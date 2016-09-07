@@ -23,10 +23,8 @@ export class SessionService {
         headers: new Headers({"Content-Type": "application/x-www-form-urlencoded"})
       }).subscribe((response) => {
         observer.onNext(ActionModel.success());
-        console.log("success");
       }, (error) => {
-        return observer.next(ActionModel.failString("Error logging in"));
-        //return Observable.throw("hepek");
+        observer.next(ActionModel.failString("Error logging in"));
       });
     });
   }
