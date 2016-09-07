@@ -1,6 +1,6 @@
 import { ErrorModel } from "./error.model";
 
-export class ActionModel {
+export class ActionResponse {
     success: boolean;
     errorList: ErrorModel[];
     errorMap: {[key: string] : ErrorModel[]};
@@ -12,15 +12,15 @@ export class ActionModel {
         this.errorMap = errorMap;
     }
 
-    static success(): ActionModel {
-        return new ActionModel(true);
+    static success(): ActionResponse {
+        return new ActionResponse(true);
     }
 
     static failList(errors: ErrorModel | ErrorModel[]) {
-        return new ActionModel(false, errors);
+        return new ActionResponse(false, errors);
     }
 
     static failString(error: string) {
-        return new ActionModel(false, new ErrorModel(error, null));
+        return new ActionResponse(false, new ErrorModel(error, null));
     }
 }

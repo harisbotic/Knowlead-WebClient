@@ -1,10 +1,10 @@
 import { Response } from "@angular/http";
-import { ActionModel } from "../models";
+import { LoginResponse } from "../models";
 
 export * from "./urls";
 
-export function mapToAction(response:Response) : ActionModel {
-    return response.json().data;
+export function mapToLoginResponse(response:Response) : LoginResponse {
+    return response.json();
 }
 
 export function urlFormEncode(data:any) : string {

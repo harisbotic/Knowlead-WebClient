@@ -12,13 +12,16 @@ export class LoginPageComponent implements AfterContentInit {
 
   success: boolean = false;
   tried: boolean = false;
+  errorDescription: string;
 
   constructor(protected sessionService: SessionService) { 
   }
 
   ngAfterContentInit() {
-    this.sessionService.login(new LoginModel("neki_tamo", "hepek")).subscribe(action => {
-      this.success = action.success;
+    this.sessionService.login(new LoginModel("neki_tamo", "Password123.")).subscribe(loginModel => {
+      this.success = loginModel.error == null;
+      this.errorDescription = loginModel.error_description;
+    },errorModel => {}, () => {
       this.tried = true;
     });
   }
