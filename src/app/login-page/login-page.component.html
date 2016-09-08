@@ -1,7 +1,13 @@
-<p>
-  Login page
-</p>
-<div *ngIf="tried">
+<form (ngSubmit)="loginClicked()">
+  Username:<br>
+  <input type = "text" name = "username" placeholder = "username" 
+  [(ngModel)]="cridentials.email"><br>
+  Password:<br>
+  <input type = "text" name = "password" placeholder = "password"
+  [(ngModel)]="cridentials.password">
+  <input type = "submit" name = "submit" > 
+</form>
+<div *ngIf = "tried">
   Login successful: {{success}} <br>
   Login error: {{errorDescription}}
 </div>
