@@ -1,4 +1,4 @@
-import { Component, AfterContentInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SessionService } from "../session.service";
 import { LoginModel } from "../models";
 
@@ -8,17 +8,20 @@ import { LoginModel } from "../models";
   styleUrls: ['./login-page.component.scss'],
   providers: [SessionService]
 })
-export class LoginPageComponent implements AfterContentInit {
+export class LoginPageComponent {
 
   success: boolean = false;
   tried: boolean = false;
   errorDescription: string;
+  cridentials: LoginModel;
 
   constructor(protected sessionService: SessionService) { 
+    this.cridentials = new LoginModel("", "");
   }
 
-  ngAfterContentInit() {
-    this.sessionService.login(new LoginModel("neki_tamo", "Password123.")).subscribe(loginModel => {
+
+  loginClicked() {
+    this.sessionService.login(this.cridentials).subscribe(loginModel => {
       this.success = loginModel.error == null;
       this.errorDescription = loginModel.error_description;
     },errorModel => {}, () => {
