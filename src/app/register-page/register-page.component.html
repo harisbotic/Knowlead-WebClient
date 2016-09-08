@@ -1,0 +1,16 @@
+<h1>
+  Register
+</h1>
+<div *ngIf="response != null">
+  Registration successful: {{response.success}}
+</div>
+<form (ngSubmit)="register()">
+  <input type="text" name="email" [(ngModel)]="cridentials.email" placeholder="email" class="form-control"><br>
+  <app-error-list [errors]="response?.errorMap?.email"></app-error-list><br>
+  <input type="text" name="username" [(ngModel)]="cridentials.username" placeholder="username" class="form-control"><br>
+  <app-error-list [errors]="response?.errorMap?.username"></app-error-list><br>
+  <input type="password" name="password" [(ngModel)]="cridentials.password" placeholder="password" class="form-control"><br>
+  <app-error-list [errors]="response?.errorMap?.password"></app-error-list><br>
+  <input type="submit" class="form-control">
+  <app-error-list [errors]="response?.errorList"></app-error-list><br>
+</form>

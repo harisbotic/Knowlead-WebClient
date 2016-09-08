@@ -1,9 +1,13 @@
 import { Response } from "@angular/http";
-import { LoginResponse } from "../models";
+import { LoginResponse, ActionResponse } from "../models";
 
 export * from "./urls";
 
 export function mapToLoginResponse(response:Response) : LoginResponse {
+    return response.json();
+}
+
+export function mapToActionResponse(response:Response) : ActionResponse {
     return response.json();
 }
 

@@ -1,0 +1,8 @@
+<div *ngIf="error || errors">
+  <p *ngIf="error">
+    {{err.errorDescription}}
+  </p>
+  <p *ngFor="let err of errors">
+    {{err.errorDescription}}
+  </p>
+</div>
