@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, Headers, Response } from "@angular/http";
-import { LoginModel, LoginResponse, ActionResponse, RegisterModel } from "./models";
+import { LoginModel, LoginResponse, ActionResponse, RegisterModel, ConfirmEmail } from "./models";
 import { Observable } from "rxjs/observable";
 import { Subscriber } from "rxjs/subscriber"
 import { mapToLoginResponse, mapToActionResponse, urlFormEncode } from "./utils";
-import { LOGIN, REGISTER, API } from "./utils";
+import { LOGIN, REGISTER, API, CONFIRMEMAIL } from "./utils";
 import "rxjs/add/operator/map";
 
 @Injectable()
@@ -34,5 +34,9 @@ export class SessionService {
 
   public register(cridentials: RegisterModel): Observable<ActionResponse> {
     return this.http.post(REGISTER, cridentials).map(mapToActionResponse);
+  }
+
+  public confirmEmail(data: ConfirmEmail): Observable<ActionResponse> {
+    return this.http.post(CONFIRMEMAIL, data).map(mapToActionResponse);
   }
 }
