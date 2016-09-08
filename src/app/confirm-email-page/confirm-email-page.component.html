@@ -1,4 +1,6 @@
-<form>
+<form (ngSubmit)="confirmEmail()">
   Password:<br>
-  <input type = "password" placeholder = "password" [(ngModel)]="confirm.password"> 
+  <input type = "password" name = "password" placeholder = "password" [(ngModel)]="confirm.password"> 
+  <input type = "submit" value = "Submit">
 </form>
+<app-error-list [errors]="errors"></app-error-list>
