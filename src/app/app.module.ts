@@ -9,6 +9,7 @@ import { GuestHomePageComponent } from './guest-home-page/guest-home-page.compon
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ErrorListComponent } from './error-list/error-list.component';
+import { ConfirmEmailPageComponent } from './confirm-email-page/confirm-email-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { ErrorListComponent } from './error-list/error-list.component';
     GuestHomePageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ErrorListComponent
+    ErrorListComponent, ConfirmEmailPageComponent
   ],
   imports: [
     BrowserModule,
