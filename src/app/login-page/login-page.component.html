@@ -1,13 +1,22 @@
-<form (ngSubmit)="loginClicked()">
-  Username:<br>
-  <input type = "text" name = "username" placeholder = "username" 
-  [(ngModel)]="cridentials.email"><br>
-  Password:<br>
-  <input type = "text" name = "password" placeholder = "password"
-  [(ngModel)]="cridentials.password">
-  <input type = "submit" name = "submit" > 
-</form>
-<div *ngIf = "tried">
-  Login successful: {{success}} <br>
-  Login error: {{errorDescription}}
-</div>
+<md-card id="login">
+  <md-card-title>
+    Login
+  </md-card-title>
+  <form (ngSubmit)="loginClicked()">
+    <md-card-content>
+      <md-input type = "text" name = "username" placeholder = "Username"
+      [(ngModel)]="cridentials.email"></md-input><br>
+      <md-input type = "password" name = "password" placeholder = "Password"
+      [(ngModel)]="cridentials.password"></md-input>
+    </md-card-content>
+    <md-card-actions>
+      <button md-raised-button
+              color="primary"
+              [disabled]="busy">
+        Login
+      </button>
+      <button md-button id="forgot">Forgot your password?</button>
+    </md-card-actions>
+  </form>
+  <app-error-list [error]="error"></app-error-list>
+</md-card>

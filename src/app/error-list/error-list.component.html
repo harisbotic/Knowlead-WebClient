@@ -1,6 +1,6 @@
-<div *ngIf="error || errors">
+<div *ngIf="error || errors" class="error">
   <p *ngIf="error">
-    {{err.errorDescription}}
+    {{error.errorDescription}}
   </p>
   <p *ngFor="let err of errors">
     {{err.errorDescription}}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, Headers, Response } from "@angular/http";
 import { LoginModel, LoginResponse, ActionResponse, RegisterModel, ConfirmEmail } from "./models";
+import { Subject } from "rxjs/subject";
 import { Observable } from "rxjs/observable";
 import { Subscriber } from "rxjs/subscriber"
 import { mapToLoginResponse, mapToActionResponse, urlFormEncode } from "./utils";
@@ -13,23 +14,23 @@ export class SessionService {
   constructor(protected http: Http) { }
 
   public login(cridentials: LoginModel): Observable<LoginResponse> {
-    return Observable.create((subscriber:Subscriber<LoginResponse>) => {
-      this.http.post(LOGIN, urlFormEncode({
-        "grant_type": "password",
-        "username": cridentials.email,
-        "password": cridentials.password,
-        "resource": API,
-        "client_id": "angular"
-      }),{
-        headers: new Headers({"Content-Type":"application/x-www-form-urlencoded"})
-      }).subscribe((response: Response) => {
-        subscriber.next(mapToLoginResponse(response));
-        subscriber.complete();
-      }, (errorResponse: Response) => {
-        subscriber.next(mapToLoginResponse(errorResponse));
-        subscriber.complete();
-      })
+    let subject = new Subject<LoginResponse>();
+    this.http.post(LOGIN, urlFormEncode({
+      "grant_type": "password",
+      "username": cridentials.email,
+      "password": cridentials.password,
+      "resource": API,
+      "client_id": "angular"
+    }),{
+      headers: new Headers({"Content-Type":"application/x-www-form-urlencoded"})
+    }).finally(() => {
+      subject.complete();
+    }).subscribe((response: Response) => {
+      subject.next(mapToLoginResponse(response));
+    }, (errorResponse: Response) => {
+      subject.next(mapToLoginResponse(errorResponse));
     });
+    return subject;
   }
 
   public register(cridentials: RegisterModel): Observable<ActionResponse> {

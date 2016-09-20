@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SessionService } from "../session.service";
-import { LoginModel } from "../models";
+import { LoginModel, ErrorModel, LoginResponse } from "../models";
+import { Observable } from "rxjs/observable";
+import "rxjs/Rx"
 
 @Component({
   selector: 'app-login-page',
@@ -11,22 +13,23 @@ import { LoginModel } from "../models";
 export class LoginPageComponent {
 
   success: boolean = false;
-  tried: boolean = false;
-  errorDescription: string;
+  busy: boolean = false;
+  error: ErrorModel;
   cridentials: LoginModel;
 
-  constructor(protected sessionService: SessionService) { 
+  constructor(protected sessionService: SessionService) {
     this.cridentials = new LoginModel("", "");
   }
 
-
   loginClicked() {
-    this.sessionService.login(this.cridentials).subscribe(loginModel => {
-      this.success = loginModel.error == null;
-      this.errorDescription = loginModel.error_description;
-    },errorModel => {}, () => {
-      this.tried = true;
+    this.busy = true;
+    this.sessionService.login(this.cridentials).finally(() => {
+      this.busy = false;
+      console.log('finally');
+    }).subscribe(loginResponse => {
+      this.error = (loginResponse.asErrorModel !== undefined) ?
+        loginResponse.asErrorModel() :
+        new ErrorModel("Unknown error occured");
     });
   }
-
 }
