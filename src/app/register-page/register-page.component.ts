@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
-import { SessionService } from '../session.service';
 import { RegisterModel, ActionResponse } from "../models";
+import { AccountService } from './../account.service';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
-  providers: [SessionService]
+  providers: [AccountService]
 })
 export class RegisterPageComponent {
 
   cridentials: RegisterModel = new RegisterModel();
   response: ActionResponse;
 
-  constructor(protected sessionService: SessionService) {
-    console.log(this.response);
+  constructor(protected accountService: AccountService) {
   }
 
   register() {
-    this.sessionService.register(this.cridentials).subscribe((response) => {
+    this.accountService.register(this.cridentials).subscribe((response) => {
       this.response = response;
     },(errorResponse) => {
       this.response = errorResponse.json();

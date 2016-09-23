@@ -8,7 +8,7 @@ import "rxjs/Rx"
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
-  providers: [SessionService]
+  providers: []
 })
 export class LoginPageComponent {
 
@@ -23,13 +23,11 @@ export class LoginPageComponent {
 
   loginClicked() {
     this.busy = true;
+    delete this.error;
     this.sessionService.login(this.cridentials).finally(() => {
       this.busy = false;
-      console.log('finally');
     }).subscribe(loginResponse => {
-      this.error = (loginResponse.asErrorModel !== undefined) ?
-        loginResponse.asErrorModel() :
-        new ErrorModel("Unknown error occured");
+      this.error = ErrorModel.fromLoginResponse(loginResponse);
     });
   }
 }

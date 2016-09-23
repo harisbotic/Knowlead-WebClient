@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from './../session.service';
 
 @Component({
   selector: 'app-guest-home-page',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestHomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected sessionService: SessionService) { }
 
   ngOnInit() {
   }

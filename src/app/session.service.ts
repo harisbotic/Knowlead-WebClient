@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, Headers, Response } from "@angular/http";
-import { LoginModel, LoginResponse, ActionResponse, RegisterModel, ConfirmEmail } from "./models";
+import { LoginModel, LoginResponse, User } from "./models";
 import { Subject } from "rxjs/subject";
 import { Observable } from "rxjs/observable";
 import { Subscriber } from "rxjs/subscriber"
-import { mapToLoginResponse, mapToActionResponse, urlFormEncode } from "./utils";
-import { LOGIN, REGISTER, API, CONFIRMEMAIL } from "./utils";
+import { mapToLoginResponse, mapToActionResponse, urlFormEncode, mapToUser } from "./utils";
+import { LOGIN, API, ME } from "./utils";
+import { StorageService } from "./storage.service";
 import "rxjs/add/operator/map";
 
 @Injectable()
 export class SessionService {
 
-  constructor(protected http: Http) { }
+  constructor(protected http: Http, protected storageService: StorageService) {
+  }
+
+  user: User;
+  access_code: string;
 
   public login(cridentials: LoginModel): Observable<LoginResponse> {
     let subject = new Subject<LoginResponse>();
@@ -26,18 +31,23 @@ export class SessionService {
     }).finally(() => {
       subject.complete();
     }).subscribe((response: Response) => {
-      subject.next(mapToLoginResponse(response));
+      let login = mapToLoginResponse(response);
+      this.storageService.setAccessToken(login.access_token);
+      subject.next(login);
     }, (errorResponse: Response) => {
       subject.next(mapToLoginResponse(errorResponse));
     });
     return subject;
   }
 
-  public register(cridentials: RegisterModel): Observable<ActionResponse> {
-    return this.http.post(REGISTER, cridentials).map(mapToActionResponse);
-  }
-
-  public confirmEmail(data: ConfirmEmail): Observable<ActionResponse> {
-    return this.http.post(CONFIRMEMAIL, data).map(mapToActionResponse);
+  public getUser(): Observable<User> {
+    if (this.user != null) {
+      return Observable.from([this.user]);
+    }
+    let ret = this.http.get(ME).map(mapToUser);
+    ret.subscribe((user) => {
+      this.user = user;
+    });
+    return ret;
   }
 }

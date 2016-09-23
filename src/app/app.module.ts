@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 
 import { MdButtonModule } from '@angular2-material/button';
 import { MdCardModule } from '@angular2-material/card';
@@ -15,6 +15,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { ErrorListComponent } from './error-list/error-list.component';
 import { ConfirmEmailPageComponent } from './confirm-email-page/confirm-email-page.component';
+
+import { SessionService } from './session.service';
+import { HttpProvider } from './http.provider';
+import { StorageService } from './storage.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { ConfirmEmailPageComponent } from './confirm-email-page/confirm-email-pa
     MdCardModule.forRoot(),
     MdInputModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: Http, useClass: HttpProvider, deps: [XHRBackend, RequestOptions, StorageService]},
+    SessionService,
+    StorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
