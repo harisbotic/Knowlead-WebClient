@@ -1,11 +1,13 @@
 import { ErrorModel } from "./error.model";
+import { BaseModel } from './base.response';
 
-export class ActionResponse {
+export class ActionResponse extends BaseModel {
     success: boolean;
     errorList: ErrorModel[];
     errorMap: {[key: string] : ErrorModel[]};
 
     constructor(success: boolean = true, errors: ErrorModel | ErrorModel[] = null, errorMap: {[key: string] : ErrorModel[]} = null) {
+        super();
         this.success = success;
         if (errors != null)
             this.errorList = [].concat(errors);

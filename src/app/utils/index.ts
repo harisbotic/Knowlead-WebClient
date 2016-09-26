@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/observable';
 import { User } from './../models/user.model';
 
 export * from "./urls";
+export * from "./storage.constants";
 
 export function mapToLoginResponse(response:Response) : LoginResponse {
     return response.json();

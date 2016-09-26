@@ -1,6 +1,7 @@
 import { ErrorModel } from "./error.model";
+import { BaseModel } from './base.response';
 
-export class LoginResponse {
+export class LoginResponse extends BaseModel {
     token_type: string;
     access_token: string;
     expires_in: number;

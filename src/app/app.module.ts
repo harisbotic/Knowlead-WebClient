@@ -19,6 +19,8 @@ import { ConfirmEmailPageComponent } from './confirm-email-page/confirm-email-pa
 import { SessionService } from './session.service';
 import { HttpProvider } from './http.provider';
 import { StorageService } from './storage.service';
+import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { StorageService } from './storage.service';
     GuestHomePageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ErrorListComponent, ConfirmEmailPageComponent
+    ErrorListComponent, ConfirmEmailPageComponent, UserHomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { StorageService } from './storage.service';
     MdInputModule.forRoot()
   ],
   providers: [
-    {provide: Http, useClass: HttpProvider, deps: [XHRBackend, RequestOptions, StorageService]},
+    {provide: Http, useClass: HttpProvider, deps: [XHRBackend, RequestOptions, StorageService, Router]},
     SessionService,
     StorageService
   ],
