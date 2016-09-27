@@ -3,6 +3,7 @@ import { SessionService } from "../session.service";
 import { LoginModel, ErrorModel, LoginResponse } from "../models";
 import { Observable } from "rxjs/observable";
 import "rxjs/Rx"
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +18,7 @@ export class LoginPageComponent {
   error: ErrorModel;
   cridentials: LoginModel;
 
-  constructor(protected sessionService: SessionService) {
+  constructor(protected sessionService: SessionService, protected router: Router) {
     this.cridentials = new LoginModel("", "");
   }
 
@@ -28,6 +29,9 @@ export class LoginPageComponent {
       this.busy = false;
     }).subscribe(loginResponse => {
       this.error = ErrorModel.fromLoginResponse(loginResponse);
+      if (this.error.errorDescription == undefined) {
+        this.router.navigate(["/home"]);
+      }
     });
   }
 }

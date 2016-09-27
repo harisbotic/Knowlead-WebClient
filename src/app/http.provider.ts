@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, ConnectionBackend, Response, RequestOptionsArgs, Request, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject, Subscriber } from 'rxjs/Rx';
 import { StorageService } from './storage.service';
 import { ErrorModel } from './models/error.model';
 import { ERROR_NOT_LOGGED_IN } from './utils/error.constants';
+import { API } from './utils/urls';
 
 @Injectable()
 export class HttpProvider extends Http {
@@ -14,28 +15,39 @@ export class HttpProvider extends Http {
                 protected router: Router) {
         super(_backend, _defaultOptions);
     }
+
+    emit(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
+        console.log(method + ": " + url);
+        if (url.toString().toLowerCase().startsWith(API + "/api")) {
+            return this.getRequestOptionArgs(options).flatMap((args) => {
+                return this.intercept(method, url, args, body);
+            });
+        } else {
+            return this.intercept(method, url, options, body);
+        }
+    }
     
     request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-        return this.intercept(super.request(url, this.getRequestOptionArgs(options)));
+        return this.emit("request", url, options);
     }
  
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.intercept(super.get(url, this.getRequestOptionArgs(options)));
+        return this.emit("get", url, options);
     }
  
-    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {   
-        return this.intercept(super.post(url, body, this.getRequestOptionArgs(options)));
+    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {  
+        return this.emit("post", url, options, body);
     }
  
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.intercept(super.put(url, body, this.getRequestOptionArgs(options)));
+        return this.emit("put", url, options, body);
     }
  
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return this.intercept(super.delete(url, this.getRequestOptionArgs(options)));
+        return this.emit("delete", url, options);
     }
     
-    getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {
+    getRequestOptionArgs(options?: RequestOptionsArgs) : Observable<RequestOptionsArgs> {
         if (options == null) {
             options = new RequestOptions();
         }
@@ -43,12 +55,18 @@ export class HttpProvider extends Http {
             options.headers = new Headers();
         }
         if (this.storageService.hasAccessToken()) {
-            options.headers.append("Authorization", "Bearer " + this.storageService.getAccessToken());
+            return this.storageService.getAccessToken().map<RequestOptionsArgs>((value) => {
+                options.headers.append("Authorization", "Bearer " + value);
+                return options;
+            });
+        } else {
+            return Observable.from([options]);
         }
-        return options;
     }
 
-    intercept(observable: Observable<Response>): Observable<Response> {
+    intercept(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
+        let observable: Observable<Response> =
+            (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse) => {
             let error = ErrorModel.fromResponse(errorResponse);
             if (error.errorCode == ERROR_NOT_LOGGED_IN) {
