@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ErrorModel, LoginResponse } from "../models";
 import { LoginModel, ActionResponse } from "../models";
 import { AccountService } from './../account.service';
 
@@ -10,6 +11,7 @@ import { AccountService } from './../account.service';
 })
 export class RegisterPageComponent {
 
+  busy: boolean = false;
   cridentials: LoginModel = new LoginModel();
   response: ActionResponse;
 
@@ -17,11 +19,14 @@ export class RegisterPageComponent {
   }
 
   register() {
-    this.accountService.register(this.cridentials).subscribe((response) => {
-      this.response = response;
-    },(errorResponse) => {
-      this.response = errorResponse.json();
-    });
+    this.busy = true;
+    this.accountService.register (this.cridentials).finally(() => { this.busy = false; })
+      .subscribe((response) => {
+        this.response = response;
+      },(errorResponse) => {
+        this.response = errorResponse.json();
+        console.log(this.response);
+      });
   }
 
 }

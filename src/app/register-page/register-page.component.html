@@ -1,24 +1,40 @@
-<h1>
+<!--<h1>
   Register
 </h1>
 <div *ngIf="response != null">
   Registration successful: {{response.success}}
-</div>
+</div>-->
 
- <div class="slds-card__body">
-    <app-error-list [error]="error"></app-error-list>
-    <form (ngSubmit)="loginClicked()">
+<article class="slds-card slds-card--narrow" id="register">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media--center slds-has-flexi-truncate">
+      <div class="slds-media__body slds-truncate">
+        <h1 class="slds-text-heading--large">
+          Register
+        </h1>
+      </div>
+    </header>
+  </div>
+    
+  <div class="slds-card__body">
+    <app-error-list [error]="response?.errorList"></app-error-list>
+    <form (ngSubmit)="register()">
       <ngl-form-element>
-        <input type="text" name="username" placeholder="Username" [(ngModel)]="cridentials.email">
+        <app-error-list [errors]="response?.errorMap?.email"></app-error-list>
+        <input type="text" name="Email" placeholder="Email" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
+        <app-error-list [errors]="response?.errorMap?.password"></app-error-list>
         <input type="password" name="password" placeholder="Password" [(ngModel)]="cridentials.password">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="submit" [disabled]="busy" value="Login" class="slds-button--brand">
+        <input type="submit" [disabled]="busy" value="Register" class="slds-button--brand">
       </ngl-form-element>
     </form>
   </div>
+  <div class="slds-card__footer">
+  </div>
+</article>
   
 <!--<form (ngSubmit)="register()">
   <input type="text" name="email" [(ngModel)]="cridentials.email" placeholder="email" class="form-control"><br>

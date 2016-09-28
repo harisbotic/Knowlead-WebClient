@@ -12,7 +12,7 @@
     <app-error-list [error]="error"></app-error-list>
     <form (ngSubmit)="loginClicked()">
       <ngl-form-element>
-        <input type="text" name="username" placeholder="Username" [(ngModel)]="cridentials.email">
+        <input type="text" name="Email" placeholder="Email" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
         <input type="password" name="password" placeholder="Password" [(ngModel)]="cridentials.password">
@@ -26,25 +26,3 @@
     <a href="#">Forgot your password?</a>
   </div>
 </article>
-
-<!--<md-card id="login">
-  <md-card-title>
-    Login
-  </md-card-title>
-  <form (ngSubmit)="loginClicked()">
-    <md-card-content>
-      <md-input type = "text" name = "username" placeholder = "Username"
-      [(ngModel)]="cridentials.email"></md-input><br>
-      <md-input type = "password" name = "password" placeholder = "Password"
-      [(ngModel)]="cridentials.password"></md-input>
-    </md-card-content>
-    <md-card-actions>
-      <button md-raised-button
-              color="primary"
-              [disabled]="busy">
-        Login
-      </button>
-      <button md-button id="forgot">Forgot your password?</button>
-    </md-card-actions>
-  </form>
-</md-card>-->
