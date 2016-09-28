@@ -1,11 +1,14 @@
 #login {
-  width: 500px;
+  max-width: 500px;
   margin: auto;
 }
-md-input {
-  width: 100%
+app-error-list {
+  padding: 0 24px 0 24px;
+  display: block;
 }
-#forgot {
-  position: absolute;
-  right: 5px;
+
+.slds-card__body {
+  ngl-form-element {
+    padding: 0 24px 0 24px;
+  }
 }
