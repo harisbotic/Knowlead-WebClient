@@ -23,10 +23,12 @@ export class StorageService {
 
   public setAccessToken(value: string) {
     console.log("Setting access token");
-    this.access_token_value = parseJwt(value);
     this.access_token = value;
-    console.log(this.access_token_value);
-    localStorage.setItem(STORE_ACCESS_TOKEN, value);
+    if (value != undefined) {
+      this.access_token_value = parseJwt(value);
+      console.log(this.access_token_value);
+      localStorage.setItem(STORE_ACCESS_TOKEN, value);
+    }
   }
 
   public getAccessToken(): Observable<string> {
