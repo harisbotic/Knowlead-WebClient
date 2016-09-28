@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RegisterModel, ActionResponse } from "../models";
+import { LoginModel, ActionResponse } from "../models";
 import { AccountService } from './../account.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AccountService } from './../account.service';
 })
 export class RegisterPageComponent {
 
-  cridentials: RegisterModel = new RegisterModel();
+  cridentials: LoginModel = new LoginModel();
   response: ActionResponse;
 
   constructor(protected accountService: AccountService) {

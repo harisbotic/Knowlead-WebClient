@@ -1,6 +1,6 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http } from '@angular/http';
-import { RegisterModel, ConfirmEmail, ActionResponse } from './models';
+import { LoginModel, ConfirmEmail, ActionResponse } from './models';
 import { Observable } from 'rxjs/observable';
 import { REGISTER, CONFIRMEMAIL, mapToActionResponse } from './utils';
 import { User } from './models/user.model';
@@ -11,7 +11,7 @@ export class AccountService {
 
   constructor(protected http: Http, protected storageService: StorageService) { }
 
-  public register(cridentials: RegisterModel): Observable<ActionResponse> {
+  public register(cridentials: LoginModel): Observable<ActionResponse> {
     return this.http.post(REGISTER, cridentials).map(mapToActionResponse);
   }
 

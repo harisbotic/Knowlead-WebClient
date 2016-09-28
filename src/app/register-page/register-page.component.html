@@ -4,7 +4,23 @@
 <div *ngIf="response != null">
   Registration successful: {{response.success}}
 </div>
-<form (ngSubmit)="register()">
+
+ <div class="slds-card__body">
+    <app-error-list [error]="error"></app-error-list>
+    <form (ngSubmit)="loginClicked()">
+      <ngl-form-element>
+        <input type="text" name="username" placeholder="Username" [(ngModel)]="cridentials.email">
+      </ngl-form-element>
+      <ngl-form-element>
+        <input type="password" name="password" placeholder="Password" [(ngModel)]="cridentials.password">
+      </ngl-form-element>
+      <ngl-form-element>
+        <input type="submit" [disabled]="busy" value="Login" class="slds-button--brand">
+      </ngl-form-element>
+    </form>
+  </div>
+  
+<!--<form (ngSubmit)="register()">
   <input type="text" name="email" [(ngModel)]="cridentials.email" placeholder="email" class="form-control"><br>
   <app-error-list [errors]="response?.errorMap?.email"></app-error-list><br>
   <input type="text" name="username" [(ngModel)]="cridentials.username" placeholder="username" class="form-control"><br>
@@ -13,4 +29,4 @@
   <app-error-list [errors]="response?.errorMap?.password"></app-error-list><br>
   <input type="submit" class="form-control">
   <app-error-list [errors]="response?.errorList"></app-error-list><br>
-</form>
+</form>-->
