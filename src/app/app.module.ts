@@ -17,6 +17,7 @@ import { StorageService } from './storage.service';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { Router } from '@angular/router';
 import { NglModule } from 'ng-lightning';
+import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { NglModule } from 'ng-lightning';
     GuestHomePageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ErrorListComponent, ConfirmEmailPageComponent, UserHomePageComponent
+    ErrorListComponent, ConfirmEmailPageComponent, UserHomePageComponent, ProfileSetupPageComponent
   ],
   imports: [
     BrowserModule,
