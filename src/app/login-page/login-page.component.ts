@@ -19,7 +19,7 @@ export class LoginPageComponent {
   cridentials: LoginModel;
 
   constructor(protected sessionService: SessionService, protected router: Router) {
-    this.cridentials = new LoginModel("", "");
+    this.cridentials = new LoginModel("","");
   }
 
   loginClicked() {
