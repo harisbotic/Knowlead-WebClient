@@ -1,22 +1,10 @@
 import { Response } from "@angular/http";
-import { LoginResponse, ActionResponse } from "../models";
 import { Observable } from 'rxjs/observable';
-import { User } from './../models/user.model';
+import { ApplicationUserModel } from './../models/dto';
 
 export * from "./urls";
 export * from "./storage.constants";
-
-export function mapToLoginResponse(response:Response) : LoginResponse {
-    return response.json();
-}
-
-export function mapToActionResponse(response:Response) : ActionResponse {
-    return response.json();
-}
-
-export function mapToUser(response:Response) : User {
-    return response.json();
-}
+export * from "./converters";
 
 export function urlFormEncode(data:any) : string {
     let rets = [];

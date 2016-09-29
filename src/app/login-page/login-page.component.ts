@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { SessionService } from "../session.service";
-import { LoginModel, ErrorModel, LoginResponse } from "../models";
 import { Observable } from "rxjs/observable";
 import "rxjs/Rx"
 import { Router } from '@angular/router';
+import { ErrorModel, RegisterUserModel } from './../models/dto';
+import { responseToErrorModel, loginResponseToErrorModel } from './../utils/converters';
 
 @Component({
   selector: 'app-login-page',
@@ -16,10 +17,10 @@ export class LoginPageComponent {
   success: boolean = false;
   busy: boolean = false;
   error: ErrorModel;
-  cridentials: LoginModel;
+  cridentials: RegisterUserModel;
 
   constructor(protected sessionService: SessionService, protected router: Router) {
-    this.cridentials = new LoginModel("","");
+    this.cridentials = {email: "", password: ""};
   }
 
   loginClicked() {
@@ -28,8 +29,8 @@ export class LoginPageComponent {
     this.sessionService.login(this.cridentials).finally(() => {
       this.busy = false;
     }).subscribe(loginResponse => {
-      this.error = ErrorModel.fromLoginResponse(loginResponse);
-      if (this.error.errorDescription == undefined) {
+      this.error = loginResponseToErrorModel(loginResponse);
+      if (this.error == undefined) {
         this.router.navigate(["/home"]);
       }
     });

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ErrorModel, LoginResponse } from "../models";
-import { LoginModel, ActionResponse } from "../models";
 import { AccountService } from './../account.service';
+import { RegisterUserModel, ResponseModel } from './../models/dto';
 
 @Component({
   selector: 'app-register-page',
@@ -12,8 +11,8 @@ import { AccountService } from './../account.service';
 export class RegisterPageComponent {
 
   busy: boolean = false;
-  cridentials: LoginModel = new LoginModel();
-  response: ActionResponse;
+  cridentials: RegisterUserModel = {email: "", password: ""};
+  response: ResponseModel;
 
   constructor(protected accountService: AccountService) {
   }

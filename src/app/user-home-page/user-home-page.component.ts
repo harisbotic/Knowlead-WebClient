@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './../models/user.model';
 import { AccountService } from './../account.service';
+import { ApplicationUserModel } from './../models/dto';
 
 @Component({
   selector: 'app-user-home-page',
@@ -10,7 +10,7 @@ import { AccountService } from './../account.service';
 })
 export class UserHomePageComponent implements OnInit {
 
-  user: User = null;
+  user: ApplicationUserModel = null;
 
   constructor(protected accountService: AccountService) { }
 

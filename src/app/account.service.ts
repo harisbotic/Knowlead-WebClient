@@ -1,25 +1,25 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http } from '@angular/http';
-import { LoginModel, ConfirmEmail, ActionResponse } from './models';
 import { Observable } from 'rxjs/observable';
-import { REGISTER, CONFIRMEMAIL, mapToActionResponse } from './utils';
-import { User } from './models/user.model';
+import { REGISTER, CONFIRMEMAIL } from './utils';
 import { StorageService } from './storage.service';
+import { ApplicationUserModel, RegisterUserModel, ResponseModel, ConfirmEmailModel } from './models/dto';
+import { responseToResponseModel } from './utils/converters';
 
 @Injectable()
 export class AccountService {
 
   constructor(protected http: Http, protected storageService: StorageService) { }
 
-  public register(cridentials: LoginModel): Observable<ActionResponse> {
-    return this.http.post(REGISTER, cridentials).map(mapToActionResponse);
+  public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
+    return this.http.post(REGISTER, cridentials).map(responseToResponseModel);
   }
 
-  public confirmEmail(data: ConfirmEmail): Observable<ActionResponse> {
-    return this.http.post(CONFIRMEMAIL, data).map(mapToActionResponse);
+  public confirmEmail(data: ConfirmEmailModel): Observable<ResponseModel> {
+    return this.http.post(CONFIRMEMAIL, data).map(responseToResponseModel);
   }
 
-  public currentUser(): Observable<User> {
-    return this.storageService.getFromStorage<User>("user");
+  public currentUser(): Observable<ApplicationUserModel> {
+    return this.storageService.getFromStorage<ApplicationUserModel>("user");
   }
 }

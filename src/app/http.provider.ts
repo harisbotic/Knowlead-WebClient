@@ -3,9 +3,10 @@ import { Http, RequestOptions, ConnectionBackend, Response, RequestOptionsArgs, 
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscriber } from 'rxjs/Rx';
 import { StorageService } from './storage.service';
-import { ErrorModel } from './models/error.model';
-import { ERROR_NOT_LOGGED_IN } from './utils/error.constants';
 import { API } from './utils/urls';
+import { ErrorModel } from './models/dto';
+import { responseToErrorModel } from './utils/converters';
+import { ErrorCodes } from './models/constants';
 
 @Injectable()
 export class HttpProvider extends Http {
@@ -68,8 +69,8 @@ export class HttpProvider extends Http {
         let observable: Observable<Response> =
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse) => {
-            let error = ErrorModel.fromResponse(errorResponse);
-            if (error.errorCode == ERROR_NOT_LOGGED_IN) {
+            let error = responseToErrorModel(errorResponse);
+            if (error.errorCode == ErrorCodes.NotLoggedIn) {
                 this.router.navigate(['/login']);
                 return Observable.empty();
             } else {
