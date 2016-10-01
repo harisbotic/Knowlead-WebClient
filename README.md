@@ -1,31 +1,25 @@
-# Knowlead
+# Knowlead WebClient Repo
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.11-webpack.8.
+## HTTP Status Codes
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### For 4xx and 5xx status codes
 
-## Code scaffolding
+**The "Key" describes the possition of the error message**  
+**The "Value" describes the error message it self**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+[![Screen Shot 2016-10-01](https://s12.postimg.org/hdf5dx7d9/Screen_Shot_2016_10_01_at_01_38_00.png)](https://postimg.org/image/vjuw95i89/)
 
-## Build
+* If key matches some of element in the form, put the error message above that element
+* If no element is named as the given key, then put the error message above/below the whole form    
+      -
+* If value (Error Code) matches one from our translations dictionary, use the value from that dictionary
+* If no match is found in the dictionary for given value, use the value (raw) as it is to display the error message
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### For 1xx and 2xx status codes
 
-## Running unit tests
+**Just expect an object with properites**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 3xx are just Redirects
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
 
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
