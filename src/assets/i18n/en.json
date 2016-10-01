@@ -1,0 +1,17 @@
+{
+    "common:email": "Email",
+    "common:password": "Password",
+
+    "translation-test:title": "Test translation on english",
+
+    "confirm-email-page:submit": "Submit",
+
+    "login-page:submit": "Login",
+    "login-page:title": "Login",
+    "login-page:forgot-password": "Forgot your password?",
+
+    "register-page:submit": "Register",
+    "register-page:title": "Register",
+
+    "user-home-page:hello": "Hello {{username}}"
+}

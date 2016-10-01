@@ -1,6 +1,6 @@
 <form (ngSubmit)="confirmEmail()">
   Password:<br>
-  <input type = "password" name = "password" placeholder = "password" [(ngModel)]="confirm.password"> 
-  <input type = "submit" value = "Submit">
+  <input type = "password" name = "password" placeholder = "{{'common:password' | translate}}" [(ngModel)]="confirm.password"> 
+  <input type = "submit" value = "{{'confirm-email-page:submit' | translate}}">
 </form>
 <app-error-list [errors]="errors"></app-error-list>

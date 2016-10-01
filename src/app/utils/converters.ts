@@ -2,20 +2,28 @@ import { Response } from '@angular/http';
 import { ErrorModel, ResponseModel, ApplicationUserModel } from './../models/dto';
 import { LoginResponse } from './../models/login.response';
 
+function safeJsonExtraction(response: Response) {
+    try {
+        return response.json();
+    } catch(SyntaxError) {
+        return null;
+    }
+}
+
 export function responseToErrorModel(response: Response): ErrorModel {
-    return response.json();
+    return safeJsonExtraction(response);
 }
 
 export function responseToLoginResponse(response:Response) : LoginResponse {
-    return response.json();
+    return safeJsonExtraction(response);
 }
 
 export function responseToResponseModel(response:Response) : ResponseModel {
-    return response.json();
+    return safeJsonExtraction(response);
 }
 
 export function responseToUser(response:Response) : ApplicationUserModel {
-    return response.json();
+    return safeJsonExtraction(response);
 }
 
 export function loginResponseToErrorModel(loginResponse: LoginResponse): ErrorModel {

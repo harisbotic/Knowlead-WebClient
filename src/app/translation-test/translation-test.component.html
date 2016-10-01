@@ -1,0 +1,21 @@
+<h1 class="slds-text-heading--large">Translation test: {{"translation-test:title" | translate}}</h1>
+<h2 class="slds-text-heading--large">Failed translation test: {{"no_key" | translate}}</h2>
+<table ngl-datatable [data]="data">
+    <ngl-datatable-column
+        heading="Translation key"
+        key="key">
+    </ngl-datatable-column>
+    <ngl-datatable-column
+        heading="Page"
+        key="page">
+    </ngl-datatable-column>
+    <ngl-datatable-column
+        heading="Name"
+        key="name">
+    </ngl-datatable-column>
+    <ngl-datatable-column
+        *ngFor="let language of languages"
+        [heading]="language"
+        [key]="language">
+    </ngl-datatable-column>
+</table>

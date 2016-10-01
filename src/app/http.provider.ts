@@ -70,7 +70,7 @@ export class HttpProvider extends Http {
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse) => {
             let error = responseToErrorModel(errorResponse);
-            if (error.errorCode == ErrorCodes.NotLoggedIn) {
+            if (error != null && error.errorCode == ErrorCodes.NotLoggedIn) {
                 this.router.navigate(['/login']);
                 return Observable.empty();
             } else {

@@ -10,7 +10,7 @@
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__body slds-truncate">
         <h1 class="slds-text-heading--large">
-          Register
+          {{"register-page:title" | translate}}
         </h1>
       </div>
     </header>
@@ -21,14 +21,14 @@
     <form (ngSubmit)="register()">
       <ngl-form-element>
         <app-error-list [errors]="response?.errorMap?.email"></app-error-list>
-        <input type="text" name="Email" placeholder="Email" [(ngModel)]="cridentials.email">
+        <input type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
         <app-error-list [errors]="response?.errorMap?.password"></app-error-list>
-        <input type="password" name="password" placeholder="Password" [(ngModel)]="cridentials.password">
+        <input type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="submit" [disabled]="busy" value="Register" class="slds-button--brand">
+        <input type="submit" [disabled]="busy" value="{{'register-page:submit' | translate}}" class="slds-button--brand">
       </ngl-form-element>
     </form>
   </div>

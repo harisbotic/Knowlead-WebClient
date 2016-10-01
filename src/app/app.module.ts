@@ -18,7 +18,8 @@ import { UserHomePageComponent } from './user-home-page/user-home-page.component
 import { Router } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
-
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+import { TranslationTestComponent } from './translation-test/translation-test.component';
 
 @NgModule({
   declarations: [
@@ -26,17 +27,30 @@ import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-pa
     GuestHomePageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ErrorListComponent, ConfirmEmailPageComponent, UserHomePageComponent, ProfileSetupPageComponent
+    ErrorListComponent,
+    ConfirmEmailPageComponent,
+    UserHomePageComponent,
+    ProfileSetupPageComponent,
+    TranslationTestComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRouting,
-    NglModule
+    NglModule,
+    TranslateModule.forRoot({ 
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      deps: [Http]
+    })
   ],
   providers: [
-    {provide: Http, useClass: HttpProvider, deps: [XHRBackend, RequestOptions, StorageService, Router]},
+    {
+      provide: Http,
+      useClass: HttpProvider,
+      deps: [XHRBackend, RequestOptions, StorageService, Router]
+    },
     SessionService,
     StorageService
   ],
