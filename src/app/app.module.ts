@@ -16,7 +16,7 @@ import { HttpProvider } from './http.provider';
 import { StorageService } from './storage.service';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { Router } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglModule, provideNglConfig } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { TranslationTestComponent } from './translation-test/translation-test.component';
@@ -46,13 +46,14 @@ import { TranslationTestComponent } from './translation-test/translation-test.co
     })
   ],
   providers: [
+    StorageService,
     {
       provide: Http,
       useClass: HttpProvider,
       deps: [XHRBackend, RequestOptions, StorageService, Router]
     },
     SessionService,
-    StorageService
+    provideNglConfig()
   ],
   bootstrap: [AppComponent]
 })

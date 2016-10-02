@@ -3,6 +3,7 @@ import { STORAGE_CONFIG, STORE_ACCESS_TOKEN } from './utils/storage.constants';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { parseJwt } from './utils/index';
+import { CountryModel, LanguageModel } from './models/dto';
 
 @Injectable()
 export class StorageService {
@@ -19,6 +20,7 @@ export class StorageService {
 
   constructor(protected injector: Injector) {
     this.setAccessToken(localStorage.getItem(STORE_ACCESS_TOKEN));
+    console.log("storage service created");
   }
 
   public setAccessToken(value: string) {
@@ -26,7 +28,6 @@ export class StorageService {
     this.access_token = value;
     if (value != undefined) {
       this.access_token_value = parseJwt(value);
-      console.log(this.access_token_value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
     }
   }
@@ -50,6 +51,34 @@ export class StorageService {
       .map((data) => {
         return data.json();
       });
+  }
+
+  public getCountries(): Observable<CountryModel> {
+    return Observable.from([{
+      geoLookupId: 0,
+      code: 'ba',
+      name: "Bosnia and Herzegovina"
+    },{
+      geoLookupId: 1,
+      code: 'uk',
+      name: "United Kingdom"
+    },{
+      geoLookupId: 2,
+      code: 'us',
+      name: "United States of America"
+    }]);
+  }
+
+  public getLanguages(): Observable<LanguageModel> {
+    return Observable.from([{
+      coreLookupId: 0,
+      code: 'ba',
+      name: 'Bosnian'
+    },{
+      coreLookupId: 1,
+      code: 'en',
+      name: 'English'
+    }])
   }
 
 }

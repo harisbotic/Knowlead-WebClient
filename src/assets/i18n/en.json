@@ -1,6 +1,14 @@
 {
     "common:email": "Email",
     "common:password": "Password",
+    "common:name": "Name",
+    "common:surname": "Surname",
+    "common:birthdate": "Date of birth",
+    "common:gender": "Gender",
+    "common:male": "Male",
+    "common:female": "Female",
+    "common:about me": "About me",
+    "common:country": "Country",
 
     "translation-test:title": "Test translation on english",
 
@@ -8,10 +16,14 @@
 
     "login-page:submit": "Login",
     "login-page:title": "Login",
-    "login-page:forgot-password": "Forgot your password?",
+    "login-page:forgot password": "Forgot your password?",
 
     "register-page:submit": "Register",
     "register-page:title": "Register",
 
-    "user-home-page:hello": "Hello {{username}}"
+    "user-home-page:hello": "Hello {{username}}",
+
+    "profile-setup-page:title": "Personal details",
+    "profile-setup-page:submit": "Next step",
+    "profile-setup-page:open date picker": "{{birthdate}}"
 }

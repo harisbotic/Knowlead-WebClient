@@ -6,6 +6,7 @@ import { RegisterPageComponent } from "./register-page/register-page.component";
 import { ConfirmEmailPageComponent} from './confirm-email-page/confirm-email-page.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { TranslationTestComponent } from './translation-test/translation-test.component';
+import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
  
 const appRoutes: Routes = [
     { path: 'login', component: LoginPageComponent },
@@ -13,7 +14,8 @@ const appRoutes: Routes = [
     { path: '', component: GuestHomePageComponent },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent },
-    { path: 'translatetest', component: TranslationTestComponent }
+    { path: 'translatetest', component: TranslationTestComponent },
+    { path: 'profilesetup', component: ProfileSetupPageComponent }
 ];
 
 export const appRoutingProviders: any[] = [

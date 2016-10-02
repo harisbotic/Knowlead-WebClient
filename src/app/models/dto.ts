@@ -39,7 +39,7 @@ export interface FriendshipModel
 }
 export interface LanguageModel extends _CoreLookupModel
 {
-	applicationUserLanguages: ApplicationUserLanguageModel[];
+	//applicationUserLanguages: ApplicationUserLanguageModel[];
 }
 export interface FOSModel extends _CoreLookupModel
 {

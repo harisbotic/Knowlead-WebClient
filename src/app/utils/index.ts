@@ -23,8 +23,21 @@ export function fromObservable<T>(
     });
 }
 
-export function parseJwt (token: string): any {
+export function parseJwt(token: string): any {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+
+interface NameInterface {
+    name: string
+}
+
+export function baseLookup(source: Observable<NameInterface>, query: string): Observable<any[]> {
+    return source
+    .filter((entry: NameInterface) => {
+        return entry.name.toLowerCase().indexOf(query) > -1;
+    }).scan((acc: NameInterface[], value: NameInterface) => {
+        return [...acc, value];
+    }, []);
+}
