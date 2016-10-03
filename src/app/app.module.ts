@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 
 import { AppRouting } from "./app.routing"
@@ -39,6 +39,7 @@ import { TranslationTestComponent } from './translation-test/translation-test.co
     HttpModule,
     AppRouting,
     NglModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({ 
       provide: TranslateLoader,
       useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),

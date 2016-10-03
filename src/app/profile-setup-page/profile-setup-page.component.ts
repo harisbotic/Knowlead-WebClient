@@ -1,4 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationUserModel, CountryModel, LanguageModel } from './../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './../storage.service';
@@ -10,27 +11,42 @@ import { baseLookup } from './../utils/index';
 @Component({
   selector: 'app-profile-setup-page',
   templateUrl: './profile-setup-page.component.html',
-  styleUrls: ['./profile-setup-page.component.scss'],
+  styleUrls: ['./profile-setup-page.component.scss', '../../assets/styles/flags.css'],
   providers: []
 })
-export class ProfileSetupPageComponent {
+export class ProfileSetupPageComponent implements OnInit {
 
-  user: ApplicationUserModel = <ApplicationUserModel>{};
   dateSelector: boolean = false;
   genderSelector: boolean = false;
+  form: FormGroup;
+  country: CountryModel;
 
-  constructor(protected storageService: StorageService, protected translateService: TranslateService) {
+  constructor(
+      protected storageService: StorageService,
+      protected translateService: TranslateService,
+      protected formBuilder: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      "name": null,
+      "surname": null,
+      "birthdate": null,
+      "isMale": null,
+      "aboutMe": null,
+      "countryId": null
+    });
   }
 
   submit() {
-    console.log(this.user);
+    console.log(this.form.value);
   }
 
   getGender(): string {
-    if (this.user.isMale === undefined)
+    if (this.form.value.isMale == null)
       return "common:gender";
     else
-      return this.user.isMale ? "common:male" : "common:female";
+      return this.form.value.isMale ? "common:male" : "common:female";
   }
 
   countryLookup = (query: string): Observable<CountryModel[]> => {
@@ -41,11 +57,17 @@ export class ProfileSetupPageComponent {
     return baseLookup(this.storageService.getLanguages(), query);
   }
 
-  countryChanged() {
-    if (this.user.country != null)
-      this.user.countryId = this.user.country.geoLookupId;
+  countryChanged(country) {
+    console.log(country);
+    if (country != null)
+      this.form.patchValue({countryId: country.geoLookupId});
     else
-      delete this.user.countryId
+      this.form.patchValue({countryId: null});
+  }
+
+  birthdayChanged(value) {
+    this.form.patchValue({birthdate: value});
+    console.log(value);
   }
 
 }

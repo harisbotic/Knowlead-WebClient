@@ -26,5 +26,5 @@
 
     "profile-setup-page:title": "Personal details",
     "profile-setup-page:submit": "Next step",
-    "profile-setup-page:open date picker": "{{birthdate}}"
+    "profile-setup-page:open date picker": "Please select birthdate"
 }

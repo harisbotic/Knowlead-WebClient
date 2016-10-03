@@ -10,23 +10,28 @@
   </div>
     
   <div class="slds-card__body">
-    <form (ngSubmit)="submit()">
+    <form (ngSubmit)="submit()" [formGroup]="form">
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:name' | translate}}</div>
-        <input type="text" placeholder="{{'common:name' | translate}}" [(ngModel)]="user.name" name="name">
+        <input type="text" placeholder="{{'common:name' | translate}}" formControlName="name">
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:surname' | translate}}</div>
-        <input type="text" placeholder="{{'common:surname' | translate}}" [(ngModel)]="user.surname" name="surname">
+        <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname">
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{"common:birthdate" | translate}}</div>
-        <input [(ngModel)]="user.birthdate" type="hidden" name="birthdate">
+        <input type="hidden" formControlName="birthdate">
         <button nglButton="neutral" (click)="dateSelector = true" type="button">
-          {{"profile-setup-page:open date picker" | translate:{birthdate:user.birthdate | date} }}
+          <span *ngIf="form.value.birthdate == null">
+            {{"profile-setup-page:open date picker" | translate}}
+          </span>
+          <span *ngIf="form.value.birthdate != null">
+            {{form.value.birthdate | date}}
+          </span>
         </button>
       </ngl-form-element>
 
@@ -42,31 +47,36 @@
           <div class="slds-dropdown slds-dropdown--left">
             <ul class="dropdown__list" role="menu">
               <li class="slds-dropdown__item">
-                <a role="menuitem" nglDropdownItem (click)="user.isMale = true; genderSelector = false;">
+                <a role="menuitem" nglDropdownItem (click)="form.patchValue({isMale: true}); genderSelector = false;">
                   {{"common:male" | translate}}
                 </a>
               </li>
               <li class="slds-dropdown__item">
-                <a role="menuitem" nglDropdownItem (click)="user.isMale = false; genderSelector = false;">
+                <a role="menuitem" nglDropdownItem (click)="form.patchValue({isMale: false}); genderSelector = false;">
                   {{"common:female" | translate}}
                 </a>
               </li>
             </ul>
           </div>
         </span>
-        <input [(ngModel)]="user.isMale" type="hidden" name="isMale">
+        <input type="hidden" formControlName="isMale">
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:about me' | translate}}</div>
-        <textarea [(ngModel)]="user.aboutMe" name="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
+        <textarea formControlName="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country' | translate}}</div>
-        <ngl-lookup [lookup]="countryLookup" [(pick)]="user.country" debounce="0" field="name" (pickChange)="countryChanged()">
+        <ngl-lookup [lookup]="countryLookup" debounce="0" field="name" (pickChange)="countryChanged($event)" [(pick)]="country">
+          <template nglLookupItem let-ctx>
+            <div class="slds-media__body">
+              <div class="slds-lookup__result-text"><img class="flag flag-{{ctx.code}}">{{ctx.name}}</div>
+            </div>
+          </template>
         </ngl-lookup>
-        <input [(ngModel)]="user.countryId" type="hidden" name="countryId">
+        <input type="hidden" formControlName="countryId">
       </ngl-form-element>
 
     </form>
@@ -80,7 +90,7 @@
 
 <ngl-modal [(open)]="dateSelector" header="{{'profile-setup-page:select birthdate' | translate}}">
   <div body>
-    <ngl-datepicker [(date)]="user.birthdate"></ngl-datepicker>
+    <ngl-datepicker (dateChange)="birthdayChanged($event)" [date]="null"></ngl-datepicker>
   </div>
   <template ngl-modal-footer>
     <button class="slds-button slds-button--brand" (click)="dateSelector = false">Save</button>
