@@ -60,8 +60,8 @@ export class StorageService {
       name: "Bosnia and Herzegovina"
     },{
       geoLookupId: 1,
-      code: 'uk',
-      name: "United Kingdom"
+      code: 'gb',
+      name: "Great Britain"
     },{
       geoLookupId: 2,
       code: 'us',
