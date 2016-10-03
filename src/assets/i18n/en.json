@@ -20,7 +20,7 @@
 
     "register-page:submit": "Register",
     "register-page:title": "Register",
-    "register-page:confirmpassword" : "Confirm Password",
+    "register-page:confirm password" : "Confirm Password",
 
     "user-home-page:hello": "Hello {{username}}",
 
