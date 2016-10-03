@@ -14,6 +14,7 @@ export class RegisterPageComponent {
   busy: boolean = false;
   cridentials: RegisterUserModel = {email: "", password: ""};
   response: ResponseModel;
+  error: ErrorModel;
 
   constructor(protected accountService: AccountService) {
   }
@@ -22,7 +23,8 @@ export class RegisterPageComponent {
 
     if(this.test != this.cridentials.password)
      { 
-      
+      this.response = <ResponseModel>{errorList: [<ErrorModel>{errorDescription: "Passwords don't match"}],
+       success: false, errorMap: undefined}
       return;  
      }
 

@@ -10,7 +10,7 @@
   </div>
     
   <div class="slds-card__body">
-    <app-error-list [error]="response?.errorList"></app-error-list>    
+    <app-error-list [errors]="response?.errorList"></app-error-list>    
     <form (ngSubmit)="register()">
       <ngl-form-element>
         <app-error-list [errors]="response?.errorMap?.email"></app-error-list>
