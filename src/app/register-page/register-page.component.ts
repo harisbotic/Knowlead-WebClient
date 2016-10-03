@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountService } from './../account.service';
-import { RegisterUserModel, ResponseModel } from './../models/dto';
+import { RegisterUserModel, ResponseModel, ErrorModel } from './../models/dto';
 
 @Component({
   selector: 'app-register-page',
@@ -10,6 +10,7 @@ import { RegisterUserModel, ResponseModel } from './../models/dto';
 })
 export class RegisterPageComponent {
 
+  test: string  = "";
   busy: boolean = false;
   cridentials: RegisterUserModel = {email: "", password: ""};
   response: ResponseModel;
@@ -18,6 +19,13 @@ export class RegisterPageComponent {
   }
 
   register() {
+
+    if(this.test != this.cridentials.password)
+     { 
+      
+      return;  
+     }
+
     this.busy = true;
     this.accountService.register (this.cridentials).finally(() => { this.busy = false; })
       .subscribe((response) => {

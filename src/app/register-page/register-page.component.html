@@ -10,7 +10,7 @@
   </div>
     
   <div class="slds-card__body">
-    <app-error-list [error]="response?.errorList"></app-error-list>
+    <app-error-list [error]="response?.errorList"></app-error-list>    
     <form (ngSubmit)="register()">
       <ngl-form-element>
         <app-error-list [errors]="response?.errorMap?.email"></app-error-list>
@@ -19,6 +19,11 @@
       <ngl-form-element>
         <app-error-list [errors]="response?.errorMap?.password"></app-error-list>
         <input type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
+      </ngl-form-element>
+      <ngl-form-element>
+        <app-error-list [errors]="response?.errorMap?.password"></app-error-list>
+        <input type="password" name="confirmpassword" placeholder="{{'register-page:confirmpassword' | translate}}"
+        [(ngModel)]="test">
       </ngl-form-element>
       <ngl-form-element>
         <input type="submit" [disabled]="busy" value="{{'register-page:submit' | translate}}" class="slds-button--brand">
