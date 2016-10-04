@@ -127,17 +127,9 @@ export interface P2PDiscussionModel
 }
 export interface ResponseModel
 {
-	success: boolean;
-	errorMap: { [index: string]: ErrorModel[] };
-	errorList: ErrorModel[];
-}
-export interface ErrorMappers
-{
-}
-export interface ErrorModel
-{
-	errorCode: number;
-	errorDescription: string;
+	formErrors: { [index: string]: string[] };
+	errors: string[];
+	object: any;
 }
 export enum UserStatus
 {

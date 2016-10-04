@@ -1,8 +1,5 @@
-<ul *ngIf="error || errors" class="slds-text-color--error slds-text-align--left">
-  <li *ngIf="error">
-    {{error.errorDescription}}
-  </li>
+<ul *ngIf="errors && errors.length > 0" class="slds-text-color--error slds-text-align--left">
   <li *ngFor="let err of errors">
-    {{err.errorDescription}}
+    {{err | translate}}
   </li>
 </ul>

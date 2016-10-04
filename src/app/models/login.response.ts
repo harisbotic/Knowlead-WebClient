@@ -1,5 +1,3 @@
-import { ErrorModel } from './dto';
-
 export class LoginResponse {
     token_type: string;
     access_token: string;

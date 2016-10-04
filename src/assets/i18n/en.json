@@ -26,5 +26,21 @@
 
     "profile-setup-page:title": "Personal details",
     "profile-setup-page:submit": "Next step",
-    "profile-setup-page:open date picker": "Please select birthdate"
+    "profile-setup-page:open date picker": "Please select birthdate",
+
+    "INVALID_REQUEST": "Email/password is missing",
+
+    "PASSWORDS_DONT_MATCH": "Passwords don't match",
+    "NETWORK_ERROR": "Network error has occured (maybe you are not connected to internet or Knowlead server is not working)",
+    "BACKEND_ERROR": "Unknown error has occured",
+
+    "REQUIRED_FIELD": "This field is required",
+    "DATABASE_ERROR": "Some fields are invalid",
+    "EMAIL_INVALID": "Your email doesn't have right format",
+    "EMAIL_NOT_VERIFIED": "Your email is not verified",
+    "MODEL_EMPTY": "Posted data empty",
+    "USER_NOT_FOUND": "User was not found",
+    "INCORRECT_PASSWORD": "Password is incorrect",
+    "INCORRECT_CODE": "Incorrect email validation code",
+    "NOT_LOGGED_IN": "You are not logged in"
 }

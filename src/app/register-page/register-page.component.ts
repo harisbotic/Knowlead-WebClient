@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AccountService } from './../account.service';
-import { RegisterUserModel, ResponseModel, ErrorModel } from './../models/dto';
+import { RegisterUserModel, ResponseModel } from './../models/dto';
+import { FrontendErrorCodes } from './../models/frontend.constants';
+import { safeJsonExtraction } from './../utils/converters';
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +16,6 @@ export class RegisterPageComponent {
   busy: boolean = false;
   cridentials: RegisterUserModel = {email: "", password: ""};
   response: ResponseModel;
-  error: ErrorModel;
 
   constructor(protected accountService: AccountService) {
   }
@@ -23,8 +24,7 @@ export class RegisterPageComponent {
 
     if(this.test != this.cridentials.password)
      { 
-      this.response = <ResponseModel>{errorList: [<ErrorModel>{errorDescription: "Passwords don't match"}],
-       success: false, errorMap: undefined}
+      this.response = <ResponseModel>{errors: [FrontendErrorCodes.passwordsDontMatch]}
       return;  
      }
 
@@ -33,8 +33,7 @@ export class RegisterPageComponent {
       .subscribe((response) => {
         this.response = response;
       },(errorResponse) => {
-        this.response = errorResponse.json();
-        console.log(this.response);
+        this.response = errorResponse;
       });
   }
 

@@ -10,7 +10,7 @@
   </div>
   
   <div class="slds-card__body">
-    <app-error-list [error]="error"></app-error-list>
+    <app-error-list [errors]="response?.errors"></app-error-list>
     <form (ngSubmit)="loginClicked()">
       <ngl-form-element>
         <input type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
@@ -24,6 +24,6 @@
     </form>
   </div>
   <div class="slds-card__footer">
-    <a href="#">{{'login-page:forgot-password' | translate}}</a>
+    <a href="#">{{'login-page:forgot password' | translate}}</a>
   </div>
 </article>

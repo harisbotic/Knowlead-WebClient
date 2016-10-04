@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Subscriber } from 'rxjs/Rx';
 import { StorageService } from './storage.service';
 import { API } from './utils/urls';
-import { ErrorModel } from './models/dto';
-import { responseToErrorModel } from './utils/converters';
+import { ResponseModel } from './models/dto';
+import { responseToResponseModel, responseToLoginResponse } from './utils/converters';
 import { ErrorCodes } from './models/constants';
+import { FrontendErrorCodes } from './models/frontend.constants';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @Injectable()
 export class HttpProvider extends Http {
@@ -68,13 +70,18 @@ export class HttpProvider extends Http {
     intercept(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
         let observable: Observable<Response> =
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
-        return observable.catch((errorResponse) => {
-            let error = responseToErrorModel(errorResponse);
-            if (error != null && error.errorCode == ErrorCodes.NotLoggedIn) {
+        return observable.catch((errorResponse: Response) => {
+            let error = responseToResponseModel(errorResponse);
+            if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
                 this.router.navigate(['/login']);
                 return Observable.empty();
             } else {
-                return Observable.throw(errorResponse);
+                if (errorResponse.status == 0) {
+                    return Observable.throw(<ResponseModel>{errors: [FrontendErrorCodes.networkError]});
+                } else if (errorResponse.status / 100 == 5) {
+                    return Observable.throw(<ResponseModel>{errors: [FrontendErrorCodes.backendError]});
+                }
+                return Observable.throw(error);
             }
         });
     }

@@ -1,8 +1,12 @@
-export enum ErrorCodes
+export class ErrorCodes
 {
-	ValidationError = 0,
-	DatabaseError = 1,
-	IdentityError = 2,
-	NotLoggedIn = 3,
-	EmailNotConfirmed = 4,
+	static requiredField: string = "REQUIRED_FIELD";
+	static databaseError: string = "DATABASE_ERROR";
+	static emailInvalid: string = "EMAIL_INVALID";
+	static emailNotVerified: string = "EMAIL_NOT_VERIFIED";
+	static modelEmpty: string = "MODEL_EMPTY";
+	static userNotFound: string = "USER_NOT_FOUND";
+	static passwordIncorrect: string = "INCORRECT_PASSWORD";
+	static confirmationCodeIncorrect: string = "INCORRECT_CODE";
+	static notLoggedIn: string = "NOT_LOGGED_IN";
 }

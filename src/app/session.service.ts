@@ -4,10 +4,10 @@ import { Observable, Subscriber, Subject } from "rxjs/Rx";
 import { LOGIN, API, ME } from "./utils";
 import { StorageService } from "./storage.service";
 import "rxjs/add/operator/map";
-import { ApplicationUserModel, RegisterUserModel } from './models/dto';
+import { ApplicationUserModel, RegisterUserModel, ResponseModel } from './models/dto';
 import { LoginResponse } from './models/login.response';
 import { urlFormEncode } from './utils/index';
-import { responseToLoginResponse, responseToUser } from './utils/converters';
+import { responseToLoginResponse, responseToUser, loginResponseToResponseModel } from './utils/converters';
 
 @Injectable()
 export class SessionService {
@@ -34,11 +34,11 @@ export class SessionService {
       let login = responseToLoginResponse(response);
       this.storageService.setAccessToken(login.access_token);
       subject.next(login);
-    }, (errorResponse: Response) => {
-      if (errorResponse.status != 0)
-        subject.next(responseToLoginResponse(errorResponse));
-      else
-        subject.error(errorResponse);
+    }, (errorResponse: any) => {
+      let error: ResponseModel = errorResponse;
+      if (errorResponse.error != null)
+        error = loginResponseToResponseModel(errorResponse);
+      subject.error(error);
     });
     return subject;
   }

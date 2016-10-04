@@ -1,17 +1,14 @@
 import { Response } from '@angular/http';
-import { ErrorModel, ResponseModel, ApplicationUserModel } from './../models/dto';
+import { ResponseModel, ApplicationUserModel } from './../models/dto';
 import { LoginResponse } from './../models/login.response';
+import { FrontendErrorCodes } from './../models/frontend.constants';
 
-function safeJsonExtraction(response: Response) {
+export function safeJsonExtraction(response: Response) {
     try {
         return response.json();
     } catch(SyntaxError) {
         return null;
     }
-}
-
-export function responseToErrorModel(response: Response): ErrorModel {
-    return safeJsonExtraction(response);
 }
 
 export function responseToLoginResponse(response:Response) : LoginResponse {
@@ -26,9 +23,11 @@ export function responseToUser(response:Response) : ApplicationUserModel {
     return safeJsonExtraction(response);
 }
 
-export function loginResponseToErrorModel(loginResponse: LoginResponse): ErrorModel {
+export function loginResponseToResponseModel(loginResponse: LoginResponse): ResponseModel {
+    if (loginResponse == null) {
+        return <ResponseModel>{errors: [FrontendErrorCodes.networkError]};
+    }
     if (loginResponse.error_description != null && loginResponse.error_description != "") {
-        // TODO: Translate loginResponse.error to number
-        return {errorDescription: loginResponse.error_description, errorCode: null};
+        return <ResponseModel>{errors: [loginResponse.error.toUpperCase()]};
     } else return null;
 }

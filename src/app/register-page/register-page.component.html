@@ -10,14 +10,14 @@
   </div>
     
   <div class="slds-card__body">
-    <app-error-list [errors]="response?.errorList"></app-error-list>    
+    <app-error-list [errors]="response?.errors"></app-error-list>    
     <form (ngSubmit)="register()">
       <ngl-form-element>
-        <app-error-list [errors]="response?.errorMap?.email"></app-error-list>
+        <app-error-list [errors]="response?.formErrors?.email"></app-error-list>
         <input type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
-        <app-error-list [errors]="response?.errorMap?.password"></app-error-list>
+        <app-error-list [errors]="response?.formErrors?.password"></app-error-list>
         <input type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
       </ngl-form-element>
       <ngl-form-element>

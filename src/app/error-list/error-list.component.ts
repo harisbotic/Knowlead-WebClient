@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ErrorModel } from './../models/dto';
+import { ResponseModel } from './../models/dto';
 
 @Component({
   selector: 'app-error-list',
@@ -8,7 +8,6 @@ import { ErrorModel } from './../models/dto';
 })
 export class ErrorListComponent {
 
-  @Input() errors: ErrorModel[];
-  @Input() error: ErrorModel;
+  @Input() errors: string[];
 
 }
