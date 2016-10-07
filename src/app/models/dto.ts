@@ -39,7 +39,6 @@ export interface FriendshipModel
 }
 export interface LanguageModel extends _CoreLookupModel
 {
-	//applicationUserLanguages: ApplicationUserLanguageModel[];
 }
 export interface FOSModel extends _CoreLookupModel
 {
@@ -73,6 +72,8 @@ export interface FeedbackClassModel extends _FeedbackModel
 }
 export interface StateModel extends _GeoLookupModel
 {
+	statesCountryId: number;
+	statesCountry: CountryModel;
 }
 export interface CountryModel extends _GeoLookupModel
 {
@@ -188,8 +189,10 @@ export interface ApplicationUserModel
 	country: CountryModel;
 	stateId: number;
 	state: StateModel;
+	motherTongueId: number;
+	motherTongue: LanguageModel;
+	languages: LanguageModel[];
 	status: UserStatus;
-	applicationUserLanguages: ApplicationUserLanguageModel[];
 }
 export interface ApplicationUserLanguageModel
 {
