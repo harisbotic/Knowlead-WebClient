@@ -7,6 +7,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import { joinTranslation } from './../utils/translate-utils';
 import { TranslationTestComponent } from './../translation-test/translation-test.component';
 import { baseLookup } from './../utils/index';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -20,6 +21,8 @@ export class ProfileSetupPageComponent implements OnInit {
   genderSelector: boolean = false;
   form: FormGroup;
   country: CountryModel;
+  mainLanguage: LanguageModel;
+  newLanguage: LanguageModel;
 
   constructor(
       protected storageService: StorageService,
@@ -34,7 +37,9 @@ export class ProfileSetupPageComponent implements OnInit {
       "birthdate": null,
       "isMale": null,
       "aboutMe": null,
-      "countryId": null
+      "countryId": null,
+      "motherTongueId": null,
+      "languages": null
     });
   }
 
@@ -54,11 +59,18 @@ export class ProfileSetupPageComponent implements OnInit {
   }
 
   languageLookup = (query: string): Observable<LanguageModel[]> => {
-    return baseLookup(this.storageService.getLanguages(), query);
+    return baseLookup(this.storageService.getLanguages()
+      .filter((language: LanguageModel) => {
+        if (language.coreLookupId == this.form.value.motherTongueId)
+          return false;
+        if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null)
+          return false;
+        return true;
+      })
+      , query);
   }
 
   countryChanged(country) {
-    console.log(country);
     if (country != null)
       this.form.patchValue({countryId: country.geoLookupId});
     else
@@ -67,7 +79,22 @@ export class ProfileSetupPageComponent implements OnInit {
 
   birthdayChanged(value) {
     this.form.patchValue({birthdate: value});
-    console.log(value);
+  }
+
+  languageAdded(language: LanguageModel) {
+    if (language != null)
+      this.form.patchValue({languages: [...(this.form.value.languages || []), language]});
+    this.newLanguage = null;
+  }
+
+  languageRemoved(language: LanguageModel) {
+    let languages = this.form.value.languages;
+    _.remove(languages, language);
+    this.form.patchValue({languages: languages});
+  }
+
+  mainLanguageChanged(language: LanguageModel) {
+    this.form.patchValue({motherTongueId: language ? language.coreLookupId : null});
   }
 
 }

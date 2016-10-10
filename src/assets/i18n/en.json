@@ -9,6 +9,8 @@
     "common:female": "Female",
     "common:about me": "About me",
     "common:country": "Country",
+    "common:native language": "Native language",
+    "common:other languages": "Other languages",
 
     "translation-test:title": "Test translation on english",
 

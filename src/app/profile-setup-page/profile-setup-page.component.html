@@ -69,7 +69,11 @@
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country' | translate}}</div>
-        <ngl-lookup [lookup]="countryLookup" debounce="0" field="name" (pickChange)="countryChanged($event)" [(pick)]="country">
+        <ngl-lookup [lookup]="countryLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="countryChanged($event)"
+            [(pick)]="country">
           <template nglLookupItem let-ctx>
             <div class="slds-media__body">
               <div class="slds-lookup__result-text"><img class="flag flag-{{ctx.code}}">{{ctx.name}}</div>
@@ -77,6 +81,31 @@
           </template>
         </ngl-lookup>
         <input type="hidden" formControlName="countryId">
+      </ngl-form-element>
+
+      <ngl-form-element>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:native language' | translate}}</div>
+        <ngl-lookup [lookup]="languageLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="mainLanguageChanged($event)"
+            [(pick)]="mainLanguage">
+        </ngl-lookup>
+        <input type="hidden" formControlName="motherTongueId">
+      </ngl-form-element>
+
+      <ngl-form-element>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:other languages' | translate}}</div>
+        <ngl-pill *ngFor="let language of form.value.languages" (nglPillRemove)="languageRemoved(language)">
+          {{language.name}}
+        </ngl-pill>
+        <ngl-lookup [lookup]="languageLookup"
+            debounce="0"
+            field="name"
+            [(pick)]="newLanguage"
+            (pickChange)="languageAdded($event)">
+        </ngl-lookup>
+        <input type="hidden" formControlName="languages">
       </ngl-form-element>
 
     </form>
