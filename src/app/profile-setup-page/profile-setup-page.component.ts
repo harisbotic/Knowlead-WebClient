@@ -83,8 +83,10 @@ export class ProfileSetupPageComponent implements OnInit {
 
   languageAdded(language: LanguageModel) {
     if (language != null)
-      this.form.patchValue({languages: [...(this.form.value.languages || []), language]});
-    this.newLanguage = null;
+      this.form.patchValue({languages: _.uniq([...(this.form.value.languages || []), language])});
+    Observable.timer(1).subscribe(() => {
+      this.newLanguage = null;
+    });
   }
 
   languageRemoved(language: LanguageModel) {
