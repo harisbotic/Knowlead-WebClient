@@ -81,4 +81,18 @@ export class StorageService {
     }])
   }
 
+  public getStates(country: CountryModel): Observable<CountryModel> {
+    if (country.code == "us") {
+      return Observable.from([{
+        geoLookupId: 3,
+        code: "wa",
+        name: "Washington d. c."
+      },{
+        geoLookupId: 4,
+        code: "ny",
+        name: "New York"
+      }]);
+    } else return Observable.from([]);
+  }
+
 }

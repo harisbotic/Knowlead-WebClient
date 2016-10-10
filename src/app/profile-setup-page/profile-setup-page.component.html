@@ -83,6 +83,17 @@
         <input type="hidden" formControlName="countryId">
       </ngl-form-element>
 
+      <ngl-form-element *ngIf="states.length > 0">
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:state' | translate}}</div>
+        <ngl-lookup [lookup]="stateLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="stateChanged($event)"
+            [(pick)]="state">
+        </ngl-lookup>
+        <input type="hidden" formControlName="stateId">
+      </ngl-form-element>
+
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:native language' | translate}}</div>
         <ngl-lookup [lookup]="languageLookup"

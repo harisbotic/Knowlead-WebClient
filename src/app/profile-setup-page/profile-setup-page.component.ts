@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ApplicationUserModel, CountryModel, LanguageModel } from './../models/dto';
+import { ApplicationUserModel, CountryModel, LanguageModel, StateModel } from './../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './../storage.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -23,6 +23,8 @@ export class ProfileSetupPageComponent implements OnInit {
   country: CountryModel;
   mainLanguage: LanguageModel;
   newLanguage: LanguageModel;
+  states: StateModel[] = [];
+  selectedState: StateModel;
 
   constructor(
       protected storageService: StorageService,
@@ -39,7 +41,8 @@ export class ProfileSetupPageComponent implements OnInit {
       "aboutMe": null,
       "countryId": null,
       "motherTongueId": null,
-      "languages": null
+      "languages": null,
+      "stateId": null
     });
   }
 
@@ -70,14 +73,29 @@ export class ProfileSetupPageComponent implements OnInit {
       , query);
   }
 
-  countryChanged(country) {
-    if (country != null)
+  stateLookup = (query: string): Observable<StateModel[]> => {
+    return baseLookup(Observable.from(this.states), query);
+  }
+
+  stateChanged(state: StateModel) {
+    this.form.patchValue({stateId: state ? state.geoLookupId : null});
+    this.selectedState = state;
+  }
+
+  countryChanged(country: CountryModel) {
+    this.states = [];
+    this.stateChanged(null);
+    if (country != null) {
       this.form.patchValue({countryId: country.geoLookupId});
+      this.storageService.getStates(country).subscribe((state: StateModel) => {
+        this.states.push(state);
+      });
+    }
     else
       this.form.patchValue({countryId: null});
   }
 
-  birthdayChanged(value) {
+  birthdayChanged(value: Date) {
     this.form.patchValue({birthdate: value});
   }
 
