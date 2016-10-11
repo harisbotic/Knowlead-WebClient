@@ -1,7 +1,38 @@
-<a routerLink="/login">Login</a> | 
+<!--<a routerLink="/login">Login</a> | 
 <a routerLink="/register">Register</a> | 
 <a routerLink="/">Unlogged home</a> |
 <a routerLink="/home">Logged home</a> |
 <a routerLink="/profilesetup">Profile setup</a> |
 <a routerLink="/translatetest">Translation test</a>
+<router-outlet></router-outlet>-->
+
+<div class="slds-tabs--scoped">
+  <ul class="slds-tabs--scoped__nav" role="tablist">
+
+    <li class="slds-tabs--scoped__item slds-text-title--caps" title="Item One" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/login" role="tab" tabindex="-1" aria-selected="false" 
+     aria-controls="tab-scoped-1" id="tab-scoped-1__item">Login</a></li>
+
+    <li class="slds-tabs--scoped__item slds-text-title--caps " title="Item Two" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/register" role="tab" tabindex="0" aria-selected="true" 
+     aria-controls="tab-scoped-2" id="tab-scoped-2__item">register</a></li>
+
+    <li class="slds-tabs--scoped__item slds-text-title--caps" title="Item Three" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/" role="tab" tabindex="-1" aria-selected="false" 
+     aria-controls="tab-scoped-3" id="tab-scoped-3__item">unlogged home</a></li>
+
+     <li class="slds-tabs--scoped__item slds-text-title--caps" title="Item Three" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/home" role="tab" tabindex="-1" aria-selected="false" 
+     aria-controls="tab-scoped-3" id="tab-scoped-3__item">logged home</a></li>
+
+     <li class="slds-tabs--scoped__item slds-text-title--caps" title="Item Three" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/profilesetup" role="tab" tabindex="-1" aria-selected="false" 
+     aria-controls="tab-scoped-3" id="tab-scoped-3__item">profile setup</a></li>
+
+     <li class="slds-tabs--scoped__item slds-text-title--caps" title="Item Three" role="presentation">
+     <a class="slds-tabs--scoped__link" routerLink="/translatetest" role="tab" tabindex="-1" aria-selected="false" 
+     aria-controls="tab-scoped-3" id="tab-scoped-3__item">translation test</a></li>
+  </ul>
+
+</div>
 <router-outlet></router-outlet>
