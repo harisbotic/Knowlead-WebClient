@@ -20,7 +20,7 @@ export function responseToResponseModel(response:Response) : ResponseModel {
 }
 
 export function responseToUser(response:Response) : ApplicationUserModel {
-    return safeJsonExtraction(response);
+    return responseToResponseModel(response).object;
 }
 
 export function loginResponseToResponseModel(loginResponse: LoginResponse): ResponseModel {

@@ -10,7 +10,7 @@
   </div>
     
   <div class="slds-card__body">
-    <form (ngSubmit)="submit()" [formGroup]="form">
+    <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form != null">
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:name' | translate}}</div>
@@ -80,18 +80,18 @@
             </div>
           </template>
         </ngl-lookup>
-        <input type="hidden" formControlName="countryId">
+        <input type="hidden" formControlName="country">
       </ngl-form-element>
 
       <ngl-form-element *ngIf="states.length > 0">
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:state' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country state' | translate}}</div>
         <ngl-lookup [lookup]="stateLookup"
             debounce="0"
             field="name"
             (pickChange)="stateChanged($event)"
             [(pick)]="state">
         </ngl-lookup>
-        <input type="hidden" formControlName="stateId">
+        <input type="hidden" formControlName="state">
       </ngl-form-element>
 
       <ngl-form-element>
@@ -100,9 +100,9 @@
             debounce="0"
             field="name"
             (pickChange)="mainLanguageChanged($event)"
-            [(pick)]="mainLanguage">
+            [(pick)]="motherTongue">
         </ngl-lookup>
-        <input type="hidden" formControlName="motherTongueId">
+        <input type="hidden" formControlName="motherTongue">
       </ngl-form-element>
 
       <ngl-form-element>
