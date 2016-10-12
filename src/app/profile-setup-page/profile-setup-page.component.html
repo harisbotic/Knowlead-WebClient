@@ -121,7 +121,9 @@
 
     </form>
   </div>
+
   <div class="slds-card__footer">
+    <app-error-list [errors]="response?.errors"></app-error-list>
     <button nglButton="brand" (click)="submit()">
       {{"profile-setup-page:submit" | translate}}
     </button>

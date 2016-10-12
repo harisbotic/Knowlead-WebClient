@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { ApplicationUserModel, CountryModel, LanguageModel, StateModel } from './../models/dto';
+import { ApplicationUserModel, CountryModel, LanguageModel, StateModel, ResponseModel } from './../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './../storage.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -10,12 +10,13 @@ import { baseLookup } from './../utils/index';
 import * as _ from 'lodash';
 import { SessionService } from './../session.service';
 import * as jsonpatch from 'fast-json-patch';
+import { AccountService } from './../account.service';
 
 @Component({
   selector: 'app-profile-setup-page',
   templateUrl: './profile-setup-page.component.html',
   styleUrls: ['./profile-setup-page.component.scss', '../../assets/styles/flags.css'],
-  providers: []
+  providers: [AccountService]
 })
 export class ProfileSetupPageComponent implements OnInit {
 
@@ -28,16 +29,17 @@ export class ProfileSetupPageComponent implements OnInit {
   motherTongue: LanguageModel;
   country: CountryModel;
   user: ApplicationUserModel;
+  response: ResponseModel;
 
   constructor(
       protected storageService: StorageService,
       protected translateService: TranslateService,
       protected formBuilder: FormBuilder,
-      protected sessionService: SessionService) {
+      protected accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.sessionService.getUser().subscribe((user: ApplicationUserModel) => {
+    this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
       this.user = user;
       this.form = new FormGroup({
         "name": new FormControl(this.user.name),
@@ -53,6 +55,17 @@ export class ProfileSetupPageComponent implements OnInit {
       this.state = this.user.state;
       this.country = this.user.country;
       this.motherTongue = this.user.motherTongue;
+      for (let key1 in this.user) {
+        let found = false;
+        for (let key2 in this.form.controls) {
+          if (key2 == key1 || key1 == key2 + "Id") {
+            found = true;
+          }
+        }
+        if (!found) {
+          delete this.user[key1];
+        }
+      }
     })
   }
 
@@ -61,7 +74,14 @@ export class ProfileSetupPageComponent implements OnInit {
     submission.countryId = submission.country.geoLookupId;
     submission.motherTongueId = submission.motherTongue.coreLookupId;
     submission.stateId = submission.state ? submission.state.geoLookupId : null;
-    console.log(jsonpatch.compare(this.user, this.form.value));
+    this.accountService
+      .patchUser(jsonpatch.compare(this.user, submission))
+      .subscribe((response: ResponseModel) => {
+        console.log(response);
+      }, (error: ResponseModel) => {
+        this.response = error;
+      }
+    );
   }
 
   getGender(): string {
