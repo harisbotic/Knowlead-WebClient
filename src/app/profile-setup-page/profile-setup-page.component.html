@@ -11,7 +11,7 @@
   </div>
     
   <div class="slds-card__body">
-    <form (ngSubmit)="submit()" [formGroup]="form">
+    <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form != null">
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:name' | translate}}</div>
@@ -70,19 +70,61 @@
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country' | translate}}</div>
-        <ngl-lookup [lookup]="countryLookup" debounce="0" field="name" (pickChange)="countryChanged($event)" [(pick)]="country">
+        <ngl-lookup [lookup]="countryLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="countryChanged($event)"
+            [(pick)]="country">
           <template nglLookupItem let-ctx>
             <div class="slds-media__body">
               <div class="slds-lookup__result-text"><img class="flag flag-{{ctx.code}}">{{ctx.name}}</div>
             </div>
           </template>
         </ngl-lookup>
-        <input type="hidden" formControlName="countryId">
+        <input type="hidden" formControlName="country">
+      </ngl-form-element>
+
+      <ngl-form-element *ngIf="states.length > 0">
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country state' | translate}}</div>
+        <ngl-lookup [lookup]="stateLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="stateChanged($event)"
+            [(pick)]="state">
+        </ngl-lookup>
+        <input type="hidden" formControlName="state">
+      </ngl-form-element>
+
+      <ngl-form-element>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:native language' | translate}}</div>
+        <ngl-lookup [lookup]="languageLookup"
+            debounce="0"
+            field="name"
+            (pickChange)="mainLanguageChanged($event)"
+            [(pick)]="motherTongue">
+        </ngl-lookup>
+        <input type="hidden" formControlName="motherTongue">
+      </ngl-form-element>
+
+      <ngl-form-element>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:other languages' | translate}}</div>
+        <ngl-pill *ngFor="let language of form.value.languages" (nglPillRemove)="languageRemoved(language)">
+          {{language.name}}
+        </ngl-pill>
+        <ngl-lookup [lookup]="languageLookup"
+            debounce="0"
+            field="name"
+            [(pick)]="newLanguage"
+            (pickChange)="languageAdded($event)">
+        </ngl-lookup>
+        <input type="hidden" formControlName="languages">
       </ngl-form-element>
 
     </form>
   </div>
+
   <div class="slds-card__footer">
+    <app-error-list [errors]="response?.errors"></app-error-list>
     <button nglButton="brand" (click)="submit()">
       {{"profile-setup-page:submit" | translate}}
     </button>

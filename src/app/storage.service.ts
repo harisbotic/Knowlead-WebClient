@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { parseJwt } from './utils/index';
 import { CountryModel, LanguageModel } from './models/dto';
+import { responseToResponseModel } from './utils/converters';
 
 @Injectable()
 export class StorageService {
@@ -29,6 +30,8 @@ export class StorageService {
     if (value != undefined) {
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
+    } else {
+      this.removeAccessToken();
     }
   }
 
@@ -47,10 +50,14 @@ export class StorageService {
   }
 
   public getFromStorage<T>(parameter: string): Observable<T> {
-    return this.getHttp().get(STORAGE_CONFIG["user"].api)
-      .map((data) => {
-        return data.json();
+    return this.getHttp().get(STORAGE_CONFIG[parameter].api)
+      .map((response) => {
+        return responseToResponseModel(response).object;
       });
+  }
+
+  public patchToStorage(parameter: string, patch: any) {
+    console.error("NOT IMPLEMENTED YET");
   }
 
   public getCountries(): Observable<CountryModel> {
@@ -79,6 +86,20 @@ export class StorageService {
       code: 'en',
       name: 'English'
     }])
+  }
+
+  public getStates(country: CountryModel): Observable<CountryModel> {
+    if (country.code == "us") {
+      return Observable.from([{
+        geoLookupId: 3,
+        code: "wa",
+        name: "Washington d. c."
+      },{
+        geoLookupId: 4,
+        code: "ny",
+        name: "New York"
+      }]);
+    } else return Observable.from([]);
   }
 
 }

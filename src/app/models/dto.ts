@@ -192,6 +192,7 @@ export interface ApplicationUserModel
 	motherTongueId: number;
 	motherTongue: LanguageModel;
 	languages: LanguageModel[];
+	languageIds: number[];
 	status: UserStatus;
 }
 export interface ApplicationUserLanguageModel

@@ -42,6 +42,10 @@ export class HttpProvider extends Http {
         return this.emit("post", url, options, body);
     }
  
+    patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {  
+        return this.emit("patch", url, options, body);
+    }
+ 
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         return this.emit("put", url, options, body);
     }

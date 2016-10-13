@@ -15,9 +15,6 @@ export class SessionService {
   constructor(protected http: Http, protected storageService: StorageService) {
   }
 
-  user: ApplicationUserModel;
-  access_code: string;
-
   public login(cridentials: RegisterUserModel): Observable<LoginResponse> {
     let subject = new Subject<LoginResponse>();
     this.http.post(LOGIN, urlFormEncode({
@@ -41,16 +38,5 @@ export class SessionService {
       subject.error(error);
     });
     return subject;
-  }
-
-  public getUser(): Observable<ApplicationUserModel> {
-    if (this.user != null) {
-      return Observable.from([this.user]);
-    }
-    let ret = this.http.get(ME).map(responseToUser);
-    ret.subscribe((user) => {
-      this.user = user;
-    });
-    return ret;
   }
 }

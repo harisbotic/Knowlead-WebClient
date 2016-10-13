@@ -9,6 +9,9 @@
     "common:female": "Female",
     "common:about me": "About me",
     "common:country": "Country",
+    "common:country state": "State",
+    "common:native language": "Native language",
+    "common:other languages": "Other languages",
 
     "translation-test:title": "Test translation on english",
 
@@ -41,6 +44,7 @@
     "MODEL_EMPTY": "Posted data empty",
     "USER_NOT_FOUND": "User was not found",
     "INCORRECT_PASSWORD": "Password is incorrect",
-    "INCORRECT_CODE": "Incorrect email validation code",
-    "NOT_LOGGED_IN": "You are not logged in"
+    "CONFIRMATION_CODE_INCORRECT": "Incorrect email validation code",
+    "NOT_LOGGED_IN": "You are not logged in",
+    "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination"
 }
