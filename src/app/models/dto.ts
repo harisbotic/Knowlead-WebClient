@@ -43,11 +43,13 @@ export interface LanguageModel extends _CoreLookupModel
 export interface FOSModel extends _CoreLookupModel
 {
 	fosDesc: string;
+	parentFos: FOSModel;
+	parentFosId: number;
 }
 export interface AchievementModel extends _CoreLookupModel
 {
 	desc: string;
-	imageId: number;
+	imageId: Guid;
 	image: ImageModel;
 }
 export interface _CoreLookupModel
@@ -108,7 +110,7 @@ export interface P2PImageModel
 {
 	p2pId: number;
 	p2p: P2PModel;
-	imageId: number;
+	imageId: Guid;
 	image: ImageModel;
 }
 export interface P2PFileModel
@@ -146,7 +148,7 @@ export interface UserNotebookModel
 	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
-	imageId: number;
+	imageId: Guid;
 	image: ImageModel;
 }
 export interface UserCertificateModel
@@ -157,7 +159,7 @@ export interface UserCertificateModel
 	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
-	imageId: number;
+	imageId: Guid;
 	image: ImageModel;
 }
 export interface UserAchievementModel
@@ -192,7 +194,6 @@ export interface ApplicationUserModel
 	motherTongueId: number;
 	motherTongue: LanguageModel;
 	languages: LanguageModel[];
-	languageIds: number[];
 	status: UserStatus;
 }
 export interface ApplicationUserLanguageModel
