@@ -25,7 +25,7 @@
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{"common:birthdate" | translate}}</div>
         <input type="hidden" formControlName="birthdate">
-        <button nglButton="neutral" (click)="dateSelector = true" type="button">
+        <button nglButton="neutral" (click)="dateSelector = true; currentDate = form.value.birthdate" type="button">
           <span *ngIf="form.value.birthdate == null">
             {{"profile-setup-page:open date picker" | translate}}
           </span>
@@ -130,9 +130,9 @@
   </div>
 </article>
 
-<ngl-modal [(open)]="dateSelector" header="{{'profile-setup-page:select birthdate' | translate}}">
+<ngl-modal [(open)]="dateSelector" header="{{'profile-setup-page:select birthdate' | translate}}" *ngIf="form != null">
   <div body>
-    <ngl-datepicker (dateChange)="birthdayChanged($event)" [date]="null"></ngl-datepicker>
+    <ngl-datepicker (dateChange)="birthdayChanged($event)" [(date)]="currentDate"></ngl-datepicker>
   </div>
   <template ngl-modal-footer>
     <button class="slds-button slds-button--brand" (click)="dateSelector = false">Save</button>

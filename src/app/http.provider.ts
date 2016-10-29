@@ -20,7 +20,6 @@ export class HttpProvider extends Http {
     }
 
     emit(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
-        console.log(method + ": " + url);
         if (url.toString().toLowerCase().startsWith(API + "/api")) {
             return this.getRequestOptionArgs(options).flatMap((args) => {
                 return this.intercept(method, url, args, body);
@@ -67,7 +66,7 @@ export class HttpProvider extends Http {
                 return options;
             });
         } else {
-            return Observable.from([options]);
+            return Observable.of(options);
         }
     }
 

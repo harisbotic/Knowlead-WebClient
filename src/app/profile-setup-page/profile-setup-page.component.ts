@@ -97,19 +97,22 @@ export class ProfileSetupPageComponent implements OnInit {
 
   languageLookup = (query: string): Observable<LanguageModel[]> => {
     return baseLookup(this.storageService.getLanguages()
-      .filter((language: LanguageModel) => {
-        if (this.form.value.motherTongue != null &&
-            language.coreLookupId == this.form.value.motherTongue.coreLookupId)
-          return false;
-        if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null)
-          return false;
-        return true;
+      .map((languages: LanguageModel[]) => {
+        return _.filter(languages, (language) => 
+        {
+          if (this.form.value.motherTongue != null &&
+              language.coreLookupId == this.form.value.motherTongue.coreLookupId)
+            return false;
+          if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null)
+            return false;
+          return true;
+        });
       })
       , query);
   }
 
   stateLookup = (query: string): Observable<StateModel[]> => {
-    return baseLookup(Observable.from(this.states), query);
+    return baseLookup(Observable.of(this.states), query);
   }
 
   stateChanged(state: StateModel) {
@@ -122,8 +125,8 @@ export class ProfileSetupPageComponent implements OnInit {
     this.stateChanged(null);
     if (country != null) {
       this.form.patchValue({country: country});
-      this.storageService.getStates(country).subscribe((state: StateModel) => {
-        this.states.push(state);
+      this.storageService.getStates(country).subscribe((states: StateModel[]) => {
+        this.states = states;
       });
     }
     else

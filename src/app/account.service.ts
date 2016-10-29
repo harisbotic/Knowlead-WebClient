@@ -20,7 +20,12 @@ export class AccountService {
   }
 
   public currentUser(): Observable<ApplicationUserModel> {
-    return this.storageService.getFromStorage<ApplicationUserModel>("user");
+    return this.storageService.getFromStorage<ApplicationUserModel>("user").map(user => {
+      if (user.birthdate != null && typeof(user.birthdate) == "string") {
+        user.birthdate = new Date(Date.parse(user.birthdate));
+      }
+      return user;
+    })
   }
 
   public patchUser(patch: any): Observable<ResponseModel> {

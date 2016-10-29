@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { STORAGE_CONFIG, STORE_ACCESS_TOKEN } from './utils/storage.constants';
 import { Observable } from 'rxjs/Rx';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { parseJwt } from './utils/index';
-import { CountryModel, LanguageModel } from './models/dto';
+import { CountryModel, LanguageModel, StateModel } from './models/dto';
 import { responseToResponseModel } from './utils/converters';
 
 @Injectable()
@@ -49,8 +49,14 @@ export class StorageService {
     return this.access_token != undefined;
   }
 
-  public getFromStorage<T>(parameter: string): Observable<T> {
-    return this.getHttp().get(STORAGE_CONFIG[parameter].api)
+  public getFromStorage<T>(key: string, parameters?: {[key: string]: any}): Observable<T> {
+    let params: URLSearchParams;
+    if (parameters != null) {
+      params = new URLSearchParams();
+      for (let searchkey in parameters)
+        params.set(searchkey, parameters[searchkey]);
+    }
+    return this.getHttp().get(STORAGE_CONFIG[key].api, {search: params})
       .map((response) => {
         return responseToResponseModel(response).object;
       });
@@ -60,46 +66,16 @@ export class StorageService {
     console.error("NOT IMPLEMENTED YET");
   }
 
-  public getCountries(): Observable<CountryModel> {
-    return Observable.from([{
-      geoLookupId: 0,
-      code: 'ba',
-      name: "Bosnia and Herzegovina"
-    },{
-      geoLookupId: 1,
-      code: 'gb',
-      name: "Great Britain"
-    },{
-      geoLookupId: 2,
-      code: 'us',
-      name: "United States of America"
-    }]);
+  public getCountries(): Observable<CountryModel[]> {
+    return this.getFromStorage<CountryModel[]>("countries");
   }
 
-  public getLanguages(): Observable<LanguageModel> {
-    return Observable.from([{
-      coreLookupId: 0,
-      code: 'ba',
-      name: 'Bosnian'
-    },{
-      coreLookupId: 1,
-      code: 'en',
-      name: 'English'
-    }])
+  public getLanguages(): Observable<LanguageModel[]> {
+    return this.getFromStorage<LanguageModel[]>("languages");
   }
 
-  public getStates(country: CountryModel): Observable<CountryModel> {
-    if (country.code == "us") {
-      return Observable.from([{
-        geoLookupId: 3,
-        code: "wa",
-        name: "Washington d. c."
-      },{
-        geoLookupId: 4,
-        code: "ny",
-        name: "New York"
-      }]);
-    } else return Observable.from([]);
+  public getStates(country: CountryModel): Observable<StateModel[]> {
+    return this.getFromStorage<StateModel[]>("states", {countryId: country.geoLookupId});
   }
 
 }
