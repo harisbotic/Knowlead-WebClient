@@ -35,6 +35,6 @@ interface NameInterface {
 
 export function baseLookup(source: Observable<NameInterface[]>, query: string): Observable<any[]> {
     return source.map((entry: NameInterface[]) => {
-        return _.filter(entry, val => val.name.toLowerCase().indexOf(query) > -1);
+        return _.filter(entry, val => val.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
     });
 }
