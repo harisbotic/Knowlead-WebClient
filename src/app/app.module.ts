@@ -16,11 +16,12 @@ import { HttpProvider } from './http.provider';
 import { StorageService } from './storage.service';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { Router } from '@angular/router';
-import { NglModule, provideNglConfig } from 'ng-lightning';
+import { NglModule, INglConfig } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { TranslationTestComponent } from './translation-test/translation-test.component';
 import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
+import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,17 @@ import { InterestSetupPageComponent } from './interest-setup-page/interest-setup
     UserHomePageComponent,
     ProfileSetupPageComponent,
     TranslationTestComponent,
-    InterestSetupPageComponent
+    InterestSetupPageComponent,
+    InterestSetupChoiceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRouting,
-    NglModule,
+    NglModule.forRoot({
+      //svgPath: "https://www.lightningdesignsystem.com/assets"
+    }),
     ReactiveFormsModule,
     TranslateModule.forRoot({ 
       provide: TranslateLoader,
@@ -55,8 +59,7 @@ import { InterestSetupPageComponent } from './interest-setup-page/interest-setup
       useClass: HttpProvider,
       deps: [XHRBackend, RequestOptions, StorageService, Router]
     },
-    SessionService,
-    provideNglConfig()
+    SessionService
   ],
   bootstrap: [AppComponent]
 })

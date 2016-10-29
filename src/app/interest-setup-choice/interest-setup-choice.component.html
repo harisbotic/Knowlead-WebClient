@@ -1,0 +1,12 @@
+<div class="slds-card__body">
+  <div class="slds-text-title">{{subject}}</div>
+
+  <div class="slds-text-title--caps slds-m-top--x-large slds-m-bottom--small">Close</div>
+  <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small">
+    <ngl-icon icon="close"></ngl-icon>
+  </button>
+
+  Rate: {{value}}
+  <ngl-rating [(rate)]="value" [isReadonly]="readonly" [size]="size" [colorOn]="color"></ngl-rating>
+
+</div>
