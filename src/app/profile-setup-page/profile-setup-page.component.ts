@@ -52,9 +52,11 @@ export class ProfileSetupPageComponent implements OnInit {
         "languages": new FormControl(this.user.languages),
         "state": new FormControl(this.user.state)
       });
-      this.state = this.user.state;
-      this.country = this.user.country;
-      this.motherTongue = this.user.motherTongue;
+
+      this.countryChanged(this.user.country);
+      this.stateChanged(this.user.state);
+      this.mainLanguageChanged(this.user.motherTongue);
+
       for (let key1 in this.user) {
         let found = false;
         for (let key2 in this.form.controls) {
@@ -121,6 +123,7 @@ export class ProfileSetupPageComponent implements OnInit {
   }
 
   countryChanged(country: CountryModel) {
+    this.country = country;
     this.states = [];
     this.stateChanged(null);
     if (country != null) {
@@ -153,6 +156,7 @@ export class ProfileSetupPageComponent implements OnInit {
 
   mainLanguageChanged(language: LanguageModel) {
     this.form.patchValue({motherTongue: language});
+    this.motherTongue = language;
   }
 
 }

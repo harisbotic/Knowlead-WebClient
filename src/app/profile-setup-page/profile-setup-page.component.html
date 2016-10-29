@@ -36,30 +36,10 @@
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{"common:gender" | translate}}</div>
-        <span nglDropdown [(open)]="genderSelector">
-          <button class="slds-button slds-button--neutral" nglDropdownTrigger type="button">
-            <span class="slds-truncate">
-              {{getGender() | translate}}
-            </span>
-            <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
-          </button>
-          <div class="slds-dropdown slds-dropdown--left">
-            <ul class="dropdown__list" role="menu">
-              <li class="slds-dropdown__item">
-                <a role="menuitem" nglDropdownItem (click)="form.patchValue({isMale: true}); genderSelector = false;">
-                  {{"common:male" | translate}}
-                </a>
-              </li>
-              <li class="slds-dropdown__item">
-                <a role="menuitem" nglDropdownItem (click)="form.patchValue({isMale: false}); genderSelector = false;">
-                  {{"common:female" | translate}}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </span>
-        <input type="hidden" formControlName="isMale">
+        <select nglFormControl class="slds-select" formControlName="isMale">
+          <option [selected]="form.value.isMale">{{"common:male" | translate}}</option>
+          <option [selected]="!form.value.isMale">{{"common:female" | translate}}</option>
+        </select>
       </ngl-form-element>
 
       <ngl-form-element>
