@@ -36,9 +36,9 @@
       </ngl-form-element>
 
       <ngl-form-element>
-        <select nglFormControl class="slds-select" formControlName="isMale">
-          <option [selected]="form.value.isMale">{{"common:male" | translate}}</option>
-          <option [selected]="!form.value.isMale">{{"common:female" | translate}}</option>
+        <select class="slds-select" formControlName="isMale">
+          <option value="true">{{"common:male" | translate}}</option>
+          <option value="false">{{"common:female" | translate}}</option>
         </select>
       </ngl-form-element>
 
