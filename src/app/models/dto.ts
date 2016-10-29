@@ -42,8 +42,7 @@ export interface LanguageModel extends _CoreLookupModel
 }
 export interface FOSModel extends _CoreLookupModel
 {
-	fosDesc: string;
-	parentFos: FOSModel;
+	children: FOSModel[];
 	parentFosId: number;
 }
 export interface AchievementModel extends _CoreLookupModel

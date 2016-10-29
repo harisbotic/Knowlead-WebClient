@@ -10,4 +10,5 @@ export class ErrorCodes
 	static confirmationCodeIncorrect: string = "CONFIRMATION_CODE_INCORRECT";
 	static notLoggedIn: string = "NOT_LOGGED_IN";
 	static loginCredentialsIncorrect: string = "LOGIN_CREDENTIALS_INCORRECT";
+	static incorrectValue: string = "INCORRECT_VALUE";
 }

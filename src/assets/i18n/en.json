@@ -46,5 +46,6 @@
     "INCORRECT_PASSWORD": "Password is incorrect",
     "CONFIRMATION_CODE_INCORRECT": "Incorrect email validation code",
     "NOT_LOGGED_IN": "You are not logged in",
-    "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination"
+    "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination",
+    "INCORRECT_VALUE": "The value is incorrect"
 }
