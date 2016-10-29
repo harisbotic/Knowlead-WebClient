@@ -20,6 +20,7 @@ import { NglModule, provideNglConfig } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { TranslationTestComponent } from './translation-test/translation-test.component';
+import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TranslationTestComponent } from './translation-test/translation-test.co
     ConfirmEmailPageComponent,
     UserHomePageComponent,
     ProfileSetupPageComponent,
-    TranslationTestComponent
+    TranslationTestComponent,
+    InterestSetupPageComponent
   ],
   imports: [
     BrowserModule,

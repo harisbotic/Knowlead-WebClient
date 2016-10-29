@@ -9,7 +9,6 @@ import { TranslationTestComponent } from './../translation-test/translation-test
 import { baseLookup } from './../utils/index';
 import * as _ from 'lodash';
 import { SessionService } from './../session.service';
-import * as jsonpatch from 'fast-json-patch';
 import { AccountService } from './../account.service';
 
 @Component({
@@ -72,12 +71,8 @@ export class ProfileSetupPageComponent implements OnInit {
   }
 
   submit() {
-    let submission: ApplicationUserModel = this.form.value;
-    submission.countryId = submission.country.geoLookupId;
-    submission.motherTongueId = submission.motherTongue.coreLookupId;
-    submission.stateId = submission.state ? submission.state.geoLookupId : null;
     this.accountService
-      .patchUser(jsonpatch.compare(this.user, submission))
+      .patchUser(this.form.value)
       .subscribe((response: ResponseModel) => {
         console.log(response);
       }, (error: ResponseModel) => {

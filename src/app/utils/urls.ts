@@ -7,3 +7,4 @@ export const USER_DETAILS = API + "/api/account/details";
 export const LANGUAGES = API + "/api/lookup/languages";
 export const COUNTRIES = API + "/api/lookup/countries";
 export const STATES = API + "/api/lookup/states";
+export const FOSES = API + "/api/lookup/allfos";

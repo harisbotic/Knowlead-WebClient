@@ -38,3 +38,23 @@ export function baseLookup(source: Observable<NameInterface[]>, query: string): 
         return _.filter(entry, val => val.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
     });
 }
+
+export function iterateObjectAlphabetically(obj: any, callback: (value: any, key: any, original?: any) => void) {
+    var arr = [],
+        i;
+
+    for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            arr.push(i);
+        }
+    }
+
+    arr.sort();
+
+    for (i = 0; i < arr.length; i++) {
+        var key = obj[arr[i]];
+        if (callback) {
+            callback(obj[arr[i]], arr[i], obj);
+        }
+    }
+}

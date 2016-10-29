@@ -7,6 +7,7 @@ import { ConfirmEmailPageComponent} from './confirm-email-page/confirm-email-pag
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { TranslationTestComponent } from './translation-test/translation-test.component';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
+import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
  
 const appRoutes: Routes = [
     { path: 'login', component: LoginPageComponent },
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent },
     { path: 'translatetest', component: TranslationTestComponent },
-    { path: 'profilesetup', component: ProfileSetupPageComponent }
+    { path: 'profilesetup', component: ProfileSetupPageComponent },
+    { path: 'interestsetup', component: InterestSetupPageComponent }
 ];
 
 export const appRoutingProviders: any[] = [
