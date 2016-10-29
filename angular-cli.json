@@ -7,7 +7,7 @@
     {
       "root": "src",
       "outDir": "dist",
-      "assets": ["assets", "../node_modules/@salesforce-ux/design-system/assets123"],
+      "assets": "assets",
       "index": "index.html",
       "main": "main.ts",
       "test": "test.ts",
