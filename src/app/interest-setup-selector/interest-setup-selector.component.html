@@ -6,7 +6,7 @@
           <div class="slds-text-heading--medium slds-float--left">
             {{item.name}}
           </div>
-          <button type="button" nglButtonIcon class="slds-float--right" (click)="remove(item)">
+          <button *ngIf="isRemovable(item)" type="button" nglButtonIcon class="slds-float--right" (click)="$event.stopPropagation(); remove(item)">
             <ngl-icon icon="close" size="medium"></ngl-icon>
           </button>
         </div>

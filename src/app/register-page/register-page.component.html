@@ -14,18 +14,18 @@
     <form (ngSubmit)="register()">
       <ngl-form-element>
         <app-error-list [errors]="response?.formErrors?.email"></app-error-list>
-        <input type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
+        <input nglFormControl type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
         <app-error-list [errors]="response?.formErrors?.password"></app-error-list>
-        <input type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
+        <input nglFormControl type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="password" name="confirmpassword" placeholder="{{'register-page:confirm password' | translate}}"
+        <input nglFormControl type="password" name="confirmpassword" placeholder="{{'register-page:confirm password' | translate}}"
         [(ngModel)]="test">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="submit" [disabled]="busy" value="{{'register-page:submit' | translate}}" class="slds-button--brand">
+        <input nglFormControl type="submit" [disabled]="busy" value="{{'register-page:submit' | translate}}" class="slds-button--brand">
       </ngl-form-element>
     </form>
   </div>

@@ -13,13 +13,13 @@
     <app-error-list [errors]="response?.errors"></app-error-list>
     <form (ngSubmit)="loginClicked()">
       <ngl-form-element>
-        <input type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
+        <input nglFormControl type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
+        <input nglFormControl type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
       </ngl-form-element>
       <ngl-form-element>
-        <input type="submit" [disabled]="busy" value="{{'login-page:submit' | translate}}" class="slds-button--brand">
+        <input nglFormControl type="submit" [disabled]="busy" value="{{'login-page:submit' | translate}}" class="slds-button--brand">
       </ngl-form-element>
     </form>
   </div>

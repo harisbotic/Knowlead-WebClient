@@ -3,6 +3,7 @@ import { AccountService } from './../account.service';
 import { RegisterUserModel, ResponseModel } from './../models/dto';
 import { FrontendErrorCodes } from './../models/frontend.constants';
 import { safeJsonExtraction } from './../utils/converters';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -17,7 +18,8 @@ export class RegisterPageComponent {
   cridentials: RegisterUserModel = {email: "", password: ""};
   response: ResponseModel;
 
-  constructor(protected accountService: AccountService) {
+  constructor(protected accountService: AccountService,
+              protected router: Router) {
   }
 
   register() {
@@ -32,6 +34,7 @@ export class RegisterPageComponent {
     this.accountService.register (this.cridentials).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
+        this.router.navigate["/login"];
       },(errorResponse) => {
         this.response = errorResponse;
       });

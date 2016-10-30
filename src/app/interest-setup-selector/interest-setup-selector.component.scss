@@ -6,11 +6,3 @@
     border-radius: 3px;
     cursor: pointer;
 }
-.delete {
-    display: none;
-}
-.selected {
-    .delete {
-        display: default;
-    }
-}

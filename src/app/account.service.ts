@@ -30,24 +30,23 @@ export class AccountService {
     })
   }
 
-  public patchUser(newUser: ApplicationUserModel): Observable<ResponseModel> {
+  public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
     return this.currentUser().flatMap((user) => {
       let _newUser = _.cloneDeep(newUser);
       let _user = _.cloneDeep(user);
+      let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
       _newUser.countryId = _newUser.country.geoLookupId;
-      delete _newUser.country;
       _newUser.stateId = (_newUser.state != undefined) ? _newUser.state.geoLookupId : undefined;
-      delete _newUser.state;
       _newUser.motherTongueId = _newUser.motherTongue.coreLookupId;
-      delete _newUser.motherTongue;
-      delete _user.country;
-      delete _user.state;
-      delete _user.motherTongue;
+      toDelete.forEach((key) => {
+        delete _user[key];
+        delete _newUser[key];
+      });
       let patch = jsonpatch.compare(_user, _newUser);
       return this.http.patch(USER_DETAILS, patch)
         .map(responseToResponseModel)
         .do((response: ResponseModel) => {
-          this.storageService.patchToStorage("user", patch);
+          this.storageService.patchToStorage("user", undefined, patch);
         });
     });
   }

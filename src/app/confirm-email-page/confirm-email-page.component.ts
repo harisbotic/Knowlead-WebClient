@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from './../account.service';
 import { ConfirmEmailModel, ResponseModel } from './../models/dto';
 
@@ -14,11 +14,13 @@ import { ConfirmEmailModel, ResponseModel } from './../models/dto';
 export class ConfirmEmailPageComponent implements OnInit {
   confirm: ConfirmEmailModel;
   response: ResponseModel;
-  constructor(protected route:ActivatedRoute,  protected accountService: AccountService) { }
+  constructor(protected route:ActivatedRoute,
+              protected accountService: AccountService,
+              protected router: Router) { }
 
   confirmEmail(){
     this.accountService.confirmEmail(this.confirm).subscribe((result) => {
-      
+      this.router.navigate(["/login"]);
     },(errorResult)=>{
       this.response = errorResult.json();
     });

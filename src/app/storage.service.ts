@@ -5,6 +5,7 @@ import { Http, URLSearchParams } from '@angular/http';
 import { parseJwt, iterateObjectAlphabetically, treeify } from './utils/index';
 import { CountryModel, LanguageModel, StateModel, FOSModel } from './models/dto';
 import { responseToResponseModel } from './utils/converters';
+import * as fastjsonpatch from 'fast-json-patch';
 
 @Injectable()
 export class StorageService {
@@ -92,8 +93,18 @@ export class StorageService {
     return ret;
   }
 
-  public patchToStorage(parameter: string, patch: any) {
-    console.error("PATCH TO STORAGE NOT IMPLEMENTED YET");
+  public patchToStorage(key: string, parameters: {[key: string]: any}, patch: any) {
+    let cacheKey = this.getCacheKey(key, parameters);
+    if (this.cache[cacheKey] != null)
+      this.cache[cacheKey] = this.cache[cacheKey]
+        .map((value) => {
+          console.debug("Patched cache: " + cacheKey);
+          fastjsonpatch.apply(value, patch);
+          return value;
+        })
+        .cache();
+    else
+      console.error("Cache not found (for patching): " + cacheKey);
   }
 
   public getCountries(): Observable<CountryModel[]> {
@@ -114,7 +125,7 @@ export class StorageService {
 
   public getFOShierarchy(): Observable<FOSModel> {
     return this.getFOSes().map((foses: FOSModel[]) => {
-      let ret = <FOSModel>{children: treeify(foses, 'coreLookupId', 'parentFosId', 'children')};
+      let ret = <FOSModel>{children: treeify(_.cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
       let recurse = (model: FOSModel) => {
         if (model.children != null) {
           model.children = _.sortBy(model.children, 'name');

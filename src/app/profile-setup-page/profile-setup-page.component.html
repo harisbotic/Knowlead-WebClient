@@ -14,17 +14,17 @@
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:name' | translate}}</div>
-        <input type="text" placeholder="{{'common:name' | translate}}" formControlName="name">
+        <input type="text" placeholder="{{'common:name' | translate}}" formControlName="name" nglFormControl>
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:surname' | translate}}</div>
-        <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname">
+        <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname" nglFormControl>
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{"common:birthdate" | translate}}</div>
-        <input type="hidden" formControlName="birthdate">
+        <input type="hidden" formControlName="birthdate" nglFormControl>
         <button nglButton="neutral" (click)="dateSelector = true; currentDate = form.value.birthdate" type="button">
           <span *ngIf="form.value.birthdate == null">
             {{"profile-setup-page:open date picker" | translate}}
@@ -36,7 +36,7 @@
       </ngl-form-element>
 
       <ngl-form-element>
-        <select class="slds-select" formControlName="isMale">
+        <select class="slds-select" formControlName="isMale" nglFormControl>
           <option value="true">{{"common:male" | translate}}</option>
           <option value="false">{{"common:female" | translate}}</option>
         </select>
@@ -44,7 +44,7 @@
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common:about me' | translate}}</div>
-        <textarea formControlName="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
+        <textarea nglFormControl formControlName="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
       </ngl-form-element>
 
       <ngl-form-element>
@@ -60,7 +60,7 @@
             </div>
           </template>
         </ngl-lookup>
-        <input type="hidden" formControlName="country">
+        <input nglFormControl type="hidden" formControlName="country">
       </ngl-form-element>
 
       <ngl-form-element *ngIf="states.length > 0">
@@ -71,7 +71,7 @@
             (pickChange)="stateChanged($event)"
             [(pick)]="state">
         </ngl-lookup>
-        <input type="hidden" formControlName="state">
+        <input nglFormControl type="hidden" formControlName="state">
       </ngl-form-element>
 
       <ngl-form-element>
@@ -82,7 +82,7 @@
             (pickChange)="mainLanguageChanged($event)"
             [(pick)]="motherTongue">
         </ngl-lookup>
-        <input type="hidden" formControlName="motherTongue">
+        <input nglFormControl type="hidden" formControlName="motherTongue">
       </ngl-form-element>
 
       <ngl-form-element>
@@ -96,7 +96,7 @@
             [(pick)]="newLanguage"
             (pickChange)="languageAdded($event)">
         </ngl-lookup>
-        <input type="hidden" formControlName="languages">
+        <input nglFormControl type="hidden" formControlName="languages">
       </ngl-form-element>
 
     </form>
@@ -115,6 +115,6 @@
     <ngl-datepicker (dateChange)="birthdayChanged($event)" [(date)]="currentDate"></ngl-datepicker>
   </div>
   <template ngl-modal-footer>
-    <button class="slds-button slds-button--brand" (click)="dateSelector = false">Save</button>
+    <button class="slds-button slds-button--brand" (click)="dateSelector = false">{{"profile-setup-page:save birthdate" | translate}}</button>
   </template>
 </ngl-modal>

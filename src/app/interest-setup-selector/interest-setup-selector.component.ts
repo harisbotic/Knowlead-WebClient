@@ -34,11 +34,10 @@ export class InterestSetupSelectorComponent implements OnInit {
   }
 
   isRemovable(fos: FOSModel): boolean {
-    return false;
+    return true;
   }
 
   remove(fos: FOSModel) {
-    
   }
 
   constructor() { }
