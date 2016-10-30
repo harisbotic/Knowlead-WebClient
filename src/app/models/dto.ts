@@ -170,12 +170,11 @@ export interface UserAchievementModel
 	achievementId: number;
 	achievement: AchievementModel;
 }
-export interface ApplicationUserSkillModel
+export interface InterestModel
 {
-	applicationUserId: Guid;
-	applicationUser: ApplicationUserModel;
 	fosId: number;
 	fos: FOSModel;
+	stars: number;
 }
 export interface ApplicationUserModel
 {
@@ -193,6 +192,7 @@ export interface ApplicationUserModel
 	motherTongueId: number;
 	motherTongue: LanguageModel;
 	languages: LanguageModel[];
+	interests: InterestModel[];
 	status: UserStatus;
 }
 export interface ApplicationUserLanguageModel
@@ -208,6 +208,7 @@ export interface ApplicationUserInterestModel
 	applicationUser: ApplicationUserModel;
 	fosId: number;
 	fos: FOSModel;
+	stars: number;
 }
 export interface ConfirmEmailModel
 {

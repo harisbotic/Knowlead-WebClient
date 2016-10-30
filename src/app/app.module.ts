@@ -22,6 +22,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 import { TranslationTestComponent } from './translation-test/translation-test.component';
 import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
 import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
+import { InterestSetupSelectorComponent } from './interest-setup-selector/interest-setup-selector.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-s
     ProfileSetupPageComponent,
     TranslationTestComponent,
     InterestSetupPageComponent,
-    InterestSetupChoiceComponent
+    InterestSetupChoiceComponent,
+    InterestSetupSelectorComponent
   ],
   imports: [
     BrowserModule,

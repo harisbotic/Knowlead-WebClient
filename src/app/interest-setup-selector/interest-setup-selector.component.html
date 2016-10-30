@@ -1,0 +1,23 @@
+<div class="slds-grid">
+  <div class="slds-size--1-of-2">
+    <ul class="slds-list--vertical-space">
+      <li *ngFor="let item of subcategories" class="slds-item" (click)="selectedCategory = item" ngClass="{selected: isRemovable(item)}">
+        <div class="slds-tile slds-clearfix">
+          <div class="slds-text-heading--medium slds-float--left">
+            {{item.name}}
+          </div>
+          <button type="button" nglButtonIcon class="slds-float--right" (click)="remove(item)">
+            <ngl-icon icon="close" size="medium"></ngl-icon>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="slds-size--1-of-2" *ngIf="selectedCategory && selectedCategory.children?.length > 0">
+    <select nglFormControl [size]="selectedCategory?.children?.length">
+      <option *ngFor="let item of selectedCategory?.children">
+        {{item.name}}
+      </option>
+    </select>
+  </div>
+</div>

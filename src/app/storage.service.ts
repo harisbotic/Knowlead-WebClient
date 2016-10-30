@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { STORAGE_CONFIG, STORE_ACCESS_TOKEN } from './utils/storage.constants';
 import { Observable } from 'rxjs/Rx';
 import { Http, URLSearchParams } from '@angular/http';
-import { parseJwt, iterateObjectAlphabetically } from './utils/index';
+import { parseJwt, iterateObjectAlphabetically, treeify } from './utils/index';
 import { CountryModel, LanguageModel, StateModel, FOSModel } from './models/dto';
 import { responseToResponseModel } from './utils/converters';
 
@@ -110,6 +110,20 @@ export class StorageService {
 
   public getFOSes(): Observable<FOSModel[]> {
     return this.getFromStorage<FOSModel[]>("FOSes");
+  }
+
+  public getFOShierarchy(): Observable<FOSModel> {
+    return this.getFOSes().map((foses: FOSModel[]) => {
+      let ret = <FOSModel>{children: treeify(foses, 'coreLookupId', 'parentFosId', 'children')};
+      let recurse = (model: FOSModel) => {
+        if (model.children != null) {
+          model.children = _.sortBy(model.children, 'name');
+          model.children.forEach(recurse);
+        }
+      }
+      recurse(ret);
+      return ret;
+    });
   }
 
 }

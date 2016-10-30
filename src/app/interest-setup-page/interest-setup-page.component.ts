@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './../storage.service';
-import { FOSModel } from './../models/dto';
+import { FOSModel, InterestModel } from './../models/dto';
 
 @Component({
   selector: 'app-interest-setup-page',
@@ -9,11 +9,15 @@ import { FOSModel } from './../models/dto';
 })
 export class InterestSetupPageComponent implements OnInit {
 
+  category: FOSModel;
+  root: FOSModel;
+
   constructor(protected storageService: StorageService) { }
 
   ngOnInit() {
-    this.storageService.getFOSes().subscribe(foses => {
-      console.log(foses);
+    this.storageService.getFOShierarchy().subscribe(root => {
+      this.category = root.children[2];
+      console.log(this.category);
     });
   }
 

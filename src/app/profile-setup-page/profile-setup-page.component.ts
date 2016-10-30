@@ -39,7 +39,7 @@ export class ProfileSetupPageComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
-      this.user = user;
+      this.user = _.cloneDeep(user);
       this.form = new FormGroup({
         "name": new FormControl(this.user.name),
         "surname": new FormControl(this.user.surname),
