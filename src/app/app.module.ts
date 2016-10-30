@@ -23,6 +23,7 @@ import { TranslationTestComponent } from './translation-test/translation-test.co
 import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
 import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
 import { InterestSetupSelectorComponent } from './interest-setup-selector/interest-setup-selector.component';
+import { SelectableListComponent } from './selectable-list/selectable-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { InterestSetupSelectorComponent } from './interest-setup-selector/intere
     TranslationTestComponent,
     InterestSetupPageComponent,
     InterestSetupChoiceComponent,
-    InterestSetupSelectorComponent
+    InterestSetupSelectorComponent,
+    SelectableListComponent
   ],
   imports: [
     BrowserModule,
