@@ -18,8 +18,9 @@ export class InterestSetupPageComponent implements OnInit {
 
   ngOnInit() {
     this.storageService.getFOShierarchy().subscribe(root => {
-      this.category = root.children[2];
-      console.log(this.category);
+      //this.category = root.children[2];
+      // console.log(this.category);
+      this.root = root;
     });
   }
 
