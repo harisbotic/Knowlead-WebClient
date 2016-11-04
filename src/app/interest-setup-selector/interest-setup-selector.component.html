@@ -1,16 +1,17 @@
 <div class="slds-grid">
   <div class="slds-size--1-of-2">
     <app-selectable-list [items]="subcategories"
-      [isRemovableCallback]="isRemovable"
+      [isRemovableCallback]="isRemovableCallback"
       displayProperty="name"
-      (itemClicked)="selectedCategory = $event"
+      (itemClicked)="itemClicked($event)"
       (itemRemoved)="remove($event)"></app-selectable-list>
   </div>
   <div class="slds-size--1-of-2" *ngIf="selectedCategory && selectedCategory.children?.length > 0">
-    <select nglFormControl [size]="selectedCategory?.children?.length">
-      <option *ngFor="let item of selectedCategory?.children">
-        {{item.name}}
-      </option>
-    </select>
+    <app-selectable-list [items]="selectedCategory.children"
+      [isRemovableCallback]="isRemovableCallback"
+      displayProperty="name"
+      (itemClicked)="subItemClicked($event)"
+      (itemRemoved)="remove($event)">
+    </app-selectable-list>
   </div>
 </div>

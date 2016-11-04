@@ -1,1 +1,9 @@
-<app-interest-setup-selector [root]="root" [category]="category"></app-interest-setup-selector>
+<app-interest-setup-selector class="slds-size--3-of-4"
+    [root]="root"
+    [category]="category"
+    [isRemovableCallback]="isRemovable"
+    (fosAdded)="fosAdded($event)"
+    (fosRemoved)="fosRemoved($event)"></app-interest-setup-selector>
+<div class="slds-size--1-of-4">
+    <!--<app-interest-setup-choice *ngFor="let item of interests" [interest]="item"></app-interest-setup-choice>-->
+</div>
