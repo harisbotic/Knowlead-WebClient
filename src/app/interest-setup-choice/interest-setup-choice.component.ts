@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { InterestModel } from '../models/dto';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { InterestModel, FOSModel } from '../models/dto';
 
 @Component({
   selector: 'app-interest-setup-choice',
@@ -8,10 +8,14 @@ import { InterestModel } from '../models/dto';
 })
 export class InterestSetupChoiceComponent implements OnInit {
 
+  @Output() remove = new EventEmitter<FOSModel>();
   constructor() { }
-@Input() interest: InterestModel = { fosId:0, fos:{name:"MY CHOICE No1",children:[], parentFosId:-1,coreLookupId:0, code:"testni primjer"},stars:0};
+  @Input() interest: InterestModel = { fosId:0, fos:{name:"MY CHOICE No1",children:[], parentFosId:-1,coreLookupId:0, code:"testni primjer"},stars:0};
   niz: string[] = ["interest-setup:very low", "interest-setup:low", "interest-setup:good", "interest-setup:very good", "interest-setup:excellent"];  
   ngOnInit() {
+  }
+  removed() {
+    this.remove.emit(this.interest.fos);
   }
 
 }

@@ -3,7 +3,8 @@
 
         <section class="slds-clearfix">
             <div class="slds-text-title slds-text-color--blue slds-text-align--left slds-float--left">{{interest.fos.name}}</div>
-            <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small slds-float--right ">
+            <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small slds-float--right"
+                (click)="removed()">
               <ngl-icon icon="close"></ngl-icon>
             </button>
         </section>
