@@ -31,6 +31,12 @@
     "profile-setup-page:submit": "Next step",
     "profile-setup-page:open date picker": "Please select birthdate",
 
+    "interest-setup:very low": "Very low",
+    "interest-setup:low": "Low",
+    "interest-setup:good": "Good",
+    "interest-setup:very good": "Very Good",
+    "interest-setup:excellent": "Excellent",
+
     "INVALID_REQUEST": "Email/password is missing",
 
     "PASSWORDS_DONT_MATCH": "Passwords don't match",
