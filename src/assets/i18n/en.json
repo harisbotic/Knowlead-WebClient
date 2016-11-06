@@ -29,7 +29,9 @@
 
     "profile-setup-page:title": "Personal details",
     "profile-setup-page:submit": "Next step",
-    "profile-setup-page:open date picker": "Please select birthdate",
+    "profile-setup-page:select birthdate": "Please select birthdate",
+    "profile-setup-page:open date picker": "Open date selector",
+    "profile-setup-page:save birthdate": "Save",
 
     "interest-setup:very low": "Very low",
     "interest-setup:low": "Low",

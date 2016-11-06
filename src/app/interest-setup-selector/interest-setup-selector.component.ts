@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from './../models/dto';
 
 @Component({
@@ -17,12 +17,15 @@ export class InterestSetupSelectorComponent implements OnInit {
     this._category = category;
     this.refresh();
   }
+  @Input() isRemovableCallback: (fos: FOSModel) => boolean;
   get category(): FOSModel {
     return this._category;
   }
   get search(): string {
     return this._search;
   }
+  @Output() fosAdded = new EventEmitter<FOSModel>();
+  @Output() fosRemoved = new EventEmitter<FOSModel>();
 
   _search: string;
   _category: FOSModel;
@@ -33,12 +36,28 @@ export class InterestSetupSelectorComponent implements OnInit {
     this.subcategories = (this.category) ? this.category.children : undefined;
   }
 
-  isRemovable(fos: FOSModel): boolean {
-    return false;
+  remove(fos: FOSModel) {
+    this.fosRemoved.emit(fos);
   }
 
-  remove(fos: FOSModel) {
-    
+  // Propagate this fos to parent
+  addCategory(fos: FOSModel) {
+    this.fosAdded.emit(fos);
+  }
+
+  // When left side is selected
+  itemClicked(fos: FOSModel) {
+    if (fos.children != null && fos.children.length > 0) {
+      this.selectedCategory = fos;
+    } else {
+      delete this.selectedCategory;
+      this.addCategory(fos);
+    }
+  }
+
+  // When right side is selected
+  subItemClicked(fos: FOSModel) {
+    this.addCategory(fos);
   }
 
   constructor() { }

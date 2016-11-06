@@ -1,16 +1,5 @@
-.slds-item:hover {
-    background-color: rgba(0,0,0,0.05);
-}
-.slds-item {
-    padding: 0.7rem;
-    border-radius: 3px;
-    cursor: pointer;
-}
-.delete {
-    display: none;
-}
-.selected {
-    .delete {
-        display: default;
-    }
+app-selectable-list {
+    max-height: 80vh;
+    overflow: scroll;
+    display: block;
 }

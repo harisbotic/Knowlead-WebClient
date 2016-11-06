@@ -1,0 +1,12 @@
+<ul class="slds-list--vertical-space">
+  <li *ngFor="let item of items" class="slds-item" (click)="itemClickedLocal(item)" ngClass="{selected: isRemovable(item)}">
+    <div class="slds-tile slds-clearfix">
+      <div class="slds-text-heading--medium slds-float--left">
+        {{displayItem(item)}}
+      </div>
+      <button *ngIf="isRemovable(item)" type="button" nglButtonIcon class="slds-float--right" (click)="$event.stopPropagation(); itemRemovedLocal(item)">
+        <ngl-icon icon="close" size="medium"></ngl-icon>
+      </button>
+    </div>
+  </li>
+</ul>

@@ -10,6 +10,7 @@ import { baseLookup } from './../utils/index';
 import * as _ from 'lodash';
 import { SessionService } from './../session.service';
 import { AccountService } from './../account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -34,7 +35,8 @@ export class ProfileSetupPageComponent implements OnInit {
       protected storageService: StorageService,
       protected translateService: TranslateService,
       protected formBuilder: FormBuilder,
-      protected accountService: AccountService) {
+      protected accountService: AccountService,
+      protected router: Router) {
   }
 
   ngOnInit() {
@@ -72,9 +74,9 @@ export class ProfileSetupPageComponent implements OnInit {
 
   submit() {
     this.accountService
-      .patchUser(this.form.value)
+      .patchUserDetails(this.form.value)
       .subscribe((response: ResponseModel) => {
-        console.log(response);
+        this.router.navigate(["/interestsetup"]);
       }, (error: ResponseModel) => {
         this.response = error;
       }
