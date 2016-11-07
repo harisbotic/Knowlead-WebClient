@@ -11,7 +11,18 @@ export class InterestSetupPageComponent implements OnInit {
 
   category: FOSModel;
   root: FOSModel;
-  search: string;
+  _search: string;
+
+  set search(value: string) {
+    this._search = value;
+    if (!!value) {
+      this.category = null;
+    }
+  }
+
+  get search(): string {
+    return this._search;
+  }
 
   interests: InterestModel[] = [];
 
