@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from './../models/dto';
+import { stringContains } from '../utils/index';
 
 @Component({
   selector: 'app-interest-setup-selector',
@@ -32,8 +33,44 @@ export class InterestSetupSelectorComponent implements OnInit {
   selectedCategory: FOSModel;
   subcategories: FOSModel[];
 
+  searchFos(fos: FOSModel, level: number, parent: FOSModel) {
+    if (level == 0 && !!fos.children) {
+      fos.children.forEach(f => this.searchFos(f, 1, fos));
+    }
+    // When searching for level 1, if name matches, whole FOS should be added
+    if (level == 1) {
+      if (stringContains(fos.name, this.search)) {
+        this.subcategories.push(fos);
+      } else {
+        if (!!fos.children) {
+          let tmp = _.clone(fos);
+          tmp.children = [];
+          fos.children.forEach(f => {
+            this.searchFos(f, 2, tmp);
+          });
+          if (tmp.children.length > 0) {
+            this.subcategories.push(tmp);
+          }
+        }
+      }
+    }
+    // When searching for level 2, add matches to the parent
+    if (level == 2) {
+      if (stringContains(fos.name, this.search)) {
+        parent.children.push(fos);
+      }
+      if (!!fos.children && fos.children.length > 0) {
+        console.error("2nd level contains children ... ${fos.name}");
+      }
+    }
+  }
+
   refresh() {
     this.subcategories = (this.category) ? this.category.children : undefined;
+    if (!!this.search) {
+      this.subcategories = [];
+      this.root.children.forEach(f => this.searchFos(f, 0, this.root));
+    }
   }
 
   remove(fos: FOSModel) {

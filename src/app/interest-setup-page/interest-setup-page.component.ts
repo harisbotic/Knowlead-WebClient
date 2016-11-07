@@ -11,6 +11,7 @@ export class InterestSetupPageComponent implements OnInit {
 
   category: FOSModel;
   root: FOSModel;
+  search: string;
 
   interests: InterestModel[] = [];
 
@@ -22,6 +23,15 @@ export class InterestSetupPageComponent implements OnInit {
       // console.log(this.category);
       this.root = root;
     });
+  }
+
+  shouldShowSelector(): boolean {
+    return !!this.search || !!this.category;
+  }
+
+  hideSelector() {
+    this.search = '';
+    this.category = null;
   }
 
   findInterestByFos(fos: FOSModel): InterestModel {

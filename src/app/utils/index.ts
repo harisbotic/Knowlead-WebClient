@@ -35,8 +35,12 @@ interface NameInterface {
 
 export function baseLookup(source: Observable<NameInterface[]>, query: string): Observable<any[]> {
     return source.map((entry: NameInterface[]) => {
-        return _.filter(entry, val => val.name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+        return _.filter(entry, val => stringContains(val.name, query));
     });
+}
+
+export function stringContains(theStr: string, query: string): boolean {
+    return theStr.toLowerCase().indexOf(query.toLowerCase()) >= 0;
 }
 
 export function iterateObjectAlphabetically(obj: any, callback: (value: any, key: any, original?: any) => void) {

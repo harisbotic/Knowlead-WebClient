@@ -1,18 +1,22 @@
-<div class="slds-grid" *ngIf="root">
+<div class="slds-grid slds-wrap" *ngIf="root">
+    <div class="slds-size--1-of-1">
+        <input type="text" nglFormControl placeholder="Search ..." [(ngModel)]="search">
+    </div>
     <div class="slds-size--3-of-4">
-        <button *ngIf="category != null"
-            (click)="category = null"
+        <button *ngIf="shouldShowSelector()"
+            (click)="hideSelector()"
             class="slds-button slds-button--neutral">
             Go back
         </button>
-        <app-interest-setup-selector *ngIf="category != null"
+        <app-interest-setup-selector *ngIf="shouldShowSelector()"
             [root]="root"
             [category]="category"
             [isRemovableCallback]="isRemovable"
             (fosAdded)="fosAdded($event)"
-            (fosRemoved)="fosRemoved($event)">
+            (fosRemoved)="fosRemoved($event)"
+            [search]="search">
         </app-interest-setup-selector>
-        <div *ngIf="category == null">
+        <div *ngIf="!shouldShowSelector()">
             <div class="slds-grid" *ngFor="let row of [0,1,2];">
                 <button *ngFor = "let col of [0,1,2,3]"
                     class="slds-size--1-of-4 slds-button slds-button--neutral slds-align--absolute-center category"
