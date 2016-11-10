@@ -36,7 +36,7 @@ interface NameInterface {
 export function baseLookup(source: Observable<NameInterface[]>, query: string): Observable<any[]> {
     return source.map((entry: NameInterface[]) => {
         return _.filter(entry, val => stringContains(val.name, query));
-    });
+    }).map(value => value.length > 0 ? value : null);
 }
 
 export function stringContains(theStr: string, query: string): boolean {

@@ -1,15 +1,17 @@
-export interface UploadedFileModel
+export interface ImageBlobModel extends _BlobModel
 {
-	filename: Guid;
-	filesize: number;
-	uploadedById: Guid;
-	uploadedBy: ApplicationUserModel;
-}
-export interface ImageModel
-{
-	filename: Guid;
 	width: number;
 	height: number;
+}
+export interface FileBlobModel extends _BlobModel
+{
+	filesize: number;
+}
+export interface _BlobModel
+{
+	blobId: Guid;
+	filename: string;
+	extension: string;
 	uploadedById: Guid;
 	uploadedBy: ApplicationUserModel;
 }
@@ -43,13 +45,14 @@ export interface LanguageModel extends _CoreLookupModel
 export interface FOSModel extends _CoreLookupModel
 {
 	children: FOSModel[];
+	parent: FOSModel;
 	parentFosId: number;
 }
 export interface AchievementModel extends _CoreLookupModel
 {
 	desc: string;
-	imageId: Guid;
-	image: ImageModel;
+	imageBlobId: Guid;
+	imageBlob: ImageBlobModel;
 }
 export interface _CoreLookupModel
 {
@@ -88,17 +91,29 @@ export interface _GeoLookupModel
 export enum P2PStatus
 {
 	Inactive = 0,
-	PendingAction = 1,
+	Active = 1,
 	Scheduled = 2,
 	Finsihed = 3,
 }
 export interface P2PModel
 {
-	rate: number;
-	startingAt: Date;
+	title: string;
+	text: string;
+	chargePerMinute: number;
+	deadline: Date;
+	scheduledAt: Date;
+	scheduledWithId: Guid;
+	scheduledWith: ApplicationUserModel;
+	createdById: Guid;
+	createdBy: ApplicationUserModel;
+	languages: LanguageModel[];
+	images: ImageBlobModel[];
+	files: FileBlobModel[];
+	fosId: number;
+	fos: FOSModel;
 	status: P2PStatus;
 }
-export interface P2PLangugageModel
+export interface P2PLanguageModel
 {
 	p2pId: number;
 	p2p: P2PModel;
@@ -109,15 +124,15 @@ export interface P2PImageModel
 {
 	p2pId: number;
 	p2p: P2PModel;
-	imageId: Guid;
-	image: ImageModel;
+	imageBlobId: Guid;
+	imageBlob: ImageBlobModel;
 }
 export interface P2PFileModel
 {
 	p2pId: number;
 	p2p: P2PModel;
-	uploadedFileId: number;
-	uploadedFile: UploadedFileModel;
+	fileBlobId: Guid;
+	fileBlob: FileBlobModel;
 }
 export interface P2PDiscussionModel
 {
@@ -147,8 +162,8 @@ export interface UserNotebookModel
 	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
-	imageId: Guid;
-	image: ImageModel;
+	imageBlobId: Guid;
+	imageBlob: ImageBlobModel;
 }
 export interface UserCertificateModel
 {
@@ -158,8 +173,8 @@ export interface UserCertificateModel
 	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
-	imageId: Guid;
-	image: ImageModel;
+	imageBlobId: Guid;
+	imageBlob: ImageBlobModel;
 }
 export interface UserAchievementModel
 {

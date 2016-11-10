@@ -1,0 +1,10 @@
+<div *ngIf="root">
+  <ngl-lookup
+    [(value)]="search"
+    (pickChange)="value = $event"
+    field="name"
+    [lookup]="lookup"
+    #lookupElement
+    *ngIf="value.children">
+  </ngl-lookup>
+</div>

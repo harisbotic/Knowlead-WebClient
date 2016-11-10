@@ -9,6 +9,7 @@ import { TranslationTestComponent } from './translation-test/translation-test.co
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
 import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
+import { P2pCreateComponent } from './p2p-create/p2p-create.component';
  
 const appRoutes: Routes = [
     { path: 'login', component: LoginPageComponent },
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent },
     { path: 'interestsetup', component: InterestSetupPageComponent },
-    { path: 'setupchoice', component:InterestSetupChoiceComponent }
+    { path: 'p2ptest', component: P2pCreateComponent }
 ];
 
 export const appRoutingProviders: any[] = [

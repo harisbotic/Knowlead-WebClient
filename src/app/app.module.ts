@@ -24,6 +24,8 @@ import { InterestSetupPageComponent } from './interest-setup-page/interest-setup
 import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
 import { InterestSetupSelectorComponent } from './interest-setup-selector/interest-setup-selector.component';
 import { SelectableListComponent } from './selectable-list/selectable-list.component';
+import { P2pCreateComponent } from './p2p-create/p2p-create.component';
+import { FosSelectorComponent } from './fos-selector/fos-selector.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { SelectableListComponent } from './selectable-list/selectable-list.compo
     InterestSetupPageComponent,
     InterestSetupChoiceComponent,
     InterestSetupSelectorComponent,
-    SelectableListComponent
+    SelectableListComponent,
+    P2pCreateComponent,
+    FosSelectorComponent
   ],
   imports: [
     BrowserModule,
