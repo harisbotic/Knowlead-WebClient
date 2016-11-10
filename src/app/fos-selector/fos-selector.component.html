@@ -1,6 +1,14 @@
 <div *ngIf="root">
+  <nav role="navigation">
+    <ol class="slds-breadcrumb slds-list--horizontal">
+      <li *ngFor="let parent of parents" class="slds-breadcrumb__item">
+        <a href="javascript:void(0)" (click)="value = parent.parent">
+          {{parent.name}}
+        </a>
+      </li>
+    </ol>
+  </nav>
   <ngl-lookup
-    [(value)]="search"
     (pickChange)="value = $event"
     field="name"
     [lookup]="lookup"

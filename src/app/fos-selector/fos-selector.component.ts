@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FOSModel } from '../models/dto';
 import { StorageService } from '../storage.service';
-import { baseLookup, stringContains } from '../utils/index';
+import { baseLookup, stringContains, getFOSParents } from '../utils/index';
 
 type CallbackType = (value: FOSModel) => void;
 
@@ -22,6 +22,8 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild("lookupElement") lookupElement;
 
+  parents: FOSModel[];
+
   _value: FOSModel;
   search: string;
   get value(): FOSModel {
@@ -35,6 +37,7 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
       this.lookupElement.open = false;
       this.search = "";
     }
+    this.parents = this.getParents();
   }
   chCallback: CallbackType;
   tcCallback: CallbackType;
@@ -76,6 +79,13 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: CallbackType) : void {
     this.tcCallback = fn;
+  }
+
+  getParents(): FOSModel[] {
+    let ret = getFOSParents(this.value).reverse();
+    if (this.value != this.root)
+      ret.push(this.value);
+    return ret;
   }
 
 }

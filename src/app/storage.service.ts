@@ -141,6 +141,7 @@ export class StorageService {
       let recurse = (model: FOSModel) => {
         if (model.children != null) {
           model.children = _.sortBy(model.children, 'name');
+          model.children.forEach(child => child.parent = model);
           model.children.forEach(recurse);
         }
       }

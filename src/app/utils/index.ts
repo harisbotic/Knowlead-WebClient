@@ -1,6 +1,7 @@
 import { Response } from "@angular/http";
 import { Observable } from 'rxjs/observable';
 import { ApplicationUserModel } from './../models/dto';
+import { FOSModel } from '../models/dto';
 
 export * from "./urls";
 export * from "./storage.constants";
@@ -91,3 +92,18 @@ export function fillArray<T>(array: T[], key: string): T[] {
     //ret.forEach((v, index) => {if (v == null) delete ret[index]});
     return ret;
 }
+
+export function getFOSParents(value: FOSModel) : FOSModel[] {
+    let ret = <FOSModel[]>[];
+    let cb = (fos: FOSModel) => {
+      if (!fos) return;
+      if (fos.name != null)
+        ret.push(fos);
+      if (fos.parent != null) {
+        cb(fos.parent);
+      }
+    }
+    if (value)
+      cb(value.parent);
+    return ret;
+  }
