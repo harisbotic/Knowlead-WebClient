@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { STORAGE_CONFIG, STORE_ACCESS_TOKEN } from './utils/storage.constants';
+import { STORAGE_CONFIG, STORE_ACCESS_TOKEN, StorageKey } from './utils/storage.constants';
 import { Observable } from 'rxjs/Rx';
 import { Http, URLSearchParams } from '@angular/http';
 import { parseJwt, iterateObjectAlphabetically, treeify } from './utils/index';
@@ -51,8 +51,8 @@ export class StorageService {
     return this.access_token != undefined;
   }
 
-  private getCacheKey(key: string, parameters?: {[key: string]: any}): string {
-    let cacheKey = key;
+  private getCacheKey(key: StorageKey, parameters?: {[key: string]: any}): string {
+    let cacheKey = <string>key;
     if (parameters != null) {
       iterateObjectAlphabetically(parameters, (value, key) => {
         cacheKey += "|" + key + "=" + value;
@@ -61,7 +61,7 @@ export class StorageService {
     return cacheKey;
   }
 
-  public clearCache(key?: string, params? :{[key: string]: any}) {
+  public clearCache(key?: StorageKey, params? :{[key: string]: any}) {
     if (key == null) {
       this.cache = {};
     } else {
@@ -71,7 +71,7 @@ export class StorageService {
 
   private cache: {[key: string]: Observable<any>} = {};
 
-  public getFromStorage<T>(key: string, parameters?: {[key: string]: any}): Observable<T> {
+  public getFromStorage<T>(key: StorageKey, parameters?: {[key: string]: any}): Observable<T> {
     let cacheKey = this.getCacheKey(key, parameters);
     if (this.cache[cacheKey] != undefined) {
       console.debug("Loading from cache key: " + cacheKey);
@@ -93,7 +93,7 @@ export class StorageService {
     return ret;
   }
 
-  public patchToStorage(key: string, parameters: {[key: string]: any}, patch: any) {
+  public patchToStorage(key: StorageKey, parameters: {[key: string]: any}, patch: any) {
     let cacheKey = this.getCacheKey(key, parameters);
     if (this.cache[cacheKey] != null)
       this.cache[cacheKey] = this.cache[cacheKey]
@@ -105,6 +105,18 @@ export class StorageService {
         .cache();
     else
       console.error("Cache not found (for patching): " + cacheKey);
+  }
+
+  public setToStorage(key: StorageKey, parameters: {[key: string]: any}, value: any) {
+    let cacheKey = this.getCacheKey(key, parameters);
+    if (this.cache[cacheKey] != null)
+      this.cache[cacheKey] = this.cache[cacheKey]
+        .map((old) => {
+          return value;
+        })
+        .cache();
+    else
+      console.error("Cache not found (for setting): " + cacheKey);
   }
 
   public getCountries(): Observable<CountryModel[]> {

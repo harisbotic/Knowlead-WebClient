@@ -29,5 +29,8 @@
     <div class="slds-size--1-of-4">
         <app-interest-setup-choice *ngFor="let item of interests" [interest]="item" (remove)="fosRemoved($event)">
         </app-interest-setup-choice>
+        <button (click)="submit()" class="slds-button slds-button--brand">
+            Save
+        </button>
     </div>
 </div>

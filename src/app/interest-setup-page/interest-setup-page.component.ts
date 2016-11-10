@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './../storage.service';
 import { FOSModel, InterestModel } from './../models/dto';
+import { AccountService } from '../account.service';
+import { ApplicationUserModel } from '../models/dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interest-setup-page',
   templateUrl: './interest-setup-page.component.html',
-  styleUrls: ['./interest-setup-page.component.scss']
+  styleUrls: ['./interest-setup-page.component.scss'],
+  providers: [AccountService]
 })
 export class InterestSetupPageComponent implements OnInit {
 
   category: FOSModel;
   root: FOSModel;
   _search: string;
+  user: ApplicationUserModel;
 
   set search(value: string) {
     this._search = value;
@@ -26,13 +31,18 @@ export class InterestSetupPageComponent implements OnInit {
 
   interests: InterestModel[] = [];
 
-  constructor(protected storageService: StorageService) { }
+  constructor(
+    protected storageService: StorageService,
+    protected accountService: AccountService,
+    protected router: Router) { }
 
   ngOnInit() {
     this.storageService.getFOShierarchy().subscribe(root => {
-      //this.category = root.children[2];
-      // console.log(this.category);
       this.root = root;
+    });
+    this.accountService.currentUser().subscribe((user) => {
+      this.user = user;
+      this.interests = this.user.interests;
     });
   }
 
@@ -65,7 +75,6 @@ export class InterestSetupPageComponent implements OnInit {
         stars: 0
       });
     }
-    console.log(this.interests);
   }
 
   fosRemoved(fos: FOSModel) {
@@ -75,7 +84,12 @@ export class InterestSetupPageComponent implements OnInit {
       let toDelete = this.findInterestByFos(fos);
       _.remove(this.interests, (f) => {return toDelete === f});
     }
-    console.log(this.interests);
+  }
+
+  submit() {
+    this.accountService.patchInterests(this.interests).subscribe((response) => {
+      this.router.navigate(["/"]);
+    });
   }
 
 }

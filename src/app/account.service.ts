@@ -2,11 +2,13 @@ import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/observable';
 import { StorageService } from './storage.service';
-import { ApplicationUserModel, RegisterUserModel, ResponseModel, ConfirmEmailModel } from './models/dto';
+import { ApplicationUserModel, RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './models/dto';
 import { responseToResponseModel } from './utils/converters';
 import { USER_DETAILS, REGISTER, CONFIRMEMAIL } from './utils/urls';
 import * as jsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
+import * as fastjsonpatch from 'fast-json-patch';
+import { fillArray } from './utils/index';
 
 @Injectable()
 export class AccountService {
@@ -26,8 +28,19 @@ export class AccountService {
       if (user.birthdate != null && typeof(user.birthdate) == "string") {
         user.birthdate = new Date(Date.parse(user.birthdate));
       }
-      return user;
+      return _.cloneDeep(user);
     })
+  }
+
+  public patchUser(patch: fastjsonpatch.Patch[]): Observable<ResponseModel> {
+    return this.http.patch(USER_DETAILS, patch)
+      .map(responseToResponseModel)
+      .do((response: ResponseModel) => {
+        if (response.object != null)
+          this.storageService.setToStorage("user", null, response.object);
+        else
+          console.error("No object in user patch response");
+      });
   }
 
   public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
@@ -43,11 +56,21 @@ export class AccountService {
         delete _newUser[key];
       });
       let patch = jsonpatch.compare(_user, _newUser);
-      return this.http.patch(USER_DETAILS, patch)
-        .map(responseToResponseModel)
-        .do((response: ResponseModel) => {
-          this.storageService.patchToStorage("user", undefined, patch);
-        });
+      return this.patchUser(patch);
     });
+  }
+
+  public patchInterests(interests: InterestModel[]): Observable<ResponseModel> {
+    return this.currentUser().flatMap((user) => {
+      let tmp1 = <ApplicationUserModel>{};
+      tmp1.interests = fillArray(_.cloneDeep(user.interests), "fosId");
+      let tmp2 = <ApplicationUserModel>{};
+      tmp2.interests = fillArray(_.cloneDeep(interests), "fosId");
+      console.log(tmp1);
+      console.log(tmp2);
+      let patch = fastjsonpatch.compare(tmp1, tmp2);
+      console.log(patch);
+      return this.patchUser(patch);
+    })
   }
 }

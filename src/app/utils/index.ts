@@ -83,3 +83,11 @@ export function treeify(list, idAttr, parentAttr, childrenAttr) {
     });
     return treeList;
 };
+
+export function fillArray<T>(array: T[], key: string): T[] {
+    let ids = <number[]>array.map(val => val[key]);
+    let ret = <T[]>{};
+    array.forEach(val => ret[val[key]] = val);
+    //ret.forEach((v, index) => {if (v == null) delete ret[index]});
+    return ret;
+}
