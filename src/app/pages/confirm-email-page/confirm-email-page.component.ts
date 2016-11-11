@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from './../../services/account.service';
 import { ConfirmEmailModel, ResponseModel } from './../../models/dto';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-confirm-email-page',
@@ -16,11 +17,16 @@ export class ConfirmEmailPageComponent implements OnInit {
   response: ResponseModel;
   constructor(protected route:ActivatedRoute,
               protected accountService: AccountService,
+              protected sessionService: SessionService,
               protected router: Router) { }
 
   confirmEmail(){
     this.accountService.confirmEmail(this.confirm).subscribe((result) => {
-      this.router.navigate(["/login"]);
+      this.sessionService
+        .login({email: this.confirm.email, password: this.confirm.password})
+        .subscribe(() => {
+          this.router.navigate(["/profilesetup"]);
+        });
     },(errorResult)=>{
       this.response = errorResult.json();
     });

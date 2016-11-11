@@ -64,10 +64,11 @@ export class AccountService {
 
   public patchInterests(interests: InterestModel[]): Observable<ResponseModel> {
     return this.currentUser().flatMap((user) => {
+
       let tmp1 = <ApplicationUserModel>{};
-      tmp1.interests = fillArray(_.cloneDeep(user.interests), "fosId");
+      tmp1.interests = fillArray(_.cloneDeep(user.interests).map(i => <InterestModel>_.omit(i, "fos")), "fosId");
       let tmp2 = <ApplicationUserModel>{};
-      tmp2.interests = fillArray(_.cloneDeep(interests), "fosId");
+      tmp2.interests = fillArray(_.cloneDeep(interests).map(i => <InterestModel>_.omit(i, "fos")), "fosId");
       let patch = fastjsonpatch.compare(tmp1, tmp2);
       return this.patchUser(patch);
     })

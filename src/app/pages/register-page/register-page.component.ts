@@ -34,7 +34,7 @@ export class RegisterPageComponent {
     this.accountService.register (this.cridentials).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
-        this.router.navigate["/login"];
+        this.router.navigate(["/login"]);
       },(errorResponse) => {
         this.response = errorResponse;
       });
