@@ -8,12 +8,10 @@
       </li>
     </ol>
   </nav>
-  <ngl-lookup
+  <app-empty-lookup
     (pickChange)="value = $event"
-    [pick]="null"
     field="displayName"
     [lookup]="lookup"
-    #lookupElement
     *ngIf="value?.children">
-  </ngl-lookup>
+  </app-empty-lookup>
 </div>

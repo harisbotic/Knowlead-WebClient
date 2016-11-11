@@ -20,7 +20,7 @@ type CallbackType = (value: FOSModel) => void;
 })
 export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
-  @ViewChild("lookupElement") lookupElement;
+  // @ViewChild("lookupElement") lookupElement;
 
   parents: FOSModel[] = [];
 
@@ -38,9 +38,9 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
     this._value = value;
     if (this.chCallback != null && this.callCallbacks)
       this.chCallback(value == this.root ? null : value);
-    if (this.lookupElement) {
-      this.lookupElement.open = false;
-    }
+    //if (this.lookupElement) {
+    //  this.lookupElement.open = false;
+    //}
     this.parents = this.getParents();
     this.callCallbacks = true;
   }
