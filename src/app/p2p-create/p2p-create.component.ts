@@ -20,6 +20,7 @@ export class P2pCreateComponent implements OnInit {
   constructor(protected p2pService: P2pService) { }
 
   ngOnInit() {
+    console.log("init");
     let initial = {
       title: new FormControl(),
       text: new FormControl(),

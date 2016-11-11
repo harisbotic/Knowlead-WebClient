@@ -22,25 +22,31 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild("lookupElement") lookupElement;
 
-  parents: FOSModel[];
+  parents: FOSModel[] = [];
 
   _value: FOSModel;
-  search: string;
   get value(): FOSModel {
     return this._value;
   }
   set value(value: FOSModel) {
+    if (value == null) {
+      if (this.root != null) {
+        this.value = this.root;
+      }
+      return;
+    }
     this._value = value;
-    if (this.chCallback != null)
-      this.chCallback(value);
+    if (this.chCallback != null && this.callCallbacks)
+      this.chCallback(value == this.root ? null : value);
     if (this.lookupElement) {
       this.lookupElement.open = false;
-      this.search = "";
     }
     this.parents = this.getParents();
+    this.callCallbacks = true;
   }
   chCallback: CallbackType;
   tcCallback: CallbackType;
+  callCallbacks = true;
 
   root: FOSModel;
 
@@ -50,12 +56,27 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
     this.storageService.getFOShierarchy().subscribe(root => {
       this.root = root;
       this.value = root;
+      let cb = (fos: any) => {
+        if (fos.children) {
+          fos.children.forEach((f: any) => {
+            if (fos.displayName != null)
+              f.displayName = fos.displayName + " > " + f.name;
+            else
+              f.displayName = f.name;
+          });
+          fos.children.forEach(cb);
+        }
+      }
+      cb(this.root);
+      this.root.name = "All";
     });
   }
 
   lookup = (query: string): FOSModel[] => {
     if (this.value == null)
       return null;
+    if (query == "")
+      return this.value.children;
     let res = <FOSModel[]>[];
     let cb = (fos: FOSModel) => {
       if (stringContains(fos.name, query))
@@ -70,6 +91,7 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(obj: FOSModel) : void {
+    this.callCallbacks = false;
     this.value = obj;
   }
 
@@ -82,8 +104,8 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   getParents(): FOSModel[] {
-    let ret = getFOSParents(this.value).reverse();
-    if (this.value != this.root)
+    let ret = [this.root].concat(getFOSParents(this.value).reverse());
+    if (this.value != this.root && this.value != null)
       ret.push(this.value);
     return ret;
   }

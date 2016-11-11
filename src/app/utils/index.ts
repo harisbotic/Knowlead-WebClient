@@ -97,7 +97,7 @@ export function getFOSParents(value: FOSModel) : FOSModel[] {
     let ret = <FOSModel[]>[];
     let cb = (fos: FOSModel) => {
       if (!fos) return;
-      if (fos.name != null)
+      if (fos.coreLookupId != null)
         ret.push(fos);
       if (fos.parent != null) {
         cb(fos.parent);
