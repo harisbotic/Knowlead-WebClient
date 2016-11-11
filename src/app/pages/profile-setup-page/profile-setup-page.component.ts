@@ -23,7 +23,6 @@ export class ProfileSetupPageComponent implements OnInit {
   dateSelector: boolean = false;
   genderSelector: boolean = false;
   form: FormGroup;
-  newLanguage: LanguageModel;
   states: StateModel[] = [];
   state: StateModel;
   motherTongue: LanguageModel;
@@ -140,9 +139,6 @@ export class ProfileSetupPageComponent implements OnInit {
   languageAdded(language: LanguageModel) {
     if (language != null)
       this.form.patchValue({languages: _.uniq([...(this.form.value.languages || []), language])});
-    Observable.timer(1).subscribe(() => {
-      this.newLanguage = null;
-    });
   }
 
   languageRemoved(language: LanguageModel) {

@@ -90,12 +90,10 @@
         <ngl-pill *ngFor="let language of form.value.languages" (nglPillRemove)="languageRemoved(language)">
           {{language.name}}
         </ngl-pill>
-        <ngl-lookup [lookup]="languageLookup"
-            debounce="0"
+        <app-empty-lookup [lookup]="languageLookup"
             field="name"
-            [(pick)]="newLanguage"
             (pickChange)="languageAdded($event)">
-        </ngl-lookup>
+        </app-empty-lookup>
         <input nglFormControl type="hidden" formControlName="languages">
       </ngl-form-element>
 

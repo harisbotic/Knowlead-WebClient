@@ -55,6 +55,8 @@ export class AccountService {
         delete _user[key];
         delete _newUser[key];
       });
+      _newUser.languages = fillArray(_newUser.languages, "coreLookupId");
+      _user.languages = fillArray(_user.languages, "coreLookupId");
       let patch = jsonpatch.compare(_user, _newUser);
       return this.patchUser(patch);
     });
@@ -66,10 +68,7 @@ export class AccountService {
       tmp1.interests = fillArray(_.cloneDeep(user.interests), "fosId");
       let tmp2 = <ApplicationUserModel>{};
       tmp2.interests = fillArray(_.cloneDeep(interests), "fosId");
-      console.log(tmp1);
-      console.log(tmp2);
       let patch = fastjsonpatch.compare(tmp1, tmp2);
-      console.log(patch);
       return this.patchUser(patch);
     })
   }
