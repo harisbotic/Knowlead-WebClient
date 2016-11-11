@@ -1,15 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { GuestHomePageComponent } from "./guest-home-page/guest-home-page.component";
-import { LoginPageComponent } from "./login-page/login-page.component";
-import { RegisterPageComponent } from "./register-page/register-page.component";
-import { ConfirmEmailPageComponent} from './confirm-email-page/confirm-email-page.component';
-import { UserHomePageComponent } from './user-home-page/user-home-page.component';
-import { TranslationTestComponent } from './translation-test/translation-test.component';
-import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
-import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
-import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
-import { P2pCreateComponent } from './p2p-create/p2p-create.component';
+import { GuestHomePageComponent } from "./pages/guest-home-page/guest-home-page.component";
+import { LoginPageComponent } from "./pages/login-page/login-page.component";
+import { RegisterPageComponent } from "./pages/register-page/register-page.component";
+import { ConfirmEmailPageComponent} from './pages/confirm-email-page/confirm-email-page.component';
+import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
+import { TranslationTestComponent } from './pages/translation-test/translation-test.component';
+import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
+import { InterestSetupPageComponent } from './pages/interest-setup-page/interest-setup-page.component';
+import { P2pCreateComponent } from './components/p2p-create/p2p-create.component';
  
 const appRoutes: Routes = [
     { path: 'login', component: LoginPageComponent },

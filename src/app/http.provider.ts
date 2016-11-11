@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, ConnectionBackend, Response, RequestOptionsArgs, Request, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscriber } from 'rxjs/Rx';
-import { StorageService } from './storage.service';
+import { StorageService } from './services/storage.service';
 import { API } from './utils/urls';
 import { ResponseModel } from './models/dto';
 import { responseToResponseModel, responseToLoginResponse } from './utils/converters';
 import { ErrorCodes } from './models/constants';
 import { FrontendErrorCodes } from './models/frontend.constants';
-import { LoginPageComponent } from './login-page/login-page.component';
 
 @Injectable()
 export class HttpProvider extends Http {

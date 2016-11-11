@@ -5,27 +5,27 @@ import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 
 import { AppRouting } from "./app.routing"
 import { AppComponent } from './app.component';
-import { GuestHomePageComponent } from './guest-home-page/guest-home-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
-import { ErrorListComponent } from './error-list/error-list.component';
-import { ConfirmEmailPageComponent } from './confirm-email-page/confirm-email-page.component';
+import { GuestHomePageComponent } from './pages/guest-home-page/guest-home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { ErrorListComponent } from './components/error-list/error-list.component';
+import { ConfirmEmailPageComponent } from './pages/confirm-email-page/confirm-email-page.component';
 
-import { SessionService } from './session.service';
+import { SessionService } from './services/session.service';
 import { HttpProvider } from './http.provider';
-import { StorageService } from './storage.service';
-import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { StorageService } from './services/storage.service';
+import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
 import { Router } from '@angular/router';
 import { NglModule, INglConfig } from 'ng-lightning';
-import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
+import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
-import { TranslationTestComponent } from './translation-test/translation-test.component';
-import { InterestSetupPageComponent } from './interest-setup-page/interest-setup-page.component';
-import { InterestSetupChoiceComponent } from './interest-setup-choice/interest-setup-choice.component';
-import { InterestSetupSelectorComponent } from './interest-setup-selector/interest-setup-selector.component';
-import { SelectableListComponent } from './selectable-list/selectable-list.component';
-import { P2pCreateComponent } from './p2p-create/p2p-create.component';
-import { FosSelectorComponent } from './fos-selector/fos-selector.component';
+import { TranslationTestComponent } from './pages/translation-test/translation-test.component';
+import { InterestSetupPageComponent } from './pages/interest-setup-page/interest-setup-page.component';
+import { InterestSetupChoiceComponent } from './pages/interest-setup-page/interest-setup-choice/interest-setup-choice.component';
+import { InterestSetupSelectorComponent } from './pages/interest-setup-page/interest-setup-selector/interest-setup-selector.component';
+import { SelectableListComponent } from './components/selectable-list/selectable-list.component';
+import { P2pCreateComponent } from './components/p2p-create/p2p-create.component';
+import { FosSelectorComponent } from './components/fos-selector/fos-selector.component';
 
 @NgModule({
   declarations: [
