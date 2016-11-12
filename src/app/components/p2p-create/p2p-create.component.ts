@@ -20,9 +20,7 @@ export class P2pCreateComponent implements OnInit {
   constructor(protected p2pService: P2pService) { }
 
   ngOnInit() {
-    let file = new FormGroup({
-      blobId: new FormControl()
-    });
+    let file = new FormControl();
     let initial = {
       title: new FormControl(),
       text: new FormControl(),
