@@ -1,11 +1,11 @@
-import { Component, OnInit, forwardRef, ViewChild } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FOSModel } from '../../models/dto';
 import { StorageService } from '../../services/storage.service';
 import { baseLookup, stringContains, getFOSParents } from '../../utils/index';
 import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
 
-type CallbackType = (value: FOSModel) => void;
+type CallbackType = (value: any) => void;
 
 @Component({
   selector: 'app-fos-selector',
@@ -23,6 +23,8 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild("lookupElement") lookupElement: EmptyLookupComponent<FOSModel>;
 
+  @Input() outputType = "object";
+
   parents: FOSModel[] = [];
 
   _value: FOSModel;
@@ -37,11 +39,13 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
       return;
     }
     this._value = value;
-    if (this.chCallback != null && this.callCallbacks)
-      this.chCallback(value == this.root ? null : value);
-    //if (this.lookupElement) {
-    //  this.lookupElement.open = false;
-    //}
+    if (this.chCallback != null && this.callCallbacks) {
+      let tmp = value == this.root ? null : value;
+      if (this.outputType == "object")
+        this.chCallback(tmp);
+      else
+        this.chCallback(tmp ? tmp.coreLookupId : null);
+    }
     this.parents = this.getParents();
     this.callCallbacks = true;
   }

@@ -6,10 +6,10 @@
     <textarea formControlName="text" placeholder="{{'p2p:text' | translate}}" nglFormControl>
     </textarea>
   </ngl-form-element>
-  <app-fos-selector formControlName="fos"></app-fos-selector>
+  <app-fos-selector formControlName="fosId" outputType="id"></app-fos-selector>
   <div formArrayName="files">
     <div formGroupName="0">
-      <app-file-upload formControlName="blobId"></app-file-upload>
+      <app-file-upload formControlName="blobId" outputType="id"></app-file-upload>
     </div>
   </div>
   <button nglButton="brand" type="submit">{{'p2p:submit' | translate}}</button>

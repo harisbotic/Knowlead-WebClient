@@ -26,7 +26,7 @@ export class P2pCreateComponent implements OnInit {
     let initial = {
       title: new FormControl(),
       text: new FormControl(),
-      fos: new FormControl(),
+      fosId: new FormControl(),
       files: new FormArray([file])
     };
     this.form = new FormGroup(initial);

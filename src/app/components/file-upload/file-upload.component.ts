@@ -1,10 +1,10 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { ResponseModel, _BlobModel } from '../../models/dto';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type CallbackType = (value: string) => void;
+type CallbackType = (value: any) => void;
 
 @Component({
   selector: 'app-file-upload',
@@ -27,13 +27,15 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   error: string;
   showAlert: boolean;
   _value: _BlobModel;
+  @Input() outputType = "object";
   set value(obj: _BlobModel) {
     this._value = obj;
     if (this.changeCb) {
-      if (obj)
-        this.changeCb(obj.blobId);
-      else
-        this.changeCb(null);
+      if (this.outputType == "object") {
+        this.changeCb(obj);
+      } else if (this.outputType == "id") {
+        this.changeCb(obj ? obj.blobId : null);
+      }
     }
   }
   get value(): _BlobModel {
@@ -72,12 +74,10 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnChange(cb: CallbackType): void {
-    console.debug('register on change');
     this.changeCb = cb;
   }
 
   registerOnTouched(cb: CallbackType): void {
-    console.debug('register on touch');
     this.touchCb = cb;
   }
 
