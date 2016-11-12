@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FOSModel } from '../../models/dto';
 import { StorageService } from '../../services/storage.service';
 import { baseLookup, stringContains, getFOSParents } from '../../utils/index';
+import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
 
 type CallbackType = (value: FOSModel) => void;
 
@@ -20,7 +21,7 @@ type CallbackType = (value: FOSModel) => void;
 })
 export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
-  // @ViewChild("lookupElement") lookupElement;
+  @ViewChild("lookupElement") lookupElement: EmptyLookupComponent<FOSModel>;
 
   parents: FOSModel[] = [];
 
@@ -108,6 +109,13 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
     if (this.value != this.root && this.value != null)
       ret.push(this.value);
     return ret;
+  }
+
+  breadcrumbClicked(item) {
+    this.value = item;
+    setTimeout(() => {
+      if (this.lookupElement) this.lookupElement.focused()
+    }, 100);
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="slds-form-element slds-lookup slds-is-open" data-select="single" (click)="focused()">
+<div class="slds-form-element slds-lookup slds-is-open" data-select="single" (mousedown)="clicked($event)">
   <div class="slds-form-element__control">
     <div class="slds-input-has-icon slds-input-has-icon--right">
       <svg aria-hidden="true" class="slds-input__icon">
@@ -15,7 +15,7 @@
   </div>
   <div class="slds-lookup__menu" role="listbox" *ngIf="isOpen()">
     <ul class="slds-lookup__list" role="presentation">
-      <li *ngFor="let item of items" (click)="selected(item)">
+      <li *ngFor="let item of items" (mousedown)="selected(item)">
         <a class="slds-lookup__item-action">{{getText(item)}}</a>
       </li>
     </ul>

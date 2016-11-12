@@ -15,7 +15,6 @@ export class EmptyLookupComponent<T> implements OnInit {
   @ViewChild("inputElement") inputElement: ElementRef;
   items: T[];
   value: string;
-  wasSelected = false;
 
   getText(item: T) {
     if (this.field)
@@ -37,8 +36,7 @@ export class EmptyLookupComponent<T> implements OnInit {
 
   selected(item: T) {
     this.pickChange.emit(item);
-    this.wasSelected = true;
-    this.refresh();
+    this.focused();
   }
   
   isFocused: boolean = false;
@@ -64,6 +62,11 @@ export class EmptyLookupComponent<T> implements OnInit {
         this.isFocused = false;
       }
     },100);
+  }
+
+  clicked(event: MouseEvent) {
+    this.focused();
+    event.preventDefault();
   }
 
 }
