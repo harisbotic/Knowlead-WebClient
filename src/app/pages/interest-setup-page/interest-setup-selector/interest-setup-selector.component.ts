@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from './../../../models/dto';
 import { stringContains } from '../../../utils/index';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-interest-setup-selector',

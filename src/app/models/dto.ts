@@ -5,13 +5,14 @@ export interface ImageBlobModel extends _BlobModel
 }
 export interface FileBlobModel extends _BlobModel
 {
-	filesize: number;
 }
 export interface _BlobModel
 {
 	blobId: Guid;
+	blobType: string;
 	filename: string;
 	extension: string;
+	filesize: number;
 	uploadedById: Guid;
 	uploadedBy: ApplicationUserModel;
 }
@@ -102,6 +103,7 @@ export interface P2PModel
 	chargePerMinute: number;
 	deadline: Date;
 	scheduledAt: Date;
+	isDeleted: boolean;
 	scheduledWithId: Guid;
 	scheduledWith: ApplicationUserModel;
 	createdById: Guid;

@@ -7,5 +7,10 @@
     </textarea>
   </ngl-form-element>
   <app-fos-selector formControlName="fos"></app-fos-selector>
+  <div formArrayName="files">
+    <div formGroupName="0">
+      <app-file-upload formControlName="blobId"></app-file-upload>
+    </div>
+  </div>
   <button nglButton="brand" type="submit">{{'p2p:submit' | translate}}</button>
 </form>

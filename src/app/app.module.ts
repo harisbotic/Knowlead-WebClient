@@ -27,6 +27,7 @@ import { SelectableListComponent } from './components/selectable-list/selectable
 import { P2pCreateComponent } from './components/p2p-create/p2p-create.component';
 import { FosSelectorComponent } from './components/fos-selector/fos-selector.component';
 import { EmptyLookupComponent } from './components/empty-lookup/empty-lookup.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { EmptyLookupComponent } from './components/empty-lookup/empty-lookup.com
     SelectableListComponent,
     P2pCreateComponent,
     FosSelectorComponent,
-    EmptyLookupComponent
+    EmptyLookupComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

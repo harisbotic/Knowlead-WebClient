@@ -2,6 +2,7 @@ import { Response } from "@angular/http";
 import { Observable } from 'rxjs/observable';
 import { ApplicationUserModel } from './../models/dto';
 import { FOSModel } from '../models/dto';
+import * as _ from 'lodash';
 
 export * from "./urls";
 export * from "./storage.constants";
@@ -96,14 +97,24 @@ export function fillArray<T>(array: T[], key: string): T[] {
 export function getFOSParents(value: FOSModel) : FOSModel[] {
     let ret = <FOSModel[]>[];
     let cb = (fos: FOSModel) => {
-      if (!fos) return;
-      if (fos.coreLookupId != null)
+        if (!fos) return;
+        if (fos.coreLookupId != null)
         ret.push(fos);
-      if (fos.parent != null) {
+        if (fos.parent != null) {
         cb(fos.parent);
-      }
+        }
     }
     if (value)
-      cb(value.parent);
+        cb(value.parent);
     return ret;
-  }
+}
+
+export function getGuid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}

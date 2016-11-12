@@ -4,6 +4,7 @@ import { FOSModel, InterestModel } from './../../models/dto';
 import { AccountService } from '../../services/account.service';
 import { ApplicationUserModel } from '../../models/dto';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-interest-setup-page',

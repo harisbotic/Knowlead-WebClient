@@ -1,0 +1,35 @@
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showAlert" type="alert" severity="error" (nglNotificationClose)="onErrorClose($event)" timeout="5000" class="slds-theme--alert-texture">
+    <h2>{{"file:upload fail" | translate}}</h2>
+    <span class="slds-small-show">{{error | translate}}</span>
+  </ngl-notification>
+</div>
+<div class="slds-form-element">
+  <div class="slds-form-element__control">
+    <div class="slds-file-selector slds-file-selector--files">
+      <div class="slds-file-selector__dropzone">
+        <div *ngIf="step == 0">
+          <input class="slds-file-selector__input slds-assistive-text"
+            type="file"
+            (change)="fileSelected($event)"
+            aria-describedby="file-selector-id"
+            [id]="id"/>
+          <label class="slds-file-selector__body" [attr.for]="id">
+            <span class="slds-file-selector__button slds-button slds-button--neutral">
+              <svg aria-hidden="true" class="slds-button__icon slds-button__icon--left">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
+              </svg>
+              {{"file:upload" | translate}}
+            </span>
+            <span class="slds-file-selector__text slds-medium-show">{{"file:drop" | translate}}</span>
+          </label>
+        </div>
+        <div *ngIf="step > 0">
+          <label class="slds-file-selector__body">
+            <span class="slds-file-selector__text slds-medium-show">{{value ? "file:uploaded" : "file:uploading" | translate}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
