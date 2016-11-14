@@ -39,6 +39,16 @@
     "interest-setup:very good": "Very Good",
     "interest-setup:excellent": "Excellent",
 
+    "p2p:title": "Peer to peer request title",
+    "p2p:text": "Peer to peer request text",
+    "p2p:submit": "Submit peer to peer request",
+
+    "file:upload": "Click to select a file",
+    "file:drop": "Or drop a file here",
+    "file:uploading": "Your file is being uploaded ...",
+    "file:uploaded": "File uploaded successfuly",
+    "file:fail": "Failed to upload the file",
+
     "INVALID_REQUEST": "Email/password is missing",
 
     "PASSWORDS_DONT_MATCH": "Passwords don't match",
