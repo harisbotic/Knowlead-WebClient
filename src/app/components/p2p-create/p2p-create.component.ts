@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { P2PModel, _BlobModel } from '../../models/dto';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { P2pService } from '../../services/p2p.service';
+import { NotificationService } from '../../services/notification.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-p2p-create',
@@ -14,10 +16,12 @@ export class P2pCreateComponent implements OnInit {
   form: FormGroup;
 
   get value(): P2PModel {
-    return this.form.value;
+    let ret: P2PModel = _.cloneDeep(this.form.value);
+    ret.blobs = _.without(ret.blobs, null);
+    return ret;
   }
 
-  constructor(protected p2pService: P2pService) { }
+  constructor(protected p2pService: P2pService, protected notificationService: NotificationService) { }
 
   ngOnInit() {
     let initial = {
@@ -49,10 +53,10 @@ export class P2pCreateComponent implements OnInit {
   }
 
   submit() {
-    //this.p2pService.create(this.value).subscribe(response => {
-    //  console.log(response);
-    //});
-    console.log(this.value);
+    this.p2pService.create(this.value).subscribe(response => {
+      this.notificationService.info("p2p created");
+      this.form.reset();
+    });
   }
 
 }

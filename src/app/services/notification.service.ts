@@ -26,4 +26,12 @@ export class NotificationService {
     })
   }
 
+  info(title: string, subtitle?: string) {
+    this.notify({
+      title: title,
+      subtitle: subtitle,
+      type: "info"
+    });
+  }
+
 }

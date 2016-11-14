@@ -47,6 +47,7 @@ export class AccountService {
     return this.currentUser().flatMap((user) => {
       let _newUser = _.cloneDeep(newUser);
       let _user = _.cloneDeep(user);
+      (<any>_user).birthdate = (_user.birthdate) ? _user.birthdate.toJSON() : undefined;
       let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
       _newUser.countryId = _newUser.country.geoLookupId;
       _newUser.stateId = (_newUser.state != undefined) ? _newUser.state.geoLookupId : undefined;
@@ -57,10 +58,7 @@ export class AccountService {
       });
       _newUser.languages = fillArray(_newUser.languages, "coreLookupId");
       _user.languages = fillArray(_user.languages, "coreLookupId");
-      console.log(_user);
-      console.log(_newUser);
       let patch = jsonpatch.compare(_user, _newUser);
-      console.log(patch);
       return this.patchUser(patch);
     });
   }

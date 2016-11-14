@@ -32,19 +32,13 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   @Output() uploading = new EventEmitter<any>();
   @Input() outputType = "object";
   set value(obj: _BlobModel) {
-    if (this.value != null && obj == null) {
-      this.deleted();
-    } else {
-      this._value = obj;
-      if (this.changeCb) {
-        if (this.outputType == "object") {
-          this.changeCb(obj);
-        } else if (this.outputType == "id") {
-          this.changeCb(obj ? obj.blobId : null);
-        }
+    this._value = obj;
+    if (this.changeCb) {
+      if (this.outputType == "object") {
+        this.changeCb(obj);
+      } else if (this.outputType == "id") {
+        this.changeCb(obj ? obj.blobId : null);
       }
-      if (this.subscription && !obj)
-        this.deleted();
     }
   }
   get value(): _BlobModel {

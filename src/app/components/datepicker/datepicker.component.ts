@@ -22,7 +22,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   set value(date: Date) {
     this._value = date;
     if (this.changed)
-      this.changed(date);
+      this.changed(eval(JSON.stringify(date)));
   }
   changed: (date: any) => void;
   touched: (date: any) => void;
