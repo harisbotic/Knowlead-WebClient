@@ -5,6 +5,7 @@ import { ResponseModel, _BlobModel } from '../../models/dto';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from "rxjs";
 import { Observable } from 'rxjs/Rx';
+import { NotificationService } from '../../services/notification.service';
 
 type CallbackType = (value: any) => void;
 
@@ -25,8 +26,6 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   changeCb: CallbackType;
   touchCb: CallbackType;
   id: string;
-  error: string;
-  showAlert: boolean;
   _value: _BlobModel;
   subscription: Subscription;
   @Output() removed = new EventEmitter<any>();
@@ -52,7 +51,7 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
     return this._value;
   }
 
-  constructor(protected fileService: FileService) { }
+  constructor(protected fileService: FileService, protected notificationService: NotificationService) { }
 
   ngOnInit() {
     this.id = getGuid();
@@ -71,17 +70,12 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
         .subscribe(response => {
           this.value = response.object;
         }, (response: ResponseModel) => {
-          this.error = response.errors[0];
-          this.showAlert = true;
+          this.notificationService.error("file:fail", response.errors[0]);
           this.deleted();
         });
     }
     else
       console.error("No file selected");
-  }
-
-  onErrorClose(reaspon: string) {
-    this.showAlert = false;
   }
 
   writeValue(value: _BlobModel): void {

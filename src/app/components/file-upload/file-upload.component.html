@@ -1,9 +1,3 @@
-<div class="slds-notify_container">
-  <ngl-notification *ngIf="showAlert" type="alert" severity="error" (nglNotificationClose)="onErrorClose($event)" timeout="5000" class="slds-theme--alert-texture">
-    <h2>{{"file:upload fail" | translate}}</h2>
-    <span class="slds-small-show">{{error | translate}}</span>
-  </ngl-notification>
-</div>
 <div class="slds-form-element">
   <div class="slds-form-element__control" *ngIf="!subscription">
     <div class="slds-file-selector slds-file-selector--files">

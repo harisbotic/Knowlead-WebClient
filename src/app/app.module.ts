@@ -28,6 +28,8 @@ import { P2pCreateComponent } from './components/p2p-create/p2p-create.component
 import { FosSelectorComponent } from './components/fos-selector/fos-selector.component';
 import { EmptyLookupComponent } from './components/empty-lookup/empty-lookup.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     P2pCreateComponent,
     FosSelectorComponent,
     EmptyLookupComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
       useClass: HttpProvider,
       deps: [XHRBackend, RequestOptions, StorageService, Router]
     },
-    SessionService
+    SessionService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
