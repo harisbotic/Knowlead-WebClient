@@ -73,6 +73,9 @@ export class HttpProvider extends Http {
         let observable: Observable<Response> =
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse: Response) => {
+            if (typeof (<any>errorResponse).errors !== "undefined") {
+                return Observable.throw(errorResponse);
+            }
             let error = responseToResponseModel(errorResponse);
             if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
                 this.router.navigate(['/login']);

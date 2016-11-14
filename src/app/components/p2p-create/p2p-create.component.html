@@ -8,7 +8,12 @@
   </ngl-form-element>
   <app-fos-selector formControlName="fosId" outputType="id"></app-fos-selector>
   <div formArrayName="blobs">
-    <app-file-upload formControlName="0" outputType="object"></app-file-upload>
+    <app-file-upload
+      [formControlName]="idx"
+      *ngFor="let hepek of form.controls.blobs.controls; let idx = index"
+      (removed)="fileRemoved(idx)"
+      (uploading)="newFile()">
+    </app-file-upload>
   </div>
   <button nglButton="brand" type="submit">{{'p2p:submit' | translate}}</button>
 </form>

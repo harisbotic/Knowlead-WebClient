@@ -1,9 +1,10 @@
-import { Component, OnInit, forwardRef, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, EventEmitter, Output } from '@angular/core';
 import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { ResponseModel, _BlobModel } from '../../models/dto';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from "rxjs";
+import { Observable } from 'rxjs/Rx';
 
 type CallbackType = (value: any) => void;
 
@@ -28,19 +29,24 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   showAlert: boolean;
   _value: _BlobModel;
   subscription: Subscription;
-  removed: EventEmitter<any>;
+  @Output() removed = new EventEmitter<any>();
+  @Output() uploading = new EventEmitter<any>();
   @Input() outputType = "object";
   set value(obj: _BlobModel) {
-    this._value = obj;
-    if (this.changeCb) {
-      if (this.outputType == "object") {
-        this.changeCb(obj);
-      } else if (this.outputType == "id") {
-        this.changeCb(obj ? obj.blobId : null);
-      }
-    }
-    if (this.subscription && !obj)
+    if (this.value != null && obj == null) {
       this.deleted();
+    } else {
+      this._value = obj;
+      if (this.changeCb) {
+        if (this.outputType == "object") {
+          this.changeCb(obj);
+        } else if (this.outputType == "id") {
+          this.changeCb(obj ? obj.blobId : null);
+        }
+      }
+      if (this.subscription && !obj)
+        this.deleted();
+    }
   }
   get value(): _BlobModel {
     return this._value;
@@ -52,15 +58,22 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
     this.id = getGuid();
   }
 
+  fileRemoved(index: number) {
+    console.log(index);
+  }
+
   fileSelected(event: Event) {
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
+      this.value = <_BlobModel>{};
+      this.uploading.emit();
       this.subscription = this.fileService.upload(element.files[0])
         .subscribe(response => {
           this.value = response.object;
         }, (response: ResponseModel) => {
           this.error = response.errors[0];
           this.showAlert = true;
+          this.deleted();
         });
     }
     else
@@ -86,17 +99,20 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
   deleted(): void {
     if (!this.subscription)
       return;
+    let tmp: Observable<any>;
     if (!this.subscription.closed) {
-      console.debug("Canceling request");
+      tmp = Observable.of(null);
       this.subscription.unsubscribe();
+      console.debug("Canceling request");
     } else {
+      tmp = this.fileService.remove(this.value);
       console.debug("Removing file from backend");
-      this.fileService.remove(this.value).subscribe(response => {
-        this.value = null;
-      })
     }
-    this.subscription = null;
-    this.removed.emit();
+    tmp.subscribe(response => {
+      this.removed.emit();
+      this.subscription = null;
+      this.value = null;
+    });
   }
 
 }
