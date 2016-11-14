@@ -12,6 +12,7 @@
     "common:country state": "State",
     "common:native language": "Native language",
     "common:other languages": "Other languages",
+    "common:clear value": "Clear",
 
     "translation-test:title": "Test translation on english",
 
@@ -27,11 +28,11 @@
 
     "user-home-page:hello": "Hello {{username}}",
 
-    "profile-setup-page:title": "Personal details",
-    "profile-setup-page:submit": "Next step",
-    "profile-setup-page:select birthdate": "Please select birthdate",
-    "profile-setup-page:open date picker": "Open date selector",
-    "profile-setup-page:save birthdate": "Save",
+    "profile-setup:title": "Personal details",
+    "profile-setup:submit": "Next step",
+    "profile-setup:select birthdate": "Please select birthdate",
+    "profile-setup:open date picker": "Open date selector",
+    "profile-setup:save birthdate": "Save",
 
     "interest-setup:very low": "Very low",
     "interest-setup:low": "Low",

@@ -132,10 +132,6 @@ export class ProfileSetupPageComponent implements OnInit {
       this.form.patchValue({countryId: null});
   }
 
-  birthdayChanged(value: Date) {
-    this.form.patchValue({birthdate: value});
-  }
-
   languageAdded(language: LanguageModel) {
     if (language != null)
       this.form.patchValue({languages: _.uniq([...(this.form.value.languages || []), language])});

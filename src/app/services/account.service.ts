@@ -57,7 +57,10 @@ export class AccountService {
       });
       _newUser.languages = fillArray(_newUser.languages, "coreLookupId");
       _user.languages = fillArray(_user.languages, "coreLookupId");
+      console.log(_user);
+      console.log(_newUser);
       let patch = jsonpatch.compare(_user, _newUser);
+      console.log(patch);
       return this.patchUser(patch);
     });
   }

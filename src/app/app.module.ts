@@ -30,6 +30,7 @@ import { EmptyLookupComponent } from './components/empty-lookup/empty-lookup.com
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NotificationsComponent } from './components/notifications/notifications
     FosSelectorComponent,
     EmptyLookupComponent,
     FileUploadComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,

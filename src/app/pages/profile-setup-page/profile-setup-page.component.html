@@ -3,7 +3,7 @@
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__body slds-truncate">
         <h1 class="slds-text-heading--large">
-          {{"profile-setup-page:title" | translate}}
+          {{"profile-setup:title" | translate}}
         </h1>
       </div>
     </header>
@@ -22,18 +22,14 @@
         <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname" nglFormControl>
       </ngl-form-element>
 
-      <ngl-form-element>
+      <div>
         <div class="slds-text-heading--label slds-m-bottom--small">{{"common:birthdate" | translate}}</div>
-        <input type="hidden" formControlName="birthdate" nglFormControl>
-        <button nglButton="neutral" (click)="dateSelector = true; currentDate = form.value.birthdate" type="button">
-          <span *ngIf="form.value.birthdate == null">
-            {{"profile-setup-page:open date picker" | translate}}
-          </span>
-          <span *ngIf="form.value.birthdate != null">
-            {{form.value.birthdate | date}}
-          </span>
-        </button>
-      </ngl-form-element>
+        <app-datepicker formControlName="birthdate"
+          text="profile-setup:select birthdate"
+          saveText="profile-setup:save birthdate"
+          title="profile-setup:select birthdate">
+        </app-datepicker>
+      </div>
 
       <ngl-form-element>
         <select class="slds-select" formControlName="isMale" nglFormControl>
@@ -103,16 +99,7 @@
   <div class="slds-card__footer">
     <app-error-list [errors]="response?.errors"></app-error-list>
     <button nglButton="brand" (click)="submit()">
-      {{"profile-setup-page:submit" | translate}}
+      {{"profile-setup:submit" | translate}}
     </button>
   </div>
 </article>
-
-<ngl-modal [(open)]="dateSelector" header="{{'profile-setup-page:select birthdate' | translate}}" *ngIf="form != null">
-  <div body>
-    <ngl-datepicker (dateChange)="birthdayChanged($event)" [(date)]="currentDate"></ngl-datepicker>
-  </div>
-  <template ngl-modal-footer>
-    <button class="slds-button slds-button--brand" (click)="dateSelector = false">{{"profile-setup-page:save birthdate" | translate}}</button>
-  </template>
-</ngl-modal>

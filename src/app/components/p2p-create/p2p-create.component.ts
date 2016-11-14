@@ -24,25 +24,28 @@ export class P2pCreateComponent implements OnInit {
       title: new FormControl(),
       text: new FormControl(),
       fosId: new FormControl(),
-      blobs: new FormArray([])
+      blobs: new FormArray([]),
+      chargePerMinute: new FormControl(),
+      deadline: new FormControl()
     };
     this.form = new FormGroup(initial);
     this.newFile();
   }
 
+  getBlobControl(): FormArray {
+    return <FormArray>this.form.controls["blobs"];
+  }
+
   blobs(): _BlobModel[] {
-    let control = <FormArray>this.form.controls["blobs"];
-    return control.getRawValue();
+    return this.getBlobControl().getRawValue();
   }
 
   newFile() {
-    let control = <FormArray>this.form.controls["blobs"];
-    control.push(new FormControl());
+    this.getBlobControl().push(new FormControl());
   }
 
   fileRemoved(index: number) {
-    let control = <FormArray>this.form.controls["blobs"];
-    control.removeAt(index);
+    this.getBlobControl().removeAt(index);
   }
 
   submit() {

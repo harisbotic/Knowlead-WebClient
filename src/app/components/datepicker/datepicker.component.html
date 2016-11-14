@@ -1,0 +1,14 @@
+<button nglButton="neutral" type="button" (click)="open = true">
+  {{ (!value) ? (text | translate) : (value | date) }}
+</button>
+<button nglButton="destructive" type="button" (click)="value = null">
+  {{ "common:clear value" | translate }}
+</button>
+<ngl-modal [(open)]="open" header="{{title | translate}}">
+  <div body>
+    <ngl-datepicker [(date)]="value"></ngl-datepicker>
+  </div>
+  <template ngl-modal-footer>
+    <button class="slds-button slds-button--brand" (click)="open = false">{{saveText | translate}}</button>
+  </template>
+</ngl-modal>
