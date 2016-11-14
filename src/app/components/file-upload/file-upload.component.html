@@ -5,10 +5,10 @@
   </ngl-notification>
 </div>
 <div class="slds-form-element">
-  <div class="slds-form-element__control">
+  <div class="slds-form-element__control" *ngIf="!subscription">
     <div class="slds-file-selector slds-file-selector--files">
       <div class="slds-file-selector__dropzone">
-        <div *ngIf="step == 0">
+        <div>
           <input class="slds-file-selector__input slds-assistive-text"
             type="file"
             (change)="fileSelected($event)"
@@ -24,12 +24,18 @@
             <span class="slds-file-selector__text slds-medium-show">{{"file:drop" | translate}}</span>
           </label>
         </div>
-        <div *ngIf="step > 0">
-          <label class="slds-file-selector__body">
-            <span class="slds-file-selector__text slds-medium-show">{{value ? "file:uploaded" : "file:uploading" | translate}}</span>
-          </label>
-        </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="subscription">
+    <span class="slds-size--1-of-1 slds-grid slds-grid--align-end slds-grid--vertical-align-center">
+      <span class="slds-text-align--left slds-size--1-of-1">
+        {{value ? "file:uploaded" : "file:uploading" | translate}}
+      </span>
+      <button type="button" nglButtonIcon (click)="deleted()">
+        <ngl-icon icon="delete" size="large" type="error">
+        </ngl-icon>
+      </button>
+    </span>
   </div>
 </div>

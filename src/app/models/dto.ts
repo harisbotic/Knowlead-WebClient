@@ -98,6 +98,7 @@ export enum P2PStatus
 }
 export interface P2PModel
 {
+	p2pId: number;
 	title: string;
 	text: string;
 	chargePerMinute: number;
@@ -109,8 +110,7 @@ export interface P2PModel
 	createdById: Guid;
 	createdBy: ApplicationUserModel;
 	languages: LanguageModel[];
-	images: ImageBlobModel[];
-	files: FileBlobModel[];
+	blobs: _BlobModel[];
 	fosId: number;
 	fos: FOSModel;
 	status: P2PStatus;

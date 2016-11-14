@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ResponseModel } from '../models/dto';
+import { ResponseModel, _BlobModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { responseToResponseModel } from '../utils/converters';
-import { FILE_UPLOAD } from '../utils/urls';
+import { FILE_UPLOAD, FILE_REMOVE } from '../utils/urls';
 
 @Injectable()
 export class FileService {
@@ -17,6 +17,16 @@ export class FileService {
     return this.http
         .post(FILE_UPLOAD, input)
         .map(responseToResponseModel);
+  }
+
+  remove(file: _BlobModel): Observable<ResponseModel> {
+    if (!file)
+      return Observable.throw({
+        errors: ["File not set"]
+      });
+    return this.http
+      .delete(FILE_REMOVE + "/" + file.blobId)
+      .map(responseToResponseModel);
   }
 
 }
