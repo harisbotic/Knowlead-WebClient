@@ -11,21 +11,41 @@
     
   <div class="slds-card__body">
     <app-error-list [errors]="response?.errors"></app-error-list>    
-    <form (ngSubmit)="register()">
+    <form (ngSubmit)="register()" [formGroup]="form">
       <ngl-form-element>
-        <app-error-list [errors]="response?.formErrors?.email"></app-error-list>
-        <input nglFormControl type="text" name="Email" placeholder="{{'common:email' | translate}}" [(ngModel)]="cridentials.email">
+        <input
+          nglFormControl
+          type="email"
+          name="Email"
+          placeholder="{{'common:email' | translate}}"
+          formControlName="email">
+        <app-error-list [errors]="response?.formErrors?.email" [formControlProperty]="form.controls.email"></app-error-list>
       </ngl-form-element>
       <ngl-form-element>
-        <app-error-list [errors]="response?.formErrors?.password"></app-error-list>
-        <input nglFormControl type="password" name="password" placeholder="{{'common:password' | translate}}" [(ngModel)]="cridentials.password">
+        <input
+          nglFormControl
+          type="password"
+          name="password"
+          placeholder="{{'common:password' | translate}}"
+          formControlName="password">
+        <app-error-list [errors]="response?.formErrors?.password" [formControlProperty]="form.controls.password"></app-error-list>
       </ngl-form-element>
       <ngl-form-element>
-        <input nglFormControl type="password" name="confirmpassword" placeholder="{{'register-page:confirm password' | translate}}"
-        [(ngModel)]="test">
+        <input
+          nglFormControl
+          type="password"
+          name="confirmpassword"
+          placeholder="{{'register-page:confirm password' | translate}}"
+          formControlName="confirmpassword">
+        <app-error-list [formControlProperty]="form.controls.confirmpassword"></app-error-list>
       </ngl-form-element>
       <ngl-form-element>
-        <input nglFormControl type="submit" [disabled]="busy" value="{{'register-page:submit' | translate}}" class="slds-button--brand">
+        <input
+          nglFormControl
+          type="submit"
+          [disabled]="busy || !form.valid"
+          value="{{'register-page:submit' | translate}}"
+          class="slds-button--brand">
       </ngl-form-element>
     </form>
   </div>

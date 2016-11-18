@@ -118,3 +118,6 @@ export function getGuid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
 }
+
+export const PATTERN_EMAIL = "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*";
+export const PATTERN_ONE_LOWERCASE = ".*[a-z].*";

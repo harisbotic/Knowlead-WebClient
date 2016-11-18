@@ -1,6 +1,7 @@
 import { Component, Input, DoCheck } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as _ from 'lodash';
+import { translateValidations } from '../../utils/translators';
 
 @Component({
   selector: 'app-error-list',
@@ -16,7 +17,7 @@ export class ErrorListComponent implements DoCheck {
     if (this._errors)
       this.display = _.clone(this._errors);
     if (this._formControl && this._formControl.dirty)
-      this.display = this.display.concat(Object.keys(this._formControl.errors || {}).map(c => "validation:" + c));
+      this.display = this.display.concat(translateValidations(this._formControl.errors));
   }
 
   _errors: string[];
@@ -31,6 +32,8 @@ export class ErrorListComponent implements DoCheck {
     this._formControl = value;
     if (value)
       value.registerOnChange(this.refresh);
+    else
+      console.warn("Form control set to " + value);
     this.refresh();
   }
   get Object() { return Object; };

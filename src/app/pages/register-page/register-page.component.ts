@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from './../../services/account.service';
 import { RegisterUserModel, ResponseModel } from './../../models/dto';
 import { FrontendErrorCodes } from './../../models/frontend.constants';
 import { safeJsonExtraction } from './../../utils/converters';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
 
 @Component({
   selector: 'app-register-page',
@@ -11,27 +13,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-page.component.scss'],
   providers: [AccountService]
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
 
-  test: string  = "";
   busy: boolean = false;
-  cridentials: RegisterUserModel = {email: "", password: ""};
   response: ResponseModel;
+  form: FormGroup;
 
   constructor(protected accountService: AccountService,
               protected router: Router) {
   }
 
   register() {
-
-    if(this.test != this.cridentials.password)
-     { 
-      this.response = <ResponseModel>{errors: [FrontendErrorCodes.passwordsDontMatch]}
-      return;  
-     }
+    if (!this.form.valid)
+      return;
 
     this.busy = true;
-    this.accountService.register (this.cridentials).finally(() => { this.busy = false; })
+    this.accountService.register(this.form.value).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
         this.router.navigate(["/login"]);
@@ -40,4 +37,27 @@ export class RegisterPageComponent {
       });
   }
 
+  ngOnInit() {
+    this.form = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.pattern(PATTERN_EMAIL)]),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(PATTERN_ONE_LOWERCASE)
+      ]),
+      confirmpassword: new FormControl("")
+    })
+  }
+
+  ngDoCheck() {
+    if(this.form && this.form.controls['confirmpassword'].value != this.form.controls['password'].value) {
+      this.form.controls['confirmpassword'].setErrors({'passwords_dont_match': true});
+    } else {
+      this.form.controls['confirmpassword'].setErrors(null);
+    }
+  }
+}
+
+interface ValidationResult {
+    [key: string]: boolean;
 }

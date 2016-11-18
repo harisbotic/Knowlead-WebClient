@@ -13,12 +13,12 @@
     <app-error-list [errors]="response?.errors"></app-error-list>
     <form (ngSubmit)="loginClicked()" [formGroup]="form">
       <ngl-form-element>
-        <app-error-list [formControlProperty]="form.controls.email"></app-error-list>
         <input nglFormControl type="text" name="Email" placeholder="{{'common:email' | translate}}" formControlName="email" ngModel>
+        <app-error-list [formControlProperty]="form.controls.email"></app-error-list>
       </ngl-form-element>
       <ngl-form-element>
-        <app-error-list [formControlProperty]="form.controls.password"></app-error-list>
         <input nglFormControl type="password" name="password" placeholder="{{'common:password' | translate}}" formControlName="password" ngModel>
+        <app-error-list [formControlProperty]="form.controls.password"></app-error-list>
       </ngl-form-element>
       <ngl-form-element>
         <input nglFormControl type="submit" [disabled]="busy || !form.valid" value="{{'login-page:submit' | translate}}" class="slds-button--brand">

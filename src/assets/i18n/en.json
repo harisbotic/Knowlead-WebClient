@@ -52,7 +52,6 @@
 
     "INVALID_REQUEST": "Email/password is missing",
 
-    "PASSWORDS_DONT_MATCH": "Passwords don't match",
     "NETWORK_ERROR": "Network error has occured (maybe you are not connected to internet or Knowlead server is not working)",
     "BACKEND_ERROR": "Unknown error has occured",
 
@@ -68,5 +67,9 @@
     "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination",
     "INCORRECT_VALUE": "The value is incorrect",
 
-    "validation:required": "This field is required"
+    "validation:required": "This field is required",
+    "validation:passwords_dont_match": "Passwords don't match",
+    "validation:minlength:8": "Minimum 8 characters required",
+    "validation:email_invalid": "Your email doesn't have right format",
+    "validation:one_lowercase": "At least 1 lowercase letter required"
 }
