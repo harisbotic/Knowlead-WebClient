@@ -64,7 +64,7 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
         .subscribe(response => {
           this.value = response.object;
         }, (response: ResponseModel) => {
-          this.notificationService.error("file:fail", response.errors[0]);
+          this.notificationService.error("file|fail", response.errors[0]);
           this.deleted();
         });
     }

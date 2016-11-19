@@ -2,7 +2,7 @@
   {{ (!value) ? (text | translate) : (value | date) }}
 </button>
 <button nglButton="destructive" type="button" (click)="value = null">
-  {{ "common:clear value" | translate }}
+  {{ "common|clear value" | translate }}
 </button>
 <ngl-modal [(open)]="open" header="{{title | translate}}">
   <div body>

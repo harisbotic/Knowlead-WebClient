@@ -1,9 +1,9 @@
 <form (ngSubmit)="submit()" [formGroup]="form">
   <ngl-form-element>
-    <input formControlName="title" placeholder="{{'p2p:title' | translate}}" nglFormControl>
+    <input formControlName="title" placeholder="{{'p2p|title' | translate}}" nglFormControl>
   </ngl-form-element>
   <ngl-form-element>
-    <textarea formControlName="text" placeholder="{{'p2p:text' | translate}}" nglFormControl>
+    <textarea formControlName="text" placeholder="{{'p2p|text' | translate}}" nglFormControl>
     </textarea>
   </ngl-form-element>
   <app-fos-selector formControlName="fosId" outputType="id"></app-fos-selector>
@@ -18,5 +18,5 @@
   <input nglFormControl type="number" placeholder="p2p:charge per minute" min="0" max="100" formControlName="chargePerMinute">
   <app-datepicker formControlName="deadline" text="p2p:deadline" saveText="p2p:save deadline" title="p2p:select deadline">
   </app-datepicker>
-  <button nglButton="brand" type="submit">{{'p2p:submit' | translate}}</button>
+  <button nglButton="brand" type="submit">{{'p2p|submit' | translate}}</button>
 </form>

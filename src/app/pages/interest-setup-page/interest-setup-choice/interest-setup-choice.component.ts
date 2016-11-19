@@ -23,11 +23,11 @@ export class InterestSetupChoiceComponent implements OnInit {
     stars:0
   };
   niz: string[] = [
-    "interest-setup:very low",
-    "interest-setup:low",
-    "interest-setup:good",
-    "interest-setup:very good",
-    "interest-setup:excellent"
+    "interest-setup|very low",
+    "interest-setup|low",
+    "interest-setup|good",
+    "interest-setup|very good",
+    "interest-setup|excellent"
   ];  
   ngOnInit() {
   }

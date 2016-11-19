@@ -3,7 +3,7 @@
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__body slds-truncate">
         <h1 class="slds-text-heading--large">
-          {{"register-page:title" | translate}}
+          {{"register-page|title" | translate}}
         </h1>
       </div>
     </header>
@@ -17,7 +17,7 @@
           nglFormControl
           type="email"
           name="Email"
-          placeholder="{{'common:email' | translate}}"
+          placeholder="{{'common|email' | translate}}"
           formControlName="email">
         <app-error-list [errors]="response?.formErrors?.email" [formControlProperty]="form.controls.email"></app-error-list>
       </ngl-form-element>
@@ -26,7 +26,7 @@
           nglFormControl
           type="password"
           name="password"
-          placeholder="{{'common:password' | translate}}"
+          placeholder="{{'common|password' | translate}}"
           formControlName="password">
         <app-error-list [errors]="response?.formErrors?.password" [formControlProperty]="form.controls.password"></app-error-list>
       </ngl-form-element>
@@ -35,7 +35,7 @@
           nglFormControl
           type="password"
           name="confirmpassword"
-          placeholder="{{'register-page:confirm password' | translate}}"
+          placeholder="{{'register-page|confirm password' | translate}}"
           formControlName="confirmpassword">
         <app-error-list [formControlProperty]="form.controls.confirmpassword"></app-error-list>
       </ngl-form-element>
@@ -44,7 +44,7 @@
           nglFormControl
           type="submit"
           [disabled]="busy || !form.valid"
-          value="{{'register-page:submit' | translate}}"
+          value="{{'register-page|submit' | translate}}"
           class="slds-button--brand">
       </ngl-form-element>
     </form>

@@ -3,7 +3,7 @@
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__body slds-truncate">
         <h1 class="slds-text-heading--large">
-          {{"profile-setup:title" | translate}}
+          {{"profile-setup|title" | translate}}
         </h1>
       </div>
     </header>
@@ -13,38 +13,38 @@
     <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form != null">
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:name' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|name' | translate}}</div>
         <input type="text" placeholder="{{'common:name' | translate}}" formControlName="name" nglFormControl>
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:surname' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|surname' | translate}}</div>
         <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname" nglFormControl>
       </ngl-form-element>
 
       <div>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{"common:birthdate" | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{"common|birthdate" | translate}}</div>
         <app-datepicker formControlName="birthdate"
-          text="profile-setup:select birthdate"
-          saveText="profile-setup:save birthdate"
+          text="profile-setup|select birthdate"
+          saveText="profile-setup|save birthdate"
           title="profile-setup:select birthdate">
         </app-datepicker>
       </div>
 
       <ngl-form-element>
         <select class="slds-select" formControlName="isMale" nglFormControl>
-          <option value="true">{{"common:male" | translate}}</option>
-          <option value="false">{{"common:female" | translate}}</option>
+          <option value="true">{{"common|male" | translate}}</option>
+          <option value="false">{{"common|female" | translate}}</option>
         </select>
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:about me' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|about me' | translate}}</div>
         <textarea nglFormControl formControlName="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|country' | translate}}</div>
         <ngl-lookup [lookup]="countryLookup"
             debounce="0"
             field="name"
@@ -60,7 +60,7 @@
       </ngl-form-element>
 
       <ngl-form-element *ngIf="states.length > 0">
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:country state' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|country state' | translate}}</div>
         <ngl-lookup [lookup]="stateLookup"
             debounce="0"
             field="name"
@@ -71,7 +71,7 @@
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:native language' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|native language' | translate}}</div>
         <ngl-lookup [lookup]="languageLookup"
             debounce="0"
             field="name"
@@ -82,7 +82,7 @@
       </ngl-form-element>
 
       <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common:other languages' | translate}}</div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|other languages' | translate}}</div>
         <ngl-pill *ngFor="let language of form.value.languages" (nglPillRemove)="languageRemoved(language)">
           {{language.name}}
         </ngl-pill>
@@ -99,7 +99,7 @@
   <div class="slds-card__footer">
     <app-error-list [errors]="response?.errors"></app-error-list>
     <button nglButton="brand" (click)="submit()">
-      {{"profile-setup:submit" | translate}}
+      {{"profile-setup|submit" | translate}}
     </button>
   </div>
 </article>

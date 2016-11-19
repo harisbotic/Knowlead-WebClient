@@ -17,9 +17,9 @@ interface PatternInterface {
 function translatePatternValidator(key: string, value: PatternInterface) {
     let fullPattern = value.requiredPattern.substring(1, value.requiredPattern.length - 1);
     if (fullPattern == PATTERN_EMAIL) {
-        return "validation:email_invalid";
+        return "validation|email_invalid";
     } else if (fullPattern == PATTERN_ONE_LOWERCASE) {
-        return "validation:one_lowercase";
+        return "validation|one_lowercase";
     } else {
         return null;
     }
