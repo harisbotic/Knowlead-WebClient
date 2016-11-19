@@ -31,6 +31,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { NotificationService } from './services/notification.service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
     EmptyLookupComponent,
     FileUploadComponent,
     NotificationsComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    TranslateParametricPipe
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 <ul *ngIf="(display || []).length > 0" class="slds-text-align--left">
   <li *ngFor="let err of display" class="slds-text-color--error">
-    {{err | translate}}
+    {{err | translateParametric}}
   </li>
 </ul>

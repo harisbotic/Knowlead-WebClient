@@ -7,7 +7,7 @@ interface MinLengthInterface {
     requiredLength: number
 }
 function translateMinLengthValidator(key: string, value: MinLengthInterface): string {
-    return "validation:minlength:" + value.requiredLength;
+    return "PASSWORD_LENGHT_VALIDATION:" + value.requiredLength;
 }
 
 interface PatternInterface {
@@ -17,17 +17,21 @@ interface PatternInterface {
 function translatePatternValidator(key: string, value: PatternInterface) {
     let fullPattern = value.requiredPattern.substring(1, value.requiredPattern.length - 1);
     if (fullPattern == PATTERN_EMAIL) {
-        return "validation|email_invalid";
+        return "EMAIL_INVALID";
     } else if (fullPattern == PATTERN_ONE_LOWERCASE) {
-        return "validation|one_lowercase";
+        return "PASSWORD_LOWERCASE_VALIDATION";
     } else {
         return null;
     }
 }
-
+let translateDict = {
+    "required": "REQUIRED_FIELD",
+    "passwords_dont_match": "PASSWORD_DONT_MATCH"
+};
 function translateByKeyValidator(key: string, value: boolean): string {
-    return "validation:" + key;
+    return translateDict[key];
 }
+
 let dict: {[index: string]: translatable} = {
     "minlength": translateMinLengthValidator,
     "required": translateByKeyValidator,
