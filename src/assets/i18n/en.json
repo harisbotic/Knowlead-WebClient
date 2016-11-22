@@ -75,5 +75,6 @@
     "NOT_LOGGED_IN": "You are not logged in",
     "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination",
     "INCORRECT_VALUE": "The value is incorrect",
-    "OWNERSHIP_PROBLEM": "We have an authorization problem"
+    "OWNERSHIP_PROBLEM": "We have an authorization problem",
+    "DATE_TOO_YOUNG": "The date is not acceptable. You have to be at least {{param}} years old."
 }

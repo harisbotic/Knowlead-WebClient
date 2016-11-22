@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApplicationUserModel, CountryModel, LanguageModel, StateModel, ResponseModel } from './../../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './../../services/storage.service';
@@ -11,6 +11,7 @@ import { SessionService } from './../../services/session.service';
 import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
 import { joinTranslation } from '../../utils/translate-utils';
+import { dateValidator } from '../../validators/date.validator';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -42,13 +43,13 @@ export class ProfileSetupPageComponent implements OnInit {
     this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
       this.user = _.cloneDeep(user);
       this.form = new FormGroup({
-        "name": new FormControl(this.user.name),
-        "surname": new FormControl(this.user.surname),
-        "birthdate": new FormControl(this.user.birthdate),
-        "isMale": new FormControl(this.user.isMale),
+        "name": new FormControl(this.user.name, [Validators.required]),
+        "surname": new FormControl(this.user.surname, [Validators.required]),
+        "birthdate": new FormControl(this.user.birthdate, [Validators.required, dateValidator({minYearsOld: 10})]),
+        "isMale": new FormControl(this.user.isMale, [Validators.required]),
         "aboutMe": new FormControl(this.user.aboutMe),
         "country": new FormControl(this.user.country),
-        "motherTongue": new FormControl(this.user.motherTongue),
+        "motherTongue": new FormControl(this.user.motherTongue, [Validators.required]),
         "languages": new FormControl(this.user.languages),
         "state": new FormControl(this.user.state)
       });
@@ -72,6 +73,8 @@ export class ProfileSetupPageComponent implements OnInit {
   }
 
   submit() {
+    if (!this.form.valid)
+      return;
     this.accountService
       .patchUserDetails(this.form.value)
       .subscribe((response: ResponseModel) => {

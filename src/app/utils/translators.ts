@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from './index';
+import { DateValidationErrorValue } from '../validators/date.validator';
 type translatable = (key: string, value: any) => string;
 
 interface MinLengthInterface {
@@ -14,7 +15,7 @@ interface PatternInterface {
     actialValue: string,
     requiredPattern: string
 }
-function translatePatternValidator(key: string, value: PatternInterface) {
+function translatePatternValidator(key: string, value: PatternInterface): string {
     let fullPattern = value.requiredPattern.substring(1, value.requiredPattern.length - 1);
     if (fullPattern == PATTERN_EMAIL) {
         return "EMAIL_INVALID";
@@ -32,11 +33,20 @@ function translateByKeyValidator(key: string, value: boolean): string {
     return translateDict[key];
 }
 
+function translateDateValidator(key: string, value: DateValidationErrorValue): string {
+    if (value.dateConfiguration.minYearsOld) {
+        return "DATE_TOO_YOUNG:" + value.dateConfiguration.minYearsOld;
+    } else {
+        return null;
+    }
+}
+
 let dict: {[index: string]: translatable} = {
     "minlength": translateMinLengthValidator,
     "required": translateByKeyValidator,
     "pattern": translatePatternValidator,
-    "passwords_dont_match": translateByKeyValidator
+    "passwords_dont_match": translateByKeyValidator,
+    "dateInvalid": translateDateValidator
 };
 
 export function translateValidations(object: {[key: string]: any}): string[] {

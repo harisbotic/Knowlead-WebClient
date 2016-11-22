@@ -14,12 +14,14 @@
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common|name' | translate}}</div>
-        <input type="text" placeholder="{{'common:name' | translate}}" formControlName="name" nglFormControl>
+        <input type="text" placeholder="{{'common|name' | translate}}" formControlName="name" nglFormControl>
+        <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common|surname' | translate}}</div>
-        <input type="text" placeholder="{{'common:surname' | translate}}" formControlName="surname" nglFormControl>
+        <input type="text" placeholder="{{'common|surname' | translate}}" formControlName="surname" nglFormControl>
+        <app-error-list [formControlProperty]="form.controls.surname"></app-error-list>
       </ngl-form-element>
 
       <div>
@@ -29,6 +31,7 @@
           saveText="profile-setup|save birthdate"
           title="profile-setup:select birthdate">
         </app-datepicker>
+        <app-error-list [formControlProperty]="form.controls.birthdate"></app-error-list>
       </div>
 
       <ngl-form-element>
@@ -36,11 +39,13 @@
           <option value="true">{{"common|male" | translate}}</option>
           <option value="false">{{"common|female" | translate}}</option>
         </select>
+        <app-error-list [formControlProperty]="form.controls.isMale"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element>
         <div class="slds-text-heading--label slds-m-bottom--small">{{'common|about me' | translate}}</div>
-        <textarea nglFormControl formControlName="aboutMe" placeholder="{{'common:about me' | translate}}"></textarea>
+        <textarea nglFormControl formControlName="aboutMe" placeholder="{{'common|about me' | translate}}"></textarea>
+        <app-error-list [formControlProperty]="form.controls.aboutMe"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element>
@@ -57,6 +62,7 @@
           </template>
         </ngl-lookup>
         <input nglFormControl type="hidden" formControlName="country">
+        <app-error-list [formControlProperty]="form.controls.country" [checkDirty]="false"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element *ngIf="states.length > 0">
@@ -68,6 +74,7 @@
             [(pick)]="state">
         </ngl-lookup>
         <input nglFormControl type="hidden" formControlName="state">
+        <app-error-list [formControlProperty]="form.controls.state" [checkDirty]="false"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element>
@@ -79,6 +86,7 @@
             [(pick)]="motherTongue">
         </ngl-lookup>
         <input nglFormControl type="hidden" formControlName="motherTongue">
+        <app-error-list [formControlProperty]="form.controls.motherTongue" [checkDirty]="false"></app-error-list>
       </ngl-form-element>
 
       <ngl-form-element>
@@ -91,6 +99,7 @@
             (pickChange)="languageAdded($event)">
         </app-empty-lookup>
         <input nglFormControl type="hidden" formControlName="languages">
+        <app-error-list [formControlProperty]="form.controls.languages" [checkDirty]="false"></app-error-list>
       </ngl-form-element>
 
     </form>
@@ -98,7 +107,7 @@
 
   <div class="slds-card__footer">
     <app-error-list [errors]="response?.errors"></app-error-list>
-    <button nglButton="brand" (click)="submit()">
+    <button nglButton="brand" (click)="submit()" [disabled]="!form?.valid">
       {{"profile-setup|submit" | translate}}
     </button>
   </div>

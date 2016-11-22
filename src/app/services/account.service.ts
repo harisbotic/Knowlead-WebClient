@@ -43,21 +43,25 @@ export class AccountService {
       });
   }
 
+  private prepareForPatch(user: ApplicationUserModel): ApplicationUserModel {
+    let cl = _.cloneDeep(user);
+    (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
+    let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
+    cl.countryId = cl.country.geoLookupId;
+    cl.stateId = (cl.state != undefined) ? cl.state.geoLookupId : undefined;
+    cl.motherTongueId = cl.motherTongue.coreLookupId;
+    toDelete.forEach((key) => {
+      delete cl[key];
+    });
+    cl.languages = fillArray(cl.languages, "coreLookupId");
+    cl = _.mapValues(cl, (v) => v === null ? undefined : v);
+    return cl;
+  }
+
   public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
     return this.currentUser().flatMap((user) => {
-      let _newUser = _.cloneDeep(newUser);
-      let _user = _.cloneDeep(user);
-      (<any>_user).birthdate = (_user.birthdate) ? _user.birthdate.toJSON() : undefined;
-      let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
-      _newUser.countryId = _newUser.country.geoLookupId;
-      _newUser.stateId = (_newUser.state != undefined) ? _newUser.state.geoLookupId : undefined;
-      _newUser.motherTongueId = _newUser.motherTongue.coreLookupId;
-      toDelete.forEach((key) => {
-        delete _user[key];
-        delete _newUser[key];
-      });
-      _newUser.languages = fillArray(_newUser.languages, "coreLookupId");
-      _user.languages = fillArray(_user.languages, "coreLookupId");
+      let _user = this.prepareForPatch(user);
+      let _newUser = this.prepareForPatch(newUser);
       let patch = jsonpatch.compare(_user, _newUser);
       return this.patchUser(patch);
     });
