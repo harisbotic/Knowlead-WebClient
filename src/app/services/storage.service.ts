@@ -1,12 +1,13 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, OnInit } from '@angular/core';
 import { STORAGE_CONFIG, STORE_ACCESS_TOKEN, StorageKey } from './../utils/storage.constants';
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Http, URLSearchParams } from '@angular/http';
 import { parseJwt, iterateObjectAlphabetically, treeify } from './../utils/index';
 import { CountryModel, LanguageModel, StateModel, FOSModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
 import * as fastjsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
+import { SessionService, SessionEvent } from './session.service';
 
 @Injectable()
 export class StorageService {
@@ -14,6 +15,9 @@ export class StorageService {
   protected access_token: string;
   protected access_token_value: any;
   protected http: Http;
+
+  protected accessTokenStream = new BehaviorSubject<string>(undefined);
+
   protected getHttp(): Http {
     if (this.http == undefined) {
       this.http = this.injector.get(Http);
@@ -21,28 +25,38 @@ export class StorageService {
     return this.http;
   };
 
-  constructor(protected injector: Injector) {
+  constructor(protected injector: Injector, protected sessionService: SessionService) {
     this.setAccessToken(localStorage.getItem(STORE_ACCESS_TOKEN));
+    this.sessionService.eventStream.subscribe(evt => {
+      if (evt == SessionEvent.LOGGED_OUT) {
+        this.setAccessToken(null);
+      }
+    });
     console.info("Storage service created");
   }
 
   public setAccessToken(value: string) {
-    console.debug("Setting access token");
-    this.clearCache("user");
     this.access_token = value;
     if (value != undefined) {
+      console.debug("Setting access token");
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
     } else {
       this.removeAccessToken();
     }
+    this.accessTokenStream.next(value);
   }
 
   public getAccessToken(): Observable<string> {
-    return Observable.from([this.access_token]);
+    return Observable.of(this.access_token);
+  }
+
+  public getAccessTokenStream(): Observable<string> {
+    return this.accessTokenStream;
   }
 
   public removeAccessToken() {
+    console.debug("Removing access token");
     delete this.access_token;
     delete this.access_token_value;
     localStorage.removeItem(STORE_ACCESS_TOKEN);

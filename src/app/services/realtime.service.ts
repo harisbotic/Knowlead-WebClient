@@ -14,13 +14,15 @@ import { StorageService } from './storage.service';
 import { NotificationModel } from '../models/notification.model';
 import { NotificationService } from './notification.service';
 import { ApplicationUserModel } from '../models/dto';
+import { SessionService, SessionEvent } from './session.service';
 
 @Injectable()
 export class RealtimeService {
   rpcConnection: RpcConnection;
   accessToken: string;
 
-  initConnection() {
+  initConnection = () => {
+    console.info("Init websockets");
     this.rpcConnection = new RpcConnection(API + "/chat", "accessToken=" + this.accessToken);
     this.rpcConnection.start().then(() => {
       this.rpcConnection.on("notify", (value: NotificationModel) => {
@@ -31,16 +33,37 @@ export class RealtimeService {
       });
       this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
     });
+    this.rpcConnection.connectionClosed = this.connectionClosed;
+  }
+
+  connectionClosed = (e) => {
+    console.warn("Websockets connetion closed: " + e);
+  }
+
+  stop() {
+    console.info("Stopping websockets");
+    this.rpcConnection.stop();
+    delete this.rpcConnection;
   }
   
   constructor(protected storageService: StorageService,
-              protected notificationService: NotificationService) {
-    storageService.getAccessToken().subscribe((accessToken) => {
+              protected notificationService: NotificationService,
+              protected sessionService: SessionService) {
+    this.sessionService.eventStream.subscribe(evt => {
+      if (evt == SessionEvent.LOGGED_OUT) {
+        if (this.rpcConnection) {
+          this.stop();
+        }
+      }
+    });
+    storageService.getAccessTokenStream().subscribe((accessToken) => {
       this.accessToken = accessToken;
       if (this.rpcConnection) {
-        this.rpcConnection.stop();
+        this.stop();
       }
-      this.initConnection();
+      if (accessToken) {
+        this.initConnection();
+      }
     });
   }
 }

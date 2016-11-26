@@ -9,11 +9,20 @@ import * as jsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
+import { SessionService, SessionEvent } from './session.service';
 
 @Injectable()
 export class AccountService {
 
-  constructor(protected http: Http, protected storageService: StorageService) { }
+  constructor(protected http: Http,
+              protected storageService: StorageService,
+              protected sessionService: SessionService) {
+    this.sessionService.eventStream.subscribe(evt => {
+      if (evt == SessionEvent.LOGGED_OUT) {
+        this.storageService.clearCache("user");
+      }
+    })
+  }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
     return this.http.post(REGISTER, cridentials).map(responseToResponseModel);
@@ -47,9 +56,9 @@ export class AccountService {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
     let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
-    cl.countryId = cl.country.geoLookupId;
+    cl.countryId = (cl.country) ? cl.country.geoLookupId : undefined;
     cl.stateId = (cl.state != undefined) ? cl.state.geoLookupId : undefined;
-    cl.motherTongueId = cl.motherTongue.coreLookupId;
+    cl.motherTongueId = (cl.motherTongue) ? cl.motherTongue.coreLookupId : undefined;
     toDelete.forEach((key) => {
       delete cl[key];
     });

@@ -1,18 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Http, RequestOptionsArgs, Headers, Response } from "@angular/http";
-import { Observable, Subscriber, Subject } from "rxjs/Rx";
+import { Observable, Subscriber, Subject, BehaviorSubject } from 'rxjs/Rx';
 import { LOGIN, API, ME } from "./../utils";
-import { StorageService } from "./storage.service";
+import { StorageService } from './storage.service';
 import "rxjs/add/operator/map";
 import { ApplicationUserModel, RegisterUserModel, ResponseModel } from './../models/dto';
 import { LoginResponse } from './../models/login.response';
 import { urlFormEncode } from './../utils/index';
 import { responseToLoginResponse, responseToUser, loginResponseToResponseModel } from './../utils/converters';
 
+export enum SessionEvent {
+  LOGGED_IN,
+  LOGGED_OUT
+}
+
 @Injectable()
 export class SessionService {
 
-  constructor(protected http: Http, protected storageService: StorageService) {
+  eventStream = new BehaviorSubject<SessionEvent>(undefined);
+
+  get storageService(): StorageService {
+    return this.injector.get(StorageService);
+  }
+
+  get http(): Http {
+    return this.injector.get(Http);
+  }
+
+  constructor(protected injector: Injector) {
   }
 
   public login(cridentials: RegisterUserModel): Observable<LoginResponse> {
@@ -28,8 +43,11 @@ export class SessionService {
     }).finally(() => {
       subject.complete();
     }).subscribe((response: Response) => {
+      if (this.storageService.hasAccessToken())
+        this.logout();
       let login = responseToLoginResponse(response);
       this.storageService.setAccessToken(login.access_token);
+      this.emitLogin();
       subject.next(login);
     }, (errorResponse: any) => {
       let error: ResponseModel = errorResponse;
@@ -38,5 +56,13 @@ export class SessionService {
       subject.error(error);
     });
     return subject;
+  }
+
+  public emitLogin() {
+    this.eventStream.next(SessionEvent.LOGGED_IN);
+  }
+
+  logout() {
+    this.eventStream.next(SessionEvent.LOGGED_OUT);
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 
@@ -76,7 +76,7 @@ import { RealtimeService } from './services/realtime.service';
     {
       provide: Http,
       useClass: HttpProvider,
-      deps: [XHRBackend, RequestOptions, StorageService, Router]
+      deps: [XHRBackend, RequestOptions, StorageService, SessionService, Router]
     },
     SessionService,
     NotificationService

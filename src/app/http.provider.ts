@@ -8,12 +8,14 @@ import { ResponseModel } from './models/dto';
 import { responseToResponseModel, responseToLoginResponse } from './utils/converters';
 import { ErrorCodes } from './models/constants';
 import { FrontendErrorCodes } from './models/frontend.constants';
+import { SessionService } from './services/session.service';
 
 @Injectable()
 export class HttpProvider extends Http {
     constructor(_backend: ConnectionBackend,
                 _defaultOptions: RequestOptions,
                 protected storageService: StorageService,
+                protected sessionService: SessionService,
                 protected router: Router) {
         super(_backend, _defaultOptions);
     }
@@ -78,6 +80,7 @@ export class HttpProvider extends Http {
             }
             let error = responseToResponseModel(errorResponse);
             if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
+                this.sessionService.logout();
                 this.router.navigate(['/login']);
                 return Observable.throw(error);
             } else {
