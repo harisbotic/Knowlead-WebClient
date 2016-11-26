@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from './../../services/account.service';
 import { ApplicationUserModel } from './../../models/dto';
+import { P2PModel } from '../../models/dto';
+import { P2pService } from '../../services/p2p.service';
 
 @Component({
   selector: 'app-user-home-page',
   templateUrl: './user-home-page.component.html',
   styleUrls: ['./user-home-page.component.scss'],
-  providers: [AccountService]
+  providers: [AccountService, P2pService]
 })
 export class UserHomePageComponent implements OnInit {
 
-  user: ApplicationUserModel = null;
+  p2ps: P2PModel[] = [];
 
-  constructor(protected accountService: AccountService) { }
+  constructor(protected accountService: AccountService,
+              protected p2pService: P2pService) { }
 
   ngOnInit() {
-    this.accountService.currentUser().subscribe((user) => {
-      this.user = user;
-    });
+    this.p2pService.getAll().subscribe(vals => this.p2ps = vals);
   }
 
 }

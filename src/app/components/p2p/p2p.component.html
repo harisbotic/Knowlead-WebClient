@@ -1,0 +1,35 @@
+<article class="slds-card slds-card--narrow" [class.slds-theme--alert-texture]="p2p.isDeleted" *ngIf="p2p">
+  <div class="slds-card__header slds-grid">
+    <header class="slds-media slds-media--center slds-has-flexi-truncate">
+      <div class="slds-media__figure">
+        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--small">
+          <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+        </svg>
+      </div>
+      <div class="slds-media__body slds-truncate">
+        <h2>
+          <a href="javascript:void(0);" class="slds-text-link--reset">
+            <span class="slds-text-heading--medium">{{p2p.title}}</span>
+            <span class="slds-text-heading--small">{{"p2p|by" | translate}}: {{p2p.createdBy?.name}}</span>
+          </a>
+        </h2>
+      </div>
+    </header>
+    <div class="slds-no-flex" *ngIf="deletable()">
+      <button type="button" nglButtonIcon (click)="deleted()">
+        <ngl-icon icon="delete"></ngl-icon>
+      </button>
+    </div>
+  </div>
+  <div class="slds-card__body">
+    <div>
+      {{"p2p|fos" | translate}}: {{p2p.fos?.name}}
+    </div>
+    <div>
+      {{"p2p|text" | translate}}: {{p2p.text}}
+    </div>
+  </div>
+  <div class="slds-card__footer">
+    {{"p2p|deadline" | translate}}: {{p2p.deadline | date}}
+  </div>
+</article>

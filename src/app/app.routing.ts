@@ -20,8 +20,7 @@ const appRoutes: Routes = [
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent },
     { path: 'interestsetup', component: InterestSetupPageComponent },
-    { path: 'p2ptest', component: P2pCreateComponent },
-    { path: 'lookup', component: EmptyLookupComponent }
+    { path: 'p2ptest', component: P2pCreateComponent }
 ];
 
 export const appRoutingProviders: any[] = [

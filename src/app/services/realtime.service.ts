@@ -31,7 +31,7 @@ export class RealtimeService {
       this.rpcConnection.on("setUser", (value: ApplicationUserModel) => {
         this.storageService.setToStorage("user", null, value);
       });
-      this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
+      //this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }

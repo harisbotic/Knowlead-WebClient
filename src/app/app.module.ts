@@ -33,6 +33,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
 import { RealtimeService } from './services/realtime.service';
+import { P2pComponent } from './components/p2p/p2p.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { RealtimeService } from './services/realtime.service';
     FileUploadComponent,
     NotificationsComponent,
     DatepickerComponent,
-    TranslateParametricPipe
+    TranslateParametricPipe,
+    P2pComponent
   ],
   imports: [
     BrowserModule,

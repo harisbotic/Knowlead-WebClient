@@ -43,6 +43,10 @@
     "p2p|title": "Peer to peer request title",
     "p2p|text": "Peer to peer request text",
     "p2p|submit": "Submit peer to peer request",
+    "p2p|deadline": "Request deadline",
+    "p2p|delete fail": "Error deleting p2p request",
+    "p2p|fos": "Field of study",
+    "p2p|by": "Created by",
 
     "file|upload": "Click to select a file",
     "file|drop": "Or drop a file here",

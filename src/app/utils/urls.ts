@@ -9,5 +9,7 @@ export const COUNTRIES = API + "/api/lookup/countries";
 export const STATES = API + "/api/lookup/states";
 export const FOSES = API + "/api/lookup/foses";
 export const P2P_NEW = API + "/api/p2p/create";
+export const P2P_ALL = API + "/api/p2p/list";
+export const P2P_DELETE = API + "/api/p2p/delete";
 export const FILE_UPLOAD = API + "/api/blob/upload";
 export const FILE_REMOVE = API + "/api/blob/delete";

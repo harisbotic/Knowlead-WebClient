@@ -211,6 +211,7 @@ export interface ApplicationUserModel
 	languages: LanguageModel[];
 	interests: InterestModel[];
 	status: UserStatus;
+	id: Guid;
 }
 export interface ApplicationUserLanguageModel
 {
