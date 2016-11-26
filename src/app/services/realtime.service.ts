@@ -13,6 +13,7 @@ import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
 import { NotificationModel } from '../models/notification.model';
 import { NotificationService } from './notification.service';
+import { ApplicationUserModel } from '../models/dto';
 
 @Injectable()
 export class RealtimeService {
@@ -25,11 +26,14 @@ export class RealtimeService {
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);
       });
+      this.rpcConnection.on("setUser", (value: ApplicationUserModel) => {
+        this.storageService.setToStorage("user", null, value);
+      });
       this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
     });
   }
   
-  constructor(storageService: StorageService,
+  constructor(protected storageService: StorageService,
               protected notificationService: NotificationService) {
     storageService.getAccessToken().subscribe((accessToken) => {
       this.accessToken = accessToken;
