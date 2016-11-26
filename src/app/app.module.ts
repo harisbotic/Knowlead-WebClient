@@ -32,6 +32,7 @@ import { NotificationService } from './services/notification.service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
+import { RealtimeService } from './services/realtime.service';
 
 @NgModule({
   declarations: [
@@ -61,9 +62,7 @@ import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
     FormsModule,
     HttpModule,
     AppRouting,
-    NglModule.forRoot({
-      //svgPath: "https://www.lightningdesignsystem.com/assets"
-    }),
+    NglModule.forRoot(),
     ReactiveFormsModule,
     TranslateModule.forRoot({ 
       provide: TranslateLoader,
@@ -73,6 +72,7 @@ import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
   ],
   providers: [
     StorageService,
+    RealtimeService,
     {
       provide: Http,
       useClass: HttpProvider,

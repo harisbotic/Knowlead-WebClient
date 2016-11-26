@@ -22,7 +22,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginClicked() {
-    console.log(this.form.controls['email'].errors);
     this.busy = true;
     delete this.response;
     this.sessionService.login(this.form.value).finally(() => {

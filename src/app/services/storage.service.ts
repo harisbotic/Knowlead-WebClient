@@ -63,6 +63,7 @@ export class StorageService {
   }
 
   public clearCache(key?: StorageKey, params? :{[key: string]: any}) {
+    console.debug("Clearing cache " + this.getCacheKey(key, params));
     if (key == null) {
       this.cache = {};
     } else {
@@ -86,6 +87,10 @@ export class StorageService {
         params.set(searchkey, parameters[searchkey]);
     }
     let ret = this.getHttp().get(STORAGE_CONFIG[key].api, {search: params})
+      .catch(err => {
+        this.clearCache(key, parameters);
+        return Observable.throw(err);
+      })
       .map((response) => {
         return responseToResponseModel(response).object;
       })

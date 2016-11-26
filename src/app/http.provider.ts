@@ -79,7 +79,7 @@ export class HttpProvider extends Http {
             let error = responseToResponseModel(errorResponse);
             if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
                 this.router.navigate(['/login']);
-                return Observable.empty();
+                return Observable.throw(error);
             } else {
                 if (errorResponse.status == 0) {
                     return Observable.throw(<ResponseModel>{errors: [FrontendErrorCodes.networkError]});

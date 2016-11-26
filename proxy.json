@@ -1,0 +1,18 @@
+{
+  "/api": {
+    "target": "http://172.16.16.135:5000/",
+    "secure": false
+  },
+  "/chat": {
+    "target": "ws://172.16.16.135:5000/",
+    "secure": false
+  },
+  "/connect": {
+      "target": "http://172.16.16.135:5000/",
+      "secure": false
+  },
+  "/negotiate": {
+      "target": "http://172.16.16.135:5000/",
+      "secure": false
+  }
+}
