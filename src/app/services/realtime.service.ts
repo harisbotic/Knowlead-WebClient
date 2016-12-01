@@ -25,13 +25,13 @@ export class RealtimeService {
     console.info("Init websockets");
     this.rpcConnection = new RpcConnection(API + "/chat", "accessToken=" + this.accessToken);
     this.rpcConnection.start().then(() => {
+      this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);
       });
       this.rpcConnection.on("setUser", (value: ApplicationUserModel) => {
         this.storageService.setToStorage("user", null, value);
       });
-      //this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }
@@ -65,5 +65,9 @@ export class RealtimeService {
         this.initConnection();
       }
     });
+  }
+
+  send() {
+    this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
   }
 }

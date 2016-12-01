@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RealtimeService } from '../../services/realtime.service';
 
 @Component({
   selector: 'app-guest-home-page',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class GuestHomePageComponent {
 
-  constructor() { }
+  constructor(protected realtimeService: RealtimeService) { }
+
+  pritisno() {
+    this.realtimeService.send();
+  }
 
 }
