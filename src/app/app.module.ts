@@ -34,6 +34,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
 import { RealtimeService } from './services/realtime.service';
 import { P2pComponent } from './components/p2p/p2p.component';
+import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { P2pComponent } from './components/p2p/p2p.component';
     NotificationsComponent,
     DatepickerComponent,
     TranslateParametricPipe,
-    P2pComponent
+    P2pComponent,
+    P2pDiscussionComponent
   ],
   imports: [
     BrowserModule,

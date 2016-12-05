@@ -10,6 +10,8 @@ import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
+import { USER } from '../utils/urls';
+import { Guid } from '../models/dto';
 
 @Injectable()
 export class AccountService {
@@ -22,6 +24,10 @@ export class AccountService {
         this.storageService.clearCache("user");
       }
     })
+  }
+
+  public getUserById(id: Guid): Observable<ApplicationUserModel> {
+    return this.http.get(USER + "/" + id).map(responseToResponseModel).map(v => v.object);
   }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
@@ -55,7 +61,7 @@ export class AccountService {
   private prepareForPatch(user: ApplicationUserModel): ApplicationUserModel {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
-    let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email"];
+    let toDelete = ["country", "state", "motherTongue", "status", "interests", "timezone", "email", "id"];
     cl.countryId = (cl.country) ? cl.country.geoLookupId : undefined;
     cl.stateId = (cl.state != undefined) ? cl.state.geoLookupId : undefined;
     cl.motherTongueId = (cl.motherTongue) ? cl.motherTongue.coreLookupId : undefined;

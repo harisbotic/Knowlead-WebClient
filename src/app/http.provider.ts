@@ -75,6 +75,11 @@ export class HttpProvider extends Http {
         let observable: Observable<Response> =
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse: Response) => {
+            if (errorResponse == null) {
+                errorResponse = <any>{
+                    errors: [FrontendErrorCodes.unknownError]
+                }
+            }
             if (typeof (<any>errorResponse).errors !== "undefined") {
                 return Observable.throw(errorResponse);
             }

@@ -1,3 +1,15 @@
+export interface P2PMessageModel
+{
+	p2pMessageId: number;
+	text: string;
+	timestamp: Date;
+	p2pId: number;
+	p2p: P2PModel;
+	messageToId: Guid;
+	messageTo: ApplicationUserModel;
+	messageFromId: Guid;
+	messageFrom: ApplicationUserModel;
+}
 export interface ImageBlobModel extends _BlobModel
 {
 	width: number;
@@ -111,6 +123,7 @@ export interface P2PModel
 	createdBy: ApplicationUserModel;
 	languages: LanguageModel[];
 	blobs: _BlobModel[];
+	p2pMessageModels: P2PMessageModel[];
 	fosId: number;
 	fos: FOSModel;
 	status: P2PStatus;
@@ -135,14 +148,6 @@ export interface P2PFileModel
 	p2p: P2PModel;
 	fileBlobId: Guid;
 	fileBlob: FileBlobModel;
-}
-export interface P2PDiscussionModel
-{
-	text: string;
-	responseToId: number;
-	responseTo: P2PDiscussionModel;
-	p2pId: number;
-	p2p: P2PModel;
 }
 export interface ResponseModel
 {
@@ -195,6 +200,7 @@ export interface InterestModel
 }
 export interface ApplicationUserModel
 {
+	id: Guid;
 	email: string;
 	name: string;
 	surname: string;
@@ -211,7 +217,6 @@ export interface ApplicationUserModel
 	languages: LanguageModel[];
 	interests: InterestModel[];
 	status: UserStatus;
-	id: Guid;
 }
 export interface ApplicationUserLanguageModel
 {

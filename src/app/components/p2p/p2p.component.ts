@@ -8,16 +8,19 @@ import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-p2p',
   templateUrl: './p2p.component.html',
-  styleUrls: ['./p2p.component.scss']
+  styleUrls: ['./p2p.component.scss'],
+  providers: [AccountService]
 })
 export class P2pComponent implements OnInit {
 
   _p2p: P2PModel;
   @Input() set p2p(value: P2PModel) {
     this._p2p = value;
-    this.storageService.getFosById(this._p2p.fosId).subscribe((fos) => {
-      this._p2p.fos = fos;
-    });
+    if (value) {
+      this.storageService.getFosById(this._p2p.fosId).subscribe((fos) => {
+        this._p2p.fos = fos;
+      });
+    }
   };
   get p2p(): P2PModel {
     return this._p2p;

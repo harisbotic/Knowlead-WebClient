@@ -1,0 +1,9 @@
+<app-p2p [p2p]="p2p"></app-p2p>
+<div *ngIf="p2p?.p2pMessageModels">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <input nglFormElement type="text" formControlName="text">
+    </form>
+    <div *ngFor="let item of p2p?.p2pMessageModels">
+        {{item.text}}
+    </div>
+</div>
