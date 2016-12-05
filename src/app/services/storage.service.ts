@@ -109,8 +109,9 @@ export class StorageService {
       .map((response) => {
         return responseToResponseModel(response).object;
       })
+      .finally(() => this.cache[cacheKey] = ret)
       .cache();
-    this.cache[cacheKey] = ret;
+    
     return ret;
   }
 
