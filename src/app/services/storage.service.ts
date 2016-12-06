@@ -98,12 +98,17 @@ export class StorageService {
     }
     console.debug("Loading from API: " + cacheKey);
     let params: URLSearchParams;
+    let suffix = "";
     if (parameters != null) {
+      if (parameters["id"]) {
+        suffix = "/" + parameters["id"];
+        delete parameters["id"];
+      }
       params = new URLSearchParams();
       for (let searchkey in parameters)
         params.set(searchkey, parameters[searchkey]);
     }
-    let ret = notifyOnObservableCancel(this.getHttp().get(STORAGE_CONFIG[key].api, {search: params})
+    let ret = notifyOnObservableCancel(this.getHttp().get(STORAGE_CONFIG[key].api + suffix, {search: params})
       .catch(err => {
         this.clearCache(key, parameters);
         return Observable.throw(err);

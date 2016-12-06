@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
-import { P2PModel, ResponseModel } from './../models/dto';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
 import { P2P_ALL, P2P_DELETE, P2P, P2P_MESSAGES, P2P_MESSAGE } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
-import { P2PMessageModel } from '../models/dto';
+import { StorageService } from './storage.service';
+import { P2PMessageModel, P2PModel, ResponseModel } from '../models/dto';
 
 @Injectable()
 export class P2pService {
 
-  constructor(protected http: Http) {}
+  constructor(protected http: Http, protected storageService: StorageService) {}
 
   create(value: P2PModel): Observable<ResponseModel> {
     let tmp = _(value).omitBy(_.isNull).value();
@@ -27,7 +27,8 @@ export class P2pService {
   }
 
   get(id: number): Observable<P2PModel> {
-    return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);
+    return this.storageService.getFromStorage<P2PModel>("p2p", {id: id});
+    //return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);
   }
 
   message(message: P2PMessageModel): Observable<P2PMessageModel> {

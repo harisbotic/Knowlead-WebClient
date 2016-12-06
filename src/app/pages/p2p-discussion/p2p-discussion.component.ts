@@ -57,7 +57,7 @@ export class P2pDiscussionComponent implements OnInit {
               this.p2p.p2pMessageModels = values;
             });
         }}, (err: ResponseModel) => {
-          this.notificationService.error("p2p:error fetching details", (err && err.errors) ? err.errors[0] : undefined);
+          this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
         });
 
     })
@@ -70,7 +70,7 @@ export class P2pDiscussionComponent implements OnInit {
           this.p2p.p2pMessageModels.push(newVal);
         });
       }, (err: ResponseModel) => {
-        this.notificationService.error("p2p:error messaging p2p", err.errors[0]);
+        this.notificationService.error("p2p|error messaging p2p", err.errors[0]);
       })
     }
   }

@@ -42,7 +42,11 @@ export class RealtimeService {
 
   stop() {
     console.info("Stopping websockets");
-    this.rpcConnection.stop();
+    try {
+      this.rpcConnection.stop();
+    } catch(e) {
+      console.warn("Error stopping websocket: " + e);
+    }
     delete this.rpcConnection;
   }
   

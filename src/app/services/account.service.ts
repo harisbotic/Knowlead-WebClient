@@ -27,7 +27,8 @@ export class AccountService {
   }
 
   public getUserById(id: Guid): Observable<ApplicationUserModel> {
-    return this.http.get(USER + "/" + id).map(responseToResponseModel).map(v => v.object);
+    //return this.http.get(USER + "/" + id).map(responseToResponseModel).map(v => v.object);
+    return this.storageService.getFromStorage<ApplicationUserModel>("otherUser", {id: id});
   }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {

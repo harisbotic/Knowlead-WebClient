@@ -31,7 +31,8 @@ export class HttpProvider extends Http {
     }
     
     request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
-        return this.emit("request", url, options);
+        //return this.emit("request", url, options);
+        return super.request(url, options);
     }
  
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -72,6 +73,7 @@ export class HttpProvider extends Http {
     }
 
     intercept(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
+        console.info(`${method}: ${url} - ${new Date().getSeconds()}:${new Date().getMilliseconds()}`);
         let observable: Observable<Response> =
             (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
         return observable.catch((errorResponse: Response) => {
