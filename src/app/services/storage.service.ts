@@ -16,6 +16,7 @@ export class StorageService {
   protected access_token_value: any;
   protected http: Http;
   protected fosByIds: {[index: number]: FOSModel} = {};
+  protected fosHierarchy: FOSModel;
 
   protected accessTokenStream = new BehaviorSubject<string>(undefined);
 
@@ -159,6 +160,8 @@ export class StorageService {
 
   public getFOShierarchy(): Observable<FOSModel> {
     return this.getFOSes().map((foses: FOSModel[]) => {
+      if (!!this.fosHierarchy)
+        return this.fosHierarchy;
       console.debug("Creating fos hierarchy");
       let ret = <FOSModel>{children: treeify(_.cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
       this.fosByIds = {};
@@ -173,14 +176,17 @@ export class StorageService {
         }
       }
       recurse(ret);
+      this.fosHierarchy = ret;
       return ret;
-    });
+    })
+    .cache();
   }
 
   public getFosById(id: number): Observable<FOSModel> {
     return this.getFOShierarchy().map(() => {
       return this.fosByIds[id];
-    });
+    })
+    .cache();
   }
 
 }

@@ -4,12 +4,13 @@ import { AccountService } from '../../services/account.service';
 import { StorageService } from '../../services/storage.service';
 import { P2pService } from '../../services/p2p.service';
 import { NotificationService } from '../../services/notification.service';
+import { ModelUtilsService } from '../../services/model-utils.service';
 
 @Component({
   selector: 'app-p2p',
   templateUrl: './p2p.component.html',
   styleUrls: ['./p2p.component.scss'],
-  providers: [AccountService]
+  providers: [AccountService, ModelUtilsService]
 })
 export class P2pComponent implements OnInit {
 
@@ -17,9 +18,7 @@ export class P2pComponent implements OnInit {
   @Input() set p2p(value: P2PModel) {
     this._p2p = value;
     if (value) {
-      this.storageService.getFosById(this._p2p.fosId).subscribe((fos) => {
-        this._p2p.fos = fos;
-      });
+      this.modelUtilsService.fillP2p(value).subscribe(val => this._p2p = val);
     }
   };
   get p2p(): P2PModel {
@@ -31,7 +30,8 @@ export class P2pComponent implements OnInit {
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
               protected p2pService: P2pService,
-              protected notificationService: NotificationService) {}
+              protected notificationService: NotificationService,
+              protected modelUtilsService: ModelUtilsService) {}
 
   ngOnInit() {
     this.accountService.currentUser().subscribe(user => this.user = user);
