@@ -8,6 +8,7 @@ import { responseToResponseModel } from './../utils/converters';
 import * as fastjsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
 import { SessionService, SessionEvent } from './session.service';
+import { notifyOnObservableCancel } from '../utils/index';
 
 @Injectable()
 export class StorageService {
@@ -102,7 +103,7 @@ export class StorageService {
       for (let searchkey in parameters)
         params.set(searchkey, parameters[searchkey]);
     }
-    let ret = this.getHttp().get(STORAGE_CONFIG[key].api, {search: params})
+    let ret = notifyOnObservableCancel(this.getHttp().get(STORAGE_CONFIG[key].api, {search: params})
       .catch(err => {
         this.clearCache(key, parameters);
         return Observable.throw(err);
@@ -110,9 +111,12 @@ export class StorageService {
       .map((response) => {
         return responseToResponseModel(response).object;
       })
-      .finally(() => this.cache[cacheKey] = ret)
-      .cache();
-    
+      //.finally(() => this.cache[cacheKey] = ret)
+      .cache(), () => {
+        console.warn(cacheKey + " request was canceled");
+        this.clearCache(key, parameters);
+      });
+    this.cache[cacheKey] = ret;
     return ret;
   }
 

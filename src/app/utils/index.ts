@@ -1,8 +1,8 @@
 import { Response } from "@angular/http";
-import { Observable } from 'rxjs/observable';
 import { ApplicationUserModel } from './../models/dto';
 import { FOSModel } from '../models/dto';
 import * as _ from 'lodash';
+import { Subscriber, Observable } from 'rxjs/Rx';
 
 export * from "./urls";
 export * from "./storage.constants";
@@ -121,3 +121,23 @@ export function getGuid() {
 
 export const PATTERN_EMAIL = "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*";
 export const PATTERN_ONE_LOWERCASE = ".*[a-z].*";
+
+export function notifyOnObservableCancel<T>(observable: Observable<T>, callback: () => void): Observable<T> {
+    return new Observable<T>((subscriber: Subscriber<T>) => {
+        let canceled = true;
+        let subscription = observable.do(() => {
+            canceled = false;
+        }).subscribe((val: T) => {
+            subscriber.next(val);
+        }, (err) => {
+            subscriber.error(err);
+        }, () => {
+            subscriber.complete();
+        });
+        return () => {
+            subscription.unsubscribe();
+            if (canceled)
+                callback();
+        }
+    })
+}
