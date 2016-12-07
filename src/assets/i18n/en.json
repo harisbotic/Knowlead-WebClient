@@ -88,9 +88,11 @@
     "NOT_LOGGED_IN": "You are not logged in",
     "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination",
     "INCORRECT_VALUE": "The value is incorrect",
-    "OWNERSHIP_PROBLEM": "We have an authorization problem",
-    "AGE_TOO_YOUNG": "The date is not acceptable. You have to be at least {{param}} years old.",
-    "AGE_TOO_OLD": "The date is not acceptable. You can be at most {{param}} years old.",
     "DATE_TOO_EARLY": "The time is too early. Minimum time is: {{param}}",
-    "DATE_TOO_LATE": "The time is too late. Maximum time is: {{param}}"
+    "DATE_TOO_LATE": "The time is too late. Maximum time is: {{param}}",
+    "OWNERSHIP_ERROR": "You don't have rights to change this",
+    "AUTHORITY_ERROR": "Authorization error",
+    "HACK_ATTEMPT": "What are you doing here???",
+    "AGE_TOO_YOUNG": "You have to be at least {{param}} years old",
+    "AGE_TOO_OLD": "You can't be older then {{param}}"
 }
