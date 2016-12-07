@@ -1,6 +1,8 @@
 <button nglButton="neutral" type="button" (click)="open = true">
   {{ (!value) ? (text | translate) : (value | date) }}
 </button>
+<input type="number" [ngModel]="value ? value.getHours() : 0" (ngModelChange)="setHours($event)" min="0" max="24" nglFormControl class="slds-show--inline-block" *ngIf="timePick">
+<input type="number" [ngModel]="value ? value.getMinutes() : 0" (ngModelChange)="setMinutes($event)" min="0" max="60" nglFormControl class="slds-show--inline-block" *ngIf="timePick">
 <button nglButton="destructive" type="button" (click)="value = null">
   {{ "common|clear value" | translate }}
 </button>

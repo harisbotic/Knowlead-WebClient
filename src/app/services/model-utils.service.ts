@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
 import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
@@ -8,9 +8,13 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class ModelUtilsService {
 
-  private boundUserById: (id: Guid) => Observable<ApplicationUserModel>; 
+  private boundUserById: (id: Guid) => Observable<ApplicationUserModel>;
 
-  constructor(protected accountService: AccountService, protected p2pService: P2pService, protected storageService: StorageService) {
+  protected get p2pService(): P2pService {
+    return this.injector.get(P2pService);
+  } 
+
+  constructor(protected accountService: AccountService, protected injector: Injector, protected storageService: StorageService) {
     this.boundUserById = this.accountService.getUserById.bind(this.accountService);
   }
 
@@ -39,6 +43,9 @@ export class ModelUtilsService {
     ret = this.fill(ret, "p2p", this.p2pService.get.bind(this.p2pService));
     ret = this.fill(ret, "messageFrom", this.boundUserById);
     ret = this.fill(ret, "messageTo", this.boundUserById);
+    if (typeof(value.timestamp) == "string") {
+      value.timestamp = new Date(value.timestamp);
+    }
     return ret;
   }
 
@@ -48,6 +55,16 @@ export class ModelUtilsService {
     ret = this.fill(ret, "createdBy", this.boundUserById);
     ret = this.fill(ret, "scheduledWith", this.boundUserById);
     return ret;
+  }
+
+  public getUserFullName(value: ApplicationUserModel): string {
+    if (value == null) {
+      return "...";
+    }
+    if (!!!value.name || !!!value.surname) {
+      return value.email;
+    }
+    return value.name + " " + value.surname;
   }
 
 }

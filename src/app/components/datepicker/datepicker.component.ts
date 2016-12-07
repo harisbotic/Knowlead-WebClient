@@ -30,6 +30,21 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() text : string;
   @Input() saveText : string;
   @Input() title : string;
+  @Input() timePick : boolean = false;
+
+  setHours(hours: number) {
+    if (this.value == null)
+      this.value = new Date();
+    this.value.setHours(hours);
+    this.value = this.value;
+  }
+
+  setMinutes(minutes: number) {
+    if (this.value == null)
+      this.value = new Date();
+    this.value.setMinutes(minutes);
+    this.value = this.value;
+  }
 
   constructor() { }
 

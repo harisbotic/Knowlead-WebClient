@@ -7,11 +7,12 @@ import { P2P_ALL, P2P_DELETE, P2P, P2P_MESSAGES, P2P_MESSAGE } from '../utils/ur
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
 import { P2PMessageModel, P2PModel, ResponseModel } from '../models/dto';
+import { ModelUtilsService } from './model-utils.service';
 
 @Injectable()
 export class P2pService {
 
-  constructor(protected http: Http, protected storageService: StorageService) {}
+  constructor(protected http: Http, protected storageService: StorageService, protected modelUtilsService: ModelUtilsService) {}
 
   create(value: P2PModel): Observable<ResponseModel> {
     let tmp = _(value).omitBy(_.isNull).value();
@@ -36,6 +37,9 @@ export class P2pService {
   }
 
   getMessages(id: number): Observable<P2PMessageModel[]> {
-    return this.http.get(P2P_MESSAGES + "/" + id).map(responseToResponseModel).map(v => v.object);
+    return this.http.get(P2P_MESSAGES + "/" + id)
+      .map(responseToResponseModel)
+      .map(v => v.object)
+      .flatMap(v => this.modelUtilsService.fillP2pMessages(v));
   }
 }

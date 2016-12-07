@@ -22,34 +22,26 @@ export function dateValidator(configuration: DateValidatorConfiguration): (contr
         if (param == null)
             return null;
         let value = typeof(param) === "string" ? <Date>JSON.parse(param) : <Date>param;
-        let other: Date;
-        let future = false;
+        let invalid = false;
         if (configuration.minDate) {
-            other = configuration.minDate;
+            invalid = invalid || value < configuration.minDate;
         } else if (configuration.minYearsOld) {
-            other = new Date();
+            let other = new Date();
             other.setFullYear(other.getFullYear() - configuration.minYearsOld);
+            invalid = invalid || value > other;
         } else if (configuration.maxDate) {
-            other = configuration.maxDate;
-            future = true;
+            invalid = invalid || value > configuration.maxDate;
         } else {
             throw new Error("Invalid date validator configuration");
         }
         let ret: DateValidatorError = {
             dateInvalid: {
-                actualDate: other,
+                actualDate: value,
                 dateConfiguration: configuration
             }
         }
-        if (future) {
-            if (value < other) {
-                return ret;
-            }
-        } else {
-            if (value > other) {
-                return ret;
-            }
-        }
+        if (invalid)
+            return ret;
         return null;
     }
 }

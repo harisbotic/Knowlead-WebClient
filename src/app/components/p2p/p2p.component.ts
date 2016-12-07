@@ -26,6 +26,7 @@ export class P2pComponent implements OnInit {
   };
 
   user: ApplicationUserModel;
+  fullName: (user: ApplicationUserModel) => string;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
@@ -34,6 +35,7 @@ export class P2pComponent implements OnInit {
               protected modelUtilsService: ModelUtilsService) {}
 
   ngOnInit() {
+    this.fullName = this.modelUtilsService.getUserFullName;
     this.accountService.currentUser().subscribe(user => this.user = user);
   }
 

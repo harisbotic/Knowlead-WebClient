@@ -18,10 +18,12 @@ export class TranslateParametricPipe implements PipeTransform {
     if (value.indexOf(':') == -1) {
       return this.translatePipe.transform(value);
     } else {
-      let sp = value.split(':');
-      if (sp.length != 2)
-        console.error("Error splitting '" + value + "' for parametric translate. Expected 1 colon (:).");
-      return this.translatePipe.transform(sp[0], {param: sp[1]});
+      let sp = value.split(':', 1);
+
+      if (sp.length != 1)
+        console.error("Error splitting '" + value + "' for parametric translate. Expected at least 1 colon (:).");
+
+      return this.translatePipe.transform(sp[0], {param: value.substr(sp[0].length + 1)});
     }
   }
 

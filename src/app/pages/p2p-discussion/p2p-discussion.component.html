@@ -1,9 +1,33 @@
 <app-p2p [p2p]="p2p"></app-p2p>
-<div *ngIf="p2p?.p2pMessageModels">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-        <input nglFormElement type="text" formControlName="text">
-    </form>
-    <div *ngFor="let item of p2p?.p2pMessageModels">
-        {{item.text}}
+<div *ngFor="let thread of threads; trackBy: trackByThreads">
+    <span class="slds-text-heading--label">
+        {{"p2p|converisation with" | translate}}: {{fullName(thread.with)}}
+    </span>
+    <button type="button" nglButton="neutral" (click)="trySchedule(thread)" *ngIf="p2p.createdById == user.id && !p2p.scheduledWith">
+        {{"p2p|schedule with person" | translate}}
+    </button>
+    <div *ngFor="let item of thread.messages">
+        <span class="slds-text-body--regular">
+            {{fullName(item.messageFrom)}} {{"p2p|wrote"}}: {{item.text}}
+        </span>
     </div>
+    <form *ngIf="forms[thread.with.id] && !p2p.scheduledWith" [formGroup]="forms[thread.with.id]" (ngSubmit)="submit(thread.with.id)">
+        <input nglFormControl type="text" formControlName="text">
+    </form>
 </div>
+
+<ngl-modal [(open)]="scheduleOpened" header="{{'p2p|schedule with' | translate}}: {{fullName(scheduleWith)}}">
+    <div body>
+        <app-datepicker 
+            [formControl]="scheduleForm.controls.scheduleTime"
+            text="p2p|pick schedule date"
+            saveText="p2p|pick schedule date"
+            [timePick]="true">
+        </app-datepicker>
+        <app-error-list [formControlProperty]="scheduleForm.controls.scheduleTime"></app-error-list>
+    </div>
+    <template ngl-modal-footer>
+        <button nglButton="brand" (click)="scheduleNow()" type="button">{{"p2p|schedule now"}}</button>
+        <button nglButton="neutral" (click)="schedule()" type="button">{{"p2p|schedule by date"}}</button>
+    </template>
+</ngl-modal>

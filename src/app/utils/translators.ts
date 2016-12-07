@@ -36,6 +36,10 @@ function translateByKeyValidator(key: string, value: boolean): string {
 function translateDateValidator(key: string, value: DateValidationErrorValue): string {
     if (value.dateConfiguration.minYearsOld) {
         return "DATE_TOO_YOUNG:" + value.dateConfiguration.minYearsOld;
+    } else if (value.dateConfiguration.minDate) {
+        return "DATE_TOO_EARLY:" + value.dateConfiguration.minDate.toLocaleDateString();
+    } else if (value.dateConfiguration.maxDate) {
+        return "DATE_TOO_LATE:" + value.dateConfiguration.maxDate.toLocaleDateString();
     } else {
         return null;
     }
