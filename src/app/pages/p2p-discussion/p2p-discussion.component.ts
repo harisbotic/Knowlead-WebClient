@@ -47,6 +47,15 @@ export class P2pDiscussionComponent implements OnInit {
       return message.messageFrom;
   }
 
+  private makeFormGroup(fromId: string, toId: string) {
+    return new FormGroup({
+      text: new FormControl("", Validators.required),
+      messageFromId: new FormControl(fromId),
+      messageToId: new FormControl(toId),
+      p2pId: new FormControl(this.p2p.p2pId),
+    });
+  }
+
   ngOnInit() {
     interface userAndP2p {
       p2p: P2PModel,
@@ -72,14 +81,12 @@ export class P2pDiscussionComponent implements OnInit {
               this.p2p.p2pMessageModels = values;
               values.forEach(msg => {
                 let other = this.otherUser(msg);
-                this.forms[other.id] = new FormGroup({
-                  text: new FormControl("", Validators.required),
-                  messageFromId: new FormControl(this.user.id),
-                  messageToId: new FormControl(other.id),
-                  p2pId: new FormControl(this.p2p.p2pId),
-                });
-                this.threads = this.getThreads();
-              })
+                this.forms[other.id] = this.makeFormGroup(this.user.id, other.id);
+              });
+              if (this.user.id != this.p2p.createdById && values.length == 0) {
+                this.forms[this.p2p.createdById] = this.makeFormGroup(this.user.id, this.p2p.createdById);
+              }
+              this.threads = this.getThreads();
             });
         }}, (err: ResponseModel) => {
           this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
@@ -101,17 +108,24 @@ export class P2pDiscussionComponent implements OnInit {
     if (this.user == null || this.p2p == null || this.p2p.p2pMessageModels == null)
       return [];
     let ret: {[index: string]: threadModel} = {};
-    this.p2p.p2pMessageModels.forEach(msg => {
-      let id = this.otherUser(msg).id;
+    if (this.p2p.p2pMessageModels.length > 0) {
+      this.p2p.p2pMessageModels.forEach(msg => {
+        let id = this.otherUser(msg).id;
 
-      if (!ret[id]) {
-        ret[id] = {
-          with: this.otherUser(msg),
-          messages: []
+        if (!ret[id]) {
+          ret[id] = {
+            with: this.otherUser(msg),
+            messages: []
+          }
         }
-      }
-      ret[id].messages.push(msg);
-    });
+        ret[id].messages.push(msg);
+      });
+    } else {
+      ret[this.p2p.createdById] = {
+        with: this.p2p.createdBy,
+        messages: []
+      };
+    }
     _.values(ret).forEach((message) => {
       message.messages = _.sortBy(message.messages, "timestamp");
     });

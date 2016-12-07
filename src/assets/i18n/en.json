@@ -48,6 +48,15 @@
     "p2p|fos": "Field of study",
     "p2p|by": "Created by",
 
+    "p2p|wrote": "wrote",
+    "p2p|converisation with": "Your converisation with",
+    "p2p|schedule with person": "Schedule P2P with this person",
+    "p2p|schedule with": "Pick schedule time with",
+    "p2p|schedule now": "Call now!",
+    "p2p|schedule by date": "Schedule with selected time",
+    "p2p|write response": "Write a response to this converisation",
+    "p2p|error fetching details": "Error fetching p2p details",
+
     "file|upload": "Click to select a file",
     "file|drop": "Or drop a file here",
     "file|uploading": "Your file is being uploaded ...",
@@ -80,5 +89,8 @@
     "LOGIN_CREDENTIALS_INCORRECT": "Invalid email/password combination",
     "INCORRECT_VALUE": "The value is incorrect",
     "OWNERSHIP_PROBLEM": "We have an authorization problem",
-    "DATE_TOO_YOUNG": "The date is not acceptable. You have to be at least {{param}} years old."
+    "AGE_TOO_YOUNG": "The date is not acceptable. You have to be at least {{param}} years old.",
+    "AGE_TOO_OLD": "The date is not acceptable. You can be at most {{param}} years old.",
+    "DATE_TOO_EARLY": "The time is too early. Minimum time is: {{param}}",
+    "DATE_TOO_LATE": "The time is too late. Maximum time is: {{param}}"
 }

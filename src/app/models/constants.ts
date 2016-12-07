@@ -22,4 +22,6 @@ export class ErrorCodes
 	static ownershipError: string = "OWNERSHIP_ERROR";
 	static authorityError: string = "AUTHORITY_ERROR";
 	static hackAttempt: string = "HACK_ATTEMPT";
+	static ageTooYoung: string = "AGE_TOO_YOUNG";
+	static ageTooOld: string = "AGE_TOO_OLD";
 }

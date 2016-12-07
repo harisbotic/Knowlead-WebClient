@@ -35,6 +35,8 @@ export class ModelUtilsService {
   }
 
   public fillP2pMessages(values: P2PMessageModel[]): Observable<P2PMessageModel[]> {
+    if (!values || values.length == 0)
+      return Observable.of([]);
     return Observable.from(values).flatMap(value => this.fillP2pMessage(value)).bufferCount(values.length);
   }
 

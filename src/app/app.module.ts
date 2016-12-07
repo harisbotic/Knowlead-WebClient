@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
+import { MomentModule } from 'angular2-moment';
 
 import { AppRouting } from "./app.routing"
 import { AppComponent } from './app.component';
@@ -66,6 +67,7 @@ import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.co
     FormsModule,
     HttpModule,
     AppRouting,
+    MomentModule,
     NglModule.forRoot(),
     ReactiveFormsModule,
     TranslateModule.forRoot({ 
