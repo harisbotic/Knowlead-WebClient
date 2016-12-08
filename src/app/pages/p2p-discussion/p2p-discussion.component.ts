@@ -29,6 +29,7 @@ export class P2pDiscussionComponent implements OnInit {
   scheduleOpened: boolean = false;
   scheduleWith: ApplicationUserModel;
   discussable: boolean = false;
+  messages: P2PMessageModel[];
 
   constructor(
     protected p2pService: P2pService,
@@ -65,33 +66,30 @@ export class P2pDiscussionComponent implements OnInit {
     this.fullName = this.modelUtilsService.getUserFullName;
     this.route.params.subscribe(params => {
       let id = params["id"];
-      this.p2pService.get(id)
-        .combineLatest(this.accountService.currentUser(), this.p2pService.getMessages(id), (p2p, user, messages) =>
-          <userAndP2p>{
-            p2p: p2p,
-            user: user,
-            messages: messages
-          }
-        ).subscribe((value) => {
-          if (value.p2p && value.user && value.messages) {
-            this.user = value.user;
-            this.p2p = value.p2p;
-            this.p2p.p2pMessageModels = value.messages;
+      this.p2pService.getMessages(id).do(messages => this.messages = messages)
+        .merge(this.accountService.currentUser().do(user => this.user = user))
+        .merge(this.p2pService.get(id).do(p2p => this.p2p = p2p))
+        .subscribe(() => {
+          if (this.messages && this.p2p) {
+            this.p2p.p2pMessageModels = this.messages;
             this.discussable = !this.p2p.isDeleted && !this.p2p.scheduledWithId;
-            this.modelUtilsService.fillP2pMessages(this.p2p.p2pMessageModels).subscribe(values => {
-              this.p2p.p2pMessageModels = values;
-              values.forEach(msg => {
-                let other = this.otherUser(msg);
-                this.forms[other.id] = this.makeFormGroup(this.user.id, other.id);
-              });
-              if (this.user.id != this.p2p.createdById && values.length == 0) {
-                this.forms[this.p2p.createdById] = this.makeFormGroup(this.user.id, this.p2p.createdById);
-              }
+            if (this.user) {
               this.threads = this.getThreads();
-            });
-        }}, (err: ResponseModel) => {
-          this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
-        });
+              this.modelUtilsService.fillP2pMessages(this.p2p.p2pMessageModels).subscribe(values => {
+                this.p2p.p2pMessageModels = values;
+                values.forEach(msg => {
+                  let other = this.otherUser(msg);
+                  this.forms[other.id] = this.makeFormGroup(this.user.id, other.id);
+                });
+                if (this.user.id != this.p2p.createdById && values.length == 0) {
+                  this.forms[this.p2p.createdById] = this.makeFormGroup(this.user.id, this.p2p.createdById);
+                }
+                this.threads = this.getThreads();
+              });
+            }
+          }}, (err: ResponseModel) => {
+            this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
+          });
     });
     this.scheduleForm = new FormGroup({
       scheduleWithId: new FormControl("", Validators.required),
