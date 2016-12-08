@@ -8,6 +8,7 @@ import { NotificationService } from '../../services/notification.service';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import * as _ from 'lodash';
 import { dateValidator } from '../../validators/date.validator';
+import { BaseComponent } from '../../base.component';
 
 interface threadModel {
   with: ApplicationUserModel;
@@ -19,7 +20,7 @@ interface threadModel {
   templateUrl: './p2p-discussion.component.html',
   styleUrls: ['./p2p-discussion.component.scss']
 })
-export class P2pDiscussionComponent implements OnInit {
+export class P2pDiscussionComponent extends BaseComponent implements OnInit {
 
   p2p: P2PModel;
   user: ApplicationUserModel;
@@ -37,6 +38,7 @@ export class P2pDiscussionComponent implements OnInit {
     protected accountService: AccountService,
     protected notificationService: NotificationService,
     protected modelUtilsService: ModelUtilsService) {
+    super();
   }
 
   private otherUser(message: P2PMessageModel): ApplicationUserModel { 
@@ -64,9 +66,9 @@ export class P2pDiscussionComponent implements OnInit {
       messages: P2PMessageModel[]
     };
     this.fullName = this.modelUtilsService.getUserFullName;
-    this.route.params.subscribe(params => {
+    this.subscriptions.push(this.route.params.subscribe(params => {
       let id = params["id"];
-      this.p2pService.getMessages(id).do(messages => this.messages = messages)
+      this.subscriptions.push(this.p2pService.getMessages(id).do(messages => this.messages = messages)
         .merge(this.accountService.currentUser().do(user => this.user = user))
         .merge(this.p2pService.get(id).do(p2p => this.p2p = p2p))
         .subscribe(() => {
@@ -89,8 +91,10 @@ export class P2pDiscussionComponent implements OnInit {
             }
           }}, (err: ResponseModel) => {
             this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
-          });
-    });
+          }
+        )
+      );
+    }));
     this.scheduleForm = new FormGroup({
       scheduleWithId: new FormControl("", Validators.required),
       scheduleTime: new FormControl(new Date(), dateValidator({minDate: new Date()}))
@@ -134,14 +138,14 @@ export class P2pDiscussionComponent implements OnInit {
   submit(id: string) {
     let form = this.forms[id];
     if (form && form.valid) {
-      this.p2pService.message(form.value).subscribe(val => {
-        this.modelUtilsService.fillP2pMessage(val).subscribe(newVal => {
+      this.subscriptions.push(this.p2pService.message(form.value).subscribe(val => {
+        this.subscriptions.push(this.modelUtilsService.fillP2pMessage(val).subscribe(newVal => {
           this.p2p.p2pMessageModels.push(newVal);
           this.threads = this.getThreads();
-        });
+        }));
       }, (err: ResponseModel) => {
         this.notificationService.error("p2p|error messaging p2p", err && err.errors ? err.errors[0] : undefined);
-      });
+      }));
       this.forms[id].patchValue({text: ""});
     }
   }

@@ -5,18 +5,20 @@ import { StorageService } from '../../services/storage.service';
 import { P2pService } from '../../services/p2p.service';
 import { NotificationService } from '../../services/notification.service';
 import { ModelUtilsService } from '../../services/model-utils.service';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-p2p',
   templateUrl: './p2p.component.html',
   styleUrls: ['./p2p.component.scss'],
 })
-export class P2pComponent implements OnInit {
+export class P2pComponent extends BaseComponent implements OnInit {
 
   _p2p: P2PModel;
+  
   @Input() set p2pId(value: number) {
     if (value != null) {
-      this.p2pService.get(value).subscribe((p2p) => this._p2p = p2p);
+      this.subscriptions.push(this.p2pService.get(value).subscribe((p2p) => this._p2p = p2p));
     } else {
       this._p2p = null;
     }
@@ -32,17 +34,19 @@ export class P2pComponent implements OnInit {
               protected storageService: StorageService,
               protected p2pService: P2pService,
               protected notificationService: NotificationService,
-              protected modelUtilsService: ModelUtilsService) {}
+              protected modelUtilsService: ModelUtilsService) {
+    super();
+  }
 
   ngOnInit() {
     this.fullName = this.modelUtilsService.getUserFullName;
-    this.accountService.currentUser().subscribe(user => this.user = user);
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
   }
 
   deleted() {
-    this.p2pService.delete(this.p2p).subscribe(undefined, (error: ResponseModel) => {
+    this.subscriptions.push(this.p2pService.delete(this.p2p).subscribe(undefined, (error: ResponseModel) => {
       this.notificationService.error("p2p|delete fail", error && error.errors ? error.errors[0] : undefined);
-    });
+    }));
   }
 
   deletable(): boolean {

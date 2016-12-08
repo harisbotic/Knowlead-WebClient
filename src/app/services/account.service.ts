@@ -2,7 +2,7 @@ import { Injectable, ReflectiveInjector } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/observable';
 import { StorageService } from './storage.service';
-import { ApplicationUserModel, RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
+import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
 import { USER_DETAILS, REGISTER, CONFIRMEMAIL } from './../utils/urls';
 import * as jsonpatch from 'fast-json-patch';
@@ -11,7 +11,7 @@ import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
 import { USER } from '../utils/urls';
-import { Guid } from '../models/dto';
+import { Guid, UserStatus, ApplicationUserModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 
@@ -47,9 +47,6 @@ export class AccountService {
 
   public currentUser(): Observable<ApplicationUserModel> {
     return this.storageService.getFromStorage<ApplicationUserModel>("user", this.userFiller).map(user => {
-      if (user.birthdate != null && typeof(user.birthdate) == "string") {
-        user.birthdate = new Date(Date.parse(user.birthdate));
-      }
       return _.cloneDeep(user);
     })
   }
@@ -57,11 +54,15 @@ export class AccountService {
   public patchUser(patch: fastjsonpatch.Patch[]): Observable<ResponseModel> {
     return this.http.patch(USER_DETAILS, patch)
       .map(responseToResponseModel)
-      .do((response: ResponseModel) => {
-        if (response.object != null)
-          this.storageService.setToStorage("user", this.userFiller, null, response.object);
-        else
+      .map(response => response.object)
+      .do((user: ApplicationUserModel) => {
+        if (user != null) {
+          this.storageService.setToStorage("user", this.userFiller, null, user);
+          this.storageService.setToStorage("otherUser", this.userFiller, {id: user.id}, user);
+        }
+        else {
           console.error("No object in user patch response");
+        }
       });
   }
 

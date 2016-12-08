@@ -70,7 +70,7 @@ export class StorageService {
     return this.access_token != undefined;
   }
 
-  private getCacheKey(key: StorageKey, parameters?: {[key: string]: any}): string {
+  public static getCacheKey(key: StorageKey, parameters?: {[key: string]: any}): string {
     let cacheKey = <string>key;
     if (parameters != null) {
       iterateObjectAlphabetically(parameters, (value, key) => {
@@ -81,18 +81,18 @@ export class StorageService {
   }
 
   public clearCache(key?: StorageKey, params? :{[key: string]: any}) {
-    console.debug("Clearing cache " + this.getCacheKey(key, params));
+    console.debug("Clearing cache " + StorageService.getCacheKey(key, params));
     if (key == null) {
       this.cache = {};
     } else {
-      delete this.cache[this.getCacheKey(key, params)];
+      delete this.cache[StorageService.getCacheKey(key, params)];
     }
   }
 
-  private cache: {[key: string]: StorageSubject<any>} = {};
+  public cache: {[key: string]: StorageSubject<any>} = {};
 
   private getOrCreateSubject<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}) {
-    let cacheKey = this.getCacheKey(key, parameters);
+    let cacheKey = StorageService.getCacheKey(key, parameters);
     if (this.cache[cacheKey] == undefined) {
       this.cache[cacheKey] = new StorageSubject<T>(key, parameters, this.getHttp(), filler);
     }

@@ -37,7 +37,7 @@ export class P2pService {
       .map(v => v.object)
       .do((vals: P2PModel[]) => {
         vals.forEach((p2p) => {
-          this.get(p2p.p2pId).subscribe();
+          this.get(p2p.p2pId).subscribe().unsubscribe();
         })
       });
   }

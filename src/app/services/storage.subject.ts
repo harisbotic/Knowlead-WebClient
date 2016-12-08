@@ -1,23 +1,26 @@
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { URLSearchParams, Http } from '@angular/http';
-import { STORAGE_CONFIG } from '../utils/storage.constants';
+import { STORAGE_CONFIG, StorageKey } from '../utils/storage.constants';
 import { responseToResponseModel } from '../utils/converters';
 import * as _ from 'lodash';
+import { StorageService } from './storage.service';
 
 export type StorageFiller<T> = (value: T) => Observable<T>; 
 
 export class StorageSubject<T> extends Observable<T> {
     value: T;
 
-    subscribers: Subscriber<T>[] = [];
+    public subscribers: Subscriber<T>[] = [];
     fetching: boolean;
+    public cacheKey: string;
 
     constructor(
-            protected key: string,
+            protected key: StorageKey,
             protected parameters: {[key: string]: string},
             protected http: Http,
             protected filler?: StorageFiller<T>) {
         super();
+        this.cacheKey = StorageService.getCacheKey(this.key, this.parameters);
         this._subscribe = this.subscribed.bind(this);
         if (STORAGE_CONFIG[key].parameters) {
             STORAGE_CONFIG[key].parameters.forEach(key => {
@@ -28,19 +31,21 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     protected subscribed(subscriber: Subscriber<T>): () => void {
-        // console.warn("New subscriber " + this.key + " (value: " + this.value + ")");
         if (!this.value) {
             if (!this.fetching) {
                 this.refresh();
             } else {
-                console.debug(`Cache ${this.key}: Waiting for response ...`)
+                // console.debug(`Cache ${this.cacheKey}: Waiting for response ...`)
             }
         } else {
-            console.debug(`Cache ${this.key}: Emitting cached value`);
+            // console.debug(`Cache ${this.cacheKey}: Emitting cached value`);
             subscriber.next(this.value);
         }
         this.subscribers.push(subscriber);
-        return () => {};
+        return () => {
+            subscriber.unsubscribe();
+            this.subscribers = this.subscribers.filter((sub) => sub != subscriber);
+        };
     }
 
     private setValue(newValue: T) {
@@ -49,7 +54,7 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     public changeValue(newValue: T) {
-        console.debug(`Cache ${this.key}: Value is changed`);
+        // console.debug(`Cache ${this.cacheKey}: Value is changed`);
         if (this.filler) {
             this.filler(newValue).subscribe(filledValue => {
                 this.setValue(newValue);
@@ -60,7 +65,7 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     public refresh() {
-        console.debug(`Cache ${this.key}: Loading from API`);
+        // console.debug(`Cache ${this.cacheKey}: Loading from API`);
         this.fetching = true;
         let params: URLSearchParams;
         let suffix = "";
@@ -86,9 +91,11 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     protected notifyObservers() {
+        let before = this.subscribers.length;
+        this.subscribers = this.subscribers.filter(s => !s.closed);
         this.subscribers.forEach(subscriber => {
             subscriber.next(this.value);
         });
-        this.subscribers = this.subscribers.filter(s => !s.closed);
+        // console.debug(`Cache ${this.cacheKey}: subscribers count: ${this.subscribers.length} (${before - this.subscribers.length} deleted)`);
     }
 }

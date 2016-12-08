@@ -27,10 +27,10 @@ export class ModelUtilsService {
     if (!idKey)
       idKey = modelKey + "Id";
     return value.flatMap(val => {
-      if (!!val[modelKey] || val[idKey] == null)
+      if (/*!!val[modelKey] || */val[idKey] == null)
         return Observable.of(val);
       else return getter(val[idKey]).map(obj => {
-        console.warn(`Filling ${modelKey} from ${idKey}`);
+        //console.warn(`Filling ${modelKey} from ${idKey}`);
         val[modelKey] = obj;
         return val;
       })
@@ -64,8 +64,11 @@ export class ModelUtilsService {
     return ret;
   }
 
-  public fillUser(value: ApplicationUserModel): Observable<ApplicationUserModel> {
-    return Observable.of(value);
+  public fillUser(user: ApplicationUserModel): Observable<ApplicationUserModel> {
+    if (user.birthdate != null && typeof(user.birthdate) == "string") {
+      user.birthdate = new Date(Date.parse(user.birthdate));
+    }
+    return Observable.of(user);
   }
 
   public getUserFullName(value: ApplicationUserModel): string {

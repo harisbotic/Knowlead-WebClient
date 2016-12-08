@@ -46,6 +46,17 @@
      <a class="slds-tabs--scoped__link" routerLink="/lookup" role="tab" tabindex="-1" aria-selected="false" 
      aria-controls="tab-scoped-3" id="tab-scoped-9__item">lookup test</a></li>
   </ul>
-<br><br>
 </div>
+<table class="slds-table slds-table--bordered">
+  <thead>
+    <th>Cache key</th>
+    <th>Number of subscribers</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cache of caches">
+      <td>{{cache.cacheKey}}</td>
+      <td>{{cache.subscribers.length}}</td>
+    </tr>
+  </tbody>
+</table>
 <router-outlet></router-outlet>
