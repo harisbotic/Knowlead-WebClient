@@ -12,14 +12,20 @@ import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
 import { USER } from '../utils/urls';
 import { Guid } from '../models/dto';
+import { ModelUtilsService } from './model-utils.service';
+import { StorageFiller } from './storage.subject';
 
 @Injectable()
 export class AccountService {
 
+  userFiller: StorageFiller<ApplicationUserModel>;
+
   constructor(protected http: Http,
               protected storageService: StorageService,
-              protected sessionService: SessionService) {
+              protected sessionService: SessionService,
+              protected modelUtilsService: ModelUtilsService) {
     this.sessionService.eventStream.subscribe(evt => {
+      this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
       if (evt == SessionEvent.LOGGED_OUT) {
         this.storageService.clearCache("user");
       }
@@ -28,7 +34,7 @@ export class AccountService {
 
   public getUserById(id: Guid): Observable<ApplicationUserModel> {
     //return this.http.get(USER + "/" + id).map(responseToResponseModel).map(v => v.object);
-    return this.storageService.getFromStorage<ApplicationUserModel>("otherUser", {id: id});
+    return this.storageService.getFromStorage<ApplicationUserModel>("otherUser", this.userFiller, {id: id});
   }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
@@ -40,7 +46,7 @@ export class AccountService {
   }
 
   public currentUser(): Observable<ApplicationUserModel> {
-    return this.storageService.getFromStorage<ApplicationUserModel>("user").map(user => {
+    return this.storageService.getFromStorage<ApplicationUserModel>("user", this.userFiller).map(user => {
       if (user.birthdate != null && typeof(user.birthdate) == "string") {
         user.birthdate = new Date(Date.parse(user.birthdate));
       }
@@ -53,7 +59,7 @@ export class AccountService {
       .map(responseToResponseModel)
       .do((response: ResponseModel) => {
         if (response.object != null)
-          this.storageService.setToStorage("user", null, response.object);
+          this.storageService.setToStorage("user", this.userFiller, null, response.object);
         else
           console.error("No object in user patch response");
       });
@@ -75,7 +81,7 @@ export class AccountService {
   }
 
   public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
-    return this.currentUser().flatMap((user) => {
+    return this.currentUser().take(1).flatMap((user) => {
       let _user = this.prepareForPatch(user);
       let _newUser = this.prepareForPatch(newUser);
       let patch = jsonpatch.compare(_user, _newUser);
@@ -84,7 +90,7 @@ export class AccountService {
   }
 
   public patchInterests(interests: InterestModel[]): Observable<ResponseModel> {
-    return this.currentUser().flatMap((user) => {
+    return this.currentUser().take(1).flatMap((user) => {
 
       let tmp1 = <ApplicationUserModel>{};
       tmp1.interests = fillArray(_.cloneDeep(user.interests).map(i => <InterestModel>_.omit(i, "fos")), "fosId");

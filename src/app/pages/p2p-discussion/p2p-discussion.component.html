@@ -1,9 +1,9 @@
-<app-p2p [p2p]="p2p"></app-p2p>
+<app-p2p [p2pId]="p2p?.p2pId"></app-p2p>
 <div *ngFor="let thread of threads; trackBy: trackByThreads">
-    <span class="slds-text-heading--label">
+    <span class="slds-text-heading--large">
         {{"p2p|converisation with" | translate}} {{fullName(thread.with)}}
     </span>
-    <button type="button" nglButton="neutral" (click)="trySchedule(thread)" *ngIf="p2p.createdById == user.id && !p2p.scheduledWith">
+    <button type="button" nglButton="neutral" (click)="trySchedule(thread)" *ngIf="p2p.createdById == user.id && discussable">
         {{"p2p|schedule with person" | translate}}
     </button>
     <div *ngFor="let item of thread.messages">
@@ -14,7 +14,7 @@
             {{item.timestamp | amTimeAgo}}
         </div>
     </div>
-    <form *ngIf="forms[thread.with.id] && !p2p.scheduledWith" [formGroup]="forms[thread.with.id]" (ngSubmit)="submit(thread.with.id)">
+    <form *ngIf="forms[thread.with.id] && discussable" [formGroup]="forms[thread.with.id]" (ngSubmit)="submit(thread.with.id)">
         <input nglFormControl type="text" formControlName="text" placeholder="{{'p2p|write response' | translate}}">
     </form>
 </div>

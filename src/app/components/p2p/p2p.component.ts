@@ -10,15 +10,15 @@ import { ModelUtilsService } from '../../services/model-utils.service';
   selector: 'app-p2p',
   templateUrl: './p2p.component.html',
   styleUrls: ['./p2p.component.scss'],
-  providers: [AccountService, ModelUtilsService]
 })
 export class P2pComponent implements OnInit {
 
   _p2p: P2PModel;
-  @Input() set p2p(value: P2PModel) {
-    this._p2p = value;
-    if (value) {
-      this.modelUtilsService.fillP2p(value).subscribe(val => this._p2p = val);
+  @Input() set p2pId(value: number) {
+    if (value != null) {
+      this.p2pService.get(value).subscribe((p2p) => this._p2p = p2p);
+    } else {
+      this._p2p = null;
     }
   };
   get p2p(): P2PModel {
@@ -40,11 +40,8 @@ export class P2pComponent implements OnInit {
   }
 
   deleted() {
-    this.p2pService.delete(this.p2p).subscribe((response) => {
-      console.log(response);
-      this._p2p = response.object;
-    }, (error: ResponseModel) => {
-      this.notificationService.error("p2p|delete fail", error.errors[0]);
+    this.p2pService.delete(this.p2p).subscribe(undefined, (error: ResponseModel) => {
+      this.notificationService.error("p2p|delete fail", error && error.errors ? error.errors[0] : undefined);
     });
   }
 

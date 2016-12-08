@@ -36,6 +36,9 @@ import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
 import { RealtimeService } from './services/realtime.service';
 import { P2pComponent } from './components/p2p/p2p.component';
 import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.component';
+import { ModelUtilsService } from './services/model-utils.service';
+import { P2pService } from './services/p2p.service';
+import { AccountService } from './services/account.service';
 
 @NgModule({
   declarations: [
@@ -85,7 +88,10 @@ import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.co
       deps: [XHRBackend, RequestOptions, StorageService, SessionService, Router]
     },
     SessionService,
-    NotificationService
+    NotificationService,
+    ModelUtilsService,
+    P2pService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })

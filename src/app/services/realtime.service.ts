@@ -29,9 +29,6 @@ export class RealtimeService {
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);
       });
-      this.rpcConnection.on("setUser", (value: ApplicationUserModel) => {
-        this.storageService.setToStorage("user", null, value);
-      });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }

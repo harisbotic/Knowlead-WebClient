@@ -8,14 +8,19 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class ModelUtilsService {
 
-  private boundUserById: (id: Guid) => Observable<ApplicationUserModel>;
-
   protected get p2pService(): P2pService {
     return this.injector.get(P2pService);
-  } 
+  }
+  
+  protected get accountService(): AccountService {
+    return this.injector.get(AccountService);
+  }
 
-  constructor(protected accountService: AccountService, protected injector: Injector, protected storageService: StorageService) {
-    this.boundUserById = this.accountService.getUserById.bind(this.accountService);
+  protected get storageService(): StorageService {
+    return this.injector.get(StorageService);
+  }
+
+  constructor(protected injector: Injector) {
   }
 
   private fill<T>(value: Observable<T>, modelKey: string, getter: (id: any) => Observable<any>, idKey?: string): Observable<T> {
@@ -31,7 +36,7 @@ export class ModelUtilsService {
       })
         .onErrorResumeNext(Observable.of(val))
         .take(1);
-    })
+    }, 10);
   }
 
   public fillP2pMessages(values: P2PMessageModel[]): Observable<P2PMessageModel[]> {
@@ -43,8 +48,8 @@ export class ModelUtilsService {
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
     let ret = Observable.of(value);
     ret = this.fill(ret, "p2p", this.p2pService.get.bind(this.p2pService));
-    ret = this.fill(ret, "messageFrom", this.boundUserById);
-    ret = this.fill(ret, "messageTo", this.boundUserById);
+    ret = this.fill(ret, "messageFrom", this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, "messageTo", this.accountService.getUserById.bind(this.accountService));
     if (typeof(value.timestamp) == "string") {
       value.timestamp = new Date(value.timestamp);
     }
@@ -54,9 +59,13 @@ export class ModelUtilsService {
   public fillP2p(value: P2PModel): Observable<P2PModel> {
     let ret = Observable.of(value);
     ret = this.fill(ret, "fos", this.storageService.getFosById.bind(this.storageService));
-    ret = this.fill(ret, "createdBy", this.boundUserById);
-    ret = this.fill(ret, "scheduledWith", this.boundUserById);
+    ret = this.fill(ret, "createdBy", this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, "scheduledWith", this.accountService.getUserById.bind(this.accountService));
     return ret;
+  }
+
+  public fillUser(value: ApplicationUserModel): Observable<ApplicationUserModel> {
+    return Observable.of(value);
   }
 
   public getUserFullName(value: ApplicationUserModel): string {

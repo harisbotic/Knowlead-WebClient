@@ -9,6 +9,7 @@ import * as fastjsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
 import { SessionService, SessionEvent } from './session.service';
 import { notifyOnObservableCancel } from '../utils/index';
+import { StorageSubject, StorageFiller } from './storage.subject';
 
 @Injectable()
 export class StorageService {
@@ -88,83 +89,38 @@ export class StorageService {
     }
   }
 
-  private cache: {[key: string]: Observable<any>} = {};
+  private cache: {[key: string]: StorageSubject<any>} = {};
 
-  public getFromStorage<T>(key: StorageKey, parameters?: {[key: string]: any}): Observable<T> {
+  private getOrCreateSubject<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}) {
     let cacheKey = this.getCacheKey(key, parameters);
-    if (this.cache[cacheKey] != undefined) {
-      console.debug("Loading from cache key: " + cacheKey);
-      return this.cache[cacheKey];
+    if (this.cache[cacheKey] == undefined) {
+      this.cache[cacheKey] = new StorageSubject<T>(key, parameters, this.getHttp(), filler);
     }
-    console.debug("Loading from API: " + cacheKey);
-    let params: URLSearchParams;
-    let suffix = "";
-    if (parameters != null) {
-      if (parameters["id"]) {
-        suffix = "/" + parameters["id"];
-        delete parameters["id"];
-      }
-      params = new URLSearchParams();
-      for (let searchkey in parameters)
-        params.set(searchkey, parameters[searchkey]);
-    }
-    let ret = notifyOnObservableCancel(this.getHttp().get(STORAGE_CONFIG[key].api + suffix, {search: params})
-      .catch(err => {
-        this.clearCache(key, parameters);
-        return Observable.throw(err);
-      })
-      .map((response) => {
-        return responseToResponseModel(response).object;
-      })
-      //.finally(() => this.cache[cacheKey] = ret)
-      .cache(), () => {
-        console.warn(cacheKey + " request was canceled");
-        this.clearCache(key, parameters);
-      });
-    this.cache[cacheKey] = ret;
-    return ret;
+    return this.cache[cacheKey];
   }
 
-  public patchToStorage(key: StorageKey, parameters: {[key: string]: any}, patch: any) {
-    let cacheKey = this.getCacheKey(key, parameters);
-    if (this.cache[cacheKey] != null)
-      this.cache[cacheKey] = this.cache[cacheKey]
-        .map((value) => {
-          console.debug("Patched cache: " + cacheKey);
-          fastjsonpatch.apply(value, patch);
-          return value;
-        })
-        .cache();
-    else
-      console.error("Cache not found (for patching): " + cacheKey);
+  public getFromStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}): Observable<T> {
+    return this.getOrCreateSubject(key, filler, parameters);
   }
 
-  public setToStorage(key: StorageKey, parameters: {[key: string]: any}, value: any) {
-    let cacheKey = this.getCacheKey(key, parameters);
-    if (this.cache[cacheKey] != null)
-      this.cache[cacheKey] = this.cache[cacheKey]
-        .map((old) => {
-          return value;
-        })
-        .cache();
-    else
-      console.error("Cache not found (for setting): " + cacheKey);
+  public setToStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters: {[key: string]: any}, value: T) {
+    this.getOrCreateSubject(key, filler, parameters).changeValue(value);
   }
 
   public getCountries(): Observable<CountryModel[]> {
-    return this.getFromStorage<CountryModel[]>("countries");
+    return this.getFromStorage<CountryModel[]>("countries", null);
   }
 
   public getLanguages(): Observable<LanguageModel[]> {
-    return this.getFromStorage<LanguageModel[]>("languages");
+    return this.getFromStorage<LanguageModel[]>("languages", null);
   }
 
   public getStates(country: CountryModel): Observable<StateModel[]> {
-    return this.getFromStorage<StateModel[]>("states", {countryId: country.geoLookupId});
+    return this.getFromStorage<StateModel[]>("states", null, {countryId: country.geoLookupId});
   }
 
   public getFOSes(): Observable<FOSModel[]> {
-    return this.getFromStorage<FOSModel[]>("FOSes");
+    return this.getFromStorage<FOSModel[]>("FOSes", null);
   }
 
   public getFOShierarchy(): Observable<FOSModel> {

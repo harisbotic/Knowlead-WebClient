@@ -94,5 +94,6 @@
     "AUTHORITY_ERROR": "Authorization error",
     "HACK_ATTEMPT": "What are you doing here???",
     "AGE_TOO_YOUNG": "You have to be at least {{param}} years old",
-    "AGE_TOO_OLD": "You can't be older then {{param}}"
+    "AGE_TOO_OLD": "You can't be older then {{param}}",
+    "DISCUSSION_CLOSED": "Cannot discuss on this p2p anymore"
 }

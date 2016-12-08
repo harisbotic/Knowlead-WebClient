@@ -9,17 +9,18 @@ import { ModelUtilsService } from '../../services/model-utils.service';
   selector: 'app-user-home-page',
   templateUrl: './user-home-page.component.html',
   styleUrls: ['./user-home-page.component.scss'],
-  providers: [AccountService, P2pService, ModelUtilsService]
+  providers: [P2pService]
 })
 export class UserHomePageComponent implements OnInit {
 
   p2ps: P2PModel[] = [];
 
-  constructor(protected accountService: AccountService,
-              protected p2pService: P2pService) { }
+  constructor(protected p2pService: P2pService) { }
 
   ngOnInit() {
-    this.p2pService.getAll().subscribe(vals => this.p2ps = vals);
+    this.p2pService.getAll().subscribe(vals => {
+      this.p2ps = vals
+    });
   }
 
 }

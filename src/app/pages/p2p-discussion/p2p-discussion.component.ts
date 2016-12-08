@@ -17,8 +17,7 @@ interface threadModel {
 @Component({
   selector: 'app-p2p-discussion',
   templateUrl: './p2p-discussion.component.html',
-  styleUrls: ['./p2p-discussion.component.scss'],
-  providers: [P2pService, AccountService, ModelUtilsService]
+  styleUrls: ['./p2p-discussion.component.scss']
 })
 export class P2pDiscussionComponent implements OnInit {
 
@@ -29,6 +28,7 @@ export class P2pDiscussionComponent implements OnInit {
   scheduleForm: FormGroup;
   scheduleOpened: boolean = false;
   scheduleWith: ApplicationUserModel;
+  discussable: boolean = false;
 
   constructor(
     protected p2pService: P2pService,
@@ -77,6 +77,7 @@ export class P2pDiscussionComponent implements OnInit {
             this.user = value.user;
             this.p2p = value.p2p;
             this.p2p.p2pMessageModels = value.messages;
+            this.discussable = !this.p2p.isDeleted && !this.p2p.scheduledWithId;
             this.modelUtilsService.fillP2pMessages(this.p2p.p2pMessageModels).subscribe(values => {
               this.p2p.p2pMessageModels = values;
               values.forEach(msg => {
