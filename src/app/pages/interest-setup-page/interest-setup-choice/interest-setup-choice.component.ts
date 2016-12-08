@@ -1,15 +1,16 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from '../../../models/dto';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
   selector: 'app-interest-setup-choice',
   templateUrl: './interest-setup-choice.component.html',
   styleUrls: ['./interest-setup-choice.component.scss']
 })
-export class InterestSetupChoiceComponent implements OnInit {
+export class InterestSetupChoiceComponent extends BaseComponent implements OnInit {
 
   @Output() remove = new EventEmitter<FOSModel>();
-  constructor() { }
+  constructor() { super(); }
   @Input() interest: InterestModel = {
     fosId:0,
     fos: {

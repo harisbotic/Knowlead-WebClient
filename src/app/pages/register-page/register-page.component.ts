@@ -6,6 +6,7 @@ import { safeJsonExtraction } from './../../utils/converters';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-register-page',
@@ -13,7 +14,7 @@ import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
   styleUrls: ['./register-page.component.scss'],
   providers: [AccountService]
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent extends BaseComponent implements OnInit {
 
   busy: boolean = false;
   response: ResponseModel;
@@ -21,6 +22,7 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(protected accountService: AccountService,
               protected router: Router) {
+    super();
   }
 
   register() {
@@ -28,13 +30,14 @@ export class RegisterPageComponent implements OnInit {
       return;
 
     this.busy = true;
-    this.accountService.register(this.form.value).finally(() => { this.busy = false; })
+    this.subscriptions.push(this.accountService.register(this.form.value).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
         this.router.navigate(["/login"]);
       },(errorResponse) => {
         this.response = errorResponse;
-      });
+      }
+    ));
   }
 
   ngOnInit() {

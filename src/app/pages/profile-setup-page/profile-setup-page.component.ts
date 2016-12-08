@@ -12,6 +12,7 @@ import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
 import { joinTranslation } from '../../utils/translate-utils';
 import { dateValidator } from '../../validators/date.validator';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -19,7 +20,7 @@ import { dateValidator } from '../../validators/date.validator';
   styleUrls: ['./profile-setup-page.component.scss', '../../../assets/styles/flags.css'],
   providers: [AccountService]
 })
-export class ProfileSetupPageComponent implements OnInit {
+export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
 
   dateSelector: boolean = false;
   genderSelector: boolean = false;
@@ -37,10 +38,11 @@ export class ProfileSetupPageComponent implements OnInit {
       protected formBuilder: FormBuilder,
       protected accountService: AccountService,
       protected router: Router) {
+    super();
   }
 
   ngOnInit() {
-    this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
+    this.subscriptions.push(this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
       this.user = _.cloneDeep(user);
       this.form = new FormGroup({
         "name": new FormControl(this.user.name, [Validators.required]),
@@ -69,20 +71,20 @@ export class ProfileSetupPageComponent implements OnInit {
           delete this.user[key1];
         }
       }
-    })
+    }));
   }
 
   submit() {
     if (!this.form.valid)
       return;
-    this.accountService
+    this.subscriptions.push(this.accountService
       .patchUserDetails(this.form.value)
       .subscribe((response: ResponseModel) => {
         this.router.navigate(["/interestsetup"]);
       }, (error: ResponseModel) => {
         this.response = error;
       }
-    );
+    ));
   }
 
   getGender(): string {
@@ -127,9 +129,9 @@ export class ProfileSetupPageComponent implements OnInit {
     this.stateChanged(null);
     if (country != null) {
       this.form.patchValue({country: country});
-      this.storageService.getStates(country).subscribe((states: StateModel[]) => {
+      this.subscriptions.push(this.storageService.getStates(country).subscribe((states: StateModel[]) => {
         this.states = states;
-      });
+      }));
     }
     else
       this.form.patchValue({countryId: null});

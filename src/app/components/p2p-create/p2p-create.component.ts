@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { P2pService } from '../../services/p2p.service';
 import { NotificationService } from '../../services/notification.service';
 import * as _ from 'lodash';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-p2p-create',
@@ -11,7 +12,7 @@ import * as _ from 'lodash';
   styleUrls: ['./p2p-create.component.scss'],
   providers: [P2pService]
 })
-export class P2pCreateComponent implements OnInit {
+export class P2pCreateComponent extends BaseComponent implements OnInit {
 
   form: FormGroup;
 
@@ -21,7 +22,9 @@ export class P2pCreateComponent implements OnInit {
     return ret;
   }
 
-  constructor(protected p2pService: P2pService, protected notificationService: NotificationService) { }
+  constructor(protected p2pService: P2pService, protected notificationService: NotificationService) {
+    super();
+  }
 
   ngOnInit() {
     let initial = {
@@ -53,10 +56,10 @@ export class P2pCreateComponent implements OnInit {
   }
 
   submit() {
-    this.p2pService.create(this.value).subscribe(response => {
+    this.subscriptions.push(this.p2pService.create(this.value).subscribe(response => {
       this.notificationService.info("p2p created");
       this.form.reset();
-    });
+    }));
   }
 
 }

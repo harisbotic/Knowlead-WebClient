@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-selectable-list',
   templateUrl: './selectable-list.component.html',
   styleUrls: ['./selectable-list.component.scss']
 })
-export class SelectableListComponent implements OnInit {
+export class SelectableListComponent extends BaseComponent implements OnInit {
 
   @Input() items: any[];
   @Input() isRemovableCallback: (item: any) => boolean; 
@@ -13,7 +14,7 @@ export class SelectableListComponent implements OnInit {
   @Output() itemClicked = new EventEmitter<any>();
   @Output() itemRemoved = new EventEmitter<any>();
 
-  constructor() { }
+  constructor() { super(); }
 
   ngOnInit() {
   }

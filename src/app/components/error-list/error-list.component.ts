@@ -2,13 +2,14 @@ import { Component, Input, DoCheck } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { translateValidations } from '../../utils/translators';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-error-list',
   templateUrl: './error-list.component.html',
   styleUrls: ['./error-list.component.scss']
 })
-export class ErrorListComponent implements DoCheck {
+export class ErrorListComponent extends BaseComponent implements DoCheck {
 
   display: string[];
 

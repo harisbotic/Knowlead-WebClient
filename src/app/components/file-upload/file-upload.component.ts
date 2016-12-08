@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { ResponseModel, _BlobModel } from '../../models/dto';
@@ -6,6 +6,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from "rxjs";
 import { Observable } from 'rxjs/Rx';
 import { NotificationService } from '../../services/notification.service';
+import { BaseComponent } from '../../base.component';
 
 type CallbackType = (value: any) => void;
 
@@ -22,7 +23,7 @@ type CallbackType = (value: any) => void;
     }
   ]
 })
-export class FileUploadComponent implements OnInit, ControlValueAccessor {
+export class FileUploadComponent extends BaseComponent implements OnInit, ControlValueAccessor, OnDestroy {
   changeCb: CallbackType;
   touchCb: CallbackType;
   id: string;
@@ -45,7 +46,9 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
     return this._value;
   }
 
-  constructor(protected fileService: FileService, protected notificationService: NotificationService) { }
+  constructor(protected fileService: FileService, protected notificationService: NotificationService) {
+    super();
+  }
 
   ngOnInit() {
     this.id = getGuid();
@@ -96,11 +99,17 @@ export class FileUploadComponent implements OnInit, ControlValueAccessor {
       tmp = this.fileService.remove(this.value);
       console.debug("Removing file from backend");
     }
-    tmp.subscribe(response => {
+    this.subscriptions.push(tmp.subscribe(response => {
       this.removed.emit();
       this.subscription = null;
       this.value = null;
-    });
+    }));
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    if (this.subscription)
+      this.subscription.unsubscribe();
   }
 
 }

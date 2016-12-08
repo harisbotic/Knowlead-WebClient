@@ -4,6 +4,7 @@ import { FOSModel } from '../../models/dto';
 import { StorageService } from '../../services/storage.service';
 import { baseLookup, stringContains, getFOSParents } from '../../utils/index';
 import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
+import { BaseComponent } from '../../base.component';
 
 type CallbackType = (value: any) => void;
 
@@ -19,7 +20,7 @@ type CallbackType = (value: any) => void;
     }
   ]
 })
-export class FosSelectorComponent implements OnInit, ControlValueAccessor {
+export class FosSelectorComponent extends BaseComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild("lookupElement") lookupElement: EmptyLookupComponent<FOSModel>;
 
@@ -55,10 +56,10 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
 
   root: FOSModel;
 
-  constructor(protected storageService: StorageService) { }
+  constructor(protected storageService: StorageService) { super(); }
 
   ngOnInit() {
-    this.storageService.getFOShierarchy().subscribe(root => {
+    this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
       this.root = root;
       this.value = root;
       let cb = (fos: any) => {
@@ -74,7 +75,7 @@ export class FosSelectorComponent implements OnInit, ControlValueAccessor {
       }
       cb(this.root);
       this.root.name = "All";
-    });
+    }));
   }
 
   lookup = (query: string): FOSModel[] => {

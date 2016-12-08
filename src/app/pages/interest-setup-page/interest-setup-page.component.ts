@@ -5,6 +5,7 @@ import { AccountService } from '../../services/account.service';
 import { ApplicationUserModel } from '../../models/dto';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-interest-setup-page',
@@ -12,7 +13,7 @@ import * as _ from 'lodash';
   styleUrls: ['./interest-setup-page.component.scss'],
   providers: [AccountService]
 })
-export class InterestSetupPageComponent implements OnInit {
+export class InterestSetupPageComponent extends BaseComponent implements OnInit {
 
   category: FOSModel;
   root: FOSModel;
@@ -35,16 +36,18 @@ export class InterestSetupPageComponent implements OnInit {
   constructor(
     protected storageService: StorageService,
     protected accountService: AccountService,
-    protected router: Router) { }
+    protected router: Router) {
+    super();
+  }
 
   ngOnInit() {
-    this.storageService.getFOShierarchy().subscribe(root => {
+    this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
       this.root = root;
-    });
-    this.accountService.currentUser().subscribe((user) => {
+    }));
+    this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
       this.user = user;
       this.interests = this.user.interests;
-    });
+    }));
   }
 
   shouldShowSelector(): boolean {
@@ -88,9 +91,9 @@ export class InterestSetupPageComponent implements OnInit {
   }
 
   submit() {
-    this.accountService.patchInterests(this.interests).subscribe((response) => {
+    this.subscriptions.push(this.accountService.patchInterests(this.interests).subscribe((response) => {
       this.router.navigate(["/"]);
-    });
+    }));
   }
 
 }

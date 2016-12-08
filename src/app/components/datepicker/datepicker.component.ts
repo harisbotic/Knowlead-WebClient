@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-datepicker',
@@ -12,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true
     }]
 })
-export class DatepickerComponent implements OnInit, ControlValueAccessor {
+export class DatepickerComponent extends BaseComponent implements OnInit, ControlValueAccessor {
 
   _value: Date;
   open = false;
@@ -46,7 +47,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.value = this.value;
   }
 
-  constructor() { }
+  constructor() { super() }
 
   ngOnInit() {
   }

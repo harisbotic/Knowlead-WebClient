@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-empty-lookup',
   templateUrl: './empty-lookup.component.html',
   styleUrls: ['./empty-lookup.component.scss']
 })
-export class EmptyLookupComponent<T> implements OnInit {
+export class EmptyLookupComponent<T> extends BaseComponent implements OnInit {
 
   @Input() placeholder = "";
   @Input() lookup: (query: string) => T[] | Observable<T[]>;
@@ -31,7 +32,7 @@ export class EmptyLookupComponent<T> implements OnInit {
       ret = Observable.of(ret);
     }
     if (ret != null)
-      ret.subscribe(vals => this.items = vals);
+      this.subscriptions.push(ret.subscribe(vals => this.items = vals));
   }
 
   selected(item: T) {
@@ -41,7 +42,9 @@ export class EmptyLookupComponent<T> implements OnInit {
   
   isFocused: boolean = false;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
   }

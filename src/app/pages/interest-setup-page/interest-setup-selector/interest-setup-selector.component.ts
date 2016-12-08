@@ -2,13 +2,14 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from './../../../models/dto';
 import { stringContains } from '../../../utils/index';
 import * as _ from 'lodash';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
   selector: 'app-interest-setup-selector',
   templateUrl: './interest-setup-selector.component.html',
   styleUrls: ['./interest-setup-selector.component.scss']
 })
-export class InterestSetupSelectorComponent implements OnInit {
+export class InterestSetupSelectorComponent extends BaseComponent implements OnInit {
 
   @Input() root: FOSModel;
   @Input() set search(search: string) {
@@ -98,7 +99,7 @@ export class InterestSetupSelectorComponent implements OnInit {
     this.addCategory(fos);
   }
 
-  constructor() { }
+  constructor() { super(); }
 
   ngOnInit() {
   }

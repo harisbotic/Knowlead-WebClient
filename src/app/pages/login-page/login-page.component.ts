@@ -4,6 +4,7 @@ import "rxjs/Rx"
 import { Router } from '@angular/router';
 import { ResponseModel, RegisterUserModel } from './../../models/dto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BaseComponent } from '../../base.component';
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login-page.component.scss'],
   providers: []
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent extends BaseComponent implements OnInit {
 
   success: boolean = false;
   busy: boolean = false;
@@ -19,18 +20,19 @@ export class LoginPageComponent implements OnInit {
   form: FormGroup;
 
   constructor(protected sessionService: SessionService, protected router: Router) {
+    super();
   }
 
   loginClicked() {
     this.busy = true;
     delete this.response;
-    this.sessionService.login(this.form.value).finally(() => {
+    this.subscriptions.push(this.sessionService.login(this.form.value).finally(() => {
       this.busy = false;
     }).subscribe(loginResponse => {
       this.router.navigate(["/home"]);
     }, (errorResponse) => {
       this.response = errorResponse;
-    });
+    }));
   }
 
   ngOnInit() {
