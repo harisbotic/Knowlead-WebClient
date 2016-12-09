@@ -1,33 +1,30 @@
-/// <reference path="../../../signalr/Common.ts" />
-/// <reference path="../../../signalr/EventSource.d.ts" />
-/// <reference path="../../../signalr/HttpClient.ts" />
-/// <reference path="../../../signalr/ITransport.ts" />
-/// <reference path="../../../signalr/LongPollingTransport.ts" />
-/// <reference path="../../../signalr/ServerSentEventsTransport.ts" />
-/// <reference path="../../../signalr/WebSocketTransport.ts" />
-/// <reference path="../../../signalr/Connection.ts" />
-/// <reference path="../../../signalr/RpcConnection.ts" />
-
 import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
 import { NotificationModel } from '../models/notification.model';
 import { NotificationService } from './notification.service';
-import { ApplicationUserModel } from '../models/dto';
+import { ApplicationUserModel, CallModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
+import { HubConnection } from '../signalr/HubConnection';
+import { Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class RealtimeService {
-  rpcConnection: RpcConnection;
+  rpcConnection: HubConnection;
   accessToken: string;
+
+  public callSubject = new Subject<CallModel>();
 
   initConnection = () => {
     console.info("Init websockets");
-    this.rpcConnection = new RpcConnection(API + "/chat", "accessToken=" + this.accessToken);
+    this.rpcConnection = new HubConnection(API + "/chat", "accessToken=" + this.accessToken);
     this.rpcConnection.start().then(() => {
-      this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);
+      });
+      this.rpcConnection.on("receiveCall", (value: string) => {
+        if (value)
+          this.callSubject.next(JSON.parse(value));
       });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
@@ -69,10 +66,12 @@ export class RealtimeService {
   }
 
   send() {
-    this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
+    this.rpcConnection.invoke("Send", "Neka poruka");
   }
 
   call(p2pId: number) {
-    this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.InitiateP2pCall", p2pId);
+    this.rpcConnection.invoke("CallP2p", p2pId);
   }
+
+
 }

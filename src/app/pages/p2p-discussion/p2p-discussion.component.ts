@@ -66,7 +66,6 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
       user: ApplicationUserModel,
       messages: P2PMessageModel[]
     };
-    this.fullName = this.modelUtilsService.getUserFullName;
     this.subscriptions.push(this.route.params.subscribe(params => {
       let id = params["id"];
       this.scheduleForm = new FormGroup({
@@ -152,7 +151,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     }
   }
 
-  fullName: (user: ApplicationUserModel) => string;
+  fullName = ModelUtilsService.getUserFullName;
 
   trackByThread(thread: threadModel) {
     return thread.with.id;

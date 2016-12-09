@@ -29,7 +29,7 @@ export class P2pComponent extends BaseComponent implements OnInit {
   };
 
   user: ApplicationUserModel;
-  fullName: (user: ApplicationUserModel) => string;
+  fullName = ModelUtilsService.getUserFullName;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
@@ -41,7 +41,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fullName = this.modelUtilsService.getUserFullName;
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
   }
 

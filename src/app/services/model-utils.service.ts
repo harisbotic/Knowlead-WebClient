@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid } from '../models/dto';
+import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, CallModel, P2pCallModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
@@ -93,7 +93,7 @@ export class ModelUtilsService {
     return Observable.of(user);
   }
 
-  public getUserFullName(value: ApplicationUserModel): string {
+  public static getUserFullName(value: ApplicationUserModel): string {
     if (value == null) {
       return "...";
     }
@@ -101,6 +101,10 @@ export class ModelUtilsService {
       return value.email;
     }
     return value.name + " " + value.surname;
+  }
+
+  public static isCallP2p(value: CallModel | P2pCallModel) : value is P2pCallModel {
+    return !!(<P2pCallModel>value).p2pId;
   }
 
 }

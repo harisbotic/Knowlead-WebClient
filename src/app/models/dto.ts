@@ -250,4 +250,13 @@ export interface RegisterUserModel
 	email: string;
 	password: string;
 }
+export interface CallModel
+{
+	caller: ApplicationUserModel;
+	receiver: ApplicationUserModel;
+}
+export interface P2pCallModel extends CallModel
+{
+	p2pId: number;
+}
 export type Guid = string;

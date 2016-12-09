@@ -63,6 +63,12 @@
     "file|uploaded": "File uploaded successfuly",
     "file|fail": "Failed to upload the file",
 
+    "call|receiving call": "You are receiving a call from",
+    "call|regarding p2p": "Regarding P2P",
+    "call|accept": "Accept",
+    "call|decline" : "Decline",
+    "call|sending call": "Calling",
+
     "INVALID_REQUEST": "Email/password is missing",
 
     "NETWORK_ERROR": "Network error has occured (maybe you are not connected to internet or Knowlead server is not working)",

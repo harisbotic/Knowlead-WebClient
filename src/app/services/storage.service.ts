@@ -80,12 +80,12 @@ export class StorageService {
     return cacheKey;
   }
 
-  public clearCache(key?: StorageKey, params? :{[key: string]: any}) {
+  public clearCache<T>(filler: StorageFiller<T>, key?: StorageKey, params? :{[key: string]: any}) {
     console.debug("Clearing cache " + StorageService.getCacheKey(key, params));
     if (key == null) {
       this.cache = {};
     } else {
-      delete this.cache[StorageService.getCacheKey(key, params)];
+      this.getOrCreateSubject(key, filler, params).changeValue(null);
     }
   }
 

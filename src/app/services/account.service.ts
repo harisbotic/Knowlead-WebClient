@@ -27,7 +27,7 @@ export class AccountService {
     this.sessionService.eventStream.subscribe(evt => {
       this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
       if (evt == SessionEvent.LOGGED_OUT) {
-        this.storageService.clearCache("user");
+        this.storageService.clearCache(this.userFiller, "user");
       }
     })
   }

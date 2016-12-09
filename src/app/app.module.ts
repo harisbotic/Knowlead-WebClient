@@ -39,6 +39,7 @@ import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.co
 import { ModelUtilsService } from './services/model-utils.service';
 import { P2pService } from './services/p2p.service';
 import { AccountService } from './services/account.service';
+import { CallDialogComponent } from './components/call-dialog/call-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AccountService } from './services/account.service';
     DatepickerComponent,
     TranslateParametricPipe,
     P2pComponent,
-    P2pDiscussionComponent
+    P2pDiscussionComponent,
+    CallDialogComponent
   ],
   imports: [
     BrowserModule,
