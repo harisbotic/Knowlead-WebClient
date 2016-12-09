@@ -24,4 +24,7 @@ export class ErrorCodes
 	static hackAttempt: string = "HACK_ATTEMPT";
 	static ageTooYoung: string = "AGE_TOO_YOUNG";
 	static ageTooOld: string = "AGE_TOO_OLD";
+	static discussionClosed: string = "DISCUSSION_CLOSED";
+	static alreadyScheduled: string = "ALREADY_SCHEDULED";
+	static dateInPast: string = "DATE_IN_PAST";
 }

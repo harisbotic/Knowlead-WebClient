@@ -3,10 +3,10 @@ import { Http, URLSearchParams } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { P2P_ALL, P2P_DELETE, P2P, P2P_MESSAGES, P2P_MESSAGE } from '../utils/urls';
+import { P2P_ALL, P2P_DELETE, P2P, P2P_MESSAGES, P2P_MESSAGE, P2P_SCHEDULE } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
-import { P2PMessageModel, P2PModel, ResponseModel } from '../models/dto';
+import { P2PMessageModel, P2PModel, ResponseModel, P2PScheduleModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 
@@ -38,12 +38,15 @@ export class P2pService {
       .flatMap(v => this.modelUtilsService.fillP2ps(v));
   }
 
-  delete(p2p: P2PModel): Observable<P2PModel> {
-    return this.http.delete(P2P_DELETE + "/" + p2p.p2pId)
-      .map(responseToResponseModel)
-      .map(v => v.object)
-      .flatMap(p2p => this.modelUtilsService.fillP2p(p2p))
+  private modifyP2p(o: Observable<P2PModel>): Observable<P2PModel> {
+    return o.flatMap(p2p => this.modelUtilsService.fillP2p(p2p))
       .do((p2p: P2PModel) => this.storageService.setToStorage("p2p", this.p2pFiller, {id: p2p.p2pId}, p2p));
+  }
+
+  delete(p2p: P2PModel): Observable<P2PModel> {
+    return this.modifyP2p(this.http.delete(P2P_DELETE + "/" + p2p.p2pId)
+      .map(responseToResponseModel)
+      .map(v => v.object));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
@@ -51,7 +54,6 @@ export class P2pService {
     if (typeof(id) == "number" || typeof(id) == "string") {
       return this.storageService.getFromStorage<P2PModel>("p2p", this.p2pFiller, {id: id});
     } else {
-      console.log(id);
       this.storageService.setToStorage<P2PModel>("p2p", this.p2pFiller, {id: id.p2pId}, id);
       return this.get(id.p2pId);
     }
@@ -67,5 +69,11 @@ export class P2pService {
       .map(responseToResponseModel)
       .map(v => v.object)
       .flatMap(v => this.modelUtilsService.fillP2pMessages(v));
+  }
+
+  schedule(schedule: P2PScheduleModel): Observable<P2PModel> {
+    return this.modifyP2p(this.http.post(P2P_SCHEDULE, schedule)
+      .map(responseToResponseModel)
+      .map(v => v.object));
   }
 }

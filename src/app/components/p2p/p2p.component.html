@@ -15,10 +15,17 @@
         </h2>
       </div>
     </header>
-    <div class="slds-no-flex" *ngIf="deletable()">
-      <button type="button" nglButtonIcon (click)="deleted()">
-        <ngl-icon icon="delete"></ngl-icon>
-      </button>
+    <div class="slds-no-flex">
+      <div *ngIf="deletable()">
+        <button type="button" nglButtonIcon (click)="deleted()">
+          <ngl-icon icon="delete"></ngl-icon>
+        </button>
+      </div>
+      <div *ngIf="callable()">
+        <button type="button" nglButtonIcon (click)="call()">
+          <ngl-icon icon="call"></ngl-icon>
+        </button>
+      </div>
     </div>
   </div>
   <div class="slds-card__body">

@@ -6,6 +6,7 @@ import { P2pService } from '../../services/p2p.service';
 import { NotificationService } from '../../services/notification.service';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { BaseComponent } from '../../base.component';
+import { RealtimeService } from '../../services/realtime.service';
 
 @Component({
   selector: 'app-p2p',
@@ -34,7 +35,8 @@ export class P2pComponent extends BaseComponent implements OnInit {
               protected storageService: StorageService,
               protected p2pService: P2pService,
               protected notificationService: NotificationService,
-              protected modelUtilsService: ModelUtilsService) {
+              protected modelUtilsService: ModelUtilsService,
+              protected realtimeService: RealtimeService) {
     super();
   }
 
@@ -53,6 +55,16 @@ export class P2pComponent extends BaseComponent implements OnInit {
     if (this.p2p.isDeleted)
       return false;
     return (this.user) ? this.user.id == this.p2p.createdById : false; 
+  }
+
+  callable(): boolean {
+    if (!this.user || !this.p2p)
+      return false;
+    return !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById == this.user.id;
+  }
+
+  call() {
+    this.realtimeService.call(this.p2p.p2pId);
   }
 
 }

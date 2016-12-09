@@ -15,5 +15,6 @@ export const P2P_MESSAGE = API + "/api/p2p/message";
 export const P2P_MESSAGES = API + "/api/p2p/messages";
 export const P2P = API + "/api/p2p";
 export const P2P_DELETE = API + "/api/p2p/delete";
+export const P2P_SCHEDULE = API + "/api/p2p/schedule";
 export const FILE_UPLOAD = API + "/api/blob/upload";
 export const FILE_REMOVE = API + "/api/blob/delete";

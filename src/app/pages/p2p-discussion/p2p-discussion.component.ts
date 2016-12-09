@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { P2PModel, ApplicationUserModel, P2PMessageModel, ResponseModel, Guid } from '../../models/dto';
+import { P2PModel, ApplicationUserModel, P2PMessageModel, ResponseModel, Guid, P2PScheduleModel } from '../../models/dto';
 import { P2pService } from '../../services/p2p.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AccountService } from '../../services/account.service';
@@ -9,6 +9,7 @@ import { ModelUtilsService } from '../../services/model-utils.service';
 import * as _ from 'lodash';
 import { dateValidator } from '../../validators/date.validator';
 import { BaseComponent } from '../../base.component';
+import { tomorrow } from '../../utils/index';
 
 interface threadModel {
   with: ApplicationUserModel;
@@ -68,6 +69,11 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     this.fullName = this.modelUtilsService.getUserFullName;
     this.subscriptions.push(this.route.params.subscribe(params => {
       let id = params["id"];
+      this.scheduleForm = new FormGroup({
+        scheduleWithId: new FormControl("", Validators.required),
+        scheduleTime: new FormControl(tomorrow(), dateValidator({minDate: new Date()})),
+        p2pId: new FormControl(id)
+      });
       this.subscriptions.push(this.p2pService.getMessages(id).do(messages => this.messages = messages)
         .merge(this.accountService.currentUser().do(user => this.user = user))
         .merge(this.p2pService.get(id).do(p2p => this.p2p = p2p))
@@ -95,10 +101,6 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
         )
       );
     }));
-    this.scheduleForm = new FormGroup({
-      scheduleWithId: new FormControl("", Validators.required),
-      scheduleTime: new FormControl(new Date(), dateValidator({minDate: new Date()}))
-    });
   }
 
   trySchedule(thread: threadModel) {
@@ -163,9 +165,13 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
 
   schedule() {
     console.log(this.scheduleForm.value);
-    console.log(this.scheduleForm.valid);
     if (!this.scheduleForm.valid)
       return;
+    this.subscriptions.push(this.p2pService.schedule(this.scheduleForm.value).subscribe(() => {
+      this.scheduleOpened = false;
+    }, (err: ResponseModel) => {
+      this.notificationService.error("p2p|error scheduling p2p", err && err.errors ? err.errors[0] : undefined);
+    }));
   }
 
 }

@@ -149,6 +149,12 @@ export interface P2PFileModel
 	fileBlobId: Guid;
 	fileBlob: FileBlobModel;
 }
+export interface P2PScheduleModel
+{
+	p2pId: number;
+	scheduleTime: Date;
+	scheduleWithId: Guid;
+}
 export interface ResponseModel
 {
 	formErrors: { [index: string]: string[] };

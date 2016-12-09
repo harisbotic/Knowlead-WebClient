@@ -141,3 +141,11 @@ export function notifyOnObservableCancel<T>(observable: Observable<T>, callback:
         }
     })
 }
+
+export function tomorrow(): Date {
+    let ret = new Date();
+    ret.setDate(new Date().getDate() + 1);
+    ret.setHours(0);
+    ret.setMinutes(0);
+    return ret;
+}

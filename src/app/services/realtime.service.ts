@@ -71,4 +71,8 @@ export class RealtimeService {
   send() {
     this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.Send", "Neka poruka");
   }
+
+  call(p2pId: number) {
+    this.rpcConnection.invoke("Knowlead.WebApi.Hubs.Chat.InitiateP2pCall", p2pId);
+  }
 }
