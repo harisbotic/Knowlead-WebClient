@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 export type StorageFiller<T> = (value: T) => Observable<T>; 
 
 export class StorageSubject<T> extends Observable<T> {
-    value: T;
+    public value: T;
 
     public subscribers: Subscriber<T>[] = [];
     fetching: boolean;
@@ -70,13 +70,14 @@ export class StorageSubject<T> extends Observable<T> {
         let params: URLSearchParams;
         let suffix = "";
         if (this.parameters != null) {
-            if (this.parameters["id"]) {
-                suffix = "/" + this.parameters["id"];
-                delete this.parameters["id"];
+            let parameters = _.clone(this.parameters);
+            if (parameters["id"]) {
+                suffix = "/" + parameters["id"];
+                delete parameters["id"];
             }
             params = new URLSearchParams();
-            for (let searchkey in this.parameters)
-                params.set(searchkey, this.parameters[searchkey]);
+            for (let searchkey in parameters)
+                params.set(searchkey, parameters[searchkey]);
         }
         let o = this.http.get(STORAGE_CONFIG[this.key].api + suffix, {search: params})
             .retry(10)

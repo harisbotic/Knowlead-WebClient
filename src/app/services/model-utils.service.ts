@@ -4,6 +4,7 @@ import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid } from '../models
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ModelUtilsService {
@@ -30,19 +31,33 @@ export class ModelUtilsService {
       if (/*!!val[modelKey] || */val[idKey] == null)
         return Observable.of(val);
       else return getter(val[idKey]).map(obj => {
-        //console.warn(`Filling ${modelKey} from ${idKey}`);
         val[modelKey] = obj;
         return val;
       })
         .onErrorResumeNext(Observable.of(val))
         .take(1);
-    }, 10);
+    });
   }
 
   public fillP2pMessages(values: P2PMessageModel[]): Observable<P2PMessageModel[]> {
     if (!values || values.length == 0)
       return Observable.of([]);
-    return Observable.from(values).flatMap(value => this.fillP2pMessage(value)).bufferCount(values.length);
+    let idKey = "p2pMessageId";
+    let arr = values.map(() => null);
+    let reduced: Observable<P2PMessageModel> = values.reduce((o, msg: P2PMessageModel) => {
+        let ret = this.fillP2pMessage(msg).do(filled => {
+          //console.log(filled);
+          let idx = _.findIndex(values, val => val[idKey] == filled[idKey]);
+          if (idx == -1)
+            throw new Error("Item was not found: " + filled[idKey]);
+          arr[idx] = filled;
+        });
+        return o == null ? ret : o.merge(ret);
+      }, null);
+    return reduced
+      .map(() => arr)
+      .filter(arr => !arr.some(_.isNull))
+    //return Observable.from(values).flatMap(value => this.fillP2pMessage(value)).bufferCount(values.length);
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
