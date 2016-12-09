@@ -35,11 +35,7 @@ export class P2pService {
     return this.http.get(P2P_ALL)
       .map(responseToResponseModel)
       .map(v => v.object)
-      .do((vals: P2PModel[]) => {
-        vals.forEach((p2p) => {
-          this.get(p2p.p2pId).subscribe().unsubscribe();
-        })
-      });
+      .flatMap(v => this.modelUtilsService.fillP2ps(v));
   }
 
   delete(p2p: P2PModel): Observable<P2PModel> {
@@ -50,8 +46,15 @@ export class P2pService {
       .do((p2p: P2PModel) => this.storageService.setToStorage("p2p", this.p2pFiller, {id: p2p.p2pId}, p2p));
   }
 
-  get(id: number): Observable<P2PModel> {
-    return this.storageService.getFromStorage<P2PModel>("p2p", this.p2pFiller, {id: id});
+  get(id: number | P2PModel): Observable<P2PModel> {
+    // id is type of string when got from url parameter (ex. /p2p/3)
+    if (typeof(id) == "number" || typeof(id) == "string") {
+      return this.storageService.getFromStorage<P2PModel>("p2p", this.p2pFiller, {id: id});
+    } else {
+      console.log(id);
+      this.storageService.setToStorage<P2PModel>("p2p", this.p2pFiller, {id: id.p2pId}, id);
+      return this.get(id.p2pId);
+    }
     //return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);
   }
 

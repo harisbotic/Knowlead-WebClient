@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
+import { StorageFiller } from './storage.subject';
 
 @Injectable()
 export class ModelUtilsService {
@@ -27,7 +28,7 @@ export class ModelUtilsService {
   private fill<T>(value: Observable<T>, modelKey: string, getter: (id: any) => Observable<any>, idKey?: string): Observable<T> {
     if (!idKey)
       idKey = modelKey + "Id";
-    return value.flatMap(val => {
+    return value.merge(value.flatMap(val => {
       if (/*!!val[modelKey] || */val[idKey] == null)
         return Observable.of(val);
       else return getter(val[idKey]).map(obj => {
@@ -36,16 +37,23 @@ export class ModelUtilsService {
       })
         .onErrorResumeNext(Observable.of(val))
         .take(1);
-    });
+    }));
   }
 
   public fillP2pMessages(values: P2PMessageModel[]): Observable<P2PMessageModel[]> {
+    return this.fillArray(values, this.fillP2pMessage.bind(this), "p2pMessageId");
+  }
+
+  public fillP2ps(values: P2PModel[]): Observable<P2PModel[]> {
+    return this.fillArray(values, this.p2pService.get.bind(this.p2pService), "p2pId");
+  }
+
+  public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: string): Observable<T[]> {
     if (!values || values.length == 0)
       return Observable.of([]);
-    let idKey = "p2pMessageId";
     let arr = values.map(() => null);
-    let reduced: Observable<P2PMessageModel> = values.reduce((o, msg: P2PMessageModel) => {
-        let ret = this.fillP2pMessage(msg).do(filled => {
+    let reduced: Observable<T> = values.reduce((o, msg: T) => {
+        let ret = filler(msg).do(filled => {
           //console.log(filled);
           let idx = _.findIndex(values, val => val[idKey] == filled[idKey]);
           if (idx == -1)
@@ -56,8 +64,7 @@ export class ModelUtilsService {
       }, null);
     return reduced
       .map(() => arr)
-      .filter(arr => !arr.some(_.isNull))
-    //return Observable.from(values).flatMap(value => this.fillP2pMessage(value)).bufferCount(values.length);
+      .filter(arr => !arr.some(_.isNull));
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {

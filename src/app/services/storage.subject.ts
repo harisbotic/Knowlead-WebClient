@@ -30,7 +30,13 @@ export class StorageSubject<T> extends Observable<T> {
         }
     }
 
+    protected pause() {
+        /*if (this.key == "p2p")
+            debugger;*/
+    }
+
     protected subscribed(subscriber: Subscriber<T>): () => void {
+        this.pause();
         if (!this.value) {
             if (!this.fetching) {
                 this.refresh();
@@ -54,9 +60,11 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     public changeValue(newValue: T) {
+        this.pause();
         // console.debug(`Cache ${this.cacheKey}: Value is changed`);
         if (this.filler) {
-            this.filler(newValue).subscribe(filledValue => {
+            this.fetching = true;
+            this.filler(newValue).finally(() => this.fetching = false).subscribe(filledValue => {
                 this.setValue(newValue);
             });
         } else {
