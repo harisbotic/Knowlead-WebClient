@@ -85,7 +85,8 @@ export class StorageService {
     if (key == null) {
       this.cache = {};
     } else {
-      this.getOrCreateSubject(key, filler, params).changeValue(null);
+      this.getOrCreateSubject(key, filler, params).dispose();
+      delete this.cache[StorageService.getCacheKey(key, params)];
     }
   }
 

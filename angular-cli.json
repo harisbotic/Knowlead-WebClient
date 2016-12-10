@@ -18,7 +18,9 @@
         "styles.scss",
         "../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/simple-peer/simplepeer.min.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "prod": "environments/environment.prod.ts",

@@ -1,0 +1,8 @@
+<div>
+  Your SDP:
+  <input [ngModel]="JSON.stringify(mySDP)">
+</div>
+<div>
+  Other SDP:
+  <input (ngModelChange)="setOtherSDP($event)">
+</div>

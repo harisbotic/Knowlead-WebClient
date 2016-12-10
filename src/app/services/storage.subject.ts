@@ -38,11 +38,7 @@ export class StorageSubject<T> extends Observable<T> {
     protected subscribed(subscriber: Subscriber<T>): () => void {
         this.pause();
         if (!this.value) {
-            if (!this.fetching) {
-                this.refresh();
-            } else {
-                // console.debug(`Cache ${this.cacheKey}: Waiting for response ...`)
-            }
+            this.refresh();
         } else {
             // console.debug(`Cache ${this.cacheKey}: Emitting cached value`);
             subscriber.next(this.value);
@@ -59,10 +55,16 @@ export class StorageSubject<T> extends Observable<T> {
         this.notifyObservers();
     }
 
+    public dispose() {
+        this.changeValue(null);
+        this.subscribers.forEach(sub => sub.unsubscribe());
+        this.subscribers = [];
+    }
+
     public changeValue(newValue: T) {
         this.pause();
         // console.debug(`Cache ${this.cacheKey}: Value is changed`);
-        if (this.filler) {
+        if (this.filler && newValue) {
             this.fetching = true;
             this.filler(newValue).finally(() => this.fetching = false).subscribe(filledValue => {
                 this.setValue(newValue);
@@ -72,8 +74,10 @@ export class StorageSubject<T> extends Observable<T> {
         }
     }
 
-    public refresh() {
+    public refresh(force?:boolean) {
         // console.debug(`Cache ${this.cacheKey}: Loading from API`);
+        if (this.fetching && !force)
+            return;
         this.fetching = true;
         let params: URLSearchParams;
         let suffix = "";

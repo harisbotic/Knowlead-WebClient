@@ -17,7 +17,7 @@ export class RealtimeService {
 
   initConnection = () => {
     console.info("Init websockets");
-    this.rpcConnection = new HubConnection(API + "/chat", "accessToken=" + this.accessToken);
+    this.rpcConnection = new HubConnection(API + "/mainHub", "accessToken=" + this.accessToken);
     this.rpcConnection.start().then(() => {
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);

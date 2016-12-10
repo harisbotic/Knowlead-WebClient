@@ -40,6 +40,7 @@ import { ModelUtilsService } from './services/model-utils.service';
 import { P2pService } from './services/p2p.service';
 import { AccountService } from './services/account.service';
 import { CallDialogComponent } from './components/call-dialog/call-dialog.component';
+import { CallPageComponent } from './pages/call-page/call-page.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CallDialogComponent } from './components/call-dialog/call-dialog.compon
     TranslateParametricPipe,
     P2pComponent,
     P2pDiscussionComponent,
-    CallDialogComponent
+    CallDialogComponent,
+    CallPageComponent
   ],
   imports: [
     BrowserModule,

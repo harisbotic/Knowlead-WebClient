@@ -9,6 +9,7 @@ import { responseToResponseModel, responseToLoginResponse } from './utils/conver
 import { ErrorCodes } from './models/constants';
 import { FrontendErrorCodes } from './models/frontend.constants';
 import { SessionService } from './services/session.service';
+import { isPathFree } from './app.routing';
 
 @Injectable()
 export class HttpProvider extends Http {
@@ -88,7 +89,10 @@ export class HttpProvider extends Http {
             let error = responseToResponseModel(errorResponse);
             if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
                 this.sessionService.logout();
-                this.router.navigate(['/login']);
+                if (!isPathFree(this.router.url)) {
+                    console.warn("Redirecting to login");
+                    this.router.navigate(['/login']);
+                }
                 return Observable.throw(error);
             } else {
                 if (errorResponse.status == 0) {

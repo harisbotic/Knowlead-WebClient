@@ -42,6 +42,12 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     super();
   }
 
+  get isOwner(): boolean {
+    if (!this.user || !this.p2p)
+      return null;
+    return this.user.id == this.p2p.createdById;
+  }
+
   private otherUser(message: P2PMessageModel): ApplicationUserModel { 
     if (this.user == null)
       return null;
@@ -82,17 +88,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
             this.discussable = !this.p2p.isDeleted && !this.p2p.scheduledWithId;
             if (this.user) {
               this.threads = this.getThreads();
-              this.modelUtilsService.fillP2pMessages(this.p2p.p2pMessageModels).subscribe(values => {
-                this.p2p.p2pMessageModels = values;
-                values.forEach(msg => {
-                  let other = this.otherUser(msg);
-                  this.forms[other.id] = this.makeFormGroup(this.user.id, other.id);
-                });
-                if (this.user.id != this.p2p.createdById && values.length == 0) {
-                  this.forms[this.p2p.createdById] = this.makeFormGroup(this.user.id, this.p2p.createdById);
-                }
-                this.threads = this.getThreads();
-              });
+              this.refreshMessages();
             }
           }}, (err: ResponseModel) => {
             this.notificationService.error("p2p|error fetching details", (err && err.errors) ? err.errors[0] : undefined);
@@ -100,6 +96,22 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
         )
       );
     }));
+  }
+
+  refreshMessages() {              
+    this.modelUtilsService.fillP2pMessages(this.p2p.p2pMessageModels).subscribe(values => {
+      this.p2p.p2pMessageModels = values;
+      values.forEach(msg => {
+        let other = this.otherUser(msg);
+        if (!other)
+          return;
+        this.forms[other.id] = this.makeFormGroup(this.user.id, other.id);
+      });
+      if (this.user.id != this.p2p.createdById && values.length == 0) {
+        this.forms[this.p2p.createdById] = this.makeFormGroup(this.user.id, this.p2p.createdById);
+      }
+      this.threads = this.getThreads();
+    });
   }
 
   trySchedule(thread: threadModel) {
@@ -112,8 +124,10 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     if (this.user == null || this.p2p == null || this.p2p.p2pMessageModels == null)
       return [];
     let ret: {[index: string]: threadModel} = {};
-    if (this.p2p.p2pMessageModels.length > 0) {
+    if (this.p2p.p2pMessageModels.length > 0 || this.isOwner) {
       this.p2p.p2pMessageModels.forEach(msg => {
+        if (!this.otherUser(msg))
+          return;
         let id = this.otherUser(msg).id;
 
         if (!ret[id]) {
@@ -140,10 +154,8 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     let form = this.forms[id];
     if (form && form.valid) {
       this.subscriptions.push(this.p2pService.message(form.value).subscribe(val => {
-        this.subscriptions.push(this.modelUtilsService.fillP2pMessage(val).subscribe(newVal => {
-          this.p2p.p2pMessageModels.push(newVal);
-          this.threads = this.getThreads();
-        }));
+        this.p2p.p2pMessageModels.push(val);
+        this.refreshMessages();
       }, (err: ResponseModel) => {
         this.notificationService.error("p2p|error messaging p2p", err && err.errors ? err.errors[0] : undefined);
       }));
