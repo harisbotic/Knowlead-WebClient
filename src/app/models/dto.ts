@@ -250,23 +250,6 @@ export interface RegisterUserModel
 	email: string;
 	password: string;
 }
-/*
-public class PeerInfoModel
-    {
-        public Guid PeerId { get; private set; }
-        public ApplicationUserModel Peer { get; private set; }
- 
-        public String ConnectionId { get; private set; }
-        public String SDP { get; private set; }
- 
-        public PeerStatus Status { get; private set; }
- 
-        public enum PeerStatus
-        {
-            Accepted, Rejected, Waiting
-        }
-*/
-
 export enum PeerStatus {
 	accepted, rejected, waiting
 }
