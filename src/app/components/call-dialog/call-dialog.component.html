@@ -1,6 +1,6 @@
 <ngl-modal [open]="call && user" (openChange)="decline()">
   <div body>
-    {{callPrefix() | translate}}: {{fullName(otherUser())}}
+    {{callPrefix() | translate}}: {{fullName(otherUser() | async)}}
     <div *ngIf="p2p">
       {{"call|regarding p2p" | translate}}: {{p2p.text}}
     </div>

@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, CallModel, P2pCallModel } from '../models/dto';
+import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, P2pCallModel, PeerInfoModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
@@ -103,8 +103,12 @@ export class ModelUtilsService {
     return value.name + " " + value.surname;
   }
 
-  public static isCallP2p(value: CallModel | P2pCallModel) : value is P2pCallModel {
-    return !!(<P2pCallModel>value).p2pId;
+  public static isCallP2p(value: _CallModel): value is P2pCallModel {
+    return (<P2pCallModel>value).p2pId !== null;
+  }
+
+  public static getOtherCallParties(value: _CallModel, userId: string): PeerInfoModel[] {
+    return value.peers.filter((p) => p.peerId != userId);
   }
 
 }

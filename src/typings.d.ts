@@ -18,7 +18,7 @@ declare interface SimplePeerConfiguration {
   answerConstraints?: any,
   reconnectTimer?: boolean,
   sdpTransform?: (sdp: any) => any,
-  stream?: boolean,
+  stream?: MediaStream,
   trickle?: boolean,
   wrtc?: any
 }

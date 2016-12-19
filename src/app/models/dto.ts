@@ -250,13 +250,49 @@ export interface RegisterUserModel
 	email: string;
 	password: string;
 }
-export interface CallModel
-{
-	caller: ApplicationUserModel;
-	receiver: ApplicationUserModel;
+/*
+public class PeerInfoModel
+    {
+        public Guid PeerId { get; private set; }
+        public ApplicationUserModel Peer { get; private set; }
+ 
+        public String ConnectionId { get; private set; }
+        public String SDP { get; private set; }
+ 
+        public PeerStatus Status { get; private set; }
+ 
+        public enum PeerStatus
+        {
+            Accepted, Rejected, Waiting
+        }
+*/
+
+export enum PeerStatus {
+	accepted, rejected, waiting
 }
-export interface P2pCallModel extends CallModel
+export interface PeerInfoModel
 {
+	peerId: Guid;
+	peer: ApplicationUserModel;
+	connectionId: string;
+	sdp: string;
+	status: PeerStatus;
+}
+export interface _CallModel
+{
+	callId: Guid;
+	failed: boolean;
+	failReason: string;
+	callerId: Guid;
+	caller: ApplicationUserModel;
+	duration: number;
+	endDate: Date;
+	callStarted: boolean;
+	peers: PeerInfoModel[];
+}
+export interface P2pCallModel extends _CallModel
+{
+	p2p: P2PModel;
 	p2pId: number;
 }
 export type Guid = string;

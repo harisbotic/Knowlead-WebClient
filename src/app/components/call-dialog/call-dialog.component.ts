@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationUserModel, CallModel, P2pCallModel, P2PModel } from '../../models/dto';
+import { ApplicationUserModel, _CallModel, P2PModel } from '../../models/dto';
 import { AccountService } from '../../services/account.service';
 import { BaseComponent } from '../../base.component';
 import { RealtimeService } from '../../services/realtime.service';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { P2pService } from '../../services/p2p.service';
+import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-call-dialog',
@@ -14,13 +16,14 @@ import { P2pService } from '../../services/p2p.service';
 export class CallDialogComponent extends BaseComponent implements OnInit {
 
   user: ApplicationUserModel;
-  call: CallModel | P2pCallModel;
+  call: _CallModel;
   p2p: P2PModel;
 
   constructor(
     protected accountService: AccountService,
     protected realtimeService: RealtimeService,
-    protected p2pService: P2pService) { super() }
+    protected p2pService: P2pService,
+    protected router: Router) { super() }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
@@ -34,21 +37,27 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
           this.p2p = p2p;
         }));
       }
-    }))
+    }));
+    this.subscriptions.push(this.realtimeService.callModelUpdateSubject.subscribe((call) => {
+      // Check if this call was a reject or accept
+      if (this.call && call) {
+        this.redirect();
+      }
+    }));
   }
 
   fullName = ModelUtilsService.getUserFullName;
 
-  otherUser(): ApplicationUserModel {
+  otherUser(): Observable<ApplicationUserModel> {
     if (!this.user || !this.call)
       return null;
-    return this.user.id == this.call.caller.id ? this.call.caller : this.call.receiver;
+    return this.accountService.getUserById(ModelUtilsService.getOtherCallParties(this.call, this.user.id)[0].peerId);
   }
 
   isCaller(): boolean {
     if (!this.user || !this.call)
       return null;
-    return this.call.caller.id == this.user.id;
+    return this.call.callerId == this.user.id;
   }
 
   callPrefix(): string {
@@ -60,17 +69,24 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
       return "call|receiving call";
   }
 
+  redirect() {
+    this.router.navigate(["/call/" + this.call.callId]);
+    this.cleanup();
+  }
+
   cleanup() {
     delete this.call;
     delete this.p2p;
   }
 
   decline() {
+    this.realtimeService.respondToCall(this.call.callId, false);
     this.cleanup();
   }
 
   accept() {
-    this.cleanup();
+    this.realtimeService.respondToCall(this.call.callId, true);
+    this.redirect();
   }
 
 }
