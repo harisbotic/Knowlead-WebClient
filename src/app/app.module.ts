@@ -44,6 +44,7 @@ import { CallPageComponent } from './pages/call-page/call-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ChatService } from './services/chat.service';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatConverisationComponent } from './components/chat-converisation/chat-converisation.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ChatComponent } from './components/chat/chat.component';
     CallDialogComponent,
     CallPageComponent,
     ProfilePageComponent,
-    ChatComponent
+    ChatComponent,
+    ChatConverisationComponent
   ],
   imports: [
     BrowserModule,

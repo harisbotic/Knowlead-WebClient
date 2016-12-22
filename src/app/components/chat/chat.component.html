@@ -1,3 +1,6 @@
-<div *ngFor="let item of friends">
-  <a routerLink="/profile/{{item.id}}">{{fullName(item)}}</a> - {{item.status}}
+<div *ngFor="let item of friends" (click)="openConverisation(item)">
+  {{fullName(item)}}
+</div>
+<div class="chat-tabs">
+  <app-chat-converisation [user]="item" *ngFor="let item of converisations" (close)="closeConverisation(item)"></app-chat-converisation>
 </div>

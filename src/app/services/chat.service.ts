@@ -12,8 +12,6 @@ export class ChatService {
 
   constructor(protected accountService: AccountService) {
     this.accountService.currentUser().subscribe((user) => {
-      console.debug("New user");
-      console.log(user);
       this.friends.next([]);
       this.me = user;
     });
@@ -29,9 +27,7 @@ export class ChatService {
     if (!this.me)
       return;
     let ret = new Subject<ApplicationUserRelationshipModel>();
-    console.log("Adding friend");
     Observable.timer(1000).subscribe(() => {
-      console.log("Set to pending");
       let sub = this.friends.take(1).subscribe(friends => {
         let tmp = {
           applicationUserBiggerId: this.me.id,
@@ -44,7 +40,6 @@ export class ChatService {
       }).unsubscribe();
     });
     Observable.timer(6000).subscribe(() => {
-      console.log("Set to accepted");
       this.friends.take(1).subscribe(friends => {
         friends.forEach(friend => {
           if (friend.applicationUserSmallerId == id)
