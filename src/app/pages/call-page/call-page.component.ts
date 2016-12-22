@@ -19,7 +19,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     if (!this.user || !this.call)
       return null;
     let others = ModelUtilsService.getOtherCallParties(this.call, this.user.id);
-    return others[0].sdp;
+    return others[0].sDP;
   }
   @ViewChild("video") video: ElementRef;
   JSON = JSON;

@@ -28,6 +28,42 @@ export interface _BlobModel
 	uploadedById: Guid;
 	uploadedBy: ApplicationUserModel;
 }
+export enum PeerStatus
+{
+	Accepted = 0,
+	Rejected = 1,
+	Waiting = 2,
+}
+export interface PeerInfoModel
+{
+	peerId: Guid;
+	peer: ApplicationUserModel;
+	connectionId: string;
+	sDP: string;
+	status: PeerStatus;
+}
+export interface P2PCallModel extends _CallModel
+{
+	p2pId: number;
+	p2p: P2PModel;
+}
+export interface FriendCallModel extends _CallModel
+{
+	receiverId: Guid;
+	receiver: ApplicationUserModel;
+}
+export interface _CallModel
+{
+	callId: Guid;
+	failed: boolean;
+	failReason: string;
+	callerId: Guid;
+	caller: ApplicationUserModel;
+	duration: number;
+	endDate: Date;
+	callStarted: boolean;
+	peers: PeerInfoModel[];
+}
 export interface _FeedbackModel
 {
 	feedbackText: string;
@@ -161,6 +197,13 @@ export interface ResponseModel
 	errors: string[];
 	object: any;
 }
+export enum UserRelationshipStatus
+{
+	Pending = 0,
+	Accepted = 1,
+	Declined = 2,
+	Blocked = 3,
+}
 export enum UserStatus
 {
 	Online = 0,
@@ -203,6 +246,18 @@ export interface InterestModel
 	fosId: number;
 	fos: FOSModel;
 	stars: number;
+}
+export interface ApplicationUserRelationshipModel
+{
+	applicationUserSmallerId: Guid;
+	applicationUserSmaller: ApplicationUserModel;
+	applicationUserBiggerId: Guid;
+	applicationUserBigger: ApplicationUserModel;
+	status: UserRelationshipStatus;
+	lastActionById: Guid;
+	lastActionBy: ApplicationUserModel;
+	updatedAt: Date;
+	createdAt: Date;
 }
 export interface ApplicationUserModel
 {
@@ -249,33 +304,5 @@ export interface RegisterUserModel
 {
 	email: string;
 	password: string;
-}
-export enum PeerStatus {
-	accepted, rejected, waiting
-}
-export interface PeerInfoModel
-{
-	peerId: Guid;
-	peer: ApplicationUserModel;
-	connectionId: string;
-	sdp: string;
-	status: PeerStatus;
-}
-export interface _CallModel
-{
-	callId: Guid;
-	failed: boolean;
-	failReason: string;
-	callerId: Guid;
-	caller: ApplicationUserModel;
-	duration: number;
-	endDate: Date;
-	callStarted: boolean;
-	peers: PeerInfoModel[];
-}
-export interface P2pCallModel extends _CallModel
-{
-	p2p: P2PModel;
-	p2pId: number;
 }
 export type Guid = string;

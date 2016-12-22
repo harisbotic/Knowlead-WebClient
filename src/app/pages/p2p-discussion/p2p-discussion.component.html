@@ -1,14 +1,14 @@
 <app-p2p [p2pId]="p2p?.p2pId"></app-p2p>
 <div *ngFor="let thread of threads; trackBy: trackByThreads">
     <span class="slds-text-heading--large">
-        {{"p2p|converisation with" | translate}} {{fullName(thread.with)}}
+        {{"p2p|converisation with" | translate}} <a routerLink="/profile/{{thread.with.id}}">{{fullName(thread.with)}}</a>
     </span>
     <button type="button" nglButton="neutral" (click)="trySchedule(thread)" *ngIf="p2p.createdById == user.id && discussable">
         {{"p2p|schedule with person" | translate}}
     </button>
     <div *ngFor="let item of thread.messages">
         <div class="slds-text-body--regular">
-            {{fullName(item.messageFrom)}} {{"p2p|wrote" | translate}}: {{item.text}}
+            <a routerLink="/profile/{{item.messageFromId}}">{{fullName(item.messageFrom)}}</a> {{"p2p|wrote" | translate}}: {{item.text}}
         </div>
         <div class="slds-text-body--small">
             {{item.timestamp | amTimeAgo}}

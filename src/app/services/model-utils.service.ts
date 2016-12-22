@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, P2pCallModel, PeerInfoModel } from '../models/dto';
+import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, PeerInfoModel, ApplicationUserRelationshipModel, P2PCallModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
@@ -93,6 +93,20 @@ export class ModelUtilsService {
     return Observable.of(user);
   }
 
+  public fillUsersById(userIds: string[]): Observable<ApplicationUserModel[]> {
+    let ret: ApplicationUserModel[] = [];
+    return Observable.from(userIds)
+      .flatMap(id => this.accountService.getUserById(id).do(user => {
+        let idx = _.findIndex(ret, u => u.id == user.id);
+        if (idx == -1)
+          ret.push(user)
+        else
+          ret[idx] = user;
+      }))
+      .map(() => ret)
+      .filter(arr => arr.length == userIds.length);
+  }
+
   public static getUserFullName(value: ApplicationUserModel): string {
     if (value == null) {
       return "...";
@@ -103,12 +117,16 @@ export class ModelUtilsService {
     return value.name + " " + value.surname;
   }
 
-  public static isCallP2p(value: _CallModel): value is P2pCallModel {
-    return (<P2pCallModel>value).p2pId !== null;
+  public static isCallP2p(value: _CallModel): value is P2PCallModel {
+    return (<P2PCallModel>value).p2pId !== null;
   }
 
   public static getOtherCallParties(value: _CallModel, userId: string): PeerInfoModel[] {
     return value.peers.filter((p) => p.peerId != userId);
+  }
+
+  public static getOtherFriendId(value: ApplicationUserRelationshipModel, myId: string) {
+    return value.applicationUserBiggerId == myId ? value.applicationUserSmallerId : value.applicationUserBiggerId;
   }
 
 }

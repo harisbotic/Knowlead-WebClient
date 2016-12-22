@@ -42,6 +42,8 @@ import { AccountService } from './services/account.service';
 import { CallDialogComponent } from './components/call-dialog/call-dialog.component';
 import { CallPageComponent } from './pages/call-page/call-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ChatService } from './services/chat.service';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     P2pDiscussionComponent,
     CallDialogComponent,
     CallPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     })
   ],
   providers: [
+    ChatService,
     StorageService,
     RealtimeService,
     {

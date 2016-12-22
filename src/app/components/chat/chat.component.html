@@ -1,0 +1,3 @@
+<div *ngFor="let item of friends">
+  <a routerLink="/profile/{{item.id}}">{{fullName(item)}}</a> - {{item.status}}
+</div>

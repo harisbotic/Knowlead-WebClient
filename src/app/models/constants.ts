@@ -18,6 +18,7 @@ export class ErrorCodes
 	static confirmationCodeIncorrect: string = "CONFIRMATION_CODE_INCORRECT";
 	static notLoggedIn: string = "NOT_LOGGED_IN";
 	static loginCredentialsIncorrect: string = "LOGIN_CREDENTIALS_INCORRECT";
+	static sthWentWrong: string = "STH_WENT_WRONG";
 	static incorrectValue: string = "INCORRECT_VALUE";
 	static ownershipError: string = "OWNERSHIP_ERROR";
 	static authorityError: string = "AUTHORITY_ERROR";
@@ -27,4 +28,6 @@ export class ErrorCodes
 	static discussionClosed: string = "DISCUSSION_CLOSED";
 	static alreadyScheduled: string = "ALREADY_SCHEDULED";
 	static dateInPast: string = "DATE_IN_PAST";
+	static userBlocked: string = "USER_BLOCKED";
+	static alreadyFriend: string = "ALREADY_FRIENDS";
 }
