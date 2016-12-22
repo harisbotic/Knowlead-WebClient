@@ -13,7 +13,7 @@ export const STORAGE_CONFIG: {[StorageKey: string] : StorageConfiguration} = {
     "countries": {api: COUNTRIES },
     "states": {api: STATES, parameters: ["countryId"]},
     "FOSes": {api: FOSES},
-    "otherUser": {api: USER, parameters: ["id"]},
+    "otherUser": {api: USER, parameters: ["id", "includeDetails"]},
     "p2p": {api: P2P, parameters: ["id"]}
 };
 export const STORE_ACCESS_TOKEN = "access_token";

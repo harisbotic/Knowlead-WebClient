@@ -24,7 +24,7 @@ export class StorageSubject<T> extends Observable<T> {
         this._subscribe = this.subscribed.bind(this);
         if (STORAGE_CONFIG[key].parameters) {
             STORAGE_CONFIG[key].parameters.forEach(key => {
-                if (!parameters[key])
+                if (parameters[key] === undefined)
                     throw new Error("Parameter not found for request: " + key);
             });
         }

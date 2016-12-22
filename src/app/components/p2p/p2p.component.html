@@ -10,6 +10,8 @@
         <h2>
           <a routerLink="/p2p/{{p2p.p2pId}}" class="slds-text-link--reset">
             <span class="slds-text-heading--medium">{{p2p.title}}</span>
+          </a>
+          <a routerLink="/profile/{{p2p.createdById}}" class="slds-text-link--reset">
             <span class="slds-text-heading--small">{{"p2p|by" | translate}}: {{fullName(p2p.createdBy)}}</span>
           </a>
         </h2>

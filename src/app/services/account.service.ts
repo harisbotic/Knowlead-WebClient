@@ -32,9 +32,9 @@ export class AccountService {
     })
   }
 
-  public getUserById(id: Guid): Observable<ApplicationUserModel> {
+  public getUserById(id: Guid, includeDetails: boolean = false): Observable<ApplicationUserModel> {
     //return this.http.get(USER + "/" + id).map(responseToResponseModel).map(v => v.object);
-    return this.storageService.getFromStorage<ApplicationUserModel>("otherUser", this.userFiller, {id: id});
+    return this.storageService.getFromStorage<ApplicationUserModel>("otherUser", this.userFiller, {id: id, includeDetails: includeDetails});
   }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
@@ -58,7 +58,8 @@ export class AccountService {
       .do((user: ApplicationUserModel) => {
         if (user != null) {
           this.storageService.setToStorage("user", this.userFiller, null, user);
-          this.storageService.setToStorage("otherUser", this.userFiller, {id: user.id}, user);
+          this.storageService.setToStorage("otherUser", this.userFiller, {id: user.id, includeDetails: true}, user);
+          this.storageService.setToStorage("otherUser", this.userFiller, {id: user.id, includeDetails: false}, user);
         }
         else {
           console.error("No object in user patch response");
