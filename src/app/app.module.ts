@@ -46,6 +46,10 @@ import { ChatService } from './services/chat.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatConverisationComponent } from './components/chat-converisation/chat-converisation.component';
 
+export function getLoader(http: Http) {
+  return new TranslateStaticLoader(http, '/assets/i18n', '.json')
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +90,7 @@ import { ChatConverisationComponent } from './components/chat-converisation/chat
     ReactiveFormsModule,
     TranslateModule.forRoot({ 
       provide: TranslateLoader,
-      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      useFactory: getLoader,
       deps: [Http]
     })
   ],

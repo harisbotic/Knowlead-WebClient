@@ -1,4 +1,5 @@
-import { Response } from "@angular/http";
+import { TranslateStaticLoader } from 'ng2-translate';
+import { Http, Response } from '@angular/http';
 import { ApplicationUserModel } from './../models/dto';
 import { FOSModel } from '../models/dto';
 import * as _ from 'lodash';

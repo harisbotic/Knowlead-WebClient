@@ -145,14 +145,12 @@ export class StorageService {
       this.fosHierarchy = ret;
       return ret;
     })
-    .cache();
   }
 
   public getFosById(id: number): Observable<FOSModel> {
     return this.getFOShierarchy().map(() => {
       return this.fosByIds[id];
-    })
-    .cache();
+    });
   }
 
 }
