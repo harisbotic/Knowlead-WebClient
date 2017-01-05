@@ -29,5 +29,7 @@ export class ErrorCodes
 	static alreadyScheduled: string = "ALREADY_SCHEDULED";
 	static dateInPast: string = "DATE_IN_PAST";
 	static userBlocked: string = "USER_BLOCKED";
-	static alreadyFriend: string = "ALREADY_FRIENDS";
+	static alreadyFriends: string = "ALREADY_FRIENDS";
+	static requestNotFound: string = "REQUEST_NOT_FOUND";
+	static notInFriendlist: string = "NOT_IN_FRIENDLIST";
 }

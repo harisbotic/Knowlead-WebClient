@@ -1,3 +1,39 @@
+export enum UserStatus
+{
+	Online = 0,
+	Offline = 1,
+	Busy = 2,
+}
+export enum PeerStatus
+{
+	Accepted = 0,
+	Rejected = 1,
+	Waiting = 2,
+}
+export enum FriendshipDTOActions
+{
+	NewRequest = 0,
+	AcceptRequest = 1,
+	DeclineRequest = 2,
+	CancelRequest = 3,
+	RemoveFriend = 4,
+	BlockUser = 5,
+	UnblockUser = 6,
+}
+export enum FriendshipStatus
+{
+	Pending = 0,
+	Accepted = 1,
+	Declined = 2,
+	Blocked = 3,
+}
+export enum P2PStatus
+{
+	Inactive = 0,
+	Active = 1,
+	Scheduled = 2,
+	Finsihed = 3,
+}
 export interface P2PMessageModel
 {
 	p2pMessageId: number;
@@ -10,14 +46,6 @@ export interface P2PMessageModel
 	messageFromId: Guid;
 	messageFrom: ApplicationUserModel;
 }
-export interface ImageBlobModel extends _BlobModel
-{
-	width: number;
-	height: number;
-}
-export interface FileBlobModel extends _BlobModel
-{
-}
 export interface _BlobModel
 {
 	blobId: Guid;
@@ -28,11 +56,25 @@ export interface _BlobModel
 	uploadedById: Guid;
 	uploadedBy: ApplicationUserModel;
 }
-export enum PeerStatus
+export interface ImageBlobModel extends _BlobModel
 {
-	Accepted = 0,
-	Rejected = 1,
-	Waiting = 2,
+	width: number;
+	height: number;
+}
+export interface FileBlobModel extends _BlobModel
+{
+}
+export interface _CallModel
+{
+	callId: Guid;
+	failed: boolean;
+	failReason: string;
+	callerId: Guid;
+	caller: ApplicationUserModel;
+	duration: number;
+	endDate: Date;
+	callStarted: boolean;
+	peers: PeerInfoModel[];
 }
 export interface PeerInfoModel
 {
@@ -52,17 +94,27 @@ export interface FriendCallModel extends _CallModel
 	receiverId: Guid;
 	receiver: ApplicationUserModel;
 }
-export interface _CallModel
+export interface NewChatMessage
 {
-	callId: Guid;
-	failed: boolean;
-	failReason: string;
-	callerId: Guid;
-	caller: ApplicationUserModel;
-	duration: number;
-	endDate: Date;
-	callStarted: boolean;
-	peers: PeerInfoModel[];
+	message: string;
+	sendToId: Guid;
+}
+export interface ChangeFriendshipStatusModel
+{
+	applicationUserId: Guid;
+	action: FriendshipDTOActions;
+}
+export interface FriendshipModel
+{
+	applicationUserBiggerId: Guid;
+	applicationUserBigger: ApplicationUserModel;
+	applicationUserSmallerId: Guid;
+	applicationUserSmaller: ApplicationUserModel;
+	status: FriendshipStatus;
+	lastActionById: Guid;
+	lastActionBy: ApplicationUserModel;
+	updatedAt: Date;
+	createdAt: Date;
 }
 export interface _FeedbackModel
 {
@@ -74,19 +126,11 @@ export interface _FeedbackModel
 	studentId: Guid;
 	student: ApplicationUserModel;
 }
-export interface FriendshipRequestModel
+export interface _CoreLookupModel
 {
-	userSentId: Guid;
-	userSent: ApplicationUserModel;
-	userReceivedId: Guid;
-	userReceived: ApplicationUserModel;
-}
-export interface FriendshipModel
-{
-	userSentId: Guid;
-	userSent: ApplicationUserModel;
-	userAcceptedId: Guid;
-	userAccepted: ApplicationUserModel;
+	coreLookupId: number;
+	code: string;
+	name: string;
 }
 export interface LanguageModel extends _CoreLookupModel
 {
@@ -103,12 +147,6 @@ export interface AchievementModel extends _CoreLookupModel
 	imageBlobId: Guid;
 	imageBlob: ImageBlobModel;
 }
-export interface _CoreLookupModel
-{
-	coreLookupId: number;
-	code: string;
-	name: string;
-}
 export interface FeedbackQuestionModel extends _FeedbackModel
 {
 }
@@ -123,6 +161,12 @@ export interface FeedbackCourseModel extends _FeedbackModel
 export interface FeedbackClassModel extends _FeedbackModel
 {
 }
+export interface _GeoLookupModel
+{
+	geoLookupId: number;
+	code: string;
+	name: string;
+}
 export interface StateModel extends _GeoLookupModel
 {
 	statesCountryId: number;
@@ -131,18 +175,11 @@ export interface StateModel extends _GeoLookupModel
 export interface CountryModel extends _GeoLookupModel
 {
 }
-export interface _GeoLookupModel
+export interface P2PScheduleModel
 {
-	geoLookupId: number;
-	code: string;
-	name: string;
-}
-export enum P2PStatus
-{
-	Inactive = 0,
-	Active = 1,
-	Scheduled = 2,
-	Finsihed = 3,
+	p2pId: number;
+	scheduleTime: Date;
+	scheduleWithId: Guid;
 }
 export interface P2PModel
 {
@@ -185,30 +222,22 @@ export interface P2PFileModel
 	fileBlobId: Guid;
 	fileBlob: FileBlobModel;
 }
-export interface P2PScheduleModel
-{
-	p2pId: number;
-	scheduleTime: Date;
-	scheduleWithId: Guid;
-}
 export interface ResponseModel
 {
 	formErrors: { [index: string]: string[] };
 	errors: string[];
 	object: any;
 }
-export enum UserRelationshipStatus
+export interface ConfirmEmailModel
 {
-	Pending = 0,
-	Accepted = 1,
-	Declined = 2,
-	Blocked = 3,
+	email: string;
+	code: string;
+	password: string;
 }
-export enum UserStatus
+export interface RegisterUserModel
 {
-	Online = 0,
-	Offline = 1,
-	Busy = 2,
+	email: string;
+	password: string;
 }
 export interface UserNotebookModel
 {
@@ -247,18 +276,6 @@ export interface InterestModel
 	fos: FOSModel;
 	stars: number;
 }
-export interface ApplicationUserRelationshipModel
-{
-	applicationUserSmallerId: Guid;
-	applicationUserSmaller: ApplicationUserModel;
-	applicationUserBiggerId: Guid;
-	applicationUserBigger: ApplicationUserModel;
-	status: UserRelationshipStatus;
-	lastActionById: Guid;
-	lastActionBy: ApplicationUserModel;
-	updatedAt: Date;
-	createdAt: Date;
-}
 export interface ApplicationUserModel
 {
 	id: Guid;
@@ -293,16 +310,5 @@ export interface ApplicationUserInterestModel
 	fosId: number;
 	fos: FOSModel;
 	stars: number;
-}
-export interface ConfirmEmailModel
-{
-	email: string;
-	code: string;
-	password: string;
-}
-export interface RegisterUserModel
-{
-	email: string;
-	password: string;
 }
 export type Guid = string;

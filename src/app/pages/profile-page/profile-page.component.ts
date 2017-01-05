@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { AccountService } from '../../services/account.service';
-import { ApplicationUserModel, UserRelationshipStatus } from '../../models/dto';
+import { ApplicationUserModel, FriendshipStatus } from '../../models/dto';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../../base.component';
 import { ChatService } from '../../services/chat.service';
@@ -34,10 +34,10 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
         this.subscriptions.push(this.chatService.getFriendshipStatus(this.target.id).subscribe(friendship => {
           if (friendship)
             switch (friendship.status) {
-              case UserRelationshipStatus.Accepted:
+              case FriendshipStatus.Accepted:
                 this.status = "Accepted";
                 break;
-              case UserRelationshipStatus.Pending:
+              case FriendshipStatus.Pending:
                 this.status = "Pending";
                 break;
             }

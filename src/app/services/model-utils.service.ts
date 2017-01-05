@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, PeerInfoModel, ApplicationUserRelationshipModel, P2PCallModel } from '../models/dto';
+import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, PeerInfoModel, FriendshipModel, P2PCallModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
@@ -125,7 +125,7 @@ export class ModelUtilsService {
     return value.peers.filter((p) => p.peerId != userId);
   }
 
-  public static getOtherFriendId(value: ApplicationUserRelationshipModel, myId: string) {
+  public static getOtherFriendId(value: FriendshipModel, myId: string) {
     return value.applicationUserBiggerId == myId ? value.applicationUserSmallerId : value.applicationUserBiggerId;
   }
 
