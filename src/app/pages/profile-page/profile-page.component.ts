@@ -31,25 +31,8 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.route.params.subscribe(params => {
       this.subscriptions.push(this.accountService.getUserById(params["id"], true).subscribe(user => {
         this.target = user;
-        this.subscriptions.push(this.chatService.getFriendshipStatus(this.target.id).subscribe(friendship => {
-          if (friendship)
-            switch (friendship.status) {
-              case FriendshipStatus.Accepted:
-                this.status = "Accepted";
-                break;
-              case FriendshipStatus.Pending:
-                this.status = "Pending";
-                break;
-            }
-          else
-            this.status = "Add friend";
-        }));
       }));
     }));
-  }
-
-  addFriend() {
-    this.chatService.addFriendById(this.target.id).subscribe().unsubscribe();
   }
 
 }

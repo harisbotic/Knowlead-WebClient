@@ -86,7 +86,7 @@ export class RealtimeService {
         this.stop();
       }
       if (accessToken) {
-        this.initConnection();
+        //this.initConnection();
       }
     });
   }

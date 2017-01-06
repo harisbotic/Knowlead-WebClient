@@ -18,3 +18,5 @@ export const P2P_DELETE = API + "/api/p2p/delete";
 export const P2P_SCHEDULE = API + "/api/p2p/schedule";
 export const FILE_UPLOAD = API + "/api/blob/upload";
 export const FILE_REMOVE = API + "/api/blob/delete";
+export const GET_FRIENDS = API + "/api/chat/getallfriends";
+export const CHANGE_FRIENDSHIP = API + "/api/chat/changefriendshipstatus"

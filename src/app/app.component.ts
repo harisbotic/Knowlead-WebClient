@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from "./services/account.service";
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { RealtimeService } from './services/realtime.service';
 import { StorageService } from './services/storage.service';
@@ -9,7 +10,8 @@ import { BaseComponent } from './base.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [AccountService]
 })
 export class AppComponent extends BaseComponent {
 

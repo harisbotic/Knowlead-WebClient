@@ -45,6 +45,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { ChatService } from './services/chat.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatConverisationComponent } from './components/chat-converisation/chat-converisation.component';
+import { FriendshipPageComponent } from './pages/friendship-page/friendship-page.component';
+import { FriendshipStripComponent } from './components/friendship-strip/friendship-strip.component';
 
 export function getLoader(http: Http) {
   return new TranslateStaticLoader(http, '/assets/i18n', '.json')
@@ -78,7 +80,9 @@ export function getLoader(http: Http) {
     CallPageComponent,
     ProfilePageComponent,
     ChatComponent,
-    ChatConverisationComponent
+    ChatConverisationComponent,
+    FriendshipPageComponent,
+    FriendshipStripComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +99,10 @@ export function getLoader(http: Http) {
     })
   ],
   providers: [
+    AccountService,
+    ModelUtilsService,
     ChatService,
+    P2pService,
     StorageService,
     RealtimeService,
     {
@@ -104,10 +111,7 @@ export function getLoader(http: Http) {
       deps: [XHRBackend, RequestOptions, StorageService, SessionService, Router]
     },
     SessionService,
-    NotificationService,
-    ModelUtilsService,
-    P2pService,
-    AccountService
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

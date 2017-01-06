@@ -5,7 +5,6 @@ import { StorageService } from './storage.service';
 import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
 import { USER_DETAILS, REGISTER, CONFIRMEMAIL } from './../utils/urls';
-import * as jsonpatch from 'fast-json-patch';
 import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
@@ -48,7 +47,7 @@ export class AccountService {
   public currentUser(): Observable<ApplicationUserModel> {
     return this.storageService.getFromStorage<ApplicationUserModel>("user", this.userFiller).map(user => {
       return _.cloneDeep(user);
-    })
+    });
   }
 
   public patchUser(patch: fastjsonpatch.Patch[]): Observable<ResponseModel> {
@@ -86,7 +85,7 @@ export class AccountService {
     return this.currentUser().take(1).flatMap((user) => {
       let _user = this.prepareForPatch(user);
       let _newUser = this.prepareForPatch(newUser);
-      let patch = jsonpatch.compare(_user, _newUser);
+      let patch = fastjsonpatch.compare(_user, _newUser);
       return this.patchUser(patch);
     });
   }

@@ -5,7 +5,5 @@
   <div>
     i tako dalje ...
   </div>
-  <button *ngIf="user?.id != target?.id" (click)="addFriend()">
-    {{status}}
-  </button>
+  <app-friendship-strip *ngIf="target" [otherId]="target.id"></app-friendship-strip>
 </div>

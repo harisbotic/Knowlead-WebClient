@@ -108,6 +108,10 @@ export class StorageService {
     this.getOrCreateSubject(key, filler, parameters).changeValue(value);
   }
 
+  public refreshStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}) {
+    this.getOrCreateSubject(key, filler, parameters).refresh(true);
+  }
+
   public getCountries(): Observable<CountryModel[]> {
     return this.getFromStorage<CountryModel[]>("countries", null);
   }

@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, PeerInfoModel, FriendshipModel, P2PCallModel } from '../models/dto';
+import { P2PMessageModel, P2PModel, ApplicationUserModel, Guid, _CallModel, PeerInfoModel, FriendshipModel, P2PCallModel, FriendshipStatus } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
@@ -36,7 +36,7 @@ export class ModelUtilsService {
         return val;
       })
         .onErrorResumeNext(Observable.of(val))
-        .take(1);
+        //.take(1);
     }));
   }
 
@@ -95,6 +95,8 @@ export class ModelUtilsService {
 
   public fillUsersById(userIds: string[]): Observable<ApplicationUserModel[]> {
     let ret: ApplicationUserModel[] = [];
+    if (userIds.length == 0)
+      return Observable.of([]);
     return Observable.from(userIds)
       .flatMap(id => this.accountService.getUserById(id).do(user => {
         let idx = _.findIndex(ret, u => u.id == user.id);
@@ -105,6 +107,24 @@ export class ModelUtilsService {
       }))
       .map(() => ret)
       .filter(arr => arr.length == userIds.length);
+  }
+
+  public fillFriendship(value: FriendshipModel): Observable<FriendshipModel> {
+    if (value.updatedAt != null && typeof(value.updatedAt) == "string") {
+      value.updatedAt = new Date(Date.parse(value.updatedAt));
+    }
+    if (value.createdAt != null && typeof(value.createdAt) == "string") {
+      value.createdAt = new Date(Date.parse(value.createdAt));
+    }
+    let ret = Observable.of(value);
+    ret = this.fill(ret, "applicationUserBigger", this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, "applicationUserSmaller", this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, "lastActionBy", this.accountService.getUserById.bind(this.accountService));
+    return ret;
+  }
+  
+  public fillFriendships(values: FriendshipModel[]): Observable<FriendshipModel[]> {
+    return this.fillArray(values, this.fillFriendship.bind(this), "createdAt");
   }
 
   public static getUserFullName(value: ApplicationUserModel): string {
@@ -127,6 +147,38 @@ export class ModelUtilsService {
 
   public static getOtherFriendId(value: FriendshipModel, myId: string) {
     return value.applicationUserBiggerId == myId ? value.applicationUserSmallerId : value.applicationUserBiggerId;
+  }
+
+  public static getOtherFriend(value: FriendshipModel, myId: string) {
+    return value.applicationUserBiggerId == myId ? value.applicationUserSmaller : value.applicationUserBigger;
+  }
+
+  public static canAcceptFriendship(value: FriendshipModel, myId: string) {
+    return value && value.status == FriendshipStatus.Pending && myId != value.lastActionById;
+  }
+
+  public static canDeclineFriendship(value: FriendshipModel, myId: string) {
+    return value && ModelUtilsService.canAcceptFriendship(value, myId);
+  }
+
+  public static canBlockFriendship(value: FriendshipModel) {
+    return value == null || value.status != FriendshipStatus.Blocked;
+  }
+
+  public static canUnblockFriendship(value: FriendshipModel) {
+    return value && value.status == FriendshipStatus.Blocked;
+  }
+
+  public static canRemoveFriendship(value: FriendshipModel) {
+    return value && value.status == FriendshipStatus.Accepted;
+  }
+
+  public static canCancelFriendship(value: FriendshipModel, myId: string) {
+    return value && value.status == FriendshipStatus.Pending && myId == value.lastActionById;
+  }
+
+  public static canAddFriendship(value: FriendshipModel, myId: string) {
+    return value == null || (value.status == FriendshipStatus.Declined && myId == value.lastActionById);
   }
 
 }

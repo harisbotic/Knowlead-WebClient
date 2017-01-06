@@ -1,7 +1,7 @@
-import { ME, LANGUAGES, COUNTRIES, STATES, FOSES, USER, P2P } from './urls';
+import { ME, LANGUAGES, COUNTRIES, STATES, FOSES, USER, P2P, GET_FRIENDS } from './urls';
 import { ApplicationUserModel } from './../models/dto';
 
-export type StorageKey = "user" | "languages" | "countries" | "states" | "FOSes" | "otherUser" | "p2p";
+export type StorageKey = "user" | "languages" | "countries" | "states" | "FOSes" | "otherUser" | "p2p" | "friends";
 
 export type StorageConfiguration = {
     api: string;
@@ -14,6 +14,7 @@ export const STORAGE_CONFIG: {[StorageKey: string] : StorageConfiguration} = {
     "states": {api: STATES, parameters: ["countryId"]},
     "FOSes": {api: FOSES},
     "otherUser": {api: USER, parameters: ["id", "includeDetails"]},
-    "p2p": {api: P2P, parameters: ["id"]}
+    "p2p": {api: P2P, parameters: ["id"]},
+    "friends": {api: GET_FRIENDS}
 };
 export const STORE_ACCESS_TOKEN = "access_token";

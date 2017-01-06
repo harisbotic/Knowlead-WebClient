@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { FriendshipPageComponent } from "./pages/friendship-page/friendship-page.component";
 import { ModuleWithProviders } from '@angular/core';
 import { GuestHomePageComponent } from "./pages/guest-home-page/guest-home-page.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     { path: 'p2ptest', component: P2pCreateComponent },
     { path: 'p2p/:id', component: P2pDiscussionComponent },
     { path: "call/:id", component: CallPageComponent },
-    { path: "profile/:id", component: ProfilePageComponent }
+    { path: "profile/:id", component: ProfilePageComponent },
+    { path: "friendships", component: FriendshipPageComponent }
 ];
 
 export const appRoutingProviders: any[] = [

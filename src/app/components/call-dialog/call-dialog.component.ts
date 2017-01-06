@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-call-dialog',
   templateUrl: './call-dialog.component.html',
-  styleUrls: ['./call-dialog.component.scss']
+  styleUrls: ['./call-dialog.component.scss'],
+  providers: [P2pService]
 })
 export class CallDialogComponent extends BaseComponent implements OnInit {
 

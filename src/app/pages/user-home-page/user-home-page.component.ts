@@ -10,8 +10,7 @@ import { BaseComponent } from '../../base.component';
 @Component({
   selector: 'app-user-home-page',
   templateUrl: './user-home-page.component.html',
-  styleUrls: ['./user-home-page.component.scss'],
-  providers: [P2pService]
+  styleUrls: ['./user-home-page.component.scss']
 })
 export class UserHomePageComponent extends BaseComponent implements OnInit, OnDestroy {
 
