@@ -165,7 +165,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
 
   fullName = ModelUtilsService.getUserFullName;
 
-  trackByThread(thread: threadModel) {
+  trackByThreads(thread: threadModel) {
     return thread.with.id;
   }
 

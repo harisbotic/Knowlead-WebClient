@@ -1,5 +1,5 @@
 <app-p2p [p2pId]="p2p?.p2pId"></app-p2p>
-<div *ngFor="let thread of threads; trackBy: trackByThreads">
+<div *ngFor="let thread of threads">
     <span class="slds-text-heading--large">
         {{"p2p|converisation with" | translate}} <a routerLink="/profile/{{thread.with.id}}">{{fullName(thread.with)}}</a>
     </span>
