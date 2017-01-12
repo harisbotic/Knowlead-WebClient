@@ -52,7 +52,7 @@ export class ModelUtilsService {
     if (!values || values.length == 0)
       return Observable.of([]);
     let arr = values.map(() => null);
-    let reduced: Observable<T> = values.reduce((o, msg: T) => {
+    let reduced: Observable<T> = values.reduce((o: Observable<T>, msg: T) => {
         let ret = filler(msg).do(filled => {
           //console.log(filled);
           let idx = _.findIndex(values, val => val[idKey] == filled[idKey]);

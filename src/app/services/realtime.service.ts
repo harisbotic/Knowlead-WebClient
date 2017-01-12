@@ -20,7 +20,7 @@ export class RealtimeService {
   initConnection = () => {
     console.info("Init websockets");
     this.rpcConnection = new HubConnection(API + "/mainHub", "accessToken=" + this.accessToken);
-    this.rpcConnection.start("longPolling").then(() => {
+    this.rpcConnection.start().then(() => {
       this.connectionStateSubject.next(true);
       this.rpcConnection.on("notify", (value: NotificationModel) => {
         this.notificationService.notify(value);
@@ -48,10 +48,14 @@ export class RealtimeService {
     this.rpcConnection.invoke("CallRespond", callId, accepted);
   }
 
-  setCallSDP(callId: string, sdp: string) {
+  addCallSDP(callId: string, sdp: string) {
     if (typeof(sdp) !== "string")
       sdp = JSON.stringify(sdp);
-    this.rpcConnection.invoke("SetSDP", callId, sdp);
+    this.rpcConnection.invoke("AddSDP", callId, sdp);
+  }
+
+  clearCallSDP(callId: string) {
+    this.rpcConnection.invoke("ClearSDP", callId);
   }
 
   getCallUpdate(callId: string): Promise<_CallModel> {
@@ -86,7 +90,7 @@ export class RealtimeService {
         this.stop();
       }
       if (accessToken) {
-        //this.initConnection();
+        this.initConnection();
       }
     });
   }

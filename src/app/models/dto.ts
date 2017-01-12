@@ -81,7 +81,7 @@ export interface PeerInfoModel
 	peerId: Guid;
 	peer: ApplicationUserModel;
 	connectionId: string;
-	sDP: string;
+	sdps: string[];
 	status: PeerStatus;
 }
 export interface P2PCallModel extends _CallModel

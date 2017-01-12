@@ -165,10 +165,6 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
 
   fullName = ModelUtilsService.getUserFullName;
 
-  trackByThreads(thread: threadModel) {
-    return thread.with.id;
-  }
-
   scheduleNow() {
     this.scheduleForm.patchValue({scheduleTime: null});
     this.schedule();
