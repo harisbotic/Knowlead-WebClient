@@ -14,23 +14,24 @@ export class NotificationService {
   }
 
   notify(notification: NotificationModel) {
-    if (this.notificationComponent)
+    if (this.notificationComponent) {
       this.notificationComponent.notify(notification);
+    }
   }
 
   error(title: string, subtitle?: string) {
     this.notify({
       title: title,
       subtitle: subtitle,
-      type: "error"
-    })
+      type: 'error'
+    });
   }
 
   info(title: string, subtitle?: string) {
     this.notify({
       title: title,
       subtitle: subtitle,
-      type: "info"
+      type: 'info'
     });
   }
 

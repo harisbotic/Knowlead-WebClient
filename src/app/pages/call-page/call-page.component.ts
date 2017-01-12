@@ -18,7 +18,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
 
   signaledSDPs: string[];
 
-  @ViewChild("video") video: ElementRef;
+  @ViewChild('video') video: ElementRef;
   JSON = JSON;
   call: _CallModel;
   user: ApplicationUserModel;
@@ -26,9 +26,10 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   otherStream: MediaStream;
 
   get initiator(): boolean {
-    if (!this.call || !this.user)
+    if (!this.call || !this.user) {
       return null;
-    return this.user.id == this.call.callerId;
+    }
+    return this.user.id === this.call.callerId;
   }
 
   constructor(
@@ -43,15 +44,15 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     this.signaledSDPs = [];
     this.cleanup();
     if (!this.call || !this.user) {
-      console.warn("Cannot initialize peer");
+      console.warn('Cannot initialize peer');
       return;
     }
-    console.debug("Initializing peer");
+    console.debug('Initializing peer');
     navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((myStream) => {
       this.myStream = myStream;
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
       this.peer.on('signal', (data) => {
-        console.log("Got signal !");
+        console.log('Got signal !');
         this.mySDP = data;
         this.realtimeService.addCallSDP(this.call.callId, data);
       });
@@ -71,19 +72,21 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     if (this.peer) {
       try {
         this.peer.destroy();
-      } catch(e) {
-        console.warn("Error destroying peer: " + e);
+      } catch (e) {
+        console.warn('Error destroying peer: ' + e);
       }
       delete this.mySDP;
       delete this.peer;
     }
-    if (this.myStream && this.myStream.stop)
+    if (this.myStream && this.myStream.stop) {
       this.myStream.stop();
+    }
     delete this.myStream;
-    if (this.otherStream && this.otherStream.stop)
+    if (this.otherStream && this.otherStream.stop) {
       this.otherStream.stop();
+    }
     delete this.otherStream;
-    console.debug("Cleaning up call");
+    console.debug('Cleaning up call');
   }
 
   setOtherSDP() {
@@ -91,14 +94,14 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       try {
         let other = ModelUtilsService.getOtherCallParties(this.call, this.user.id)[0];
         for (let sdp of other.sdps) {
-          if (this.signaledSDPs.indexOf(sdp) == -1) {
+          if (this.signaledSDPs.indexOf(sdp) === -1) {
             this.peer.signal(sdp);
             this.signaledSDPs.push(sdp);
-            console.info("Signaling peer");
+            console.info('Signaling peer');
           }
         }
-      } catch(e) {
-        console.error("Error signaling peer: " + e);
+      } catch (e) {
+        console.error('Error signaling peer: ' + e);
         this.initPeer();
       }
     }
@@ -107,7 +110,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   ngOnInit() {
     this.subscriptions.push(this.realtimeService.connectionStateSubject.filter(val => val).subscribe(() => {
       this.subscriptions.push(this.route.params.subscribe((params) => {
-        this.realtimeService.getCallUpdate(params["id"]).then(call => {
+        this.realtimeService.getCallUpdate(params['id']).then(call => {
           this.call = call;
           this.initPeer();
         });

@@ -11,10 +11,10 @@ import { BaseComponent } from '../../base.component';
 })
 export class NotificationsComponent extends BaseComponent implements OnInit {
 
-  constructor(protected notificationService: NotificationService) { super(); }
-
   notifications: NotificationModel[] = [];
   timeout = 5000;
+
+  constructor(protected notificationService: NotificationService) { super(); }
 
   ngOnInit() {
     this.notificationService.setCallback(this);

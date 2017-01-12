@@ -1,6 +1,6 @@
 export class FrontendErrorCodes {
-    static passwordsDontMatch: string = "PASSWORDS_DONT_MATCH";
-    static networkError: string = "NETWORK_ERROR";
-    static backendError: string = "BACKEND_ERROR";
-    static unknownError: string = "UNKNOWN_ERROR";
+    static passwordsDontMatch: string = 'PASSWORDS_DONT_MATCH';
+    static networkError: string = 'NETWORK_ERROR';
+    static backendError: string = 'BACKEND_ERROR';
+    static unknownError: string = 'UNKNOWN_ERROR';
 }

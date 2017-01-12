@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { InterestModel, FOSModel } from './../../../models/dto';
+import { FOSModel } from './../../../models/dto';
 import { stringContains } from '../../../utils/index';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
@@ -36,11 +36,11 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
   subcategories: FOSModel[];
 
   searchFos(fos: FOSModel, level: number, parent: FOSModel) {
-    if (level == 0 && !!fos.children) {
+    if (level === 0 && !!fos.children) {
       fos.children.forEach(f => this.searchFos(f, 1, fos));
     }
     // When searching for level 1, if name matches, whole FOS should be added
-    if (level == 1) {
+    if (level === 1) {
       if (stringContains(fos.name, this.search)) {
         this.subcategories.push(fos);
       } else {
@@ -57,12 +57,12 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
       }
     }
     // When searching for level 2, add matches to the parent
-    if (level == 2) {
+    if (level === 2) {
       if (stringContains(fos.name, this.search)) {
         parent.children.push(fos);
       }
       if (!!fos.children && fos.children.length > 0) {
-        console.error("2nd level contains children ... ${fos.name}");
+        console.error('2nd level contains children ... ${fos.name}');
       }
     }
   }

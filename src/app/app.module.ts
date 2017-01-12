@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 
-import { AppRouting } from "./app.routing"
+import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { GuestHomePageComponent } from './pages/guest-home-page/guest-home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -17,7 +17,7 @@ import { HttpProvider } from './http.provider';
 import { StorageService } from './services/storage.service';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
 import { Router } from '@angular/router';
-import { NglModule, INglConfig } from 'ng-lightning';
+import { NglModule } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { TranslationTestComponent } from './pages/translation-test/translation-test.component';
@@ -49,7 +49,7 @@ import { FriendshipPageComponent } from './pages/friendship-page/friendship-page
 import { FriendshipStripComponent } from './components/friendship-strip/friendship-strip.component';
 
 export function getLoader(http: Http) {
-  return new TranslateStaticLoader(http, '/assets/i18n', '.json')
+  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
 }
 
 @NgModule({
@@ -92,7 +92,7 @@ export function getLoader(http: Http) {
     MomentModule,
     NglModule.forRoot(),
     ReactiveFormsModule,
-    TranslateModule.forRoot({ 
+    TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: getLoader,
       deps: [Http]

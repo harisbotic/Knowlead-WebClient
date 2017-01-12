@@ -10,26 +10,26 @@ import { BaseComponent } from '../../../base.component';
 export class InterestSetupChoiceComponent extends BaseComponent implements OnInit {
 
   @Output() remove = new EventEmitter<FOSModel>();
-  constructor() { super(); }
   @Input() interest: InterestModel = {
-    fosId:0,
+    fosId: 0,
     fos: {
-      name: "MY CHOICE No1",
+      name: 'MY CHOICE No1',
       children: [],
       parentFosId: -1,
       coreLookupId: 0,
-      code: "testni primjer",
+      code: 'testni primjer',
       parent: null
     },
-    stars:0
+    stars: 0
   };
   niz: string[] = [
-    "interest-setup|very low",
-    "interest-setup|low",
-    "interest-setup|good",
-    "interest-setup|very good",
-    "interest-setup|excellent"
-  ];  
+    'interest-setup|very low',
+    'interest-setup|low',
+    'interest-setup|good',
+    'interest-setup|very good',
+    'interest-setup|excellent'
+  ];
+  constructor() { super(); }
   ngOnInit() {
   }
   removed() {

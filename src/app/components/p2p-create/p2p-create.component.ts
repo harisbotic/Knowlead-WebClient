@@ -40,7 +40,7 @@ export class P2pCreateComponent extends BaseComponent implements OnInit {
   }
 
   getBlobControl(): FormArray {
-    return <FormArray>this.form.controls["blobs"];
+    return <FormArray>this.form.controls['blobs'];
   }
 
   blobs(): _BlobModel[] {
@@ -57,7 +57,7 @@ export class P2pCreateComponent extends BaseComponent implements OnInit {
 
   submit() {
     this.subscriptions.push(this.p2pService.create(this.value).subscribe(response => {
-      this.notificationService.info("p2p created");
+      this.notificationService.info('p2p created');
       this.form.reset();
     }));
   }

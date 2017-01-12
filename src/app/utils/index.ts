@@ -1,20 +1,17 @@
-import { TranslateStaticLoader } from 'ng2-translate';
-import { Http, Response } from '@angular/http';
-import { ApplicationUserModel } from './../models/dto';
 import { FOSModel } from '../models/dto';
 import * as _ from 'lodash';
 import { Subscriber, Observable } from 'rxjs/Rx';
 
-export * from "./urls";
-export * from "./storage.constants";
-export * from "./converters";
+export * from './urls';
+export * from './storage.constants';
+export * from './converters';
 
-export function urlFormEncode(data:any) : string {
+export function urlFormEncode(data: any): string {
     let rets = [];
-    for (var key in data) {
-        rets.push(key + "=" + data[key]);
+    for (let key of Object.keys(data)) {
+        rets.push(key + '=' + data[key]);
     }
-    return rets.join("&");
+    return rets.join('&');
 }
 
 export function fromObservable<T>(
@@ -27,13 +24,13 @@ export function fromObservable<T>(
 }
 
 export function parseJwt(token: string): any {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
 
 interface NameInterface {
-    name: string
+    name: string;
 }
 
 export function baseLookup(source: Observable<NameInterface[]>, query: string): Observable<any[]> {
@@ -47,7 +44,7 @@ export function stringContains(theStr: string, query: string): boolean {
 }
 
 export function iterateObjectAlphabetically(obj: any, callback: (value: any, key: any, original?: any) => void) {
-    var arr = [],
+    let arr = [],
         i;
 
     for (i in obj) {
@@ -59,7 +56,6 @@ export function iterateObjectAlphabetically(obj: any, callback: (value: any, key
     arr.sort();
 
     for (i = 0; i < arr.length; i++) {
-        var key = obj[arr[i]];
         if (callback) {
             callback(obj[arr[i]], arr[i], obj);
         }
@@ -67,12 +63,12 @@ export function iterateObjectAlphabetically(obj: any, callback: (value: any, key
 }
 
 export function treeify(list, idAttr, parentAttr, childrenAttr) {
-    if (!idAttr) idAttr = 'id';
-    if (!parentAttr) parentAttr = 'parent';
-    if (!childrenAttr) childrenAttr = 'children';
+    if (!idAttr) { idAttr = 'id'; }
+    if (!parentAttr) { parentAttr = 'parent'; }
+    if (!childrenAttr) { childrenAttr = 'children'; }
 
-    var treeList = [];
-    var lookup = {};
+    let treeList = [];
+    let lookup = {};
     list.forEach(function(obj) {
         lookup[obj[idAttr]] = obj;
     });
@@ -88,25 +84,27 @@ export function treeify(list, idAttr, parentAttr, childrenAttr) {
 };
 
 export function fillArray<T>(array: T[], key: string): T[] {
-    let ids = <number[]>array.map(val => val[key]);
     let ret = <T[]>{};
     array.forEach(val => ret[val[key]] = val);
-    //ret.forEach((v, index) => {if (v == null) delete ret[index]});
     return ret;
 }
 
-export function getFOSParents(value: FOSModel) : FOSModel[] {
+export function getFOSParents(value: FOSModel): FOSModel[] {
     let ret = <FOSModel[]>[];
     let cb = (fos: FOSModel) => {
-        if (!fos) return;
-        if (fos.coreLookupId != null)
-        ret.push(fos);
+        if (!fos) {
+            return;
+        }
+        if (fos.coreLookupId != null) {
+            ret.push(fos);
+        }
         if (fos.parent != null) {
         cb(fos.parent);
         }
-    }
-    if (value)
+    };
+    if (value) {
         cb(value.parent);
+    }
     return ret;
 }
 
@@ -120,8 +118,8 @@ export function getGuid() {
         s4() + '-' + s4() + s4() + s4();
 }
 
-export const PATTERN_EMAIL = "[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*";
-export const PATTERN_ONE_LOWERCASE = ".*[a-z].*";
+export const PATTERN_EMAIL = '[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*';
+export const PATTERN_ONE_LOWERCASE = '.*[a-z].*';
 
 export function notifyOnObservableCancel<T>(observable: Observable<T>, callback: () => void): Observable<T> {
     return new Observable<T>((subscriber: Subscriber<T>) => {
@@ -137,10 +135,11 @@ export function notifyOnObservableCancel<T>(observable: Observable<T>, callback:
         });
         return () => {
             subscription.unsubscribe();
-            if (canceled)
+            if (canceled) {
                 callback();
-        }
-    })
+            }
+        };
+    });
 }
 
 export function tomorrow(): Date {

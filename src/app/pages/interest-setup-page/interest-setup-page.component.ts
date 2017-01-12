@@ -61,17 +61,17 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
 
   findInterestByFos(fos: FOSModel): InterestModel {
     return _.find(this.interests, (interest: InterestModel) => {
-      return interest.fos.code == fos.code;
-    })
+      return interest.fos.code === fos.code;
+    });
   }
 
-  isRemovable = (fos: FOSModel): boolean => { 
+  isRemovable = (fos: FOSModel): boolean => {
     return this.findInterestByFos(fos) != null;
   }
 
   fosAdded(fos: FOSModel) {
     if (this.isRemovable(fos)) {
-      console.error("${fos.name} was already added");
+      console.error('${fos.name} was already added');
     } else {
       this.interests.push({
         fos: fos,
@@ -83,16 +83,16 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
 
   fosRemoved(fos: FOSModel) {
     if (!this.isRemovable(fos)) {
-      console.error("${fos.name} wasn't added, but tried to remove it");
+      console.error('${fos.name} wasn\'t added, but tried to remove it');
     } else {
       let toDelete = this.findInterestByFos(fos);
-      _.remove(this.interests, (f) => {return toDelete === f});
+      _.remove(this.interests, (f) => { return toDelete === f; });
     }
   }
 
   submit() {
     this.subscriptions.push(this.accountService.patchInterests(this.interests).subscribe((response) => {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }));
   }
 

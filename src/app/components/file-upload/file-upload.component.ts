@@ -3,7 +3,7 @@ import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { ResponseModel, _BlobModel } from '../../models/dto';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from "rxjs";
+import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
 import { NotificationService } from '../../services/notification.service';
 import { BaseComponent } from '../../base.component';
@@ -16,7 +16,7 @@ type CallbackType = (value: any) => void;
   styleUrls: ['./file-upload.component.scss'],
   providers: [
     FileService,
-    { 
+    {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FileUploadComponent),
       multi: true
@@ -31,13 +31,13 @@ export class FileUploadComponent extends BaseComponent implements OnInit, Contro
   subscription: Subscription;
   @Output() removed = new EventEmitter<any>();
   @Output() uploading = new EventEmitter<any>();
-  @Input() outputType = "object";
+  @Input() outputType = 'object';
   set value(obj: _BlobModel) {
     this._value = obj;
     if (this.changeCb) {
-      if (this.outputType == "object") {
+      if (this.outputType === 'object') {
         this.changeCb(obj);
-      } else if (this.outputType == "id") {
+      } else if (this.outputType === 'id') {
         this.changeCb(obj ? obj.blobId : null);
       }
     }
@@ -67,12 +67,12 @@ export class FileUploadComponent extends BaseComponent implements OnInit, Contro
         .subscribe(response => {
           this.value = response.object;
         }, (response: ResponseModel) => {
-          this.notificationService.error("file|fail", response.errors[0]);
+          this.notificationService.error('file|fail', response.errors[0]);
           this.deleted();
         });
+    } else {
+      console.error('No file selected');
     }
-    else
-      console.error("No file selected");
   }
 
   writeValue(value: _BlobModel): void {
@@ -88,16 +88,17 @@ export class FileUploadComponent extends BaseComponent implements OnInit, Contro
   }
 
   deleted(): void {
-    if (!this.subscription)
+    if (!this.subscription) {
       return;
+    }
     let tmp: Observable<any>;
     if (!this.subscription.closed) {
       tmp = Observable.of(null);
       this.subscription.unsubscribe();
-      console.debug("Canceling request");
+      console.debug('Canceling request');
     } else {
       tmp = this.fileService.remove(this.value);
-      console.debug("Removing file from backend");
+      console.debug('Removing file from backend');
     }
     this.subscriptions.push(tmp.subscribe(response => {
       this.removed.emit();
@@ -108,8 +109,9 @@ export class FileUploadComponent extends BaseComponent implements OnInit, Contro
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    if (this.subscription)
+    if (this.subscription) {
       this.subscription.unsubscribe();
+    }
   }
 
 }

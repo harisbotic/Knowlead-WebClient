@@ -1,9 +1,9 @@
-import { Injectable, Inject, Injector } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Injectable, Injector } from '@angular/core';
+import { Http } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { P2P_ALL, P2P_DELETE, P2P, P2P_MESSAGES, P2P_MESSAGE, P2P_SCHEDULE } from '../utils/urls';
+import { P2P_ALL, P2P_DELETE, P2P_MESSAGES, P2P_MESSAGE, P2P_SCHEDULE } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
 import { P2PMessageModel, P2PModel, ResponseModel, P2PScheduleModel } from '../models/dto';
@@ -15,7 +15,7 @@ export class P2pService {
 
   p2pFiller: StorageFiller<P2PModel>;
 
-  get modelUtilsService():ModelUtilsService {
+  get modelUtilsService(): ModelUtilsService {
     return this.injector.get(ModelUtilsService);
   }
 
@@ -40,24 +40,24 @@ export class P2pService {
 
   private modifyP2p(o: Observable<P2PModel>): Observable<P2PModel> {
     return o.flatMap(p2p => this.modelUtilsService.fillP2p(p2p))
-      .do((p2p: P2PModel) => this.storageService.setToStorage("p2p", this.p2pFiller, {id: p2p.p2pId}, p2p));
+      .do((p2p: P2PModel) => this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p));
   }
 
   delete(p2p: P2PModel): Observable<P2PModel> {
-    return this.modifyP2p(this.http.delete(P2P_DELETE + "/" + p2p.p2pId)
+    return this.modifyP2p(this.http.delete(P2P_DELETE + '/' + p2p.p2pId)
       .map(responseToResponseModel)
       .map(v => v.object));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
     // id is type of string when got from url parameter (ex. /p2p/3)
-    if (typeof(id) == "number" || typeof(id) == "string") {
-      return this.storageService.getFromStorage<P2PModel>("p2p", this.p2pFiller, {id: id});
+    if (typeof(id) === 'number' || typeof(id) === 'string') {
+      return this.storageService.getFromStorage<P2PModel>('p2p', this.p2pFiller, {id: id});
     } else {
-      this.storageService.setToStorage<P2PModel>("p2p", this.p2pFiller, {id: id.p2pId}, id);
+      this.storageService.setToStorage<P2PModel>('p2p', this.p2pFiller, {id: id.p2pId}, id);
       return this.get(id.p2pId);
     }
-    //return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);
+    // return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);
   }
 
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
@@ -65,7 +65,7 @@ export class P2pService {
   }
 
   getMessages(id: number): Observable<P2PMessageModel[]> {
-    return this.http.get(P2P_MESSAGES + "/" + id)
+    return this.http.get(P2P_MESSAGES + '/' + id)
       .map(responseToResponseModel)
       .map(v => v.object)
       .flatMap(v => this.modelUtilsService.fillP2pMessages(v));

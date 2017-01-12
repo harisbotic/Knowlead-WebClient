@@ -11,7 +11,10 @@ import { BaseComponent } from '../../base.component';
 })
 export class ErrorListComponent extends BaseComponent implements DoCheck {
 
+  @Input() checkDirty = true;
   display: string[];
+  _errors: string[];
+  _formControl: FormControl;
 
   refresh = () => {
     this.display = [];
@@ -23,22 +26,19 @@ export class ErrorListComponent extends BaseComponent implements DoCheck {
     }
   }
 
-  @Input() checkDirty = true;
-
-  _errors: string[];
   @Input() set errors(value: string[]) {
     this._errors = value;
     this.refresh();
   }
 
-  _formControl: FormControl;
 
   @Input() set formControlProperty(value: FormControl) {
     this._formControl = value;
-    if (value && value.registerOnChange)
+    if (value && value.registerOnChange) {
       value.registerOnChange(this.refresh);
-    else
-      console.warn("Form control set to " + value);
+    } else {
+      console.warn('Form control set to ' + value);
+    }
     this.refresh();
   }
   get Object() { return Object; };

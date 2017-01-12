@@ -5,7 +5,7 @@ import { responseToResponseModel } from '../utils/converters';
 import * as _ from 'lodash';
 import { StorageService } from './storage.service';
 
-export type StorageFiller<T> = (value: T) => Observable<T>; 
+export type StorageFiller<T> = (value: T) => Observable<T>;
 
 export class StorageSubject<T> extends Observable<T> {
     public value: T;
@@ -23,9 +23,10 @@ export class StorageSubject<T> extends Observable<T> {
         this.cacheKey = StorageService.getCacheKey(this.key, this.parameters);
         this._subscribe = this.subscribed.bind(this);
         if (STORAGE_CONFIG[key].parameters) {
-            STORAGE_CONFIG[key].parameters.forEach(key => {
-                if (parameters[key] === undefined)
-                    throw new Error("Parameter not found for request: " + key);
+            STORAGE_CONFIG[key].parameters.forEach(kkey => {
+                if (parameters[kkey] === undefined) {
+                    throw new Error('Parameter not found for request: ' + kkey);
+                }
             });
         }
     }
@@ -46,7 +47,7 @@ export class StorageSubject<T> extends Observable<T> {
         this.subscribers.push(subscriber);
         return () => {
             subscriber.unsubscribe();
-            this.subscribers = this.subscribers.filter((sub) => sub != subscriber);
+            this.subscribers = this.subscribers.filter((sub) => sub !== subscriber);
         };
     }
 
@@ -74,25 +75,27 @@ export class StorageSubject<T> extends Observable<T> {
         }
     }
 
-    public refresh(force?:boolean) {
+    public refresh(force?: boolean) {
         // console.debug(`Cache ${this.cacheKey}: Loading from API`);
-        if (this.fetching && !force)
+        if (this.fetching && !force) {
             return;
+        }
         this.fetching = true;
         let params: URLSearchParams;
-        let suffix = "";
+        let suffix = '';
         if (this.parameters != null) {
             let parameters = _.clone(this.parameters);
-            if (parameters["id"]) {
-                suffix = "/" + parameters["id"];
-                delete parameters["id"];
+            if (parameters['id']) {
+                suffix = '/' + parameters['id'];
+                delete parameters['id'];
             }
             params = new URLSearchParams();
-            for (let searchkey in parameters)
+            for (let searchkey of Object.keys(parameters)) {
                 params.set(searchkey, parameters[searchkey]);
+            }
         }
-        let o = this.http.get(STORAGE_CONFIG[this.key].api + suffix, {search: params})
-            //.retry(10)
+        this.http.get(STORAGE_CONFIG[this.key].api + suffix, {search: params})
+            // .retry(10)
             .finally(() => {
                 this.fetching = false;
             })
@@ -104,11 +107,9 @@ export class StorageSubject<T> extends Observable<T> {
     }
 
     protected notifyObservers() {
-        let before = this.subscribers.length;
         this.subscribers = this.subscribers.filter(s => !s.closed);
         this.subscribers.forEach(subscriber => {
             subscriber.next(this.value);
         });
-        // console.debug(`Cache ${this.cacheKey}: subscribers count: ${this.subscribers.length} (${before - this.subscribers.length} deleted)`);
     }
 }

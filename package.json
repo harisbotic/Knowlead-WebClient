@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve --host 0.0.0.0",
-    "lint": "tslint \"src/**/*.ts\"",
+    "lint": "tslint \"src/**/*.ts\" --exclude \"src/typings/**\" --exclude \"src/typings.d.ts\" --exclude \"src/app/signalr/**\" --exclude \"src/app/models/dto.ts\" --exclude \"src/app/models/constants.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"

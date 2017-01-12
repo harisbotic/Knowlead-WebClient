@@ -9,7 +9,7 @@ import { BaseComponent } from '../../base.component';
 export class SelectableListComponent extends BaseComponent implements OnInit {
 
   @Input() items: any[];
-  @Input() isRemovableCallback: (item: any) => boolean; 
+  @Input() isRemovableCallback: (item: any) => boolean;
   @Input() displayProperty: string;
   @Output() itemClicked = new EventEmitter<any>();
   @Output() itemRemoved = new EventEmitter<any>();
@@ -27,8 +27,9 @@ export class SelectableListComponent extends BaseComponent implements OnInit {
   }
 
   displayItem(item): string {
-    if (this.displayProperty != null)
+    if (this.displayProperty != null) {
       return item[this.displayProperty];
+    }
     return item;
   }
 

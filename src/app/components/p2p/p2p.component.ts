@@ -16,7 +16,7 @@ import { RealtimeService } from '../../services/realtime.service';
 export class P2pComponent extends BaseComponent implements OnInit {
 
   _p2p: P2PModel;
-  
+
   @Input() set p2pId(value: number) {
     if (value != null) {
       this.subscriptions.push(this.p2pService.get(value).subscribe((p2p) => this._p2p = p2p));
@@ -46,20 +46,22 @@ export class P2pComponent extends BaseComponent implements OnInit {
 
   deleted() {
     this.subscriptions.push(this.p2pService.delete(this.p2p).subscribe(undefined, (error: ResponseModel) => {
-      this.notificationService.error("p2p|delete fail", error && error.errors ? error.errors[0] : undefined);
+      this.notificationService.error('p2p|delete fail', error && error.errors ? error.errors[0] : undefined);
     }));
   }
 
   deletable(): boolean {
-    if (this.p2p.isDeleted)
+    if (this.p2p.isDeleted) {
       return false;
-    return (this.user) ? this.user.id == this.p2p.createdById : false; 
+    }
+    return (this.user) ? this.user.id === this.p2p.createdById : false;
   }
 
   callable(): boolean {
-    if (!this.user || !this.p2p)
+    if (!this.user || !this.p2p) {
       return false;
-    return !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById == this.user.id;
+    }
+    return !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById === this.user.id;
   }
 
   call() {

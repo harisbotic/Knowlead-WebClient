@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ResponseModel, _BlobModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
-import { Http, URLSearchParams } from '@angular/http';
+import { Http } from '@angular/http';
 import { responseToResponseModel } from '../utils/converters';
 import { FILE_UPLOAD, FILE_REMOVE } from '../utils/urls';
 
@@ -12,7 +12,7 @@ export class FileService {
 
   upload(file: any): Observable<ResponseModel> {
     let input = new FormData();
-    input.append("file", file);
+    input.append('file', file);
 
     return this.http
         .post(FILE_UPLOAD, input)
@@ -20,12 +20,13 @@ export class FileService {
   }
 
   remove(file: _BlobModel): Observable<ResponseModel> {
-    if (!file)
+    if (!file) {
       return Observable.throw({
-        errors: ["File not set"]
+        errors: ['File not set']
       });
+    }
     return this.http
-      .delete(FILE_REMOVE + "/" + file.blobId)
+      .delete(FILE_REMOVE + '/' + file.blobId)
       .map(responseToResponseModel);
   }
 

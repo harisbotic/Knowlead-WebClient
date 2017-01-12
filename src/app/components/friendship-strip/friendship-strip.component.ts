@@ -14,11 +14,11 @@ export class FriendshipStripComponent extends BaseComponent implements OnInit {
 
   me: ApplicationUserModel;
   actions = FriendshipDTOActions;
-
-  constructor(protected chatService: ChatService, protected accountService: AccountService) {super() }
-
   friendship: FriendshipModel;
   _otherId: string;
+
+  constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
+
   @Input() set otherId(value: string) {
     this._otherId = value;
     this.subscriptions.push(this.chatService.getFriendshipStatus(value).subscribe(friendship => this.friendship = friendship));
@@ -29,12 +29,13 @@ export class FriendshipStripComponent extends BaseComponent implements OnInit {
   }
 
   isSelf() {
-    return this.me && this.me.id == this._otherId;
+    return this.me && this.me.id === this._otherId;
   }
 
   doAction(action: FriendshipDTOActions) {
-    if (action == undefined)
-      return console.error("Friendship action is undefined");
+    if (action === undefined) {
+      return console.error('Friendship action is undefined');
+    }
     this.chatService.friendshipActionById(this._otherId, action);
   }
 

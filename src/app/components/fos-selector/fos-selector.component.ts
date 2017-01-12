@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, ViewChild, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FOSModel } from '../../models/dto';
 import { StorageService } from '../../services/storage.service';
-import { baseLookup, stringContains, getFOSParents } from '../../utils/index';
+import { stringContains, getFOSParents } from '../../utils/index';
 import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
 import { BaseComponent } from '../../base.component';
 
@@ -13,7 +13,7 @@ type CallbackType = (value: any) => void;
   templateUrl: './fos-selector.component.html',
   styleUrls: ['./fos-selector.component.scss'],
   providers: [
-    { 
+    {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FosSelectorComponent),
       multi: true
@@ -22,9 +22,9 @@ type CallbackType = (value: any) => void;
 })
 export class FosSelectorComponent extends BaseComponent implements OnInit, ControlValueAccessor {
 
-  @ViewChild("lookupElement") lookupElement: EmptyLookupComponent<FOSModel>;
+  @ViewChild('lookupElement') lookupElement: EmptyLookupComponent<FOSModel>;
 
-  @Input() outputType = "object";
+  @Input() outputType = 'object';
 
   parents: FOSModel[] = [];
 
@@ -41,11 +41,12 @@ export class FosSelectorComponent extends BaseComponent implements OnInit, Contr
     }
     this._value = value;
     if (this.chCallback != null && this.callCallbacks) {
-      let tmp = value == this.root ? null : value;
-      if (this.outputType == "object")
+      let tmp = value === this.root ? null : value;
+      if (this.outputType === 'object') {
         this.chCallback(tmp);
-      else
+      } else {
         this.chCallback(tmp ? tmp.coreLookupId : null);
+      }
     }
     this.parents = this.getParents();
     this.callCallbacks = true;
@@ -65,61 +66,67 @@ export class FosSelectorComponent extends BaseComponent implements OnInit, Contr
       let cb = (fos: any) => {
         if (fos.children) {
           fos.children.forEach((f: any) => {
-            if (fos.displayName != null)
-              f.displayName = fos.displayName + " > " + f.name;
-            else
+            if (fos.displayName != null) {
+              f.displayName = fos.displayName + ' > ' + f.name;
+            } else {
               f.displayName = f.name;
+            }
           });
           fos.children.forEach(cb);
         }
-      }
+      };
       cb(this.root);
-      this.root.name = "All";
+      this.root.name = 'All';
     }));
   }
 
   lookup = (query: string): FOSModel[] => {
-    if (this.value == null)
+    if (this.value == null) {
       return null;
-    if (query == "")
+    }
+    if (query === '') {
       return this.value.children;
+    }
     let res = <FOSModel[]>[];
     let cb = (fos: FOSModel) => {
-      if (stringContains(fos.name, query))
+      if (stringContains(fos.name, query)) {
         res.push(fos);
+      }
       if (fos.children != null) {
         fos.children.forEach(cb);
       }
-    }
-    if (this.value.children != null)
+    };
+    if (this.value.children != null) {
       this.value.children.forEach(cb);
+    }
     return res;
   }
 
-  writeValue(obj: FOSModel) : void {
+  writeValue(obj: FOSModel): void {
     this.callCallbacks = false;
     this.value = obj;
   }
 
-  registerOnChange(fn: CallbackType) : void {
+  registerOnChange(fn: CallbackType): void {
     this.chCallback = fn;
   }
 
-  registerOnTouched(fn: CallbackType) : void {
+  registerOnTouched(fn: CallbackType): void {
     this.tcCallback = fn;
   }
 
   getParents(): FOSModel[] {
     let ret = [this.root].concat(getFOSParents(this.value).reverse());
-    if (this.value != this.root && this.value != null)
+    if (this.value !== this.root && this.value != null) {
       ret.push(this.value);
+    }
     return ret;
   }
 
   breadcrumbClicked(item) {
     this.value = item;
     setTimeout(() => {
-      if (this.lookupElement) this.lookupElement.focused()
+      if (this.lookupElement) { this.lookupElement.focused(); }
     }, 100);
   }
 

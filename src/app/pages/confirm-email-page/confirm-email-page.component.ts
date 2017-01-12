@@ -16,28 +16,28 @@ import { BaseComponent } from '../../base.component';
 export class ConfirmEmailPageComponent extends BaseComponent implements OnInit {
   confirm: ConfirmEmailModel;
   response: ResponseModel;
-  constructor(protected route:ActivatedRoute,
+  constructor(protected route: ActivatedRoute,
               protected accountService: AccountService,
               protected sessionService: SessionService,
               protected router: Router) {
     super();
   }
 
-  confirmEmail(){
+  confirmEmail() {
     this.subscriptions.push(this.accountService.confirmEmail(this.confirm).subscribe((result) => {
       this.subscriptions.push(this.sessionService
         .login({email: this.confirm.email, password: this.confirm.password})
         .subscribe(() => {
-          this.router.navigate(["/profilesetup"]);
+          this.router.navigate(['/profilesetup']);
         }
       ));
-    },(errorResult)=>{
+    }, (errorResult) => {
       this.response = errorResult.json();
     }));
   }
   ngOnInit() {
-    this.subscriptions.push(this.route.queryParams.subscribe((params:any) => {
-      this.confirm = {code: params.code, email: params.email, password: ""};
+    this.subscriptions.push(this.route.queryParams.subscribe((params: any) => {
+      this.confirm = {code: params.code, email: params.email, password: ''};
       this.confirm.code = params.code;
       this.confirm.email = params.email;
     }));

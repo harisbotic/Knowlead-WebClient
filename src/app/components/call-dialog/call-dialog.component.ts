@@ -19,12 +19,13 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
   user: ApplicationUserModel;
   call: _CallModel;
   p2p: P2PModel;
+  fullName = ModelUtilsService.getUserFullName;
 
   constructor(
     protected accountService: AccountService,
     protected realtimeService: RealtimeService,
     protected p2pService: P2pService,
-    protected router: Router) { super() }
+    protected router: Router) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
@@ -47,31 +48,33 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
     }));
   }
 
-  fullName = ModelUtilsService.getUserFullName;
-
   otherUser(): Observable<ApplicationUserModel> {
-    if (!this.user || !this.call)
+    if (!this.user || !this.call) {
       return null;
+    }
     return this.accountService.getUserById(ModelUtilsService.getOtherCallParties(this.call, this.user.id)[0].peerId);
   }
 
   isCaller(): boolean {
-    if (!this.user || !this.call)
+    if (!this.user || !this.call) {
       return null;
-    return this.call.callerId == this.user.id;
+    }
+    return this.call.callerId === this.user.id;
   }
 
   callPrefix(): string {
-    if (!this.user || !this.call)
+    if (!this.user || !this.call) {
       return null;
-    if (this.isCaller())
-      return "call|sending call";
-    else
-      return "call|receiving call";
+    }
+    if (this.isCaller()) {
+      return 'call|sending call';
+    } else {
+      return 'call|receiving call';
+    }
   }
 
   redirect() {
-    this.router.navigate(["/call/" + this.call.callId]);
+    this.router.navigate(['/call/' + this.call.callId]);
     this.cleanup();
   }
 

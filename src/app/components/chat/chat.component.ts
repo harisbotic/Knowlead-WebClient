@@ -11,10 +11,11 @@ import * as _ from 'lodash';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(protected chatService: ChatService, protected modelUtilsService: ModelUtilsService) { }
-
   friends: ApplicationUserModel[] = [];
   converisations: ApplicationUserModel[] = [];
+  fullName = ModelUtilsService.getUserFullName;
+
+  constructor(protected chatService: ChatService, protected modelUtilsService: ModelUtilsService) { }
 
   ngOnInit() {
     this.chatService.getAcceptedFriendsIds()
@@ -25,21 +26,21 @@ export class ChatComponent implements OnInit {
   }
 
   private getConverisationIndex(other: ApplicationUserModel): number {
-    return _.findIndex(this.converisations, conv => conv.id == other.id);
+    return _.findIndex(this.converisations, conv => conv.id === other.id);
   }
 
   openConverisation(other: ApplicationUserModel) {
-    if (this.getConverisationIndex(other) != -1)
+    if (this.getConverisationIndex(other) !== -1) {
       return;
+    }
     this.converisations.push(other);
   }
 
   closeConverisation(other: ApplicationUserModel) {
     let idx = this.getConverisationIndex(other);
-    if (idx != -1)
+    if (idx !== -1) {
       this.converisations.splice(idx);
+    }
   }
-
-  fullName = ModelUtilsService.getUserFullName;
 
 }

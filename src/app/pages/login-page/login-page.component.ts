@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from "../../services/session.service";
-import "rxjs/Rx"
+import { SessionService } from '../../services/session.service';
+import 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { ResponseModel, RegisterUserModel } from './../../models/dto';
+import { ResponseModel } from './../../models/dto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BaseComponent } from '../../base.component';
 
@@ -29,7 +29,7 @@ export class LoginPageComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.sessionService.login(this.form.value).finally(() => {
       this.busy = false;
     }).subscribe(loginResponse => {
-      this.router.navigate(["/home"]);
+      this.router.navigate(['/home']);
     }, (errorResponse) => {
       this.response = errorResponse;
     }));
@@ -37,8 +37,8 @@ export class LoginPageComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      email: new FormControl("", [Validators.required]),
-      password: new FormControl("", [Validators.required])
-    })
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+    });
   }
 }

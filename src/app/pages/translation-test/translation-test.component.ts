@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { extractTranslationPage, extractTranslationName } from './../../utils/translate-utils';
 import { BaseComponent } from '../../base.component';
@@ -19,10 +19,10 @@ export class TranslationTestComponent extends BaseComponent {
     for (let language of translate.getLangs()) {
       this.subscriptions.push(translate.getTranslation(language)
         .subscribe(translation => {
-          for (var key in translation) {
-            var row = null;
-            for (var tmprow in this.data) {
-              if (tmprow["key"] == key) {
+          for (let key of Object.keys(translation)) {
+            let row = null;
+            for (let tmprow in this.data) {
+              if (tmprow['key'] === key) {
                 row = tmprow;
                 break;
               }

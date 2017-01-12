@@ -4,7 +4,6 @@ import { ModelUtilsService } from '../../services/model-utils.service';
 import { AccountService } from '../../services/account.service';
 import { FriendshipStatus, ApplicationUserModel, FriendshipModel, FriendshipDTOActions } from '../../models/dto';
 import { BaseComponent } from '../../base.component';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-friendship-page',
@@ -13,12 +12,12 @@ import * as _ from 'lodash';
 })
 export class FriendshipPageComponent extends BaseComponent implements OnInit {
 
-  constructor(protected chatService: ChatService, protected accountService: AccountService) { super() }
-
   fullName = ModelUtilsService.getUserFullName;
   friendshipStatus = FriendshipStatus;
   actions = FriendshipDTOActions;
   me: ApplicationUserModel;
+
+  constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user =>

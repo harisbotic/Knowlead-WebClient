@@ -6,20 +6,20 @@ import { FrontendErrorCodes } from './../models/frontend.constants';
 export function safeJsonExtraction(response: Response) {
     try {
         return response.json();
-    } catch(SyntaxError) {
+    } catch (SyntaxError) {
         return null;
     }
 }
 
-export function responseToLoginResponse(response:Response) : LoginResponse {
+export function responseToLoginResponse(response: Response): LoginResponse {
     return safeJsonExtraction(response);
 }
 
-export function responseToResponseModel(response:Response) : ResponseModel {
+export function responseToResponseModel(response: Response): ResponseModel {
     return safeJsonExtraction(response);
 }
 
-export function responseToUser(response:Response) : ApplicationUserModel {
+export function responseToUser(response: Response): ApplicationUserModel {
     return responseToResponseModel(response).object;
 }
 
@@ -27,7 +27,9 @@ export function loginResponseToResponseModel(loginResponse: LoginResponse): Resp
     if (loginResponse == null) {
         return <ResponseModel>{errors: [FrontendErrorCodes.networkError]};
     }
-    if (loginResponse.error_description != null && loginResponse.error_description != "") {
+    if (loginResponse.error_description != null && loginResponse.error_description !== '') {
         return <ResponseModel>{errors: [loginResponse.error.toUpperCase()]};
-    } else return null;
+    } else {
+        return null;
+    }
 }

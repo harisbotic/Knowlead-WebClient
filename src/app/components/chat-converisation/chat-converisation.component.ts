@@ -9,6 +9,8 @@ import { ModelUtilsService } from '../../services/model-utils.service';
 })
 export class ChatConverisationComponent implements OnInit {
 
+  fullName = ModelUtilsService.getUserFullName;
+
   @Input() user: ApplicationUserModel;
   @Output() close = new EventEmitter();
 
@@ -16,8 +18,6 @@ export class ChatConverisationComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  fullName = ModelUtilsService.getUserFullName;
 
   closed() {
     this.close.emit();

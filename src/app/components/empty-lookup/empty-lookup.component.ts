@@ -9,38 +9,41 @@ import { BaseComponent } from '../../base.component';
 })
 export class EmptyLookupComponent<T> extends BaseComponent implements OnInit {
 
-  @Input() placeholder = "";
+  isFocused: boolean = false;
+
+  @Input() placeholder = '';
   @Input() lookup: (query: string) => T[] | Observable<T[]>;
   @Input() field: string;
   @Output() pickChange = new EventEmitter<T>();
-  @ViewChild("inputElement") inputElement: ElementRef;
+  @ViewChild('inputElement') inputElement: ElementRef;
   items: T[];
   value: string;
 
   getText(item: T) {
-    if (this.field)
+    if (this.field) {
       return item[this.field];
-    else
+    } else {
       return item;
+    }
   }
 
   refresh() {
-    if (this.lookup == null)
+    if (this.lookup == null) {
       return;
-    let ret = this.lookup(this.value || "");
+    }
+    let ret = this.lookup(this.value || '');
     if (ret instanceof Array) {
       ret = Observable.of(ret);
     }
-    if (ret != null)
+    if (ret != null) {
       this.subscriptions.push(ret.subscribe(vals => this.items = vals));
+    }
   }
 
   selected(item: T) {
     this.pickChange.emit(item);
     this.focused();
   }
-  
-  isFocused: boolean = false;
 
   constructor() {
     super();
@@ -61,10 +64,10 @@ export class EmptyLookupComponent<T> extends BaseComponent implements OnInit {
 
   blured() {
     setTimeout(() => {
-      if (document.activeElement != this.inputElement.nativeElement) {
+      if (document.activeElement !== this.inputElement.nativeElement) {
         this.isFocused = false;
       }
-    },100);
+    }, 100);
   }
 
   clicked(event: MouseEvent) {

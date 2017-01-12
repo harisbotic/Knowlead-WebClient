@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { FormControl } from '@angular/forms';
 
 export interface DateValidatorConfiguration {
@@ -13,15 +12,16 @@ export interface DateValidationErrorValue {
 }
 
 export interface DateValidatorError {
-    dateInvalid: DateValidationErrorValue
+    dateInvalid: DateValidationErrorValue;
 }
 
 export function dateValidator(configuration: DateValidatorConfiguration): (control: FormControl) => DateValidatorError {
-    return (control : FormControl) => {
+    return (control: FormControl) => {
         let param = control.value;
-        if (param == null)
+        if (param == null) {
             return null;
-        let value = typeof(param) === "string" ? <Date>JSON.parse(param) : <Date>param;
+        }
+        let value = typeof(param) === 'string' ? <Date>JSON.parse(param) : <Date>param;
         let invalid = false;
         if (configuration.minDate) {
             invalid = invalid || value < configuration.minDate;
@@ -32,16 +32,17 @@ export function dateValidator(configuration: DateValidatorConfiguration): (contr
         } else if (configuration.maxDate) {
             invalid = invalid || value > configuration.maxDate;
         } else {
-            throw new Error("Invalid date validator configuration");
+            throw new Error('Invalid date validator configuration');
         }
         let ret: DateValidatorError = {
             dateInvalid: {
                 actualDate: value,
                 dateConfiguration: configuration
             }
-        }
-        if (invalid)
+        };
+        if (invalid) {
             return ret;
+        }
         return null;
-    }
+    };
 }

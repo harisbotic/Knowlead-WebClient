@@ -1,4 +1,4 @@
-type NotificationType = "error" | "success" | "warning" | "info";
+type NotificationType = 'error' | 'success' | 'warning' | 'info';
 
 export interface NotificationModel {
     type: NotificationType;

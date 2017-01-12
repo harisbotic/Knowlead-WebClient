@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { AccountService } from '../../services/account.service';
-import { ApplicationUserModel, FriendshipStatus } from '../../models/dto';
+import { ApplicationUserModel } from '../../models/dto';
 import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../../base.component';
 import { ChatService } from '../../services/chat.service';
@@ -29,7 +29,7 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
       this.user = user;
     }));
     this.subscriptions.push(this.route.params.subscribe(params => {
-      this.subscriptions.push(this.accountService.getUserById(params["id"], true).subscribe(user => {
+      this.subscriptions.push(this.accountService.getUserById(params['id'], true).subscribe(user => {
         this.target = user;
       }));
     }));

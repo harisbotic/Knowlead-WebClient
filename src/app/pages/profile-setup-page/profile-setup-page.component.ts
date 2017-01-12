@@ -1,13 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApplicationUserModel, CountryModel, LanguageModel, StateModel, ResponseModel } from './../../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './../../services/storage.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
-import { TranslationTestComponent } from './../translation-test/translation-test.component';
 import { baseLookup } from './../../utils/index';
 import * as _ from 'lodash';
-import { SessionService } from './../../services/session.service';
 import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
 import { joinTranslation } from '../../utils/translate-utils';
@@ -45,25 +43,25 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
       this.user = _.cloneDeep(user);
       this.form = new FormGroup({
-        "name": new FormControl(this.user.name, [Validators.required]),
-        "surname": new FormControl(this.user.surname, [Validators.required]),
-        "birthdate": new FormControl(this.user.birthdate, [Validators.required, dateValidator({minYearsOld: 10})]),
-        "isMale": new FormControl(this.user.isMale, [Validators.required]),
-        "aboutMe": new FormControl(this.user.aboutMe),
-        "country": new FormControl(this.user.country),
-        "motherTongue": new FormControl(this.user.motherTongue, [Validators.required]),
-        "languages": new FormControl(this.user.languages),
-        "state": new FormControl(this.user.state)
+        'name': new FormControl(this.user.name, [Validators.required]),
+        'surname': new FormControl(this.user.surname, [Validators.required]),
+        'birthdate': new FormControl(this.user.birthdate, [Validators.required, dateValidator({minYearsOld: 10})]),
+        'isMale': new FormControl(this.user.isMale, [Validators.required]),
+        'aboutMe': new FormControl(this.user.aboutMe),
+        'country': new FormControl(this.user.country),
+        'motherTongue': new FormControl(this.user.motherTongue, [Validators.required]),
+        'languages': new FormControl(this.user.languages),
+        'state': new FormControl(this.user.state)
       });
 
       this.countryChanged(this.user.country);
       this.stateChanged(this.user.state);
       this.mainLanguageChanged(this.user.motherTongue);
 
-      for (let key1 in this.user) {
+      for (let key1 of Object.keys(this.user)) {
         let found = false;
         for (let key2 in this.form.controls) {
-          if (key2 == key1 || key1 == key2 + "Id") {
+          if (key2 === key1 || key1 === key2 + 'Id') {
             found = true;
           }
         }
@@ -75,12 +73,13 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
   }
 
   submit() {
-    if (!this.form.valid)
+    if (!this.form.valid) {
       return;
+    }
     this.subscriptions.push(this.accountService
       .patchUserDetails(this.form.value)
       .subscribe((response: ResponseModel) => {
-        this.router.navigate(["/interestsetup"]);
+        this.router.navigate(['/interestsetup']);
       }, (error: ResponseModel) => {
         this.response = error;
       }
@@ -88,10 +87,11 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
   }
 
   getGender(): string {
-    if (this.form.value.isMale == null)
-      return joinTranslation("common", "gender")
-    else
-      return this.form.value.isMale ? joinTranslation("common", "male") : joinTranslation("common", "female");
+    if (this.form.value.isMale == null) {
+      return joinTranslation('common', 'gender');
+    } else {
+      return this.form.value.isMale ? joinTranslation('common', 'male') : joinTranslation('common', 'female');
+    }
   }
 
   countryLookup = (query: string): Observable<CountryModel[]> => {
@@ -101,13 +101,14 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
   languageLookup = (query: string): Observable<LanguageModel[]> => {
     return baseLookup(this.storageService.getLanguages()
       .map((languages: LanguageModel[]) => {
-        return _.filter(languages, (language) => 
-        {
+        return _.filter(languages, (language) => {
           if (this.form.value.motherTongue != null &&
-              language.coreLookupId == this.form.value.motherTongue.coreLookupId)
+              language.coreLookupId === this.form.value.motherTongue.coreLookupId) {
             return false;
-          if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null)
+          }
+          if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null) {
             return false;
+          }
           return true;
         });
       })
@@ -132,14 +133,15 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
       this.subscriptions.push(this.storageService.getStates(country).subscribe((states: StateModel[]) => {
         this.states = states;
       }));
-    }
-    else
+    } else {
       this.form.patchValue({countryId: null});
+    }
   }
 
   languageAdded(language: LanguageModel) {
-    if (language != null)
+    if (language != null) {
       this.form.patchValue({languages: _.uniq([...(this.form.value.languages || []), language])});
+    }
   }
 
   languageRemoved(language: LanguageModel) {
