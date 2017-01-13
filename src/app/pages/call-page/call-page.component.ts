@@ -48,9 +48,10 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       return;
     }
     console.debug('Initializing peer');
-    navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((myStream) => {
+    navigator.getUserMedia({video: true, audio: false}, (myStream) => {
       this.myStream = myStream;
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
+      console.debug('Peer initialized');
       this.peer.on('signal', (data) => {
         console.log('Got signal !');
         this.mySDP = data;
@@ -78,8 +79,13 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       delete this.mySDP;
       delete this.peer;
     }
-    if (this.myStream && this.myStream.stop) {
-      this.myStream.stop();
+    if (this.myStream) {
+      for (let track of this.myStream.getTracks()) {
+        track.stop();
+      }
+      if (this.myStream.stop) {
+        this.myStream.stop();
+      }
     }
     delete this.myStream;
     if (this.otherStream && this.otherStream.stop) {

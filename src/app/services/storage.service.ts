@@ -49,7 +49,7 @@ export class StorageService {
 
   public setAccessToken(value: string) {
     this.access_token = value;
-    if (value !== undefined) {
+    if (value) {
       console.debug('Setting access token');
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
