@@ -48,7 +48,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       return;
     }
     console.debug('Initializing peer');
-    navigator.getUserMedia({video: true, audio: false}, (myStream) => {
+    navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((myStream) => {
       this.myStream = myStream;
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
       console.debug('Peer initialized');

@@ -54,7 +54,7 @@ export class AccountService {
       .map(responseToResponseModel)
       .map(response => response.object)
       .do((user: ApplicationUserModel) => {
-        if (user != null) {
+        if (!user) {
           this.storageService.setToStorage('user', this.userFiller, null, user);
           this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: true}, user);
           this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
@@ -69,13 +69,13 @@ export class AccountService {
     (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
     let toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id'];
     cl.countryId = (cl.country) ? cl.country.geoLookupId : undefined;
-    cl.stateId = (cl.state !== undefined) ? cl.state.geoLookupId : undefined;
+    cl.stateId = (cl.state) ? cl.state.geoLookupId : undefined;
     cl.motherTongueId = (cl.motherTongue) ? cl.motherTongue.coreLookupId : undefined;
     toDelete.forEach((key) => {
       delete cl[key];
     });
     cl.languages = fillArray(cl.languages, 'coreLookupId');
-    cl = _.mapValues(cl, (v) => v === null ? undefined : v);
+    cl = _.mapValues(cl, (v) => v ? undefined : v);
     return cl;
   }
 
