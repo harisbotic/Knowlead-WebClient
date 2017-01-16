@@ -75,7 +75,7 @@ export class AccountService {
       delete cl[key];
     });
     cl.languages = fillArray(cl.languages, 'coreLookupId');
-    cl = _.mapValues(cl, (v) => v ? undefined : v);
+    cl = _.mapValues(cl, (v) => v ? v : undefined);
     return cl;
   }
 
