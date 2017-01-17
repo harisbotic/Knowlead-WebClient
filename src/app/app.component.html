@@ -1,5 +1,5 @@
-<!--<a routerLink="/login">Login</a> | 
-<a routerLink="/register">Register</a> | 
+<!--<a routerLink="/login">Login</a> |
+<a routerLink="/register">Register</a> |
 <a routerLink="/">Unlogged home</a> |
 <a routerLink="/home">Logged home</a> |
 <a routerLink="/profilesetup">Profile setup</a> |
@@ -11,39 +11,39 @@
   <ul class="slds-tabs--scoped__nav" role="tablist">
 
     <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/login" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/login" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-1" id="tab-scoped-1__item">Login</a></li>
 
     <li class="slds-tabs--scoped__item slds-text-title--caps " role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/register" role="tab" tabindex="0" aria-selected="true" 
+     <a class="slds-tabs--scoped__link" routerLink="/register" role="tab" tabindex="0" aria-selected="true"
      aria-controls="tab-scoped-2" id="tab-scoped-2__item">register</a></li>
 
     <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-3__item">unlogged home</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/home" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/home" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-4__item">logged home</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/profilesetup" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/profilesetup" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-5__item">profile setup</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/interestsetup" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/interestsetup" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-6__item">interests setup</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/translatetest" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/translatetest" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-7__item">translation test</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/p2ptest" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/p2ptest" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-8__item">p2p create test</a></li>
 
      <li class="slds-tabs--scoped__item slds-text-title--caps" role="presentation">
-     <a class="slds-tabs--scoped__link" routerLink="/friendships" role="tab" tabindex="-1" aria-selected="false" 
+     <a class="slds-tabs--scoped__link" routerLink="/friendships" role="tab" tabindex="-1" aria-selected="false"
      aria-controls="tab-scoped-3" id="tab-scoped-9__item">friendships</a></li>
   </ul>
 </div>
@@ -63,8 +63,8 @@
 </ngl-section>
 <app-call-dialog></app-call-dialog>
 <div class="slds-grid">
-  <div class="slds-size--5-of-6">
-    <router-outlet ></router-outlet>
-  </div>
-  <app-chat class="slds-size--1-of-6 slds-container--small"></app-chat>
+   <div class="slds-size--1-of-1 full-height"> 
+    <router-outlet></router-outlet>
+   </div> 
+  <!-- <app-chat class="slds-size--1-of-6 slds-container--small"></app-chat> -->
 </div>

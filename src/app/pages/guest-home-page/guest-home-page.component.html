@@ -1,5 +1,39 @@
-<h1>
-  Welcome to Knowlead.
-</h1>
-ovo ono
-<button (click)="pritisno()" type="button">Za harketa</button>
+<section class="main-section">
+    <div class="left-wrap">
+        <div class="logo">
+            <img src="/assets/images/knowlead_logo_white.png" alt="Knowlead Logo">
+        </div>
+
+        <div class="welcoming-text">
+            <h1 class="title">{{'guest-home-page|welcome title' | translate}}</h1>
+            <h1 class="title">{{'guest-home-page|welcome subtitle' | translate}}</h1>
+            <p class="info-text">
+                {{'guest-home-page|info text' | translate}}
+            </p>
+        </div>
+
+        <div class="button-wrap">
+            <button id="findout-button" (click)="pritisno()" type="button">{{'guest-home-page|button text' | translate}}</button>
+        </div>
+
+        
+    </div>
+    <div class="right-wrap">
+        <app-login-page></app-login-page>
+    </div>
+
+    <div class="footer-wrap">
+        <p class="footer-elements">
+            <span>{{'guest-home-page|footer careers' | translate}}</span>
+            <span>{{'guest-home-page|footer help and support' | translate}}</span>
+            <span>{{'guest-home-page|footer privacy' | translate}}</span>
+            <span>{{'guest-home-page|footer team' | translate}}</span>
+            <span>{{'guest-home-page|footer languages' | translate}}</span>
+            <span id="footnote">{{'guest-home-page|footer knowlead' | translate}}</span>
+        </p>
+        
+    </div>
+
+
+
+</section>

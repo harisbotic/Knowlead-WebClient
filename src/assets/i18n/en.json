@@ -14,12 +14,25 @@
     "common|other languages": "Other languages",
     "common|clear value": "Clear",
 
+    "guest-home-page|welcome title": "Welcome to Knowlead",
+    "guest-home-page|welcome subtitle": "Social Network Learning Platform",
+    "guest-home-page|info text": "Community where you can acquire needed knowledge. Learn new language, do your homework, prepare for exams, earn the minutes and much more!",
+    "guest-home-page|button text": "Find Out!",
+    "guest-home-page|footer careers": "Careers",
+    "guest-home-page|footer help and support": "Help & Support",
+    "guest-home-page|footer privacy": "Privacy",
+    "guest-home-page|footer team": "Team",
+    "guest-home-page|footer languages": "Languages",
+    "guest-home-page|footer knowlead": "Knowlead & 2017",
+
+
     "translation-test|title": "Test translation on english",
 
     "confirm-email-page|submit": "Submit",
 
     "login-page|submit": "Login",
-    "login-page|title": "Login",
+    "login-page|join": "Join for FREE",
+    "login-page|title": "Login to your Account",
     "login-page|forgot password": "Forgot your password?",
 
     "register-page|submit": "Register",

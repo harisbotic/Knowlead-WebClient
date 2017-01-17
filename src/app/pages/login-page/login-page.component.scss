@@ -1,5 +1,70 @@
-.slds-card__body {
-  ngl-form-element {
-    padding: 0 24px 0 24px;
-  }
-}
+@import "../../../styles.scss";
+
+.login-section {
+  width: 100%;
+  font-family: "Roboto";
+};
+
+.video-section {
+  width: 10%;
+  float: left;
+  height: 550px;
+  background-color: #fafbfd;
+  border-radius: 5px 0 0 5px;
+
+    img{
+      display: flex;
+      text-align: center center;
+      margin: 0 auto;
+      margin-top: 251px;
+    };
+};
+
+.login-form {
+  width: 60%;
+  float: left;
+  height: 550px;
+  background-color: white;
+  border-radius: 0 5px 5px 0;
+  border-left: 2px solid $divider-color;
+};
+
+.login-title {
+  padding: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  border-bottom: 2px solid $divider-color;
+};
+
+.global-errors {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 15px;
+};
+
+.form-wrap {
+  width: 85%;
+  margin: 0 auto;
+};
+
+ input[type=text], input[type=password] {
+   padding: 10px;
+};
+
+input[type=text] {
+  margin-top: 15px;
+};
+
+input[type=password] {
+  margin-bottom: 15px;
+};
+
+input[type=checkbox] {
+  float: left;
+};
+
+ .forgot-password {
+  float: right;
+  margin-top: -20px; 
+ };
+
