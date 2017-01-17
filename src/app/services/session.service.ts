@@ -18,16 +18,22 @@ export enum SessionEvent {
 export class SessionService {
 
   eventStream = new BehaviorSubject<SessionEvent>(undefined);
+  lastEvent: SessionEvent = undefined;
 
-  get storageService(): StorageService {
+  protected get storageService(): StorageService {
     return this.injector.get(StorageService);
   }
 
-  get http(): Http {
+  protected get http(): Http {
     return this.injector.get(Http);
   }
 
   constructor(protected injector: Injector) {
+    this.eventStream.subscribe(val => {
+      if (val !== undefined) {
+        this.lastEvent = val;
+      }
+    });
   }
 
   public login(cridentials: RegisterUserModel): Observable<LoginResponse> {
@@ -66,5 +72,9 @@ export class SessionService {
 
   logout() {
     this.eventStream.next(SessionEvent.LOGGED_OUT);
+  }
+
+  public getLastEventSync() {
+    return this.lastEvent;
   }
 }

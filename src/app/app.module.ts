@@ -48,6 +48,7 @@ import { ChatConverisationComponent } from './components/chat-converisation/chat
 import { FriendshipPageComponent } from './pages/friendship-page/friendship-page.component';
 import { FriendshipStripComponent } from './components/friendship-strip/friendship-strip.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,12 @@ import { HeaderComponent } from './components/header/header.component';
     })
   ],
   providers: [
+    // this solves problem "Unknown parameters for DI in constructor"
+    {
+      provide: AuthGuard,
+      deps: [Router, SessionService],
+      useClass: AuthGuard
+    },
     AccountService,
     ModelUtilsService,
     ChatService,
