@@ -47,10 +47,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatConverisationComponent } from './components/chat-converisation/chat-converisation.component';
 import { FriendshipPageComponent } from './pages/friendship-page/friendship-page.component';
 import { FriendshipStripComponent } from './components/friendship-strip/friendship-strip.component';
-
-export function getLoader(http: Http) {
-  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
-}
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +79,8 @@ export function getLoader(http: Http) {
     ChatComponent,
     ChatConverisationComponent,
     FriendshipPageComponent,
-    FriendshipStripComponent
+    FriendshipStripComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -116,3 +114,7 @@ export function getLoader(http: Http) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getLoader(http: Http) {
+  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+}
