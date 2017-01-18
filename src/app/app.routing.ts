@@ -16,7 +16,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-    { path: 'login', component: GuestHomePageComponent },
+    { path: 'login', redirectTo: '/' },
     { path: 'register', component: RegisterPageComponent },
     { path: '', component: GuestHomePageComponent },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },

@@ -53,6 +53,7 @@ export class StorageService {
       console.debug('Setting access token');
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
+      this.sessionService.emitLogin();
     } else {
       this.removeAccessToken();
     }
@@ -69,6 +70,9 @@ export class StorageService {
 
   public removeAccessToken() {
     console.debug('Removing access token');
+    if (this.access_token) {
+      this.sessionService.logout();
+    }
     delete this.access_token;
     delete this.access_token_value;
     localStorage.removeItem(STORE_ACCESS_TOKEN);
