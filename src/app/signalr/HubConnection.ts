@@ -12,10 +12,12 @@ interface InvocationResultDescriptor {
     readonly Result: any;
 }
 
+export { Connection } from "./Connection"
+
 export class HubConnection {
     private connection: Connection;
-    private callbacks: Map<string, (any) => void>;
-    private methods: Map<string, (...args:any[]) => void>;
+    private callbacks: Map<string, (invocationDescriptor: InvocationResultDescriptor) => void>;
+    private methods: Map<string, (...args: any[]) => void>;
     private id: number;
 
     constructor(url: string, queryString?: string) {
@@ -26,13 +28,17 @@ export class HubConnection {
             thisHubConnection.dataReceived(data);
         };
 
-        this.callbacks = new Map<string, (any) => void>();
-        this.methods = new Map<string, (...args:any[]) => void>();
+        this.callbacks = new Map<string, (InvocationResultDescriptor) => void>();
+        this.methods = new Map<string, (...args: any[]) => void>();
         this.id = 0;
     }
 
     private dataReceived(data: any) {
-        //TODO: separate JSON parsing
+        // TODO: separate JSON parsing
+        // Can happen if a poll request was cancelled
+        if (!data) {
+            return;
+        }
         var descriptor = JSON.parse(data);
         if (descriptor.Method === undefined) {
             let invocationResult: InvocationResultDescriptor = descriptor;
@@ -60,7 +66,7 @@ export class HubConnection {
         return this.connection.stop();
     }
 
-    invoke(methodName: string, ...args: any[]): Promise<void> {
+    invoke(methodName: string, ...args: any[]): Promise<any> {
 
         let id = this.id;
         this.id++;
@@ -74,7 +80,7 @@ export class HubConnection {
         let p = new Promise<any>((resolve, reject) => {
             this.callbacks[id] = (invocationResult: InvocationResultDescriptor) => {
                 if (invocationResult.Error != null) {
-                    reject(invocationResult.Error);
+                    reject(new Error(invocationResult.Error));
                 }
                 else {
                     resolve(invocationResult.Result);

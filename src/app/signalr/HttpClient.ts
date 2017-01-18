@@ -1,4 +1,9 @@
-export class HttpClient {
+export interface IHttpClient {
+    get(url: string): Promise<string>;
+    post(url: string, content: string): Promise<string>;
+}
+
+export class HttpClient implements IHttpClient {
     get(url: string): Promise<string> {
         return this.xhr("GET", url);
     }
@@ -8,7 +13,7 @@ export class HttpClient {
     }
 
     private xhr(method: string, url: string, content?: string): Promise<string> {
-        return new Promise((resolve, reject) => {
+        return new Promise<string>((resolve, reject) => {
             let xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
 

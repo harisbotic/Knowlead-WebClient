@@ -1,5 +1,6 @@
 import { ITransport, WebSocketTransport, ServerSentEventsTransport, LongPollingTransport } from "./Transports"
-import { HttpClient } from "./HttpClient"
+import { IHttpClient, HttpClient } from "./HttpClient"
+import { ISignalROptions } from "./ISignalROptions"
 
 enum ConnectionState {
     Disconnected,
@@ -12,40 +13,39 @@ export class Connection {
     private url: string;
     private queryString: string;
     private connectionId: string;
+    private httpClient: IHttpClient;
     private transport: ITransport;
     private dataReceivedCallback: DataReceived = (data: any) => { };
     private connectionClosedCallback: ConnectionClosed = (error?: any) => { };
 
-    constructor(url: string, queryString: string = "") {
+    constructor(url: string, queryString: string = "", options: ISignalROptions = {}) {
         this.url = url;
         this.queryString = queryString;
+        this.httpClient = options.httpClient || new HttpClient();
         this.connectionState = ConnectionState.Disconnected;
     }
 
-    start(transportName: string = 'webSockets'): Promise<void> {
+    async start(transportName: string = 'webSockets'): Promise<void> {
         if (this.connectionState != ConnectionState.Disconnected) {
             throw new Error("Cannot start a connection that is not in the 'Disconnected' state");
         }
 
         this.transport = this.createTransport(transportName);
         this.transport.onDataReceived = this.dataReceivedCallback;
-        this.transport.onError = e => this.stopConnection();
+        this.transport.onError = e => this.stopConnection(e);
 
-        return new HttpClient().get(`${this.url}/getid?${this.queryString}`)
-            .then(connectionId => {
-                this.connectionId = connectionId;
-                this.queryString = `id=${connectionId}&${this.connectionId}&${this.queryString}`;
-                return this.transport.connect(this.url, this.queryString);
-            })
-            .then(() => {
-                this.connectionState = ConnectionState.Connected;
-            })
-            .catch(e => {
-                console.log("Failed to start the connection.")
-                this.connectionState = ConnectionState.Disconnected;
-                this.transport = null;
-                throw e;
-            });
+        try {
+            this.connectionId = await this.httpClient.get(`${this.url}/getid?${this.queryString}`);
+            this.queryString = `id=${this.connectionId}&${this.queryString}`;
+            await this.transport.connect(this.url, this.queryString);
+            this.connectionState = ConnectionState.Connected;
+        }
+        catch(e) {
+            console.log("Failed to start the connection.")
+            this.connectionState = ConnectionState.Disconnected;
+            this.transport = null;
+            throw e;
+        };
     }
 
     private createTransport(transportName: string): ITransport {
@@ -53,10 +53,10 @@ export class Connection {
             return new WebSocketTransport();
         }
         if (transportName === 'serverSentEvents') {
-            return new ServerSentEventsTransport();
+            return new ServerSentEventsTransport(this.httpClient);
         }
         if (transportName === 'longPolling') {
-            return new LongPollingTransport();
+            return new LongPollingTransport(this.httpClient);
         }
 
         throw new Error("No valid transports requested.");

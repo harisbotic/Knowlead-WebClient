@@ -1,4 +1,4 @@
-import { HttpClient } from "./HttpClient"
+import { IHttpClient } from "./HttpClient"
 
 export interface ITransport {
     connect(url: string, queryString: string): Promise<void>;
@@ -38,7 +38,7 @@ export class WebSocketTransport implements ITransport {
 
             webSocket.onclose = (event: CloseEvent) => {
                 // webSocket will be null if the transport did not start successfully
-                if (thisWebSocketTransport.webSocket && event.wasClean === false) {
+                if (thisWebSocketTransport.webSocket && (event.wasClean === false || event.code !== 1000)) {
                     if (thisWebSocketTransport.onError) {
                         thisWebSocketTransport.onError(event);
                     }
@@ -53,7 +53,7 @@ export class WebSocketTransport implements ITransport {
             return Promise.resolve();
         }
 
-        return Promise.reject("WebSocket is not in OPEN state");
+        return Promise.reject("WebSocket is not in the OPEN state");
     }
 
     stop(): void {
@@ -71,6 +71,11 @@ export class ServerSentEventsTransport implements ITransport {
     private eventSource: EventSource;
     private url: string;
     private queryString: string;
+    private httpClient: IHttpClient;
+
+    constructor(httpClient :IHttpClient) {
+        this.httpClient = httpClient;
+    }
 
     connect(url: string, queryString: string): Promise<void> {
         if (typeof (EventSource) === "undefined") {
@@ -112,8 +117,8 @@ export class ServerSentEventsTransport implements ITransport {
         });
     }
 
-    send(data: any): Promise<void> {
-        return <any>(new HttpClient().post(this.url + "/send?" + this.queryString, data));
+    async send(data: any): Promise<void> {
+        await this.httpClient.post(this.url + "/send?" + this.queryString, data);
     }
 
     stop(): void {
@@ -130,16 +135,27 @@ export class ServerSentEventsTransport implements ITransport {
 export class LongPollingTransport implements ITransport {
     private url: string;
     private queryString: string;
+    private httpClient: IHttpClient;
     private pollXhr: XMLHttpRequest;
+    private shouldPoll: boolean;
+
+    constructor(httpClient :IHttpClient) {
+        this.httpClient = httpClient;
+    }
 
     connect(url: string, queryString: string): Promise<void> {
         this.url = url;
         this.queryString = queryString;
+        this.shouldPoll = true;
         this.poll(url + "/poll?" + this.queryString)
         return Promise.resolve();
     }
 
     private poll(url: string): void {
+        if (!this.shouldPoll) {
+            return;
+        }
+
         let thisLongPollingTransport = this;
         let pollXhr = new XMLHttpRequest();
 
@@ -183,11 +199,12 @@ export class LongPollingTransport implements ITransport {
         this.pollXhr.send();
     }
 
-    send(data: any): Promise<void> {
-        return <any>new HttpClient().post(this.url + "/send?" + this.queryString, data);
+    async send(data: any): Promise<void> {
+        await this.httpClient.post(this.url + "/send?" + this.queryString, data);
     }
 
     stop(): void {
+        this.shouldPoll = false;
         if (this.pollXhr) {
             this.pollXhr.abort();
             this.pollXhr = null;
