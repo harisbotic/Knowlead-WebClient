@@ -5,18 +5,18 @@
   font-family: "Roboto";
 };
 
-.video-section {
+.video-button {
+  text-decoration: none;
   width: 10%;
   float: left;
   height: 550px;
+  border: none;
   background-color: #fafbfd;
   border-radius: 5px 0 0 5px;
+  outline: none;
 
-    img{
-      display: flex;
-      text-align: center center;
-      margin: 0 auto;
-      margin-top: 251px;
+    &:hover {
+      background-color: $divider-color;
     };
 };
 
@@ -67,4 +67,7 @@ input[type=checkbox] {
   float: right;
   margin-top: -20px; 
  };
+
+
+
 
