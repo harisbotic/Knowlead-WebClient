@@ -14,6 +14,7 @@ import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.co
 import { CallPageComponent } from './pages/call-page/call-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MediatestComponent } from './pages/mediatest/mediatest.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     { path: 'p2p/:id', component: P2pDiscussionComponent, canActivate: [AuthGuard] },
     { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard] },
     { path: 'profile/:id', component: ProfilePageComponent, canActivate: [AuthGuard] },
-    { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard] }
+    { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard] },
+    { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard] }
 ];
 
 export const appRoutingProviders: any[] = [

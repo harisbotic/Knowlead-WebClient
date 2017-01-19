@@ -59,7 +59,7 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
     if (!this.user || !this.call) {
       return null;
     }
-    return this.call.callerId === this.user.id;
+    return this.call.caller.peerId === this.user.id;
   }
 
   callPrefix(): string {

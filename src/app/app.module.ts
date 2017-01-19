@@ -49,6 +49,7 @@ import { FriendshipPageComponent } from './pages/friendship-page/friendship-page
 import { FriendshipStripComponent } from './components/friendship-strip/friendship-strip.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MediatestComponent } from './pages/mediatest/mediatest.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { AuthGuard } from './guards/auth.guard';
     ChatConverisationComponent,
     FriendshipPageComponent,
     FriendshipStripComponent,
-    HeaderComponent
+    HeaderComponent,
+    MediatestComponent
   ],
   imports: [
     BrowserModule,
