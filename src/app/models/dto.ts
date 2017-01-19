@@ -69,8 +69,7 @@ export interface _CallModel
 	callId: Guid;
 	failed: boolean;
 	failReason: string;
-	callerId: Guid;
-	caller: ApplicationUserModel;
+	caller: PeerInfoModel;
 	duration: number;
 	endDate: Date;
 	callStarted: boolean;

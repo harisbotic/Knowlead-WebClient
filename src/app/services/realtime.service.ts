@@ -7,6 +7,7 @@ import { _CallModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RealtimeService {
@@ -25,10 +26,10 @@ export class RealtimeService {
       this.rpcConnection.on('notify', (value: NotificationModel) => {
         this.notificationService.notify(value);
       });
-      this.rpcConnection.on('receiveCall', (value: string) => {
-        console.log('RECEIVING CALL ' + JSON.parse(value));
-        // if (value)
-        this.callSubject.next(JSON.parse(value));
+      this.rpcConnection.on('startCall', (value: string) => {
+        console.log('STARTING CALL');
+        const call: _CallModel = JSON.parse(value);
+        this.router.navigate(['/call', call.callId]);
       });
       this.rpcConnection.on('callModelUpdate', (value: string) => {
         console.log('NEW CALL MODEL: ');
@@ -77,7 +78,8 @@ export class RealtimeService {
 
   constructor(protected storageService: StorageService,
               protected notificationService: NotificationService,
-              protected sessionService: SessionService) {
+              protected sessionService: SessionService,
+              protected router: Router) {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
         if (this.rpcConnection) {
@@ -101,6 +103,6 @@ export class RealtimeService {
   }
 
   call(p2pId: number) {
-    this.rpcConnection.invoke('CallP2p', p2pId);
+    this.rpcConnection.invoke('StartP2pCall', p2pId);
   }
 }

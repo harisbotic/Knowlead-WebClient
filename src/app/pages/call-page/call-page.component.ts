@@ -29,7 +29,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     if (!this.call || !this.user) {
       return null;
     }
-    return this.user.id === this.call.callerId;
+    return this.user.id === this.call.caller.peerId;
   }
 
   constructor(
