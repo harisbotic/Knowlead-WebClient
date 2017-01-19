@@ -149,3 +149,12 @@ export function tomorrow(): Date {
     ret.setMinutes(0);
     return ret;
 }
+
+export function stopMediaStream(mediaStream: MediaStream) {
+    for (let track of mediaStream.getTracks()) {
+        track.stop();
+    }
+    if (mediaStream.stop) {
+        mediaStream.stop();
+    }
+}
