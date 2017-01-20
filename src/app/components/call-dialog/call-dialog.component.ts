@@ -31,7 +31,7 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
       this.user = user;
     }));
-    this.subscriptions.push(this.realtimeService.callSubject.subscribe((call) => {
+    this.subscriptions.push(this.realtimeService.callInvitations.subscribe((call) => {
       this.call = call;
       delete this.p2p;
       if (ModelUtilsService.isCallP2p(this.call)) {

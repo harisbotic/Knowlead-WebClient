@@ -15,6 +15,7 @@ export class RealtimeService {
   accessToken: string;
 
   public callSubject = new Subject<_CallModel>();
+  public callInvitations = new Subject<_CallModel>();
   public callModelUpdateSubject = new Subject<_CallModel>();
   public connectionStateSubject = new BehaviorSubject<boolean>(false);
 
@@ -25,6 +26,12 @@ export class RealtimeService {
       this.connectionStateSubject.next(true);
       this.rpcConnection.on('notify', (value: NotificationModel) => {
         this.notificationService.notify(value);
+      });
+      this.rpcConnection.on('callInvitation', (call: _CallModel) => {
+        if (typeof(call) === 'string') {
+          call = JSON.parse(call);
+        }
+        this.callInvitations.next(call);
       });
       this.rpcConnection.on('startCall', (value: string) => {
         console.log('STARTING CALL');
