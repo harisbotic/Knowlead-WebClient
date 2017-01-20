@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
 import { NotificationModel } from '../models/notification.model';
+import { ResponseModel } from '../models/dto';
 
 @Injectable()
 export class NotificationService {
@@ -20,6 +21,9 @@ export class NotificationService {
   }
 
   error(title: string, subtitle?: string) {
+    if (typeof(subtitle) === 'object' && (<ResponseModel>subtitle).errors) {
+      subtitle = (<ResponseModel>subtitle).errors[0];
+    }
     this.notify({
       title: title,
       subtitle: subtitle,

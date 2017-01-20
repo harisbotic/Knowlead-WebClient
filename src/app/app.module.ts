@@ -50,6 +50,7 @@ import { FriendshipStripComponent } from './components/friendship-strip/friendsh
 import { HeaderComponent } from './components/header/header.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MediatestComponent } from './pages/mediatest/mediatest.component';
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { MediatestComponent } from './pages/mediatest/mediatest.component';
     FriendshipPageComponent,
     FriendshipStripComponent,
     HeaderComponent,
-    MediatestComponent
+    MediatestComponent,
+    FeedbackFormComponent
   ],
   imports: [
     BrowserModule,

@@ -20,3 +20,4 @@ export const FILE_UPLOAD = API + '/api/blob/upload';
 export const FILE_REMOVE = API + '/api/blob/delete';
 export const GET_FRIENDS = API + '/api/chat/getallfriends';
 export const CHANGE_FRIENDSHIP = API + '/api/chat/changefriendshipstatus';
+export const FEEDBACK = API + '/api/statistics/feedback';

@@ -54,7 +54,7 @@ export class AccountService {
       .map(responseToResponseModel)
       .map(response => response.object)
       .do((user: ApplicationUserModel) => {
-        if (!user) {
+        if (user) {
           this.storageService.setToStorage('user', this.userFiller, null, user);
           this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: true}, user);
           this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
