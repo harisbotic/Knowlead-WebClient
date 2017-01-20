@@ -26,6 +26,8 @@ export class AccountService {
       this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
       if (evt === SessionEvent.LOGGED_OUT) {
         this.storageService.clearCache(this.userFiller, 'user');
+      } else {
+        this.storageService.refreshStorage('user', this.userFiller);
       }
     });
   }

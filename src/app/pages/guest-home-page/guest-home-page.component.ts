@@ -15,10 +15,6 @@ export class GuestHomePageComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  pritisno() {
-    this.realtimeService.send();
-  }
-
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().take(1).subscribe(user => {
       if (user) {
