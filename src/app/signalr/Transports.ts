@@ -30,7 +30,7 @@ export class WebSocketTransport implements ITransport {
             };
 
             webSocket.onmessage = (message: MessageEvent) => {
-                console.log(`(WebSockets transport) data received: ${message.data}`);
+                // console.log(`(WebSockets transport) data received: ${message.data}`);
                 if (thisWebSocketTransport.onDataReceived) {
                     thisWebSocketTransport.onDataReceived(message.data);
                 }

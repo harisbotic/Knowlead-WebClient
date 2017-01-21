@@ -9,6 +9,16 @@ import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
+export enum CallEventType {
+  CALL_UPDATE,
+  CALL_RESET
+}
+
+export interface CallEvent {
+  type: CallEventType;
+  call: _CallModel;
+}
+
 @Injectable()
 export class RealtimeService {
   rpcConnection: HubConnection;
@@ -16,8 +26,16 @@ export class RealtimeService {
 
   public callSubject = new Subject<_CallModel>();
   public callInvitations = new Subject<_CallModel>();
-  public callModelUpdateSubject = new Subject<_CallModel>();
+  public callModelUpdateSubject = new Subject<CallEvent>();
   public connectionStateSubject = new BehaviorSubject<boolean>(false);
+
+  protected parseIfString<T>(value: T): T {
+    if (typeof(value) === 'string') {
+      return JSON.parse(value);
+    } else {
+      return value;
+    }
+  }
 
   initConnection = () => {
     console.info('Init websockets');
@@ -28,20 +46,23 @@ export class RealtimeService {
         this.notificationService.notify(value);
       });
       this.rpcConnection.on('callInvitation', (call: _CallModel) => {
-        if (typeof(call) === 'string') {
-          call = JSON.parse(call);
-        }
+        call = this.parseIfString(call);
         this.callInvitations.next(call);
       });
-      this.rpcConnection.on('startCall', (value: string) => {
-        console.log('STARTING CALL');
-        const call: _CallModel = JSON.parse(value);
+      this.rpcConnection.on('startCall', (call: _CallModel) => {
+        console.debug('STARTING CALL');
+        call = this.parseIfString(call);
         this.router.navigate(['/call', call.callId]);
       });
-      this.rpcConnection.on('callModelUpdate', (value: string) => {
-        console.log('NEW CALL MODEL: ');
-        console.log(JSON.parse(value));
-        this.callModelUpdateSubject.next(JSON.parse(value));
+      this.rpcConnection.on('callModelUpdate', (value: _CallModel) => {
+        console.debug('NEW CALL MODEL');
+        value = this.parseIfString(value);
+        this.callModelUpdateSubject.next({type: CallEventType.CALL_UPDATE, call: value});
+      });
+      this.rpcConnection.on('callReset', (value: _CallModel) => {
+        console.debug('CALL RESET');
+        value = this.parseIfString(value);
+        this.callModelUpdateSubject.next({type: CallEventType.CALL_RESET, call: value});
       });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
@@ -63,8 +84,8 @@ export class RealtimeService {
     this.rpcConnection.invoke('AddSDP', callId, sdp);
   }
 
-  clearCallSDP(callId: string) {
-    this.rpcConnection.invoke('ClearSDP', callId);
+  resetCall(callId: string) {
+    this.rpcConnection.invoke('ResetCall', callId);
   }
 
   getCallUpdate(callId: string): Promise<_CallModel> {

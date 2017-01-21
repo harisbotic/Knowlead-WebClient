@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { BaseComponent } from '../../base.component';
-import { RealtimeService } from '../../services/realtime.service';
+import { RealtimeService, CallEventType } from '../../services/realtime.service';
 import { AccountService } from '../../services/account.service';
 import { _CallModel, ApplicationUserModel } from '../../models/dto';
 import { ActivatedRoute } from '@angular/router';
@@ -38,11 +38,10 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     protected route: ActivatedRoute) { super(); }
 
   initPeer() {
-    if (this.call) {
-      this.realtimeService.clearCallSDP(this.call.callId);
-    }
     this.signaledSDPs = [];
-    this.cleanup();
+    if (this.myStream) {
+      console.warn('Peer already initalized');
+    }
     if (!this.call || !this.user) {
       console.warn('Cannot initialize peer');
       return;
@@ -116,17 +115,22 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   ngOnInit() {
     this.subscriptions.push(this.realtimeService.connectionStateSubject.filter(val => val).subscribe(() => {
       this.subscriptions.push(this.route.params.subscribe((params) => {
-        this.realtimeService.getCallUpdate(params['id']).then(call => {
-          this.call = call;
-          this.initPeer();
-        });
+        this.realtimeService.resetCall(params['id']);
+        // this.realtimeService.getCallUpdate(params['id']).then(call => {
+        //   this.call = call;
+        //   this.initPeer();
+        // });
         this.accountService.currentUser().subscribe((user) => {
           this.user = user;
-          this.initPeer();
         });
         this.subscriptions.push(this.realtimeService.callModelUpdateSubject.subscribe((call) => {
-          this.call = call;
-          this.setOtherSDP();
+          this.call = call.call;
+          if (call.type === CallEventType.CALL_RESET) {
+            this.cleanup();
+            this.initPeer();
+          } else if (call.type === CallEventType.CALL_UPDATE) {
+            this.setOtherSDP();
+          }
         }));
       }));
     }));
