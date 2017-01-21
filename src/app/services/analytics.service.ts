@@ -6,7 +6,20 @@ import { AccountService } from './account.service';
 import { ApplicationUserModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 
-type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'call' | 'p2pCall' | 'p2pCreate' | 'p2pRespond' | 'userPatch';
+type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'call' | 'p2pCall' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
+  | 'p2pRespond';
+
+const categories: {[index: string]: string} = {
+  'register': 'account',
+  'login': 'session',
+  'logout': 'session',
+  'confirmEmail': 'account',
+  'call': 'call',
+  'p2pCall': 'call',
+  'p2pCreate': 'p2p',
+  'p2pRespond': 'p2p',
+  'userPatch': 'account'
+};
 
 @Injectable()
 export class AnalyticsService {
@@ -49,7 +62,7 @@ export class AnalyticsService {
     });
   }
 
-  protected sendEvent(action: EventType) {
+  protected sendEvent(action: EventType, label?: any) {
     if (action === 'login') {
       if (this.lastLogin === this.user.id) {
         return;
@@ -57,7 +70,7 @@ export class AnalyticsService {
         this.lastLogin = this.user.id;
       }
     }
-    this.analytics.eventTrack.next({action: action});
+    this.analytics.eventTrack.next({action: action, properties: {category: categories[action], label: label}});
   }
 
   protected refreshUserId() {
