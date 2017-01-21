@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { NotificationService } from '../../services/notification.service';
 import { FEEDBACK } from '../../utils/urls';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -16,7 +17,9 @@ export class FeedbackFormComponent implements OnInit {
     text: new FormControl('', [Validators.required])
   });
 
-  constructor(protected http: Http, protected notificationService: NotificationService) { }
+  constructor(protected http: Http,
+      protected notificationService: NotificationService,
+      protected analyticsService: AnalyticsService) { }
 
   ngOnInit() {
   }
@@ -31,7 +34,7 @@ export class FeedbackFormComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.http.post(FEEDBACK, this.form.value).subscribe(() => {
+    this.analyticsService.sendFeedback(this.form.value.text).subscribe(() => {
       this.notificationService.info('feedback|success');
       this.form.reset();
     }, (err) => {

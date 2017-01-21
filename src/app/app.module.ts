@@ -51,6 +51,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MediatestComponent } from './pages/mediatest/mediatest.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { AnalyticsService } from './services/analytics.service';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     AppRouting,
     MomentModule,
     NglModule.forRoot(),
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
@@ -114,6 +117,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     P2pService,
     StorageService,
     RealtimeService,
+    AnalyticsService,
     {
       provide: Http,
       useClass: HttpProvider,

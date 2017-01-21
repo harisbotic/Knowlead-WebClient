@@ -5,6 +5,7 @@ import { RealtimeService } from './services/realtime.service';
 import { StorageService } from './services/storage.service';
 import * as _ from 'lodash';
 import { BaseComponent } from './base.component';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,10 @@ export class AppComponent extends BaseComponent {
 
   caches = [];
 
-  constructor(translate: TranslateService, realtimeService: RealtimeService, protected storageService: StorageService) {
+  constructor(translate: TranslateService,
+      realtimeService: RealtimeService,
+      protected storageService: StorageService,
+      protected analiticsService: AnalyticsService) {
     super();
     translate.addLangs(['en']);
     translate.setDefaultLang('en');

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/observable';
 import { StorageService } from './storage.service';
@@ -12,16 +12,22 @@ import { SessionService, SessionEvent } from './session.service';
 import { Guid, ApplicationUserModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable()
 export class AccountService {
 
   userFiller: StorageFiller<ApplicationUserModel>;
 
+  get analyticsService(): AnalyticsService {
+    return this.injector.get(AnalyticsService);
+  }
+
   constructor(protected http: Http,
               protected storageService: StorageService,
               protected sessionService: SessionService,
-              protected modelUtilsService: ModelUtilsService) {
+              protected modelUtilsService: ModelUtilsService,
+              protected injector: Injector) {
     this.sessionService.eventStream.subscribe(evt => {
       this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
       if (evt === SessionEvent.LOGGED_OUT) {
@@ -38,11 +44,15 @@ export class AccountService {
   }
 
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
-    return this.http.post(REGISTER, cridentials).map(responseToResponseModel);
+    return this.http.post(REGISTER, cridentials).map(responseToResponseModel).do(response => {
+      this.analyticsService.userRegistration(response.object);
+    });
   }
 
   public confirmEmail(data: ConfirmEmailModel): Observable<ResponseModel> {
-    return this.http.post(CONFIRMEMAIL, data).map(responseToResponseModel);
+    return this.http.post(CONFIRMEMAIL, data).map(responseToResponseModel).do(response => {
+      this.analyticsService.userConfirmedEmail(response.object);
+    });
   }
 
   public currentUser(): Observable<ApplicationUserModel> {
