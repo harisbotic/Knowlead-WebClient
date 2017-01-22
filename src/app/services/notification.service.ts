@@ -20,13 +20,14 @@ export class NotificationService {
     }
   }
 
-  error(title: string, subtitle?: string) {
+  error(title: string, subtitle?: string | ResponseModel) {
+    let subtitleString = <string>subtitle;
     if (typeof(subtitle) === 'object' && (<ResponseModel>subtitle).errors) {
-      subtitle = (<ResponseModel>subtitle).errors[0];
+      subtitleString = (<ResponseModel>subtitle).errors[0];
     }
     this.notify({
       title: title,
-      subtitle: subtitle,
+      subtitle: subtitleString,
       type: 'error'
     });
   }

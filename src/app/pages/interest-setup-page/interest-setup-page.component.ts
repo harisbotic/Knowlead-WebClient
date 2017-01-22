@@ -11,7 +11,7 @@ import { BaseComponent } from '../../base.component';
   selector: 'app-interest-setup-page',
   templateUrl: './interest-setup-page.component.html',
   styleUrls: ['./interest-setup-page.component.scss'],
-  providers: [AccountService]
+  providers: []
 })
 export class InterestSetupPageComponent extends BaseComponent implements OnInit {
 

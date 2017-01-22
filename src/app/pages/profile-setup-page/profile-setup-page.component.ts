@@ -16,7 +16,7 @@ import { BaseComponent } from '../../base.component';
   selector: 'app-profile-setup-page',
   templateUrl: './profile-setup-page.component.html',
   styleUrls: ['./profile-setup-page.component.scss', '../../../assets/styles/flags.css'],
-  providers: [AccountService]
+  providers: []
 })
 export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
 
@@ -40,19 +40,21 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.accountService.currentUser().subscribe((user: ApplicationUserModel) => {
+    this.form = new FormGroup({
+      'name': new FormControl(null, [Validators.required]),
+      'surname': new FormControl(null, [Validators.required]),
+      'birthdate': new FormControl(null, [Validators.required, dateValidator({minYearsOld: 10})]),
+      'isMale': new FormControl(null, [Validators.required]),
+      'aboutMe': new FormControl(null),
+      'country': new FormControl(null),
+      'motherTongue': new FormControl(null, [Validators.required]),
+      'languages': new FormControl(null),
+      'state': new FormControl(null),
+      'profilePictureId': new FormControl(null)
+    });
+    this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).subscribe((user: ApplicationUserModel) => {
+      this.form.patchValue(user);
       this.user = _.cloneDeep(user);
-      this.form = new FormGroup({
-        'name': new FormControl(this.user.name, [Validators.required]),
-        'surname': new FormControl(this.user.surname, [Validators.required]),
-        'birthdate': new FormControl(this.user.birthdate, [Validators.required, dateValidator({minYearsOld: 10})]),
-        'isMale': new FormControl(this.user.isMale, [Validators.required]),
-        'aboutMe': new FormControl(this.user.aboutMe),
-        'country': new FormControl(this.user.country),
-        'motherTongue': new FormControl(this.user.motherTongue, [Validators.required]),
-        'languages': new FormControl(this.user.languages),
-        'state': new FormControl(this.user.state)
-      });
 
       this.countryChanged(this.user.country);
       this.stateChanged(this.user.state);

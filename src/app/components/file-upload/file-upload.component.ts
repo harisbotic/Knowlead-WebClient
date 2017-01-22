@@ -6,9 +6,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
 import { NotificationService } from '../../services/notification.service';
-import { BaseComponent } from '../../base.component';
+import { BaseFormInputComponent } from '../base-form-input/base-form-input.component';
 
-type CallbackType = (value: any) => void;
 
 @Component({
   selector: 'app-file-upload',
@@ -23,27 +22,19 @@ type CallbackType = (value: any) => void;
     }
   ]
 })
-export class FileUploadComponent extends BaseComponent implements OnInit, ControlValueAccessor, OnDestroy {
-  changeCb: CallbackType;
-  touchCb: CallbackType;
+export class FileUploadComponent extends BaseFormInputComponent<_BlobModel> implements OnInit, OnDestroy {
   id: string;
-  _value: _BlobModel;
   subscription: Subscription;
   @Output() removed = new EventEmitter<any>();
   @Output() uploading = new EventEmitter<any>();
   @Input() outputType = 'object';
-  set value(obj: _BlobModel) {
-    this._value = obj;
-    if (this.changeCb) {
-      if (this.outputType === 'object') {
-        this.changeCb(obj);
-      } else if (this.outputType === 'id') {
-        this.changeCb(obj ? obj.blobId : null);
-      }
+
+  emitChange() {
+    if (this.outputType === 'object') {
+      this.changeCb(this.value);
+    } else if (this.outputType === 'id') {
+      this.changeCb(this.value ? this.value.blobId : null);
     }
-  }
-  get value(): _BlobModel {
-    return this._value;
   }
 
   constructor(protected fileService: FileService, protected notificationService: NotificationService) {
@@ -67,24 +58,12 @@ export class FileUploadComponent extends BaseComponent implements OnInit, Contro
         .subscribe(response => {
           this.value = response.object;
         }, (response: ResponseModel) => {
-          this.notificationService.error('file|fail', response.errors[0]);
+          this.notificationService.error('file|fail', response);
           this.deleted();
         });
     } else {
       console.error('No file selected');
     }
-  }
-
-  writeValue(value: _BlobModel): void {
-    this.value = value;
-  }
-
-  registerOnChange(cb: CallbackType): void {
-    this.changeCb = cb;
-  }
-
-  registerOnTouched(cb: CallbackType): void {
-    this.touchCb = cb;
   }
 
   deleted(): void {

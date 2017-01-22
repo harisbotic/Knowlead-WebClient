@@ -28,8 +28,9 @@ export class AccountService {
               protected sessionService: SessionService,
               protected modelUtilsService: ModelUtilsService,
               protected injector: Injector) {
+    this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
+    console.log('ACCOUTN SERVICE');
     this.sessionService.eventStream.subscribe(evt => {
-      this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
       if (evt === SessionEvent.LOGGED_OUT) {
         this.storageService.clearCache(this.userFiller, 'user');
       } else {
@@ -79,7 +80,7 @@ export class AccountService {
   private prepareForPatch(user: ApplicationUserModel): ApplicationUserModel {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
-    let toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id'];
+    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture'];
     cl.countryId = (cl.country) ? cl.country.geoLookupId : undefined;
     cl.stateId = (cl.state) ? cl.state.geoLookupId : undefined;
     cl.motherTongueId = (cl.motherTongue) ? cl.motherTongue.coreLookupId : undefined;

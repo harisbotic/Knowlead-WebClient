@@ -5,6 +5,7 @@ import { FEEDBACK } from '../utils/urls';
 import { AccountService } from './account.service';
 import { ApplicationUserModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
+import { Observable } from 'rxjs';
 
 type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'call' | 'p2pCall' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
   | 'p2pRespond';
@@ -43,22 +44,24 @@ export class AnalyticsService {
       protected analytics: Angulartics2,
       protected injector: Injector,
       protected sessionService: SessionService) {
-    this.sessionService.eventStream.distinctUntilChanged().subscribe(evt => {
-      if (evt === SessionEvent.LOGGED_OUT) {
-        if (this.user) {
-          this.sendEvent('logout');
-          delete this.user;
-          this.refreshUserId();
-        }
-        this.initialize();
-      } else if (evt === SessionEvent.LOGGED_IN) {
-      this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
-          this.user = user;
-          this.refreshUserId();
-          this.sendEvent('login');
+    Observable.timer(1000).subscribe(() => {
+      this.sessionService.eventStream.distinctUntilChanged().subscribe(evt => {
+        if (evt === SessionEvent.LOGGED_OUT) {
+          if (this.user) {
+            this.sendEvent('logout');
+            delete this.user;
+            this.refreshUserId();
+          }
           this.initialize();
-        });
-      }
+        } else if (evt === SessionEvent.LOGGED_IN) {
+        this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
+            this.user = user;
+            this.refreshUserId();
+            this.sendEvent('login');
+            this.initialize();
+          });
+        }
+      });
     });
   }
 

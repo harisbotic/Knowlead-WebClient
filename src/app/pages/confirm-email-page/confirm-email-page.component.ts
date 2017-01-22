@@ -10,7 +10,7 @@ import { BaseComponent } from '../../base.component';
   templateUrl: './confirm-email-page.component.html',
   styleUrls: ['./confirm-email-page.component.scss'],
 
-  providers: [AccountService]
+  providers: []
 
 })
 export class ConfirmEmailPageComponent extends BaseComponent implements OnInit {

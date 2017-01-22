@@ -9,6 +9,7 @@ export enum PeerStatus
 	Accepted = 0,
 	Rejected = 1,
 	Waiting = 2,
+	Disconnected = 3,
 }
 export enum FriendshipDTOActions
 {
@@ -72,6 +73,7 @@ export interface _CallModel
 	caller: PeerInfoModel;
 	duration: number;
 	endDate: Date;
+	sealed: boolean;
 	callStarted: boolean;
 	peers: PeerInfoModel[];
 }
@@ -227,6 +229,10 @@ export interface ResponseModel
 	errors: string[];
 	object: any;
 }
+export interface PlatformFeedbackModel
+{
+	feedback: string;
+}
 export interface ConfirmEmailModel
 {
 	email: string;
@@ -285,6 +291,8 @@ export interface ApplicationUserModel
 	isMale: boolean;
 	timezone: string;
 	aboutMe: string;
+	profilePictureId: Guid;
+	profilePicture: ImageBlobModel;
 	countryId: number;
 	country: CountryModel;
 	stateId: number;

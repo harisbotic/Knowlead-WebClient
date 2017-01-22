@@ -10,7 +10,7 @@ import { BaseComponent } from '../../base.component';
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
-  providers: [AccountService]
+  providers: []
 })
 export class RegisterPageComponent extends BaseComponent implements OnInit, DoCheck {
 

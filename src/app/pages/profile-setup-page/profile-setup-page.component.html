@@ -25,6 +25,12 @@
       </ngl-form-element>
 
       <div>
+        <div class="slds-text-heading--label slds-m-bottom--small">{{"common|profile image" | translate}}</div>
+        <app-file-upload formControlName="profilePictureId" outputType="id"></app-file-upload>
+        <!--<app-error-list [formControlProperty]="form.controls.profilePictureId"></app-error-list>-->
+      </div>
+
+      <div>
         <div class="slds-text-heading--label slds-m-bottom--small">{{"common|birthdate" | translate}}</div>
         <app-datepicker formControlName="birthdate"
           text="profile-setup|select birthdate"
