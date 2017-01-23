@@ -53,6 +53,7 @@ import { MediatestComponent } from './pages/mediatest/mediatest.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { AnalyticsService } from './services/analytics.service';
+import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { AnalyticsService } from './services/analytics.service';
     FriendshipStripComponent,
     HeaderComponent,
     MediatestComponent,
-    FeedbackFormComponent
+    FeedbackFormComponent,
+    ProfilePictureComponent
   ],
   imports: [
     BrowserModule,

@@ -7,9 +7,14 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
+import { _BlobModel, ImageBlobModel } from '../models/dto';
 
 @Injectable()
 export class ModelUtilsService {
+
+  public static getImageBlobUrl(blob: ImageBlobModel) {
+    return 'https://teststorage3123.blob.core.windows.net/images/' + blob.blobId + '.' + blob.extension;
+  }
 
   public static getUserFullName(value: ApplicationUserModel): string {
     if (value == null) {

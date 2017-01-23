@@ -44,7 +44,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
     this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
       this.root = root;
     }));
-    this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
+    this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user) => {
       this.user = user;
       this.interests = this.user.interests;
     }));
