@@ -31,12 +31,16 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
     }
   }
   fileSelected(event: Event) {
+    if (!this.user) {
+      return;
+    }
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
       this.subscriptions.push(this.fileService.upload(element.files[0]).map(response => <ImageBlobModel>response.object).subscribe(image => {
+        this.user.profilePictureId;
         this.subscriptions.push(this.accountService.patchUser([{
           op: 'replace',
-          path: '/profilePictureId',
+          path: '/profilePictureId', // TODO: MAKE THIS STRONGLY TYPED
           value: image.blobId
         }]).subscribe());
       }));
