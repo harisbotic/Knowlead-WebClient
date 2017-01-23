@@ -8,6 +8,7 @@ import { RegisterUserModel, ResponseModel } from './../models/dto';
 import { LoginResponse } from './../models/login.response';
 import { urlFormEncode } from './../utils/index';
 import { responseToLoginResponse, loginResponseToResponseModel } from './../utils/converters';
+import { LoginUserModel } from '../models/login-user.model';
 
 export enum SessionEvent {
   LOGGED_IN,
@@ -36,7 +37,7 @@ export class SessionService {
     });
   }
 
-  public login(cridentials: RegisterUserModel): Observable<LoginResponse> {
+  public login(cridentials: LoginUserModel): Observable<LoginResponse> {
     let subject = new Subject<LoginResponse>();
     this.http.post(LOGIN, urlFormEncode({
       'grant_type': 'password',

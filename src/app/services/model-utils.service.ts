@@ -8,6 +8,7 @@ import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
 import { _BlobModel, ImageBlobModel } from '../models/dto';
+import { FRONTEND } from '../utils/urls';
 
 @Injectable()
 export class ModelUtilsService {
@@ -24,6 +25,10 @@ export class ModelUtilsService {
       return value.email;
     }
     return value.name + ' ' + value.surname;
+  }
+
+  public static getReferralLink(user: ApplicationUserModel): string {
+    return FRONTEND + '/register?ref=' + user.id;
   }
 
   public static isCallP2p(value: _CallModel): value is P2PCallModel {

@@ -243,6 +243,7 @@ export interface RegisterUserModel
 {
 	email: string;
 	password: string;
+	referralUserId: Guid;
 }
 export interface UserNotebookModel
 {

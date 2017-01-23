@@ -15,13 +15,17 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   user: ApplicationUserModel;
   fullName = ModelUtilsService.getUserFullName;
+  referral: string;
 
   constructor(protected accountService: AccountService,
       protected sessionService: SessionService,
       protected realtimeService: RealtimeService) { super(); }
 
   ngOnInit() {
-    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
+      this.user = user;
+      this.referral = ModelUtilsService.getReferralLink(user);
+    }));
   }
 
   logout() {

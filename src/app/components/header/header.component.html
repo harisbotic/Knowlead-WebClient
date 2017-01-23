@@ -1,7 +1,7 @@
 <!--OVAJ NGIF MORA BITI PRISUTAN-->
 <nav *ngIf="user">
   <app-profile-picture [user]="user" [uploadable]="true"></app-profile-picture>
-  Welcome: {{fullName(user)}}
+  Welcome: {{fullName(user)}} ... Refer other friends using this link: <a href="{{referral}}">{{referral}}</a>
   <button type="button" (click)="logout()">Log out</button>
   <button type="button" (click)="pritisno()">Za harketa</button>
   <app-feedback-form></app-feedback-form>
