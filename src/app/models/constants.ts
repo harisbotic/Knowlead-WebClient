@@ -32,4 +32,6 @@ export class ErrorCodes
 	static alreadyFriends: string = "ALREADY_FRIENDS";
 	static requestNotFound: string = "REQUEST_NOT_FOUND";
 	static notInFriendlist: string = "NOT_IN_FRIENDLIST";
+	static claimRewardError: string = "CLAIM_REWARD_ERROR";
+	static alreadyGotReward: string = "ALREADY_GOT_REWARD";
 }

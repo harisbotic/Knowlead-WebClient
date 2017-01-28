@@ -54,6 +54,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { AnalyticsService } from './services/analytics.service';
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
+import { NotebookListComponent } from './components/notebook/notebook-list/notebook-list.component';
+import { NotebookEditComponent } from './components/notebook/notebook-edit/notebook-edit.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { ProfilePictureComponent } from './components/profile-picture/profile-pi
     HeaderComponent,
     MediatestComponent,
     FeedbackFormComponent,
-    ProfilePictureComponent
+    ProfilePictureComponent,
+    NotebookListComponent,
+    NotebookEditComponent
   ],
   imports: [
     BrowserModule,

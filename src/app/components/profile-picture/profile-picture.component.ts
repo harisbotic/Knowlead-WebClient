@@ -36,8 +36,8 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
     }
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
-      this.subscriptions.push(this.fileService.upload(element.files[0]).map(response => <ImageBlobModel>response.object).subscribe(image => {
-        this.user.profilePictureId;
+      this.subscriptions.push(
+          this.fileService.upload(element.files[0]).map(response => <ImageBlobModel>response.object).subscribe(image => {
         this.subscriptions.push(this.accountService.patchUser([{
           op: 'replace',
           path: '/profilePictureId', // TODO: MAKE THIS STRONGLY TYPED
@@ -45,7 +45,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
         }]).subscribe());
       }));
     } else {
-      console.error("No file selected");
+      console.error('No file selected');
     }
   }
 

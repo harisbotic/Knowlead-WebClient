@@ -1,4 +1,3 @@
-import { OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { BaseComponent } from '../../base.component';
 

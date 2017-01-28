@@ -24,7 +24,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
       this.user = user;
-      this.referral = ModelUtilsService.getReferralLink(user);
+      if (user) {
+        this.referral = ModelUtilsService.getReferralLink(user);
+      }
     }));
   }
 

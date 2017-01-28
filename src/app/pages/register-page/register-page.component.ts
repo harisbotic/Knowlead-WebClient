@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
 import { BaseComponent } from '../../base.component';
-import { RegisterUserModel } from '../../models/dto';
 
 @Component({
   selector: 'app-register-page',
@@ -44,11 +43,10 @@ export class RegisterPageComponent extends BaseComponent implements OnInit, DoCh
           this.response = errorResponse;
         }
       ));
-    })
+    });
   }
 
   ngOnInit() {
-    let a: RegisterUserModel;
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern(PATTERN_EMAIL)]),
       password: new FormControl('', [

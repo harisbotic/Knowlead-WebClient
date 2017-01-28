@@ -133,6 +133,9 @@ export interface _CoreLookupModel
 	code: string;
 	name: string;
 }
+export interface RewardModel extends _CoreLookupModel
+{
+}
 export interface LanguageModel extends _CoreLookupModel
 {
 }
@@ -229,6 +232,14 @@ export interface ResponseModel
 	errors: string[];
 	object: any;
 }
+export interface ReferralStatsModel
+{
+	registratedReferralsCount: number;
+	unregisteredReferralsCount: number;
+	rewardsClaimed: number[];
+	rewardsAvailable: number[];
+	unregisteredReferrals: { [index: string]: string };
+}
 export interface PlatformFeedbackModel
 {
 	feedback: string;
@@ -251,8 +262,8 @@ export interface UserNotebookModel
 	name: string;
 	markdown: string;
 	createdAt: Date;
-	applicationUserId: Guid;
-	applicationUser: ApplicationUserModel;
+	createdById: Guid;
+	createdBy: ApplicationUserModel;
 	imageBlobId: Guid;
 	imageBlob: ImageBlobModel;
 }

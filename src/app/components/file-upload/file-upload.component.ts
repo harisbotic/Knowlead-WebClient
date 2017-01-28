@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, Input, EventEmitter, Output, OnDestroy }
 import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { ResponseModel, _BlobModel } from '../../models/dto';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
 import { NotificationService } from '../../services/notification.service';

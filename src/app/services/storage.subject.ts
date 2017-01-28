@@ -80,6 +80,15 @@ export class StorageSubject<T> extends Observable<T> {
         if (this.fetching && !force) {
             return;
         }
+        const cfg = STORAGE_CONFIG[this.key];
+        if (cfg.mock) {
+            if (cfg.mock.type === 'object') {
+                this.changeValue(cfg.mock.value);
+            } else if (cfg.mock.type === 'array') {
+                this.changeValue(<T>_.find(cfg.mock.value, v => v[cfg.mock.idKey] === this.parameters['id']));
+            }
+            return;
+        }
         this.fetching = true;
         let params: URLSearchParams;
         let suffix = '';
@@ -94,7 +103,7 @@ export class StorageSubject<T> extends Observable<T> {
                 params.set(searchkey, parameters[searchkey]);
             }
         }
-        this.http.get(STORAGE_CONFIG[this.key].api + suffix, {search: params})
+        this.http.get(cfg.api + suffix, {search: params})
             // .retry(10)
             .finally(() => {
                 this.fetching = false;

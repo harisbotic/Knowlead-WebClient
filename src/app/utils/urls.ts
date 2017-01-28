@@ -1,5 +1,5 @@
 export const API = 'http://knowlead.com:5000';
-export const FRONTEND = 'http://localhost:4200'
+export const FRONTEND = 'http://localhost:4200';
 export const LOGIN = API + '/connect/token';
 export const REGISTER = API + '/api/account/register';
 export const CONFIRMEMAIL = API + '/api/account/confirmEmail';

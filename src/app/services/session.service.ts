@@ -4,7 +4,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 import { LOGIN, API } from './../utils';
 import { StorageService } from './storage.service';
 import 'rxjs/add/operator/map';
-import { RegisterUserModel, ResponseModel } from './../models/dto';
+import { ResponseModel } from './../models/dto';
 import { LoginResponse } from './../models/login.response';
 import { urlFormEncode } from './../utils/index';
 import { responseToLoginResponse, loginResponseToResponseModel } from './../utils/converters';

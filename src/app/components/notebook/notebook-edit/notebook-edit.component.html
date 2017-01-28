@@ -1,0 +1,7 @@
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="{}">
+  <input name="name" formControlName="name" placeholder="name">
+  <textarea name="markdown" formControlName="markdown"></textarea>
+  <button (click)="save()" type="button">Save</button>
+  <button (click)="save();doClose();" type="button">Save and close</button>
+  <button (click)="doClose();" type="button">Close</button>
+</form>

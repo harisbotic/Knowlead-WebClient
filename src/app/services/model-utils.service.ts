@@ -7,7 +7,7 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { _BlobModel, ImageBlobModel } from '../models/dto';
+import { ImageBlobModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 
 @Injectable()
