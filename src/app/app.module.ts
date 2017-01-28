@@ -56,6 +56,7 @@ import { AnalyticsService } from './services/analytics.service';
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 import { NotebookListComponent } from './components/notebook/notebook-list/notebook-list.component';
 import { NotebookEditComponent } from './components/notebook/notebook-edit/notebook-edit.component';
+import { TextInputComponent } from './components/form-components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { NotebookEditComponent } from './components/notebook/notebook-edit/noteb
     FeedbackFormComponent,
     ProfilePictureComponent,
     NotebookListComponent,
-    NotebookEditComponent
+    NotebookEditComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
