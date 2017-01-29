@@ -1,8 +1,8 @@
 import { Component, Input, DoCheck } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as _ from 'lodash';
-import { translateValidations } from '../../utils/translators';
-import { BaseComponent } from '../../base.component';
+import { translateValidations } from '../../../utils/translators';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
   selector: 'app-error-list',

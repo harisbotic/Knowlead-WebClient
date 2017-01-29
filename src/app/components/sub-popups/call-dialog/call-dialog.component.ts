@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationUserModel, _CallModel, P2PModel } from '../../models/dto';
-import { AccountService } from '../../services/account.service';
-import { BaseComponent } from '../../base.component';
-import { RealtimeService } from '../../services/realtime.service';
-import { ModelUtilsService } from '../../services/model-utils.service';
-import { P2pService } from '../../services/p2p.service';
+import { ApplicationUserModel, _CallModel, P2PModel } from '../../../models/dto';
+import { AccountService } from '../../../services/account.service';
+import { BaseComponent } from '../../../base.component';
+import { RealtimeService } from '../../../services/realtime.service';
+import { ModelUtilsService } from '../../../services/model-utils.service';
+import { P2pService } from '../../../services/p2p.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 

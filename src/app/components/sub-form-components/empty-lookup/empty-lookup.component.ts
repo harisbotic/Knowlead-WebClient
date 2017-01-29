@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { BaseComponent } from '../../base.component';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
   selector: 'app-empty-lookup',

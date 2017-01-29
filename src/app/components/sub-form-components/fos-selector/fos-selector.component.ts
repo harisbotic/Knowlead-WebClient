@@ -1,10 +1,10 @@
 import { Component, OnInit, forwardRef, ViewChild, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FOSModel } from '../../models/dto';
-import { StorageService } from '../../services/storage.service';
-import { stringContains, getFOSParents } from '../../utils/index';
+import { FOSModel } from '../../../models/dto';
+import { StorageService } from '../../../services/storage.service';
+import { stringContains, getFOSParents } from '../../../utils/index';
 import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
-import { BaseComponent } from '../../base.component';
+import { BaseComponent } from '../../../base.component';
 
 type CallbackType = (value: any) => void;
 

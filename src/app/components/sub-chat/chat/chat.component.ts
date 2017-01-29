@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import { ApplicationUserModel } from '../../models/dto';
-import { ModelUtilsService } from '../../services/model-utils.service';
+import { ChatService } from '../../../services/chat.service';
+import { ApplicationUserModel } from '../../../models/dto';
+import { ModelUtilsService } from '../../../services/model-utils.service';
 import * as _ from 'lodash';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotificationsComponent } from '../components/notifications/notifications.component';
+import { NotificationsComponent } from '../components/sub-popups/notifications/notifications.component';
 import { NotificationModel } from '../models/notification.model';
 import { ResponseModel } from '../models/dto';
 
