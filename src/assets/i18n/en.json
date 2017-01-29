@@ -33,6 +33,7 @@
     "login-page|submit": "Login",
     "login-page|join": "Join for FREE",
     "login-page|title": "Login to your Account",
+    "login-page|remember": "Remember Me",
     "login-page|forgot password": "Forgot your password?",
 
     "register-page|submit": "Register",

@@ -1,8 +1,36 @@
 <!--OVAJ NGIF MORA BITI PRISUTAN-->
 <nav *ngIf="user">
-  <app-profile-picture [user]="user" [uploadable]="true"></app-profile-picture>
-  Welcome: {{fullName(user)}} ... Refer other friends using this link: <a href="{{referral}}">{{referral}}</a>
-  <button type="button" (click)="logout()">Log out</button>
+  <!-- Welcome: {{fullName(user)}} ... Refer other friends using this link: <a href="{{referral}}">{{referral}}</a> -->
+    <div class="grid-container outline">
+        <div class="row">
+            <div class="col-30">
+                <div class="col-25 headerPosRel">
+                    <a href="#HomePage" class="centerV">
+                        <img src="/assets/images/logo/logo_short.png" alt="Knowlead Logo short version" class="logo-short centerV">
+                    </a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <a href="#StorePage" class="centerV">Store</a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <a href="#HomePage"class="centerV">Home</a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <a href="#ProfilePage"class="centerV">James</a>
+                </div>
+            </div>
+            <div class="col-40">
+                <form class="search-wrap">
+                    <input class="col-100 search" type="text" name="search" placeholder="Search people or subjects..">
+                </form>
+            </div>
+            <div class="col-30"></div>
+        </div>
+    </div>
+
+
+  <!-- <button type="button" (click)="logout()">Log out</button>
   <button type="button" (click)="pritisno()">Za harketa</button>
-  <app-feedback-form></app-feedback-form>
+
+  <app-feedback-form></app-feedback-form>  -->
 </nav>

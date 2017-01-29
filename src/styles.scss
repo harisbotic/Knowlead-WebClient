@@ -8,6 +8,13 @@ $knowlead-primary: #007bb6;
 $knowlead-secondary: #ff5e3a;
 $divider-color: #e6ecf5;
 $dark-hover-color: #e1e2e5;
+$placeholder-color: #c8cddd;
+$background-color: #edf2f6;
+$light-font-color: #888da8;
+
+* {
+    font-family: "Roboto";
+}
 
 .full-height {
     height: 100vh;
@@ -15,4 +22,64 @@ $dark-hover-color: #e1e2e5;
 
 .hidden {
     display: none;
+}
+
+input[type=text], input[type=password] {
+  padding: 5px;
+}
+
+
+.centerV {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.middleV {
+    position: absolute;
+    top: 50%;
+    margin-bottom: -50%;
+}
+
+.grid-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*-- cleafix hack -- */
+.row:before,
+.row:after {
+    content:"";
+      display: table ;
+    clear:both;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    width: 25%;
+    /*-- gutter -- */
+    //padding: 12px;
+    //background-color: #FFDCDC;
+}
+
+.col-10 { width: 10%;  }
+.col-15 { width: 15%;  }
+.col-20 { width: 20%;  }
+.col-25 { width: 25%;  }
+.col-30 { width: 30%;  }
+.col-40 { width: 40%;  }
+.col-50 { width: 50%;  }
+.col-60 { width: 60%;  }
+.col-70 { width: 70%;  }
+.col-80 { width: 80%;  }
+.col-85 { width: 85%;  }
+.col-90 { width: 90%;  }
+.col-100{ width: 100%; }
+
+.outline, .outline *{
+    outline: 1px solid #F6A1A1;
 }

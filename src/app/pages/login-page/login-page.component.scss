@@ -1,15 +1,11 @@
 @import "../../../styles.scss";
 
-.login-section {
-  width: 100%;
-  font-family: "Roboto";
-};
 
-.video-button {
+.video-tab {
   text-decoration: none;
-  width: 10%;
+  width: 100%;
   float: left;
-  height: 550px;
+  height: 450px;
   border: none;
   background-color: #fafbfd;
   border-radius: 5px 0 0 5px;
@@ -17,57 +13,76 @@
 
     &:hover {
       background-color: $divider-color;
-    };
-};
+    }
+}
 
-.login-form {
-  width: 60%;
-  float: left;
-  height: 550px;
+.login-section {
   background-color: white;
+  height: 450px;
   border-radius: 0 5px 5px 0;
   border-left: 2px solid $divider-color;
-};
+}
 
-.login-title {
+#login-title {
   padding: 15px;
   font-weight: 600;
   font-size: 20px;
   border-bottom: 2px solid $divider-color;
-};
+}
 
 .global-errors {
-  width: 80%;
-  margin: 0 auto;
-  padding-top: 15px;
-};
+  margin-top: 15px;
+  text-align: center;
+}
 
 .form-wrap {
-  width: 85%;
-  margin: 0 auto;
-};
+    width: 85%;
+    margin: 0 auto;
+}
 
- input[type=text], input[type=password] {
-   padding: 10px;
-};
+#email-form {
+    margin: 40px;
+}
 
-input[type=text] {
-  margin-top: 15px;
-};
+#forgot-password {
+    float: right;
+}
 
-input[type=password] {
-  margin-bottom: 15px;
-};
+.options {
+    margin-top: 10px;
+    color: $light-font-color;
 
-input[type=checkbox] {
-  float: left;
-};
+    #forgot-password > a {
+        text-decoration: none;
+        color: $light-font-color;
 
- .forgot-password {
-  float: right;
-  margin-top: -20px; 
- };
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
 
 
 
 
+
+//
+// input[type=text] {
+//   margin-top: 15px;
+// };
+//
+// input[type=password] {
+//   margin-bottom: 15px;
+// };
+//
+// input[type=checkbox] {
+//   float: left;
+// };
+//
+//  .forgot-password {
+//   float: right;
+//   margin-top: -20px;
+//  };
+//
+//
+//
