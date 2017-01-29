@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { UserNotebookModel } from '../../../models/dto';
 import { NotebookService } from '../../../services/notebook.service';
 import { BaseComponent } from '../../../base.component';
 import * as _ from 'lodash';

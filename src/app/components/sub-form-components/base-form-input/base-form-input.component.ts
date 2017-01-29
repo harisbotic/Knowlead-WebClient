@@ -1,5 +1,5 @@
 import { ControlValueAccessor } from '@angular/forms';
-import { BaseComponent } from '../../base.component';
+import { BaseComponent } from '../../../base.component';
 
 export type InputCallbackType = (value: any) => void;
 

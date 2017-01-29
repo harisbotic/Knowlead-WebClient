@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ApplicationUserModel } from '../../models/dto';
-import { ModelUtilsService } from '../../services/model-utils.service';
+import { ApplicationUserModel } from '../../../models/dto';
+import { ModelUtilsService } from '../../../services/model-utils.service';
 
 @Component({
   selector: 'app-chat-converisation',

@@ -13,7 +13,7 @@ export class TextInputComponent implements OnInit {
   }
 
   focused() {
-    console.log("hepek");
+    console.log('hepek');
   }
 
 }
