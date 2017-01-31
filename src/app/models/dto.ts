@@ -330,4 +330,18 @@ export interface ApplicationUserInterestModel
 	fos: FOSModel;
 	stars: number;
 }
+export enum NotificationType {
+
+}
+export interface Notification {
+	type: NotificationType;
+	fromId: Guid;
+	from: ApplicationUserModel;
+	timestamp: Date;
+	read: boolean;
+}
+export interface NotificationWithP2p {
+	p2pId: number;
+	p2p: P2PModel;
+}
 export type Guid = string;

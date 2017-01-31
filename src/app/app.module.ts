@@ -57,6 +57,7 @@ import { ProfilePictureComponent } from './components/profile-picture/profile-pi
 import { NotebookListComponent } from './components/sub-notebook/notebook-list/notebook-list.component';
 import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/notebook-edit.component';
 import { TextInputComponent } from './components/sub-form-components/text-input/text-input.component';
+import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { TextInputComponent } from './components/sub-form-components/text-input/
     ProfilePictureComponent,
     NotebookListComponent,
     NotebookEditComponent,
-    TextInputComponent
+    TextInputComponent,
+    SingleNotificationComponent
   ],
   imports: [
     BrowserModule,
