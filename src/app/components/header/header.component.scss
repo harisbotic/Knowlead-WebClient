@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import "../../../kl-styles/variables.scss";
 
 
 nav {
@@ -28,17 +28,30 @@ a, :visited, :hover, :active {
     position: relative;
 }
 
-.search {
-    color: black;
-    padding: 5px;
-    margin: 0;
+
+.headerIcon {
+    max-width: 22px;
+}
+
+.verticalLine {
+    width: 1px;
+    height: 30px;
     position: absolute;
     top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    margin-top: -15px;
+    background-color: transparentize($dark-icon-color, 0.8);
+    margin-left: 25px;
 
-    &::-webkit-input-placeholder {
-        color: $placeholder-color;
-    }
+}
+
+.centerVr {
+    position: absolute;
+    top: 50%;
+    transform: translate(100%, -50%);
+}
+
+.centerVl {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
 }

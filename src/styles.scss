@@ -2,15 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
-
-$error-color: #e74c3c;
-$knowlead-primary: #007bb6;
-$knowlead-secondary: #ff5e3a;
-$divider-color: #e6ecf5;
-$dark-hover-color: #e1e2e5;
-$placeholder-color: #c8cddd;
-$background-color: #edf2f6;
-$light-font-color: #888da8;
+@import "/kl-styles/variables.scss";
 
 * {
     font-family: "Roboto";
@@ -24,10 +16,14 @@ $light-font-color: #888da8;
     display: none;
 }
 
-input[type=text], input[type=password] {
-  padding: 5px;
+.clearButton {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: black;
+    outline: none;
+    border-radius: 5px;
 }
-
 
 .centerV {
     position: absolute;
@@ -42,6 +38,56 @@ input[type=text], input[type=password] {
     top: 50%;
     margin-bottom: -50%;
 }
+
+.video-tab {
+  text-decoration: none;
+  width: 100%;
+  float: left;
+  height: 415px;
+  border: none;
+  background-color: #fafbfd;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+
+    &:hover {
+      background-color: $divider-color;
+    }
+}
+
+
+.log-reg-section {
+  background-color: white;
+  height: 415px;
+  border-radius: 0 5px 5px 0;
+  border-left: 2px solid $divider-color;
+}
+
+.bttns {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px 0;
+    background-color: $knowlead-primary;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+//////////////////
+// ICON CLASSES //
+//////////////////
+
+.iconMaxW {
+    max-width: 20px;
+}
+
+
+
+//////////////////////////////
+// KNOWLEAD GRID SYSTEM CSS //
+//////////////////////////////
 
 .grid-container{
     width: 100%;
@@ -60,7 +106,7 @@ input[type=text], input[type=password] {
 [class*='col-'] {
     float: left;
     min-height: 1px;
-    width: 25%;
+    width: 10%;
     /*-- gutter -- */
     //padding: 12px;
     //background-color: #FFDCDC;

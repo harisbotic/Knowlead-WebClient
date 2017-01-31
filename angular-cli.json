@@ -18,6 +18,8 @@
       "mobile": false,
       "styles": [
         "styles.scss",
+        "kl-styles/form.scss",
+        "kl-styles/variables.scss",
         "../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css"
       ],
       "scripts": [

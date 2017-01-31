@@ -1,4 +1,63 @@
-<article class="slds-card slds-card--narrow slds-container--small slds-container--center" id="register">
+<div class="col-85 log-reg-section">
+    <div class="row" id="bottBorder">
+        <div class="col-85" id="reg-title">
+            <h2>{{"register-page|title" | translate}}</h2>
+        </div>
+        <div class="col-15 backIcon-wrap">
+            <button class="clearButton backIcon">
+                <img src="/assets/images/icons/backArrow.png" alt="Back Icon" id="icBck">
+            </button>
+        </div>
+    </div>
+    <div class="row">
+    <div class="regForm-wrap">
+        <form (ngSubmit)="loginClicked()" [formGroup]="form">
+            <div id="regEmail-wrap">
+                <input type="text" name="Email" placeholder="{{'common|email' | translate}}" formControlName="email" ngModel class="defaultInput">
+                <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
+            </div>
+
+            <div id="regPass-wrap">
+                <input type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" ngModel class="defaultInput">
+                <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+            </div>
+            <div id="regConfirm-wrap">
+                <input type="password" name="password" placeholder="{{'register-page|confirm password' | translate}}" formControlName="password" ngModel class="defaultInput">
+                <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+            </div>
+            <input type="button" value="{{'register-page|submit' | translate}}" class="bttns" id="register-button">
+        </form>
+    </div>
+</div>
+<div class="row regForm-wrap">
+    <div class="termsTxt">
+        <input type="checkbox" name="Terms and Conditions Checkbox" id="termsBox">
+        <span> I accept the <a id="termsLink" href="#">Terms and Conditions</a> of this website</span>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <article class="slds-card slds-card--narrow slds-container--small slds-container--center" id="register">
   <div class="slds-card__header slds-grid">
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
       <div class="slds-media__body slds-truncate">
@@ -8,9 +67,9 @@
       </div>
     </header>
   </div>
-    
+
   <div class="slds-card__body">
-    <app-error-list [errors]="response?.errors"></app-error-list>    
+    <app-error-list [errors]="response?.errors"></app-error-list>
     <form (ngSubmit)="register()" [formGroup]="form">
       <ngl-form-element>
         <input
@@ -52,4 +111,4 @@
   </div>
   <div class="slds-card__footer">
   </div>
-</article>
+</article> -->

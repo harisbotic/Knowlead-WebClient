@@ -37,7 +37,7 @@
     "login-page|forgot password": "Forgot your password?",
 
     "register-page|submit": "Register",
-    "register-page|title": "Register",
+    "register-page|title": "Register Your Account",
     "register-page|confirm password" : "Confirm Password",
 
     "user-home-page|hello": "Hello {{username}}",

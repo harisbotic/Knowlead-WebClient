@@ -1,5 +1,60 @@
-.slds-card__body {
-  ngl-form-element {
-    padding: 0 24px 0 24px;
-  }
+@import "../../../kl-styles/variables.scss";
+
+
+#reg-title {
+  padding: 15px 0 15px 30px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.backIcon-wrap {
+    position: relative;
+}
+
+.backIcon {
+    margin-top: 17%;
+
+
+    &:hover {
+        background-color: $divider-color;
+    }
+}
+
+#icBck {
+    padding: 3px;
+}
+
+#bottBorder {
+    border-bottom: 2px solid $divider-color;
+}
+
+.regForm-wrap {
+    width: 85%;
+    margin: 0 auto;
+}
+
+#regEmail-wrap {
+    margin-top: 35px;
+}
+
+#regPass-wrap, #regConfirm-wrap {
+    margin-top: 20px;
+}
+
+#register-button {
+    margin-top: 30px;
+    background-color: $knowlead-secondary;
+}
+
+.termsTxt {
+    margin-top: 20px;
+}
+
+#termsLink {
+    text-decoration: none;
+    color: $knowlead-secondary;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
