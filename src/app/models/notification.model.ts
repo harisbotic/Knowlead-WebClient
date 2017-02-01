@@ -1,6 +1,6 @@
 type NotificationType = 'error' | 'success' | 'warning' | 'info';
 
-export interface NotificationModel {
+export interface PopupNotificationModel {
     type: NotificationType;
     title: string;
     subtitle: string;

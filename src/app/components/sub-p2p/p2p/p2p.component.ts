@@ -3,7 +3,7 @@ import { P2PModel, ApplicationUserModel, ResponseModel } from '../../../models/d
 import { AccountService } from '../../../services/account.service';
 import { StorageService } from '../../../services/storage.service';
 import { P2pService } from '../../../services/p2p.service';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../services/notifications/notification.service';
 import { ModelUtilsService } from '../../../services/model-utils.service';
 import { BaseComponent } from '../../../base.component';
 import { RealtimeService } from '../../../services/realtime.service';

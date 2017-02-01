@@ -5,7 +5,7 @@ import { ResponseModel, _BlobModel } from '../../../models/dto';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../services/notifications/notification.service';
 import { BaseFormInputComponent } from '../base-form-input/base-form-input.component';
 
 

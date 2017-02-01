@@ -330,11 +330,11 @@ export interface ApplicationUserInterestModel
 	fos: FOSModel;
 	stars: number;
 }
-export enum NotificationType {
+export enum NotificationModelType {
 
 }
-export interface Notification {
-	type: NotificationType;
+export interface NotificationModel {
+	type: NotificationModelType;
 	fromId: Guid;
 	from: ApplicationUserModel;
 	timestamp: Date;
