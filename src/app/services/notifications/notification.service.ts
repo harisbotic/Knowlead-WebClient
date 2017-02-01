@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { NotificationsComponent } from '../components/sub-popups/notifications/notifications.component';
-import { NotificationModel } from '../models/notification.model';
-import { ResponseModel } from '../models/dto';
+import { NotificationsComponent } from '../../components/sub-popups/notifications/notifications.component';
+import { ResponseModel, NotificationModel } from '../../models/dto';
+import { PopupNotificationModel } from '../../models/notification.model';
+import { Observable } from 'rxjs';
+
+export interface NotificationCollector {
+  getNotificationStream(): Observable<NotificationModel>;
+  induceNotification(notification: NotificationModel);
+}
 
 @Injectable()
 export class NotificationService {
@@ -14,7 +20,7 @@ export class NotificationService {
     this.notificationComponent = notificationComponent;
   }
 
-  notify(notification: NotificationModel) {
+  notify(notification: PopupNotificationModel) {
     if (this.notificationComponent) {
       this.notificationComponent.notify(notification);
     }

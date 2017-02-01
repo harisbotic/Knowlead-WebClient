@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
-import { NotificationModel } from '../models/notification.model';
-import { NotificationService } from './notification.service';
+import { PopupNotificationModel } from '../models/notification.model';
+import { NotificationService } from './notifications/notification.service';
 import { _CallModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
@@ -42,7 +42,7 @@ export class RealtimeService {
     this.rpcConnection = new HubConnection(API + '/mainHub', 'accessToken=' + this.accessToken);
     this.rpcConnection.start().then(() => {
       this.connectionStateSubject.next(true);
-      this.rpcConnection.on('notify', (value: NotificationModel) => {
+      this.rpcConnection.on('notify', (value: PopupNotificationModel) => {
         this.notificationService.notify(value);
       });
       this.rpcConnection.on('callInvitation', (call: _CallModel) => {

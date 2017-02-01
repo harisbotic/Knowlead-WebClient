@@ -4,7 +4,7 @@ import { P2pService } from '../../services/p2p.service';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NotificationService } from '../../services/notification.service';
+import { NotificationService } from '../../services/notifications/notification.service';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import * as _ from 'lodash';
 import { dateValidator } from '../../validators/date.validator';
