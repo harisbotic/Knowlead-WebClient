@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
+import { PopoverModule } from 'ngx-popover';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -107,6 +108,7 @@ import { NotificationIconComponent } from './components/sub-notifications/notifi
     HttpModule,
     AppRouting,
     MomentModule,
+    PopoverModule,
     NglModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,

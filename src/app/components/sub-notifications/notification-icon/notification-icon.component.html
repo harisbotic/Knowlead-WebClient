@@ -1,11 +1,9 @@
 <img
   [src]="src"
   [alt]="alt"
-  [nglPopover]="notifications"
-  [nglOpen]="isOpened"
-  (click)="toggle()"
-  nglPopoverPlacement="bottom"
-  #popover="nglPopover">
-<template #notifications>
-  <app-single-notification *ngFor="let item of notificationSource?.getNotificationStream() | async"></app-single-notification>
-</template>
+  [popover]="popover">
+<popover-content #popover placement="bottom" class="notification-popover">
+  <div class="notification-content">
+    <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async"></app-single-notification>
+  </div>
+</popover-content>

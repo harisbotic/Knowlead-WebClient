@@ -8,32 +8,18 @@ import { BaseComponent } from '../../../base.component';
   templateUrl: './notification-icon.component.html',
   styleUrls: ['./notification-icon.component.scss']
 })
-export class NotificationIconComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class NotificationIconComponent extends BaseComponent implements OnInit {
 
   notifications: NotificationModel[];
   @Input() notificationSource: NotificationSource;
   @Input() src: string;
   @Input() alt: string;
-  @ViewChild('popover') popover;
 
   isOpened = false;
 
   constructor() { super(); }
 
-  toggle() {
-    //console.log(this.popover.popover);
-    //this.isOpened = !this.isOpened;
-    if (this.popover.popover) {
-      this.popover.popover.element.nativeElement.style.width = '400px';
-    }
-    this.isOpened = true;
-  }
-
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
-    this.popover.element.nativeElement.style += 'width: 400px';
   }
 
 }
