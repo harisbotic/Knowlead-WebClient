@@ -43,12 +43,15 @@
                         [notificationSource]="testNotificationSource">
                     </app-notification-icon>
                 </div>
-                <div class="col-25 headerPosRel">
+                <div class="col-25 headerPosRel" [popover]="popover">
                     <div class="verticalLine"></div>
-                    <a href="#HomePage" class="centerV">
+                    <a class="centerV">
                         <img src="/assets/images/icons/accountOptionsIcon.png" alt="Knowlead Account Options Icon" class="headerIcon centerV">
                     </a>
                 </div>
+                <popover-content #popover placement="bottom">
+                    <button type="button" (click)="logout()">Log out</button>
+                </popover-content>
             </div>
         </div>
     </div>
