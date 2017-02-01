@@ -26,10 +26,15 @@
                     </div>
                     <div class="row options">
                         <div class="col-50">
+
+                            <!-- NOTE Checkbox forma koja bi trebala biti zasebna komponenta...mozda! -->
                             <form class="remeber-box">
-                                <input type="checkbox" name="remeber-me" value="Yes">
-                                <span>{{'login-page|remember' | translate}}</span>
+                                <label class="check-label">
+                                    <input type="checkbox" name="remeber-me" value="Yes">
+                                    <span class="check-label-text">{{'login-page|remember' | translate}}</span>
+                                </label>
                             </form>
+
                         </div>
                         <div class="col-50">
                             <div id="forgot-password">

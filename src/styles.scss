@@ -4,6 +4,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
 @import "/kl-styles/variables.scss";
 
+
+///////////////////////////////////////////////////////////
+// OTHER CLASSES //////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
 * {
     font-family: "Roboto";
 }
@@ -14,29 +20,6 @@
 
 .hidden {
     display: none;
-}
-
-.clearButton {
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    color: black;
-    outline: none;
-    border-radius: 5px;
-}
-
-.centerV {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
-
-.middleV {
-    position: absolute;
-    top: 50%;
-    margin-bottom: -50%;
 }
 
 .video-tab {
@@ -54,12 +37,81 @@
     }
 }
 
-
 .log-reg-section {
   background-color: white;
   height: 415px;
   border-radius: 0 5px 5px 0;
   border-left: 2px solid $divider-color;
+}
+
+
+///////////////////////////////////////////////////////////
+// CHECKBOX CLASSES ///////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+.check-label {
+    cursor: pointer;
+
+    input[type=checkbox] {
+        display: none;
+
+        + .check-label-text:before {
+            content: "\f096";
+            font-family: "FontAwesome";
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            width: 1em;
+            margin-right: 3px;
+            display: inline-block;
+        }
+
+        &:checked + .check-label-text:before {
+            content: "\f14a";
+            color: $knowlead-primary;
+            animation: checkboxTick 180ms ease-in;
+        }
+
+        &:disabled + .check-label-text {
+            color: $disabled-color;
+
+            &:before {
+                content: "\f0c8";
+            }
+        }
+    }
+}
+
+@keyframes checkboxTick {
+    0% {
+        transform: scale(0);
+    }
+    90% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+///////////////////////////////////////////////////////////
+// BUTTON CLASSES /////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+.clearButton {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: black;
+    outline: none;
+    border-radius: 5px;
 }
 
 .bttns {
@@ -75,19 +127,64 @@
     border-radius: 5px;
 }
 
-//////////////////
-// ICON CLASSES //
-//////////////////
+
+///////////////////////////////////////////////////////////
+// ALIGNMENT CLASSES //////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+.posRel {
+    position: relative;
+    height: 100%;
+}
+
+.centerV {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.middleV {
+    position: absolute;
+    top: 50%;
+    margin-bottom: -50%;
+}
+
+
+///////////////////////////////////////////////////////////
+// PROFILE IMAGE CLASSES //////////////////////////////////
+///////////////////////////////////////////////////////////
+
+.profile-image-round-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    .profile-image {
+            display: inline-block;
+            min-width: 100%;
+            min-height: 100%;
+    }
+}
+
+
+///////////////////////////////////////////////////////////
+// ICON CLASSES ///////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
 
 .iconMaxW {
     max-width: 20px;
 }
 
 
+///////////////////////////////////////////////////////////
+// KNOWLEAD GRID SYSTEM CSS ///////////////////////////////
+///////////////////////////////////////////////////////////
 
-//////////////////////////////
-// KNOWLEAD GRID SYSTEM CSS //
-//////////////////////////////
 
 .grid-container{
     width: 100%;
