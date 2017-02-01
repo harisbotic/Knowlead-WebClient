@@ -1,0 +1,28 @@
+@import "../../../kl-styles/variables.scss";
+
+.static-header {
+    height: $nav-height;
+    width: 100%;
+    background-color: $knowlead-primary;
+}
+
+.knowlead-beta-logo {
+    max-height: $nav-logo-max-height;
+    margin-top: 5px;
+}
+
+.text-wrap {
+    max-width: 425px;
+    // background-color: $background-color;
+}
+
+.welcome-text {
+    margin-top: 60px;
+    font-size: 30px;
+    font-weight: bold;
+    color: $font-primary-color;
+}
+
+.subText {
+    color: $font-primary-color;
+}
