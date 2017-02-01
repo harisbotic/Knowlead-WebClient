@@ -3,9 +3,13 @@
 
 .single-notification-container {
     width: 100%;
-    height: 75px;
+    height: $single-notification-height;
     // background-color: $divider-color;
     border-bottom: 1px solid $divider-color;
+
+    &:hover {
+        background-color: $middle-hover-color;
+    }
 }
 
 
@@ -36,34 +40,18 @@
 .timeAgo {
     position: absolute;
     font-size: 10px;
-    color: $placeholder-color;
+    color: $disabled-color;
     bottom: 7px;
     left: 0;
 }
 
 .hardPosRel {
     position: relative;
-    height: 75px;
-}
-
-.optionsRow {
-    height: 15px;
-}
-
-.iconRow {
-    height: 60px;
-}
-
-.optionsIcon {
-    float: right;
-    max-width: 15px;
-    opacity: 0.3;
-    margin-top: 5px;
-    margin-right: 5px;
+    height: $single-notification-height;
 }
 
 .notification-icon > img {
     opacity: 0.5;
     max-width: 25px;
-    margin-top: -10px;
+    cursor: pointer;
 }

@@ -2,7 +2,7 @@
   [src]="src"
   [alt]="alt"
   [popover]="popover">
-<popover-content #popover placement="bottom">
+<popover-content #popover placement="bottom" class="notification-popover">
   <div class="notification-content">
     <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async"></app-single-notification>
   </div>

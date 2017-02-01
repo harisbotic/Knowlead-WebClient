@@ -5,16 +5,36 @@
 @import "/kl-styles/variables.scss";
 
 
+.loading-screen {
+    width: 100vw;
+    height: 100vh;
+    background-color: $knowlead-primary;
+    line-height: 100vh;
+    text-align: center;
+    color: white;
+
+    > img {
+        max-width: 400px;
+    }
+}
+
+.main-background-color {
+    background-color: $background-color;
+}
+
+
+
 ///////////////////////////////////////////////////////////
 // POPOVER ////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
 .popover {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    border: 1px black;
-    border-style: dashed;
+    margin-top: 15px;
+    border: 1px solid $dark-hover-color;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+    outline: none;
+
 }
 
 ///////////////////////////////////////////////////////////
