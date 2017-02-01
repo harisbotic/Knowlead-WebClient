@@ -12,10 +12,19 @@
         </p>
     </div>
     <div class="row">
-        <form (ngSubmit)="confirmEmail()">
-          <input type = "password" name = "password" placeholder = "{{'common|password' | translate}}" [(ngModel)]="confirm.password">
-          <input type = "submit" value = "{{'confirm-email-page|submit' | translate}}">
-        </form>
-        <app-error-list [errors]="response?.errors"></app-error-list>
+        <div class="col-100">
+            <div class="row">
+                <div class="col-25"></div>
+                <div class="col-50"></div>
+                <div class="col-25"></div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<!-- <form (ngSubmit)="confirmEmail()">
+  <input type = "password" name = "password" placeholder = "{{'common|password' | translate}}" [(ngModel)]="confirm.password">
+  <input type = "submit" value = "{{'confirm-email-page|submit' | translate}}">
+</form>
+<app-error-list [errors]="response?.errors"></app-error-list> -->
