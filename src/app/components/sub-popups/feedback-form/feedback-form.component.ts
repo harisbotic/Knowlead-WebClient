@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../services/notifications/notification.service';
 import { AnalyticsService } from '../../../services/analytics.service';
 
 @Component({

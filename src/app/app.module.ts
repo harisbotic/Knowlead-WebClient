@@ -29,7 +29,7 @@ import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.c
 import { FosSelectorComponent } from './components/sub-form-components/fos-selector/fos-selector.component';
 import { EmptyLookupComponent } from './components/sub-form-components/empty-lookup/empty-lookup.component';
 import { FileUploadComponent } from './components/sub-form-components/file-upload/file-upload.component';
-import { NotificationService } from './services/notification.service';
+import { NotificationService } from './services/notifications/notification.service';
 import { NotificationsComponent } from './components/sub-popups/notifications/notifications.component';
 import { DatepickerComponent } from './components/sub-form-components/datepicker/datepicker.component';
 import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
@@ -57,6 +57,7 @@ import { ProfilePictureComponent } from './components/profile-picture/profile-pi
 import { NotebookListComponent } from './components/sub-notebook/notebook-list/notebook-list.component';
 import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/notebook-edit.component';
 import { TextInputComponent } from './components/sub-form-components/text-input/text-input.component';
+import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { TextInputComponent } from './components/sub-form-components/text-input/
     ProfilePictureComponent,
     NotebookListComponent,
     NotebookEditComponent,
-    TextInputComponent
+    TextInputComponent,
+    SingleNotificationComponent
   ],
   imports: [
     BrowserModule,

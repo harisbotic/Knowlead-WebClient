@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { P2PModel, _BlobModel } from '../../../models/dto';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { P2pService } from '../../../services/p2p.service';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../services/notifications/notification.service';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
 

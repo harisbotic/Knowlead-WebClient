@@ -1,36 +1,60 @@
 <!--OVAJ NGIF MORA BITI PRISUTAN-->
 <nav *ngIf="user">
   <!-- Welcome: {{fullName(user)}} ... Refer other friends using this link: <a href="{{referral}}">{{referral}}</a> -->
-    <div class="grid-container outline">
+    <div class="grid-container">
         <div class="row">
             <div class="col-30">
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage" class="centerV">
-                        <img src="/assets/images/logo/logo_short.png" alt="Knowlead Logo short version" class="logo-short centerV">
+                    <a href="#HomePage">
+                        <img src="/assets/images/logo/logo_short.png" alt="Knowlead Logo short version" class="logo-short centerVl">
                     </a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#StorePage" class="centerV">Store</a>
+                    <a href="#StorePage" class="centerVl">Store</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage"class="centerV">Home</a>
+                    <a href="#HomePage"class="centerVl">Home</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#ProfilePage"class="centerV">James</a>
+                    <a href="#ProfilePage"class="centerVl">James</a>
                 </div>
             </div>
             <div class="col-40">
                 <form class="search-wrap">
-                    <input class="col-100 search" type="text" name="search" placeholder="Search people or subjects..">
+                    <input class="searchInput" type="text" name="search" placeholder="Search people or subjects..">
                 </form>
             </div>
-            <div class="col-30"></div>
+            <div class="col-30">
+                <div class="col-25 headerPosRel">
+                    <a href="#HomePage" class="centerV">
+                        <img src="/assets/images/icons/friendsIcon.png" alt="Knowlead Friends Icon" class="headerIcon centerVr">
+                    </a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <a href="#HomePage" class="centerV">
+                        <img src="/assets/images/icons/messagesIcon.png" alt="Knowlead Message Chat Icon" class="headerIcon centerV">
+                    </a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <a href="#HomePage">
+                        <img src="/assets/images/icons/notificationsIcon.png" alt="Knowlead Notifications Icon" class="headerIcon centerVl">
+                    </a>
+                </div>
+                <div class="col-25 headerPosRel">
+                    <div class="verticalLine"></div>
+                    <a href="#HomePage" class="centerV">
+                        <img src="/assets/images/icons/accountOptionsIcon.png" alt="Knowlead Account Options Icon" class="headerIcon centerV">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+</nav>
 
 
-  <!-- <button type="button" (click)="logout()">Log out</button>
-  <button type="button" (click)="pritisno()">Za harketa</button>
+
+
+ <!-- <button type="button" (click)="logout()">Log out</button> -->
+   <!-- <button type="button" (click)="pritisno()">Za harketa</button>
 
   <app-feedback-form></app-feedback-form>  -->
-</nav>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../../../services/notification.service';
-import { NotificationModel } from '../../../models/notification.model';
+import { NotificationService } from '../../../services/notifications/notification.service';
+import { PopupNotificationModel } from '../../../models/notification.model';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
 
@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../base.component';
 })
 export class NotificationsComponent extends BaseComponent implements OnInit {
 
-  notifications: NotificationModel[] = [];
+  notifications: PopupNotificationModel[] = [];
   timeout = 5000;
 
   constructor(protected notificationService: NotificationService) { super(); }
@@ -20,11 +20,11 @@ export class NotificationsComponent extends BaseComponent implements OnInit {
     this.notificationService.setCallback(this);
   }
 
-  notify(notification: NotificationModel) {
+  notify(notification: PopupNotificationModel) {
     this.notifications.push(notification);
   }
 
-  onNotificationClose(notification: NotificationModel) {
+  onNotificationClose(notification: PopupNotificationModel) {
     this.notifications = _.without(this.notifications, notification);
   }
 

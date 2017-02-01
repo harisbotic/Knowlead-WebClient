@@ -1,47 +1,29 @@
-@import "../../../styles.scss";
-
-
-.video-tab {
-  text-decoration: none;
-  width: 100%;
-  float: left;
-  height: 450px;
-  border: none;
-  background-color: #fafbfd;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-
-    &:hover {
-      background-color: $divider-color;
-    }
-}
-
-.login-section {
-  background-color: white;
-  height: 450px;
-  border-radius: 0 5px 5px 0;
-  border-left: 2px solid $divider-color;
-}
+@import "../../../kl-styles/variables.scss";
 
 #login-title {
-  padding: 15px;
+  padding: 15px 0 15px 30px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   border-bottom: 2px solid $divider-color;
 }
 
 .global-errors {
-  margin-top: 15px;
-  text-align: center;
+    // position: relative;
+    height: 20px;
+    // background-color: $dark-hover-color;
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 15px;
 }
 
-.form-wrap {
+.logForm-wrap {
     width: 85%;
     margin: 0 auto;
 }
 
-#email-form {
-    margin: 40px;
+#pass-wrap {
+    margin-top: 10px;
 }
 
 #forgot-password {
@@ -62,27 +44,21 @@
     }
 }
 
+#register-button {
+    background-color: $knowlead-secondary;
+    margin-top: 10px;
+}
 
 
+#regLink {
+    text-decoration: none;
+    color: $knowlead-secondary;
 
+    &:hover {
+        text-decoration: underline;
+    }
+}
 
-//
-// input[type=text] {
-//   margin-top: 15px;
-// };
-//
-// input[type=password] {
-//   margin-bottom: 15px;
-// };
-//
-// input[type=checkbox] {
-//   float: left;
-// };
-//
-//  .forgot-password {
-//   float: right;
-//   margin-top: -20px;
-//  };
-//
-//
-//
+.regTextMarg {
+    margin-top: 10px;
+}
