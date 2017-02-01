@@ -58,6 +58,7 @@ import { NotebookListComponent } from './components/sub-notebook/notebook-list/n
 import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/notebook-edit.component';
 import { TextInputComponent } from './components/sub-form-components/text-input/text-input.component';
 import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
+import { NotificationIconComponent } from './components/sub-notifications/notification-icon/notification-icon.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { SingleNotificationComponent } from './components/sub-notifications/sing
     NotebookListComponent,
     NotebookEditComponent,
     TextInputComponent,
-    SingleNotificationComponent
+    SingleNotificationComponent,
+    NotificationIconComponent
   ],
   imports: [
     BrowserModule,

@@ -5,11 +5,13 @@ import { ModelUtilsService } from '../../services/model-utils.service';
 import { BaseComponent } from '../../base.component';
 import { SessionService } from '../../services/session.service';
 import { RealtimeService } from '../../services/realtime.service';
+import { MockNotificationsService } from '../../services/notifications/mock-notifications.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  providers: [MockNotificationsService]
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
 
@@ -19,7 +21,8 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   constructor(protected accountService: AccountService,
       protected sessionService: SessionService,
-      protected realtimeService: RealtimeService) { super(); }
+      protected realtimeService: RealtimeService,
+      protected testNotificationSource: MockNotificationsService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {

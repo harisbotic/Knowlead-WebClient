@@ -36,9 +36,12 @@
                     </a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage">
-                        <img src="/assets/images/icons/notificationsIcon.png" alt="Knowlead Notifications Icon" class="headerIcon centerVl">
-                    </a>
+                    <app-notification-icon
+                        src="/assets/images/icons/notificationsIcon.png"
+                        alt="Knowlead Notifications Icon"
+                        class="headerIcon centerVl"
+                        [notificationSource]="testNotificationSource">
+                    </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
                     <div class="verticalLine"></div>

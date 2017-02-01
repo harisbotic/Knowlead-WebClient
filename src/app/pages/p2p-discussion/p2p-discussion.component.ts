@@ -28,9 +28,9 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
   forms: {[toId: string]: FormGroup} = {};
   threads: ThreadModel[] = [];
   scheduleForm: FormGroup;
-  scheduleOpened: boolean = false;
+  scheduleOpened = false;
   scheduleWith: ApplicationUserModel;
-  discussable: boolean = false;
+  discussable = false;
   messages: P2PMessageModel[];
 
   fullName = ModelUtilsService.getUserFullName;

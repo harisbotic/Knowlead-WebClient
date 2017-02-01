@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NotificationsComponent } from '../../components/sub-popups/notifications/notifications.component';
-import { ResponseModel, NotificationModel } from '../../models/dto';
+import { ResponseModel } from '../../models/dto';
 import { PopupNotificationModel } from '../../models/notification.model';
-import { Observable } from 'rxjs';
-
-export interface NotificationCollector {
-  getNotificationStream(): Observable<NotificationModel>;
-  induceNotification(notification: NotificationModel);
-}
 
 @Injectable()
 export class NotificationService {
