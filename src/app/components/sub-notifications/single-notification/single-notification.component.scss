@@ -1,0 +1,69 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.notification-container {
+    width: 400px;
+    height: 75px;
+    // background-color: $divider-color;
+    border-bottom: 1px solid $divider-color;
+}
+
+
+.notification-text-wrap {
+    margin: 10px auto;
+}
+
+
+.fromWho > a {
+    text-decoration: none;
+    font-weight: bold;
+    color: $font-primary-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.notification-type {
+    color: $light-font-color;
+}
+
+.post-type {
+    color: $knowlead-secondary;
+    font-weight: bold;
+}
+
+.timeAgo {
+    position: absolute;
+    font-size: 10px;
+    color: $placeholder-color;
+    bottom: 7px;
+    left: 0;
+}
+
+.hardPosRel {
+    position: relative;
+    height: 75px;
+}
+
+.optionsRow {
+    height: 15px;
+}
+
+.iconRow {
+    height: 60px;
+}
+
+.optionsIcon {
+    float: right;
+    max-width: 15px;
+    opacity: 0.3;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.notification-icon > img {
+    opacity: 0.5;
+    max-width: 25px;
+    margin-top: -10px;
+}
