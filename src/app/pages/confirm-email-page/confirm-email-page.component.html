@@ -1,23 +1,21 @@
-<div class="static-header">
-    <div class="grid-container outline">
-        <div class="row">
-            <img src="/assets/images/logo/knowlead_logo_white_beta.png" alt="Knowlead Beta Logo" class="knowlead-beta-logo">
-        </div>
-        <div class="row text-wrap">
-            <h1 class="welcome-text">
-                Welcome to Knowlead!
-            </h1>
-            <p class="subText">
-                Thank you for joining and helping us spread knowledge across the world.
-                Please finish your email confirmation process.
-            </p>
-        </div>
-        <div class="row">
-            <form (ngSubmit)="confirmEmail()">
-              <input type = "password" name = "password" placeholder = "{{'common|password' | translate}}" [(ngModel)]="confirm.password">
-              <input type = "submit" value = "{{'confirm-email-page|submit' | translate}}">
-            </form>
-            <app-error-list [errors]="response?.errors"></app-error-list>
-        </div>
+<div class="grid-container outline">
+    <!-- <div class="row">
+        <img src="/assets/images/logo/knowlead_logo_white_beta.png" alt="Knowlead Beta Logo" class="knowlead-beta-logo">
+    </div> -->
+    <div class="row text-wrap">
+        <h1 class="welcome-text">
+            Welcome to Knowlead!
+        </h1>
+        <p class="subText">
+            Thank you for joining and helping us spread knowledge across the world.
+            Please finish your email confirmation process.
+        </p>
+    </div>
+    <div class="row">
+        <form (ngSubmit)="confirmEmail()">
+          <input type = "password" name = "password" placeholder = "{{'common|password' | translate}}" [(ngModel)]="confirm.password">
+          <input type = "submit" value = "{{'confirm-email-page|submit' | translate}}">
+        </form>
+        <app-error-list [errors]="response?.errors"></app-error-list>
     </div>
 </div>

@@ -17,12 +17,10 @@
                 <form (ngSubmit)="loginClicked()" [formGroup]="form">
                     <div id="email-wrap">
                         <input type="text" name="Email" placeholder="{{'common|email' | translate}}" formControlName="email" ngModel class="defaultInput">
-                        <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
                     </div>
 
                     <div id="pass-wrap">
                         <input type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" ngModel class="defaultInput">
-                        <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
                     </div>
                     <div class="row options">
                         <div class="col-50">
@@ -42,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                        <input type="submit" [disabled]="busy || !form.valid" value="{{'login-page|submit' | translate}}" class="bttns">
+                        <input type="submit" value="{{'login-page|submit' | translate}}" class="bttns">
                         <input type="button" value="{{'login-page|join' | translate}}" class="bttns" id="register-button">
                 </form>
             </div>
