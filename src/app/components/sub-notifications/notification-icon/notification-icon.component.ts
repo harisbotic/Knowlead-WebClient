@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/cor
 import { NotificationSource } from '../../../services/notifications/notification.source';
 import { NotificationModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
-
 @Component({
   selector: 'app-notification-icon',
   templateUrl: './notification-icon.component.html',
@@ -15,11 +14,16 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
   @Input() src: string;
   @Input() alt: string;
 
+  @Input() canMarkAsRead = true;
+
   isOpened = false;
 
   constructor() { super(); }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  scrolled() {
+    this.notificationSource.loadMore();
   }
 
 }

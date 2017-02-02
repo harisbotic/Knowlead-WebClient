@@ -12,8 +12,6 @@ export class SingleNotificationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.notification.read);
-  }
+  ngOnInit() { }
 
 }
