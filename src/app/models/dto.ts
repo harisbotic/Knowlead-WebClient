@@ -340,6 +340,10 @@ export interface NotificationModel {
 	timestamp: Date;
 	read: boolean;
 }
+export interface NotificationSourceStats {
+	unread: number;
+	total: number;
+}
 export interface NotificationWithP2p {
 	p2pId: number;
 	p2p: P2PModel;

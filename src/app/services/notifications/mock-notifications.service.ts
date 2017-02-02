@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class MockNotificationsService extends BaseNotificationSource {
 
-  constructor() { super(); this.setUnread(10); this.loadMore(); }
+  constructor() { super(); this.stats.unread = 10; this.refreshStats(); this.loadMore(); }
 
   loadMore() {
     this.addNotifications(_.times(5, () => {
@@ -14,7 +14,7 @@ export class MockNotificationsService extends BaseNotificationSource {
         type: NotificationModelType.test,
         fromId: undefined,
         from: undefined,
-        timestamp: new Date(2000 + Math.random() * 5, Math.random() * 12),
+        timestamp: new Date(2016 + Math.random() * 1.2, Math.random() * 12),
         read: Math.random() > 0.5
       };
     }));

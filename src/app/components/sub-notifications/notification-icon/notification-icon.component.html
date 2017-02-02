@@ -1,7 +1,8 @@
 <img
     [src]="src"
     [alt]="alt"
-[popover]="popover">
+    [popover]="popover"
+    [popoverCloseOnClickOutside]="true">
 <popover-content #popover placement="bottom" class="notification-popover">
     <div class="notification-content" *ngIf="notificationSource">
         <div class="row popover-header">
@@ -9,7 +10,7 @@
                 <span class="header-title">Notifications</span>
             </div>
             <div class="col-30" *ngIf="canMarkAsRead">
-                <a class="markRead">Mark all as read</a>
+                <a class="markRead" (click)="markAsRead()">Mark all as read</a>
             </div>
         </div>
         <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>

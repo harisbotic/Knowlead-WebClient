@@ -1,39 +1,38 @@
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
-import { NotificationModel } from '../../models/dto';
+import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 
 export interface NotificationSource {
   getNotificationStream(): Observable<NotificationModel[]>;
   induceNotification(notification: NotificationModel);
   addNotifications(notifications: NotificationModel[]);
   reset();
-  getUnreadStream(): Observable<number>;
+  getStatsStream(): Observable<NotificationSourceStats>;
   getSingleNotificationStream(): Observable<NotificationModel>;
   markAsRead();
   loadMore();
 }
 
 export abstract class BaseNotificationSource implements NotificationSource {
-  notificationStream = new BehaviorSubject<NotificationModel[]>([]);
-  singleNotificationStream = new Subject<NotificationModel>();
-  unreadStream = new BehaviorSubject<number>(0);
-  notifications: NotificationModel[] = [];
-  unread = 0;
+  protected notificationStream = new BehaviorSubject<NotificationModel[]>([]);
+  protected singleNotificationStream = new Subject<NotificationModel>();
+  protected statsStream = new BehaviorSubject<NotificationSourceStats>({unread: 0, total: 0});
+  protected notifications: NotificationModel[] = [];
+  protected stats: NotificationSourceStats = {unread: 0, total: 0};
 
   protected notifyNotifications() {
     this.notificationStream.next(this.notifications);
   }
 
-  protected setUnread(value: number) {
-    this.unread = value;
-    this.unreadStream.next(value);
+  protected refreshStats() {
+    this.statsStream.next(this.stats);
   }
 
   getNotificationStream() {
     return this.notificationStream;
   }
 
-  getUnreadStream() {
-    return this.unreadStream;
+  getStatsStream() {
+    return this.statsStream;
   }
 
   getSingleNotificationStream() {
@@ -43,7 +42,8 @@ export abstract class BaseNotificationSource implements NotificationSource {
   reset() {
     this.notifications = [];
     this.notificationStream.next([]);
-    this.setUnread(0);
+    this.stats = {unread: 0, total: 0};
+    this.refreshStats();
   }
 
   addNotifications(notifications: NotificationModel[]) {
@@ -54,7 +54,9 @@ export abstract class BaseNotificationSource implements NotificationSource {
   induceNotification(notification: NotificationModel) {
     this.addNotifications([notification]);
     if (!notification.read) {
-      this.setUnread(this.unread + 1);
+      this.stats.unread++;
+      this.stats.total++;
+      this.refreshStats();
     }
   }
 
@@ -63,7 +65,8 @@ export abstract class BaseNotificationSource implements NotificationSource {
       notification.read = false;
     }
     this.notifyNotifications();
-    this.setUnread(0);
+    this.stats.unread = 0;
+    this.refreshStats();
   }
   abstract markAsRead();
   abstract loadMore();

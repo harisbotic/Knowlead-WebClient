@@ -26,4 +26,8 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
     this.notificationSource.loadMore();
   }
 
+  markAsRead() {
+    this.notificationSource.markAsRead();
+  }
+
 }
