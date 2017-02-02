@@ -6,6 +6,7 @@ import { BaseComponent } from '../../base.component';
 import { SessionService } from '../../services/session.service';
 import { RealtimeService } from '../../services/realtime.service';
 import { MockNotificationsService } from '../../services/notifications/mock-notifications.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,8 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   constructor(protected accountService: AccountService,
       protected sessionService: SessionService,
       protected realtimeService: RealtimeService,
-      protected testNotificationSource: MockNotificationsService) { super(); }
+      protected testNotificationSource: MockNotificationsService,
+      protected router: Router) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
@@ -35,6 +37,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   logout() {
     this.sessionService.logout();
+    this.router.navigate(['/']);
   }
 
   pritisno() {

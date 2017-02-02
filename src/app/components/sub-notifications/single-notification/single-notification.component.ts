@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NotificationModel } from '../../../models/dto';
 
 @Component({
   selector: 'app-single-notification',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleNotificationComponent implements OnInit {
 
+  @Input() notification: NotificationModel;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.notification.read);
   }
 
 }

@@ -4,6 +4,6 @@
   [popover]="popover">
 <popover-content #popover placement="bottom" class="notification-popover">
   <div class="notification-content">
-    <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async"></app-single-notification>
+    <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>
   </div>
 </popover-content>
