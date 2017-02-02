@@ -5,10 +5,9 @@ import { LOGIN, API } from './../utils';
 import { StorageService } from './storage.service';
 import 'rxjs/add/operator/map';
 import { ResponseModel } from './../models/dto';
-import { LoginResponse } from './../models/login.response';
 import { urlFormEncode } from './../utils/index';
 import { responseToLoginResponse, loginResponseToResponseModel } from './../utils/converters';
-import { LoginUserModel } from '../models/login-user.model';
+import { LoginUserModel, LoginResponse } from '../models/frontend.models';
 
 export enum SessionEvent {
   LOGGED_IN,

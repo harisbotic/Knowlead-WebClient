@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
-import { PopupNotificationModel } from '../models/notification.model';
 import { NotificationService } from './notifications/notification.service';
 import { _CallModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { PopupNotificationModel } from '../models/frontend.models';
 
 export enum CallEventType {
   CALL_UPDATE,

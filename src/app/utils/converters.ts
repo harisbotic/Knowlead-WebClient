@@ -1,7 +1,7 @@
 import { Response } from '@angular/http';
 import { ResponseModel, ApplicationUserModel } from './../models/dto';
-import { LoginResponse } from './../models/login.response';
 import { FrontendErrorCodes } from './../models/frontend.constants';
+import { LoginResponse } from '../models/frontend.models';
 
 export function safeJsonExtraction(response: Response) {
     try {

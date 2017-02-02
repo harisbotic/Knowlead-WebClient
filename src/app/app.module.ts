@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { PopoverModule } from 'ngx-popover';
+import { SelectModule } from 'angular2-select';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -110,6 +111,7 @@ import { RegisteredGuard } from './guards/registered.guard';
     AppRouting,
     MomentModule,
     PopoverModule,
+    SelectModule,
     NglModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,

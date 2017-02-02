@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../../services/notifications/notification.service';
-import { PopupNotificationModel } from '../../../models/notification.model';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
+import { PopupNotificationModel } from '../../../models/frontend.models';
 
 @Component({
   selector: 'app-notifications',

@@ -158,3 +158,20 @@ export function stopMediaStream(mediaStream: MediaStream) {
         mediaStream.stop();
     }
 }
+
+export function getDateIfValid(day: number, month: number, year: number): Date {
+    if (year < 1900 || year > 2050 || month <= 0 || month > 12) {
+        return undefined;
+    }
+    const monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+    // Adjust for leap years
+    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
+        monthLength[1] = 29;
+    }
+    // Check the range of the day
+    if (day > 0 && day <= monthLength[month - 1]) {
+        return new Date(year, month - 1, day);
+    } else {
+        return undefined;
+    }
+}

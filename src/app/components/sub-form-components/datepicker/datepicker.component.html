@@ -1,4 +1,11 @@
-<button nglButton="neutral" type="button" (click)="open = true">
+<ng-select [options]="days" (selected)="daySelected($event)" (deselected)="daySelected(null)" ngModel placeholder="Day">
+</ng-select>
+<ng-select [options]="months" (selected)="monthSelected($event)" (deselected)="monthSelected(null)" ngModel placeholder="Month">
+</ng-select>
+<ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" ngModel placeholder="Year">
+</ng-select>
+
+<!--<button nglButton="neutral" type="button" (click)="open = true">
   {{ (!value) ? (text | translate) : (value | date) }}
 </button>
 <input type="number" [ngModel]="value ? value.getHours() : 0" (ngModelChange)="setHours($event)" min="0" max="24" nglFormControl class="slds-show--inline-block" *ngIf="timePick">
@@ -13,4 +20,4 @@
   <template ngl-modal-footer>
     <button class="slds-button slds-button--brand" (click)="open = false">{{saveText | translate}}</button>
   </template>
-</ngl-modal>
+</ngl-modal>-->
