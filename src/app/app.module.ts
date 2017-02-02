@@ -60,6 +60,7 @@ import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/n
 import { TextInputComponent } from './components/sub-form-components/text-input/text-input.component';
 import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
 import { NotificationIconComponent } from './components/sub-notifications/notification-icon/notification-icon.component';
+import { RegisteredGuard } from './guards/registered.guard';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,11 @@ import { NotificationIconComponent } from './components/sub-notifications/notifi
       provide: AuthGuard,
       deps: [Router, SessionService],
       useClass: AuthGuard
+    },
+    {
+      provide: RegisteredGuard,
+      deps: [Router, AccountService],
+      useClass: RegisteredGuard
     },
     AccountService,
     ModelUtilsService,

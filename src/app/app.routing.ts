@@ -13,22 +13,23 @@ import { CallPageComponent } from './pages/call-page/call-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MediatestComponent } from './pages/mediatest/mediatest.component';
+import { RegisteredGuard } from './guards/registered.guard';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
-    { path: ':type', component: GuestHomePageComponent },
     { path: '', component: GuestHomePageComponent },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
-    { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },
-    { path: 'p2ptest', component: P2pCreateComponent, canActivate: [AuthGuard] },
-    { path: 'p2p/:id', component: P2pDiscussionComponent, canActivate: [AuthGuard] },
-    { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard] },
-    { path: 'profile/:id', component: ProfilePageComponent, canActivate: [AuthGuard] },
-    { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard] },
-    { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard] }
+    { path: 'p2ptest', component: P2pCreateComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'p2p/:id', component: P2pDiscussionComponent },
+    { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'profile/:id', component: ProfilePageComponent },
+    { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: ':type', component: GuestHomePageComponent }
 ];
 
 export const appRoutingProviders: any[] = [

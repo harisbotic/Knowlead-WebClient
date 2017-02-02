@@ -98,6 +98,8 @@ export class HttpProvider extends Http {
                     return Observable.throw(<ResponseModel>{errors: [FrontendErrorCodes.networkError]});
                 } else if (errorResponse.status / 100 === 5) {
                     return Observable.throw(<ResponseModel>{errors: [FrontendErrorCodes.backendError]});
+                } else if (errorResponse.status === 403) {
+                    return Observable.throw(<ResponseModel>{errors: [ErrorCodes.authorityError]});
                 }
                 return Observable.throw(error);
             }
