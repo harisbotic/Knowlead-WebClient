@@ -31,6 +31,7 @@ a, :visited, :hover, :active {
 
 .headerIcon {
     max-width: $nav-icon-max-width;
+    cursor: pointer;
 }
 
 .verticalLine {

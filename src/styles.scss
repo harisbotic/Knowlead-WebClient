@@ -5,6 +5,11 @@
 @import "/kl-styles/variables.scss";
 
 
+///////////////////////////////////////////////////////////
+// LOADING SCREEN CLASSES /////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
 .loading-screen {
     width: 100vw;
     height: 100vh;
@@ -13,8 +18,10 @@
     text-align: center;
     color: white;
 
-    > img {
+    > .loadingLogo {
         max-width: 400px;
+        animation: loadingAnimation 2s ease-in-out;
+        animation-iteration-count: infinite;
     }
 }
 
@@ -23,9 +30,8 @@
 }
 
 
-
 ///////////////////////////////////////////////////////////
-// POPOVER ////////////////////////////////////////////////
+// POPOVER CLASSES ////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
 .popover {
@@ -115,18 +121,6 @@
                 content: "\f0c8";
             }
         }
-    }
-}
-
-@keyframes checkboxTick {
-    0% {
-        transform: scale(0);
-    }
-    90% {
-        transform: scale(1.4);
-    }
-    100% {
-        transform: scale(1);
     }
 }
 
@@ -264,4 +258,38 @@
 
 .outline, .outline *{
     outline: 1px solid #F6A1A1;
+}
+
+
+///////////////////////////////////////////////////////////
+// KEYFRAMES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+
+@keyframes checkboxTick {
+    0% {
+        transform: scale(0);
+    }
+    90% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes loadingAnimation {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+
 }
