@@ -40,19 +40,50 @@ a, :visited, :hover, :active {
     position: absolute;
     top: 50%;
     margin-top: -15px;
-    background-color: transparentize($dark-icon-color, 0.8);
+    background-color: transparentize($icon-dark-color, 0.8);
     margin-left: 25px;
 
 }
 
-.centerVr {
-    position: absolute;
-    top: 50%;
-    transform: translate(100%, -50%);
+.accountOptions-content {
+    border: 1px solid $hover-dark-color;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+    outline: none;
+    width: 180px;
 }
 
-.centerVl {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+.accountOptions-title-wrap {
+    padding: 5px 0 5px 10px;
+    border-bottom: 1px solid $placeholder-color;
+    text-transform: uppercase;
+}
+
+.accountOptions-title {
+    color: $font-secondary-color;
+    font-size: 10px;
+    cursor: default;
+}
+
+.accountOptions-button {
+    text-decoration: none;
+    width: 100%;
+    height: 37px;
+
+    &:hover {
+        text-decoration: none;
+        color: $font-primary-color;
+        background-color: $hover-middle-color;
+    }
+}
+
+.logIcon {
+    width: 20px;
+}
+
+.logoutButtonText {
+    font-weight: 600;
+    text-decoration: none;
+    color: $font-primary-color;
+    width: 100%;
+    text-align: left;
 }

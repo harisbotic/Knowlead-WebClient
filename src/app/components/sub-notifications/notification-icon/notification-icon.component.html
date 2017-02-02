@@ -1,9 +1,17 @@
 <img
-  [src]="src"
-  [alt]="alt"
-  [popover]="popover">
+    [src]="src"
+    [alt]="alt"
+[popover]="popover">
 <popover-content #popover placement="bottom" class="notification-popover">
-  <div class="notification-content">
-    <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>
-  </div>
+    <div class="notification-content">
+        <div class="row popover-header">
+            <div class="col-70">
+                <span class="header-title">Notifications</span>
+            </div>
+            <div class="col-30">
+                <a class="markRead">Mark all as read</a>
+            </div>
+        </div>
+        <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>
+    </div>
 </popover-content>

@@ -2,4 +2,31 @@
 
 .notification-content {
     width: 400px;
+    margin-top: 15px;
+    border: 1px solid $hover-dark-color;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+    outline: none;
+}
+
+.popover-header {
+    padding: 7px 10px 7px 10px;
+    border-bottom: 1px solid $placeholder-color;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.header-title {
+    color: $font-secondary-color;
+}
+
+.markRead {
+    font-weight: bold;
+    float: right;
+    text-decoration: none;
+    color: $font-primary-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
 }

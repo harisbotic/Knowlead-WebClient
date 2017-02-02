@@ -36,11 +36,6 @@
 
 .popover {
     position: absolute;
-    margin-top: 15px;
-    border: 1px solid $dark-hover-color;
-    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
-    outline: none;
-
 }
 
 ///////////////////////////////////////////////////////////
@@ -134,9 +129,7 @@
     text-decoration: none;
     background-color: transparent;
     border: none;
-    color: black;
     outline: none;
-    border-radius: 5px;
 }
 
 .bttns {
@@ -179,6 +172,18 @@
     transform: translate(-50%, -50%);
 }
 
+.centerVr {
+    position: absolute;
+    top: 50%;
+    transform: translate(100%, -50%);
+}
+
+.centerVl {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
 .middleV {
     position: absolute;
     top: 50%;
@@ -197,9 +202,9 @@
     overflow: hidden;
 
     .profile-image {
-            display: inline-block;
-            min-width: 100%;
-            min-height: 100%;
+        display: inline-block;
+        min-width: 100%;
+        min-height: 100%;
     }
 }
 

@@ -10,7 +10,7 @@
 .global-errors {
     // position: relative;
     height: 20px;
-    // background-color: $dark-hover-color;
+    // background-color: $hover-dark-color;
     text-align: center;
     width: 85%;
     margin: 0 auto;
@@ -32,11 +32,11 @@
 
 .options {
     margin-top: 10px;
-    color: $light-font-color;
+    color: $font-secondary-color;
 
     #forgot-password > a {
         text-decoration: none;
-        color: $light-font-color;
+        color: $font-secondary-color;
 
         &:hover {
             text-decoration: underline;

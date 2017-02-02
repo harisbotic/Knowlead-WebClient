@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 input.defaultInput[type=text], input.defaultInput[type=password] {
-    border: 1px solid $dark-hover-color;
+    border: 1px solid $hover-dark-color;
     border-radius: 5px;
     width: 100%;
     padding: 12px 10px;
@@ -25,7 +25,7 @@ input.searchInput[type=text] {
     top: 50%;
     transform: translate(0, -50%);
     border-radius: 20px;
-    border: 1px solid $dark-hover-color;
+    border: 1px solid $hover-dark-color;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
