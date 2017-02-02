@@ -29,16 +29,17 @@
                         </div>
                     </button>
                 </div>
-                <app-login-page></app-login-page>
+                <app-login-page *ngIf="!showRegister"></app-login-page>
+                <app-register-page *ngIf="showRegister"></app-register-page>
             </div>
         </div>
         <div class="row footer-wrap">
             <div class="col-80">
-                    <span class="footer-element">{{'guest-home-page|footer careers' | translate}}</span>
-                    <span class="footer-element">{{'guest-home-page|footer help and support' | translate}}</span>
-                    <span class="footer-element">{{'guest-home-page|footer privacy' | translate}}</span>
-                    <span class="footer-element">{{'guest-home-page|footer team' | translate}}</span>
-                    <span class="footer-element">{{'guest-home-page|footer languages' | translate}}</span>
+                <span class="footer-element">{{'guest-home-page|footer careers' | translate}}</span>
+                <span class="footer-element">{{'guest-home-page|footer help and support' | translate}}</span>
+                <span class="footer-element">{{'guest-home-page|footer privacy' | translate}}</span>
+                <span class="footer-element">{{'guest-home-page|footer team' | translate}}</span>
+                <span class="footer-element">{{'guest-home-page|footer languages' | translate}}</span>
             </div>
             <div class="col-20">
                 <span id="footnote">{{'guest-home-page|footer knowlead' | translate}}</span>

@@ -2,8 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { FriendshipPageComponent } from './pages/friendship-page/friendship-page.component';
 import { ModuleWithProviders } from '@angular/core';
 import { GuestHomePageComponent } from './pages/guest-home-page/guest-home-page.component';
-// import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ConfirmEmailPageComponent} from './pages/confirm-email-page/confirm-email-page.component';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
 import { TranslationTestComponent } from './pages/translation-test/translation-test.component';
@@ -18,7 +16,7 @@ import { MediatestComponent } from './pages/mediatest/mediatest.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
-    { path: 'register', component: RegisterPageComponent },
+    { path: ':type', component: GuestHomePageComponent },
     { path: '', component: GuestHomePageComponent },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard] },

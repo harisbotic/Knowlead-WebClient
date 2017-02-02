@@ -21,7 +21,10 @@ export class ChatService {
   private filler: StorageFiller<FriendshipModel>;
   private fillerArr: StorageFiller<FriendshipModel[]>;
 
-  public getFriends(): Observable<FriendshipModel[]> {
+  public getFriends(refresh?: boolean): Observable<FriendshipModel[]> {
+    if (refresh) {
+      this.storageService.refreshStorage('friends', this.fillerArr);
+    }
     return this.storageService.getFromStorage<FriendshipModel[]>('friends', this.fillerArr);
   }
 

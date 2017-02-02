@@ -331,7 +331,8 @@ export interface ApplicationUserInterestModel
 	stars: number;
 }
 export enum NotificationModelType {
-	test
+	test,
+	friendship
 }
 export interface NotificationModel {
 	type: NotificationModelType;

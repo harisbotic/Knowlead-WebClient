@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RealtimeService } from '../../services/realtime.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../services/account.service';
 import { BaseComponent } from '../../base.component';
 
@@ -11,7 +11,13 @@ import { BaseComponent } from '../../base.component';
 })
 export class GuestHomePageComponent extends BaseComponent implements OnInit {
 
-  constructor(protected realtimeService: RealtimeService, protected router: Router, protected accountService: AccountService) {
+  showRegister = false;
+
+  constructor(
+      protected realtimeService: RealtimeService,
+      protected router: Router,
+      protected accountService: AccountService,
+      protected activatedRoute: ActivatedRoute) {
     super();
   }
 
@@ -19,6 +25,12 @@ export class GuestHomePageComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.accountService.currentUser().take(1).subscribe(user => {
       if (user) {
         this.router.navigate(['/home']);
+      }
+    }));
+    this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
+      console.log(params);
+      if (params['type'] === 'register') {
+        this.showRegister = true;
       }
     }));
   }

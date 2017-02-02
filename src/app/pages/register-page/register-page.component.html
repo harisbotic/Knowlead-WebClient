@@ -3,38 +3,38 @@
         <div class="col-85" id="reg-title">
             <h2>{{"register-page|title" | translate}}</h2>
         </div>
-        <div class="col-15 backIcon-wrap">
+        <a class="col-15 backIcon-wrap" href="/">
             <button class="clearButton backIcon">
                 <img src="/assets/images/icons/backArrow.png" alt="Back Icon" id="icBck">
             </button>
-        </div>
+        </a>
     </div>
     <div class="row">
-    <div class="regForm-wrap">
-        <form (ngSubmit)="loginClicked()" [formGroup]="form">
-            <div id="regEmail-wrap">
-                <input type="text" name="Email" placeholder="{{'common|email' | translate}}" formControlName="email" ngModel class="defaultInput">
-                <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
-            </div>
+        <div class="regForm-wrap">
+            <form (ngSubmit)="register()" [formGroup]="form">
+                <div id="regEmail-wrap">
+                    <input type="text" name="email" placeholder="{{'common|email' | translate}}" formControlName="email" class="defaultInput">
+                    <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
+                </div>
 
-            <div id="regPass-wrap">
-                <input type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" ngModel class="defaultInput">
-                <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
-            </div>
-            <div id="regConfirm-wrap">
-                <input type="password" name="password" placeholder="{{'register-page|confirm password' | translate}}" formControlName="password" ngModel class="defaultInput">
-                <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
-            </div>
-            <input type="button" value="{{'register-page|submit' | translate}}" class="bttns" id="register-button">
-        </form>
+                <div id="regPass-wrap">
+                    <input type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" class="defaultInput">
+                    <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+                </div>
+                <div id="regConfirm-wrap">
+                    <input type="password" name="confirmpassword" placeholder="{{'register-page|confirm password' | translate}}" formControlName="confirmpassword" class="defaultInput">
+                    <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+                </div>
+                <input type="submit" value="{{'register-page|submit' | translate}}" class="bttns" id="register-button" [disabled]="busy || !form.valid">
+            </form>
+        </div>
     </div>
-</div>
-<div class="row regForm-wrap">
-    <div class="termsTxt">
-        <input type="checkbox" name="Terms and Conditions Checkbox" id="termsBox">
-        <span> I accept the <a id="termsLink" href="#">Terms and Conditions</a> of this website</span>
+    <div class="row regForm-wrap">
+        <div class="termsTxt">
+            <input type="checkbox" name="Terms and Conditions Checkbox" id="termsBox">
+            <span> I accept the <a id="termsLink" href="#">Terms and Conditions</a> of this website</span>
+        </div>
     </div>
-</div>
 </div>
 
 <!-- <article class="slds-card slds-card--narrow slds-container--small slds-container--center" id="register">

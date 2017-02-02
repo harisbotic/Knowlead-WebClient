@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotificationSource } from '../../../services/notifications/notification.source';
 import { NotificationModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
@@ -13,6 +13,7 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
   @Input() notificationSource: NotificationSource;
   @Input() src: string;
   @Input() alt: string;
+  @Input() title: string;
 
   @Input() canMarkAsRead = true;
 

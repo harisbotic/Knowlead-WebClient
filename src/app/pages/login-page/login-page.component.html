@@ -40,16 +40,19 @@
                             </div>
                         </div>
                     </div>
-                        <input type="submit" value="{{'login-page|submit' | translate}}" class="bttns">
-                        <input type="button" value="{{'login-page|join' | translate}}" class="bttns" id="register-button">
+                    <input type="submit" value="{{'login-page|submit' | translate}}" class="bttns">
+                    <a href="/register">
+                        <button class="bttns" id="register-button" type="button">
+                            {{'login-page|join' | translate}}
+                        </button>
+                    </a>
                 </form>
             </div>
         </div>
         <div class="row logForm-wrap">
             <div class="col-100 regTextMarg">
                 <p>Don't have an account?
-                    <a href="#" id="regLink">Register Now!</a>
-                    So you can start enjoying all the benefits.
+                    <a href="/register" id="regLink">Register Now!</a> So you can start enjoying all the benefits.
                 </p>
             </div>
         </div>

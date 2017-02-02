@@ -15,10 +15,10 @@
                     <a href="#StorePage" class="centerVl">Store</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage"class="centerVl">Home</a>
+                    <a href="#HomePage" class="centerVl">Home</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#ProfilePage"class="centerVl">James</a>
+                    <a href="#ProfilePage" class="centerVl">James</a>
                 </div>
             </div>
             <div class="col-40">
@@ -28,74 +28,69 @@
             </div>
             <div class="col-30">
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage" class="centerV">
-                        <img src="/assets/images/icons/friendsIcon.png" alt="Knowlead Friends Icon" class="headerIcon centerVr">
-                    </a>
+                    <app-notification-icon src="/assets/images/icons/friendsIcon.png" alt="Knowlead Friends Icon" class="headerIcon centerVr" title="Friend requests" [notificationSource]="friendshipNotificationSource">
+                    </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage" class="centerV">
+                    <a class="centerV">
                         <img src="/assets/images/icons/messagesIcon.png" alt="Knowlead Message Chat Icon" class="headerIcon centerV">
                     </a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <app-notification-icon
-                    src="/assets/images/icons/notificationsIcon.png"
-                    alt="Knowlead Notifications Icon"
-                    class="headerIcon centerVl"
-                    [notificationSource]="testNotificationSource">
-                </app-notification-icon>
-            </div>
-            <div class="col-25 headerPosRel" [popover]="popover">
-                <div class="verticalLine"></div>
-                <a class="centerV">
-                    <img src="/assets/images/icons/accountOptionsIcon.png" alt="Knowlead Account Options Icon" class="headerIcon centerV">
-                </a>
-            </div>
-            <popover-content #popover placement="bottom">
-                <div class="accountOptions-content">
-
-                    <div class="row accountOptions-title-wrap">
-                        <span class="accountOptions-title">Your Account</span>
-                    </div>
-
-                    <div class="row accountOptions-button">
-                        <a class="posRel">
-                            <div class="col-30 posRel">
-                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                            </div>
-                            <div class="col-70 posRel">
-                                <p class="logoutButtonText centerVl">Settings</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="row accountOptions-button">
-                        <a class="posRel">
-                            <div class="col-30 posRel">
-                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                            </div>
-                            <div class="col-70 posRel">
-                                <p class="logoutButtonText centerVl">Send Feedback</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="row accountOptions-button">
-                        <a (click)="logout()" class="posRel">
-                            <div class="col-30 posRel">
-                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                            </div>
-                            <div class="col-70 posRel">
-                                <p class="logoutButtonText centerVl">Log Out</p>
-                            </div>
-                        </a>
-                    </div>
-
+                    <app-notification-icon src="/assets/images/icons/notificationsIcon.png" alt="Knowlead Notifications Icon" class="headerIcon centerVl" title="Notifications" [notificationSource]="testNotificationSource">
+                    </app-notification-icon>
                 </div>
-            </popover-content>
+                <div class="col-25 headerPosRel" [popover]="popover">
+                    <div class="verticalLine"></div>
+                    <a class="centerV">
+                        <img src="/assets/images/icons/accountOptionsIcon.png" alt="Knowlead Account Options Icon" class="headerIcon centerV">
+                    </a>
+                </div>
+                <popover-content #popover placement="bottom">
+                    <div class="accountOptions-content">
+
+                        <div class="row accountOptions-title-wrap">
+                            <span class="accountOptions-title">Your Account</span>
+                        </div>
+
+                        <div class="row accountOptions-button">
+                            <a class="posRel">
+                                <div class="col-30 posRel">
+                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                </div>
+                                <div class="col-70 posRel">
+                                    <p class="logoutButtonText centerVl">Settings</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="row accountOptions-button">
+                            <a class="posRel">
+                                <div class="col-30 posRel">
+                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                </div>
+                                <div class="col-70 posRel">
+                                    <p class="logoutButtonText centerVl">Send Feedback</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="row accountOptions-button">
+                            <a (click)="logout()" class="posRel">
+                                <div class="col-30 posRel">
+                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                </div>
+                                <div class="col-70 posRel">
+                                    <p class="logoutButtonText centerVl">Log Out</p>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </popover-content>
+            </div>
         </div>
     </div>
-</div>
 </nav>
 
 <!-- <button type="button" (click)="pritisno()">Za harketa</button>

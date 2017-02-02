@@ -2,6 +2,8 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 
 export interface NotificationSource {
+  canLoadMore: boolean;
+  canMarkAsRead: boolean;
   getNotificationStream(): Observable<NotificationModel[]>;
   induceNotification(notification: NotificationModel);
   addNotifications(notifications: NotificationModel[]);
@@ -18,6 +20,10 @@ export abstract class BaseNotificationSource implements NotificationSource {
   protected statsStream = new BehaviorSubject<NotificationSourceStats>({unread: 0, total: 0});
   protected notifications: NotificationModel[] = [];
   protected stats: NotificationSourceStats = {unread: 0, total: 0};
+  abstract canMarkAsRead: boolean;
+  get canLoadMore() {
+    return this.stats.total >= this.notifications.length;
+  }
 
   protected notifyNotifications() {
     this.notificationStream.next(this.notifications);

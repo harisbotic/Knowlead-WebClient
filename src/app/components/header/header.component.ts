@@ -7,12 +7,13 @@ import { SessionService } from '../../services/session.service';
 import { RealtimeService } from '../../services/realtime.service';
 import { MockNotificationsService } from '../../services/notifications/mock-notifications.service';
 import { Router } from '@angular/router';
+import { FriendshipNotificationsService } from '../../services/notifications/friendship-notifications.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [MockNotificationsService]
+  providers: [MockNotificationsService, FriendshipNotificationsService]
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
 
@@ -24,6 +25,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       protected sessionService: SessionService,
       protected realtimeService: RealtimeService,
       protected testNotificationSource: MockNotificationsService,
+      protected friendshipNotificationSource: FriendshipNotificationsService,
       protected router: Router) { super(); }
 
   ngOnInit() {

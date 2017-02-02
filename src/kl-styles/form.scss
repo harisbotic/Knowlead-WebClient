@@ -1,6 +1,12 @@
 @import "variables.scss";
+// NOTE: CHANGE THIS. This class is present on any form input if it is invalid
+// NOTE: FORM also receives the class
+input.ng-invalid.ng-dirty {
+    background-color: red;
+}
 
-input.defaultInput[type=text], input.defaultInput[type=password] {
+input.defaultInput[type=text],
+input.defaultInput[type=password] {
     border: 1px solid $hover-dark-color;
     border-radius: 5px;
     width: 100%;
@@ -9,7 +15,6 @@ input.defaultInput[type=text], input.defaultInput[type=password] {
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     outline: none;
-
     &:focus {
         box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
         border: 1px solid transparentize($knowlead-primary, 0.6);
@@ -30,11 +35,9 @@ input.searchInput[type=text] {
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     outline: none;
-
     &::-webkit-input-placeholder {
         color: $placeholder-color;
     }
-
     &:focus {
         box-shadow: 0 0 5px transparentize(white, 0.6);
         border: 1px solid transparentize(white, 0.6);

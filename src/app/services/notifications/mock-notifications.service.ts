@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 @Injectable()
 export class MockNotificationsService extends BaseNotificationSource {
 
+  canMarkAsRead = true;
+
   constructor() { super(); this.stats.unread = 10; this.refreshStats(); this.loadMore(); }
 
   loadMore() {
