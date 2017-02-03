@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ApplicationUserModel, CountryModel, LanguageModel, StateModel, ResponseModel } from './../../models/dto';
-import { Observable } from 'rxjs/Rx';
+import { ApplicationUserModel, CountryModel, LanguageModel, ResponseModel } from './../../models/dto';
 import { StorageService } from './../../services/storage.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
-import { baseLookup } from './../../utils/index';
 import * as _ from 'lodash';
 import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
-import { joinTranslation } from '../../utils/translate-utils';
 import { dateValidator } from '../../validators/date.validator';
 import { BaseComponent } from '../../base.component';
+import { DropdownValueInterface } from '../../models/frontend.models';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -18,17 +16,14 @@ import { BaseComponent } from '../../base.component';
   styleUrls: ['./profile-setup-page.component.scss', '../../../assets/styles/flags.css'],
   providers: []
 })
-export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
+export class ProfileSetupPageComponent extends BaseComponent implements AfterViewInit {
 
-  dateSelector: boolean = false;
-  genderSelector: boolean = false;
   form: FormGroup;
-  states: StateModel[] = [];
-  state: StateModel;
-  motherTongue: LanguageModel;
-  country: CountryModel;
   user: ApplicationUserModel;
   response: ResponseModel;
+
+  countries: DropdownValueInterface<number>[];
+  languages: DropdownValueInterface<number>[];
 
   constructor(
       protected storageService: StorageService,
@@ -37,40 +32,62 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
       protected accountService: AccountService,
       protected router: Router) {
     super();
-  }
-
-  ngOnInit() {
     this.form = new FormGroup({
       'name': new FormControl(null, [Validators.required]),
       'surname': new FormControl(null, [Validators.required]),
       'birthdate': new FormControl(null, [Validators.required, dateValidator({minYearsOld: 10})]),
       'isMale': new FormControl(null, [Validators.required]),
-      'aboutMe': new FormControl(null),
-      'country': new FormControl(null),
-      'motherTongue': new FormControl(null, [Validators.required]),
-      'languages': new FormControl(null),
-      'state': new FormControl(null),
+      'countryId': new FormControl(null),
+      'motherTongueId': new FormControl(null, [Validators.required]),
       'profilePictureId': new FormControl(null)
     });
-    this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).subscribe((user: ApplicationUserModel) => {
-      this.form.patchValue(user);
+  }
+
+  private countryForDropdown(country: CountryModel): DropdownValueInterface<number> {
+    return {label: country.name, value: country.geoLookupId};
+  }
+
+  private languageForDropdown(language: LanguageModel): DropdownValueInterface<number> {
+    return {label: language.name, value: language.coreLookupId};
+  }
+
+  private loadUser() {
+    this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user: ApplicationUserModel) => {
+      console.log('user');
       this.user = _.cloneDeep(user);
-
-      this.countryChanged(this.user.country);
-      this.stateChanged(this.user.state);
-      this.mainLanguageChanged(this.user.motherTongue);
-
-      for (let key1 of Object.keys(this.user)) {
-        let found = false;
-        for (let key2 in this.form.controls) {
-          if (key2 === key1 || key1 === key2 + 'Id') {
-            found = true;
-          }
-        }
-        if (!found) {
-          delete this.user[key1];
-        }
+      if (this.user.isMale == null) {
+        this.user.isMale = true;
       }
+      this.user.motherTongueId = <any>[this.user.motherTongueId];
+      this.user.countryId = <any>[this.user.countryId];
+      this.form.patchValue(this.user);
+      console.log('after patch');
+
+      // for (let key1 of Object.keys(this.user)) {
+      //   let found = false;
+      //   for (let key2 in this.form.controls) {
+      //     if (key2 === key1 || key1 === key2 + 'Id') {
+      //       found = true;
+      //     }
+      //   }
+      //   if (!found) {
+      //     delete this.user[key1];
+      //   }
+      // }
+    }));
+  }
+
+  ngAfterViewInit() {
+    const countriesGetter = this.storageService.getCountries().take(1).do(countries => {
+      this.countries = countries.map(this.countryForDropdown);
+      console.log(countries);
+    });
+    const languagesGetter = this.storageService.getLanguages().take(1).do(languages => {
+      this.languages = languages.map(this.languageForDropdown);
+      console.log(languages);
+    }).delay(0);
+    this.subscriptions.push(countriesGetter.merge(languagesGetter).subscribe(undefined, undefined, () => {
+      this.loadUser();
     }));
   }
 
@@ -86,75 +103,6 @@ export class ProfileSetupPageComponent extends BaseComponent implements OnInit {
         this.response = error;
       }
     ));
-  }
-
-  getGender(): string {
-    if (this.form.value.isMale == null) {
-      return joinTranslation('common', 'gender');
-    } else {
-      return this.form.value.isMale ? joinTranslation('common', 'male') : joinTranslation('common', 'female');
-    }
-  }
-
-  countryLookup = (query: string): Observable<CountryModel[]> => {
-    return baseLookup(this.storageService.getCountries(), query);
-  }
-
-  languageLookup = (query: string): Observable<LanguageModel[]> => {
-    return baseLookup(this.storageService.getLanguages()
-      .map((languages: LanguageModel[]) => {
-        return _.filter(languages, (language) => {
-          if (this.form.value.motherTongue != null &&
-              language.coreLookupId === this.form.value.motherTongue.coreLookupId) {
-            return false;
-          }
-          if (this.form.value.languages != null && _.find(this.form.value.languages, language) != null) {
-            return false;
-          }
-          return true;
-        });
-      })
-      , query);
-  }
-
-  stateLookup = (query: string): Observable<StateModel[]> => {
-    return baseLookup(Observable.of(this.states), query);
-  }
-
-  stateChanged(state: StateModel) {
-    this.form.patchValue({state: state});
-    this.state = state;
-  }
-
-  countryChanged(country: CountryModel) {
-    this.country = country;
-    this.states = [];
-    this.stateChanged(null);
-    if (country != null) {
-      this.form.patchValue({country: country});
-      this.subscriptions.push(this.storageService.getStates(country).subscribe((states: StateModel[]) => {
-        this.states = states;
-      }));
-    } else {
-      this.form.patchValue({countryId: null});
-    }
-  }
-
-  languageAdded(language: LanguageModel) {
-    if (language != null) {
-      this.form.patchValue({languages: _.uniq([...(this.form.value.languages || []), language])});
-    }
-  }
-
-  languageRemoved(language: LanguageModel) {
-    let languages = this.form.value.languages;
-    _.remove(languages, language);
-    this.form.patchValue({languages: languages});
-  }
-
-  mainLanguageChanged(language: LanguageModel) {
-    this.form.patchValue({motherTongue: language});
-    this.motherTongue = language;
   }
 
 }

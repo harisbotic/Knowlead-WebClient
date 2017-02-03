@@ -27,9 +27,9 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   @Input() title: string;
   @Input() timePick = false;
 
-  month = 1;
-  year = 2000;
-  day: number;
+  dayValue: number;
+  monthValue: number;
+  yearValue: number;
 
   setHours(hours: number) {
     if (this.value == null) {
@@ -48,20 +48,36 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   }
 
   daySelected(value: DropdownValueInterface<number>) {
-    this.day = value.value;
     this.refreshValue();
   }
   monthSelected(value: DropdownValueInterface<number>) {
-    this.month = value.value;
     this.refreshValue();
   }
   yearSelected(value: DropdownValueInterface<number>) {
-    this.year = value.value;
     this.refreshValue();
   }
 
   refreshValue() {
-    this.value = getDateIfValid(this.day, this.month, this.year);
+    if (this.dayValue === undefined || this.monthValue === undefined || this.yearValue === undefined) {
+      this.value = undefined;
+    } else {
+      this.value = getDateIfValid(this.dayValue, this.monthValue, this.yearValue);
+    }
+  }
+
+  public writeValue(value: Date) {
+    super.writeValue(value);
+    if (value) {
+      this.dayValue = <any>[value.getDate()];
+      this.monthValue = <any>[value.getMonth()];
+      this.yearValue = <any>[value.getFullYear()];
+      this.refreshValue();
+    } else {
+      this.dayValue = undefined;
+      this.monthValue = undefined;
+      this.yearValue = undefined;
+      this.refreshValue();
+    }
   }
 
   constructor() {
@@ -73,7 +89,7 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
       this.days.push({value: i, label: i.toString()});
     }
     for (let i = 1; i <= 12; i++) {
-      this.months.push({value: i, label: i.toString()});
+      this.months.push({value: i - 1, label: i.toString()});
     }
     for (let i = 1900; i <= 2050; i++) {
       this.years.push({value: i, label: i.toString()});

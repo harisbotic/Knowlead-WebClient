@@ -5,6 +5,7 @@ import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { PopoverModule } from 'ngx-popover';
 import { SelectModule } from 'angular2-select';
+// import { UiSwitchModule } from 'angular2-ui-switch/src';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -62,6 +63,7 @@ import { TextInputComponent } from './components/sub-form-components/text-input/
 import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
 import { NotificationIconComponent } from './components/sub-notifications/notification-icon/notification-icon.component';
 import { RegisteredGuard } from './guards/registered.guard';
+import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,8 @@ import { RegisteredGuard } from './guards/registered.guard';
     NotebookEditComponent,
     TextInputComponent,
     SingleNotificationComponent,
-    NotificationIconComponent
+    NotificationIconComponent,
+    UiSwitchComponent
   ],
   imports: [
     BrowserModule,

@@ -80,23 +80,32 @@ export class AccountService {
   private prepareForPatch(user: ApplicationUserModel): ApplicationUserModel {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
-    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture'];
-    cl.countryId = (cl.country) ? cl.country.geoLookupId : undefined;
-    cl.stateId = (cl.state) ? cl.state.geoLookupId : undefined;
-    cl.motherTongueId = (cl.motherTongue) ? cl.motherTongue.coreLookupId : undefined;
+    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages'];
     toDelete.forEach((key) => {
       delete cl[key];
     });
-    cl.languages = fillArray(cl.languages, 'coreLookupId');
+    for (let key of Object.keys(cl)) {
+      if (cl[key] == null) {
+        delete cl[key];
+      }
+    }
+    if (cl.languages) {
+      cl.languages = fillArray(cl.languages, 'coreLookupId');
+    }
     cl = _.mapValues(cl, (v) => v ? v : undefined);
     return cl;
   }
 
   public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
     return this.currentUser().take(1).flatMap((user) => {
-      let _user = this.prepareForPatch(user);
-      let _newUser = this.prepareForPatch(newUser);
-      let patch = fastjsonpatch.compare(_user, _newUser);
+      let patch;
+      try {
+        let _user = this.prepareForPatch(user);
+        let _newUser = this.prepareForPatch(newUser);
+        patch = fastjsonpatch.compare(_user, _newUser);
+      } catch (e) {
+        console.error('Error preparing patches: ' + e);
+      }
       return this.patchUser(patch);
     });
   }

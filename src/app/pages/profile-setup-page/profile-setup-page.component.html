@@ -1,120 +1,27 @@
-<article class="slds-card slds-card--narrow slds-container--small slds-container--center">
-  <div class="slds-card__header slds-grid">
-    <header class="slds-media slds-media--center slds-has-flexi-truncate">
-      <div class="slds-media__body slds-truncate">
-        <h1 class="slds-text-heading--large">
-          {{"profile-setup|title" | translate}}
-        </h1>
-      </div>
-    </header>
-  </div>
-    
-  <div class="slds-card__body">
-    <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form != null">
+<!--<ngl-form-element>
+  <div class="slds-text-heading--label slds-m-bottom--small">{{'common|name' | translate}}</div>
+  <input type="text" placeholder="{{'common|name' | translate}}" formControlName="name" nglFormControl>
+  <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
+</ngl-form-element>-->
+<form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form">
+    <input type="text" name="name" formControlName="name" placeholder="name">
+    <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
 
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|name' | translate}}</div>
-        <input type="text" placeholder="{{'common|name' | translate}}" formControlName="name" nglFormControl>
-        <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
-      </ngl-form-element>
+    <input type="text" name="surname" formControlName="surname" placeholder="surname">
+    <app-error-list [formControlProperty]="form.controls.surname"></app-error-list>
 
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|surname' | translate}}</div>
-        <input type="text" placeholder="{{'common|surname' | translate}}" formControlName="surname" nglFormControl>
-        <app-error-list [formControlProperty]="form.controls.surname"></app-error-list>
-      </ngl-form-element>
+    <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png" [class.gender-icon-active]="!form.value.isMale" class="gender-icon">
+    <ui-switch formControlName="isMale" color="red" defaultBgColor="blue" reverse></ui-switch>
+    <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png" [class.gender-icon-active]="form.value.isMale" class="gender-icon">
+    <app-error-list [formControlProperty]="form.controls.isMale"></app-error-list>
 
-      <div>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{"common|profile image" | translate}}</div>
-        <app-file-upload formControlName="profilePictureId" outputType="id"></app-file-upload>
-        <!--<app-error-list [formControlProperty]="form.controls.profilePictureId"></app-error-list>-->
-      </div>
+    <app-datepicker formControlName="birthdate"></app-datepicker>
+    <app-error-list [formControlProperty]="form.controls.birthdate"></app-error-list>
 
-      <div>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{"common|birthdate" | translate}}</div>
-        <app-datepicker formControlName="birthdate"
-          text="profile-setup|select birthdate"
-          saveText="profile-setup|save birthdate"
-          title="profile-setup:select birthdate">
-        </app-datepicker>
-        <app-error-list [formControlProperty]="form.controls.birthdate"></app-error-list>
-      </div>
+    <ng-select formControlName="countryId" [options]="countries" placeholder="Country"></ng-select>
+    <ng-select formControlName="motherTongueId" [options]="languages" placeholder="Language"></ng-select>
 
-      <ngl-form-element>
-        <select class="slds-select" formControlName="isMale" nglFormControl>
-          <option value="true">{{"common|male" | translate}}</option>
-          <option value="false">{{"common|female" | translate}}</option>
-        </select>
-        <app-error-list [formControlProperty]="form.controls.isMale"></app-error-list>
-      </ngl-form-element>
-
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|about me' | translate}}</div>
-        <textarea nglFormControl formControlName="aboutMe" placeholder="{{'common|about me' | translate}}"></textarea>
-        <app-error-list [formControlProperty]="form.controls.aboutMe"></app-error-list>
-      </ngl-form-element>
-
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|country' | translate}}</div>
-        <ngl-lookup [lookup]="countryLookup"
-            debounce="0"
-            field="name"
-            (pickChange)="countryChanged($event)"
-            [(pick)]="country">
-          <template nglLookupItem let-ctx>
-            <div class="slds-media__body">
-              <div class="slds-lookup__result-text"><img class="flag flag-{{ctx.code}}">{{ctx.name}}</div>
-            </div>
-          </template>
-        </ngl-lookup>
-        <input nglFormControl type="hidden" formControlName="country">
-        <app-error-list [formControlProperty]="form.controls.country" [checkDirty]="false"></app-error-list>
-      </ngl-form-element>
-
-      <ngl-form-element *ngIf="states.length > 0">
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|country state' | translate}}</div>
-        <ngl-lookup [lookup]="stateLookup"
-            debounce="0"
-            field="name"
-            (pickChange)="stateChanged($event)"
-            [(pick)]="state">
-        </ngl-lookup>
-        <input nglFormControl type="hidden" formControlName="state">
-        <app-error-list [formControlProperty]="form.controls.state" [checkDirty]="false"></app-error-list>
-      </ngl-form-element>
-
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|native language' | translate}}</div>
-        <ngl-lookup [lookup]="languageLookup"
-            debounce="0"
-            field="name"
-            (pickChange)="mainLanguageChanged($event)"
-            [(pick)]="motherTongue">
-        </ngl-lookup>
-        <input nglFormControl type="hidden" formControlName="motherTongue">
-        <app-error-list [formControlProperty]="form.controls.motherTongue" [checkDirty]="false"></app-error-list>
-      </ngl-form-element>
-
-      <ngl-form-element>
-        <div class="slds-text-heading--label slds-m-bottom--small">{{'common|other languages' | translate}}</div>
-        <ngl-pill *ngFor="let language of form.value.languages" (nglPillRemove)="languageRemoved(language)">
-          {{language.name}}
-        </ngl-pill>
-        <app-empty-lookup [lookup]="languageLookup"
-            field="name"
-            (pickChange)="languageAdded($event)">
-        </app-empty-lookup>
-        <input nglFormControl type="hidden" formControlName="languages">
-        <app-error-list [formControlProperty]="form.controls.languages" [checkDirty]="false"></app-error-list>
-      </ngl-form-element>
-
-    </form>
-  </div>
-
-  <div class="slds-card__footer">
-    <app-error-list [errors]="response?.errors"></app-error-list>
-    <button nglButton="brand" (click)="submit()" [disabled]="!form?.valid">
-      {{"profile-setup|submit" | translate}}
+    <button type="submit">
+      Next
     </button>
-  </div>
-</article>
+</form>

@@ -1,8 +1,8 @@
-<ng-select [options]="days" (selected)="daySelected($event)" (deselected)="daySelected(null)" ngModel placeholder="Day">
+<ng-select [options]="days" (selected)="daySelected($event)" (deselected)="daySelected(null)" [(ngModel)]="dayValue" placeholder="Day">
 </ng-select>
-<ng-select [options]="months" (selected)="monthSelected($event)" (deselected)="monthSelected(null)" ngModel placeholder="Month">
+<ng-select [options]="months" (selected)="monthSelected($event)" (deselected)="monthSelected(null)" [(ngModel)]="monthValue" placeholder="Month">
 </ng-select>
-<ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" ngModel placeholder="Year">
+<ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" [(ngModel)]="yearValue" placeholder="Year">
 </ng-select>
 
 <!--<button nglButton="neutral" type="button" (click)="open = true">
