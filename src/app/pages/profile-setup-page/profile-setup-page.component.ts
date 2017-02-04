@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApplicationUserModel, CountryModel, LanguageModel, ResponseModel } from './../../models/dto';
 import { StorageService } from './../../services/storage.service';
