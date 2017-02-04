@@ -5,20 +5,20 @@
         <div class="row">
             <div class="col-30">
                 <div class="col-25 headerPosRel">
-                    <button type="button" (click)="logout()" class="clearButton">
-                        <a href="#HomePage">
+                    <button type="button" class="clearButton">
+                        <a routerLink="/">
                             <img src="/assets/images/logo/logo_short.png" alt="Knowlead Logo short version" class="logo-short centerVl">
                         </a>
                     </button>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#StorePage" class="centerVl">Store</a>
+                    <a routerLink="/store" class="centerVl">Store</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#HomePage" class="centerVl">Home</a>
+                    <a routerLink="/" class="centerVl">Home</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a href="#ProfilePage" class="centerVl">James</a>
+                    <a routerLink="/profile/{{user.id}}" class="centerVl">{{user.name}}</a>
                 </div>
             </div>
             <div class="col-40">
