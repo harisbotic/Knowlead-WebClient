@@ -169,9 +169,21 @@ export function getDateIfValid(day: number, month: number, year: number): Date {
         monthLength[1] = 29;
     }
     // Check the range of the day
-    if (day > 0 && day <= monthLength[month - 1]) {
-        return new Date(year, month, day);
+    if (day > 0 && day <= monthLength[month]) {
+        return new Date(year, month - 1, day);
     } else {
         return undefined;
     }
+}
+
+export function getGmtDate(date: Date): Date {
+    let ret = new Date(date.getTime());
+    ret.setMinutes(ret.getMinutes() - ret.getTimezoneOffset());
+    return ret;
+}
+
+export function getLocalDate(date: Date): Date {
+    let ret = new Date(date.getTime());
+    ret.setMinutes(ret.getMinutes() + ret.getTimezoneOffset());
+    return ret;
 }

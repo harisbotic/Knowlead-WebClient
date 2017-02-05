@@ -20,6 +20,7 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
 
   form: FormGroup;
   user: ApplicationUserModel;
+  realUser: ApplicationUserModel;
   response: ResponseModel;
 
   countries: DropdownValueInterface<number>[];
@@ -75,6 +76,7 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
       //   }
       // }
     }));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.realUser = user));
   }
 
   ngAfterViewInit() {
@@ -97,7 +99,7 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
     }
     this.subscriptions.push(this.accountService
       .patchUserDetails(this.form.value)
-      .subscribe((response: ResponseModel) => {
+      .subscribe((user) => {
         this.router.navigate(['/interestsetup']);
       }, (error: ResponseModel) => {
         this.response = error;

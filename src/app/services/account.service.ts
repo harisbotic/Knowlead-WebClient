@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/observable';
 import { StorageService } from './storage.service';
 import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
@@ -9,10 +9,12 @@ import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
-import { Guid, ApplicationUserModel } from '../models/dto';
+import { Guid, ApplicationUserModel, ImageBlobModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { AnalyticsService } from './analytics.service';
+import { CHANGE_PROFILE_PICTURE } from '../utils/urls';
+import { getGmtDate, getLocalDate } from '../utils/index';
 
 @Injectable()
 export class AccountService {
@@ -62,8 +64,12 @@ export class AccountService {
     });
   }
 
-  public patchUser(patch: fastjsonpatch.Patch[]): Observable<ResponseModel> {
-    return this.http.patch(USER_DETAILS, patch)
+  public changeProfilePicture(image: ImageBlobModel): Observable<ApplicationUserModel> {
+    return this.doPatch(this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {}));
+  }
+
+  protected doPatch(input: Observable<Response>): Observable<ApplicationUserModel> {
+    return input
       .map(responseToResponseModel)
       .map(response => response.object)
       .do((user: ApplicationUserModel) => {
@@ -77,10 +83,15 @@ export class AccountService {
       });
   }
 
-  private prepareForPatch(user: ApplicationUserModel): ApplicationUserModel {
+  public patchUser(patch: fastjsonpatch.Patch[]): Observable<ApplicationUserModel> {
+    return this.doPatch(this.http.patch(USER_DETAILS, patch));
+  }
+
+  private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {
     let cl = _.cloneDeep(user);
-    (<any>cl).birthdate = (cl.birthdate) ? cl.birthdate.toUTCString() : undefined;
-    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages'];
+    (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toUTCString() : undefined;
+    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages',
+      'pointsBalance', 'minutesBalance'];
     toDelete.forEach((key) => {
       delete cl[key];
     });
@@ -96,12 +107,12 @@ export class AccountService {
     return cl;
   }
 
-  public patchUserDetails(newUser: ApplicationUserModel): Observable<ResponseModel> {
+  public patchUserDetails(newUser: ApplicationUserModel): Observable<ApplicationUserModel> {
     return this.currentUser().take(1).flatMap((user) => {
       let patch;
       try {
-        let _user = this.prepareForPatch(user);
-        let _newUser = this.prepareForPatch(newUser);
+        let _user = this.prepareForPatch(user, false);
+        let _newUser = this.prepareForPatch(newUser, true);
         patch = fastjsonpatch.compare(_user, _newUser);
       } catch (e) {
         console.error('Error preparing patches: ' + e);
@@ -110,7 +121,7 @@ export class AccountService {
     });
   }
 
-  public patchInterests(interests: InterestModel[]): Observable<ResponseModel> {
+  public patchInterests(interests: InterestModel[]): Observable<ApplicationUserModel> {
     return this.currentUser().take(1).flatMap((user) => {
 
       let tmp1 = <ApplicationUserModel>{};

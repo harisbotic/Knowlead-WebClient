@@ -7,10 +7,16 @@ export class RegisteredGuard implements CanActivate {
     canActivate(): Observable<boolean> {
         return this.accountService.currentUser().take(1).map((user) => {
             if (user) {
-                if (user.name) {
+                if (user.name && user.interests && user.interests.length > 0) {
                     return true;
                 } else {
-                    this.router.navigate(['/profilesetup']);
+                    if (!user.name) {
+                        this.router.navigate(['/profilesetup']);
+                    } else if (!user.interests || user.interests.length === 0) {
+                        this.router.navigate(['/interestsetup']);
+                    } else {
+                        console.error('Error redirecting this stuff');
+                    }
                 }
             } else {
                 this.router.navigate(['/login']);

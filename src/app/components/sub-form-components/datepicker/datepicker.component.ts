@@ -69,7 +69,7 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
     super.writeValue(value);
     if (value) {
       this.dayValue = <any>[value.getDate()];
-      this.monthValue = <any>[value.getMonth()];
+      this.monthValue = <any>[value.getMonth() + 1];
       this.yearValue = <any>[value.getFullYear()];
       this.refreshValue();
     } else {
@@ -89,7 +89,7 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
       this.days.push({value: i, label: i.toString()});
     }
     for (let i = 1; i <= 12; i++) {
-      this.months.push({value: i - 1, label: i.toString()});
+      this.months.push({value: i, label: i.toString()});
     }
     for (let i = 1900; i <= 2050; i++) {
       this.years.push({value: i, label: i.toString()});

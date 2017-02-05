@@ -4,6 +4,9 @@
   <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
 </ngl-form-element>-->
 <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form">
+
+    <app-profile-picture [user]="realUser" [uploadable]="true"></app-profile-picture>
+
     <input type="text" name="name" formControlName="name" placeholder="name">
     <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
 

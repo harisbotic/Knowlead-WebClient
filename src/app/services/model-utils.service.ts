@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
 import { ImageBlobModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
+import { getGmtDate } from '../utils/index';
 
 @Injectable()
 export class ModelUtilsService {
@@ -160,7 +161,7 @@ export class ModelUtilsService {
 
   public fillUser(user: ApplicationUserModel): Observable<ApplicationUserModel> {
     if (user.birthdate != null && typeof(user.birthdate) === 'string') {
-      user.birthdate = new Date(Date.parse(user.birthdate));
+      user.birthdate = getGmtDate(new Date(Date.parse(user.birthdate)));
     }
     return Observable.of(user);
   }
