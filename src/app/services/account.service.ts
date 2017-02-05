@@ -1,6 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/observable';
 import { StorageService } from './storage.service';
 import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
@@ -15,6 +14,7 @@ import { StorageFiller } from './storage.subject';
 import { AnalyticsService } from './analytics.service';
 import { CHANGE_PROFILE_PICTURE } from '../utils/urls';
 import { getGmtDate, getLocalDate } from '../utils/index';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AccountService {
