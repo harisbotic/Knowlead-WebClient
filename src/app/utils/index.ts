@@ -169,7 +169,7 @@ export function getDateIfValid(day: number, month: number, year: number): Date {
         monthLength[1] = 29;
     }
     // Check the range of the day
-    if (day > 0 && day <= monthLength[month]) {
+    if (day > 0 && day <= monthLength[month - 1]) {
         return new Date(year, month - 1, day);
     } else {
         return undefined;

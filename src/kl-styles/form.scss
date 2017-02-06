@@ -1,7 +1,8 @@
 @import "variables.scss";
 // NOTE: CHANGE THIS. This class is present on any form input if it is invalid
 // NOTE: FORM also receives the class
-input.ng-invalid.ng-dirty {
+input.ng-invalid.ng-dirty,
+app-datepicker.ng-invalid.ng-dirty {
     background-color: red;
 }
 
