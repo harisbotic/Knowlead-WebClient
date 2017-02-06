@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { UserNotebookModel } from '../models/dto';
+import { NotebookModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { notebooksMock } from '../utils/storage.constants';
 import * as _ from 'lodash';
@@ -11,30 +11,29 @@ export class NotebookService {
 
   constructor(protected storageService: StorageService) {}
 
-  prepareNotebookForPatch(notebook: UserNotebookModel): UserNotebookModel {
+  prepareNotebookForPatch(notebook: NotebookModel): NotebookModel {
     const ret = _.cloneDeep(notebook);
     delete ret.createdAt;
-    delete ret.imageBlob;
     delete ret.createdById;
     delete ret.createdBy;
     return ret;
   }
 
-  getNotebooks(): Observable<UserNotebookModel[]> {
+  getNotebooks(): Observable<NotebookModel[]> {
     return Observable.of(notebooksMock)
-      .do((notebooks: UserNotebookModel[]) => {
+      .do((notebooks: NotebookModel[]) => {
         for (let notebook of notebooks) {
-          this.storageService.setToStorage('notebook', undefined, {id: notebook.userNotebookId}, notebook);
+          this.storageService.setToStorage('notebook', undefined, {id: notebook.notebookId}, notebook);
         }
       });
   }
 
-  getNotebook(id: number): Observable<UserNotebookModel> {
+  getNotebook(id: number): Observable<NotebookModel> {
     return this.storageService.getFromStorage('notebook', undefined, {id: id});
   }
 
-  patchNotebook(notebook: UserNotebookModel): Observable<UserNotebookModel> {
-    return this.getNotebook(notebook.userNotebookId).take(1).map(oldNotebook => {
+  patchNotebook(notebook: NotebookModel): Observable<NotebookModel> {
+    return this.getNotebook(notebook.notebookId).take(1).map(oldNotebook => {
       const old = this.prepareNotebookForPatch(oldNotebook);
       const now = this.prepareNotebookForPatch(notebook);
       const patches = fastjsonpatch.compare(old, now);
@@ -42,24 +41,24 @@ export class NotebookService {
       return patches;
     }).flatMap(patches => {
       // TODO: CALL HTTP HERE
-      return this.getNotebook(notebook.userNotebookId).take(1).map(oldNotebook => {
+      return this.getNotebook(notebook.notebookId).take(1).map(oldNotebook => {
         fastjsonpatch.apply(oldNotebook, patches);
         return oldNotebook;
       });
-    }).do((newNotebook: UserNotebookModel) => {
-      this.storageService.setToStorage('notebook', undefined, {id: newNotebook.userNotebookId}, newNotebook);
+    }).do((newNotebook: NotebookModel) => {
+      this.storageService.setToStorage('notebook', undefined, {id: newNotebook.notebookId}, newNotebook);
       // TODO: REMOVE WHEN API BECOMES AVAILABLE
-      notebooksMock.splice(notebooksMock.findIndex(n => n.userNotebookId === newNotebook.userNotebookId), 1);
+      notebooksMock.splice(notebooksMock.findIndex(n => n.notebookId === newNotebook.notebookId), 1);
       notebooksMock.push(newNotebook);
     });
   }
 
-  addNotebook(notebook: UserNotebookModel): Observable<UserNotebookModel> {
+  addNotebook(notebook: NotebookModel): Observable<NotebookModel> {
     // TODO: CALL HTTP HERE
-    notebook.userNotebookId = Math.random();
-    this.storageService.setToStorage('notebook', undefined, {id: notebook.userNotebookId}, notebook);
+    notebook.notebookId = Math.random();
+    this.storageService.setToStorage('notebook', undefined, {id: notebook.notebookId}, notebook);
     notebooksMock.push(notebook);
-    return this.storageService.getFromStorage('notebook', undefined, {id: notebook.userNotebookId});
+    return this.storageService.getFromStorage('notebook', undefined, {id: notebook.notebookId});
   }
 
 }

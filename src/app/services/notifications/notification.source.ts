@@ -47,7 +47,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
 
   reset() {
     this.notifications = [];
-    this.notificationStream.next([]);
+    this.notifyNotifications();
     this.stats = {unread: 0, total: 0};
     this.refreshStats();
   }
@@ -59,7 +59,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
 
   induceNotification(notification: NotificationModel) {
     this.addNotifications([notification]);
-    if (!notification.read) {
+    if (!notification.seenAt) {
       this.stats.unread++;
       this.stats.total++;
       this.refreshStats();
@@ -68,7 +68,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
 
   protected markAsReadHelper() {
     for (let notification of this.notifications) {
-      notification.read = false;
+      notification.seenAt = new Date();
     }
     this.notifyNotifications();
     this.stats.unread = 0;

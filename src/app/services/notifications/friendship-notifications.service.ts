@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BaseNotificationSource } from './notification.source';
 import { ChatService } from '../chat.service';
-import { ApplicationUserModel, NotificationModelType } from '../../models/dto';
+import { ApplicationUserModel } from '../../models/dto';
 import { AccountService } from '../account.service';
 import { ModelUtilsService } from '../model-utils.service';
+import { NotificationTypes } from '../../models/constants';
 
 @Injectable()
 export class FriendshipNotificationsService extends BaseNotificationSource {
@@ -26,11 +27,17 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
             ModelUtilsService.canAcceptFriendship(f, user.id)
           ).map(f => {
             return {
-              type: NotificationModelType.friendship,
-              fromId: ModelUtilsService.getOtherFriendId(f, user.id),
-              from: ModelUtilsService.getOtherFriend(f, user.id),
+              notificationId: '',
+              notificationType: NotificationTypes.newFriendship,
+              forApplicationUserId: user.id,
+              forApplicationUser: user,
+              fromApplicationUserId: ModelUtilsService.getOtherFriendId(f, user.id),
+              fromApplicationUser: ModelUtilsService.getOtherFriend(f, user.id),
               timestamp: f.createdAt,
-              read: true
+              p2pId: undefined,
+              p2p: undefined,
+              scheduledAt: f.createdAt,
+              seenAt: new Date()
             };
           })
         );

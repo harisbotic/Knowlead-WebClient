@@ -1,5 +1,5 @@
 import { ME, LANGUAGES, COUNTRIES, STATES, FOSES, USER, P2P, GET_FRIENDS } from './urls';
-import { UserNotebookModel } from '../models/dto';
+import { NotebookModel } from '../models/dto';
 
 export type StorageKey = 'user' | 'languages' | 'countries' | 'states' | 'FOSes' | 'otherUser' | 'p2p' | 'friends' | 'notebook';
 export interface MockType {
@@ -8,24 +8,24 @@ export interface MockType {
     type: 'object' | 'array';
 }
 
-export const notebooksMock: UserNotebookModel[] = [{
-    userNotebookId: 0,
+export const notebooksMock: NotebookModel[] = [{
+    notebookId: 0,
     name: 'ime',
     markdown: 'tekst',
     createdAt: new Date(),
     createdById: '',
     createdBy: undefined,
-    imageBlobId: undefined,
-    imageBlob: undefined
+    primaryColor: '#000000',
+    secondaryColor: '#ff0000'
 }, {
-    userNotebookId: 1,
+    notebookId: 1,
     name: 'drugi notebook',
     markdown: 'ovo ono he he he',
     createdAt: new Date(2000, 10, 10),
     createdById: '',
     createdBy: undefined,
-    imageBlobId: undefined,
-    imageBlob: undefined
+    primaryColor: '#ff0000',
+    secondaryColor: '#000000'
 }];
 
 export type StorageConfiguration = {

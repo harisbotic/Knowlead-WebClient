@@ -1,3 +1,11 @@
+export class NotificationTypes
+{
+	static newP2PComment: string = "NotificationTypes.NEW_P2P_COMMENT";
+	static p2PExpired: string = "NotificationTypes.P2P_EXPIRED";
+	static prepareForP2P: string = "NotificationTypes.PREPARE_FOR_P2P";
+	static rewardClaimed: string = "NotificationTypes.REWARD_CLAIMED";
+	static newFriendship: string = "NotificationTypes.NEW_FRIENDSHIP";
+}
 export class ErrorCodes
 {
 	static requiredField: string = "REQUIRED_FIELD";
@@ -34,4 +42,5 @@ export class ErrorCodes
 	static notInFriendlist: string = "NOT_IN_FRIENDLIST";
 	static claimRewardError: string = "CLAIM_REWARD_ERROR";
 	static alreadyGotReward: string = "ALREADY_GOT_REWARD";
+	static notEnoughMinutes: string = "NOT_ENOUGH_MINUTES";
 }
