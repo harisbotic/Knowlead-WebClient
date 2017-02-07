@@ -1,9 +1,11 @@
-<ng-select [options]="days" (selected)="daySelected($event)" (deselected)="daySelected(null)" [(ngModel)]="dayValue" placeholder="Day">
-</ng-select>
-<ng-select [options]="months" (selected)="monthSelected($event)" (deselected)="monthSelected(null)" [(ngModel)]="monthValue" placeholder="Month">
-</ng-select>
-<ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" [(ngModel)]="yearValue" placeholder="Year">
-</ng-select>
+<div class="birthdate-wrap">
+    <ng-select [options]="days" (selected)="daySelected($event)" (deselected)="daySelected(null)" [(ngModel)]="dayValue" placeholder="Day" class="daySection">
+    </ng-select>
+    <ng-select [options]="months" (selected)="monthSelected($event)" (deselected)="monthSelected(null)" [(ngModel)]="monthValue" placeholder="Month" class="monthSection">
+    </ng-select>
+    <ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" [(ngModel)]="yearValue" placeholder="Year" class="yearSection">
+    </ng-select>
+</div>
 
 <!--<button nglButton="neutral" type="button" (click)="open = true">
   {{ (!value) ? (text | translate) : (value | date) }}

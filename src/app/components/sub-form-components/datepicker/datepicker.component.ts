@@ -21,6 +21,8 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   months: DropdownValueInterface<number>[];
   years: DropdownValueInterface<number>[];
   open = false;
+  monthsList = [ "January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December" ];
 
   @Input() text: string;
   @Input() saveText: string;
@@ -89,7 +91,7 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
       this.days.push({value: i, label: i.toString()});
     }
     for (let i = 1; i <= 12; i++) {
-      this.months.push({value: i, label: i.toString()});
+      this.months.push({value: i, label: this.monthsList[i - 1]});
     }
     for (let i = 1900; i <= 2050; i++) {
       this.years.push({value: i, label: i.toString()});

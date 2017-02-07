@@ -2,12 +2,13 @@
 
 .notification-content {
     width: 400px;
-    height: 600px;
+    max-height: 407px;
     overflow-y: scroll;
     margin-top: 15px;
     border: 1px solid $hover-dark-color;
     box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
     outline: none;
+    background-color: $background-color;
 }
 
 .popover-header {
@@ -30,5 +31,16 @@
     &:hover {
         text-decoration: underline;
     }
+}
 
+.loadMoreButton {
+    width: 100%;
+    text-align: center;
+    color: $font-primary-color;
+    font-weight: bold;
+    padding: 10px 0;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

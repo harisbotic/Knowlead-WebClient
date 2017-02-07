@@ -10,6 +10,6 @@
             </div>
         </div>
         <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>
-        <button (click)="scrolled()">Load more</button>
+        <button (click)="scrolled()" class="clearButton loadMoreButton">Load more</button>
     </div>
 </popover-content>

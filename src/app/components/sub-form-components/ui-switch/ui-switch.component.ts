@@ -10,8 +10,8 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'ui-switch',
   template: `
-  <span class="switch" 
-  [class.checked]="checked" 
+  <span class="switch"
+  [class.checked]="checked"
   [class.disabled]="disabled"
   [class.switch-large]="size === 'large'"
   [class.switch-medium]="size === 'medium'"
@@ -32,15 +32,15 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     box-sizing: content-box;
     overflow: visible;
     padding: 0;
-    margin: 0;            
+    margin: 0;
     cursor: pointer;
     box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
     transition: 0.3s ease-out all;
     -webkit-transition: 0.3s ease-out all;
-    }        
+    }
     small {
     border-radius: 100%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);          
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -66,13 +66,18 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     height: 30px;
     }
     .switch-small {
-    width: 33px;
-    height: 20px;
+    width: 50px;
+    height: 25px;
     border-radius: 20px;
+    margin-top: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
     }
     .switch-small small {
     width: 20px;
     height: 20px;
+    left: 3px;
+    top: 2.3px;
     }
     .checked {
     background: rgb(100, 189, 99);
@@ -85,7 +90,8 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     left: 20px;
     }
     .switch-small.checked small {
-    left: 13px;
+    left: 27px;
+    top: 2.3px;
     }
     .disabled {
     opacity: .50;

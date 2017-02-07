@@ -1,15 +1,13 @@
 <!--OVAJ NGIF MORA BITI PRISUTAN-->
 <nav *ngIf="user">
     <!-- Welcome: {{fullName(user)}} ... Refer other friends using this link: <a href="{{referral}}">{{referral}}</a> -->
-    <div class="grid-container">
+    <div class="grid-container posRel zOne">
         <div class="row">
             <div class="col-30">
                 <div class="col-25 headerPosRel">
-                    <button type="button" class="clearButton">
                         <a routerLink="/">
                             <img src="/assets/images/logo/logo_short.png" alt="Knowlead Logo short version" class="logo-short centerVl">
                         </a>
-                    </button>
                 </div>
                 <div class="col-25 headerPosRel">
                     <a routerLink="/store" class="centerVl">Store</a>
@@ -26,7 +24,7 @@
                     <input class="searchInput" type="text" name="search" placeholder="Search people or subjects..">
                 </form>
             </div>
-            <div class="col-30">
+            <div class="col-30 headerPosRel">
                 <div class="col-25 headerPosRel">
                     <app-notification-icon src="/assets/images/icons/friendsIcon.png" alt="Knowlead Friends Icon" class="headerIcon centerVr" title="Friend requests" [notificationSource]="friendshipNotificationSource">
                     </app-notification-icon>
@@ -85,13 +83,14 @@
                                 </div>
                             </a>
                         </div>
-
                     </div>
                 </popover-content>
             </div>
         </div>
     </div>
 </nav>
+
+
 
 <!-- <button type="button" (click)="pritisno()">Za harketa</button>
 <app-feedback-form></app-feedback-form>  -->
