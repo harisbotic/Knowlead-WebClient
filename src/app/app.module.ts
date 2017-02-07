@@ -65,6 +65,8 @@ import { NotificationIconComponent } from './components/sub-notifications/notifi
 import { RegisteredGuard } from './guards/registered.guard';
 import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
 import { NotebookService } from './services/notebook.service';
+import { SingleNotebookComponent } from './components/sub-notebook/single-notebook/single-notebook.component';
+import { ColorPickerModule } from 'angular2-color-picker';
 
 @NgModule({
   declarations: [
@@ -106,7 +108,8 @@ import { NotebookService } from './services/notebook.service';
     TextInputComponent,
     SingleNotificationComponent,
     NotificationIconComponent,
-    UiSwitchComponent
+    UiSwitchComponent,
+    SingleNotebookComponent
   ],
   imports: [
     BrowserModule,
@@ -116,6 +119,7 @@ import { NotebookService } from './services/notebook.service';
     MomentModule,
     PopoverModule,
     SelectModule,
+    ColorPickerModule,
     NglModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,

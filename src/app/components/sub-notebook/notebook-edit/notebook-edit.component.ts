@@ -13,6 +13,8 @@ import { BaseFormComponent } from '../../../base-form.component';
 export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
 
   form: FormGroup;
+  primaryColor: string;
+  secondaryColor: string;
 
   @Output() close = new EventEmitter<any>();
 
@@ -38,13 +40,23 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
     });
   }
 
+  applyFullValue(value: NotebookModel) {
+    super.applyFullValue(value);
+    this.primaryColor = value.primaryColor;
+    this.secondaryColor = value.secondaryColor;
+  }
+
   getNewValue(): NotebookModel {
+    const pc = '#00ff00';
+    const sc = '#ff0000';
+    this.primaryColor = pc;
+    this.secondaryColor = sc;
     return {
       notebookId: undefined,
       markdown: '',
       name: '',
-      primaryColor: '#ff00000',
-      secondaryColor: '#0000ff',
+      primaryColor: pc,
+      secondaryColor: sc,
       createdAt: undefined,
       createdBy: undefined,
       createdById: undefined,
@@ -69,6 +81,13 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
         this.doClose();
       }
     }));
+  }
+
+  reapply() {
+    this.form.patchValue({
+      primaryColor: this.primaryColor,
+      secondaryColor: this.secondaryColor
+    });
   }
 
   doClose() {

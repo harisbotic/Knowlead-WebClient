@@ -4,4 +4,7 @@
     <button (click)="onSubmit(false)" type="button">Save</button>
     <button (click)="onSubmit(true);" type="button">Save and close</button>
     <button (click)="doClose();" type="button">Close</button>
+    <div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div>
+    <div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor"></div>
+    <app-single-notebook [notebook]="getValue()"></app-single-notebook>
 </form>

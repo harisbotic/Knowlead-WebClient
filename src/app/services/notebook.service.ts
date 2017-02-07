@@ -33,11 +33,6 @@ export class NotebookService {
 
   getNotebooks(): Observable<NotebookModel[]> {
     return this.http.get(NOTEBOOK).map(responseToResponseModel).map(a => a.object)
-      // .do((notebooks: NotebookModel[]) => {
-      //   for (let notebook of notebooks) {
-      //     this.storageService.setToStorage('notebook', this.notebookFiller, {id: notebook.notebookId}, notebook);
-      //   }
-      // })
       .flatMap(notebooks => this.modelUtilsService.fillNotebooks(notebooks));
   }
 

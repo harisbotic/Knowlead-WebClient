@@ -1,7 +1,5 @@
-<div *ngFor="let item of notebooks">
-    <button (click)="openNotebook(item)">
-        {{item.name}}
-    </button>
+<div *ngFor="let item of getNotebookList()">
+    <app-single-notebook [notebook]="item" (click)="openNotebook(item)"></app-single-notebook>
 </div>
 <div>
     <button (click)="openNotebook({userNotebookId: null})">

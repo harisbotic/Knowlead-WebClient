@@ -29,13 +29,11 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
             return {
               notificationId: '',
               notificationType: NotificationTypes.newFriendship,
-              forApplicationUserId: user.id,
-              forApplicationUser: user,
               fromApplicationUserId: ModelUtilsService.getOtherFriendId(f, user.id),
               fromApplicationUser: ModelUtilsService.getOtherFriend(f, user.id),
               timestamp: f.createdAt,
-              p2pId: undefined,
-              p2p: undefined,
+              p2PId: undefined,
+              p2P: undefined,
               scheduledAt: f.createdAt,
               seenAt: new Date()
             };
