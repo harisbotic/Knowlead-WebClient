@@ -3,7 +3,7 @@
   <input type="text" placeholder="{{'common|name' | translate}}" formControlName="name" nglFormControl>
   <app-error-list [formControlProperty]="form.controls.name"></app-error-list>
 </ngl-form-element>-->
-<form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form">
+<form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="form">
 
     <app-profile-picture [user]="realUser" [uploadable]="true"></app-profile-picture>
 

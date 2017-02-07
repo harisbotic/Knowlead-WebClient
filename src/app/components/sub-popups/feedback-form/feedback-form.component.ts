@@ -3,13 +3,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { AnalyticsService } from '../../../services/analytics.service';
+import { BaseFormComponent } from '../../../base-form.component';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
   selector: 'app-feedback-form',
   templateUrl: './feedback-form.component.html',
   styleUrls: ['./feedback-form.component.scss']
 })
-export class FeedbackFormComponent implements OnInit {
+export class FeedbackFormComponent extends BaseComponent implements OnInit {
 
   opened: boolean;
   form = new FormGroup({
@@ -18,7 +20,9 @@ export class FeedbackFormComponent implements OnInit {
 
   constructor(protected http: Http,
       protected notificationService: NotificationService,
-      protected analyticsService: AnalyticsService) { }
+      protected analyticsService: AnalyticsService) {
+    super();
+  }
 
   ngOnInit() {
   }

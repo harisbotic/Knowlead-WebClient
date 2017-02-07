@@ -30,11 +30,11 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
 
   getNewForm() {
     return new FormGroup({
-      markdown: new FormControl(''),
-      name: new FormControl('', [Validators.required]),
-      primaryColor: new FormControl('#ff00000', Validators.required),
-      secondaryColor: new FormControl('#0000ff', Validators.required),
-      notebookId: new FormControl()
+      markdown: new FormControl(undefined),
+      name: new FormControl(undefined, [Validators.required]),
+      primaryColor: new FormControl(undefined, Validators.required),
+      secondaryColor: new FormControl(undefined, Validators.required),
+      notebookId: new FormControl(undefined)
     });
   }
 
@@ -60,8 +60,8 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
       return;
     }
     const o = (this.form.value.userNotebookId == null) ?
-      this.notebookSerice.addNotebook(this.form.value) :
-      this.notebookSerice.patchNotebook(this.form.value);
+      this.notebookSerice.addNotebook(this.getValue()) :
+      this.notebookSerice.patchNotebook(this.getValue());
     this.subscriptions.push(o.take(1).subscribe(notebook => {
       this.notebookId = notebook.notebookId;
     }));

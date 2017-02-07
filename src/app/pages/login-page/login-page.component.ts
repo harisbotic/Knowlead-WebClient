@@ -4,7 +4,8 @@ import 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { ResponseModel } from './../../models/dto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BaseComponent } from '../../base.component';
+import { BaseFormComponent } from '../../base-form.component';
+import { LoginUserModel } from '../../models/frontend.models';
 
 @Component({
   selector: 'app-login-page',
@@ -12,18 +13,17 @@ import { BaseComponent } from '../../base.component';
   styleUrls: ['./login-page.component.scss'],
   providers: []
 })
-export class LoginPageComponent extends BaseComponent implements OnInit {
+export class LoginPageComponent extends BaseFormComponent<LoginUserModel> implements OnInit {
 
-  success: boolean = false;
-  busy: boolean = false;
   response: ResponseModel;
   form: FormGroup;
+  busy: boolean;
 
   constructor(protected sessionService: SessionService, protected router: Router) {
     super();
   }
 
-  loginClicked() {
+  onSubmit() {
     this.busy = true;
     delete this.response;
     this.subscriptions.push(this.sessionService.login(this.form.value).finally(() => {
@@ -35,10 +35,17 @@ export class LoginPageComponent extends BaseComponent implements OnInit {
     }));
   }
 
-  ngOnInit() {
-    this.form = new FormGroup({
+  getNewForm() {
+    return new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
+  }
+
+  getNewValue() {
+    return {
+      email: '',
+      password: ''
+    };
   }
 }

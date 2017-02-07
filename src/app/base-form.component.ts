@@ -1,11 +1,21 @@
 import { BaseComponent } from './base.component';
 import { FormGroup } from '@angular/forms';
 import { OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 export abstract class BaseFormComponent<T> extends BaseComponent implements OnInit {
     form: FormGroup;
+    protected subscriptions: Subscription[];
     abstract getNewValue(): T;
     abstract getNewForm(): FormGroup;
     abstract onSubmit();
+
+    getValue(): T {
+        if (this.form) {
+            return this.form.value;
+        } else {
+            return null;
+        }
+    }
 
     applyFullValue(value: T) {
         const controlKeys = Object.keys(this.form.controls);

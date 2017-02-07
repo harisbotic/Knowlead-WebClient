@@ -1,4 +1,4 @@
-<form (ngSubmit)="submit()" [formGroup]="form">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
     <textarea formControlName="text" placeholder="WTF DO YOU WANT TO POST NOW !!! i nema upitnika"></textarea>
     <div [ngSwitch]="stepStr">
         <app-fos-selector *ngSwitchCase="'fosId'" outputType="id" formControlName="fosId"></app-fos-selector>

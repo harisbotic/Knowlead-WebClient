@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="regForm-wrap">
-            <form (ngSubmit)="register()" [formGroup]="form">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form">
                 <div id="regEmail-wrap">
                     <input type="text" name="email" placeholder="{{'common|email' | translate}}" formControlName="email" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
