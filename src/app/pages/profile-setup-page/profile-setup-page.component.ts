@@ -59,8 +59,8 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
       if (this.user.isMale == null) {
         this.user.isMale = true;
       }
-      this.user.motherTongueId = <any>[this.user.motherTongueId];
-      this.user.countryId = <any>[this.user.countryId];
+      this.user.motherTongueId = this.user.motherTongueId ? <any>[this.user.motherTongueId] : undefined;
+      this.user.countryId = this.user.countryId ? <any>[this.user.countryId] : undefined;
       this.form.patchValue(this.user);
       console.log('after patch');
 
