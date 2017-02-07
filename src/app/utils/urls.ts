@@ -24,5 +24,4 @@ export const GET_FRIENDS = API + '/api/chat/getallfriends';
 export const CHANGE_FRIENDSHIP = API + '/api/chat/changefriendshipstatus';
 export const FEEDBACK = API + '/api/statistics/feedback';
 
-export const NOTEBOOK_GET = API + '/api/notebook';
-export const NOTEBOOK_ALL = API + '/api/notebook/getAll';
+export const NOTEBOOK = API + '/api/notebook';

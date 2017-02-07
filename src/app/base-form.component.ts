@@ -4,6 +4,7 @@ import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 export abstract class BaseFormComponent<T> extends BaseComponent implements OnInit {
     form: FormGroup;
+    wasSet = false;
     protected subscriptions: Subscription[];
     abstract getNewValue(): T;
     abstract getNewForm(): FormGroup;
@@ -18,6 +19,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
     }
 
     applyFullValue(value: T) {
+        this.wasSet = true;
         if (value == null) {
             console.warn('Value for form was null');
             this.form.reset();
@@ -49,6 +51,8 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
     }
 
     ngOnInit() {
-        this.restartForm();
+        if (!this.wasSet) {
+            this.restartForm();
+        }
     }
 }

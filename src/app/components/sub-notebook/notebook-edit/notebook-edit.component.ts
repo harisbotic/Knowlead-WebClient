@@ -47,7 +47,8 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
       secondaryColor: '#0000ff',
       createdAt: undefined,
       createdBy: undefined,
-      createdById: undefined
+      createdById: undefined,
+      isDeleted: undefined
     };
   }
 
@@ -55,15 +56,18 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
     super();
   }
 
-  onSubmit() {
+  onSubmit(shouldClose?: boolean) {
     if (!this.form.valid) {
       return;
     }
-    const o = (this.form.value.userNotebookId == null) ?
+    const o = (this.getValue().notebookId == null) ?
       this.notebookSerice.addNotebook(this.getValue()) :
       this.notebookSerice.patchNotebook(this.getValue());
     this.subscriptions.push(o.take(1).subscribe(notebook => {
       this.notebookId = notebook.notebookId;
+      if (shouldClose) {
+        this.doClose();
+      }
     }));
   }
 

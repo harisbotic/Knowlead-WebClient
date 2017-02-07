@@ -1,38 +1,51 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { StorageService } from './storage.service';
 import { NotebookModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { Http } from '@angular/http';
-import { NOTEBOOK_ALL, NOTEBOOK_GET } from '../utils/urls';
+import { NOTEBOOK } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
+import { ModelUtilsService } from './model-utils.service';
 
 @Injectable()
 export class NotebookService {
 
   notebookFiller = undefined;
 
-  constructor(protected storageService: StorageService, protected http: Http) {}
+  get modelUtilsService(): ModelUtilsService {
+    return this.injector.get(ModelUtilsService);
+  }
+
+  constructor(protected storageService: StorageService, protected http: Http, protected injector: Injector) {
+    this.notebookFiller = this.modelUtilsService.fillNotebook.bind(this.modelUtilsService);
+  }
 
   prepareNotebookForPatch(notebook: NotebookModel): NotebookModel {
     const ret = _.cloneDeep(notebook);
     delete ret.createdAt;
     delete ret.createdById;
     delete ret.createdBy;
+    delete ret.isDeleted;
     return ret;
   }
 
   getNotebooks(): Observable<NotebookModel[]> {
-    return this.http.get(NOTEBOOK_ALL).map(responseToResponseModel).map(a => a.object)
-      .do((notebooks: NotebookModel[]) => {
-        for (let notebook of notebooks) {
-          this.storageService.setToStorage('notebook', this.notebookFiller, {id: notebook.notebookId}, notebook);
-        }
-      });
+    return this.http.get(NOTEBOOK).map(responseToResponseModel).map(a => a.object)
+      // .do((notebooks: NotebookModel[]) => {
+      //   for (let notebook of notebooks) {
+      //     this.storageService.setToStorage('notebook', this.notebookFiller, {id: notebook.notebookId}, notebook);
+      //   }
+      // })
+      .flatMap(notebooks => this.modelUtilsService.fillNotebooks(notebooks));
   }
 
-  getNotebook(id: number): Observable<NotebookModel> {
+  getNotebook(id: number | NotebookModel): Observable<NotebookModel> {
+    if (typeof id !== 'number') {
+      this.storageService.setToStorage('notebook', this.notebookFiller, {id: id.notebookId}, id);
+      id = id.notebookId;
+    }
     return this.storageService.getFromStorage('notebook', this.notebookFiller, {id: id});
   }
 
@@ -43,7 +56,7 @@ export class NotebookService {
       const patches = fastjsonpatch.compare(old, now);
       return patches;
     }).flatMap(patches => {
-      return this.http.patch(NOTEBOOK_GET + '/' + notebook.notebookId, patches)
+      return this.http.patch(NOTEBOOK + '/' + notebook.notebookId, patches)
         .map(responseToResponseModel)
         .map(a => a.object);
     }).do((newNotebook: NotebookModel) => {
@@ -52,7 +65,7 @@ export class NotebookService {
   }
 
   addNotebook(notebook: NotebookModel): Observable<NotebookModel> {
-    return this.http.post(NOTEBOOK_GET, notebook)
+    return this.http.post(NOTEBOOK, notebook)
       .map(responseToResponseModel)
       .map(a => a.object)
       .do((n: NotebookModel) => this.storageService.setToStorage('notebook', this.notebookFiller, {id: n.notebookId}, n));

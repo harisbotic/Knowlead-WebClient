@@ -64,6 +64,7 @@ import { SingleNotificationComponent } from './components/sub-notifications/sing
 import { NotificationIconComponent } from './components/sub-notifications/notification-icon/notification-icon.component';
 import { RegisteredGuard } from './guards/registered.guard';
 import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
+import { NotebookService } from './services/notebook.service';
 
 @NgModule({
   declarations: [
@@ -140,6 +141,7 @@ import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui
     ModelUtilsService,
     ChatService,
     P2pService,
+    NotebookService,
     StorageService,
     RealtimeService,
     AnalyticsService,

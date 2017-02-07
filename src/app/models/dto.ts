@@ -135,6 +135,7 @@ export interface NotebookModel
 	primaryColor: string;
 	secondaryColor: string;
 	createdAt: Date;
+	isDeleted: boolean;
 	createdById: Guid;
 	createdBy: ApplicationUserModel;
 }
@@ -194,12 +195,10 @@ export interface NotificationModel
 {
 	notificationId: Guid;
 	notificationType: string;
-	forApplicationUserId: Guid;
-	forApplicationUser: ApplicationUserModel;
 	fromApplicationUserId: Guid;
 	fromApplicationUser: ApplicationUserModel;
-	p2pId: number;
-	p2p: P2PModel;
+	p2PId: number;
+	p2P: P2PModel;
 	scheduledAt: Date;
 	seenAt: Date;
 }
@@ -344,9 +343,5 @@ export interface ApplicationUserInterestModel
 	fosId: number;
 	fos: FOSModel;
 	stars: number;
-}
-export interface NotificationSourceStats {
-	unread: number;
-	total: number;
 }
 export type Guid = string;

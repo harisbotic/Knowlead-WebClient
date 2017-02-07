@@ -7,7 +7,7 @@ import { BaseComponent } from '../../../base.component';
   selector: 'app-notebook-list',
   templateUrl: './notebook-list.component.html',
   styleUrls: ['./notebook-list.component.scss'],
-  providers: [NotebookService]
+  providers: []
 })
 export class NotebookListComponent extends BaseComponent implements OnInit {
 

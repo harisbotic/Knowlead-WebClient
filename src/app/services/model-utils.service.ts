@@ -7,9 +7,10 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { ImageBlobModel } from '../models/dto';
+import { ImageBlobModel, NotebookModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
+import { NotebookService } from './notebook.service';
 
 @Injectable()
 export class ModelUtilsService {
@@ -82,9 +83,11 @@ export class ModelUtilsService {
   protected get accountService(): AccountService {
     return this.injector.get(AccountService);
   }
-
   protected get storageService(): StorageService {
     return this.injector.get(StorageService);
+  }
+  protected get notebookService(): NotebookService {
+    return this.injector.get(NotebookService);
   }
 
   constructor(protected injector: Injector) {
@@ -117,6 +120,10 @@ export class ModelUtilsService {
 
   public fillFriendships(values: FriendshipModel[]): Observable<FriendshipModel[]> {
     return this.fillArray(values, this.fillFriendship.bind(this), 'createdAt');
+  }
+
+  public fillNotebooks(values: NotebookModel[]): Observable<NotebookModel[]> {
+    return this.fillArray(values, this.notebookService.getNotebook.bind(this.notebookService), 'notebookId');
   }
 
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: string): Observable<T[]> {
@@ -156,6 +163,15 @@ export class ModelUtilsService {
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
+    return ret;
+  }
+
+  public fillNotebook(value: NotebookModel): Observable<NotebookModel> {
+    if (value.createdAt != null && typeof(value.createdAt) === 'string') {
+      value.createdAt = new Date(Date.parse(value.createdAt));
+    }
+    let ret = Observable.of(value);
+    ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     return ret;
   }
 
