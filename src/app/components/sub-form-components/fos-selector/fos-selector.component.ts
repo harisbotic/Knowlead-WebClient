@@ -1,10 +1,10 @@
 import { Component, OnInit, forwardRef, ViewChild, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FOSModel } from '../../../models/dto';
 import { StorageService } from '../../../services/storage.service';
 import { stringContains, getFOSParents } from '../../../utils/index';
 import { EmptyLookupComponent } from '../empty-lookup/empty-lookup.component';
-import { BaseComponent } from '../../../base.component';
+import { BaseFormInputComponent } from '../base-form-input/base-form-input.component';
 
 type CallbackType = (value: any) => void;
 
@@ -20,7 +20,7 @@ type CallbackType = (value: any) => void;
     }
   ]
 })
-export class FosSelectorComponent extends BaseComponent implements OnInit, ControlValueAccessor {
+export class FosSelectorComponent extends BaseFormInputComponent<FOSModel> implements OnInit {
 
   @ViewChild('lookupElement') lookupElement: EmptyLookupComponent<FOSModel>;
 
@@ -28,36 +28,19 @@ export class FosSelectorComponent extends BaseComponent implements OnInit, Contr
 
   parents: FOSModel[] = [];
 
-  _value: FOSModel;
-  get value(): FOSModel {
-    return this._value;
-  }
-  set value(value: FOSModel) {
-    if (value == null) {
-      if (this.root != null) {
-        this.value = this.root;
-      }
-      return;
-    }
-    this._value = value;
-    if (this.chCallback != null && this.callCallbacks) {
-      let tmp = value === this.root ? null : value;
-      if (this.outputType === 'object') {
-        this.chCallback(tmp);
-      } else {
-        this.chCallback(tmp ? tmp.coreLookupId : null);
-      }
-    }
-    this.parents = this.getParents();
-    this.callCallbacks = true;
-  }
-  chCallback: CallbackType;
-  tcCallback: CallbackType;
-  callCallbacks = true;
-
   root: FOSModel;
 
   constructor(protected storageService: StorageService) { super(); }
+
+  emitChange() {
+    let tmp = this.value === this.root ? null : this.value;
+    if (this.outputType === 'object') {
+      this.changeCb(tmp);
+    } else {
+      this.changeCb(tmp ? tmp.coreLookupId : null);
+    }
+    this.parents = this.getParents();
+  }
 
   ngOnInit() {
     this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
@@ -102,17 +85,12 @@ export class FosSelectorComponent extends BaseComponent implements OnInit, Contr
     return res;
   }
 
-  writeValue(obj: FOSModel): void {
-    this.callCallbacks = false;
-    this.value = obj;
-  }
-
-  registerOnChange(fn: CallbackType): void {
-    this.chCallback = fn;
-  }
-
-  registerOnTouched(fn: CallbackType): void {
-    this.tcCallback = fn;
+  writeValue(obj: FOSModel | number): void {
+    if (typeof obj === 'number') {
+      this.storageService.getFosById(obj).take(1).subscribe(fos => this.value = fos);
+    } else {
+      this.value = obj;
+    }
   }
 
   getParents(): FOSModel[] {
