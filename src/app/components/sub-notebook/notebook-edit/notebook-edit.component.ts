@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
-import { BaseComponent } from '../../../base.component';
 import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotebookModel } from '../../../models/dto';
+import { BaseFormComponent } from '../../../base-form.component';
 
 @Component({
   selector: 'app-notebook-edit',
   templateUrl: './notebook-edit.component.html',
   styleUrls: ['./notebook-edit.component.scss']
 })
-export class NotebookEditComponent extends BaseComponent implements OnInit {
+export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
 
   form: FormGroup;
 
@@ -19,35 +20,50 @@ export class NotebookEditComponent extends BaseComponent implements OnInit {
     if (value != null) {
       this.subscriptions.push(
         this.notebookSerice.getNotebook(value).take(1).subscribe(notebook =>
-          this.form.patchValue(_.cloneDeep(notebook))
+          this.applyFullValue(_.cloneDeep(notebook))
         )
       );
     } else {
-      this.form.reset();
+      this.restartForm();
     }
+  }
+
+  getNewForm() {
+    return new FormGroup({
+      markdown: new FormControl(undefined),
+      name: new FormControl(undefined, [Validators.required]),
+      primaryColor: new FormControl(undefined, Validators.required),
+      secondaryColor: new FormControl(undefined, Validators.required),
+      notebookId: new FormControl(undefined)
+    });
+  }
+
+  getNewValue(): NotebookModel {
+    return {
+      notebookId: undefined,
+      markdown: '',
+      name: '',
+      primaryColor: '#ff00000',
+      secondaryColor: '#0000ff',
+      createdAt: undefined,
+      createdBy: undefined,
+      createdById: undefined
+    };
   }
 
   constructor(protected notebookSerice: NotebookService) {
     super();
-    this.form = new FormGroup({
-      markdown: new FormControl(''),
-      name: new FormControl('', [Validators.required]),
-      userNotebookId: new FormControl()
-    });
   }
 
-  ngOnInit() {
-  }
-
-  save() {
+  onSubmit() {
     if (!this.form.valid) {
       return;
     }
     const o = (this.form.value.userNotebookId == null) ?
-      this.notebookSerice.addNotebook(this.form.value) :
-      this.notebookSerice.patchNotebook(this.form.value);
+      this.notebookSerice.addNotebook(this.getValue()) :
+      this.notebookSerice.patchNotebook(this.getValue());
     this.subscriptions.push(o.take(1).subscribe(notebook => {
-      this.notebookId = notebook.userNotebookId;
+      this.notebookId = notebook.notebookId;
     }));
   }
 

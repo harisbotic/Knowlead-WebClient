@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApplicationUserModel, CountryModel, LanguageModel, ResponseModel } from './../../models/dto';
 import { StorageService } from './../../services/storage.service';
@@ -7,8 +7,8 @@ import * as _ from 'lodash';
 import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
 import { dateValidator } from '../../validators/date.validator';
-import { BaseComponent } from '../../base.component';
 import { DropdownValueInterface } from '../../models/frontend.models';
+import { BaseFormComponent } from '../../base-form.component';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -16,7 +16,7 @@ import { DropdownValueInterface } from '../../models/frontend.models';
   styleUrls: ['./profile-setup-page.component.scss', '../../../assets/styles/flags.css'],
   providers: []
 })
-export class ProfileSetupPageComponent extends BaseComponent implements AfterViewInit {
+export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUserModel> implements OnInit {
 
   form: FormGroup;
   user: ApplicationUserModel;
@@ -33,7 +33,10 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
       protected accountService: AccountService,
       protected router: Router) {
     super();
-    this.form = new FormGroup({
+  }
+
+  getNewForm() {
+    return new FormGroup({
       'name': new FormControl(null, [Validators.required]),
       'surname': new FormControl(null, [Validators.required]),
       'birthdate': new FormControl(null, [Validators.required, dateValidator({minYearsOld: 10})]),
@@ -42,6 +45,14 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
       'motherTongueId': new FormControl(null, [Validators.required]),
       'profilePictureId': new FormControl(null)
     });
+  }
+
+  getNewValue(): ApplicationUserModel {
+    if (this.user) {
+      return this.user;
+    } else {
+      return null;
+    }
   }
 
   private countryForDropdown(country: CountryModel): DropdownValueInterface<number> {
@@ -54,32 +65,19 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
 
   private loadUser() {
     this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user: ApplicationUserModel) => {
-      console.log('user');
       this.user = _.cloneDeep(user);
       if (this.user.isMale == null) {
         this.user.isMale = true;
       }
-      this.user.motherTongueId = <any>[this.user.motherTongueId];
-      this.user.countryId = <any>[this.user.countryId];
-      this.form.patchValue(this.user);
-      console.log('after patch');
-
-      // for (let key1 of Object.keys(this.user)) {
-      //   let found = false;
-      //   for (let key2 in this.form.controls) {
-      //     if (key2 === key1 || key1 === key2 + 'Id') {
-      //       found = true;
-      //     }
-      //   }
-      //   if (!found) {
-      //     delete this.user[key1];
-      //   }
-      // }
+      this.user.motherTongueId = this.user.motherTongueId ? <any>[this.user.motherTongueId] : undefined;
+      this.user.countryId = this.user.countryId ? <any>[this.user.countryId] : undefined;
+      this.restartForm();
     }));
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.realUser = user));
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
+    super.ngOnInit();
     const countriesGetter = this.storageService.getCountries().take(1).do(countries => {
       this.countries = countries.map(this.countryForDropdown);
       console.log(countries);
@@ -93,7 +91,7 @@ export class ProfileSetupPageComponent extends BaseComponent implements AfterVie
     }));
   }
 
-  submit() {
+  onSubmit() {
     if (!this.form.valid) {
       return;
     }

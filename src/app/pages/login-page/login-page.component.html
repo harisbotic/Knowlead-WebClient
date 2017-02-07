@@ -14,7 +14,7 @@
         </div>
         <div class="row logForm-wrap">
             <div class="col-100">
-                <form (ngSubmit)="loginClicked()" [formGroup]="form">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div id="email-wrap">
                         <input type="text" name="Email" placeholder="{{'common|email' | translate}}" formControlName="email" ngModel class="defaultInput">
                     </div>

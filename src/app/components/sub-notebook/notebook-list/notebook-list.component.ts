@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
-import { UserNotebookModel } from '../../../models/dto';
+import { NotebookModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../base.component';
 })
 export class NotebookListComponent extends BaseComponent implements OnInit {
 
-  notebooks: UserNotebookModel[];
+  notebooks: NotebookModel[];
   modalOpened = false;
   viewingNotebook: number;
 
@@ -26,9 +26,9 @@ export class NotebookListComponent extends BaseComponent implements OnInit {
     delete this.viewingNotebook;
   }
 
-  openNotebook(notebook: UserNotebookModel) {
+  openNotebook(notebook: NotebookModel) {
     this.modalOpened = true;
-    this.viewingNotebook = notebook.userNotebookId;
+    this.viewingNotebook = notebook.notebookId;
   }
 
 }

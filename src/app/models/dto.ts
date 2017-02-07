@@ -127,6 +127,17 @@ export interface _FeedbackModel
 	studentId: Guid;
 	student: ApplicationUserModel;
 }
+export interface NotebookModel
+{
+	notebookId: number;
+	name: string;
+	markdown: string;
+	primaryColor: string;
+	secondaryColor: string;
+	createdAt: Date;
+	createdById: Guid;
+	createdBy: ApplicationUserModel;
+}
 export interface _CoreLookupModel
 {
 	coreLookupId: number;
@@ -178,6 +189,19 @@ export interface StateModel extends _GeoLookupModel
 }
 export interface CountryModel extends _GeoLookupModel
 {
+}
+export interface NotificationModel
+{
+	notificationId: Guid;
+	notificationType: string;
+	forApplicationUserId: Guid;
+	forApplicationUser: ApplicationUserModel;
+	fromApplicationUserId: Guid;
+	fromApplicationUser: ApplicationUserModel;
+	p2pId: number;
+	p2p: P2PModel;
+	scheduledAt: Date;
+	seenAt: Date;
 }
 export interface P2PScheduleModel
 {
@@ -256,17 +280,6 @@ export interface RegisterUserModel
 	password: string;
 	referralUserId: Guid;
 }
-export interface UserNotebookModel
-{
-	userNotebookId: number;
-	name: string;
-	markdown: string;
-	createdAt: Date;
-	createdById: Guid;
-	createdBy: ApplicationUserModel;
-	imageBlobId: Guid;
-	imageBlob: ImageBlobModel;
-}
 export interface UserCertificateModel
 {
 	userCertificateId: number;
@@ -299,6 +312,8 @@ export interface ApplicationUserModel
 	email: string;
 	name: string;
 	surname: string;
+	minutesBalance: number;
+	pointsBalance: number;
 	birthdate: Date;
 	isMale: boolean;
 	timezone: string;
@@ -330,23 +345,8 @@ export interface ApplicationUserInterestModel
 	fos: FOSModel;
 	stars: number;
 }
-export enum NotificationModelType {
-	test,
-	friendship
-}
-export interface NotificationModel {
-	type: NotificationModelType;
-	fromId: Guid;
-	from: ApplicationUserModel;
-	timestamp: Date;
-	read: boolean;
-}
 export interface NotificationSourceStats {
 	unread: number;
 	total: number;
-}
-export interface NotificationWithP2p {
-	p2pId: number;
-	p2p: P2PModel;
 }
 export type Guid = string;
