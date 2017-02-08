@@ -1,12 +1,12 @@
-<div class="slds-grid">
-  <div class="slds-size--1-of-2">
+<div>
+  <div *ngIf="!showSubSubCategories()">
     <app-selectable-list [items]="subcategories"
       [isRemovableCallback]="isRemovableCallback"
       displayProperty="name"
       (itemClicked)="itemClicked($event)"
       (itemRemoved)="remove($event)"></app-selectable-list>
   </div>
-  <div class="slds-size--1-of-2" *ngIf="selectedCategory && selectedCategory.children?.length > 0">
+  <div *ngIf="showSubSubCategories()">
     <app-selectable-list [items]="selectedCategory.children"
       [isRemovableCallback]="isRemovableCallback"
       displayProperty="name"

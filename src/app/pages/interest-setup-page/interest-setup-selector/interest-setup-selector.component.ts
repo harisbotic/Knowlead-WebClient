@@ -99,6 +99,12 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
     this.addCategory(fos);
   }
 
+  showSubSubCategories() {
+    return this.selectedCategory &&
+      this.selectedCategory.children &&
+      this.selectedCategory.children.length > 0;
+  }
+
   constructor() { super(); }
 
   ngOnInit() {

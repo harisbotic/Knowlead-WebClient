@@ -1,15 +1,9 @@
-<article class="slds-card slds-card--narrow slds-container--small slds-container--center" id="choice">
-    <div class="slds-card__body">
-
-        <section class="slds-clearfix">
-            <div class="slds-text-title slds-text-color--blue slds-text-align--left slds-float--left">{{interest.fos.name}}</div>
-            <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small slds-float--right"
-                (click)="removed()">
-              <ngl-icon icon="close"></ngl-icon>
-            </button>
-        </section>
-      <br>
-      <ngl-rating [(rate)]="interest.stars" [isReadonly]="readonly" [size]="size"></ngl-rating><br>
-      {{niz[interest.stars-1] | translate}}
-    </div>
-</article>
+<div id="choice">
+    <section class="choice-wrap posRel" >
+        <div class="fos-title">{{interest.fos.name}}</div>
+        <button type="button" class="clearButton fosCloseButton" (click)="removed()">
+            <img src="/assets/images/icons/closeIcon_blue.png" alt="Close Icon for Interests">
+        </button>
+        <ngl-rating [(rate)]="interest.stars" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small"></ngl-rating>
+    </section>
+</div>

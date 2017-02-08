@@ -41,4 +41,16 @@ export class SelectableListComponent extends BaseComponent implements OnInit {
     this.itemRemoved.emit(item);
   }
 
+  loop(from: number, to: number) {
+    const ret = [];
+    for (let i = 0; i < to; i++) {
+      ret.push(i);
+    }
+    return ret;
+  }
+
+  getItem(index: number) {
+    return this.items[index];
+  }
+
 }
