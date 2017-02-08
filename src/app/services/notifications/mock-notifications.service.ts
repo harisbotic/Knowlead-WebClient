@@ -12,16 +12,14 @@ export class MockNotificationsService extends BaseNotificationSource {
   loadMore() {
     this.addNotifications(_.times(5, () => {
       return {
-              notificationId: '',
-              notificationType: 'test',
-              forApplicationUserId: undefined,
-              forApplicationUser: undefined,
-              fromApplicationUserId: undefined,
-              fromApplicationUser: undefined,
-              p2pId: undefined,
-              p2p: undefined,
-              scheduledAt: new Date(2016 + Math.random() * 1.2, Math.random() * 12),
-              seenAt: Math.random() < 0.5 ? new Date() : undefined
+        notificationId: '',
+        notificationType: 'test',
+        fromApplicationUserId: undefined,
+        fromApplicationUser: undefined,
+        p2PId: undefined,
+        p2P: undefined,
+        scheduledAt: new Date(2016 + Math.random() * 1.2, Math.random() * 12),
+        seenAt: Math.random() < 0.5 ? new Date() : undefined
       };
     }));
   }

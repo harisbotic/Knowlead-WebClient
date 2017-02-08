@@ -13,6 +13,8 @@ import { BaseFormComponent } from '../../../base-form.component';
 export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
 
   form: FormGroup;
+  primaryColor: string;
+  secondaryColor: string;
 
   @Output() close = new EventEmitter<any>();
 
@@ -38,16 +40,27 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
     });
   }
 
+  applyFullValue(value: NotebookModel) {
+    super.applyFullValue(value);
+    this.primaryColor = value.primaryColor;
+    this.secondaryColor = value.secondaryColor;
+  }
+
   getNewValue(): NotebookModel {
+    const pc = '#00ff00';
+    const sc = '#ff0000';
+    this.primaryColor = pc;
+    this.secondaryColor = sc;
     return {
       notebookId: undefined,
       markdown: '',
       name: '',
-      primaryColor: '#ff00000',
-      secondaryColor: '#0000ff',
+      primaryColor: pc,
+      secondaryColor: sc,
       createdAt: undefined,
       createdBy: undefined,
-      createdById: undefined
+      createdById: undefined,
+      isDeleted: undefined
     };
   }
 
@@ -55,16 +68,26 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
     super();
   }
 
-  onSubmit() {
+  onSubmit(shouldClose?: boolean) {
     if (!this.form.valid) {
       return;
     }
-    const o = (this.form.value.userNotebookId == null) ?
+    const o = (this.getValue().notebookId == null) ?
       this.notebookSerice.addNotebook(this.getValue()) :
       this.notebookSerice.patchNotebook(this.getValue());
     this.subscriptions.push(o.take(1).subscribe(notebook => {
       this.notebookId = notebook.notebookId;
+      if (shouldClose) {
+        this.doClose();
+      }
     }));
+  }
+
+  reapply() {
+    this.form.patchValue({
+      primaryColor: this.primaryColor,
+      secondaryColor: this.secondaryColor
+    });
   }
 
   doClose() {

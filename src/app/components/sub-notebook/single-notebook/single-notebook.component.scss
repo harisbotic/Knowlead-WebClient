@@ -1,0 +1,20 @@
+@import '../../../../kl-styles/variables.scss';
+svg {
+    width: 150px;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.title {
+    top: 14px;
+    left: 40px;
+    position: absolute;
+    width: 90px;
+    max-height: 84px;
+    overflow: hidden;
+    background-color: white;
+    border: 2px solid $font-primary-color;
+    padding: 2px;
+}
