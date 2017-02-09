@@ -11,9 +11,8 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
 
   notifications: NotificationModel[];
   @Input() notificationSource: NotificationSource;
-  @Input() src: string;
-  @Input() alt: string;
-  @Input() title: string;
+  @Input() iconClass: string;
+  @Input() notificationTitle: string;
 
   @Input() canMarkAsRead = true;
 

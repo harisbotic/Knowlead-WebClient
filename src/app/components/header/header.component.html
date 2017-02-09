@@ -26,7 +26,7 @@
             </div>
             <div class="col-30 headerPosRel">
                 <div class="col-25 headerPosRel">
-                    <app-notification-icon class="kl-friends headerIcon centerVr" [notificationSource]="friendshipNotificationSource">
+                    <app-notification-icon notificationTitle="Friendships" iconClass="kl-friends" class="headerIcon centerVr" [notificationSource]="friendshipNotificationSource">
                     </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
@@ -35,58 +35,58 @@
                     </a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <app-notification-icon class="kl-notifications headerIcon centerVl" [notificationSource]="testNotificationSource">
+                    <app-notification-icon notificationTitle="Notifications" iconClass="kl-notifications" class="headerIcon centerVl" [notificationSource]="testNotificationSource">
                     </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
                     <div class="verticalLine"></div>
-                    <div class="accountOptions-wrap" [popover]="popover">
+                    <div class="accountOptions-wrap">
                         <a class="centerV">
-                            <i class="kl-account-options headerIcon centerV" id="accOptionsIcon"></i>
+                            <i class="kl-account-options headerIcon centerV" id="accOptionsIcon" [popover]="popover"></i>
+                            <popover-content #popover placement="bottom">
+                                <div class="accountOptions-content">
+
+                                    <div class="row accountOptions-title-wrap">
+                                        <span class="accountOptions-title">Your Account</span>
+                                    </div>
+
+                                    <div class="row accountOptions-button">
+                                        <a class="posRel">
+                                            <div class="col-30 posRel">
+                                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                            </div>
+                                            <div class="col-70 posRel">
+                                                <p class="logoutButtonText centerVl">Settings</p>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="row accountOptions-button">
+                                        <a class="posRel">
+                                            <div class="col-30 posRel">
+                                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                            </div>
+                                            <div class="col-70 posRel">
+                                                <p class="logoutButtonText centerVl">Send Feedback</p>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="row accountOptions-button">
+                                        <a (click)="logout()" class="posRel">
+                                            <div class="col-30 posRel">
+                                                <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
+                                            </div>
+                                            <div class="col-70 posRel">
+                                                <p class="logoutButtonText centerVl">Log Out</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </popover-content>
                         </a>
                     </div>
                 </div>
-                <popover-content #popover placement="bottom">
-                    <div class="accountOptions-content">
-
-                        <div class="row accountOptions-title-wrap">
-                            <span class="accountOptions-title">Your Account</span>
-                        </div>
-
-                        <div class="row accountOptions-button">
-                            <a class="posRel">
-                                <div class="col-30 posRel">
-                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                                </div>
-                                <div class="col-70 posRel">
-                                    <p class="logoutButtonText centerVl">Settings</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="row accountOptions-button">
-                            <a class="posRel">
-                                <div class="col-30 posRel">
-                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                                </div>
-                                <div class="col-70 posRel">
-                                    <p class="logoutButtonText centerVl">Send Feedback</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="row accountOptions-button">
-                            <a (click)="logout()" class="posRel">
-                                <div class="col-30 posRel">
-                                    <img src="/assets/images/icons/logoutIcon.png" alt="Knowlead Loguout Icon" class="centerV logIcon">
-                                </div>
-                                <div class="col-70 posRel">
-                                    <p class="logoutButtonText centerVl">Log Out</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </popover-content>
             </div>
         </div>
     </div>
