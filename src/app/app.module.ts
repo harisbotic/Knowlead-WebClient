@@ -5,7 +5,8 @@ import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { PopoverModule } from 'ngx-popover';
 import { SelectModule } from 'angular2-select';
-// import { UiSwitchModule } from 'angular2-ui-switch/src';
+import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
+import { ColorPickerModule } from 'ng-color-picker';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -66,7 +67,6 @@ import { RegisteredGuard } from './guards/registered.guard';
 import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
 import { NotebookService } from './services/notebook.service';
 import { SingleNotebookComponent } from './components/sub-notebook/single-notebook/single-notebook.component';
-import { ColorPickerModule } from 'angular2-color-picker';
 
 @NgModule({
   declarations: [
@@ -120,6 +120,7 @@ import { ColorPickerModule } from 'angular2-color-picker';
     PopoverModule,
     SelectModule,
     ColorPickerModule,
+    PerfectScrollbarModule,
     NglModule.forRoot(),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,
