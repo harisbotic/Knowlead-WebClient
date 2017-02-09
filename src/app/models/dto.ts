@@ -1,4 +1,3 @@
-import { NotificationSource } from '../services/notifications/notification.source';
 export enum UserStatus
 {
 	Online = 0,
@@ -198,8 +197,8 @@ export interface NotificationModel
 	notificationType: string;
 	fromApplicationUserId: Guid;
 	fromApplicationUser: ApplicationUserModel;
-	p2PId: number;
-	p2P: P2PModel;
+	p2pId: number;
+	p2p: P2PModel;
 	scheduledAt: Date;
 	seenAt: Date;
 }

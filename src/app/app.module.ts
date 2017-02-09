@@ -67,6 +67,8 @@ import { RegisteredGuard } from './guards/registered.guard';
 import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
 import { NotebookService } from './services/notebook.service';
 import { SingleNotebookComponent } from './components/sub-notebook/single-notebook/single-notebook.component';
+import { FriendshipNotificationsService } from './services/notifications/friendship-notifications.service';
+import { UserNotificationsService } from './services/notifications/user-notifications.service';
 
 @NgModule({
   declarations: [
@@ -142,8 +144,8 @@ import { SingleNotebookComponent } from './components/sub-notebook/single-notebo
       deps: [Router, AccountService],
       useClass: RegisteredGuard
     },
-    AccountService,
     ModelUtilsService,
+    AccountService,
     ChatService,
     P2pService,
     NotebookService,
@@ -156,7 +158,9 @@ import { SingleNotebookComponent } from './components/sub-notebook/single-notebo
       deps: [XHRBackend, RequestOptions, StorageService, SessionService, Router]
     },
     SessionService,
-    NotificationService
+    NotificationService,
+    FriendshipNotificationsService,
+    UserNotificationsService
   ],
   bootstrap: [AppComponent]
 })

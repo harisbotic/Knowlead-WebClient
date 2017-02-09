@@ -19,18 +19,22 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class AccountService {
 
-  userFiller: StorageFiller<ApplicationUserModel>;
+  get userFiller(): StorageFiller<ApplicationUserModel> {
+    return this.modelUtilsService.fillUser.bind(this.modelUtilsService);
+  };
 
   get analyticsService(): AnalyticsService {
     return this.injector.get(AnalyticsService);
   }
 
+  get modelUtilsService(): ModelUtilsService {
+    return this.injector.get(ModelUtilsService);
+  }
+
   constructor(protected http: Http,
               protected storageService: StorageService,
               protected sessionService: SessionService,
-              protected modelUtilsService: ModelUtilsService,
               protected injector: Injector) {
-    this.userFiller = this.modelUtilsService.fillUser.bind(this.modelUtilsService);
     console.log('ACCOUTN SERVICE');
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationModel } from '../../../models/dto';
+import { ModelUtilsService } from '../../../services/model-utils.service';
+import { NotificationTypes } from '../../../models/constants';
 
 @Component({
   selector: 'app-single-notification',
@@ -9,9 +11,37 @@ import { NotificationModel } from '../../../models/dto';
 export class SingleNotificationComponent implements OnInit {
 
   @Input() notification: NotificationModel;
+  fullName = ModelUtilsService.getUserFullName;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() { }
+
+  getLink() {
+    if (this.notification.p2pId) {
+      return '/p2p/' + this.notification.p2pId;
+    } else {
+      return undefined;
+    }
+  }
+
+  getBefore() {
+    if (this.notification.notificationType === NotificationTypes.newP2PComment) {
+      return 'commented on your';
+    }
+  }
+
+  getMiddle() {
+    if (this.notification.notificationType === NotificationTypes.newP2PComment) {
+      return 'peer-to-peer';
+    }
+  }
+
+  getAfter() {
+    if (this.notification.notificationType === NotificationTypes.newP2PComment) {
+      return 'request';
+    }
+  }
 
 }

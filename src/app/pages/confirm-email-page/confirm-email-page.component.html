@@ -20,12 +20,7 @@
         </div>
         <div class="row confirmForm-wrap">
             <div class="row betaNote">
-                <span class="pleaseNote"> Please note:</span>
-                This beta release is in early
-                development stage so you can encounter some
-                unexpected behavior! Many important
-                functionalities are still NOT in place.
-                We would greatly appreciate your feedback.
+                <span class="pleaseNote"> Please note:</span> This beta release is in early development stage so you can encounter some unexpected behavior! Many important functionalities are still NOT in place. We would greatly appreciate your feedback.
             </div>
             <div class="row">
                 <form (ngSubmit)="confirmEmail()">
@@ -33,7 +28,7 @@
                         <input type="password" name="password" placeholder="{{'common|password' | translate}}" [(ngModel)]="confirm.password" class="defaultInput">
                     </div>
                     <div class="confirmButton-wrap">
-                        <button class="defaultButton">{{'confirm-email-page|submit' | translate}}</button>
+                        <button class="defaultButton" type="submit">{{'confirm-email-page|submit' | translate}}</button>
                     </div>
                 </form>
                 <app-error-list [errors]="response?.errors"></app-error-list>

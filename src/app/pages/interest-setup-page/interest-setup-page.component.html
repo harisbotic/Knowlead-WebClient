@@ -28,26 +28,16 @@
                 </div>
                 <div *ngIf="!shouldShowSelector()" class="row categories-selection-wrap">
                     <div *ngFor="let row of [0,1,2,3];">
-                        <button *ngFor = "let col of [0,1,2]"
-                        class="col-32 clearButton category-box"
-                        (click)="category = root.children[col + row * 3]">
+                        <button *ngFor="let col of [0,1,2]" class="col-32 clearButton category-box" (click)="category = root.children[col + row * 3]">
                         {{root.children[col + row * 3].name}}
                         </button>
                     </div>
                 </div>
                 <!-- TODO: Make go back button for sub categories also. Not to  -->
-                <button *ngIf="shouldShowSelector()"
-                (click)="hideSelector()"
-                class="clearButton goBack-button">
+                <button *ngIf="shouldShowSelector()" (click)="hideSelector()" class="clearButton goBack-button">
                 Go back
                 </button>
-                <app-interest-setup-selector *ngIf="shouldShowSelector()"
-                [root]="root"
-                [category]="category"
-                [isRemovableCallback]="isRemovable"
-                (fosAdded)="fosAdded($event)"
-                (fosRemoved)="fosRemoved($event)"
-                [search]="search">
+                <app-interest-setup-selector *ngIf="shouldShowSelector()" [root]="root" [category]="category" [isRemovableCallback]="isRemovable" (fosAdded)="fosAdded($event)" (fosRemoved)="fosRemoved($event)" [search]="search">
                 </app-interest-setup-selector>
             </div>
             <div class="col-25 selection-column">
@@ -79,13 +69,13 @@
         </div>
         <div class="row bottomElements">
             <div class="slider-wrap">
-                <div class="left-button-wrap">
-                    <button class="defaultButton" id="backToStepOne-button" (click)="onSubmit()"> Back </button>
-                </div>
+                <a class="left-button-wrap" routerLink="/profilesetup">
+                    <button class="defaultButton" id="backToStepOne-button"> Back </button>
+                </a>
                 <div class="slider firstSlider"></div>
                 <div class="slider secondSlider"></div>
                 <div class="right-button-wrap">
-                    <button class="defaultButton" id="finish-button" (click)="onSubmit()"> Next </button>
+                    <button class="defaultButton" id="finish-button" (click)="submit()"> Next </button>
                 </div>
             </div>
         </div>

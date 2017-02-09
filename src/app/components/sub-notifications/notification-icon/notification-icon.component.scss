@@ -1,5 +1,4 @@
 @import "../../../../kl-styles/variables.scss";
-
 .notification-content {
     width: 400px;
     max-height: 407px;
@@ -27,7 +26,6 @@
     float: right;
     text-decoration: none;
     color: $font-primary-color;
-
     &:hover {
         text-decoration: underline;
     }
@@ -39,8 +37,20 @@
     color: $font-primary-color;
     font-weight: bold;
     padding: 10px 0;
-
     &:hover {
         text-decoration: underline;
     }
+}
+
+.unread-bedge {
+    background-color: #fa3e3e;
+    border-radius: 50%;
+    color: white;
+    padding: 1px 3px;
+    font-size: 10px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 17px;
+    height: 17px;
 }

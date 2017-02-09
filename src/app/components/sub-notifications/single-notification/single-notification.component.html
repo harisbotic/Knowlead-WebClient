@@ -1,19 +1,17 @@
-<a href="#">
+<a [routerLink]="getLink()" *ngIf="notification">
     <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
-        <div class="col-20 posRel">
-            <div class="profile-image-round-small centerV">
-                <img src="/assets/images/testprofile.jpg" alt="" class="profile-image centerV">
-            </div>
+        <div class="col-20 posRel profile-image-round-small">
+            <app-profile-picture [user]="notification.fromApplicationUser"></app-profile-picture>
         </div>
         <div class="col-60 posRel">
             <div class="notification-text-wrap">
                 <span class="fromWho">
-                    <a href="#">Hepek Hepekowski</a>
+                    <a routerLink="/profile/{{notification.fromApplicationUserId}}">{{fullName(notification.fromApplicationUser)}}</a>
                 </span>
-                <span class="notification-type">commented on your</span>
-                <span class="post-type">peer-to-peer</span>
-                <span class="notification-type">post.</span>
-                <span class="timeAgo">{{notification.timestamp | amTimeAgo}}</span>
+                <span class="notification-type">{{getBefore()}}</span>
+                <span class="post-type">{{getMiddle()}}</span>
+                <span class="notification-type">{{getAfter()}}</span>
+                <span class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</span>
             </div>
         </div>
         <div class="col-20">

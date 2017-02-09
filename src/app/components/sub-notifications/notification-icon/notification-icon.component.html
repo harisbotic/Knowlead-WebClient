@@ -1,4 +1,5 @@
 <i [popover]="popover" [class]="[iconClass]"></i>
+<span class="unread-bedge" *ngIf="stats?.unread > 0">{{stats.unread}}</span>
 <popover-content #popover placement="bottom" class="notification-popover" [closeOnClickOutside]="true">
     <perfect-scrollbar class="notification-content" *ngIf="notificationSource">
         <div class="row popover-header">

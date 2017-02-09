@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
 import { NotificationService } from './notifications/notification.service';
-import { _CallModel } from '../models/dto';
+import { _CallModel, NotificationModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject } from 'rxjs/Rx';
@@ -63,6 +63,10 @@ export class RealtimeService {
         console.debug('CALL RESET');
         value = this.parseIfString(value);
         this.callModelUpdateSubject.next({type: CallEventType.CALL_RESET, call: value});
+      });
+      this.rpcConnection.on('displayNotification', (value: string) => {
+        let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
+        this.notificationService.receiveNotification(notification);
       });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;

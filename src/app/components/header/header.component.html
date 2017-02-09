@@ -26,16 +26,15 @@
             </div>
             <div class="col-30 headerPosRel">
                 <div class="col-25 headerPosRel">
-                    <app-notification-icon notificationTitle="Friendships" iconClass="kl-friends" class="headerIcon centerVr" [notificationSource]="friendshipNotificationSource">
+                    <app-notification-icon notificationTitle="Friendships" iconClass="kl-friends" class="headerIcon centerVr" [notificationSource]="notificationService.friendshipNotificationService">
                     </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a class="centerV">
-                        <i class="kl-messages headerIcon centerV"></i>
-                    </a>
+                    <app-notification-icon notificationTitle="Converisations" iconClass="kl-messages" class="headerIcon centerVr" [notificationSource]="testNotificationSource">
+                    </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <app-notification-icon notificationTitle="Notifications" iconClass="kl-notifications" class="headerIcon centerVl" [notificationSource]="testNotificationSource">
+                    <app-notification-icon notificationTitle="Notifications" iconClass="kl-notifications" class="headerIcon centerVl" [notificationSource]="notificationService.userNotificationsService">
                     </app-notification-icon>
                 </div>
                 <div class="col-25 headerPosRel">
