@@ -54,8 +54,8 @@
                 <div class="row selection-wrap">
                     <div class="col-100">
                         <div class="row">
-                            <div class="col-100 myChoices-title-wrap">
-                                <div class="myChoices-title"> My Choices </div>
+                            <div class="col-100 myChoices-title-wrap posRel">
+                                <div class="myChoices-title"> My Choices <i class="kl-info moreInfo"></i></div>
                             </div>
                             <div class="row">
                                 <div class="col-100 myChoices-wrap">
@@ -73,20 +73,19 @@
         <div class="row">
             <div class="col-100 suggest-field-wrap">
                 <button class="clearButton suggestLink">
-                    <img src="/assets/images/icons/plusIcon.png" alt="Plus Icon" class="plusIcon">
-                    <div class="suggestField-text">Suggest Field</div>
+                    <div class="suggestField-text"> <i class="kl-plus"></i> Suggest Field</div>
                 </button>
             </div>
         </div>
         <div class="row bottomElements">
             <div class="slider-wrap">
                 <div class="left-button-wrap">
-                    <button class="bttns" id="backToStepOne-button" (click)="onSubmit()"> Back </button>
+                    <button class="defaultButton" id="backToStepOne-button" (click)="onSubmit()"> Back </button>
                 </div>
                 <div class="slider firstSlider"></div>
                 <div class="slider secondSlider"></div>
                 <div class="right-button-wrap">
-                    <button class="bttns" id="finish-button" (click)="onSubmit()"> Next </button>
+                    <button class="defaultButton" id="finish-button" (click)="onSubmit()"> Next </button>
                 </div>
             </div>
         </div>

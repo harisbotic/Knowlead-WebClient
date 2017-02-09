@@ -7,7 +7,7 @@
                     {{displayItem(items[col + row * 2])}}
                     <button *ngIf="isRemovable(items[col + row * 2])" type="button" (click)="$event.stopPropagation(); itemRemovedLocal(items[col + row * 2])" class="clearButton selected-category-item">
                         <div class="closeIcon-wrap">
-                            <img src="/assets/images/icons/closeIcon_white.png" alt="Close Exit Icon">
+                            <i class="kl-close closeIcon"></i>
                         </div>
                     </button>
                 </button>

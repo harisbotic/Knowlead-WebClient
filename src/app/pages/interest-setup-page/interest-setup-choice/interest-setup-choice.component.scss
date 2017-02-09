@@ -6,7 +6,8 @@
 }
 
 .fos-title {
-    max-width: 145px;
+    max-width: 142px;
+    margin-left: 3px;
 }
 
 .fosCloseButton {
@@ -15,12 +16,13 @@
     top: 6.5px;
     padding: 4px;
     border-radius: 3px;
+    color: $knowlead-primary;
 
     &:hover {
         background-color: $divider-color;
     }
+}
 
-    img {
-        max-width: 17px;
-    }
+.closeIcon {
+    color: $knowlead-primary;
 }

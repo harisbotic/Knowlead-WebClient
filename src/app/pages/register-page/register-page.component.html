@@ -5,7 +5,8 @@
         </div>
         <a class="col-15 backIcon-wrap" routerLink="/">
             <button class="clearButton backIcon">
-                <img src="/assets/images/icons/backArrow.png" alt="Back Icon" id="icBck">
+                <span class="kl-close"></span>
+                <!-- <img src="/assets/images/icons/backArrow.png" alt="Back Icon" id="icBck"> -->
             </button>
         </a>
     </div>
@@ -25,14 +26,18 @@
                     <input type="password" name="confirmpassword" placeholder="{{'register-page|confirm password' | translate}}" formControlName="confirmpassword" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
                 </div>
-                <input type="submit" value="{{'register-page|submit' | translate}}" class="bttns" id="register-button" [disabled]="busy || !form.valid">
+                <input type="submit" value="{{'register-page|submit' | translate}}" class="defaultButton" id="register-button" [disabled]="busy || !form.valid">
             </form>
         </div>
     </div>
     <div class="row regForm-wrap">
         <div class="termsTxt">
-            <input type="checkbox" name="Terms and Conditions Checkbox" id="termsBox">
-            <span> I accept the <a id="termsLink" href="#">Terms and Conditions</a> of this website</span>
+            <form class="terms-box">
+                <label class="check-label">
+                    <input type="checkbox" name="Terms-and-Conditions" value="Yes">
+                    <span class="check-label-text"> I accept the <a id="termsLink" href="#">Terms and Conditions</a> of this website</span>
+                </label>
+            </form>
         </div>
     </div>
 </div>

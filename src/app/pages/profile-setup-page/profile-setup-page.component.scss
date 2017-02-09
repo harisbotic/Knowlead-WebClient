@@ -59,8 +59,7 @@
 }
 
 .gender-wrap {
-    margin-left: 10px;
-    margin-top: 7px;
+    margin-top: 6px;
 }
 
 .switchBar {
@@ -68,21 +67,20 @@
 }
 
 .gender-icon {
-    height: 30px;
-    margin-top: -20px;
+    font-size: 28px;
 }
 
 #maleIcon.gender-icon-active {
-    content: url("/assets/images/icons/maleIconActive.png");
+    color: $knowlead-primary;
 }
 #maleIcon.gender-icon-disabled {
-    content: url("/assets/images/icons/maleIconDisabled.png");
+    color: $placeholder-color;
 }
 #femaleIcon.gender-icon-active {
-    content: url("/assets/images/icons/femaleIconActive.png");
+    color: $knowlead-secondary;
 }
 #femaleIcon.gender-icon-disabled {
-    content: url("/assets/images/icons/femaleIconDisabled.png");
+    color: $placeholder-color;
 }
 
 

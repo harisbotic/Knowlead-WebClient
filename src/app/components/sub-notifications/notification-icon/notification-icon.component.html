@@ -1,4 +1,4 @@
-<img [src]="src" [alt]="alt" [popover]="popover">
+<i [popover]="popover"></i>
 <popover-content #popover placement="bottom" class="notification-popover" [closeOnClickOutside]="true">
     <div class="notification-content" *ngIf="notificationSource">
         <div class="row popover-header">
@@ -13,3 +13,22 @@
         <button (click)="scrolled()" class="clearButton loadMoreButton">Load more</button>
     </div>
 </popover-content>
+
+
+
+
+<!-- <img [src]="src" [alt]="alt" [popover]="popover">
+<popover-content #popover placement="bottom" class="notification-popover" [closeOnClickOutside]="true">
+    <div class="notification-content" *ngIf="notificationSource">
+        <div class="row popover-header">
+            <div class="col-70">
+                <span class="header-title">{{title}}</span>
+            </div>
+            <div class="col-30" *ngIf="notificationSource.canMarkAsRead">
+                <a class="markRead" (click)="markAsRead()">Mark all as read</a>
+            </div>
+        </div>
+        <app-single-notification *ngFor="let item of notificationSource.getNotificationStream() | async" [notification]="item"></app-single-notification>
+        <button (click)="scrolled()" class="clearButton loadMoreButton">Load more</button>
+    </div>
+</popover-content> -->

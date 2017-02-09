@@ -1,30 +1,43 @@
-<div class="grid-container outline">
-    <!-- <div class="row">
-        <img src="/assets/images/logo/knowlead_logo_white_beta.png" alt="Knowlead Beta Logo" class="knowlead-beta-logo">
-    </div> -->
-    <div class="row text-wrap">
-        <h1 class="welcome-text">
-            Welcome to Knowlead!
-        </h1>
-        <p class="subText">
-            Thank you for joining and helping us spread knowledge across the world.
-            Please finish your email confirmation process.
-        </p>
-    </div>
-    <div class="row">
+<div class="grid-container-small posRel zZero">
+    <div class="row welcome-title-wrap">
         <div class="col-100">
+            <span class="welcome-title"> Welcome to Knowlead! </span>
+        </div>
+    </div>
+    <div class="row welcome-text-wrap">
+        <div class="col-100">
+            <span class="welcome-text">
+                Thank you for joining and helping us spread knowledge across the world.
+                To finish your email confirmation please type in your account password.
+            </span>
+        </div>
+    </div>
+    <div class="row confirm-wrap posRel">
+        <div class="row confirm-title-wrap">
+            <div class="col-100 confirm-title">
+                <span> Email Confirmation </span>
+            </div>
+        </div>
+        <div class="row confirmForm-wrap">
+            <div class="row betaNote">
+                <span class="pleaseNote"> Please note:</span>
+                This beta release is in early
+                development stage so you can encounter some
+                unexpected behavior! Many important
+                functionalities are still NOT in place.
+                We would greatly appreciate your feedback.
+            </div>
             <div class="row">
-                <div class="col-25"></div>
-                <div class="col-50"></div>
-                <div class="col-25"></div>
+                <form (ngSubmit)="confirmEmail()">
+                    <div class="password-wrap">
+                        <input type="password" name="password" placeholder="{{'common|password' | translate}}" [(ngModel)]="confirm.password" class="defaultInput">
+                    </div>
+                    <div class="confirmButton-wrap">
+                        <button class="defaultButton">{{'confirm-email-page|submit' | translate}}</button>
+                    </div>
+                </form>
+                <app-error-list [errors]="response?.errors"></app-error-list>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- <form (ngSubmit)="confirmEmail()">
-  <input type = "password" name = "password" placeholder = "{{'common|password' | translate}}" [(ngModel)]="confirm.password">
-  <input type = "submit" value = "{{'confirm-email-page|submit' | translate}}">
-</form>
-<app-error-list [errors]="response?.errors"></app-error-list> -->

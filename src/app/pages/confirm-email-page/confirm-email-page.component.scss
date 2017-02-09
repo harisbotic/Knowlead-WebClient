@@ -1,28 +1,60 @@
 @import "../../../kl-styles/variables.scss";
 
-.static-header {
-    height: $nav-height;
-    width: 100%;
-    background-color: $knowlead-primary;
+.welcome-title-wrap {
+    margin-top: 25px;
 }
 
-.knowlead-beta-logo {
-    max-height: $nav-logo-max-height;
-    margin-top: 5px;
-}
-
-.text-wrap {
-    max-width: 425px;
-    // background-color: $background-color;
-}
-
-.welcome-text {
-    margin-top: 50px;
+.welcome-title {
     font-size: 30px;
     font-weight: bold;
-    color: $font-primary-color;
 }
 
-.subText {
-    color: $font-primary-color;
+.welcome-text-wrap {
+    max-width: 425px;
+}
+
+.confirm-title-wrap {
+    width: 100%;
+    border-bottom: 2px solid $divider-color;
+}
+
+.confirm-title {
+    padding: 15px 0 15px 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.confirmForm-wrap {
+    margin: 0 auto;
+    width: 75%;
+    height: 300px;
+}
+
+.confirm-wrap {
+    margin-top: 20px;
+    width: 100%;
+    height: 400px;
+    border-radius: $border-radius;
+    background-color: white;
+}
+
+.betaNote {
+    margin-top: 50px;
+
+    .pleaseNote {
+        padding: 3px;
+        border-radius: 3px;
+        background-color: $knowlead-secondary;
+        color: white;
+    }
+}
+
+.password-wrap {
+    margin: 80px 100px 20px 100px;
+}
+
+
+.confirmButton-wrap {
+    width: 150px;
+    margin: 0 auto;
 }

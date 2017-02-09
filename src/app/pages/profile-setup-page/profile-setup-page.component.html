@@ -46,9 +46,9 @@
                             <div class="row gender-birthdate-wrap">
                                 <div class="col-30">
                                     <div class="gender-wrap">
-                                        <img [class.gender-icon-active]="!form.value.isMale" [class.gender-icon-disabled]="form.value.isMale" class="gender-icon" id="femaleIcon">
+                                        <i [class.gender-icon-active]="!form.value.isMale" [class.gender-icon-disabled]="form.value.isMale" class="kl-female gender-icon" id="femaleIcon"></i>
                                         <ui-switch size="small" formControlName="isMale" color="#ff5e3a" defaultBgColor="#007bb6" reverse class="switchBar"></ui-switch>
-                                        <img [class.gender-icon-active]="form.value.isMale" [class.gender-icon-disabled]="!form.value.isMale" class="gender-icon" id="maleIcon">
+                                        <i [class.gender-icon-active]="form.value.isMale" [class.gender-icon-disabled]="!form.value.isMale" class="kl-male gender-icon" id="maleIcon"></i>
                                         <app-error-list [formControlProperty]="form.controls.isMale"></app-error-list>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                 <div class="slider firstSlider"></div>
                 <div class="slider secondSlider"></div>
                 <div class="button-wrap">
-                    <button class="bttns" id="nextStep-button" (click)="onSubmit()">
+                    <button class="defaultButton" id="nextStep-button" (click)="onSubmit()">
                         Next
                     </button>
                 </div>
