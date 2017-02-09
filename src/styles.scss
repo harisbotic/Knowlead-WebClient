@@ -4,6 +4,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
 @import "/kl-styles/variables.scss";
+@import "/kl-styles/kl-icons-font-style.css";
+
 ///////////////////////////////////////////////////////////
 // LOADING SCREEN CLASSES /////////////////////////////////
 ///////////////////////////////////////////////////////////
@@ -24,6 +26,8 @@
 
 .main-background-color {
     background-color: $background-color;
+    font-family: "Roboto";
+    color: $font-primary-color;
 }
 
 ///////////////////////////////////////////////////////////
@@ -38,9 +42,6 @@
 ///////////////////////////////////////////////////////////
 // OTHER CLASSES //////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-* {
-    font-family: "Roboto";
-}
 
 .full-height {
     height: 100vh;
@@ -71,6 +72,10 @@
     border-left: 2px solid $divider-color;
 }
 
+ngl-rating {
+    outline: none;
+}
+
 ///////////////////////////////////////////////////////////
 // CHECKBOX CLASSES ///////////////////////////////////////
 ///////////////////////////////////////////////////////////
@@ -89,7 +94,7 @@
             line-height: 1;
             -webkit-font-smoothing: antialiased;
             width: 1em;
-            margin-right: 3px;
+            margin-right: 2px;
             display: inline-block;
         }
         &:checked+.check-label-text:before {
@@ -116,7 +121,7 @@
     outline: none;
 }
 
-.bttns {
+.defaultButton {
     margin-top: 20px;
     width: 100%;
     padding: 15px 0;
@@ -240,60 +245,23 @@
     //background-color: #FFDCDC;
 }
 
-.col-10 {
-    width: 10%;
-}
+.col-10  { width: 10%;  }
+.col-15  { width: 15%;  }
+.col-20  { width: 20%;  }
+.col-25  { width: 25%;  }
+.col-30  { width: 30%;  }
+.col-32  { width: 32%;  }
+.col-40  { width: 40%;  }
+.col-50  { width: 50%;  }
+.col-60  { width: 60%;  }
+.col-70  { width: 70%;  }
+.col-75  { width: 75%;  }
+.col-80  { width: 80%;  }
+.col-85  { width: 85%;  }
+.col-90  { width: 90%;  }
+.col-100 { width: 100%; }
 
-.col-15 {
-    width: 15%;
-}
-
-.col-20 {
-    width: 20%;
-}
-
-.col-25 {
-    width: 25%;
-}
-
-.col-30 {
-    width: 30%;
-}
-
-.col-40 {
-    width: 40%;
-}
-
-.col-50 {
-    width: 50%;
-}
-
-.col-60 {
-    width: 60%;
-}
-
-.col-70 {
-    width: 70%;
-}
-
-.col-80 {
-    width: 80%;
-}
-
-.col-85 {
-    width: 85%;
-}
-
-.col-90 {
-    width: 90%;
-}
-
-.col-100 {
-    width: 100%;
-}
-
-.outline,
-.outline * {
+.outline, .outline * {
     outline: 1px solid #F6A1A1;
 }
 

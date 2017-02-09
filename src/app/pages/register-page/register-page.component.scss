@@ -9,14 +9,16 @@
 
 .backIcon-wrap {
     position: relative;
+    height: 32px;
+    margin-top: 15px;
 }
 
 .backIcon {
-    margin-top: 17%;
-
+    font-size: 18px;
+    color: $placeholder-color;
 
     &:hover {
-        background-color: $divider-color;
+        color: $knowlead-primary;
     }
 }
 
@@ -48,6 +50,7 @@
 
 .termsTxt {
     margin-top: 20px;
+    color: $font-secondary-color;
 }
 
 #termsLink {

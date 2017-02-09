@@ -1,9 +1,28 @@
-.slds-card {
-    padding: 0 24px 0 24px;
-    width: 320px;
-    height: 150px;
-  }
+@import "../../../../kl-styles/variables.scss";
 
-  .slds-button {
-    margin: 1px;
-  }
+
+.choice-wrap {
+    margin-bottom: 10px;
+}
+
+.fos-title {
+    max-width: 142px;
+    margin-left: 3px;
+}
+
+.fosCloseButton {
+    position: absolute;
+    right: 15px;
+    top: 6.5px;
+    padding: 4px;
+    border-radius: 3px;
+    color: $knowlead-primary;
+
+    &:hover {
+        background-color: $divider-color;
+    }
+}
+
+.closeIcon {
+    color: $knowlead-primary;
+}

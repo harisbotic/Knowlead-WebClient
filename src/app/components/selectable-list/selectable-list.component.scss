@@ -1,8 +1,48 @@
-.slds-item:hover {
-    background-color: rgba(0,0,0,0.05);
+@import "../../../kl-styles/variables.scss";
+
+.inCategories-selection-wrap {
+    height: 360px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-.slds-item {
-    padding: 0.7rem;
+
+.category-item {
+    position: relative;
+    padding: 5px 0 5px 5px;
     border-radius: 3px;
     cursor: pointer;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    overflow: hidden;
+
+    &:hover {
+        background-color: $knowlead-primary;
+        color: white;
+    }
+}
+
+.selected-category-item {
+    position: absolute;
+    border-radius: 3px;
+    background-color: $knowlead-primary;
+    max-width: 25px;
+    padding: 5px;
+    right: 5px;
+    top: 0px;
+    font-size: 15px;
+}
+
+.closeIcon {
+    color: white;
+}
+
+.selected {
+    background-color: $knowlead-primary;
+    border-radius: 3px;
+    color: white;
+}
+
+.hasChildren {
+    font-weight: 700;
 }

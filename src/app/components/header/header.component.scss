@@ -19,7 +19,8 @@ a, :visited, :hover, :active {
 }
 
 .logo-short {
-    max-height: $nav-logo-max-height;
+    font-size: 50px;
+    color: white;
 }
 
 
@@ -30,8 +31,13 @@ a, :visited, :hover, :active {
 
 
 .headerIcon {
-    max-width: $nav-icon-max-width;
+    font-size: $icon-header-size;
+    color: $icon-dark-color;
     cursor: pointer;
+}
+
+#accOptionsIcon {
+    font-size: 28px;
 }
 
 .verticalLine {
@@ -42,8 +48,8 @@ a, :visited, :hover, :active {
     margin-top: -15px;
     background-color: transparentize($icon-dark-color, 0.8);
     margin-left: 25px;
-
 }
+
 
 .accountOptions-content {
     border: 1px solid $hover-dark-color;

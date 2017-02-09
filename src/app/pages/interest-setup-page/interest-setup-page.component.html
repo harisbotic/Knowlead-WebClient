@@ -1,36 +1,152 @@
-<div class="slds-grid slds-wrap" *ngIf="root">
-    <div class="slds-size--1-of-1">
-        <input type="text" nglFormControl placeholder="Search ..." [(ngModel)]="search">
+<div class="grid-container-small posRel zZero">
+    <div class="row welcome-title-wrap">
+        <div class="col-100">
+            <span class="welcome-title"> Welcome to Knowlead! </span>
+        </div>
     </div>
-    <div class="slds-size--3-of-4">
-        <button *ngIf="shouldShowSelector()"
-            (click)="hideSelector()"
-            class="slds-button slds-button--neutral">
-            Go back
-        </button>
-        <app-interest-setup-selector *ngIf="shouldShowSelector()"
-            [root]="root"
-            [category]="category"
-            [isRemovableCallback]="isRemovable"
-            (fosAdded)="fosAdded($event)"
-            (fosRemoved)="fosRemoved($event)"
-            [search]="search">
-        </app-interest-setup-selector>
-        <div *ngIf="!shouldShowSelector()">
-            <div class="slds-grid" *ngFor="let row of [0,1,2];">
-                <button *ngFor = "let col of [0,1,2,3]"
-                    class="slds-size--1-of-4 slds-button slds-button--neutral slds-align--absolute-center category"
-                    (click)="category = root.children[col + row * 3]">
-                    {{root.children[col + row * 3].name}}
+    <div class="row welcome-text-wrap">
+        <div class="col-100">
+            <span class="welcome-text">
+                Thank you for joining and helping us spread knowledge across the world.
+                You're one step away from completing your registration.
+            </span>
+        </div>
+    </div>
+    <div class="row stepTwo-wrap posRel">
+        <div class="row stepTwo-title-wrap">
+            <div class="col-100 stepTwo-title">
+                <span> Fields you are interested in </span>
+            </div>
+        </div>
+
+        <div class="row interest-selection-wrap posRel" *ngIf="root">
+            <div class="col-75 categories-column">
+                <div class="row">
+                    <form class="search-wrap">
+                        <input class="interestSearchInput" type="text" name="search" placeholder="Search categories or subjects.." [(ngModel)]="search">
+                    </form>
+                </div>
+                <div *ngIf="!shouldShowSelector()" class="row categories-selection-wrap">
+                    <div *ngFor="let row of [0,1,2,3];">
+                        <button *ngFor = "let col of [0,1,2]"
+                        class="col-32 clearButton category-box"
+                        (click)="category = root.children[col + row * 3]">
+                        {{root.children[col + row * 3].name}}
+                        </button>
+                    </div>
+                </div>
+                <!-- TODO: Make go back button for sub categories also. Not to  -->
+                <button *ngIf="shouldShowSelector()"
+                (click)="hideSelector()"
+                class="clearButton goBack-button">
+                Go back
+                </button>
+                <app-interest-setup-selector *ngIf="shouldShowSelector()"
+                [root]="root"
+                [category]="category"
+                [isRemovableCallback]="isRemovable"
+                (fosAdded)="fosAdded($event)"
+                (fosRemoved)="fosRemoved($event)"
+                [search]="search">
+                </app-interest-setup-selector>
+            </div>
+            <div class="col-25 selection-column">
+                <div class="row selection-wrap">
+                    <div class="col-100">
+                        <div class="row">
+                            <div class="col-100 myChoices-title-wrap posRel">
+                                <div class="myChoices-title"> My Choices <i class="kl-info moreInfo"></i></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-100 myChoices-wrap">
+                                    <app-interest-setup-choice *ngFor="let item of interests" [interest]="item" (remove)="fosRemoved($event)"></app-interest-setup-choice>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row vote-selection-wrap">
+                    <div class="col-100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-100 suggest-field-wrap">
+                <button class="clearButton suggestLink">
+                    <div class="suggestField-text"> <i class="kl-plus"></i> Suggest Field</div>
                 </button>
             </div>
         </div>
+        <div class="row bottomElements">
+            <div class="slider-wrap">
+                <div class="left-button-wrap">
+                    <button class="defaultButton" id="backToStepOne-button" (click)="onSubmit()"> Back </button>
+                </div>
+                <div class="slider firstSlider"></div>
+                <div class="slider secondSlider"></div>
+                <div class="right-button-wrap">
+                    <button class="defaultButton" id="finish-button" (click)="onSubmit()"> Next </button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="slds-size--1-of-4">
-        <app-interest-setup-choice *ngFor="let item of interests" [interest]="item" (remove)="fosRemoved($event)">
-        </app-interest-setup-choice>
-        <button (click)="submit()" class="slds-button slds-button--brand">
-            Save
-        </button>
-    </div>
+    <div class="row filler"></div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="slds-grid slds-wrap" *ngIf="root">
+<div class="slds-size--1-of-1">
+<input type="text" nglFormControl placeholder="Search ..." [(ngModel)]="search">
+</div>
+<div class="slds-size--3-of-4">
+<button *ngIf="shouldShowSelector()"
+(click)="hideSelector()"
+class="slds-button slds-button--neutral">
+Go back
+</button>
+<app-interest-setup-selector *ngIf="shouldShowSelector()"
+[root]="root"
+[category]="category"
+[isRemovableCallback]="isRemovable"
+(fosAdded)="fosAdded($event)"
+(fosRemoved)="fosRemoved($event)"
+[search]="search">
+</app-interest-setup-selector>
+<div *ngIf="!shouldShowSelector()">
+<div class="slds-grid" *ngFor="let row of [0,1,2];">
+<button *ngFor = "let col of [0,1,2,3]"
+class="slds-size--1-of-4 slds-button slds-button--neutral slds-align--absolute-center category"
+(click)="category = root.children[col + row * 3]">
+{{root.children[col + row * 3].name}}
+</button>
+</div>
+</div>
+</div>
+<div class="slds-size--1-of-4">
+<app-interest-setup-choice *ngFor="let item of interests" [interest]="item" (remove)="fosRemoved($event)">
+</app-interest-setup-choice>
+<button (click)="submit()" class="slds-button slds-button--brand">
+Save
+</button>
+</div>
+</div> -->

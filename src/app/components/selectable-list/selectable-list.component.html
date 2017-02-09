@@ -1,12 +1,17 @@
-<ul class="slds-list--vertical-space">
-  <li *ngFor="let item of items" class="slds-item" (click)="itemClickedLocal(item)" ngClass="{selected: isRemovable(item)}">
-    <div class="slds-tile slds-clearfix">
-      <div class="slds-text-heading--medium slds-float--left">
-        {{displayItem(item)}}
-      </div>
-      <button *ngIf="isRemovable(item)" type="button" nglButtonIcon class="slds-float--right" (click)="$event.stopPropagation(); itemRemovedLocal(item)">
-        <ngl-icon icon="close" size="medium"></ngl-icon>
-      </button>
+<div class="row inCategories-selection-wrap" *ngIf="items">
+    <div *ngFor="let row of loop(0, items.length / 2)">
+        <div *ngFor = "let col of loop(0, 2);"
+            class="col-50">
+            <div *ngIf="items[col + row * 2]" [class.selected]="isRemovable(items[col + row * 2])" [class.hasChildren]="items[col + row * 2].children?.length > 0">
+                <button class="clearButton category-item" (click)="itemClickedLocal(items[col + row * 2])" ngClass="{selected: isRemovable(item)}">
+                    {{displayItem(items[col + row * 2])}}
+                    <button *ngIf="isRemovable(items[col + row * 2])" type="button" (click)="$event.stopPropagation(); itemRemovedLocal(items[col + row * 2])" class="clearButton selected-category-item">
+                        <div class="closeIcon-wrap">
+                            <i class="kl-close closeIcon"></i>
+                        </div>
+                    </button>
+                </button>
+            </div>
+        </div>
     </div>
-  </li>
-</ul>
+</div>
