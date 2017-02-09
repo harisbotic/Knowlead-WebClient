@@ -5,21 +5,66 @@ import { PopupNotificationModel } from '../../models/frontend.models';
 import { FriendshipNotificationsService } from './friendship-notifications.service';
 import { UserNotificationsService } from './user-notifications.service';
 import { NotificationTypes } from '../../models/constants';
+import { SessionService, SessionEvent } from '../session.service';
+import { ModelUtilsService } from '../model-utils.service';
+import { Subscription } from 'rxjs';
+import { NotificationSource } from './notification.source';
 
 @Injectable()
 export class NotificationService {
 
   notificationComponent: NotificationsComponent;
 
+  subscriptions: {[index: string]: Subscription} = {};
+
   constructor(public friendshipNotificationService: FriendshipNotificationsService,
-              public userNotificationsService: UserNotificationsService) {
+              public userNotificationsService: UserNotificationsService,
+              // WHEN ADDING NEW SOURCE DON'T FORGET TO RESET IT ON LOG OUT
+              protected sessionService: SessionService,
+              protected modelUtilsService: ModelUtilsService) {
+    this.sessionService.eventStream.subscribe(evt => {
+      if (evt === SessionEvent.LOGGED_OUT) {
+        this.friendshipNotificationService.reset();
+        this.userNotificationsService.reset();
+      }
+    });
   }
 
   receiveNotification(notification: NotificationModel) {
+    if (notification.notificationId == null) {
+      console.error('Notification has no ID');
+      return;
+    }
+    if (this.subscriptions[notification.notificationId]) {
+      console.error('Received duplicate notification: ' + notification.notificationId);
+      return;
+    }
+    const tmp = this.getSource(notification);
+    if (tmp != null) {
+      tmp.induceNotification(notification);
+      this.subscriptions[notification.notificationId] = this.modelUtilsService.fillNotification(notification).subscribe(newNotification => {
+        if (!tmp.updateNotification(newNotification)) {
+          this.removeNotification(newNotification);
+        }
+      });
+    }
+  }
+
+  private removeNotification(notification: NotificationModel) {
+    if (!this.subscriptions[notification.notificationId]) {
+      console.error('Notification not found for removal: ' + notification.notificationId);
+      return;
+    }
+    this.subscriptions[notification.notificationId].unsubscribe();
+    delete this.subscriptions[notification.notificationId];
+  }
+
+  getSource(notification: NotificationModel): NotificationSource {
     if (notification.notificationType === NotificationTypes.newP2PComment) {
-      this.userNotificationsService.induceNotification(notification);
+      return this.userNotificationsService;
     } else {
       console.error('Unsupported notification type');
+      return undefined;
     }
   }
 

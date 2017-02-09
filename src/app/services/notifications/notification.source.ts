@@ -1,11 +1,13 @@
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
-import { NotificationModel, NotificationSourceStats } from '../../models/dto';
+import { NotificationModel, NotificationSourceStats, NotebookModel } from '../../models/dto';
 
 export interface NotificationSource {
   canLoadMore: boolean;
   canMarkAsRead: boolean;
   getNotificationStream(): Observable<NotificationModel[]>;
   induceNotification(notification: NotificationModel);
+  removeNotification(notification: NotificationModel);
+  updateNotification(notification: NotificationModel): boolean;
   addNotifications(notifications: NotificationModel[]);
   reset();
   getStatsStream(): Observable<NotificationSourceStats>;
@@ -26,6 +28,13 @@ export abstract class BaseNotificationSource implements NotificationSource {
   }
 
   protected notifyNotifications() {
+    this.notifications = this.notifications.sort((a, b) => {
+      try {
+        return b.scheduledAt.getTime() - a.scheduledAt.getTime();
+      } catch (e) {
+        return 0;
+      }
+    });
     this.notificationStream.next(this.notifications);
   }
 
@@ -59,10 +68,33 @@ export abstract class BaseNotificationSource implements NotificationSource {
 
   induceNotification(notification: NotificationModel) {
     this.addNotifications([notification]);
+    this.stats.total++;
     if (!notification.seenAt) {
       this.stats.unread++;
-      this.stats.total++;
-      this.refreshStats();
+    }
+    this.refreshStats();
+  }
+
+  protected getNotificationIndex(notification: NotificationModel) {
+    return this.notifications.findIndex((n) => n.notificationId === notification.notificationId);
+  }
+
+  removeNotification(notification: NotificationModel) {
+    let idx = this.getNotificationIndex(notification);
+    if (idx !== -1) {
+      this.notifications.splice(idx, 1);
+    }
+  }
+
+  updateNotification(notification: NotificationModel) {
+    let idx = this.getNotificationIndex(notification);
+    if (idx !== -1) {
+      this.notifications[idx] = notification;
+      this.notifyNotifications();
+      return true;
+    } else {
+      console.error('Notification not found for update: ' + notification.notificationId);
+      return false;
     }
   }
 

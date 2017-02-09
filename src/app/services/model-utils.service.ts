@@ -7,7 +7,7 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { ImageBlobModel, NotebookModel } from '../models/dto';
+import { ImageBlobModel, NotebookModel, NotificationModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
 import { NotebookService } from './notebook.service';
@@ -16,7 +16,9 @@ import { NotebookService } from './notebook.service';
 export class ModelUtilsService {
 
   public static getImageBlobUrl(blob: ImageBlobModel) {
-    return 'https://teststorage3123.blob.core.windows.net/images/' + blob.blobId + '.' + blob.extension;
+    return (blob) ?
+      'https://teststorage3123.blob.core.windows.net/images/' + blob.blobId + '.' + blob.extension :
+      undefined;
   }
 
   public static getUserFullName(value: ApplicationUserModel): string {
@@ -126,6 +128,10 @@ export class ModelUtilsService {
     return this.fillArray(values, this.notebookService.getNotebook.bind(this.notebookService), 'notebookId');
   }
 
+  public fillNotifications(values: NotificationModel[]): Observable<NotificationModel[]> {
+    return this.fillArray(values, this.fillNotification.bind(this), 'notificationId');
+  }
+
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: string): Observable<T[]> {
     if (!values || values.length === 0) {
       return Observable.of([]);
@@ -153,7 +159,7 @@ export class ModelUtilsService {
     ret = this.fill(ret, 'messageFrom', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'messageTo', this.accountService.getUserById.bind(this.accountService));
     if (typeof(value.timestamp) === 'string') {
-      value.timestamp = new Date(value.timestamp);
+      value.timestamp = new Date(Date.parse(value.timestamp));
     }
     return ret;
   }
@@ -163,6 +169,19 @@ export class ModelUtilsService {
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
+    return ret;
+  }
+
+  public fillNotification(value: NotificationModel): Observable<NotificationModel> {
+    if (typeof(value.scheduledAt) === 'string') {
+      value.scheduledAt = new Date(Date.parse(value.scheduledAt));
+    }
+    if (typeof(value.seenAt) === 'string') {
+      value.scheduledAt = new Date(Date.parse(value.seenAt));
+    }
+    let ret = Observable.of(value);
+    ret = this.fill(ret, 'fromApplicationUser', this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService));
     return ret;
   }
 
