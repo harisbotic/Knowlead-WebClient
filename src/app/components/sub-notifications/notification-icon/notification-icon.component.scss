@@ -50,7 +50,14 @@
     font-size: 10px;
     position: absolute;
     top: -5px;
-    right: -5px;
+    right: -7px;
     width: 17px;
     height: 17px;
+    text-align: center;
+}
+
+.icon {
+    font-size: $icon-header-size;
+    color: $icon-dark-color;
+    cursor: pointer;
 }

@@ -17,6 +17,7 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
 
   stats: NotificationSourceStats;
   isOpened = false;
+  Math = Math;
 
   constructor() { super(); }
 
@@ -30,6 +31,12 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
 
   markAsRead() {
     this.notificationSource.markAsRead();
+  }
+
+  getIconClass() {
+    const ret = {'icon': true};
+    ret[this.iconClass] = true;
+    return ret;
   }
 
 }
