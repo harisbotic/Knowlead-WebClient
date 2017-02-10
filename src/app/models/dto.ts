@@ -39,6 +39,8 @@ export interface P2PMessageModel
 {
 	p2pMessageId: number;
 	text: string;
+	dateTimeOffer: Date;
+	priceOffer: number;
 	timestamp: Date;
 	p2pId: number;
 	p2p: P2PModel;
@@ -202,25 +204,15 @@ export interface NotificationModel
 	scheduledAt: Date;
 	seenAt: Date;
 }
-export interface NotificationSourceStats
-{
-	unread: number;
-	total: number;
-}
-export interface P2PScheduleModel
-{
-	p2pId: number;
-	scheduleTime: Date;
-	scheduleWithId: Guid;
-}
 export interface P2PModel
 {
 	p2pId: number;
 	title: string;
 	text: string;
-	chargePerMinute: number;
+	initialPrice: number;
 	deadline: Date;
-	scheduledAt: Date;
+	priceAgreed: number;
+	dateTimeAgreed: Date;
 	isDeleted: boolean;
 	scheduledWithId: Guid;
 	scheduledWith: ApplicationUserModel;

@@ -7,6 +7,8 @@ import { PopoverModule } from 'ngx-popover';
 import { SelectModule } from 'angular2-select';
 import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
 import { ColorPickerModule } from 'ng-color-picker';
+import { Autosize } from 'angular2-autosize/angular2-autosize';
+
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -113,7 +115,8 @@ import { RegisterSuccessPageComponent } from './pages/register-success-page/regi
     NotificationIconComponent,
     UiSwitchComponent,
     SingleNotebookComponent,
-    RegisterSuccessPageComponent
+    RegisterSuccessPageComponent,
+    Autosize
   ],
   imports: [
     BrowserModule,
