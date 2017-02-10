@@ -43,4 +43,6 @@ export class ErrorCodes
 	static claimRewardError: string = "CLAIM_REWARD_ERROR";
 	static alreadyGotReward: string = "ALREADY_GOT_REWARD";
 	static notEnoughMinutes: string = "NOT_ENOUGH_MINUTES";
+	static consecutiveOffersLimit: string = "CONSECUTIVE_OFFERS_LIMIT";
+	static notLastOffer: string = "NOT_LAST_OFFER";
 }

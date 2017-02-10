@@ -35,7 +35,7 @@
                                 <div class="col-100">
                                     <div class="postTextarea-wrap">
                                         <!-- NOTE: ADD $('textarea').autoResize(); to autoresize textarea for more text -->
-                                        <textarea formControlName="text" placeholder="Share what are you interested to learn..." class="postTextarea"></textarea>
+                                        <textarea autosize formControlName="text" placeholder="Share what are you interested to learn..." class="postTextarea"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -51,26 +51,25 @@
                                 <div class="col-75">
                                     <div class="postInput-wrap">
                                         <div [ngSwitch]="stepStr">
-                                            <!-- <div *ngSwitchCase="'fosId'">
-                                                <app-fos-selector outputType="id" formControlName="fosId"></app-fos-selector>
-                                            </div> -->
-                                            <div>
+                                            <div *ngSwitchCase="'fosId'">
+                                                <ng-select outputType="id" formControlName="fosId" [options]="foses"></ng-select>
+                                            </div> 
+                                            <div *ngSwitchCase="'initialPrice'">
                                                 <div class="col-15">
                                                     <div class="inputTitle-wrap">
                                                         <div class="inputTitle centerV">Reward</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-85">
-                                                    <!-- NOTE: MINIMUM VALUE FOR REWARD 10! -->
-                                                    <input type="number" formControlName="chargePerMinute" placeholder="How many minutes are you offering?" class="postNumberInput">
+                                                    <input type="number" formControlName="initialPrice" placeholder="How many minutes are you offering?" class="postNumberInput" min="10">
                                                 </div>
                                             </div>
-                                            <!-- <div *ngSwitchCase="'languages'">
+                                             <div *ngSwitchCase="'languages'">
                                                 <ng-select [options]="languages" [multiple]="true" formControlName="languages" placeholder="Languages"></ng-select>
-                                            </div> -->
-                                            <!-- <div *ngSwitchCase="'deadline'">
+                                            </div> 
+                                             <div *ngSwitchCase="'deadline'">
                                                 <app-datepicker formControlName="deadline"></app-datepicker>
-                                            </div> -->
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +91,7 @@
                             <div class="row">
                                 <div class="col-80">
                                     <button *ngFor="let stepValue of steps; let idx = index" [disabled]="availableSteps.indexOf(stepValue) == -1" type="button" (click)="setStep(idx)" class="postButton">
-                                        <i class="kl-friends"></i>
+                                        <i [class]="iconMapping[stepValue]"></i>
                                     </button>
                                 </div>
                                 <div class="col-20">
