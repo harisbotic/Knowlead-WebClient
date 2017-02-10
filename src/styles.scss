@@ -179,32 +179,6 @@ ngl-rating {
 }
 
 ///////////////////////////////////////////////////////////
-// PROFILE IMAGE CLASSES //////////////////////////////////
-///////////////////////////////////////////////////////////
-.profile-image-round-small {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    .profile-image {
-        display: inline-block;
-        min-width: 100%;
-        min-height: 100%;
-    }
-}
-
-.profile-image-round-large {
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 20px;
-    .profile-image {
-        display: inline-block;
-        min-width: 100%;
-        min-height: 100%;
-    }
-}
-
-///////////////////////////////////////////////////////////
 // ICON CLASSES ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 .iconMaxW {

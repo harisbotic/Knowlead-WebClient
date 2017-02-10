@@ -5,6 +5,7 @@ import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
 import { BaseComponent } from '../../base.component';
 import { AccountService } from '../../services/account.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-picture',
@@ -14,26 +15,29 @@ import { AccountService } from '../../services/account.service';
 })
 export class ProfilePictureComponent extends BaseComponent implements OnInit {
 
-  @Input() user: ApplicationUserModel;
+  @Input() set user(user: ApplicationUserModel) {
+    delete this.url;
+    if (user && user.profilePicture) {
+      this.url = ModelUtilsService.getImageBlobUrl(user.profilePicture);
+    }
+    if (!this.url) {
+      this.url = 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif';
+    }
+    this.url = this.sanitizer.bypassSecurityTrustStyle('url(' + this.url + ')');
+  }
   @Input() uploadable: boolean;
+  @Input() size = 'small';
   id = getGuid();
+  url: any;
 
-  constructor(protected fileService: FileService, protected accountService: AccountService) { super(); }
+  constructor(protected fileService: FileService,
+            protected accountService: AccountService,
+            protected sanitizer: DomSanitizer) { super(); }
 
   ngOnInit() {
   }
 
-  getSrc(): string {
-    if (this.user && this.user.profilePictureId) {
-      return ModelUtilsService.getImageBlobUrl(this.user.profilePicture);
-    } else {
-      return 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif';
-    }
-  }
   fileSelected(event: Event) {
-    if (!this.user) {
-      return;
-    }
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
       this.subscriptions.push(

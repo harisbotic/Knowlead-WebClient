@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Knowlead-Icons-Font';
-  src:  url('fonts/Knowlead-Icons-Font.eot?s3k274');
-  src:  url('fonts/Knowlead-Icons-Font.eot?s3k274#iefix') format('embedded-opentype'),
-    url('fonts/Knowlead-Icons-Font.ttf?s3k274') format('truetype'),
-    url('fonts/Knowlead-Icons-Font.woff?s3k274') format('woff'),
-    url('fonts/Knowlead-Icons-Font.svg?s3k274#Knowlead-Icons-Font') format('svg');
+  src:  url('fonts/Knowlead-Icons-Font.eot?8nylpl');
+  src:  url('fonts/Knowlead-Icons-Font.eot?8nylpl#iefix') format('embedded-opentype'),
+    url('fonts/Knowlead-Icons-Font.ttf?8nylpl') format('truetype'),
+    url('fonts/Knowlead-Icons-Font.woff?8nylpl') format('woff'),
+    url('fonts/Knowlead-Icons-Font.svg?8nylpl#Knowlead-Icons-Font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.kl-edit-profile:before {
+  content: "\e910";
+}
+.kl-bookmark:before {
+  content: "\e90d";
+}
+.kl-feedback:before {
+  content: "\e90e";
+}
+.kl-calendar:before {
+  content: "\e90f";
+}
+.kl-my:before {
+  content: "\e916";
+}
+.kl-peer:before {
+  content: "\e917";
+}
+.kl-settings:before {
+  content: "\e918";
+}
+.kl-edit:before {
+  content: "\e919";
+}
 .kl-info:before {
   content: "\e90c";
 }
@@ -63,3 +87,4 @@
 .kl-plus:before {
   content: "\e909";
 }
+
