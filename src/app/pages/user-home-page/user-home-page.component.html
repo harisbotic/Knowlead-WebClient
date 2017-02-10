@@ -1,4 +1,77 @@
-<app-p2p-create>
-</app-p2p-create>
-<!--<app-p2p [p2pId]="item.p2pId" *ngFor="let item of p2ps"></app-p2p>-->
-<app-notebook-list></app-notebook-list>
+
+<div class="grid-container">
+    <div class="row">
+        <div class="col-25">
+            <div class="leftSidebar-wrap">
+                <div class="row">
+                    <div class="col-100">
+                        <div class="profileInfo-wrap"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-100">
+                        <div class="editProfile-wrap">
+                            <div class="editProfile"><i class="kl-info"></i> Edit Profile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-100">
+                        <div class="sendFeedback-wrap">
+                            <div class="sendFeedback"> <i class="kl-info"></i> Send Feedback </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-100">
+                        <div class="scheduleSection-wrap">
+                            <div class="row">
+                                <div class="col-100">
+                                    <div class="scheduleTitle"> Schedule </div>
+                                    <div class="peer-to-peer-category-wrap">
+                                        <div class="peer-to-peer-category-title"> Peer-to-Peer </div>
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="myPosts-wrap">
+                                                    <div class="myPosts"><i class="kl-notifications"></i> My Posts </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="scheduled-wrap">
+                                                    <div class="scheduled"><i class="kl-close"></i> Scheduled</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="bookmarked-wrap">
+                                                    <div class="bookmarked"><i class="kl-close"></i> Bookmarked </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-50">
+            <div class="mainSection-wrap">
+                <app-p2p-create></app-p2p-create>
+            </div>
+        </div>
+        <div class="col-25">
+            <div class="rightSidebar-wrap"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <app-p2p [p2pId]="item.p2pId" *ngFor="let item of p2ps"></app-p2p>
+<app-notebook-list></app-notebook-list> -->

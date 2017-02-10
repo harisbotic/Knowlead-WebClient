@@ -1,6 +1,6 @@
 <div class="full">
     <input type="file" [id]="id" class="hidden" *ngIf="uploadable" accept="image/*" (change)="fileSelected($event)">
     <label [attr.for]="id">
-        <img [src]="getSrc()" class="profile-image-size">
+        <img [src]="getSrc()">
     </label>
 </div>
