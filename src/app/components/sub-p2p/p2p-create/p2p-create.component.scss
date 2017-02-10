@@ -1,0 +1,79 @@
+@import "../../../../kl-styles/variables.scss";
+
+.createPost-wrap {
+    height: auto;
+    border-radius: 5px;
+    background-color: $post-background-color;
+    border: 1px solid $hover-dark-color;
+}
+
+.postType-row-bg-color {
+    background-color: $post-type-secondary-color;
+}
+
+.postType-wrap {
+    border-bottom: 2px solid $divider-color;
+}
+
+.postTypeButton-wrap {
+    border-right: 1px solid $divider-color;
+}
+
+.postTypeButton {
+    height: 50px;
+    width: 100%;
+    position: relative;
+    background-color: $post-type-primary-color;
+
+    &:hover {
+        color: $knowlead-secondary;
+    }
+
+    .postIcon {
+        font-size: 20px;
+        position: absolute;
+        top: 15px;
+        left: 18px;
+    }
+
+    .postText {
+        margin-left: 28px;
+    }
+}
+
+.attachment-border-wrap {
+    border-bottom: 2px solid $divider-color;
+}
+
+.input-elements-wrap {
+    border-bottom: 2px solid $divider-color;
+}
+
+.inputTitle-wrap {
+    height: 30px;
+    position: relative;
+    border-right: 1px solid $divider-color;
+}
+
+.nextStep-wrap, .addFile-wrap {
+    border-left: 1px solid $divider-color;
+}
+
+.nextStepButton, .addFileButton {
+    height: 30px;
+    width: 100%;
+    outline: none;
+
+    &:hover {
+        background-color: $knowlead-primary;
+        color: white;
+    }
+
+    &:disabled {
+        color: $disabled-color;
+
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}

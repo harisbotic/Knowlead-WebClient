@@ -137,6 +137,40 @@ ngl-rating {
     // }
 }
 
+.postButton {
+    width: 25%;
+    color: $icon-dark-color;
+    background-color: transparent;
+    font-size: 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+
+    &:disabled {
+        color: $disabled-color;
+        background-color: transparent;
+    }
+}
+
+
+.submitPostButton {
+    width: 100px;
+    height: 30px;
+    background-color: $knowlead-secondary;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 7px;
+
+    &:disabled {
+        background-color: $disabled-color;
+    }
+}
+
 ///////////////////////////////////////////////////////////
 // ALIGNMENT CLASSES //////////////////////////////////////
 ///////////////////////////////////////////////////////////

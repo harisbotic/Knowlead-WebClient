@@ -1,19 +1,111 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <textarea formControlName="text" placeholder="WTF DO YOU WANT TO POST NOW !!! i nema upitnika"></textarea>
-    <div [ngSwitch]="stepStr">
-        <app-fos-selector *ngSwitchCase="'fosId'" outputType="id" formControlName="fosId"></app-fos-selector>
-        <input *ngSwitchCase="'chargePerMinute'" type="number" formControlName="chargePerMinute" placeholder="Charge (minutes)">
-        <ng-select *ngSwitchCase="'languages'" [options]="languages" [multiple]="true" formControlName="languages" placeholder="Languages"></ng-select>
-        <app-datepicker *ngSwitchCase="'deadline'" formControlName="deadline"></app-datepicker>
+<div class="row">
+    <div class="col-100">
+        <div class="createPost-wrap">
+            <div class="row">
+                <div class="col-100">
+                    <div class="postType-wrap">
+                        <div class="row postType-row-bg-color">
+                            <div class="col-25">
+                                <div class="postTypeButton-wrap">
+                                    <button class="clearButton postTypeButton">
+                                        <i class="kl-peer postIcon"></i>
+                                        <div class="postText">Peer-to-Peer</div>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- COMING SOON! :P -->
+                            <!-- <div class="col-25">
+                                <div class="postTypeButton-wrap"></div>
+                            </div>
+                            <div class="col-25">
+                                <div class="postTypeButton-wrap"></div>
+                            </div>
+                            <div class="col-25">
+                                <div class="postTypeButton-wrap"></div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="createForm-wrap">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="row">
+                                <div class="col-100">
+                                    <div class="postTextarea-wrap">
+                                        <!-- NOTE: ADD $('textarea').autoResize(); to autoresize textarea for more text -->
+                                        <textarea formControlName="text" placeholder="Share what are you interested to learn..." class="postTextarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row attachment-border-wrap">
+                                <div class="col-100">
+                                    <div class="attachment-wrap">
+                                        <!-- NOTE: ATTACHMENT PILLS GO HERE xD -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row input-elements-wrap">
+                                <div class="col-75">
+                                    <div class="postInput-wrap">
+                                        <div [ngSwitch]="stepStr">
+                                            <!-- <div *ngSwitchCase="'fosId'">
+                                                <app-fos-selector outputType="id" formControlName="fosId"></app-fos-selector>
+                                            </div> -->
+                                            <div>
+                                                <div class="col-15">
+                                                    <div class="inputTitle-wrap">
+                                                        <div class="inputTitle centerV">Reward</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-85">
+                                                    <!-- NOTE: MINIMUM VALUE FOR REWARD 10! -->
+                                                    <input type="number" formControlName="chargePerMinute" placeholder="How many minutes are you offering?" class="postNumberInput">
+                                                </div>
+                                            </div>
+                                            <!-- <div *ngSwitchCase="'languages'">
+                                                <ng-select [options]="languages" [multiple]="true" formControlName="languages" placeholder="Languages"></ng-select>
+                                            </div> -->
+                                            <!-- <div *ngSwitchCase="'deadline'">
+                                                <app-datepicker formControlName="deadline"></app-datepicker>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-10">
+                                    <div class="nextStep-wrap">
+                                        <button [disabled]="step >= availableSteps.length - 1" (click)="setStep(step + 1)" type="button" class="clearButton nextStepButton">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-15">
+                                    <div class="addFile-wrap">
+                                        <button class="clearButton addFileButton">
+                                            Add Files
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-80">
+                                    <button *ngFor="let stepValue of steps; let idx = index" [disabled]="availableSteps.indexOf(stepValue) == -1" type="button" (click)="setStep(idx)" class="postButton">
+                                        <i class="kl-friends"></i>
+                                    </button>
+                                </div>
+                                <div class="col-20">
+                                    <div class="submitPost-wrap">
+                                        <button type="submit" [disabled]="!form.valid" class="submitPostButton">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button *ngFor="let stepValue of steps; let idx = index" [disabled]="availableSteps.indexOf(stepValue) == -1" type="button" (click)="setStep(idx)">
-        {{idx == step ? '>' : ''}} {{stepValue}}
-    </button>
-    <button [disabled]="step <= 0" (click)="setStep(step - 1)" type="button">
-        <<
-    </button>
-    <button [disabled]="step >= availableSteps.length - 1" (click)="setStep(step + 1)" type="button">
-        >>
-    </button>
-    <button type="submit" [disabled]="!form.valid">Submit</button>
-</form>
+</div>
+<!-- 100 -->
