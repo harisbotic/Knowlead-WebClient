@@ -44,7 +44,7 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
     this.subscriptions.push(this.accountService.register(this.form.value).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
-        this.router.navigate(['/login']);
+        this.router.navigate(['/registerSuccess']);
       }, (errorResponse) => {
         this.response = errorResponse;
       }

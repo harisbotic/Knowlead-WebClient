@@ -69,6 +69,7 @@ import { NotebookService } from './services/notebook.service';
 import { SingleNotebookComponent } from './components/sub-notebook/single-notebook/single-notebook.component';
 import { FriendshipNotificationsService } from './services/notifications/friendship-notifications.service';
 import { UserNotificationsService } from './services/notifications/user-notifications.service';
+import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { UserNotificationsService } from './services/notifications/user-notifica
     SingleNotificationComponent,
     NotificationIconComponent,
     UiSwitchComponent,
-    SingleNotebookComponent
+    SingleNotebookComponent,
+    RegisterSuccessPageComponent
   ],
   imports: [
     BrowserModule,

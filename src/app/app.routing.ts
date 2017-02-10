@@ -14,10 +14,17 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { AuthGuard } from './guards/auth.guard';
 import { MediatestComponent } from './pages/mediatest/mediatest.component';
 import { RegisteredGuard } from './guards/registered.guard';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
-    { path: '', component: GuestHomePageComponent },
+    { path: '', component: GuestHomePageComponent, children: [
+        { path: '', component: LoginPageComponent },
+        { path: 'register', component: RegisterPageComponent },
+        { path: 'registerSuccess', component: RegisterSuccessPageComponent }
+    ] },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'translatetest', component: TranslationTestComponent },
@@ -29,13 +36,12 @@ const appRoutes: Routes = [
     { path: 'profile/:id', component: ProfilePageComponent },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },
-    { path: ':type', component: GuestHomePageComponent }
 ];
 
 export const appRoutingProviders: any[] = [
 ];
 
-export const freePaths = ['login', 'register', '', 'confirmemail'];
+export const freePaths = ['login', 'register', '', 'confirmemail', 'registerSuccess'];
 
 export function isPathFree(path: string): boolean {
     if (path.startsWith('/')) {
