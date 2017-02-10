@@ -1,9 +1,19 @@
-#login-button {
-    position: absolute;
-    width: 100%;
-    bottom: 0px;
+.reg-successful-wrap {
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 105px;
 }
 
-.log-reg-section {
-    padding: 10px;
+.reg-successful-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.reg-successful-text {
+    font-size: 15px;
+}
+
+.okButton-wrap {
+    margin-top: 20px;
 }
