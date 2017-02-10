@@ -11,7 +11,7 @@ import { BaseComponent } from '../../base.component';
 })
 export class GuestHomePageComponent extends BaseComponent implements OnInit {
 
-  showRegister = false;
+  // showRegister = false;
 
   constructor(
       protected realtimeService: RealtimeService,
@@ -27,12 +27,12 @@ export class GuestHomePageComponent extends BaseComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     }));
-    this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
-      console.log(params);
-      if (params['type'] === 'register') {
-        this.showRegister = true;
-      }
-    }));
+    // this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
+    //   console.log(params);
+    //   if (params['type'] === 'register') {
+    //     this.showRegister = true;
+    //   }
+    // }));
   }
 
 }
