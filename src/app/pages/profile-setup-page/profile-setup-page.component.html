@@ -23,10 +23,8 @@
             <form (ngSubmit)="submit()" [formGroup]="form" *ngIf="form">
                 <div class="col-100">
                     <div class="row">
-                        <div class="col-30">
-                            <div class="profile-image-round-large">
-                            <app-profile-picture [user]="realUser" [uploadable]="true"></app-profile-picture>
-                            </div>
+                        <div class="col-30 posRel profile-picture-wrap">
+                            <app-profile-picture [user]="realUser" [uploadable]="true" class="centerV" size="large"></app-profile-picture>
                         </div>
                         <div class="col-70">
                             <div class="row name-wrap">
