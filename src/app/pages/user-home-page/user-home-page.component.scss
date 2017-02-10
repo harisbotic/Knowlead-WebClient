@@ -16,17 +16,38 @@
     > a, a:visited, a:active {
         text-decoration: none;
         color: $font-primary-color;
+        transition-property: color;
+        transition-duration: .2s;
 
         &:hover {
             color: $knowlead-primary;
         }
     }
 
+    > a:before {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $knowlead-primary;
+        content: '';
+        -webkit-transform: translateY(8px);
+        opacity: 0;
+        transition-property: -webkit-transform, opacity;
+        transition-duration: .2s;
+    }
+
+    > a:hover:before {
+        -webkit-transform: translateY(0);
+        opacity: .8;
+    }
 }
 
 .menuIcon {
-    font-size: 24px;
+    font-size: 22px;
     position: absolute;
+    top: -1px;
 }
 
 .menuItem-text {

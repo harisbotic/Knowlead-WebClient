@@ -54,8 +54,7 @@
     height: $single-notification-height;
 }
 
-.notification-icon > img {
-    opacity: 0.5;
-    max-width: 25px;
-    cursor: pointer;
+.notification-icon {
+    font-size: 30px;
+    color: $placeholder-color;
 }
