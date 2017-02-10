@@ -1,8 +1,70 @@
-app-p2p {
-    max-width: 1200px;
-    margin: auto;
-    display: block;
+@import "../../../kl-styles/variables.scss";
+
+
+.firstRow {
+    margin-top: 20px;
 }
-.notification-container {
-    width: 400px;
+
+.leftSidebar-Menu {
+    font-size: 16px;
+}
+
+.menuItem-wrap {
+    margin: 5px 0;
+    max-width: 155px;
+
+    > a, a:visited, a:active {
+        text-decoration: none;
+        color: $font-primary-color;
+        transition-property: color;
+        transition-duration: .2s;
+
+        &:hover {
+            color: $knowlead-primary;
+        }
+    }
+
+    > a:before {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $knowlead-primary;
+        content: '';
+        -webkit-transform: translateY(8px);
+        opacity: 0;
+        transition-property: -webkit-transform, opacity;
+        transition-duration: .2s;
+    }
+
+    > a:hover:before {
+        -webkit-transform: translateY(0);
+        opacity: .8;
+    }
+}
+
+.menuIcon {
+    font-size: 22px;
+    position: absolute;
+    top: -1px;
+}
+
+.menuItem-text {
+    margin-left: 30px;
+}
+
+.scheduleTitle {
+    margin-top: 20px;
+    font-size: 19px;
+    font-weight: bold;
+
+}
+
+.peer-to-peer-category-title {
+    font-weight: bold;
+}
+
+.peer-to-peer-sub-category {
+    margin-left: 30px;
 }

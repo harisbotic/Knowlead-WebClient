@@ -31,6 +31,7 @@ a, :visited, :hover, :active {
 
 #accOptionsIcon {
     font-size: 28px;
+    color: $icon-dark-color;
 }
 
 .verticalLine {
@@ -50,6 +51,7 @@ a, :visited, :hover, :active {
     outline: none;
     width: 180px;
     background-color: white;
+    margin-top: 11px;
 }
 
 .accountOptions-title-wrap {
@@ -76,8 +78,9 @@ a, :visited, :hover, :active {
     }
 }
 
-.logIcon {
-    width: 20px;
+.accountOptions-icon {
+    color: $font-primary-color;
+    font-size: 20px;
 }
 
 .logoutButtonText {

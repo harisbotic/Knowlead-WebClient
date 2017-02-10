@@ -1,20 +1,21 @@
 @import "../../../../kl-styles/variables.scss";
 
-.unread {
-    background-color: $unread-notification-color;
-}
+
 
 .single-notification-container {
     width: 100%;
     height: $single-notification-height;
-    // background-color: $divider-color;
+    background-color: $notification-read-color;
     border-bottom: 1px solid $divider-color;
-    
+
     &:hover {
         background-color: $hover-middle-color;
     }
 }
 
+.unread {
+    background-color: $notification-unread-color;
+}
 
 .notification-text-wrap {
     margin: 10px auto;
@@ -53,8 +54,7 @@
     height: $single-notification-height;
 }
 
-.notification-icon > img {
-    opacity: 0.5;
-    max-width: 25px;
-    cursor: pointer;
+.notification-icon {
+    font-size: 30px;
+    color: $placeholder-color;
 }
