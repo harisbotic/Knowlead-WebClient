@@ -204,6 +204,11 @@ export interface NotificationModel
 	scheduledAt: Date;
 	seenAt: Date;
 }
+export interface NotificationSourceStats
+{
+	unread: number;
+	total: number;
+}
 export interface P2PModel
 {
 	p2pId: number;

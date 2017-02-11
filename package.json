@@ -32,6 +32,7 @@
     "angulartics2": "^1.6.3",
     "core-js": "^2.4.1",
     "fast-json-patch": "^1.1.4",
+    "flatpickr": "^2.3.7",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.4",
     "ng-color-picker": "^2.0.3",
@@ -46,6 +47,7 @@
     "zone.js": "0.7.6"
   },
   "devDependencies": {
+    "@types/flatpickr": "^2.2.0",
     "@types/jasmine": "^2.5.41",
     "angular-cli": "1.0.0-beta.28.3",
     "codelyzer": "~2.0.0",
