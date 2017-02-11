@@ -21,7 +21,7 @@ export function dateValidator(configuration: DateValidatorConfiguration): (contr
         if (param == null) {
             return null;
         }
-        let value = typeof(param) === 'string' ? <Date>JSON.parse(param) : <Date>param;
+        let value = typeof(param) === 'string' ? new Date(Date.parse(param)) : <Date>param;
         let invalid = false;
         if (configuration.minDate) {
             invalid = invalid || value < configuration.minDate;

@@ -72,6 +72,7 @@ import { SingleNotebookComponent } from './components/sub-notebook/single-notebo
 import { FriendshipNotificationsService } from './services/notifications/friendship-notifications.service';
 import { UserNotificationsService } from './services/notifications/user-notifications.service';
 import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
+import { FlatpickrComponent } from './components/sub-form-components/flatpickr/flatpickr.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { RegisterSuccessPageComponent } from './pages/register-success-page/regi
     UiSwitchComponent,
     SingleNotebookComponent,
     RegisterSuccessPageComponent,
-    Autosize
+    Autosize,
+    FlatpickrComponent
   ],
   imports: [
     BrowserModule,

@@ -18,12 +18,14 @@
       "mobile": false,
       "styles": [
         "../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css",
+        "../node_modules/flatpickr/dist/flatpickr.min.css",
         "styles.scss",
         "kl-styles/form.scss",
         "kl-styles/variables.scss"
       ],
       "scripts": [
         "../node_modules/simple-peer/simplepeer.min.js",
+        "../node_modules/flatpickr/dist/flatpickr.min.js",
         "../node_modules/webrtc-adapter/out/adapter.js"
       ],
       "environments": {

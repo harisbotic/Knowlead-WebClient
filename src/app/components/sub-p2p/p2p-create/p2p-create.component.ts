@@ -137,12 +137,13 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   }
 
   onSubmit() {
-    this.subscriptions.push(this.p2pService.create(this.getValue()).subscribe(response => {
+    this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(response => {
       this.notificationService.info('p2p created');
-      this.restartForm();
-      this.checkStep();
     }, (err) => {
       this.notificationService.error('error creating p2p', err);
+    }, () => {
+      this.restartForm();
+      this.checkStep();
     }));
   }
 
