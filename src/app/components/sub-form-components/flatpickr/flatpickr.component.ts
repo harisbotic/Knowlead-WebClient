@@ -24,7 +24,8 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
     this.flatpickr = this.element.nativeElement.flatpickr({
       altInput: true,
       onChange: (date) => this.value = date[0],
-      defaultDate: this.initialValue
+      defaultDate: this.initialValue,
+      enableTime: true
     });
   }
 

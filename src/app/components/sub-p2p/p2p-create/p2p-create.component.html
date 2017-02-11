@@ -34,7 +34,6 @@
                             <div class="row">
                                 <div class="col-100">
                                     <div class="postTextarea-wrap">
-                                        <!-- NOTE: ADD $('textarea').autoResize(); to autoresize textarea for more text -->
                                         <textarea autosize formControlName="text" placeholder="Share what are you interested to learn..." class="postTextarea"></textarea>
                                     </div>
                                 </div>
@@ -91,7 +90,7 @@
                             <div class="row">
                                 <div class="col-80">
                                     <button *ngFor="let stepValue of steps; let idx = index" [disabled]="availableSteps.indexOf(stepValue) == -1" type="button" (click)="setStep(idx)" class="postButton">
-                                        <i [class]="iconMapping[stepValue]"></i>
+                                        <i [class]="iconMapping[stepValue]" [class.currentStep]="idx === step"></i>
                                     </button>
                                 </div>
                                 <div class="col-20">
