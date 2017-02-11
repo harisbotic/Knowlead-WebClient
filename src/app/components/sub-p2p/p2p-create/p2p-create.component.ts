@@ -43,20 +43,11 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return <FormControl>this.form.controls[step];
   }
 
-  checkFosValidity() {
-    if (typeof(this.form.value.fosId) === 'number') {
-      this.form.patchValue({
-        fosId: [[this.getValue().fosId]]
-      });
-    }
-  }
-
   checkStep() {
     for (let i = 1; i < Math.min(this.steps.length, this.step + 1); i++) {
       if (!this.getControlForStep(i).valid) {
         if (this.step > i) {
           this.step = i;
-          this.checkFosValidity();
         }
         break;
       }
@@ -66,7 +57,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   setStep(value: number) {
     this.step = value;
     this.checkStep();
-    this.checkFosValidity();
     this.iconClass = this.iconMapping[this.stepStr];
   }
 
