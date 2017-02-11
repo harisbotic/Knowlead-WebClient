@@ -46,9 +46,12 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   checkFosValidity() {
     if (typeof(this.form.value.fosId) === 'number') {
       this.form.patchValue({
-        fosId: [[this.getValue().fosId]]
+        fosId: [this.getValue().fosId]
       });
+      console.log('patching');
+      console.log(this.form.value);
     }
+    console.log('checking');
   }
 
   checkStep() {

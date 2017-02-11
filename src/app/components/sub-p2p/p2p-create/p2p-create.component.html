@@ -50,25 +50,51 @@
                                 <div class="col-75">
                                     <div class="postInput-wrap">
                                         <div [ngSwitch]="stepStr">
+
                                             <div *ngSwitchCase="'fosId'">
-                                                <ng-select outputType="id" formControlName="fosId" [options]="foses"></ng-select>
-                                            </div> 
+                                                <div class="col-16">
+                                                    <div class="inputTitle-wrap">
+                                                        <div class="inputTitle centerV">Subject</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-84">
+                                                    <ng-select outputType="id" formControlName="fosId" [options]="foses" placeholder="Select the subject you want to study" class="postSubjectInput"></ng-select>
+                                                </div>
+                                            </div>
+
                                             <div *ngSwitchCase="'initialPrice'">
-                                                <div class="col-15">
+                                                <div class="col-16">
                                                     <div class="inputTitle-wrap">
                                                         <div class="inputTitle centerV">Reward</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-85">
+                                                <div class="col-84">
                                                     <input type="number" formControlName="initialPrice" placeholder="How many minutes are you offering?" class="postNumberInput" min="10">
                                                 </div>
                                             </div>
-                                             <div *ngSwitchCase="'languages'">
-                                                <ng-select [options]="languages" [multiple]="true" formControlName="languages" placeholder="Languages"></ng-select>
-                                            </div> 
-                                             <div *ngSwitchCase="'deadline'">
-                                                <app-flatpickr formControlName="deadline"></app-flatpickr>
-                                            </div> 
+
+                                            <div *ngSwitchCase="'languages'">
+                                                <div class="col-16">
+                                                    <div class="inputTitle-wrap">
+                                                        <div class="inputTitle centerV">Language</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-84">
+                                                    <ng-select [options]="languages" [multiple]="true" formControlName="languages" placeholder="On which languages do you want to study?" class="postLanguageInput"></ng-select>
+                                                </div>
+                                            </div>
+
+                                            <div *ngSwitchCase="'deadline'">
+                                                <div class="col-16">
+                                                    <div class="inputTitle-wrap">
+                                                        <div class="inputTitle centerV">Deadline</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-84">
+                                                    <app-flatpickr formControlName="deadline" placeholder="Pick a deadline till when you need to study" class="postDatepickInput"></app-flatpickr>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

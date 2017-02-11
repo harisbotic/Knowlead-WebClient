@@ -1,6 +1,7 @@
 @import "../../../../kl-styles/variables.scss";
 
 .createPost-wrap {
+    margin-bottom: 5px;
     height: auto;
     border-radius: 5px;
     background-color: $post-background-color;
@@ -50,7 +51,7 @@
 }
 
 .inputTitle-wrap {
-    height: 30px;
+    height: 35px;
     position: relative;
     border-right: 1px solid $divider-color;
 }
@@ -60,7 +61,7 @@
 }
 
 .nextStepButton, .addFileButton {
-    height: 30px;
+    height: 35px;
     width: 100%;
     outline: none;
 
@@ -79,5 +80,10 @@
 }
 
 .currentStep {
-    color: $knowlead-secondary;
+    color: $knowlead-primary;
+}
+
+ng-select > div {
+    padding: 0 !important;
+    height: 30px !important;
 }

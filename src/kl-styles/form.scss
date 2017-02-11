@@ -21,6 +21,10 @@ input.defaultInput[type=password] {
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     outline: none;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
     &:focus {
         box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
         border: 1px solid transparentize($knowlead-primary, 0.6);
@@ -62,7 +66,7 @@ input.interestSearchInput[type=text] {
     -ms-transition: all 0.30s ease-in-out;
     outline: none;
     &::-webkit-input-placeholder {
-        color: $font-primary-color;
+        color: $placeholder-color;
     }
     &:focus {
         box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
@@ -70,12 +74,12 @@ input.interestSearchInput[type=text] {
     }
 }
 
-ng-select > div{
-    padding: 7px 0 !important;
+.profileSetupInput > div{
+    padding: 7px 0;
 }
 
 .placeholder {
-    color: $font-primary-color !important;
+    color: $placeholder-color;
 }
 
 ng-select > div > div.single > div.toggle:hover {
@@ -90,6 +94,7 @@ ng-select > div > div.single > div.toggle:hover {
     min-height: 50px;
     padding: 10px;
     outline: none;
+    resize: none;
     -webkit-transition: min-height 0.20s ease-in-out;
     -moz-transition: min-height 0.20s ease-in-out;
     -ms-transition: min-height 0.20s ease-in-out;
@@ -106,7 +111,7 @@ ng-select > div > div.single > div.toggle:hover {
 input.postNumberInput[type=number] {
     border: none;
     width: 100%;
-    height: 30px;
+    height: 35px;
     padding: 3px 5px;
     outline: none;
     display: inline-block;
@@ -114,4 +119,36 @@ input.postNumberInput[type=number] {
     &::-webkit-input-placeholder {
         color: $placeholder-color;
     }
+}
+
+.postSubjectInput, .postLanguageInput {
+    height: 30px;
+
+    > div {
+        border: none;
+        width: 100%;
+        padding-top: 5px;
+        outline: none;
+        display: inline-block;
+
+        > div.single > div.placeholder {
+            color: $placeholder-color;
+        }
+
+        > div.multiple input::-webkit-input-placeholder {
+            color: $placeholder-color;
+        }
+    }
+
+}
+
+.postDatepickInput > input[type=text] {
+    width: 100%;
+    height: 35px;
+    border: none;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+
 }
