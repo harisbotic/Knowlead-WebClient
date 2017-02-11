@@ -43,11 +43,20 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return <FormControl>this.form.controls[step];
   }
 
+  checkFosValidity() {
+    if (typeof(this.form.value.fosId) === 'number') {
+      this.form.patchValue({
+        fosId: [[this.getValue().fosId]]
+      });
+    }
+  }
+
   checkStep() {
     for (let i = 1; i < Math.min(this.steps.length, this.step + 1); i++) {
       if (!this.getControlForStep(i).valid) {
         if (this.step > i) {
           this.step = i;
+          this.checkFosValidity();
         }
         break;
       }
@@ -57,6 +66,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   setStep(value: number) {
     this.step = value;
     this.checkStep();
+    this.checkFosValidity();
     this.iconClass = this.iconMapping[this.stepStr];
   }
 
@@ -137,14 +147,21 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   }
 
   onSubmit() {
-    this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(response => {
+    this.subscriptions.push(this.p2pService.create(this.getValue()).subscribe(response => {
       this.notificationService.info('p2p created');
+      this.restartForm();
+      this.step = 0;
     }, (err) => {
       this.notificationService.error('error creating p2p', err);
-    }, () => {
-      this.restartForm();
-      this.checkStep();
     }));
+  }
+
+  getValue(): P2PModel {
+    const ret = super.getValue();
+    if (typeof(ret.fosId) !== 'number') {
+      ret.fosId = ret.fosId[0];
+    }
+    return ret;
   }
 
 }
