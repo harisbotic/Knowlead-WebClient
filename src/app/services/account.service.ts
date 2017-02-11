@@ -107,7 +107,7 @@ export class AccountService {
     if (cl.languages) {
       cl.languages = fillArray(cl.languages, 'coreLookupId');
     }
-    cl = _.mapValues(cl, (v) => v ? v : undefined);
+    cl = _.mapValues(cl, (v) => v != null ? v : undefined);
     return cl;
   }
 

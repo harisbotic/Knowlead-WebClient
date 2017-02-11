@@ -22,7 +22,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   iconMapping = {
     'fosId': 'kl-subject',
     'initialPrice': 'kl-currency',
-    'languages': 'kl-language',
+    'languages': 'kl-globe',
     'deadline': 'kl-clock'
   };
   iconClass: string;
