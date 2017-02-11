@@ -5,8 +5,7 @@
         </div>
         <a class="col-15 backIcon-wrap" routerLink="/">
             <button class="clearButton backIcon">
-                <span class="kl-close"></span>
-                <!-- <img src="/assets/images/icons/backArrow.png" alt="Back Icon" id="icBck"> -->
+                <i class="kl-close"></i>
             </button>
         </a>
     </div>
@@ -41,59 +40,3 @@
         </div>
     </div>
 </div>
-
-<!-- <article class="slds-card slds-card--narrow slds-container--small slds-container--center" id="register">
-  <div class="slds-card__header slds-grid">
-    <header class="slds-media slds-media--center slds-has-flexi-truncate">
-      <div class="slds-media__body slds-truncate">
-        <h1 class="slds-text-heading--large">
-          {{"register-page|title" | translate}}
-        </h1>
-      </div>
-    </header>
-  </div>
-
-  <div class="slds-card__body">
-    <app-error-list [errors]="response?.errors"></app-error-list>
-    <form (ngSubmit)="register()" [formGroup]="form">
-      <ngl-form-element>
-        <input
-          nglFormControl
-          type="email"
-          name="Email"
-          placeholder="{{'common|email' | translate}}"
-          formControlName="email">
-        <app-error-list [errors]="response?.formErrors?.email" [formControlProperty]="form.controls.email"></app-error-list>
-      </ngl-form-element>
-      <ngl-form-element>
-        <input
-          nglFormControl
-          type="password"
-          name="password"
-          placeholder="{{'common|password' | translate}}"
-          formControlName="password">
-        <app-error-list [errors]="response?.formErrors?.password" [formControlProperty]="form.controls.password"></app-error-list>
-      </ngl-form-element>
-      <ngl-form-element>
-        <input
-          nglFormControl
-          type="password"
-          name="confirmpassword"
-          placeholder="{{'register-page|confirm password' | translate}}"
-          formControlName="confirmpassword">
-        <app-error-list [formControlProperty]="form.controls.confirmpassword"></app-error-list>
-      </ngl-form-element>
-      <ngl-form-element>
-        <input
-          nglFormControl
-          type="submit"
-          [disabled]="busy || !form.valid"
-          value="{{'register-page|submit' | translate}}"
-          class="slds-button--brand">
-      </ngl-form-element>
-      <app-text-input></app-text-input>
-    </form>
-  </div>
-  <div class="slds-card__footer">
-  </div>
-</article> -->
