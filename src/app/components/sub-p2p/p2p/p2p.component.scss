@@ -1,3 +1,72 @@
-.marginTP {
-    margin: 5px 0 !important;
+@import "../../../../kl-styles/variables.scss";
+
+
+.viewPost-wrap {
+    margin: 5px 0;
+    height: auto;
+    border-radius: $border-radius;
+    background-color: $post-view-background-color;
+    border: 1px solid $hover-dark-color;
+    padding: 15px;
+}
+
+.topElements-wrap {
+    height: 60px;
+}
+
+.profileImage-wrap {
+    height: 60px;
+    position: relative;
+}
+
+.profileInfoText-wrap {
+    margin: 13px 0 0 30px;
+
+    .profileName {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .dateCreated {
+        font-size: 11px;
+        color: $disabled-color;
+    }
+}
+
+.viewPostInfo-wrap {
+    height: 60px;
+    width: 100%;
+    color: $font-secondary-color;
+
+
+    .viewPostInfo-icon {
+        line-height: 60px;
+        font-size: 25px;
+    }
+
+    .viewPostInfo-text {
+        line-height: 58px;
+    }
+
+}
+
+.viewPost-text-wrap {
+    border-bottom: 2px solid $divider-color;
+
+    .viewPost-text {
+        margin: 15px 0;
+    }
+}
+
+.bottomElementsButton-wrap {
+    margin: 15px 0;
+
+    > a, a:visited, a:active {
+        text-decoration: none;
+        color: $font-secondary-color;
+
+        &:hover {
+            color: $knowlead-primary;
+        }
+    }
 }

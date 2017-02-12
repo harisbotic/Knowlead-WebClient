@@ -3,7 +3,7 @@
 .createPost-wrap {
     margin-bottom: 5px;
     height: auto;
-    border-radius: 5px;
+    border-radius: $border-radius;
     background-color: $post-background-color;
     border: 1px solid $hover-dark-color;
 }
@@ -84,6 +84,6 @@
 }
 
 ng-select > div {
-    padding: 0 !important;
-    height: 30px !important;
+    padding: 0;
+    height: 30px;
 }

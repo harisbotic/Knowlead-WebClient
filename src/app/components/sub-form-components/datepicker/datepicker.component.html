@@ -6,20 +6,3 @@
     <ng-select [options]="years" (selected)="yearSelected($event)" (deselected)="yearSelected(null)" [(ngModel)]="yearValue" placeholder="Year" class="yearSection">
     </ng-select>
 </div>
-
-<!--<button nglButton="neutral" type="button" (click)="open = true">
-  {{ (!value) ? (text | translate) : (value | date) }}
-</button>
-<input type="number" [ngModel]="value ? value.getHours() : 0" (ngModelChange)="setHours($event)" min="0" max="24" nglFormControl class="slds-show--inline-block" *ngIf="timePick">
-<input type="number" [ngModel]="value ? value.getMinutes() : 0" (ngModelChange)="setMinutes($event)" min="0" max="60" nglFormControl class="slds-show--inline-block" *ngIf="timePick">
-<button nglButton="destructive" type="button" (click)="value = null">
-  {{ "common|clear value" | translate }}
-</button>
-<ngl-modal [(open)]="open" header="{{title | translate}}">
-  <div body>
-    <ngl-datepicker [(date)]="value"></ngl-datepicker>
-  </div>
-  <template ngl-modal-footer>
-    <button class="slds-button slds-button--brand" (click)="open = false">{{saveText | translate}}</button>
-  </template>
-</ngl-modal>-->

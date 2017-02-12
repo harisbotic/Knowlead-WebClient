@@ -70,8 +70,6 @@ const UI_SWITCH_CONTROL_VALUE_ACCESSOR: any = {
     height: 25px;
     border-radius: 20px;
     margin-top: 3px;
-    margin-right: 5px;
-    margin-left: 5px;
     }
     .switch-small small {
     width: 20px;

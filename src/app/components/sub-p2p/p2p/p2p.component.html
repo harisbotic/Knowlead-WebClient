@@ -1,3 +1,125 @@
+<div class="row">
+    <div class="col-100">
+        <div class="viewPost-wrap">
+            <div class="row">
+                <div class="col-100">
+                    <div class="topElements-wrap">
+                        <div class="col-35">
+                            <div class="profileInfo-wrap">
+                                <div class="col-15 posRel">
+                                    <div class="profileImage-wrap">
+                                        <app-profile-picture [user]="realUser" [uploadable]="false" class="centerVl" size="small"></app-profile-picture>
+                                    </div>
+                                </div>
+                                <div class="col-85">
+                                    <!-- NOTE: If profile name is too long (goes on second row). Set margin of .profileInfoText-wrap to margin: 13px 0 0 30px; -->
+                                    <div class="profileInfoText-wrap">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="profileName">Ejub Hadzic</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="dateCreated">3 minutes ago</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-65">
+                            <div class="viewPostInfo-wrap">
+                                <div class="col-25">
+                                    <div class="col-35">
+                                        <div class="viewPostInfo-icon">
+                                            <i class="kl-subject"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-65">
+                                        <div class="viewPostInfo-text">English</div>
+                                    </div>
+                                </div>
+                                <div class="col-25">
+                                    <div class="col-40">
+                                        <div class="viewPostInfo-icon">
+                                            <i class="kl-currency"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-60">
+                                        <div class="viewPostInfo-text">30</div>
+                                    </div>
+                                </div>
+                                <div class="col-25">
+                                    <div class="col-40">
+                                        <div class="viewPostInfo-icon">
+                                            <i class="kl-globe"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-60">
+                                        <div class="viewPostInfo-text">EN</div>
+                                    </div>
+                                </div>
+                                <div class="col-25">
+                                    <div class="col-40">
+                                        <div class="viewPostInfo-icon">
+                                            <i class="kl-clock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-60">
+                                        <div class="viewPostInfo-text">14h</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="viewPost-text-wrap">
+                        <div class="viewPost-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="bottomElements-wrap">
+                        <div class="col-60 bottomElements-filler"></div>
+                        <div class="col-20">
+                            <div class="bottomElementsButton-wrap">
+                                <a class="commentButton-link">
+                                    <button class="clearButton postViewButton">
+                                        <i class="kl-comment"></i>
+                                        <div class="commentButton-text">Comment</div>
+                                        <div class="commentCounter">0</div>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-20">
+                            <div class="bottomElementsButton-wrap">
+                                <a class="bookmarkButton-link">
+                                    <button class="clearButton postViewButton">
+                                        <i class="kl-bookmark"></i>
+                                        <div class="bookmarkButton-text">Bookmark</div>
+                                        <div class="commentCounter">3</div>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+
+
+
 <article class="marginTP slds-card slds-card--narrow" [class.slds-theme--alert-texture]="p2p.isDeleted" *ngIf="p2p">
   <div class="slds-card__header slds-grid">
     <header class="slds-media slds-media--center slds-has-flexi-truncate">
@@ -42,4 +164,4 @@
     {{"p2p|deadline" | translate}}: {{p2p.deadline | date:'medium'}}<br/>
     <ngl-icon icon="info" *ngIf="p2p.scheduledWithId"></ngl-icon>
   </div>
-</article>
+</article> -->
