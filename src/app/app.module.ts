@@ -41,7 +41,6 @@ import { DatepickerComponent } from './components/sub-form-components/datepicker
 import { TranslateParametricPipe } from './pipes/translate-parametric.pipe';
 import { RealtimeService } from './services/realtime.service';
 import { P2pComponent } from './components/sub-p2p/p2p/p2p.component';
-import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.component';
 import { ModelUtilsService } from './services/model-utils.service';
 import { P2pService } from './services/p2p.service';
 import { AccountService } from './services/account.service';
@@ -73,6 +72,8 @@ import { FriendshipNotificationsService } from './services/notifications/friends
 import { UserNotificationsService } from './services/notifications/user-notifications.service';
 import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
 import { FlatpickrComponent } from './components/sub-form-components/flatpickr/flatpickr.component';
+import { P2pDiscussionComponent } from './components/sub-p2p/p2p-discussion/p2p-discussion.component';
+import { P2pThreadComponent } from './components/sub-p2p/p2p-thread/p2p-thread.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,6 @@ import { FlatpickrComponent } from './components/sub-form-components/flatpickr/f
     DatepickerComponent,
     TranslateParametricPipe,
     P2pComponent,
-    P2pDiscussionComponent,
     CallDialogComponent,
     CallPageComponent,
     ProfilePageComponent,
@@ -118,7 +118,9 @@ import { FlatpickrComponent } from './components/sub-form-components/flatpickr/f
     SingleNotebookComponent,
     RegisterSuccessPageComponent,
     Autosize,
-    FlatpickrComponent
+    FlatpickrComponent,
+    P2pDiscussionComponent,
+    P2pThreadComponent
   ],
   imports: [
     BrowserModule,

@@ -30,8 +30,6 @@ const appRoutes: Routes = [
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },
-    { path: 'p2ptest', component: P2pCreateComponent, canActivate: [AuthGuard, RegisteredGuard] },
-    { path: 'p2p/:id', component: P2pDiscussionComponent },
     { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'profile/:id', component: ProfilePageComponent },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },

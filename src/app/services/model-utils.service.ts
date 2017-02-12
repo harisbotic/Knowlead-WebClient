@@ -7,13 +7,32 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { ImageBlobModel, NotebookModel, NotificationModel } from '../models/dto';
+import { ImageBlobModel, NotebookModel, NotificationModel, Guid } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
 import { NotebookService } from './notebook.service';
 
 @Injectable()
 export class ModelUtilsService {
+
+  public static getOtherUserIdInP2PMessage(message: P2PMessageModel, myId: Guid): Guid {
+    if (message.messageFromId === myId) {
+      return message.messageToId;
+    } else if (message.messageToId === myId) {
+      return message.messageFromId;
+    } else {
+      console.warn('No my id in message');
+    }
+  }
+  public static getOtherUserInP2PMessage(message: P2PMessageModel, myId: Guid): ApplicationUserModel {
+    if (message.messageFromId === myId) {
+      return message.messageTo;
+    } else if (message.messageToId === myId) {
+      return message.messageFrom;
+    } else {
+      console.warn('No my id in message');
+    }
+  }
 
   public static getImageBlobUrl(blob: ImageBlobModel) {
     return (blob) ?
@@ -154,13 +173,13 @@ export class ModelUtilsService {
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
+    if (typeof(value.timestamp) === 'string') {
+      value.timestamp = new Date(Date.parse(value.timestamp));
+    }
     let ret = Observable.of(value);
     ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService));
     ret = this.fill(ret, 'messageFrom', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'messageTo', this.accountService.getUserById.bind(this.accountService));
-    if (typeof(value.timestamp) === 'string') {
-      value.timestamp = new Date(Date.parse(value.timestamp));
-    }
     return ret;
   }
 
