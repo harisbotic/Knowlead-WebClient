@@ -7,8 +7,6 @@ import { UserHomePageComponent } from './pages/user-home-page/user-home-page.com
 import { TranslationTestComponent } from './pages/translation-test/translation-test.component';
 import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { InterestSetupPageComponent } from './pages/interest-setup-page/interest-setup-page.component';
-import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.component';
-import { P2pDiscussionComponent } from './pages/p2p-discussion/p2p-discussion.component';
 import { CallPageComponent } from './pages/call-page/call-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { AuthGuard } from './guards/auth.guard';
