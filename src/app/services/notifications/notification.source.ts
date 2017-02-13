@@ -10,6 +10,7 @@ export interface NotificationSource {
   updateNotification(notification: NotificationModel): boolean;
   addNotifications(notifications: NotificationModel[]);
   reset();
+  start();
   getStatsStream(): Observable<NotificationSourceStats>;
   getSingleNotificationStream(): Observable<NotificationModel>;
   markAsRead();
@@ -108,5 +109,5 @@ export abstract class BaseNotificationSource implements NotificationSource {
   }
   abstract markAsRead();
   abstract loadMore();
-
+  abstract start();
 }

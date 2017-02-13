@@ -28,4 +28,8 @@ export class MockNotificationsService extends BaseNotificationSource {
     this.markAsReadHelper();
   }
 
+  start() {
+    this.loadMore();
+  }
+
 }

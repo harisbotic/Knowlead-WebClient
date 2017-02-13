@@ -13,7 +13,6 @@ import { BaseFormComponent } from '../../../base-form.component';
   selector: 'app-p2p-create',
   templateUrl: './p2p-create.component.html',
   styleUrls: ['./p2p-create.component.scss'],
-  providers: [P2pService]
 })
 export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements OnInit {
 

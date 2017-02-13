@@ -17,7 +17,7 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
 
   loadMore() {
     this.reset();
-    this.chatService.getFriends(true).subscribe(friendships => {
+    this.chatService.getFriends(true).take(1).subscribe(friendships => {
       this.stats.total = friendships.length;
       this.stats.unread = friendships.length;
       this.refreshStats();
@@ -41,6 +41,10 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
         );
       });
     });
+  }
+
+  start() {
+    this.loadMore();
   }
 
   markAsRead() {}
