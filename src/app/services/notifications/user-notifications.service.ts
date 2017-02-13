@@ -4,14 +4,15 @@ import { Http, URLSearchParams } from '@angular/http';
 import { NOTIFICATIONS, NOTIFICATIONS_MARK_AS_READ, NOTIFICATION_STATS } from '../../utils/urls';
 import { responseToResponseModel } from '../../utils/converters';
 import { NotificationModel, NotificationSourceStats } from '../../models/dto';
+import { ModelUtilsService } from '../model-utils.service';
 
 @Injectable()
 export class UserNotificationsService extends BaseNotificationSource {
 
   canMarkAsRead = true;
 
-  constructor(protected http: Http) {
-    super();
+  constructor(protected http: Http, modelUtilsService: ModelUtilsService) {
+    super(modelUtilsService);
   }
 
   loadMore() {

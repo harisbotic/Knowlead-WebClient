@@ -106,7 +106,8 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       createdBy: undefined,
       createdById: undefined,
       p2pMessageModels: undefined,
-      status: undefined
+      status: undefined,
+      dateCreated: undefined
     };
   }
 

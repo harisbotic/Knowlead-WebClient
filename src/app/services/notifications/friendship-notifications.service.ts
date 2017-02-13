@@ -11,8 +11,10 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
   canMarkAsRead = false;
   user: ApplicationUserModel;
 
-  constructor(protected chatService: ChatService, protected accountService: AccountService) {
-    super();
+  constructor(protected chatService: ChatService,
+      protected accountService: AccountService,
+      modelUtilsService: ModelUtilsService) {
+    super(modelUtilsService);
   }
 
   loadMore() {
@@ -35,7 +37,9 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
               p2pId: undefined,
               p2p: undefined,
               scheduledAt: f.createdAt,
-              seenAt: new Date()
+              seenAt: new Date(),
+              p2PMessageId: undefined,
+              p2PMessage: undefined
             };
           })
         );

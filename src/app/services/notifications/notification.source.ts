@@ -1,5 +1,7 @@
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { NotificationModel, NotificationSourceStats, NotebookModel } from '../../models/dto';
+import { ModelUtilsService } from '../model-utils.service';
+import { Subscription } from 'rxjs';
 
 export interface NotificationSource {
   canLoadMore: boolean;
@@ -24,6 +26,10 @@ export abstract class BaseNotificationSource implements NotificationSource {
   protected notifications: NotificationModel[] = [];
   protected stats: NotificationSourceStats = {unread: 0, total: 0};
   abstract canMarkAsRead: boolean;
+  private fillSubscription: Subscription;
+
+  constructor(protected modelUtilsService: ModelUtilsService) {}
+
   get canLoadMore() {
     return this.stats.total >= this.notifications.length;
   }
@@ -63,8 +69,24 @@ export abstract class BaseNotificationSource implements NotificationSource {
   }
 
   addNotifications(notifications: NotificationModel[]) {
-    this.notifications = this.notifications.concat(notifications);
+    if (this.fillSubscription) {
+      this.fillSubscription.unsubscribe();
+      delete this.fillSubscription;
+    }
+    this.notifications = this.notifications.concat(notifications).sort((a,b) => {
+      try {
+        return a.seenAt.getTime() - b.seenAt.getTime();
+      } catch (e) {
+        return 0;
+      }
+    });
     this.notifyNotifications();
+    if (this.modelUtilsService) {
+      this.fillSubscription = this.modelUtilsService.fillNotifications(this.notifications).subscribe(filled => {
+        this.notifications = filled;
+        this.notifyNotifications();
+      });
+    }
   }
 
   induceNotification(notification: NotificationModel) {
