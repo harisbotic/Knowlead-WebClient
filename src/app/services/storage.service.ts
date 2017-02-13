@@ -50,13 +50,15 @@ export class StorageService {
     console.info('Storage service created');
   }
 
-  public setAccessToken(value: string) {
+  public setAccessToken(value: string, dontEmitLogin?: boolean) {
     this.access_token = value;
     if (value) {
       console.debug('Setting access token');
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
-      this.sessionService.emitLogin();
+      if (!dontEmitLogin) {
+        this.sessionService.emitLogin();
+      }
     } else {
       this.removeAccessToken();
     }

@@ -204,6 +204,8 @@ export interface NotificationModel
 	notificationType: string;
 	fromApplicationUserId: Guid;
 	fromApplicationUser: ApplicationUserModel;
+	p2pMessageId: number;
+	p2pMessage: P2PMessageModel;
 	p2pId: number;
 	p2p: P2PModel;
 	scheduledAt: Date;
@@ -217,6 +219,7 @@ export interface P2PModel
 	deadline: Date;
 	priceAgreed: number;
 	dateTimeAgreed: Date;
+	dateCreated: Date;
 	isDeleted: boolean;
 	scheduledWithId: Guid;
 	scheduledWith: ApplicationUserModel;

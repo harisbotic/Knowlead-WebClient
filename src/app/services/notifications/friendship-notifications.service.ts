@@ -11,13 +11,15 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
   canMarkAsRead = false;
   user: ApplicationUserModel;
 
-  constructor(protected chatService: ChatService, protected accountService: AccountService) {
-    super();
+  constructor(protected chatService: ChatService,
+      protected accountService: AccountService,
+      modelUtilsService: ModelUtilsService) {
+    super(modelUtilsService);
   }
 
   loadMore() {
     this.reset();
-    this.chatService.getFriends(true).subscribe(friendships => {
+    this.chatService.getFriends(true).take(1).subscribe(friendships => {
       this.stats.total = friendships.length;
       this.stats.unread = friendships.length;
       this.refreshStats();
@@ -35,12 +37,18 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
               p2pId: undefined,
               p2p: undefined,
               scheduledAt: f.createdAt,
-              seenAt: new Date()
+              seenAt: new Date(),
+              p2pMessageId: undefined,
+              p2pMessage: undefined
             };
           })
         );
       });
     });
+  }
+
+  start() {
+    this.loadMore();
   }
 
   markAsRead() {}

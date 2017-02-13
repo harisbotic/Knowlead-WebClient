@@ -53,7 +53,7 @@ export class SessionService {
         this.logout();
       }
       let login = responseToLoginResponse(response);
-      this.storageService.setAccessToken(login.access_token);
+      this.storageService.setAccessToken(login.access_token, true);
       this.emitLogin();
       subject.next(login);
     }, (errorResponse: any) => {

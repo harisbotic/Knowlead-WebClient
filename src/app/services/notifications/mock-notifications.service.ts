@@ -7,7 +7,7 @@ export class MockNotificationsService extends BaseNotificationSource {
 
   canMarkAsRead = true;
 
-  constructor() { super(); this.stats.unread = 10; this.refreshStats(); this.loadMore(); }
+  constructor() { super(undefined); this.stats.unread = 10; this.refreshStats(); this.loadMore(); }
 
   loadMore() {
     this.addNotifications(_.times(5, () => {
@@ -19,13 +19,19 @@ export class MockNotificationsService extends BaseNotificationSource {
         p2pId: undefined,
         p2p: undefined,
         scheduledAt: new Date(2016 + Math.random() * 1.2, Math.random() * 12),
-        seenAt: Math.random() < 0.5 ? new Date() : undefined
+        seenAt: Math.random() < 0.5 ? new Date() : undefined,
+        p2pMessageId: undefined,
+        p2pMessage: undefined
       };
     }));
   }
 
   markAsRead() {
     this.markAsReadHelper();
+  }
+
+  start() {
+    this.loadMore();
   }
 
 }

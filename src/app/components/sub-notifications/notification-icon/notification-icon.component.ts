@@ -23,6 +23,9 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions.push(this.notificationSource.getStatsStream().subscribe(stats => this.stats = stats));
+    this.subscriptions.push(this.notificationSource.getNotificationStream().subscribe(notifications => {
+      this.notifications = notifications;
+    }));
   }
 
   scrolled() {

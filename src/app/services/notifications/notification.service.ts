@@ -24,12 +24,24 @@ export class NotificationService {
               protected sessionService: SessionService,
               protected p2pService: P2pService,
               protected modelUtilsService: ModelUtilsService) {
+    this.resetSources();
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
-        this.friendshipNotificationService.reset();
-        this.userNotificationsService.reset();
+        this.resetSources();
+      } else if (evt === SessionEvent.LOGGED_IN) {
+        this.startSources();
       }
     });
+  }
+
+  private resetSources() {
+    this.friendshipNotificationService.reset();
+    this.userNotificationsService.reset();
+  }
+
+  private startSources() {
+    this.friendshipNotificationService.start();
+    this.userNotificationsService.start();
   }
 
   receiveNotification(notification: NotificationModel) {

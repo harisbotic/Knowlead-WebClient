@@ -152,21 +152,21 @@ export class ModelUtilsService {
   }
 
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: string): Observable<T[]> {
+    values = values.filter(val => val != null);
     if (!values || values.length === 0) {
       return Observable.of([]);
     }
     let arr = values.map(() => null);
     let reduced: Observable<T> = values.reduce((o: Observable<T>, msg: T) => {
-        let ret = filler(msg).do(filled => {
-          // console.log(filled);
-          let idx = _.findIndex(values, val => val[idKey] === filled[idKey]);
-          if (idx === -1) {
-            throw new Error('Item was not found: ' + filled[idKey]);
-          }
-          arr[idx] = filled;
-        });
-        return o == null ? ret : o.merge(ret);
-      }, null);
+      let ret = filler(msg).takeWhile(val => val != null).do(filled => {
+        let idx = _.findIndex(values, val => val[idKey] === filled[idKey]);
+        if (idx === -1) {
+          throw new Error('Item was not found: ' + filled[idKey]);
+        }
+        arr[idx] = filled;
+      });
+      return o == null ? ret : o.merge(ret);
+    }, null);
     return reduced
       .map(() => arr)
       .filter(() => !arr.some(_.isNull));
