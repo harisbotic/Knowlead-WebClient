@@ -1,1 +1,10 @@
 thread with: {{thread.withId}}
+<div *ngFor="let message of thread.messages">
+    {{fullName(message.messageFrom)}}: {{message.text}}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="comment" formControlName="text" name="text">
+    <input type="number" placeholder="price" formControlName="priceOffer" min="10" name="priceOffer">
+    <app-flatpickr formControlName="dateTimeOffer"></app-flatpickr>
+    <button type="submit">Submit</button>
+</form>

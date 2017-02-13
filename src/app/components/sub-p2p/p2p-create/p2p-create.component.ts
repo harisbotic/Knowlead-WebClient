@@ -81,7 +81,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return new FormGroup({
       text: new FormControl(null, Validators.required),
       fosId: new FormControl(null, Validators.required),
-      title: new FormControl(null),
       // blobs: new FormArray([]),
       initialPrice: new FormControl(null, Validators.required),
       deadline: new FormControl(null, dateValidator({minDate: new Date()})),
@@ -93,7 +92,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return {
       text: '',
       fosId: undefined,
-      title: 'test',
       initialPrice: undefined,
       deadline: undefined,
       languages: undefined,

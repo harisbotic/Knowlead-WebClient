@@ -193,6 +193,11 @@ export interface StateModel extends _GeoLookupModel
 export interface CountryModel extends _GeoLookupModel
 {
 }
+export interface NotificationSourceStats
+{
+	unread: number;
+	total: number;
+}
 export interface NotificationModel
 {
 	notificationId: Guid;
@@ -204,15 +209,9 @@ export interface NotificationModel
 	scheduledAt: Date;
 	seenAt: Date;
 }
-export interface NotificationSourceStats
-{
-	unread: number;
-	total: number;
-}
 export interface P2PModel
 {
 	p2pId: number;
-	title: string;
 	text: string;
 	initialPrice: number;
 	deadline: Date;

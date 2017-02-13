@@ -9,6 +9,7 @@ export interface ThreadModel {
   withId: Guid;
   messages: P2PMessageModel[];
   initialPrice: number;
+  p2pId: number;
 }
 
 @Component({
@@ -36,7 +37,8 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     this.threads.push({
       withId: userId,
       messages: [],
-      initialPrice: this.initialPrice
+      initialPrice: this.initialPrice,
+      p2pId: this.p2pId
     });
   }
 

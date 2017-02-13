@@ -7,7 +7,7 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { ImageBlobModel, NotebookModel, NotificationModel, Guid } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
 import { NotebookService } from './notebook.service';
@@ -34,9 +34,9 @@ export class ModelUtilsService {
     }
   }
 
-  public static getImageBlobUrl(blob: ImageBlobModel) {
+  public static getImageBlobUrl(blob: Guid) {
     return (blob) ?
-      'https://teststorage3123.blob.core.windows.net/images/' + blob.blobId + '.' + blob.extension :
+      'https://teststorage3123.blob.core.windows.net/images/' + blob :
       undefined;
   }
 

@@ -42,6 +42,9 @@ export class StorageService {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
         this.setAccessToken(null);
+        for (let key of Object.keys(this.cache)) {
+          this.cache[key].handleLogout();
+        }
       }
     });
     console.info('Storage service created');

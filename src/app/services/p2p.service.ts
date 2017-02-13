@@ -14,6 +14,7 @@ import { StorageFiller } from './storage.subject';
 export class P2pService {
 
   p2pFiller: StorageFiller<P2PModel>;
+  p2pMessagesFiller: StorageFiller<P2PMessageModel[]>;
 
   get modelUtilsService(): ModelUtilsService {
     return this.injector.get(ModelUtilsService);
@@ -24,6 +25,7 @@ export class P2pService {
     protected storageService: StorageService,
     protected injector: Injector) {
     this.p2pFiller = this.modelUtilsService.fillP2p.bind(this.modelUtilsService);
+    this.p2pMessagesFiller = this.modelUtilsService.fillP2pMessages.bind(this.modelUtilsService);
   }
 
   create(value: P2PModel): Observable<ResponseModel> {
@@ -61,14 +63,17 @@ export class P2pService {
   }
 
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
-    return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object);
+    return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
+      this.storageService.getFromStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId})
+        .take(1)
+        .subscribe((messages: P2PMessageModel[]) => {
+          this.storageService.setToStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId}, messages.concat(newMessage));
+        });
+    });
   }
 
   getMessages(id: number): Observable<P2PMessageModel[]> {
-    return this.http.get(P2P_MESSAGES + '/' + id)
-      .map(responseToResponseModel)
-      .map(v => v.object)
-      .flatMap(v => this.modelUtilsService.fillP2pMessages(v));
+    return this.storageService.getFromStorage('p2pMessages', this.p2pMessagesFiller, {'id': id});
   }
 
   schedule(schedule: any): Observable<P2PModel> {
@@ -76,5 +81,9 @@ export class P2pService {
     // return this.modifyP2p(this.http.post(P2P_SCHEDULE, schedule)
     //   .map(responseToResponseModel)
     //   .map(v => v.object));
+  }
+
+  refreshP2P(p2pId: number) {
+    this.storageService.refreshStorage('p2pMessages', this.p2pMessagesFiller, {id: p2pId});
   }
 }
