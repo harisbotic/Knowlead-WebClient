@@ -202,8 +202,6 @@ export interface NotificationModel
 {
 	notificationId: Guid;
 	notificationType: string;
-	forApplicationUserId: Guid;
-	forApplicationUser: ApplicationUserModel;
 	fromApplicationUserId: Guid;
 	fromApplicationUser: ApplicationUserModel;
 	p2pMessageId: number;

@@ -38,8 +38,8 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
               p2p: undefined,
               scheduledAt: f.createdAt,
               seenAt: new Date(),
-              p2PMessageId: undefined,
-              p2PMessage: undefined
+              p2pMessageId: undefined,
+              p2pMessage: undefined
             };
           })
         );
