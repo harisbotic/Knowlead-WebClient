@@ -1,11 +1,18 @@
-<div>
+<div [class.profileImage-wrap]="uploadable">
     <input type="file" [id]="id" class="hidden" *ngIf="uploadable" accept="image/*" (change)="fileSelected($event)">
-    <label [attr.for]="id">
+    <div class="profileImage-container">
         <div class="profile-image"
             [style.background-image]="url"
             [class.profile-image-large]="size === 'large'"
             [class.profile-image-medium]="size === 'medium'"
             [class.profile-image-small]="size === 'small'">
+        </div>
+    </div>
+    <div class="ovrly" *ngIf="uploadable"></div>
+    <label [attr.for]="id">
+        <div class="uploadButton centerV" *ngIf="uploadable">
+            <a rel="nofollow" rel="noreferrer"href="#" class="kl-plus"></a>
+            <a rel="nofollow" rel="noreferrer"href="#" class="kl-delete"></a>
         </div>
     </label>
 </div>

@@ -2,7 +2,8 @@
     <div *ngFor="let row of loop(0, items.length / 2)">
         <div *ngFor = "let col of loop(0, 2);"
             class="col-50">
-            <div *ngIf="items[col + row * 2]" [class.selected]="isRemovable(items[col + row * 2])" [class.hasChildren]="items[col + row * 2].children?.length > 0">
+            <div *ngIf="items[col + row * 2]" [class.selected]="isRemovable(items[col + row * 2])" [class.hasChildren]="items[col + row * 2].children?.length > 0" class="category-item-wrap">
+                <div class="category-item-overlay"></div>
                 <button class="clearButton category-item" (click)="itemClickedLocal(items[col + row * 2])" ngClass="{selected: isRemovable(item)}">
                     {{displayItem(items[col + row * 2])}}
                     <button *ngIf="isRemovable(items[col + row * 2])" type="button" (click)="$event.stopPropagation(); itemRemovedLocal(items[col + row * 2])" class="clearButton selected-category-item">

@@ -4,6 +4,39 @@
             <div class="row">
                 <div class="col-100">
                     <div class="topElements-wrap">
+                        <div class="postOptions-wrap">
+                            <a class="centerVr">
+                                <i class="kl-more postOptions-icon" [popover]="popover"></i>
+                                <popover-content #popover placement="bottom" [closeOnClickOutside]="true">
+                                    <div class="postOptions-content">
+
+                                        <div class="row postOptions-button posRel">
+                                            <a class="posRel">
+                                                <div class="col-30 posRel">
+                                                    <i class="kl-delete postOptions-icon centerV"></i>
+                                                </div>
+                                                <div class="col-70 posRel">
+                                                    <p class="postOptions-text centerVl">Delete</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <!-- NOTE: REPORT Button -->
+                                        <!-- <div class="row postOptions-button posRel">
+                                            <a class="posRel">
+                                                <div class="col-30 posRel">
+                                                    <i class="kl-edit postOptions-icon centerV"></i>
+                                                </div>
+                                                <div class="col-70 posRel">
+                                                    <p class="postOptions-text centerVl">Report</p>
+                                                </div>
+                                            </a>
+                                        </div> -->
+
+                                    </div>
+                                </popover-content>
+                            </a>
+                        </div>
                         <div class="col-35">
                             <div class="profileInfo-wrap">
                                 <div class="col-15 posRel">

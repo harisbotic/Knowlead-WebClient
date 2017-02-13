@@ -13,7 +13,42 @@
 .topElements-wrap {
     height: 60px;
 }
+.postOptions-wrap {
+    position: relative;
 
+    > a, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: $font-primary-color;
+    }
+}
+.postOptions-content {
+    margin-top: 5px;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+}
+
+.postOptions-button {
+    width: 100px;
+    height: 30px;
+    padding: 15px 10px;
+
+    &:hover {
+        background-color: $hover-middle-color;
+    }
+
+    .postOptions-icon {
+        margin: -2px 5px;
+        font-size: 18px;
+        color: $font-primary-color;
+    }
+
+    .postOptions-text {
+        color: $font-primary-color;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+}
 .profileImage-wrap {
     height: 60px;
     position: relative;
@@ -35,6 +70,7 @@
 
 .viewPostInfo-wrap {
     height: 60px;
+    max-height: 60px;
     width: 100%;
     color: $font-secondary-color;
 
@@ -46,6 +82,11 @@
 
     .viewPostInfo-text {
         line-height: 58px;
+        overflow: hidden;
+        max-width: 100%;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
 }
