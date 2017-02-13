@@ -18,7 +18,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
   @Input() set user(user: ApplicationUserModel) {
     delete this.url;
     if (user && user.profilePicture) {
-      this.url = ModelUtilsService.getImageBlobUrl(user.profilePicture);
+      this.url = ModelUtilsService.getImageBlobUrl(user.profilePictureId);
     }
     if (!this.url) {
       this.url = 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif';

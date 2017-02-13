@@ -4,6 +4,7 @@ import { STORAGE_CONFIG, StorageKey } from '../utils/storage.constants';
 import { responseToResponseModel } from '../utils/converters';
 import * as _ from 'lodash';
 import { StorageService } from './storage.service';
+import { Subscription } from 'rxjs';
 
 export type StorageFiller<T> = (value: T) => Observable<T>;
 
@@ -13,6 +14,7 @@ export class StorageSubject<T> extends Observable<T> {
     public subscribers: Subscriber<T>[] = [];
     fetching: boolean;
     public cacheKey: string;
+    fillerSubscription: Subscription;
 
     constructor(
             protected key: StorageKey,
@@ -64,10 +66,14 @@ export class StorageSubject<T> extends Observable<T> {
 
     public changeValue(newValue: T) {
         this.pause();
+        if (this.fillerSubscription) {
+            this.fillerSubscription.unsubscribe();
+            delete this.fillerSubscription;
+        }
         // console.debug(`Cache ${this.cacheKey}: Value is changed`);
         if (this.filler && newValue) {
             this.fetching = true;
-            this.filler(newValue).finally(() => this.fetching = false).subscribe(filledValue => {
+            this.fillerSubscription = this.filler(newValue).finally(() => this.fetching = false).subscribe(filledValue => {
                 this.setValue(newValue);
             });
         } else {
@@ -120,5 +126,11 @@ export class StorageSubject<T> extends Observable<T> {
         this.subscribers.forEach(subscriber => {
             subscriber.next(this.value);
         });
+    }
+
+    public handleLogout() {
+        if (STORAGE_CONFIG[this.key].clearOnLogout) {
+            this.changeValue(undefined);
+        }
     }
 }

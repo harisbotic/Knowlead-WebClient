@@ -37,9 +37,7 @@ export class AccountService {
               protected injector: Injector) {
     console.log('ACCOUTN SERVICE');
     this.sessionService.eventStream.subscribe(evt => {
-      if (evt === SessionEvent.LOGGED_OUT) {
-        this.storageService.clearCache(this.userFiller, 'user');
-      } else {
+      if (evt === SessionEvent.LOGGED_IN) {
         this.storageService.refreshStorage('user', this.userFiller);
       }
     });

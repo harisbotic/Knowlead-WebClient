@@ -4,8 +4,6 @@ import { ModelUtilsService } from './model-utils.service';
 import { FriendshipDTOActions } from './../models/dto';
 import { ChangeFriendshipStatusModel } from './../models/dto';
 import { StorageService } from './storage.service';
-import { SessionEvent } from './session.service';
-import { SessionService } from './session.service';
 import { responseToResponseModel } from './../utils/converters';
 import { CHANGE_FRIENDSHIP } from './../utils/urls';
 import { Http } from '@angular/http';
@@ -29,7 +27,6 @@ export class ChatService {
   }
 
   constructor(protected accountService: AccountService,
-      protected sessionService: SessionService,
       protected storageService: StorageService,
       protected http: Http,
       protected modelUtilsService: ModelUtilsService) {
@@ -39,11 +36,6 @@ export class ChatService {
       this.me = user;
       if (user) {
         storageService.refreshStorage('friends', this.fillerArr, undefined);
-      }
-    });
-    this.sessionService.eventStream.subscribe(event => {
-      if (event === SessionEvent.LOGGED_OUT) {
-        storageService.clearCache(this.filler, 'friends');
       }
     });
   }

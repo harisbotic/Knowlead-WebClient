@@ -9,6 +9,7 @@ import { SessionService, SessionEvent } from '../session.service';
 import { ModelUtilsService } from '../model-utils.service';
 import { Subscription } from 'rxjs';
 import { NotificationSource } from './notification.source';
+import { P2pService } from '../p2p.service';
 
 @Injectable()
 export class NotificationService {
@@ -21,6 +22,7 @@ export class NotificationService {
               public userNotificationsService: UserNotificationsService,
               // WHEN ADDING NEW SOURCE DON'T FORGET TO RESET IT ON LOG OUT
               protected sessionService: SessionService,
+              protected p2pService: P2pService,
               protected modelUtilsService: ModelUtilsService) {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
@@ -39,6 +41,13 @@ export class NotificationService {
       console.error('Received duplicate notification: ' + notification.notificationId);
       return;
     }
+
+    // TODO: MAKE THIS CLEANER
+    console.log(notification);
+    if (notification.p2pId) {
+      this.p2pService.refreshP2P(notification.p2pId);
+    }
+
     const tmp = this.getSource(notification);
     if (tmp != null) {
       tmp.induceNotification(notification);
