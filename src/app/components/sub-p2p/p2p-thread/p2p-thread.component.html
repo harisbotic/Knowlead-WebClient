@@ -1,7 +1,73 @@
-thread with: {{thread.withId}}
-<div *ngFor="let message of thread.messages">
-    {{fullName(message.messageFrom)}}: {{message.text}}
+<div class="row" *ngFor="let message of thread.messages">
+    <div class="col-100">
+        <div class="thread-wrap">
+            <div class="row">
+                <div class="col-100">
+                    <div class="threadTopElements-wrap">
+                        <div class="col-35">
+                            <div class="profileInfo-wrap">
+                                <div class="col-20 posRel">
+                                    <div class="profileImage-wrap">
+                                        <app-profile-picture [user]="message.messageFrom" [uploadable]="false" class="centerVl" size="x-small"></app-profile-picture>
+                                    </div>
+                                </div>
+                                <div class="col-80">
+                                    <!-- NOTE: If profile name is too long (goes on second row). Set margin of .profileInfoText-wrap to margin: 13px 0 0 30px; -->
+                                    <div class="profileInfoText-wrap">
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="profileName">{{fullName(message.messageFrom)}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-100">
+                                                <div class="dateCreated">Kad je poslaTo.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-35 filler"></div>
+                        <div class="col-30"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="threadText-wrap">
+                        <div class="threadText">
+                            {{message.text}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-100">
+                <div class="threadBottomElements-wrap">
+                    <div class="col-40">
+                        <div class="proposeDate-wrap"></div>
+                    </div>
+                    <div class="col-40">
+                        <div class="proposePrice-wrap"></div>
+                    </div>
+                    <div class="col-20">
+                        <div class="threadOptionButtons"></div>
+                    </div>
+                    <div class="col-20">
+                        <div class="threadOptionButtons"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+<!-- <div *ngFor="let message of thread.messages">
+    {{fullName(message.messageFrom)}}: {{message.text}}
+</div> -->
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input type="text" placeholder="comment" formControlName="text" name="text">
     <input type="number" placeholder="price" formControlName="priceOffer" min="10" name="priceOffer">

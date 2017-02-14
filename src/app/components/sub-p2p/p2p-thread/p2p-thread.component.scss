@@ -1,0 +1,22 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.profileImage-wrap {
+    height: 60px;
+    position: relative;
+}
+
+.profileInfoText-wrap {
+    margin-top: 13px;
+    margin-left: 5px;
+
+    .profileName {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .dateCreated {
+        font-size: 11px;
+        color: $disabled-color;
+    }
+}
