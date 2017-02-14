@@ -5,7 +5,7 @@ import { NotificationService } from './notifications/notification.service';
 import { _CallModel, NotificationModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
-import { Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { PopupNotificationModel } from '../models/frontend.models';
 
@@ -41,6 +41,13 @@ export class RealtimeService {
     console.info('Init websockets');
     this.rpcConnection = new HubConnection(API + '/mainHub', 'accessToken=' + this.accessToken);
     this.rpcConnection.start().then(() => {
+      if (!this.rpcConnection) {
+        const tmp = Observable.timer(5000).subscribe(() => {
+          this.initConnection();
+          tmp.unsubscribe();
+        });
+        return;
+      }
       this.connectionStateSubject.next(true);
       this.rpcConnection.on('notify', (value: PopupNotificationModel) => {
         this.notificationService.notify(value);
