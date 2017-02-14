@@ -1,5 +1,5 @@
-export const API = 'http://knowlead.com:5000';
-export const FRONTEND = 'http://localhost:4200';
+export const API = 'https://knowlead.co:8080';
+export const FRONTEND = 'https://knowlead.co';
 export const LOGIN = API + '/connect/token';
 export const REGISTER = API + '/api/account/register';
 export const CONFIRMEMAIL = API + '/api/account/confirmEmail';
@@ -7,6 +7,7 @@ export const USER = API + '/api/account';
 export const ME = API + '/api/account/me';
 export const USER_DETAILS = API + '/api/account/details';
 export const CHANGE_PROFILE_PICTURE = API + '/api/account/changeProfilePicture';
+export const REMOVE_PROFILE_PICTURE = API + '/api/account/removeProfilePicture';
 
 export const LANGUAGES = API + '/api/lookup/languages';
 export const COUNTRIES = API + '/api/lookup/countries';

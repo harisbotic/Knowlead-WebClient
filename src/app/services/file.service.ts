@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ResponseModel, _BlobModel } from '../models/dto';
+import { ResponseModel, _BlobModel, Guid } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { responseToResponseModel } from '../utils/converters';
@@ -19,14 +19,17 @@ export class FileService {
         .map(responseToResponseModel);
   }
 
-  remove(file: _BlobModel): Observable<ResponseModel> {
+  remove(file: _BlobModel | Guid): Observable<ResponseModel> {
     if (!file) {
       return Observable.throw({
         errors: ['File not set']
       });
     }
+    if ((<_BlobModel>file).blobId) {
+      file = (<_BlobModel>file).blobId;
+    }
     return this.http
-      .delete(FILE_REMOVE + '/' + file.blobId)
+      .delete(FILE_REMOVE + '/' + file)
       .map(responseToResponseModel);
   }
 

@@ -20,30 +20,32 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
   loadMore() {
     this.reset();
     this.chatService.getFriends(true).take(1).subscribe(friendships => {
-      this.stats.total = friendships.length;
-      this.stats.unread = friendships.length;
-      this.refreshStats();
-      this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
-        this.addNotifications(
-          friendships.filter(f =>
-            ModelUtilsService.canAcceptFriendship(f, user.id)
-          ).map(f => {
-            return {
-              notificationId: '',
-              notificationType: NotificationTypes.newFriendship,
-              fromApplicationUserId: ModelUtilsService.getOtherFriendId(f, user.id),
-              fromApplicationUser: ModelUtilsService.getOtherFriend(f, user.id),
-              timestamp: f.createdAt,
-              p2pId: undefined,
-              p2p: undefined,
-              scheduledAt: f.createdAt,
-              seenAt: new Date(),
-              p2pMessageId: undefined,
-              p2pMessage: undefined
-            };
-          })
-        );
-      });
+      if (friendships) {
+        this.stats.total = friendships.length;
+        this.stats.unread = friendships.length;
+        this.refreshStats();
+        this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
+          this.addNotifications(
+            friendships.filter(f =>
+              ModelUtilsService.canAcceptFriendship(f, user.id)
+            ).map(f => {
+              return {
+                notificationId: '',
+                notificationType: NotificationTypes.newFriendship,
+                fromApplicationUserId: ModelUtilsService.getOtherFriendId(f, user.id),
+                fromApplicationUser: ModelUtilsService.getOtherFriend(f, user.id),
+                timestamp: f.createdAt,
+                p2pId: undefined,
+                p2p: undefined,
+                scheduledAt: f.createdAt,
+                seenAt: new Date(),
+                p2pMessageId: undefined,
+                p2pMessage: undefined
+              };
+            })
+          );
+        });
+      }
     });
   }
 
