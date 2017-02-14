@@ -7,7 +7,7 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { NotebookModel, NotificationModel, Guid } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid, LanguageModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
 import { NotebookService } from './notebook.service';
@@ -114,7 +114,7 @@ export class ModelUtilsService {
   constructor(protected injector: Injector) {
   }
 
-  private fill<T>(value: Observable<T>, modelKey: string, getter: (id: any) => Observable<any>, idKey?: string): Observable<T> {
+  private fill<T>(value: Observable<T>, modelKey: keyof T, getter: (id: any) => Observable<any>, idKey?: string): Observable<T> {
     if (!idKey) {
       idKey = modelKey + 'Id';
     }
@@ -151,7 +151,7 @@ export class ModelUtilsService {
     return this.fillArray(values, this.fillNotification.bind(this), 'notificationId');
   }
 
-  public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: string): Observable<T[]> {
+  public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: keyof T): Observable<T[]> {
     values = values.filter(val => val != null);
     if (!values || values.length === 0) {
       return Observable.of([]);
@@ -183,11 +183,22 @@ export class ModelUtilsService {
     return ret;
   }
 
+  public fillLanguage = (language: LanguageModel): Observable<LanguageModel> => {
+    return this.storageService.getLanguages()
+      .map((languages: LanguageModel[]) =>
+        languages.find(l => l.coreLookupId === language.coreLookupId)
+      ).take(1);
+  }
+
   public fillP2p(value: P2PModel): Observable<P2PModel> {
     let ret = Observable.of(value);
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
+    ret = ret.flatMap(p2p => this.fillArray(value.languages, this.fillLanguage, 'coreLookupId').map(languages => {
+      p2p.languages = languages;
+      return p2p;
+    }));
     return ret;
   }
 

@@ -7,6 +7,7 @@ export const USER = API + '/api/account';
 export const ME = API + '/api/account/me';
 export const USER_DETAILS = API + '/api/account/details';
 export const CHANGE_PROFILE_PICTURE = API + '/api/account/changeProfilePicture';
+export const REMOVE_PROFILE_PICTURE = API + '/api/account/removeProfilePicture';
 
 export const LANGUAGES = API + '/api/lookup/languages';
 export const COUNTRIES = API + '/api/lookup/countries';

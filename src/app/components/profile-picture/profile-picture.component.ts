@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApplicationUserModel, ImageBlobModel } from '../../models/dto';
+import { ApplicationUserModel, ImageBlobModel, Guid } from '../../models/dto';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { getGuid } from '../../utils/index';
 import { FileService } from '../../services/file.service';
@@ -20,6 +20,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
     if (user && user.profilePicture) {
       this.url = ModelUtilsService.getImageBlobUrl(user.profilePictureId);
     }
+    this.profilePictureId = (user) ? user.profilePictureId : undefined;
     if (!this.url) {
       this.url = 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif';
     }
@@ -27,6 +28,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
   }
   @Input() uploadable: boolean;
   @Input() size = 'small';
+  profilePictureId: Guid;
   id = getGuid();
   url: any;
 
@@ -46,6 +48,16 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
       }));
     } else {
       console.error('No file selected');
+    }
+  }
+
+  remove() {
+    const tmp = this.profilePictureId;
+    if (this.profilePictureId) {
+      const sub = this.accountService.removeProfilePicture().subscribe(() => {
+        sub.unsubscribe();
+        this.subscriptions.push(this.fileService.remove(tmp).subscribe());
+      });
     }
   }
 

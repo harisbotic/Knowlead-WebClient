@@ -9,10 +9,10 @@
         </div>
     </div>
     <div class="ovrly" *ngIf="uploadable"></div>
-    <label [attr.for]="id">
-        <div class="uploadButton centerV" *ngIf="uploadable">
-            <a rel="nofollow" rel="noreferrer"href="#" class="kl-plus"></a>
-            <a rel="nofollow" rel="noreferrer"href="#" class="kl-delete"></a>
-        </div>
-    </label>
+    <div class="uploadButton centerV" *ngIf="uploadable">
+        <label [attr.for]="id">
+            <a rel="nofollow" rel="noreferrer" class="kl-plus"></a>
+        </label>
+        <a rel="nofollow" rel="noreferrer" (click)="remove()" class="kl-delete" *ngIf="profilePictureId"></a>
+    </div>
 </div>

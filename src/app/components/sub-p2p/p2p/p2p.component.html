@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-100">
-                                                <div class="dateCreated" *ngIf="p2p.deadline">KAD JE NAPRAVLJN</div>
+                                                <div class="dateCreated">{{p2p.dateCreated | amTimeAgo}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-65">
-                                        <div class="viewPostInfo-text">{{p2p.fos.name}}</div>
+                                        <div class="viewPostInfo-text" *ngIf="p2p.fos">{{p2p.fos.name}}</div>
                                     </div>
                                 </div>
                                 <div class="col-25">
@@ -92,7 +92,7 @@
                                     <div class="col-60">
                                         <div class="viewPostInfo-text">
                                             <span *ngFor="let language of p2p.languages">
-                                                {{language.code}}
+                                                {{language.code | uppercase}}
                                             </span>
                                         </div>
                                     </div>

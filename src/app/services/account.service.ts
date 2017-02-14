@@ -12,7 +12,7 @@ import { Guid, ApplicationUserModel, ImageBlobModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { AnalyticsService } from './analytics.service';
-import { CHANGE_PROFILE_PICTURE } from '../utils/urls';
+import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE } from '../utils/urls';
 import { getGmtDate, getLocalDate } from '../utils/index';
 import { Observable } from 'rxjs/Rx';
 
@@ -70,6 +70,10 @@ export class AccountService {
     return this.doPatch(this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {}));
   }
 
+  public removeProfilePicture(): Observable<ApplicationUserModel> {
+    return this.doPatch(this.http.delete(REMOVE_PROFILE_PICTURE));
+  }
+
   protected doPatch(input: Observable<Response>): Observable<ApplicationUserModel> {
     return input
       .map(responseToResponseModel)
@@ -93,7 +97,7 @@ export class AccountService {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toUTCString() : undefined;
     const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages',
-      'pointsBalance', 'minutesBalance'];
+      'pointsBalance', 'minutesBalance', 'profilePictureId'];
     toDelete.forEach((key) => {
       delete cl[key];
     });
