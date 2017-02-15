@@ -21,6 +21,16 @@
         color: $font-primary-color;
     }
 }
+
+.postOptions-icon-wrap {
+    padding: 0 5px;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: $hover-middle-color;
+    }
+}
+
 .postOptions-content {
     margin-top: 5px;
     border-radius: 3px;
@@ -93,6 +103,7 @@
 
 .viewPost-text-wrap {
     border-bottom: 2px solid $divider-color;
+    min-height: 60px;
 
     .viewPost-text {
         margin: 15px 0;
@@ -108,6 +119,24 @@
 
         &:hover {
             color: $knowlead-primary;
+        }
+    }
+}
+
+.callButton-wrap {
+    margin-top: 9px;
+
+    .callButton {
+        width: 120px;
+        height: 30px;
+        border: none;
+        border-radius: $border-radius;
+        color: white;
+        background-color: $knowlead-primary;
+        transition: all 0.1s ease-out;
+
+        &:hover {
+            background-color: $knowlead-secondary;
         }
     }
 }
