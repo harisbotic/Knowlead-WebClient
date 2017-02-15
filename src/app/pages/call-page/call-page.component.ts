@@ -161,6 +161,9 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   ngOnDestroy() {
     super.ngOnDestroy();
     this.cleanup();
+    if (this.call) {
+      this.realtimeService.disconnectFromCall(this.call.callId);
+    }
   }
 
 }

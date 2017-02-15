@@ -1,16 +1,24 @@
 <ngl-modal [open]="call && user" (openChange)="decline()">
   <div body>
+    <audio src="/assets/sounds/kike.mp3" autoplay loop *ngIf="call && user"></audio>
     {{callPrefix() | translate}}: {{fullName(otherUser() | async)}}
     <div *ngIf="p2p">
       {{"call|regarding p2p" | translate}}: {{p2p.text}}
     </div>
   </div>
-  <template ngl-modal-footer *ngIf="isCaller() === false">
-    <button type="button" nglButton="brand" (click)="accept()">
-      {{"call|accept" | translate}}
-    </button>
-    <button type="button" nglButton="destructive" (click)="decline()">
-      {{"call|decline" | translate}}
-    </button>
+  <template ngl-modal-footer>
+    <div *ngIf="!isCaller()">
+      <button type="button" nglButton="brand" (click)="accept()">
+        {{"call|accept" | translate}}
+      </button>
+      <button type="button" nglButton="destructive" (click)="decline()">
+        {{"call|decline" | translate}}
+      </button>
+    </div>
+    <div *ngIf="isCaller()">
+      <button type="button" (click)="redirect()">
+        Go to call
+      </button>
+    </div>
   </template>
 </ngl-modal>

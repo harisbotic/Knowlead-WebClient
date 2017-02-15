@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApplicationUserModel, _CallModel, P2PModel } from '../../../models/dto';
 import { AccountService } from '../../../services/account.service';
 import { BaseComponent } from '../../../base.component';
@@ -7,13 +7,14 @@ import { ModelUtilsService } from '../../../services/model-utils.service';
 import { P2pService } from '../../../services/p2p.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../services/notifications/notification.service';
 
 @Component({
   selector: 'app-call-dialog',
   templateUrl: './call-dialog.component.html',
   styleUrls: ['./call-dialog.component.scss'],
 })
-export class CallDialogComponent extends BaseComponent implements OnInit {
+export class CallDialogComponent extends BaseComponent implements OnInit, OnDestroy {
 
   user: ApplicationUserModel;
   call: _CallModel;
@@ -24,7 +25,8 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
     protected accountService: AccountService,
     protected realtimeService: RealtimeService,
     protected p2pService: P2pService,
-    protected router: Router) { super(); }
+    protected router: Router,
+    protected notificationService: NotificationService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
@@ -39,10 +41,10 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
         }));
       }
     }));
-    this.subscriptions.push(this.realtimeService.callModelUpdateSubject.subscribe((call) => {
-      // Check if this call was a reject or accept
-      if (this.call && call) {
-        this.redirect();
+    this.subscriptions.push(this.realtimeService.callErrorSubject.subscribe((err) => {
+      if (this.call) {
+        this.cleanup();
+        this.notificationService.error('Error joining call', 'Invitation expired');
       }
     }));
   }
@@ -89,7 +91,7 @@ export class CallDialogComponent extends BaseComponent implements OnInit {
 
   accept() {
     this.realtimeService.respondToCall(this.call.callId, true);
-    this.redirect();
+    // this.redirect();
   }
 
 }

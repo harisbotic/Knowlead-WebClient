@@ -109,6 +109,10 @@ export class RealtimeService {
     this.invoke(this.callErrorSubject, 'StopCall', callId, reason);
   }
 
+  disconnectFromCall(callId: string) {
+    this.invoke(this.callErrorSubject, 'DisconnectFromCall', callId);
+  }
+
   getCallUpdate(callId: string): Promise<_CallModel> {
     return this.rpcConnection.invoke('GetCallModel', callId).then((value) => {
       return new Promise<_CallModel>((resolve, reject) => resolve(JSON.parse(<any>value)));
