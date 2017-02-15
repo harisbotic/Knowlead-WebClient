@@ -37,14 +37,14 @@
                                 </popover-content>
                             </a>
                         </div>
-                        <div class="col-35">
+                        <div class="col-40">
                             <div class="profileInfo-wrap">
-                                <div class="col-15 posRel">
+                                <div class="col-25 posRel">
                                     <div class="profileImage-wrap">
                                         <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" class="centerVl" size="small"></app-profile-picture>
                                     </div>
                                 </div>
-                                <div class="col-85">
+                                <div class="col-75">
                                     <!-- NOTE: If profile name is too long (goes on second row). Set margin of .profileInfoText-wrap to margin: 13px 0 0 30px; -->
                                     <div class="profileInfoText-wrap">
                                         <div class="row">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-65">
+                        <div class="col-60">
                             <div class="viewPostInfo-wrap">
                                 <div class="col-25">
                                     <div class="col-35">
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-65">
-                                        <div class="viewPostInfo-text" *ngIf="p2p.fos">{{p2p.fos.name}}</div>
+                                        <div class="viewPostInfo-text" *ngIf="p2p.fos" id="subjectText">{{p2p.fos.name}}</div>
                                     </div>
                                 </div>
                                 <div class="col-25">
@@ -158,50 +158,3 @@
         </div>
     </div>
 </div>
-
-
-<!--<article class="marginTP slds-card slds-card--narrow" [class.slds-theme--alert-texture]="p2p.isDeleted" *ngIf="p2p">
-  <div class="slds-card__header slds-grid">
-    <header class="slds-media slds-media--center slds-has-flexi-truncate">
-      <div class="slds-media__figure">
-        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--small">
-          <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
-        </svg>
-      </div>
-      <div class="slds-media__body slds-truncate">
-        <h2>
-          <a routerLink="/p2p/{{p2p.p2pId}}" class="slds-text-link--reset">
-            <span class="slds-text-heading--medium">{{p2p.title}}</span>
-          </a>
-          <a routerLink="/profile/{{p2p.createdById}}" class="slds-text-link--reset">
-            <span class="slds-text-heading--small">{{"p2p|by" | translate}}: {{fullName(p2p.createdBy)}}</span>
-          </a>
-        </h2>
-      </div>
-    </header>
-    <div class="slds-no-flex">
-      <div *ngIf="deletable()">
-        <button type="button" nglButtonIcon (click)="deleted()">
-          <ngl-icon icon="delete"></ngl-icon>
-        </button>
-      </div>
-      <div *ngIf="callable()">
-        <button type="button" nglButtonIcon (click)="call()">
-          <ngl-icon icon="call"></ngl-icon>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="slds-card__body">
-    <div>
-      {{"p2p|fos" | translate}}: {{p2p.fos?.name}}
-    </div>
-    <div>
-      {{"p2p|text" | translate}}: {{p2p.text}}
-    </div>
-  </div>
-  <div class="slds-card__footer">
-    {{"p2p|deadline" | translate}}: {{p2p.deadline | date:'medium'}}<br/>
-    <ngl-icon icon="info" *ngIf="p2p.scheduledWithId"></ngl-icon>
-  </div>
-</article> -->

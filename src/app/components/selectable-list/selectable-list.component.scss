@@ -17,27 +17,13 @@
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+
+    &:hover {
+        background-color: $knowlead-primary;
+        color: white;
+    }
 }
 
-.category-item-wrap .category-item-overlay {
-    height: 29px;
-    width: 0;
-    position: absolute;
-    border-radius: 5px;
-    background-color: $knowlead-primary;
-    color: white;
-}
-
-.category-item-wrap:hover .category-item-overlay {
-    width: 276px;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
-.category-item-wrap:hover .category-item {
-    color: white;
-}
 
 .selected-category-item {
     position: absolute;

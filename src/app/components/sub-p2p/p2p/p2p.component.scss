@@ -28,8 +28,10 @@
 
     &:hover {
         background-color: $hover-middle-color;
+        color: white;
     }
 }
+
 
 .postOptions-content {
     margin-top: 5px;
@@ -65,7 +67,7 @@
 }
 
 .profileInfoText-wrap {
-    margin: 13px 0 0 30px;
+    margin-top: 13px;
 
     .profileName {
         font-size: 14px;
@@ -93,10 +95,14 @@
     .viewPostInfo-text {
         line-height: 58px;
         overflow: hidden;
-        max-width: 100%;
+        max-width: 45px;
         display: inline-block;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    #subjectText {
+        max-width: 50px;
     }
 
 }
@@ -133,10 +139,5 @@
         border-radius: $border-radius;
         color: white;
         background-color: $knowlead-primary;
-        transition: all 0.1s ease-out;
-
-        &:hover {
-            background-color: $knowlead-secondary;
-        }
     }
 }

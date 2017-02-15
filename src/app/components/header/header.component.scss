@@ -23,6 +23,14 @@ a, a:visited, a:hover, a:active {
     color: white;
 }
 
+.headerUsername {
+    max-width: 75px;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 .search-wrap {
     height: $nav-height;
