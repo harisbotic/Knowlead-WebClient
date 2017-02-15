@@ -1,4 +1,5 @@
 thread with: {{thread.withId}}
+<button *ngIf="schedulable" (click)="schedule()">Schedule</button>
 <div *ngFor="let message of thread.messages">
     {{fullName(message.messageFrom)}}: {{message.text}}
 </div>

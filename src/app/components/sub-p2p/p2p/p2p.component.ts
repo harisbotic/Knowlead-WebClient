@@ -16,10 +16,14 @@ import { RealtimeService } from '../../../services/realtime.service';
 export class P2pComponent extends BaseComponent implements OnInit {
 
   _p2p: P2PModel;
+  callable: boolean;
 
   @Input() set p2pId(value: number) {
     if (value != null) {
-      this.subscriptions.push(this.p2pService.get(value).subscribe((p2p) => this._p2p = p2p));
+      this.subscriptions.push(this.p2pService.get(value).subscribe((p2p) => {
+        this._p2p = p2p;
+        this.refresh();
+      }));
     } else {
       this._p2p = null;
     }
@@ -40,8 +44,18 @@ export class P2pComponent extends BaseComponent implements OnInit {
     super();
   }
 
+  refresh() {
+    if (!this.user || !this.p2p) {
+      return;
+    }
+    this.callable = !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById === this.user.id;
+  }
+
   ngOnInit() {
-    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
+      this.user = user;
+      this.refresh();
+    }));
   }
 
   deleted() {
@@ -55,13 +69,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
       return false;
     }
     return (this.user) ? this.user.id === this.p2p.createdById : false;
-  }
-
-  callable(): boolean {
-    if (!this.user || !this.p2p) {
-      return false;
-    }
-    return !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById === this.user.id;
   }
 
   call() {

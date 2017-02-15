@@ -1,3 +1,4 @@
+<button (click)="call()" *ngIf="callable" style="background-color: green">CALL</button>
 <div class="row" *ngIf="p2p">
     <div class="col-100">
         <div class="viewPost-wrap">
@@ -150,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <app-p2p-discussion [p2pId]="p2p.p2pId" [createdBy]="p2p.createdById" [initialPrice]="p2p.initialPrice"></app-p2p-discussion>
+            <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
         </div>
     </div>
 </div>

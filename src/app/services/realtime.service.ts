@@ -11,12 +11,14 @@ import { PopupNotificationModel } from '../models/frontend.models';
 
 export enum CallEventType {
   CALL_UPDATE,
-  CALL_RESET
+  CALL_RESET,
+  CALL_END
 }
 
 export interface CallEvent {
   type: CallEventType;
   call: _CallModel;
+  reason?: string;
 }
 
 @Injectable()
@@ -27,6 +29,7 @@ export class RealtimeService {
   public callSubject = new Subject<_CallModel>();
   public callInvitations = new Subject<_CallModel>();
   public callModelUpdateSubject = new Subject<CallEvent>();
+  public callErrorSubject = new Subject<any>();
   public connectionStateSubject = new BehaviorSubject<boolean>(false);
 
   protected parseIfString<T>(value: T): T {
@@ -75,6 +78,9 @@ export class RealtimeService {
         let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
         this.notificationService.receiveNotification(notification);
       });
+      this.rpcConnection.on('stopCall', (reason: string) => {
+        this.callModelUpdateSubject.next({type: CallEventType.CALL_END, call: null, reason: reason});
+      });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }
@@ -85,24 +91,32 @@ export class RealtimeService {
   }
 
   respondToCall(callId: string, accepted: boolean) {
-    this.rpcConnection.invoke('CallRespond', callId, accepted);
+    this.invoke(this.callErrorSubject, 'CallRespond', callId, accepted);
   }
 
   addCallSDP(callId: string, sdp: string) {
     if (typeof(sdp) !== 'string') {
       sdp = JSON.stringify(sdp);
     }
-    this.rpcConnection.invoke('AddSDP', callId, sdp);
+    this.invoke(this.callErrorSubject, 'AddSDP', callId, sdp);
   }
 
   resetCall(callId: string) {
-    this.rpcConnection.invoke('ResetCall', callId);
+    this.invoke(this.callErrorSubject, 'ResetCall', callId);
+  }
+
+  stopCall(callId: string, reason: string) {
+    this.invoke(this.callErrorSubject, 'StopCall', callId, reason);
   }
 
   getCallUpdate(callId: string): Promise<_CallModel> {
     return this.rpcConnection.invoke('GetCallModel', callId).then((value) => {
       return new Promise<_CallModel>((resolve, reject) => resolve(JSON.parse(<any>value)));
     });
+  }
+
+  private invoke(errorSubject: Subject<any>, nameOfFunction: string, ...params) {
+    this.rpcConnection.invoke(nameOfFunction, ...params).catch(err => errorSubject.next(err));
   }
 
   stop() {

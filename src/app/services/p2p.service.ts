@@ -76,11 +76,10 @@ export class P2pService {
     return this.storageService.getFromStorage('p2pMessages', this.p2pMessagesFiller, {'id': id});
   }
 
-  schedule(schedule: any): Observable<P2PModel> {
-    throw new Error('Please implement this !!!');
-    // return this.modifyP2p(this.http.post(P2P_SCHEDULE, schedule)
-    //   .map(responseToResponseModel)
-    //   .map(v => v.object));
+  schedule(message: P2PMessageModel): Observable<P2PModel> {
+    return this.modifyP2p(this.http.post(P2P_SCHEDULE + '/' + message.p2pMessageId, {})
+       .map(responseToResponseModel)
+       .map(v => v.object));
   }
 
   refreshP2P(p2pId: number) {
