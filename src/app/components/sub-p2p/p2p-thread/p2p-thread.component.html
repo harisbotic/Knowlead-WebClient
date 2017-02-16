@@ -1,5 +1,3 @@
-thread with: {{thread.withId}}
-<button *ngIf="schedulable" (click)="schedule()">Schedule</button>
 <div class="row" *ngFor="let message of thread.messages">
     <div class="col-100">
         <div class="thread-wrap">
@@ -89,14 +87,14 @@ thread with: {{thread.withId}}
             <div class="row" id="threadBottomElements-row">
                 <div class="col-100">
                     <div class="threadBottomElements-wrap">
-                        <div class="col-60 proposed-wrap">
-                            <div class="col-80">
+                        <div class="col-55 proposed-wrap">
+                            <div class="col-65">
                                 <div class="proposeDate-wrap">
                                     <i class="kl-calendar proposeDate-icon"></i>
                                     <div class="proposeDate">{{message.dateTimeOffer | date:'MMM d, y HH:mm'}}</div>
                                 </div>
                             </div>
-                            <div class="col-20">
+                            <div class="col-35">
                                 <div class="proposePrice-wrap">
                                     <i class="kl-currency proposePrice-icon"></i>
                                     <div class="proposePrice">{{message.priceOffer}}</div>
@@ -104,18 +102,18 @@ thread with: {{thread.withId}}
                             </div>
                         </div>
                         <!-- TODO: FIX THIS STATUS CHECK -->
-                        <div class="col-40 threadOptions-wrap" *ngIf="(thread.p2p.status == P2PStatus.active || thread.p2p.statu == P2PStatus.inactive) && message.last">
-                            <div class="col-58">
+                        <div class="col-45 threadOptions-wrap" *ngIf="(thread.p2p.status == P2PStatus.active || thread.p2p.statu == P2PStatus.inactive) && message.last">
+                            <div class="col-65">
                                 <div class="threadOptionsButtons" *ngIf="message.messageFromId !== user?.id">
                                     <button [class.scheduleButton]="thread.p2p?.createdById === user?.id" [class.teacherAcceptButton]="thread.p2p?.createdById !== user?.id">
                                         {{(thread.p2p?.createdById === user?.id) ? 'Schedule' : 'Accept'}}
                                     </button>
                                 </div>
-                                <div *ngIf="message.messageFromId === user?.id">
-                                    Waiting for response ...
+                                <div *ngIf="message.messageFromId === user?.id" class="waitingForResponse">
+                                    Waiting for response...
                                 </div>
                             </div>
-                            <div class="col-42">
+                            <div class="col-35">
                                 <div class="threadOptionsButtons">
                                     <button class="newOfferButton" (click)="openCode = thread.messages.length">New Offer</button>
                                 </div>
@@ -202,4 +200,4 @@ thread with: {{thread.withId}}
             </form>
         </div>
     </div>
-</div> 
+</div>

@@ -3,6 +3,7 @@
 .thread-wrap {
     margin: 0 30px;
     border-bottom: 2px solid $hover-dark-color;
+    margin-bottom: 10px;
 }
 
 .thread-reply-wrap {
@@ -102,7 +103,7 @@
 }
 
 .proposed-wrap {
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .proposeDate, .proposePrice {
@@ -115,6 +116,11 @@
     font-size: 18px;
     margin-top: 1px;
     margin-right: 5px;
+    color: $font-secondary-color;
+}
+
+.waitingForResponse {
+    margin-top: 5px;
     color: $font-secondary-color;
 }
 
@@ -147,6 +153,7 @@
 .writeOffer-row {
     background: white;
     padding: 10px 0;
+    border-radius: 0 0 $border-radius $border-radius;
 }
 
 .writeOffer-wrap {
