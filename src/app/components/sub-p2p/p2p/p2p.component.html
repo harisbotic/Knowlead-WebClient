@@ -125,13 +125,8 @@
                 <div class="col-100">
                     <div class="bottomElements-wrap">
                         <div class="col-60">
-<<<<<<< HEAD
-                            <div class="callButton-wrap">
-                                <button class="callButton">Call</button>
-=======
                             <div class="callButton-wrap" *ngIf="callable">
                                 <button class="callButton" (click)="call()">Call</button>
->>>>>>> 3a4f426e3606b5f6377733ca3618bccc41f9b85e
                             </div>
                         </div>
                         <div class="col-20">
@@ -155,15 +150,11 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-            <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
->>>>>>> 3a4f426e3606b5f6377733ca3618bccc41f9b85e
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-100">
-        <app-p2p-discussion [p2pId]="p2p.p2pId" [createdBy]="p2p.createdById" [initialPrice]="p2p.initialPrice"></app-p2p-discussion>
+        <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
     </div>
 </div>
