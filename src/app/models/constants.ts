@@ -1,3 +1,10 @@
+export class CallEndReasons
+{
+	static requested: string = "CALL_END_REQUESTED";
+	static inactive: string = "CALL_INACTIVE";
+	static rejected: string = "CALL_REJECTED";
+	static startProblem: string = "CALL_START_PROBLEM";
+}
 export class NotificationTypes
 {
 	static newP2PComment: string = "NotificationTypes.NEW_P2P_COMMENT";
@@ -45,4 +52,5 @@ export class ErrorCodes
 	static notEnoughMinutes: string = "NOT_ENOUGH_MINUTES";
 	static consecutiveOffersLimit: string = "CONSECUTIVE_OFFERS_LIMIT";
 	static notLastOffer: string = "NOT_LAST_OFFER";
+	static alreadyInCall: string = "ALREADY_IN_CALL";
 }

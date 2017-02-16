@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThreadModel } from '../p2p-discussion/p2p-discussion.component';
 import { P2PMessageModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
@@ -15,11 +15,22 @@ import { NotificationService } from '../../../services/notifications/notificatio
 })
 export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> {
 
-  @Input() thread: ThreadModel;
+  @Input() _thread: ThreadModel;
+  @Input() set thread(value: ThreadModel) {
+    this._thread = value;
+    this.schedulable = this.thread.withId !== this.thread.p2p.createdById &&
+      this.thread.p2p.scheduledWithId == null && !this.thread.p2p.isDeleted;
+  }
+  get thread() {
+    return this._thread;
+  }
 
+  schedulable: boolean;
   fullName = ModelUtilsService.getUserFullName;
 
-  constructor(protected p2pService: P2pService, protected notificationService: NotificationService) { super(); }
+  constructor(protected p2pService: P2pService, protected notificationService: NotificationService) {
+    super();
+  }
 
   getNewForm() {
     return new FormGroup({
@@ -32,7 +43,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> {
   }
 
   getNewValue(): P2PMessageModel {
-    let lastPrice = this.thread.initialPrice;
+    let lastPrice = this.thread.p2p.initialPrice;
     let lastDate = undefined;
     for (let message of this.thread.messages) {
       lastPrice = message.priceOffer;
@@ -42,7 +53,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> {
       text: '',
       dateTimeOffer: lastDate,
       priceOffer: lastPrice,
-      p2pId: this.thread.p2pId,
+      p2pId: this.thread.p2p.p2pId,
       messageToId: this.thread.withId,
 
       p2pMessageId: undefined,
@@ -63,6 +74,12 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> {
     }, (err) => {
       this.notificationService.error('Error posting message', err);
     }));
+  }
+
+  schedule() {
+    this.p2pService.schedule(this.thread.messages[this.thread.messages.length - 1]).subscribe(undefined, (err) => {
+      this.notificationService.error('Error scheduling', err);
+    });
   }
 
 }

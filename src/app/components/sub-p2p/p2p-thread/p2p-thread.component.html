@@ -1,3 +1,5 @@
+thread with: {{thread.withId}}
+<button *ngIf="schedulable" (click)="schedule()">Schedule</button>
 <div class="row" *ngFor="let message of thread.messages">
     <div class="col-100">
         <div class="thread-wrap">
@@ -58,7 +60,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-100">
-                                                <div class="dateCreated">Kad je poslaTo.</div>
+                                                <div class="dateCreated">{{message.timestamp | amTimeAgo}}</div>
                                             </div>
                                         </div>
                                     </div>

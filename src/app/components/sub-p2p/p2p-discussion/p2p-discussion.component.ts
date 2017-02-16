@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { P2PMessageModel, ApplicationUserModel, Guid } from '../../../models/dto';
+import { P2PMessageModel, ApplicationUserModel, Guid, P2PModel } from '../../../models/dto';
 import { P2pService } from '../../../services/p2p.service';
 import { AccountService } from '../../../services/account.service';
 import { BaseComponent } from '../../../base.component';
@@ -8,8 +8,7 @@ import { ModelUtilsService } from '../../../services/model-utils.service';
 export interface ThreadModel {
   withId: Guid;
   messages: P2PMessageModel[];
-  initialPrice: number;
-  p2pId: number;
+  p2p: P2PModel;
 }
 
 @Component({
@@ -19,14 +18,13 @@ export interface ThreadModel {
 })
 export class P2pDiscussionComponent extends BaseComponent implements OnInit {
 
-  @Input() p2pId: number;
-  @Input() createdBy: Guid;
-  @Input() initialPrice: number;
+  @Input() p2p: P2PModel;
 
   messages: P2PMessageModel[];
   user: ApplicationUserModel;
   threads: ThreadModel[];
   threadWith: Guid[];
+  // p2p: P2PModel;
 
   constructor(protected p2pService: P2pService, protected accountService: AccountService) {
     super();
@@ -37,8 +35,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     this.threads.push({
       withId: userId,
       messages: [],
-      initialPrice: this.initialPrice,
-      p2pId: this.p2pId
+      p2p: this.p2p
     });
   }
 
@@ -52,22 +49,23 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
       }
       this.threads[this.threadWith.indexOf(otherId)].messages.push(message);
     }
-    if (this.createdBy !== this.user.id && this.threadWith.indexOf(this.createdBy) === -1) {
-      this.addThread(this.createdBy);
+    if (this.p2p.createdById !== this.user.id && this.threadWith.indexOf(this.p2p.createdById) === -1) {
+      this.addThread(this.p2p.createdById);
     }
   }
 
   ngOnInit() {
-    if (this.p2pId === undefined || this.initialPrice === undefined || this.createdBy === undefined) {
-      console.error('No "p2p id" or "initial price" or "created by" provided for p2p discussion');
+    if (this.p2p === undefined) {
+      console.error('No "p2p" provided for p2p discussion');
       return;
     }
     this.subscriptions.push(this.accountService.currentUser().do((user: ApplicationUserModel) => {
       this.user = user;
-    }).merge(this.p2pService.getMessages(this.p2pId).do(messages => this.messages = messages))
+    })
+    .merge(this.p2pService.getMessages(this.p2p.p2pId).do(messages => this.messages = messages))
     .subscribe(() => {
       this.threads = [];
-      if (!this.messages || !this.user) {
+      if (!this.messages || !this.user || !this.p2p) {
         return;
       }
       this.messages.sort((a, b) => {

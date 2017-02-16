@@ -3,8 +3,10 @@ import { BaseComponent } from '../../base.component';
 import { RealtimeService, CallEventType } from '../../services/realtime.service';
 import { AccountService } from '../../services/account.service';
 import { _CallModel, ApplicationUserModel } from '../../models/dto';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModelUtilsService } from '../../services/model-utils.service';
+import { CallEndReasons } from '../../models/constants';
+import { NotificationService } from '../../services/notifications/notification.service';
 
 @Component({
   selector: 'app-call-page',
@@ -35,7 +37,15 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   constructor(
     protected realtimeService: RealtimeService,
     protected accountService: AccountService,
-    protected route: ActivatedRoute) { super(); }
+    protected route: ActivatedRoute,
+    protected router: Router,
+    protected notificationService: NotificationService) { super(); }
+
+  requestStop() {
+    if (this.call) {
+      this.realtimeService.stopCall(this.call.callId, CallEndReasons.requested);
+    }
+  }
 
   initPeer() {
     this.signaledSDPs = [];
@@ -64,7 +74,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       });
       this.setOtherSDP();
     }, (error) => {
-
+      this.realtimeService.stopCall(this.call.callId, CallEndReasons.startProblem);
     });
   }
 
@@ -113,6 +123,10 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   }
 
   ngOnInit() {
+    this.subscriptions.push(this.realtimeService.callErrorSubject.subscribe(err => {
+      this.router.navigate(['/']);
+      this.notificationService.error('There was an error with this call');
+    }));
     this.subscriptions.push(this.realtimeService.connectionStateSubject.filter(val => val).subscribe(() => {
       this.subscriptions.push(this.route.params.subscribe((params) => {
         this.realtimeService.resetCall(params['id']);
@@ -124,12 +138,20 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
           this.user = user;
         });
         this.subscriptions.push(this.realtimeService.callModelUpdateSubject.subscribe((call) => {
-          this.call = call.call;
           if (call.type === CallEventType.CALL_RESET) {
+            this.call = call.call;
             this.cleanup();
             this.initPeer();
           } else if (call.type === CallEventType.CALL_UPDATE) {
+            this.call = call.call;
             this.setOtherSDP();
+          } else if (call.type === CallEventType.CALL_END) {
+            // if (ModelUtilsService.isCallP2p(this.call)) {
+            //   this.router.navigate(['/p2p/', this.call.p2pId]);
+            // } else {
+              this.router.navigate(['/']);
+            // }
+            this.notificationService.info('Call has ended ...', call.reason);
           }
         }));
       }));
@@ -139,6 +161,9 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   ngOnDestroy() {
     super.ngOnDestroy();
     this.cleanup();
+    if (this.call) {
+      this.realtimeService.disconnectFromCall(this.call.callId);
+    }
   }
 
 }
