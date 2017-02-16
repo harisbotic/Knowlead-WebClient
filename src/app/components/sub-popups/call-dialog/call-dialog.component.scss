@@ -1,0 +1,83 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.incomingCall-wrap {
+    width: 350px;
+    height: 200px;
+    background-color: white;
+    border-radius: $border-radius;
+    border: 2px solid $hover-dark-color;
+}
+
+.incomingCall-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid $divider-color;
+}
+
+.callerProfileImage-wrap {
+    position: relative;
+    height: 70px;
+}
+
+.incomingCall-text {
+    margin-top: 15px;
+
+    > a {
+        font-weight: bold;
+        color: $font-primary-color;
+    }
+}
+
+.callSubject {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    > a {
+        color: $knowlead-secondary;
+    }
+}
+
+.incomingCall-buttons-wrap {
+    height: 50px;
+    position: relative;
+    border-top: 1px solid $divider-color;
+}
+
+.incomingCall-buttons {
+    padding: 10px;
+}
+
+.declineButton {
+    width: 80px;
+    height: 35px;
+    border: none;
+    outline: none;
+    border-radius: $border-radius;
+    background-color: transparentize ($disabled-color, 0.5);
+    font-weight: bold;
+    margin-right: 3px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.answerButton {
+        width: 80px;
+        height: 35px;
+        border: none;
+        outline: none;
+        border-radius: $border-radius;
+        background-color: $knowlead-primary;
+        font-weight: bold;
+        color: white;
+        margin-left: 3px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+}

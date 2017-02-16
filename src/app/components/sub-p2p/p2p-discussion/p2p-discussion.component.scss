@@ -1,0 +1,10 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.discussion-wrap {
+    margin-top: -5px;
+    padding-bottom: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid $hover-dark-color;
+    border-radius: 0 0 5px 5px;
+}

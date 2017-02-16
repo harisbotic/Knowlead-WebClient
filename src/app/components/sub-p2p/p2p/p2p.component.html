@@ -125,36 +125,36 @@
                 <div class="col-100">
                     <div class="bottomElements-wrap">
                         <div class="col-60">
-                                <div class="callButton-wrap">
+                            <div class="callButton-wrap">
                                 <button class="callButton">Call</button>
                             </div>
                         </div>
                         <div class="col-20">
                             <div class="bottomElementsButton-wrap">
+                                <i class="kl-comment comment-icon"></i>
                                 <a class="commentButton-link">
-                                    <button class="clearButton postViewButton">
-                                        <i class="kl-comment"></i>
-                                        <div class="commentButton-text">Comment</div>
-                                        <div class="commentCounter">0</div>
-                                    </button>
+                                    <button class="clearButton postViewCommentButton">Offer</button>
                                 </a>
+                                <div class="commentCounter">0</div>
                             </div>
                         </div>
                         <div class="col-20">
                             <div class="bottomElementsButton-wrap">
+                                <i class="kl-bookmark bookmark-icon"></i>
                                 <a class="bookmarkButton-link">
-                                    <button class="clearButton postViewButton">
-                                        <i class="kl-bookmark"></i>
-                                        <div class="bookmarkButton-text">Bookmark</div>
-                                        <div class="commentCounter">3</div>
-                                    </button>
+                                    <button class="clearButton postViewBookmarkButton">Bookmark</button>
                                 </a>
+                                <div class="bookmarkCounter">3</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <app-p2p-discussion [p2pId]="p2p.p2pId" [createdBy]="p2p.createdById" [initialPrice]="p2p.initialPrice"></app-p2p-discussion>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-100">
+        <app-p2p-discussion [p2pId]="p2p.p2pId" [createdBy]="p2p.createdById" [initialPrice]="p2p.initialPrice"></app-p2p-discussion>
     </div>
 </div>

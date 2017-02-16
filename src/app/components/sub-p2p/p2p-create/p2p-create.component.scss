@@ -61,6 +61,12 @@
     border-left: 1px solid $divider-color;
 }
 
+.nextStepButton {
+    background-color: $knowlead-primary;
+    color: white;
+    transition: all 0.3s ease-out;
+}
+
 .nextStepButton, .addFileButton {
     height: 35px;
     width: 100%;
@@ -72,7 +78,8 @@
     }
 
     &:disabled {
-        color: $disabled-color;
+        color: $hover-middle-color;
+        background-color: transparent;
 
         &:hover {
             background-color: transparent;

@@ -1,3 +1,47 @@
+<!-- <div class="row">
+    <div class="col-100">
+        <div class="incomingCall-wrap">
+            <div class="row">
+                <div class="col-100">
+                    <div class="incomingCall-title">Incoming Peer-to-Peer video Call</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div *ngIf="p2p" class="incomingCall-info">
+                        <div class="col-25">
+                            <div class="callerProfileImage-wrap">
+                                    <app-profile-picture [user]="url" class="centerV" size="small"></app-profile-picture>
+                            </div>
+                        </div>
+                        <div class="col-75">
+                            <div class="incomingCall-text"><a href="" class="callerName">{{fullName(otherUser() | async)}}</a> is calling you to start Peer-to-Peer session.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="callSubject">Subject: <a href="">Calculus</a></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-100">
+                    <div class="incomingCall-buttons-wrap">
+                        <div *ngIf="isCaller() === false" class="incomingCall-buttons centerV">
+                            <button type="button" (click)="decline()" class="declineButton">{{"call|decline" | translate}}</button>
+                            <button type="button" (click)="accept()" class="answerButton">Answer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
 <ngl-modal [open]="call && user" (openChange)="decline()">
   <div body>
     {{callPrefix() | translate}}: {{fullName(otherUser() | async)}}

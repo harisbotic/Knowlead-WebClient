@@ -143,6 +143,20 @@ ng-select > div > div.single > div.toggle:hover {
     }
 }
 
+.writeofferTextarea {
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid $hover-dark-color;
+    min-height: 50px;
+    padding: 10px;
+    outline: none;
+    border-radius: $border-radius;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+}
+
 input.postNumberInput[type=number] {
     border: none;
     width: 100%;
@@ -187,4 +201,29 @@ input.postNumberInput[type=number] {
         color: $placeholder-color;
     }
 
+}
+
+
+.writeOfferDatepickInput > input[type=text] {
+    width: 100%;
+    height: 35px;
+    border: 1px solid $hover-dark-color;
+    padding: 0 10px;
+    border-radius: $border-radius;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+}
+
+input.writeOfferPrice[type=number] {
+    width: 70%;
+    height: 35px;
+    border: 1px solid $hover-dark-color;
+    padding: 0 10px;
+    border-radius: $border-radius;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
 }

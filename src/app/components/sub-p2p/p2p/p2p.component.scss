@@ -4,10 +4,10 @@
 .viewPost-wrap {
     margin: 5px 0;
     height: auto;
-    border-radius: $border-radius;
+    border-radius: 5px 5px 0 0;
     background-color: $post-view-background-color;
     border: 1px solid $hover-dark-color;
-    padding: 15px;
+    padding: 15px 15px 0 15px;
 }
 
 .topElements-wrap {
@@ -113,11 +113,14 @@
 
     .viewPost-text {
         margin: 15px 0;
+        max-width: 100%;
+        word-wrap: break-word;
     }
 }
 
 .bottomElementsButton-wrap {
     margin: 15px 0;
+    height: 25px;
 
     > a, a:visited, a:active {
         text-decoration: none;
@@ -127,17 +130,39 @@
             color: $knowlead-primary;
         }
     }
+
+    .comment-icon {
+        float: left;
+        font-size: 20px;
+        color: $font-secondary-color;
+    }
+
+    .commentButton-link {
+        float: left;
+    }
+
+    .commentCounter {
+        float: left;
+        margin-top: 1px;
+        color: $font-secondary-color;
+    }
+
+    .bookmark-icon {
+        float: left;
+        font-size: 20px;
+        color: $font-secondary-color;
+    }
+
+    .bookmarkButton-link {
+        float: left;
+    }
+
+    .bookmarkCounter {
+        float: left;
+        margin-top: 1px;
+        color: $font-secondary-color;    }
 }
 
 .callButton-wrap {
     margin-top: 9px;
-
-    .callButton {
-        width: 120px;
-        height: 30px;
-        border: none;
-        border-radius: $border-radius;
-        color: white;
-        background-color: $knowlead-primary;
-    }
 }

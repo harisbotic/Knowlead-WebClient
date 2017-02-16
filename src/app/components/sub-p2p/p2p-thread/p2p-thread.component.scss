@@ -1,5 +1,69 @@
 @import "../../../../kl-styles/variables.scss";
 
+.thread-wrap {
+    margin: 0 30px;
+    border-bottom: 2px solid $hover-dark-color;
+}
+
+.thread-reply-wrap {
+    margin: 0 30px;
+    margin-left: 70px;
+    padding-left: 15px;
+    border-left: 2px solid $hover-dark-color;
+    border-bottom: 2px solid $hover-dark-color;
+}
+
+
+.offerOptions-wrap {
+    position: relative;
+
+    > a, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: $font-primary-color;
+    }
+}
+
+.offerOptions-icon-wrap {
+    margin-top: 15px;
+    margin-right: -15px;
+    padding: 0 5px;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: $hover-middle-color;
+        color: white;
+    }
+}
+
+
+.offerOptions-content {
+    margin-top: 5px;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+}
+
+.offerOptions-button {
+    width: 100px;
+    height: 30px;
+    padding: 15px 10px;
+
+    &:hover {
+        background-color: $hover-middle-color;
+    }
+
+    .offerOptions-icon {
+        margin: -2px 5px;
+        font-size: 18px;
+        color: $font-primary-color;
+    }
+
+    .offerOptions-text {
+        color: $font-primary-color;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+}
 
 .profileImage-wrap {
     height: 60px;
@@ -19,4 +83,100 @@
         font-size: 11px;
         color: $disabled-color;
     }
+}
+
+.profile-link {
+    color: $font-primary-color;
+}
+
+.reviewStars-wrap {
+    height: 50px;
+}
+
+.threadText {
+    word-wrap: break-word;
+}
+
+#threadBottomElements-row {
+    margin: 15px 0;
+}
+
+.proposed-wrap {
+    margin-top: 5px;
+}
+
+.proposeDate, .proposePrice {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.proposePrice-icon, .proposeDate-icon {
+    float: left;
+    font-size: 18px;
+    margin-top: 1px;
+    margin-right: 5px;
+    color: $font-secondary-color;
+}
+
+.teacherAgreed-wrap {
+    height: 55px;
+    margin-top: -2px;
+    padding: 10px 30px;
+    border-top: 2px solid $hover-dark-color;
+    border-bottom: 2px solid $hover-dark-color;
+    background-color: $post-background-color;
+
+    .agreedText {
+        font-weight: bold;
+        text-align: center;
+        line-height: 30px;
+        color: $knowlead-primary;
+
+        > a, a:visited, a:active {
+            text-decoration: none;
+            color: $font-primary-color;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+
+.writeOffer-row {
+    background: white;
+    padding: 10px 0;
+}
+
+.writeOffer-wrap {
+    margin: 5px 30px;
+}
+
+.writeOffer-profilePicture {
+    height: 60px;
+}
+
+.writeOfferInput-wrap {
+    margin-top: 5px;
+}
+
+.writeOfferDate-icon {
+    float: left;
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.writeOfferPrice-wrap {
+    margin-left: 10px;
+}
+
+.writeOfferPrice-icon {
+    float: left;
+    font-size: 22px;
+    margin-top: 7px;
+}
+
+.sendOfferButton-wrap {
+    padding-left: 15px;
 }

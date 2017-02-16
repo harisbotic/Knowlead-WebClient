@@ -1,22 +1,59 @@
 <div class="row" *ngFor="let message of thread.messages">
     <div class="col-100">
         <div class="thread-wrap">
+            <div class="offerOptions-wrap">
+                <a class="centerVr offerOptions-icon-wrap">
+                    <i class="kl-more offerOptions-icon" [popover]="popover"></i>
+                    <popover-content #popover placement="bottom" [closeOnClickOutside]="true">
+                        <div class="offerOptions-content">
+
+                            <div class="row offerOptions-button posRel">
+                                <a class="posRel">
+                                    <div class="col-30 posRel">
+                                        <i class="kl-delete offerOptions-icon centerV"></i>
+                                    </div>
+                                    <div class="col-70 posRel">
+                                        <p class="offerOptions-text centerVl">Delete</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- NOTE: REPORT Button -->
+                            <!-- <div class="row offerOptions-button posRel">
+                                <a class="posRel">
+                                    <div class="col-30 posRel">
+                                        <i class="kl-edit offerOptions-icon centerV"></i>
+                                    </div>
+                                    <div class="col-70 posRel">
+                                        <p class="offerOptions-text centerVl">Report</p>
+                                    </div>
+                                </a>
+                            </div> -->
+
+                        </div>
+                    </popover-content>
+                </a>
+            </div>
             <div class="row">
                 <div class="col-100">
                     <div class="threadTopElements-wrap">
-                        <div class="col-35">
+                        <div class="col-70">
                             <div class="profileInfo-wrap">
-                                <div class="col-20 posRel">
+                                <div class="col-10 posRel">
                                     <div class="profileImage-wrap">
-                                        <app-profile-picture [user]="message.messageFrom" [uploadable]="false" class="centerVl" size="x-small"></app-profile-picture>
+                                        <a href="" class="profile-link">
+                                            <app-profile-picture [user]="message.messageFrom" [uploadable]="false" class="centerVl" size="x-small"></app-profile-picture>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col-80">
+                                <div class="col-90">
                                     <!-- NOTE: If profile name is too long (goes on second row). Set margin of .profileInfoText-wrap to margin: 13px 0 0 30px; -->
                                     <div class="profileInfoText-wrap">
                                         <div class="row">
                                             <div class="col-100">
-                                                <div class="profileName">{{fullName(message.messageFrom)}}</div>
+                                                <a href="" class="profile-link">
+                                                    <div class="profileName">{{fullName(message.messageFrom)}}</div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -28,8 +65,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-35 filler"></div>
-                        <div class="col-30"></div>
+                        <div class="col-30">
+                            <div class="reviewStars-wrap posRel">
+                                <div class="reviewStars centerVl">ZVIZDE</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,19 +82,39 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-100">
-                <div class="threadBottomElements-wrap">
-                    <div class="col-40">
-                        <div class="proposeDate-wrap"></div>
-                    </div>
-                    <div class="col-40">
-                        <div class="proposePrice-wrap"></div>
-                    </div>
-                    <div class="col-20">
-                        <div class="threadOptionButtons"></div>
-                    </div>
-                    <div class="col-20">
-                        <div class="threadOptionButtons"></div>
+            <div class="row" id="threadBottomElements-row">
+                <div class="col-100">
+                    <div class="threadBottomElements-wrap">
+                        <div class="col-60 proposed-wrap">
+                            <div class="col-65">
+                                <div class="proposeDate-wrap">
+                                    <i class="kl-calendar proposeDate-icon"></i>
+                                    <div class="proposeDate">20.02.2017. 6:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="col-35">
+                                <div class="proposePrice-wrap">
+                                    <i class="kl-currency proposePrice-icon"></i>
+                                    <div class="proposePrice">30</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-40 threadOptions-wrap">
+                            <div class="col-58">
+                                <div class="threadOptionsButtons">
+                                    <button class="scheduleButton">Schedule</button>
+                                </div>
+                                <!-- NOTE: Teacher Accept Button -->
+                                <!-- <div class="threadOptionsButtons">
+                                    <button class="teacherAcceptButton">Accept</button>
+                                </div> -->
+                            </div>
+                            <div class="col-42">
+                                <div class="threadOptionsButtons">
+                                    <button class="newOfferButton">New Offer</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,13 +124,76 @@
 
 
 
-
-<!-- <div *ngFor="let message of thread.messages">
-    {{fullName(message.messageFrom)}}: {{message.text}}
+<!-- NOTE: Teacher Accepted the offer. -->
+<!-- <div class="row">
+    <div class="col-100">
+        <div class="teacherAgreed-wrap">
+            <div class="col-60">
+                <div class="agreedText"><a href="">Hepek</a> accepted your last offer. You can schedule now.</div>
+            </div>
+            <div class="col-40">
+                <div class="col-58">
+                    <div class="threadOptionsButtons">
+                        <button class="scheduleButton">Schedule</button>
+                    </div>
+                </div>
+                <div class="col-42">
+                    <div class="threadOptionsButtons">
+                        <button class="newOfferButton">New Offer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div> -->
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" placeholder="comment" formControlName="text" name="text">
-    <input type="number" placeholder="price" formControlName="priceOffer" min="10" name="priceOffer">
-    <app-flatpickr formControlName="dateTimeOffer"></app-flatpickr>
-    <button type="submit">Submit</button>
-</form>
+
+
+
+<!-- NOTE: Write Offer Section -->
+<!-- <div class="row writeOffer-row">
+    <div class="col-100">
+        <div class="writeOffer-wrap">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-100">
+                        <div class="col-10">
+                            <div class="writeOffer-profilePicture posRel">
+                                <app-profile-picture [user]="realUser" class="centerV" size="x-small"></app-profile-picture>
+                            </div>
+                        </div>
+                        <div class="col-90">
+                            <textarea formControlName="text" placeholder="Explain why you should be the one to teach..." class="writeofferTextarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row writeOfferInput-wrap">
+                    <div class="col-70">
+                        <div class="col-60">
+                            <div class="col-15">
+                                <i class="kl-calendar writeOfferDate-icon"></i>
+                            </div>
+                            <div class="col-85">
+                                <app-flatpickr formControlName="dateTimeOffer" class="writeOfferDatepickInput"></app-flatpickr>
+                            </div>
+                        </div>
+                        <div class="col-40">
+                            <div class="writeOfferPrice-wrap">
+                                <div class="col-20">
+                                    <i class="kl-currency writeOfferPrice-icon"></i>
+                                </div>
+                                <div class="col-80">
+                                    <input type="number" placeholder="Price" formControlName="priceOffer" min="10" name="priceOffer" class="writeOfferPrice">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-30">
+                        <div class="sendOfferButton-wrap">
+                            <button type="submit" class="sendOfferButton">Send Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
