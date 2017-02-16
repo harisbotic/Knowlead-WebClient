@@ -165,9 +165,14 @@ ngl-rating {
     width: 120px;
     height: 30px;
     border: none;
+    outline: none;
     border-radius: $border-radius;
     color: white;
     background-color: $knowlead-primary;
+
+    &:hover {
+        background-color: transparentize($knowlead-primary, 0.1);
+    }
 }
 
 
@@ -267,6 +272,10 @@ ngl-rating {
     border: none;
     outline: none;
     border-radius: $border-radius;
+
+    &:hover {
+        background-color: transparentize($knowlead-primary, 0.1);
+    }
 }
 
 ///////////////////////////////////////////////////////////

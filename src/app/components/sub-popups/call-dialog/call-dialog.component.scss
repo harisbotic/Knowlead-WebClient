@@ -55,12 +55,12 @@
     border: none;
     outline: none;
     border-radius: $border-radius;
-    background-color: transparentize ($disabled-color, 0.5);
+    background-color: transparentize($disabled-color, 0.5);
     font-weight: bold;
     margin-right: 3px;
 
     &:hover {
-        text-decoration: underline;
+        background-color: transparentize($disabled-color, 0.2);
     }
 }
 
@@ -76,6 +76,6 @@
         margin-left: 3px;
 
         &:hover {
-            text-decoration: underline;
+            background-color: transparentize($knowlead-primary, 0.1);
         }
 }
