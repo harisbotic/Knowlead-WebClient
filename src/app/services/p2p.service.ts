@@ -34,9 +34,17 @@ export class P2pService {
   }
 
   getAll(): Observable<P2PModel[]> {
-    return this.http.get(P2P_ALL)
+    return this.transformP2ps(this.http.get(P2P_ALL)
       .map(responseToResponseModel)
-      .map(v => v.object)
+      .map(v => v.object));
+  }
+
+  private transformP2ps(all: Observable<P2PModel[]>): Observable<P2PModel[]> {
+    return all.do((p2ps: P2PModel[]) => {
+        p2ps.forEach(p2p => {
+          this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p);
+        });
+      })
       .flatMap(v => this.modelUtilsService.fillP2ps(v));
   }
 

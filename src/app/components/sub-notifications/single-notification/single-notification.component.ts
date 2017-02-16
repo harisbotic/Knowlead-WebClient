@@ -20,7 +20,7 @@ export class SingleNotificationComponent implements OnInit {
 
   getLink() {
     if (this.notification.p2pId) {
-      return '/p2p/' + this.notification.p2pId;
+      return '/home/p2p/' + this.notification.p2pId;
     } else {
       return undefined;
     }

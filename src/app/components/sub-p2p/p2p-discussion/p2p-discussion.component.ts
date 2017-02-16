@@ -68,7 +68,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
       if (!this.messages || !this.user || !this.p2p) {
         return;
       }
-      this.messages.sort((a, b) => {
+      this.messages.slice().sort((a, b) => {
         return a.timestamp.getTime() - b.timestamp.getTime();
       });
       this.refreshThreads();

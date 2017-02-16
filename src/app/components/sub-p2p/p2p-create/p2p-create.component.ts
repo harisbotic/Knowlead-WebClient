@@ -81,7 +81,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       text: new FormControl(null, Validators.required),
       fosId: new FormControl(null, Validators.required),
       // blobs: new FormArray([]),
-      initialPrice: new FormControl(null, Validators.required),
+      initialPrice: new FormControl(null, [Validators.required]),
       deadline: new FormControl(null, dateValidator({minDate: new Date()})),
       languages: new FormControl(null, [Validators.required, ArrayValidator({min: 1})])
     });

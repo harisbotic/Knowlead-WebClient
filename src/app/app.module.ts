@@ -74,6 +74,8 @@ import { RegisterSuccessPageComponent } from './pages/register-success-page/regi
 import { FlatpickrComponent } from './components/sub-form-components/flatpickr/flatpickr.component';
 import { P2pDiscussionComponent } from './components/sub-p2p/p2p-discussion/p2p-discussion.component';
 import { P2pThreadComponent } from './components/sub-p2p/p2p-thread/p2p-thread.component';
+import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
+import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +122,9 @@ import { P2pThreadComponent } from './components/sub-p2p/p2p-thread/p2p-thread.c
     Autosize,
     FlatpickrComponent,
     P2pDiscussionComponent,
-    P2pThreadComponent
+    P2pThreadComponent,
+    DefaultHomePageComponent,
+    SingleP2pComponent
   ],
   imports: [
     BrowserModule,
