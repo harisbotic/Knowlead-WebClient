@@ -31,6 +31,9 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
 
   writeValue(value: Date) {
     super.writeValue(value);
+    if (typeof value === 'string') {
+      value = new Date(Date.parse(value));
+    }
     if (this.flatpickr) {
       this.flatpickr.setDate(value);
     } else {

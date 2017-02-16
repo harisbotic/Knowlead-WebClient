@@ -53,4 +53,5 @@ export class ErrorCodes
 	static consecutiveOffersLimit: string = "CONSECUTIVE_OFFERS_LIMIT";
 	static notLastOffer: string = "NOT_LAST_OFFER";
 	static alreadyInCall: string = "ALREADY_IN_CALL";
+	static feedbackAlreadyGiven: string = "FEEDBACK_ALREADY_GIVEN";
 }
