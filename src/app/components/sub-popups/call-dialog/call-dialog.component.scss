@@ -13,7 +13,6 @@
     font-size: 16px;
     font-weight: bold;
     padding: 10px;
-    border-bottom: 1px solid $divider-color;
 }
 
 .callerProfileImage-wrap {
@@ -36,7 +35,7 @@
     font-weight: bold;
     margin-bottom: 10px;
 
-    > a {
+    > span {
         color: $knowlead-secondary;
     }
 }
@@ -44,7 +43,6 @@
 .incomingCall-buttons-wrap {
     height: 50px;
     position: relative;
-    border-top: 1px solid $divider-color;
 }
 
 .incomingCall-buttons {
