@@ -7,6 +7,10 @@
 @import "/kl-styles/kl-icons-font-style.css";
 
 
+///////////////////////////////////////////////////////////
+// CALL POPUP CLASSES /////////////////////////////////////
+///////////////////////////////////////////////////////////
+
 body > app-root > app-call-dialog > ngl-modal.incomingCall-popUp > div.slds-modal.slds-fade-in-open > div {
     width: 390px !important;
 }
