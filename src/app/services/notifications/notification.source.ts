@@ -35,7 +35,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
   }
 
   protected notifyNotifications() {
-    this.notifications = this.notifications.sort((a, b) => {
+    this.notifications = this.notifications.slice().sort((a, b) => {
       try {
         return b.scheduledAt.getTime() - a.scheduledAt.getTime();
       } catch (e) {
@@ -73,7 +73,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
       this.fillSubscription.unsubscribe();
       delete this.fillSubscription;
     }
-    this.notifications = this.notifications.concat(notifications).sort((a,b) => {
+    this.notifications = this.notifications.concat(notifications).slice().sort((a, b) => {
       try {
         return a.seenAt.getTime() - b.seenAt.getTime();
       } catch (e) {

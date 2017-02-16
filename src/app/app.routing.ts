@@ -15,6 +15,8 @@ import { RegisteredGuard } from './guards/registered.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
+import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
+import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -24,7 +26,10 @@ const appRoutes: Routes = [
         { path: 'registerSuccess', component: RegisterSuccessPageComponent }
     ] },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
-    { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
+        { path: '', component: DefaultHomePageComponent },
+        { path: 'p2p/:id', component: SingleP2pComponent }
+    ] },
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },

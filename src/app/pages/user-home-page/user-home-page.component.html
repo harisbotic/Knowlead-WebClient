@@ -81,8 +81,7 @@
         </div>
         <div class="col-50">
             <div class="mainSection-wrap">
-                <app-p2p-create></app-p2p-create>
-                <app-p2p *ngFor="let item of p2ps" [p2pId]="item.p2pId"></app-p2p>
+                <router-outlet></router-outlet>
             </div>
         </div>
         <div class="col-25">

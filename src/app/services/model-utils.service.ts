@@ -136,7 +136,7 @@ export class ModelUtilsService {
   }
 
   public fillP2ps(values: P2PModel[]): Observable<P2PModel[]> {
-    return this.fillArray(values, this.p2pService.get.bind(this.p2pService), 'p2pId');
+    return this.fillArray(values, this.fillP2p.bind(this), 'p2pId');
   }
 
   public fillFriendships(values: FriendshipModel[]): Observable<FriendshipModel[]> {
@@ -169,7 +169,7 @@ export class ModelUtilsService {
     }, null);
     return reduced
       .map(() => arr)
-      .filter(() => !arr.some(_.isNull));
+      .filter((arrr) => !arrr.some(_.isNull));
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
@@ -183,22 +183,19 @@ export class ModelUtilsService {
     return ret;
   }
 
-  public fillLanguage = (language: LanguageModel): Observable<LanguageModel> => {
-    return this.storageService.getLanguages()
-      .map((languages: LanguageModel[]) =>
-        languages.find(l => l.coreLookupId === language.coreLookupId)
-      ).take(1);
-  }
-
   public fillP2p(value: P2PModel): Observable<P2PModel> {
     let ret = Observable.of(value);
+    if (typeof(value.dateCreated) === 'string') {
+      value.dateCreated = new Date(Date.parse(value.dateCreated));
+    }
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
-    ret = ret.flatMap(p2p => this.fillArray(value.languages, this.fillLanguage, 'coreLookupId').map(languages => {
-      p2p.languages = languages;
-      return p2p;
-    }));
+    ret = ret.flatMap(p2p => this.storageService.getLanguages().take(1)
+      .map((languages: LanguageModel[]) => {
+        p2p.languages.map(language => languages.find(l => l.coreLookupId === language.coreLookupId));
+        return p2p;
+      }));
     return ret;
   }
 

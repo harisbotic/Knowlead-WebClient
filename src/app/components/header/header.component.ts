@@ -6,7 +6,7 @@ import { BaseComponent } from '../../base.component';
 import { SessionService } from '../../services/session.service';
 import { RealtimeService } from '../../services/realtime.service';
 import { MockNotificationsService } from '../../services/notifications/mock-notifications.service';
-import { Router } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { NotificationService } from '../../services/notifications/notification.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   user: ApplicationUserModel;
   fullName = ModelUtilsService.getUserFullName;
   referral: string;
+  shouldShow: boolean;
 
   constructor(protected accountService: AccountService,
       protected sessionService: SessionService,
@@ -33,6 +34,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       this.user = user;
       if (user) {
         this.referral = ModelUtilsService.getReferralLink(user);
+      }
+    }));
+    this.subscriptions.push(this.router.events.subscribe(event => {
+      if (event instanceof RoutesRecognized) {
+        this.shouldShow = !event.urlAfterRedirects.startsWith('/call');
       }
     }));
   }
