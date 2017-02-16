@@ -42,14 +42,53 @@
 
 <ngl-modal [open]="call && user" (openChange)="decline()">
   <div body>
+    <div class="row">
+        <div class="col-100">
+            <div class="incomingCall-title">Incoming Peer-to-Peer video Call</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-100">
+            <div class="incomingCall-info">
+                <div class="col-25">
+                    <div class="callerProfileImage-wrap">
+                        <app-profile-picture [user]="otherUser() | async" class="centerV" size="small"></app-profile-picture>
+                    </div>
+                </div>
+                <div class="col-75">
+                    <div class="incomingCall-text"><a href="" class="callerName">{{fullName(otherUser() | async)}}</a> is calling you to start Peer-to-Peer session.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="p2p">
+        <div class="col-100">
+            <div class="callSubject">Subject: <a href="">{{p2p?.fos.name}}</a></div>
+        </div>
+    </div>
     <audio src="/assets/sounds/kike.mp3" autoplay loop *ngIf="call && user"></audio>
-    {{callPrefix() | translate}}: {{fullName(otherUser() | async)}}
+    <!--{{callPrefix() | translate}}: {{fullName(otherUser() | async)}}
     <div *ngIf="p2p">
       {{"call|regarding p2p" | translate}}: {{p2p.text}}
-    </div>
+    </div>-->
   </div>
   <template ngl-modal-footer>
-    <div *ngIf="!isCaller()">
+    <div class="row">
+        <div class="col-100">
+            <div class="incomingCall-buttons-wrap">
+                <div *ngIf="!isCaller()" class="incomingCall-buttons centerV">
+                    <button type="button" (click)="decline()" class="declineButton">{{"call|decline" | translate}}</button>
+                    <button type="button" (click)="accept()" class="answerButton">Answer</button>
+                </div>
+                <div *ngIf="isCaller()" class="incomingCall-buttons centerV">
+                  <button type="button" (click)="redirect()" class="answerButton">
+                    Go to call
+                  </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div *ngIf="!isCaller()">
       <button type="button" nglButton="brand" (click)="accept()">
         {{"call|accept" | translate}}
       </button>
@@ -61,6 +100,6 @@
       <button type="button" (click)="redirect()">
         Go to call
       </button>
-    </div>
+    </div>-->
   </template>
 </ngl-modal>

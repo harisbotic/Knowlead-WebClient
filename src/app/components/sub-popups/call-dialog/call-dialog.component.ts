@@ -91,7 +91,7 @@ export class CallDialogComponent extends BaseComponent implements OnInit, OnDest
 
   accept() {
     this.realtimeService.respondToCall(this.call.callId, true);
-    // this.redirect();
+    this.cleanup();
   }
 
 }
