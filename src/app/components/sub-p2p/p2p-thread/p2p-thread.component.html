@@ -69,7 +69,9 @@ thread with: {{thread.withId}}
                         </div>
                         <div class="col-30">
                             <div class="reviewStars-wrap posRel">
-                                <div class="reviewStars centerVl">ZVIZDE</div>
+                                <div class="reviewStars centerVl">
+                                    <ngl-rating [rate]="message.messageFrom.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,32 +90,34 @@ thread with: {{thread.withId}}
                 <div class="col-100">
                     <div class="threadBottomElements-wrap">
                         <div class="col-60 proposed-wrap">
-                            <div class="col-65">
+                            <div class="col-80">
                                 <div class="proposeDate-wrap">
                                     <i class="kl-calendar proposeDate-icon"></i>
-                                    <div class="proposeDate">20.02.2017. 6:00 PM</div>
+                                    <div class="proposeDate">{{message.dateTimeOffer | date:'MMM d, y HH:mm'}}</div>
                                 </div>
                             </div>
-                            <div class="col-35">
+                            <div class="col-20">
                                 <div class="proposePrice-wrap">
                                     <i class="kl-currency proposePrice-icon"></i>
-                                    <div class="proposePrice">30</div>
+                                    <div class="proposePrice">{{message.priceOffer}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-40 threadOptions-wrap">
+                        <!-- TODO: FIX THIS STATUS CHECK -->
+                        <div class="col-40 threadOptions-wrap" *ngIf="(thread.p2p.status == P2PStatus.active || thread.p2p.statu == P2PStatus.inactive) && message.last">
                             <div class="col-58">
-                                <div class="threadOptionsButtons">
-                                    <button class="scheduleButton">Schedule</button>
+                                <div class="threadOptionsButtons" *ngIf="message.messageFromId !== user?.id">
+                                    <button [class.scheduleButton]="thread.p2p?.createdById === user?.id" [class.teacherAcceptButton]="thread.p2p?.createdById !== user?.id">
+                                        {{(thread.p2p?.createdById === user?.id) ? 'Schedule' : 'Accept'}}
+                                    </button>
                                 </div>
-                                <!-- NOTE: Teacher Accept Button -->
-                                <!-- <div class="threadOptionsButtons">
-                                    <button class="teacherAcceptButton">Accept</button>
-                                </div> -->
+                                <div *ngIf="message.messageFromId === user?.id">
+                                    Waiting for response ...
+                                </div>
                             </div>
                             <div class="col-42">
                                 <div class="threadOptionsButtons">
-                                    <button class="newOfferButton">New Offer</button>
+                                    <button class="newOfferButton" (click)="openCode = thread.messages.length">New Offer</button>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +156,7 @@ thread with: {{thread.withId}}
 
 
 <!-- NOTE: Write Offer Section -->
-<!-- <div class="row writeOffer-row">
+<div class="row writeOffer-row" *ngIf="openCode === thread.messages.length">
     <div class="col-100">
         <div class="writeOffer-wrap">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -160,7 +164,7 @@ thread with: {{thread.withId}}
                     <div class="col-100">
                         <div class="col-10">
                             <div class="writeOffer-profilePicture posRel">
-                                <app-profile-picture [user]="realUser" class="centerV" size="x-small"></app-profile-picture>
+                                <app-profile-picture [user]="user" class="centerV" size="x-small"></app-profile-picture>
                             </div>
                         </div>
                         <div class="col-90">
@@ -198,4 +202,4 @@ thread with: {{thread.withId}}
             </form>
         </div>
     </div>
-</div> -->
+</div> 

@@ -76,6 +76,8 @@ export interface _CallModel
 	duration: number;
 	endDate: Date;
 	sealed: boolean;
+	inviting: boolean;
+	inactiveSince: Date;
 	callStarted: boolean;
 	peers: PeerInfoModel[];
 }
@@ -121,7 +123,9 @@ export interface FriendshipModel
 }
 export interface _FeedbackModel
 {
+	feedbackId: number;
 	feedbackText: string;
+	teacherReply: string;
 	fosId: number;
 	fos: FOSModel;
 	teacherId: Guid;
@@ -165,18 +169,20 @@ export interface AchievementModel extends _CoreLookupModel
 	imageBlobId: Guid;
 	imageBlob: ImageBlobModel;
 }
-export interface FeedbackQuestionModel extends _FeedbackModel
+export interface QuestionFeedbackModel extends _FeedbackModel
 {
 }
-export interface FeedbackP2PModel extends _FeedbackModel
+export interface P2PFeedbackModel extends _FeedbackModel
 {
-	knowleadge: number;
-	accurate: number;
+	expertise: number;
+	helpful: number;
+	p2pId: number;
+	p2p: P2PModel;
 }
-export interface FeedbackCourseModel extends _FeedbackModel
+export interface CoursFeedbackeModel extends _FeedbackModel
 {
 }
-export interface FeedbackClassModel extends _FeedbackModel
+export interface ClassFeedbackModel extends _FeedbackModel
 {
 }
 export interface _GeoLookupModel
@@ -321,6 +327,7 @@ export interface ApplicationUserModel
 	isMale: boolean;
 	timezone: string;
 	aboutMe: string;
+	averageRating: number;
 	profilePictureId: Guid;
 	profilePicture: ImageBlobModel;
 	countryId: number;
