@@ -17,6 +17,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { RegisterSuccessPageComponent } from './pages/register-success-page/register-success-page.component';
 import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
+import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     { path: 'profile/:id', component: ProfilePageComponent },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'store', component: ReferralsPageComponent, canActivate: [AuthGuard, RegisteredGuard] }
 ];
 
 export const appRoutingProviders: any[] = [

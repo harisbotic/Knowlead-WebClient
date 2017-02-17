@@ -76,6 +76,7 @@ import { P2pDiscussionComponent } from './components/sub-p2p/p2p-discussion/p2p-
 import { P2pThreadComponent } from './components/sub-p2p/p2p-thread/p2p-thread.component';
 import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
+import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p
     P2pDiscussionComponent,
     P2pThreadComponent,
     DefaultHomePageComponent,
-    SingleP2pComponent
+    SingleP2pComponent,
+    ReferralsPageComponent
   ],
   imports: [
     BrowserModule,

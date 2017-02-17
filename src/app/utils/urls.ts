@@ -13,6 +13,7 @@ export const LANGUAGES = API + '/api/lookup/languages';
 export const COUNTRIES = API + '/api/lookup/countries';
 export const STATES = API + '/api/lookup/states';
 export const FOSES = API + '/api/lookup/foses';
+export const REWARDS = API + '/api/lookup/rewards';
 
 export const P2P_NEW = API + '/api/p2p/create';
 export const P2P_ALL = API + '/api/p2p/list';
@@ -35,3 +36,5 @@ export const NOTEBOOK = API + '/api/notebook';
 export const NOTIFICATIONS = API + '/api/notification';
 export const NOTIFICATION_STATS = API + '/api/notification/stats';
 export const NOTIFICATIONS_MARK_AS_READ = API + '/api/notification/markAsRead';
+
+export const REFERRALS = API + '/api/store/referralStats';

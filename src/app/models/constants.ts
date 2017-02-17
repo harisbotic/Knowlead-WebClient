@@ -9,6 +9,7 @@ export class NotificationTypes
 {
 	static newP2PComment: string = "NotificationTypes.NEW_P2P_COMMENT";
 	static p2PExpired: string = "NotificationTypes.P2P_EXPIRED";
+	static p2POfferAccepted: string = "NotificationTypes.P2P_OFFER_ACCEPTED";
 	static prepareForP2P: string = "NotificationTypes.PREPARE_FOR_P2P";
 	static rewardClaimed: string = "NotificationTypes.REWARD_CLAIMED";
 	static newFriendship: string = "NotificationTypes.NEW_FRIENDSHIP";
