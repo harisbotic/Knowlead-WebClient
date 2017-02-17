@@ -1,6 +1,6 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouteReuseStrategy, DetachedRouteHandle, ActivatedRouteSnapshot } from '@angular/router';
 import { FriendshipPageComponent } from './pages/friendship-page/friendship-page.component';
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, Component } from '@angular/core';
 import { GuestHomePageComponent } from './pages/guest-home-page/guest-home-page.component';
 import { ConfirmEmailPageComponent} from './pages/confirm-email-page/confirm-email-page.component';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
@@ -63,3 +63,88 @@ export function isPathFree(path: string): boolean {
 }
 
 export const AppRouting: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+
+// export interface ShouldReuse {
+//     shouldStore(route: ActivatedRouteSnapshot, data: any): boolean;
+//     store(): any;
+//     shouldRestore(route: ActivatedRouteSnapshot, data: any): boolean;
+//     restore(data: any);
+// }
+
+// function isShouldReuseComponent(component: Component): component is ShouldReuse {
+//     const tmp: any = component;
+//     return tmp.shouldRestore && tmp.store && tmp.shouldRestore && tmp.restore;
+// }
+
+// export class CustomReuseStrategy implements RouteReuseStrategy {
+
+//     handlers: {[key: string]: DetachedRouteHandle} = {};
+//     data: {[key: string]: any} = {};
+
+//     private getData(route: ActivatedRouteSnapshot): any {
+//         if (!!route.routeConfig) {
+//             return this.data[route.routeConfig.path];
+//         }
+//     }
+
+//     private setData(route: ActivatedRouteSnapshot, data: any) {
+//         if (!!route.routeConfig) {
+//             this.data[route.routeConfig.path] = data;
+//         }
+//     }
+
+//     private getHandler(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+//         if (!!route.routeConfig) {
+//             return this.handlers[route.routeConfig.path];
+//         }
+//     }
+
+//     private setHandler(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle) {
+//         if (!!route.routeConfig) {
+//             this.handlers[route.routeConfig.path] = handle;
+//         }
+//     }
+
+//     shouldDetach(route: ActivatedRouteSnapshot): boolean {
+//         const tmp: ShouldReuse = <any>route.component;
+//         return (isShouldReuseComponent(route.component)) ? tmp.shouldStore(route, this.getData(route)) : false;
+//     }
+
+//     store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+//         const tmp: ShouldReuse = <any>route.component;
+//         this.setData(route, tmp.store());
+//         this.setHandler(route, handle);
+//     }
+
+//     shouldAttach(route: ActivatedRouteSnapshot): boolean {
+//         if (!!route.routeConfig && isShouldReuseComponent(route.component)) {
+//             const tmp: ShouldReuse = <any>route.component;
+//             const rest = tmp.shouldRestore(route, this.getData(route));
+//             if (rest && this.getHandler(route)) {
+//                 return true;
+//             }
+//             if (!rest && this.getData(route)) {
+//                 delete this.data[route.routeConfig.path];
+//             }
+//             if (!rest && this.getHandler(route)) {
+//                 delete this.handlers[route.routeConfig.path];
+//             }
+//         }
+//         return false;
+//     }
+
+//     retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+//         if (!route.routeConfig) {
+//             return null;
+//         }
+//         const tmp: ShouldReuse = <any>route.component;
+//         if (this.)
+//         tmp.restore(this.getData(route));
+//         return this.getHandler(route);
+//     }
+
+//     shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+//         return future.routeConfig === curr.routeConfig;
+//     }
+
+// }

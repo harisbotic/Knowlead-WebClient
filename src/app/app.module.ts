@@ -22,7 +22,7 @@ import { SessionService } from './services/session.service';
 import { HttpProvider } from './http.provider';
 import { StorageService } from './services/storage.service';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
-import { Router } from '@angular/router';
+import { Router, RouteReuseStrategy } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';

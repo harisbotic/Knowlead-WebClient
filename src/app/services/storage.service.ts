@@ -18,6 +18,7 @@ export class StorageService {
   protected fosHierarchy: FOSModel;
   protected accessTokenStream = new BehaviorSubject<string>(undefined);
 
+  public temporaryCache: {[key: string]: any} = {};
   public cache: {[key: string]: StorageSubject<any>} = {};
 
   public static getCacheKey(key: StorageKey, parameters?: {[key: string]: any}): string {
