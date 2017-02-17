@@ -21,6 +21,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   signaledSDPs: string[];
 
   @ViewChild('video') video: ElementRef;
+  @ViewChild('myVideo') myVideo: ElementRef;
   JSON = JSON;
   call: _CallModel;
   user: ApplicationUserModel;
@@ -47,6 +48,11 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     }
   }
 
+  private addStreamToVideo(video: HTMLVideoElement, theStream: MediaStream) {
+    video.src = window.URL.createObjectURL(theStream);
+    video.play();
+  }
+
   initPeer() {
     this.signaledSDPs = [];
     if (this.myStream) {
@@ -59,6 +65,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     console.debug('Initializing peer');
     navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((myStream) => {
       this.myStream = myStream;
+      this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
       console.debug('Peer initialized');
       this.peer.on('signal', (data) => {
@@ -68,9 +75,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       });
       this.peer.on('stream', (otherStream) => {
         this.otherStream = otherStream;
-        let video: HTMLVideoElement = this.video.nativeElement;
-        video.src = window.URL.createObjectURL(otherStream);
-        video.play();
+        this.addStreamToVideo(this.video.nativeElement, otherStream);
       });
       this.setOtherSDP();
     }, (error) => {

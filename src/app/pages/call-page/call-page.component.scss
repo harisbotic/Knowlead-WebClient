@@ -4,6 +4,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
 .videoSection-wrap {
@@ -15,22 +16,101 @@
     background-repeat: no-repeat;
     background-size: cover;
     z-index: -100;
+    overflow: hidden;
+
+    &:hover > .videoButtons-wrap > .videoButton,
+    &:hover > .videoButtons-wrap > .endVideoButton {
+        // transform: translateY(-300px);
+        animation: videButtonTick 180ms ease-out forwards;
+    }
 }
 
 .video-container {
+    position: relative;
     width: 100%;
     height: 100vh;
     overflow: hidden;
     float: left;
+
+    > .myVideo {
+        position: absolute;
+        bottom: 3%;
+        left: 3%;
+    }
+}
+
+.watermark {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparentize(white, 0.65);
+    color: transparentize($icon-dark-color, 0.5);
+    text-align: center;
+    font-size: 30px;
 }
 
 .videoButtons-wrap {
     position: absolute;
-    bottom: 10px;
-    width: 100%;
-    height: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    left: calc((100% - 400px) / 2);
+    width: 165px;
+    transform: translateX(-82.5px);
+    height: 45px;
+    font-size: 30px;
+    // transform: translateY(300px);
+}
+
+.videoButton {
+    transition: all 0.15s ease-in-out;
+    padding: 0 10px;
+    border-radius: $border-radius;
+    background-color: transparentize(white, 0.65);
+    color: transparentize($icon-dark-color, 0.5);
+    border: none;
+    outline: none;
+    display: inline-flex;
+    height: 45px;
+    transform: scale(0);
+
+    &:hover {
+        background-color: transparentize(white, 0.3);
+    }
+}
+
+.videoButton-offState {
+    padding: 0 10px;
+    border-radius: $border-radius;
+    background-color: transparentize(white, 0.2);
+    color: transparentize($icon-dark-color, 0.5);
+    border: none;
+    outline: none;
+    display: inline-flex;
+    height: 45px;
+
+    &:hover {
+        background-color: transparentize(white, 0.3);
+    }
+}
+
+.endVideoButton {
+    padding: 0 10px;
+    border-radius: $border-radius;
+    background-color: transparentize(white, 0.65);
+    color: transparentize($icon-dark-color, 0.5);
+    border: none;
+    outline: none;
+    display: inline-flex;
+    height: 45px;
+    transform: scale(0);
+
+    &:hover {
+        background-color: transparentize($knowlead-secondary, 0.3);
+        color: white;
+    }
 }
 
 .sidebar-wrap {
@@ -58,6 +138,13 @@
     height: 50px;
 }
 
+.notebookSelection-wrap {
+    margin-left: 25px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 92vh;
+}
+
 
 .chatSection-wrap {
     position: relative;
@@ -73,14 +160,12 @@
     bottom: 0;
     left: 0;
     right: 0;
+    overflow-y: scroll;
     overflow-x: hidden;
-
-    .sortMessages {
-        display: -webkit-flex;
-        -webkit-flex-direction: column-reverse;
-        display: flex;
-        flex-direction: column-reverse;
-    }
+    display: -webkit-flex;
+    -webkit-flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 

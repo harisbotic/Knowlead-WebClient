@@ -3,9 +3,30 @@
         <div class="videoSection-wrap">
             <div class="video-container">
                 <video #video width="100%" height="100%"></video>
-                <div class="videoButtons-wrap">
-                    <button (click)="requestStop()">STOP</button>
-                </div>
+                <video #myVideo width="150px" height="150px" muted="true" class="myVideo"></video>
+            </div>
+            <div class="watermark">
+                <i class="kl-logo-short"></i>
+            </div>
+            <div class="videoButtons-wrap">
+                <button class="videoButton">
+                    <i class="kl-camera"></i>
+                </button>
+                <!-- <button class="videoButton-offState">
+                    <i class="kl-camera-off"></i>
+                </button> -->
+
+                <button (click)="requestStop()" class="endVideoButton">
+                    <i class="kl-phone"></i>
+                </button>
+
+                <button class="videoButton">
+                    <i class="kl-mic"></i>
+                </button>
+                <!-- <button class="videoButton-offState">
+                    <i class="kl-mic-off"></i>
+                </button> -->
+
             </div>
         </div>
         <div class="sidebar-wrap">
@@ -26,78 +47,31 @@
                         </div>
 
                         <!-- NOTE: CHAT COMPONENT -->
-                        <div class="chat-wrap">
+                        <!-- <div class="chat-wrap">
                             <div class="row chatSection-wrap">
-                                <perfect-scrollbar class="chatSection">
-                                    <div class="sortMessages">
-                                        <div class="row">
-                                            <div class="myMessage">my very FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other FIRST chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="myMessage">my very LAST chat message. This is indeed my chat message.</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="otherMessage">other LAST chat message. This is indeed OTHER chat message.</div>
-                                        </div>
+                                <div class="chatSection">
+                                    <div class="row">
+                                        <div class="myMessage">my very FIRST chat message. This is indeed my chat message.</div>
                                     </div>
-                                </perfect-scrollbar>
+                                    <div class="row">
+                                        <div class="otherMessage">other FIRST chat message. This is indeed OTHER chat message.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="otherMessage">other chat message. This is indeed OTHER chat message.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="myMessage">my FIRST chat message. This is indeed my chat message.</div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -109,19 +83,12 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
 
                         <!-- NOTE: NOTEBOOK SECTION! -->
-                        <!-- <div class="row">
-                            <div class="col-100">
-                                <div class="backLink-wrap">
-                                    <a href="" class="backLink">
-                                        <i class="kl-back"></i>
-                                        Back
-                                    </a>
-                                </div>
-                            </div>
-                        </div> -->
+                        <div class="row notebookSelection-wrap">
+                            <app-notebook-list></app-notebook-list>
+                        </div>
 
                     </div>
                 </div>
