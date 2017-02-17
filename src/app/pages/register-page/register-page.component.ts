@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
 import { RegisterUserModel } from '../../models/dto';
 import { BaseFormComponent } from '../../base-form.component';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-register-page',
@@ -24,16 +25,6 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
               protected router: Router,
               protected route: ActivatedRoute) {
     super();
-  }
-
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['ref']) {
-        this.referral = params['ref'];
-      } else {
-        this.form.patchValue({referralUserId: undefined});
-      }
-    });
   }
 
   onSubmit() {
@@ -64,12 +55,14 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
     });
   }
 
-  getNewValue() {
-    return {
-      email: '',
-      password: '',
-      referralUserId: this.referral
-    };
+  getNewValue(): Observable<RegisterUserModel> {
+    return this.route.queryParams.map(params => {
+      return {
+        referralUserId: params['ref'],
+        email: '',
+        password: ''
+      };
+    });
   }
 
   ngDoCheck() {

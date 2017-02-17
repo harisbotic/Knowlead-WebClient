@@ -5,7 +5,7 @@ import { ReferralStatsModel, RewardModel, ApplicationUserModel } from '../../../
 import { AccountService } from '../../../services/account.service';
 import { ModelUtilsService } from '../../../services/model-utils.service';
 
-interface StepInterface {
+interface StopInterface {
   count: number;
   last: boolean;
   upperString: string;
@@ -16,6 +16,11 @@ interface StepInterface {
   canClaim?: boolean;
 }
 
+interface ReferralStatus {
+  email: string;
+  status: string;
+}
+
 @Component({
   selector: 'app-referrals-page',
   templateUrl: './referrals-page.component.html',
@@ -24,7 +29,7 @@ interface StepInterface {
 })
 export class ReferralsPageComponent extends BaseComponent implements OnInit {
 
-  stops: StepInterface[] = [{
+  stops: StopInterface[] = [{
     count: 3,
     width: 128,
     upperString: '50',
@@ -73,9 +78,11 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
   stats: ReferralStatsModel;
   rewards: RewardModel[];
   user: ApplicationUserModel;
+  currentStop: StopInterface;
   getReferralLink = ModelUtilsService.getReferralLink;
+  statuses: ReferralStatus[];
 
-  constructor(protected storeService: StoreService, protected accountService: AccountService) { super(); }
+  constructor(protected accountService: AccountService, protected storeService: StoreService) { super(); }
 
   refresh() {
     if (!this.stats || !this.rewards) {
@@ -83,13 +90,31 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
     }
     for (let claimable of this.stats.rewardsAvailable) {
       let reward = this.rewards.find(r => r.coreLookupId === claimable);
-      let step = this.stops.find(s => s.count === reward.minutesReward);
-      step.canClaim = true;
+      let stop = this.stops.find(s => s.count === reward.minutesReward);
+      if (stop == null) {
+        console.error('BACKEND REWARDS NOT CONSISTENT WITH FRONTEND');
+      } else {
+        stop.canClaim = true;
+      }
+    }
+    for (let claimed of this.stats.rewardsClaimed) {
+      let reward = this.rewards.find(r => r.coreLookupId === claimed);
+      let stop = this.stops.find(s => s.count === reward.minutesReward);
+      if (stop && (!this.currentStop || stop.count > this.currentStop.count)) {
+        this.currentStop = stop;
+      }
+    }
+    this.statuses = [];
+    for (let key of Object.keys(this.stats.unregisteredReferrals)) {
+      this.statuses.push({
+        email: key,
+        status: this.stats.unregisteredReferrals[key]
+      });
     }
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
     this.subscriptions.push(this.storeService.getReferralStats().subscribe(stats => {
       this.stats = stats;
       this.refresh();
@@ -98,6 +123,16 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
       this.rewards = rewards;
       this.refresh();
     }));
+  }
+
+  claimReward(stop: StopInterface) {
+    let reward = this.rewards.find(r => r.minutesReward === stop.count);
+    this.storeService.claimReward(reward).subscribe(() => {
+      this.storeService.getReferralStats().subscribe((stats) => {
+        this.stats = stats;
+        this.refresh();
+      })
+    })
   }
 
 }

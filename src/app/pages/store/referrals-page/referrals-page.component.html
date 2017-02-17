@@ -4,7 +4,7 @@
       <p class="callout brandon">Here's How It Works:</p>
       <ul class="products clearfix">
         <li class="first"></li>
-        <li *ngFor="let stop of stops" [class.selected]="stop.selected" [class.last]="stop.last" class="product brandon">
+        <li *ngFor="let stop of stops" [class.selected]="stop.selected" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
           <div class="circle">{{stop.count}}</div>
           <div class="sep"></div>
           <p>Nekakav tekst ovdje ide</p>
@@ -16,7 +16,7 @@
       </ul>
       <div class="progress">
         <div class="mover">
-          <div class="bar clearfix" [style.width]="currentStep?.width + 'px'"></div>
+          <div class="bar clearfix" [style.width]="currentStop?.width + 'px'"></div>
         </div>
       </div>
     </div>
@@ -24,3 +24,4 @@
 </div>
 Number of referrals: {{stats?.registratedReferralsCount}}
 Referral link: <a *ngIf="user" href="{{getReferralLink(user)}}">{{getReferralLink(user)}}</a>
+<div *ngFor="let status of statuses">{{status.email}} - {{status.status}}</div>

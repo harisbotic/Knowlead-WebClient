@@ -38,3 +38,4 @@ export const NOTIFICATION_STATS = API + '/api/notification/stats';
 export const NOTIFICATIONS_MARK_AS_READ = API + '/api/notification/markAsRead';
 
 export const REFERRALS = API + '/api/store/referralStats';
+export const CLAIM_REWARD = API + '/api/reward/claim';

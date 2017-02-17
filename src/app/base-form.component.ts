@@ -2,11 +2,12 @@ import { BaseComponent } from './base.component';
 import { FormGroup } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 export abstract class BaseFormComponent<T> extends BaseComponent implements OnInit {
     form: FormGroup;
     wasSet = false;
     protected subscriptions: Subscription[];
-    abstract getNewValue(): T;
+    abstract getNewValue(): T | Observable<T>;
     abstract getNewForm(): FormGroup;
     abstract onSubmit();
 
@@ -42,7 +43,13 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
 
     restartForm() {
         this.form.reset();
-        this.applyFullValue(this.getNewValue());
+        let tmp = this.getNewValue();
+        if (!(tmp instanceof Observable)) {
+            tmp = Observable.of(tmp);
+        }
+        tmp.take(1).subscribe(value => {
+            this.applyFullValue(value);
+        });
     }
 
     constructor() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReferralStatsModel, RewardModel } from '../models/dto';
-import { REFERRALS } from '../utils/urls';
+import { REFERRALS, CLAIM_REWARD } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './storage.service';
@@ -17,6 +17,10 @@ export class StoreService {
 
   getRewardLookups(): Observable<RewardModel[]> {
     return this.storageService.getFromStorage('rewards', undefined);
+  }
+
+  claimReward(rewardModel: RewardModel): Observable<any> {
+    return this.http.post(CLAIM_REWARD, rewardModel);
   }
 
 }
