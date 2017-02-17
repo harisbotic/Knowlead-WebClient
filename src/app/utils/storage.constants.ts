@@ -1,8 +1,8 @@
-import { ME, LANGUAGES, COUNTRIES, STATES, FOSES, USER, P2P, GET_FRIENDS, NOTEBOOK, P2P_MESSAGES } from './urls';
+import { ME, LANGUAGES, COUNTRIES, STATES, FOSES, USER, P2P, GET_FRIENDS, NOTEBOOK, P2P_MESSAGES, REWARDS } from './urls';
 // import { NotebookModel } from '../models/dto';
 
 export type StorageKey = 'user' | 'languages' | 'countries' | 'states' | 'FOSes' | 'otherUser' | 'p2p' | 'friends' | 'notebook' |
-    'p2pMessages';
+    'p2pMessages' | 'rewards';
 export interface MockType {
     value: any;
     idKey: string;
@@ -21,6 +21,7 @@ export const STORAGE_CONFIG: {[StorageKey: string]: StorageConfiguration} = {
     'countries': {api: COUNTRIES, clearOnLogout: false },
     'states': {api: STATES, parameters: ['countryId'], clearOnLogout: false},
     'FOSes': {api: FOSES, clearOnLogout: false},
+    'rewards': {api: REWARDS, clearOnLogout: false},
     'otherUser': {api: USER, parameters: ['id', 'includeDetails'], clearOnLogout: false},
     'p2p': {api: P2P, parameters: ['id'], clearOnLogout: true},
     'friends': {api: GET_FRIENDS, clearOnLogout: true},

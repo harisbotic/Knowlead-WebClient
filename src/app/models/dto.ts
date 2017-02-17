@@ -48,6 +48,8 @@ export interface P2PMessageModel
 	messageTo: ApplicationUserModel;
 	messageFromId: Guid;
 	messageFrom: ApplicationUserModel;
+	offerAcceptedId: number;
+	offerAccepted: P2PMessageModel;
 }
 export interface _BlobModel
 {
@@ -153,6 +155,8 @@ export interface _CoreLookupModel
 }
 export interface RewardModel extends _CoreLookupModel
 {
+	pointsReward: number;
+	minutesReward: number;
 }
 export interface LanguageModel extends _CoreLookupModel
 {
