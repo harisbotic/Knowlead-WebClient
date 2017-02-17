@@ -123,6 +123,21 @@ export interface FriendshipModel
 	updatedAt: Date;
 	createdAt: Date;
 }
+export interface ConversationModel
+{
+	isMessageSender: boolean;
+	lastMessage: string;
+	rowKey: string;
+	timestamp: Date;
+}
+export interface ChatMessageModel
+{
+	message: string;
+	sendToId: Guid;
+	senderId: Guid;
+	rowKey: string;
+	timestamp: Date;
+}
 export interface _FeedbackModel
 {
 	feedbackId: number;
@@ -358,5 +373,15 @@ export interface ApplicationUserInterestModel
 	fosId: number;
 	fos: FOSModel;
 	stars: number;
+}
+export enum DayOfWeek
+{
+	Sunday = 0,
+	Monday = 1,
+	Tuesday = 2,
+	Wednesday = 3,
+	Thursday = 4,
+	Friday = 5,
+	Saturday = 6,
 }
 export type Guid = string;

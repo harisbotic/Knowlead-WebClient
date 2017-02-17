@@ -77,6 +77,7 @@ import { P2pThreadComponent } from './components/sub-p2p/p2p-thread/p2p-thread.c
 import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
+import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-p
     P2pThreadComponent,
     DefaultHomePageComponent,
     SingleP2pComponent,
-    ReferralsPageComponent
+    ReferralsPageComponent,
+    CallChatComponent
   ],
   imports: [
     BrowserModule,

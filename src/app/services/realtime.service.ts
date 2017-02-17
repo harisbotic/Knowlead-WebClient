@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
 import { NotificationService } from './notifications/notification.service';
-import { _CallModel, NotificationModel } from '../models/dto';
+import { _CallModel, NotificationModel, ChatMessageModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
@@ -31,6 +31,7 @@ export class RealtimeService {
   public callModelUpdateSubject = new Subject<CallEvent>();
   public callErrorSubject = new Subject<any>();
   public connectionStateSubject = new BehaviorSubject<boolean>(false);
+  public callMessageSubject = new Subject<ChatMessageModel>();
 
   protected parseIfString<T>(value: T): T {
     if (typeof(value) === 'string') {
@@ -81,6 +82,13 @@ export class RealtimeService {
       this.rpcConnection.on('stopCall', (reason: string) => {
         this.callModelUpdateSubject.next({type: CallEventType.CALL_END, call: null, reason: reason});
       });
+      this.rpcConnection.on('callMsg', (message: ChatMessageModel) => {
+        let chatMessage = this.parseIfString<ChatMessageModel>(message);
+        chatMessage.timestamp = (typeof chatMessage.timestamp === 'string') ?
+          new Date(Date.parse(chatMessage.timestamp)) :
+          chatMessage.timestamp;
+        this.callMessageSubject.next(chatMessage);
+      });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }
@@ -117,6 +125,10 @@ export class RealtimeService {
     return this.rpcConnection.invoke('GetCallModel', callId).then((value) => {
       return new Promise<_CallModel>((resolve, reject) => resolve(JSON.parse(<any>value)));
     });
+  }
+
+  sendCallMsg(message: ChatMessageModel) {
+    this.invoke(this.callErrorSubject, 'CallMsg', message);
   }
 
   private invoke(errorSubject: Subject<any>, nameOfFunction: string, ...params) {

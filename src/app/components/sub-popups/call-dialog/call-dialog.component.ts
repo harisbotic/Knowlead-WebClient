@@ -42,10 +42,8 @@ export class CallDialogComponent extends BaseComponent implements OnInit, OnDest
       }
     }));
     this.subscriptions.push(this.realtimeService.callErrorSubject.subscribe((err) => {
-      if (this.call) {
-        this.cleanup();
-        this.notificationService.error('Error joining call', 'Invitation expired');
-      }
+      this.cleanup();
+      this.notificationService.error('Error joining call', 'Invitation expired');
     }));
   }
 

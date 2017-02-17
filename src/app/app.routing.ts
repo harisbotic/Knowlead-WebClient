@@ -18,6 +18,8 @@ import { RegisterSuccessPageComponent } from './pages/register-success-page/regi
 import { DefaultHomePageComponent } from './pages/user-home-page/default-home-page/default-home-page.component';
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
+import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
+import { NotebookListComponent } from './components/sub-notebook/notebook-list/notebook-list.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -34,7 +36,11 @@ const appRoutes: Routes = [
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },
-    { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
+        { path: 'chat', component: CallChatComponent, pathMatch: 'full' },
+        { path: 'notebook', component: NotebookListComponent, pathMatch: 'full' },
+        { path: '', redirectTo: 'chat', pathMatch: 'full' }
+    ] },
     { path: 'profile/:id', component: ProfilePageComponent },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },
