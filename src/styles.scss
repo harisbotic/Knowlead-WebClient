@@ -439,3 +439,15 @@ ngl-rating {
         transform: scale(1);
     }
 }
+
+@keyframes videButtonTick {
+    0% {
+        transform: scale(0);
+    }
+    85% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

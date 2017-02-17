@@ -9,6 +9,45 @@
     font-size: 16px;
 }
 
+.topElements-wrap {
+    margin-right: 50px;
+    border-bottom: 2px solid $hover-dark-color;
+}
+
+.profileInfo-wrap {
+    height: 120px;
+    position: relative;
+
+    .profileInfo-name {
+        margin-top: 20px;
+
+        > a, a:visited, a:active {
+            text-decoration: none;
+            color: $font-primary-color;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.bottomElements-wrap {
+    font-weight: bold;
+    margin-right: 50px;
+
+    #minutesValue {
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+    #scoreValue {
+        padding-top: 5px;
+        padding-right: 10px;
+        text-align: right;
+    }
+}
+
 .menuItem-wrap {
     margin: 5px 0;
     max-width: 155px;

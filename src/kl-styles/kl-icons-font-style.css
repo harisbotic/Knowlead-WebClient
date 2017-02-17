@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Knowlead-Icons-Font';
-  src:  url('fonts/Knowlead-Icons-Font.eot?qma9gb');
-  src:  url('fonts/Knowlead-Icons-Font.eot?qma9gb#iefix') format('embedded-opentype'),
-    url('fonts/Knowlead-Icons-Font.ttf?qma9gb') format('truetype'),
-    url('fonts/Knowlead-Icons-Font.woff?qma9gb') format('woff'),
-    url('fonts/Knowlead-Icons-Font.svg?qma9gb#Knowlead-Icons-Font') format('svg');
+  src:  url('fonts/Knowlead-Icons-Font.eot?rb6ter');
+  src:  url('fonts/Knowlead-Icons-Font.eot?rb6ter#iefix') format('embedded-opentype'),
+    url('fonts/Knowlead-Icons-Font.ttf?rb6ter') format('truetype'),
+    url('fonts/Knowlead-Icons-Font.woff?rb6ter') format('woff'),
+    url('fonts/Knowlead-Icons-Font.svg?rb6ter#Knowlead-Icons-Font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.kl-camera:before {
+  content: "\e91d";
+}
+.kl-camera-off:before {
+  content: "\e91e";
+}
+.kl-mic:before {
+  content: "\e91f";
+}
+.kl-mic-off:before {
+  content: "\e920";
+}
+.kl-phone:before {
+  content: "\e921";
+}
 .kl-search:before {
   content: "\e91c";
 }

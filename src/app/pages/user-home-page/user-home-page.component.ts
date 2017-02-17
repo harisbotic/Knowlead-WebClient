@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { P2PModel } from '../../models/dto';
-import { P2pService } from '../../services/p2p.service';
+import { Component, OnInit } from '@angular/core';
+import { ApplicationUserModel } from '../../models/dto';
+import { AccountService } from '../../services/account.service';
+import { ModelUtilsService } from '../../services/model-utils.service';
 import { BaseComponent } from '../../base.component';
 
 @Component({
@@ -8,12 +9,17 @@ import { BaseComponent } from '../../base.component';
   templateUrl: './user-home-page.component.html',
   styleUrls: ['./user-home-page.component.scss']
 })
-export class UserHomePageComponent extends BaseComponent {
+export class UserHomePageComponent extends BaseComponent implements OnInit {
 
-  p2ps: P2PModel[] = [];
+  user: ApplicationUserModel;
+  fullName = ModelUtilsService.getUserFullName;
 
-  constructor(protected p2pService: P2pService) {
+  constructor(protected accountService: AccountService) {
     super();
+  }
+
+  ngOnInit() {
+    this.accountService.currentUser().subscribe(user => this.user = user);
   }
 
 }
