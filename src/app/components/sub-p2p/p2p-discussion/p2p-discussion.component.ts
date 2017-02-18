@@ -75,4 +75,8 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
     }));
   }
 
+  trackByThreads(thread: ThreadModel): any {
+    return thread.withId;
+  }
+
 }

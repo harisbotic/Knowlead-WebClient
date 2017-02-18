@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-35">
                                 <div class="threadOptionsButtons">
-                                    <button class="newOfferButton" (click)="openCode = thread.messages.length">New Offer</button>
+                                    <button class="newOfferButton" (click)="openCode = (openCode > 0) ? 0 : thread.messages.length">New Offer</button>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                                 <i class="kl-calendar writeOfferDate-icon"></i>
                             </div>
                             <div class="col-85">
-                                <app-flatpickr formControlName="dateTimeOffer" class="writeOfferDatepickInput"></app-flatpickr>
+                                <app-flatpickr placeholder="Select date for studying" formControlName="dateTimeOffer" class="writeOfferDatepickInput" [disablePast]="true" [disableMax]="thread.p2p.deadline"></app-flatpickr>
                             </div>
                         </div>
                         <div class="col-40">
