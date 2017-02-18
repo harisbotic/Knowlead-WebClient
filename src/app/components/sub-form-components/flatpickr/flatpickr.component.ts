@@ -21,6 +21,7 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
 
   @Input() placeholder: string;
   @Input() disablePast = false;
+  @Input() disableMax: Date;
   constructor() { super(); }
 
   ngAfterViewInit() {
@@ -29,17 +30,21 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
       onChange: (date) => this.value = date[0],
       defaultDate: this.initialValue,
       enableTime: true,
-      disable: [],
+      enable: [],
       time_24hr: true
     };
     if (this.disablePast) {
-      config.disable.push((date: Date) => {
+      config.enable.push((date: Date) => {
         let d = new Date();
         d.setHours(0);
         d.setMinutes(0);
         d.setSeconds(0);
         d.setMilliseconds(0);
-        return d.getTime() > date.getTime();
+        let ret = d.getTime() <= date.getTime();
+        if (this.disableMax) {
+          ret = ret && this.disableMax.getTime() > date.getTime();
+        }
+        return ret;
       });
     }
     this.flatpickr = this.element.nativeElement.flatpickr(config);

@@ -16,7 +16,7 @@ import { AccountService } from '../../../services/account.service';
 export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> implements OnInit {
 
   @Input() _thread: ThreadModel;
-  @Input() openCode = 0; // When this code equals to number of messages then new offer form is displayed
+  openCode = 0; // When this code equals to number of messages then new offer form is displayed
   @Input() set thread(value: ThreadModel) {
     if (this._thread && value && this._thread.messages.length === this.openCode) {
       this.openCode = value.messages.length;
@@ -124,6 +124,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
       this.user = user;
       this.refresh();
     }));
+    console.log("THREAD");
   }
 
   acceptOrSchedule() {
