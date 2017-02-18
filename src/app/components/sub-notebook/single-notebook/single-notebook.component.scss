@@ -1,4 +1,5 @@
 @import '../../../../kl-styles/variables.scss';
+
 svg {
     width: 150px;
 }
@@ -21,4 +22,7 @@ svg {
     background-color: white;
     border: 2px solid $font-primary-color;
     padding: 2px;
+    text-decoration: none;
+    color: $font-primary-color;
+    font-weight: bold;
 }

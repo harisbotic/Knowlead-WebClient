@@ -14,8 +14,7 @@
 
 .notebookForm-wrap {
     width: 395px;
-    height: 90vh;
-    border: 2px solid black;
+    height: 92vh;
 }
 
 .primaryColor, .secondaryColor {
@@ -81,6 +80,11 @@
     font-weight: bold;
     padding-right: 10px;
     float: left;
+    outline: none;
+
+    &:hover {
+        background-color: transparentize($knowlead-secondary, 0.2);
+    }
 }
 
 .notebookCloseButton {
@@ -92,4 +96,9 @@
     font-weight: bold;
     padding-left: 10px;
     float: right;
+    outline: none;
+
+    &:hover {
+        background-color: $hover-dark-color;
+    }
 }

@@ -1,8 +1,15 @@
+@import '../../../../kl-styles/variables.scss';
+
 .notebookList-wrap {
     margin-left: 25px;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 92vh;
+
+    a, a:visited, a:active {
+        text-decoration: none;
+        color: $font-primary-color;
+    }
 }
 
 .addNewNotebook {
@@ -17,6 +24,7 @@
     background-color: transparent;
     outline: none;
     display: block;
+    padding-top: 43px;
 
     &:hover {
         background-color: transparentize(grey, 0.7)

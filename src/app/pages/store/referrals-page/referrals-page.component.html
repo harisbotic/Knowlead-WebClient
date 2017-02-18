@@ -1,27 +1,67 @@
-<div id="refer">
-  <div class="prizes">
-    <div class="page-content">
-      <p class="callout brandon">Here's How It Works:</p>
-      <ul class="products clearfix">
-        <li class="first"></li>
-        <li *ngFor="let stop of stops" [class.selected]="stop.selected" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
-          <div class="circle">{{stop.count}}</div>
-          <div class="sep"></div>
-          <p>Nekakav tekst ovdje ide</p>
+<div class="grid-container">
+    <div class="row">
+        <div class="header-wrap">
+            <div class="row centerV">
+                <div class="headerInfo-wrap">
+                    <div class="row">
+                        <div class="headerTitle">Invite Friends &amp;</div>
+                        <div class="headerTitle" id="titleBelow">Earn Rewards</div>
+                    </div>
+                    <div class="row">
+                        <div class="headerText">Share your unique link to your friends and earn <br> Knowlead rewards for each friend who signs up.</div>
+                    </div>
+                    <div class="row">
+                        <div class="referralLink">
+                            <span>{{getReferralLink(user)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-          <div class="tooltip" *ngIf="stop.canClaim">
-            Claim your reward
+    <div id="refer">
+      <div class="prizes">
+        <div class="page-content">
+          <p class="callout brandon">Your Progress:</p>
+          <ul class="products clearfix">
+            <li class="first"></li>
+            <li *ngFor="let stop of stops" [class.selected]="stop.selected" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
+              <div class="circle">{{stop.count}}</div>
+              <div class="sep"></div>
+              <p>50<br>Minutes</p>
+
+              <div class="tooltip" *ngIf="stop.canClaim">
+                Claim your reward!
+              </div>
+            </li>
+          </ul>
+          <div class="progress">
+            <div class="mover">
+              <div class="bar clearfix" [style.width]="currentStop?.width + 'px'"></div>
+            </div>
           </div>
-        </li>
-      </ul>
-      <div class="progress">
-        <div class="mover">
-          <div class="bar clearfix" [style.width]="currentStop?.width + 'px'"></div>
         </div>
       </div>
     </div>
-  </div>
+
+
+
+    <div class="row referralBottomElements">
+        <div class="col-30">
+            <div class="cicrle-wrap">
+                <div class="completedReferrals-wrap centerV">
+                    <div class="completedRefferals-number centerV">{{stats?.registratedReferralsCount}}</div>
+                    <div class="completedReferrals-text">Completed Referrals</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-70">
+            <div class="pendingReferrals-wrap">
+                <div class="pendingReferrals-title">Pending Referrals</div>
+                <div *ngFor="let status of statuses">{{status.email}} - {{status.status}}</div>
+            </div>
+        </div>
+    </div>
+
 </div>
-Number of referrals: {{stats?.registratedReferralsCount}}
-Referral link: <a *ngIf="user" href="{{getReferralLink(user)}}">{{getReferralLink(user)}}</a>
-<div *ngFor="let status of statuses">{{status.email}} - {{status.status}}</div>
