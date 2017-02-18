@@ -40,16 +40,6 @@ export class ModelUtilsService {
       undefined;
   }
 
-  public static getUserFullName(value: ApplicationUserModel): string {
-    if (value == null) {
-      return '...';
-    }
-    if (!!!value.name || !!!value.surname) {
-      return value.email;
-    }
-    return value.name + ' ' + value.surname;
-  }
-
   public static getReferralLink(user: ApplicationUserModel): string {
     return FRONTEND + '/register?ref=' + user.id;
   }
@@ -187,6 +177,12 @@ export class ModelUtilsService {
     let ret = Observable.of(value);
     if (typeof(value.dateCreated) === 'string') {
       value.dateCreated = new Date(Date.parse(value.dateCreated));
+    }
+    if (typeof(value.dateTimeAgreed) === 'string') {
+      value.dateTimeAgreed = new Date(Date.parse(value.dateTimeAgreed));
+    }
+    if (typeof(value.deadline) === 'string') {
+      value.deadline = new Date(Date.parse(value.deadline));
     }
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));

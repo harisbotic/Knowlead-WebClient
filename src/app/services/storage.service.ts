@@ -114,6 +114,10 @@ export class StorageService {
     this.getOrCreateSubject(key, filler, parameters).changeValue(value);
   }
 
+  public modifyStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters: {[key: string]: any}, modifier: (value: T) => T) {
+    this.getOrCreateSubject(key, filler, parameters).modifyWithFunction(modifier);
+  }
+
   public refreshStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}) {
     this.getOrCreateSubject(key, filler, parameters).refresh(true);
   }

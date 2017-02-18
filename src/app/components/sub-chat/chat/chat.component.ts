@@ -13,7 +13,6 @@ export class ChatComponent implements OnInit {
 
   friends: ApplicationUserModel[] = [];
   converisations: ApplicationUserModel[] = [];
-  fullName = ModelUtilsService.getUserFullName;
 
   constructor(protected chatService: ChatService, protected modelUtilsService: ModelUtilsService) { }
 

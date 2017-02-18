@@ -78,6 +78,8 @@ import { DefaultHomePageComponent } from './pages/user-home-page/default-home-pa
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
 import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -128,7 +130,9 @@ import { CallChatComponent } from './pages/call-page/call-chat/call-chat.compone
     DefaultHomePageComponent,
     SingleP2pComponent,
     ReferralsPageComponent,
-    CallChatComponent
+    CallChatComponent,
+    FullNamePipe,
+    UserProfileLinkPipe
   ],
   imports: [
     BrowserModule,

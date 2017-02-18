@@ -4,7 +4,6 @@ import { P2PMessageModel, P2PStatus, ApplicationUserModel } from '../../../model
 import { BaseFormComponent } from '../../../base-form.component';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { dateValidator } from '../../../validators/date.validator';
-import { ModelUtilsService } from '../../../services/model-utils.service';
 import { P2pService } from '../../../services/p2p.service';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { AccountService } from '../../../services/account.service';
@@ -22,24 +21,39 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     this._thread = value;
     this.schedulable = this.thread.withId !== this.thread.p2p.createdById &&
       this.thread.p2p.scheduledWithId == null && !this.thread.p2p.isDeleted;
-    for (let i = 0; i < value.messages.length; i++) {
-      value.messages[i]['last'] = i === value.messages.length - 1;
-    }
+    this.refresh();
   }
   get thread() {
     return this._thread;
   }
 
   schedulable: boolean;
-  fullName = ModelUtilsService.getUserFullName;
   user: ApplicationUserModel;
   P2PStatus = P2PStatus;
+  isMyP2p: boolean;
 
   constructor(
       protected p2pService: P2pService,
       protected notificationService: NotificationService,
       protected accountService: AccountService) {
     super();
+  }
+
+  refresh() {
+    if (this.user && this.thread && this.thread.p2p) {
+      this.isMyP2p = this.user.id === this.thread.p2p.createdById;
+    }
+    let i;
+    for (i = 0; i < this.thread.messages.length; i++) {
+      this.thread.messages[i]['last'] = this.thread.messages.length - 1 === i;
+    }
+    for (i = this.thread.messages.length - 1; i >= 0 && this.thread.messages[i].offerAcceptedId; i--) {
+      this.thread.messages[i]['last'] = true;
+    }
+    if (i >= 0 && i < this.thread.messages.length - 1 && this.isMyP2p) {
+      this.thread.messages[i]['scheduleOverride'] = true;
+      this.thread.messages[i]['last'] = true;
+    }
   }
 
   getNewForm() {
@@ -66,6 +80,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
       p2pId: this.thread.p2p.p2pId,
       messageToId: this.thread.withId,
 
+      offerAcceptedId: undefined,
       p2pMessageId: undefined,
       timestamp: undefined,
       p2p: undefined,
@@ -73,11 +88,11 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
       messageFrom: undefined,
       messageFromId: undefined,
       offerAccepted: undefined,
-      offerAcceptedId: undefined
     };
   }
 
   onSubmit() {
+    console.log(this.form);
     if (!this.form.valid) {
       return;
     }
@@ -94,9 +109,26 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     });
   }
 
+  accept() {
+    this.p2pService.acceptOffer(this.thread.messages[this.thread.messages.length - 1]).subscribe(undefined, (err) => {
+      this.notificationService.error('Error accepting', err);
+    });
+  }
+
   ngOnInit() {
     super.ngOnInit();
-    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
+      this.user = user;
+      this.refresh();
+    }));
+  }
+
+  acceptOrSchedule() {
+    if (this.isMyP2p) {
+      this.schedule();
+    } else {
+      this.accept();
+    }
   }
 
 }

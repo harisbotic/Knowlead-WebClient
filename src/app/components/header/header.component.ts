@@ -18,7 +18,6 @@ import { NotificationService } from '../../services/notifications/notification.s
 export class HeaderComponent extends BaseComponent implements OnInit {
 
   user: ApplicationUserModel;
-  fullName = ModelUtilsService.getUserFullName;
   referral: string;
   shouldShow: boolean;
 

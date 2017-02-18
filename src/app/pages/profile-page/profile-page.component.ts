@@ -13,7 +13,6 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ProfilePageComponent extends BaseComponent implements OnInit {
 
-  fullName = ModelUtilsService.getUserFullName;
   target: ApplicationUserModel;
   user: ApplicationUserModel;
   status: string;

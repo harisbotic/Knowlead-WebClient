@@ -1,6 +1,6 @@
-<div class="row" *ngFor="let message of thread.messages">
-    <div class="col-100">
-        <div class="thread-wrap">
+<div class="row" *ngFor="let message of thread.messages; let idx = index;">
+    <div class="col-100" *ngIf="!message.offerAcceptedId">
+        <div [class.thread-wrap]="idx === 0" [class.thread-reply-wrap]="idx !== 0">
             <div class="offerOptions-wrap">
                 <a class="centerVr offerOptions-icon-wrap">
                     <i class="kl-more offerOptions-icon" [popover]="popover"></i>
@@ -52,7 +52,7 @@
                                         <div class="row">
                                             <div class="col-100">
                                                 <a href="" class="profile-link">
-                                                    <div class="profileName">{{fullName(message.messageFrom)}}</div>
+                                                    <div class="profileName">{{message.messageFrom | fullName}}</div>
                                                 </a>
                                             </div>
                                         </div>
@@ -102,14 +102,14 @@
                             </div>
                         </div>
                         <!-- TODO: FIX THIS STATUS CHECK -->
-                        <div class="col-45 threadOptions-wrap" *ngIf="(thread.p2p.status == P2PStatus.active || thread.p2p.statu == P2PStatus.inactive) && message.last">
+                        <div class="col-45 threadOptions-wrap" *ngIf="message.last">
                             <div class="col-65">
-                                <div class="threadOptionsButtons" *ngIf="message.messageFromId !== user?.id">
-                                    <button [class.scheduleButton]="thread.p2p?.createdById === user?.id" [class.teacherAcceptButton]="thread.p2p?.createdById !== user?.id">
-                                        {{(thread.p2p?.createdById === user?.id) ? 'Schedule' : 'Accept'}}
+                                <div class="threadOptionsButtons" *ngIf="message.messageFromId !== user?.id || message.scheduleOverride">
+                                    <button [class.scheduleButton]="isMyP2p || message.scheduleOverride" [class.teacherAcceptButton]="!isMyP2p && !message.scheduleOverride" (click)="acceptOrSchedule()">
+                                        {{(isMyP2p || message.scheduleOverride) ? 'Schedule' : 'Accept'}}
                                     </button>
                                 </div>
-                                <div *ngIf="message.messageFromId === user?.id" class="waitingForResponse">
+                                <div *ngIf="message.messageFromId === user?.id && !message.scheduleOverride" class="waitingForResponse">
                                     Waiting for response...
                                 </div>
                             </div>
@@ -124,34 +124,24 @@
             </div>
         </div>
     </div>
-</div>
-
-
-
-<!-- NOTE: Teacher Accepted the offer. -->
-<!-- <div class="row">
-    <div class="col-100">
-        <div class="teacherAgreed-wrap">
-            <div class="col-60">
-                <div class="agreedText"><a href="">Hepek</a> accepted your last offer. You can schedule now.</div>
-            </div>
-            <div class="col-40">
-                <div class="col-58">
-                    <div class="threadOptionsButtons">
-                        <button class="scheduleButton">Schedule</button>
-                    </div>
+    <div class="col-100" *ngIf="message.offerAcceptedId">
+        <div class="teacherAgreed-wrap" *ngIf="isMyP2p">
+            <div class="col-100">
+                <div class="agreedText">
+                    <a routerLink="{{message.messageFrom | userProfileLink}}">{{message.messageFrom | fullName}}</a> accepted previous offer.
+                    <span *ngIf="message.last">You can schedule now</span>
                 </div>
-                <div class="col-42">
-                    <div class="threadOptionsButtons">
-                        <button class="newOfferButton">New Offer</button>
-                    </div>
+            </div>
+        </div>
+        <div class="teacherAgreed-wrap" *ngIf="!isMyP2p">
+            <div class="col-100">
+                <div class="agreedText">
+                    User has been notified that you accepted previous offer.
                 </div>
             </div>
         </div>
     </div>
-</div> -->
-
-
+</div>
 
 <!-- NOTE: Write Offer Section -->
 <div class="row writeOffer-row" *ngIf="openCode === thread.messages.length">
@@ -166,7 +156,7 @@
                             </div>
                         </div>
                         <div class="col-90">
-                            <textarea formControlName="text" placeholder="Explain why you should be the one to teach..." class="writeofferTextarea"></textarea>
+                            <textarea formControlName="text" placeholder="Propose a new offer ..." class="writeofferTextarea"></textarea>
                         </div>
                     </div>
                 </div>
