@@ -4,6 +4,10 @@
     margin: 0 30px;
     border-bottom: 2px solid $hover-dark-color;
     margin-bottom: 10px;
+
+    &:hover a:nth-child(1) {
+        transform: scale(1);
+    }
 }
 
 .thread-reply-wrap {
@@ -12,6 +16,10 @@
     padding-left: 15px;
     border-left: 2px solid $hover-dark-color;
     border-bottom: 2px solid $hover-dark-color;
+
+    &:hover a:nth-child(1) {
+        transform: scale(1);
+    }
 }
 
 
@@ -29,6 +37,7 @@
     margin-right: -15px;
     padding: 0 5px;
     border-radius: 5px;
+    transform: scale(0);
 
     &:hover {
         background-color: $hover-middle-color;
