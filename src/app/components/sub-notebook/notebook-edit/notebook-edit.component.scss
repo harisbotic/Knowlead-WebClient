@@ -1,4 +1,95 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.colors-wrap {
+    margin: 10px 20px;
+}
+
 .color-picker {
     width: 60px;
     height: 20px;
+    float: right;
+    margin-left: 10px;
+}
+
+.notebookForm-wrap {
+    width: 395px;
+    height: 90vh;
+    border: 2px solid black;
+}
+
+.primaryColor, .secondaryColor {
+    display: inline-block;
+    float: left;
+    color: $font-primary-color;
+}
+
+.secondaryColor {
+    float: right;
+}
+
+.notebookTitleInput-wrap {
+    margin: 10px 20px;
+}
+
+.notebookTitleInput {
+    border: 1px solid $hover-dark-color;
+    border-radius: 5px;
+    width: 100%;
+    padding: 12px 10px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    outline: none;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+    &:focus {
+        box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
+        border: 1px solid transparentize($knowlead-primary, 0.6);
+    }
+}
+
+.notebookText {
+    margin: 10px 20px;
+    min-width: 351px;
+    max-width: 351px;
+    border: 1px solid $hover-dark-color;
+    min-height: 65vh;
+    padding: 10px;
+    outline: none;
+    border-radius: $border-radius;
+    resize: none;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+}
+
+.notebookButton-wrap {
+    margin: 0 20px 15px 20px;
+}
+
+.notebookSaveButton {
+    width: 95%;
+    height: 35px;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $knowlead-secondary;
+    color: white;
+    font-weight: bold;
+    padding-right: 10px;
+    float: left;
+}
+
+.notebookCloseButton {
+    width: 95%;
+    height: 35px;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $hover-middle-color;
+    font-weight: bold;
+    padding-left: 10px;
+    float: right;
 }

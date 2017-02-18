@@ -130,17 +130,11 @@
 }
 
 .sidebarTopElements {
+    width: 100%;
     height: 8vh;
 }
 
 .tabButton-wrap {
     width: 100%;
     height: 50px;
-}
-
-.notebookSelection-wrap {
-    margin-left: 25px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 92vh;
 }
