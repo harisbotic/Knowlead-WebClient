@@ -144,7 +144,9 @@ import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
     SelectModule,
     ColorPickerModule,
     PerfectScrollbarModule,
-    NglModule.forRoot(),
+    NglModule.forRoot({
+      svgPath: '/assets'
+    }),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,
     TranslateModule.forRoot({
