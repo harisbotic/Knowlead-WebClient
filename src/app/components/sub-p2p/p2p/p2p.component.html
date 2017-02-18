@@ -124,7 +124,23 @@
             <div class="row">
                 <div class="col-100">
                     <div class="bottomElements-wrap">
-                        <div class="col-60">
+
+                        <div class="scheduledFooter">
+                            <div class="row">
+                                <div class="scheduledInfo-wrap">
+                                    Scheduled with <a href="">Hepek Hepekowski</a> at <span class="dateScheduled">Feb 17, 2017 12:00</span> for <span class="priceScheduled">30</span> Minutes.
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-100">
+                                    <div class="callButton-wrap" *ngIf="callable">
+                                        <button class="callButton" (click)="call()">Call</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-60">
                             <div class="callButton-wrap" *ngIf="callable">
                                 <button class="callButton" (click)="call()">Call</button>
                             </div>
@@ -146,7 +162,9 @@
                                 </a>
                                 <div class="bookmarkCounter"></div>
                             </div>
-                        </div>
+                        </div> -->
+
+
                     </div>
                 </div>
             </div>

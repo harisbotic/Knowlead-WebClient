@@ -171,6 +171,23 @@
         color: $font-secondary-color;    }
 }
 
+.scheduledInfo-wrap {
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+
+    a {
+        color: $font-primary-color;
+        font-weight: bold;
+    }
+
+    .dateScheduled, .priceScheduled {
+        font-weight: bold;
+    }
+}
+
 .callButton-wrap {
-    margin-top: 9px;
+    margin-bottom: 10px;
+    float: right;
 }
