@@ -334,4 +334,26 @@ form{
         padding-left: 20px;
     }
 
+    .pending-wrap {
+        height: 40px;
+        border-bottom: 1px solid $divider-color;
+        line-height: 40px;
+    }
+
+    .pendingEmail {
+        text-decoration: none;
+        color: $font-primary-color;
+        font-weight: bold;
+        border-right: 1px solid $divider-color;
+        margin-left: 50px;
+    }
+
+    .pendingStatus {
+        text-decoration: none;
+        color: $knowlead-primary;
+        font-weight: bold;
+        text-transform: capitalize;
+        margin-left: 50px;
+    }
+
 }

@@ -59,9 +59,24 @@
         <div class="col-70">
             <div class="pendingReferrals-wrap">
                 <div class="pendingReferrals-title">Pending Referrals</div>
-                <div *ngFor="let status of statuses">{{status.email}} - {{status.status}}</div>
+                <div *ngFor="let status of statuses">
+                    <div class="col-100 pending-wrap">
+                        <div class="col-50">
+                            <div class="pendingEmail">
+                                {{status.email}}
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="pendingStatus" *ngIf="status.status === 'EMAIL'">
+                                Needs to confirm email.
+                            </div>
+                            <div class="pendingStatus" *ngIf="status.status === 'REGISTRATION'">
+                                Needs to finish profile registration.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
