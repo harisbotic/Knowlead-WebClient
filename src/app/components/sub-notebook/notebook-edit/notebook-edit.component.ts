@@ -1,16 +1,17 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
 import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotebookModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notebook-edit',
   templateUrl: './notebook-edit.component.html',
   styleUrls: ['./notebook-edit.component.scss']
 })
-export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
+export class NotebookEditComponent extends BaseFormComponent<NotebookModel> implements OnInit {
 
   form: FormGroup;
   primaryColor: string;
@@ -64,7 +65,7 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
     };
   }
 
-  constructor(protected notebookSerice: NotebookService) {
+  constructor(protected notebookSerice: NotebookService, protected activatedRoute: ActivatedRoute) {
     super();
   }
 
@@ -92,6 +93,15 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> {
 
   doClose() {
     this.close.emit();
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
+      if (params['notebookId']) {
+        this.notebookId = params['notebookId'];
+      }
+    }));
   }
 
 }

@@ -20,6 +20,7 @@ import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p
 import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
 import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
 import { NotebookListComponent } from './components/sub-notebook/notebook-list/notebook-list.component';
+import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/notebook-edit.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -37,8 +38,9 @@ const appRoutes: Routes = [
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
-        { path: 'chat', component: CallChatComponent, pathMatch: 'full' },
-        { path: 'notebook', component: NotebookListComponent, pathMatch: 'full' },
+        { path: 'chat', component: CallChatComponent },
+        { path: 'notebook', component: NotebookListComponent },
+        { path: 'notebook/:id', component: NotebookEditComponent },
         { path: '', redirectTo: 'chat', pathMatch: 'full' }
     ] },
     { path: 'profile/:id', component: ProfilePageComponent },

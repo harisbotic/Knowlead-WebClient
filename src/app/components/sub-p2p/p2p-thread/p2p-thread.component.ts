@@ -124,7 +124,6 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
       this.user = user;
       this.refresh();
     }));
-    console.log("THREAD");
   }
 
   acceptOrSchedule() {
