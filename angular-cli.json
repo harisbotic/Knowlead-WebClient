@@ -29,7 +29,6 @@
         "../node_modules/webrtc-adapter/out/adapter.js"
       ],
       "environments": {
-        "source": "environments/environment.ts",
         "prod": "environments/environment.prod.ts",
         "dev": "environments/environment.dev.ts"
       }
