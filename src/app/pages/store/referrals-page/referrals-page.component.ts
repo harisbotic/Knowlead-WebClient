@@ -18,7 +18,7 @@ interface StopInterface {
 
 interface ReferralStatus {
   email: string;
-  status: string;
+  status: string; // EMAIL / REGISTRATION
 }
 
 @Component({
@@ -63,7 +63,7 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
   }, {
     count: 250,
     width: 855,
-    upperString: '1100',
+    upperString: '2200',
     lowerString: 'Minutes',
     additionalString: 'Knowlead T-Shirt',
     last: false,
@@ -90,7 +90,7 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
     }
     for (let claimable of this.stats.rewardsAvailable) {
       let reward = this.rewards.find(r => r.coreLookupId === claimable);
-      let stop = this.stops.find(s => s.count === reward.minutesReward);
+      let stop = this.stops.find(s => s.count === parseInt(reward.code.substr(3), 10));
       if (stop == null) {
         console.error('BACKEND REWARDS NOT CONSISTENT WITH FRONTEND');
       } else {
@@ -126,13 +126,15 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
   }
 
   claimReward(stop: StopInterface) {
-    let reward = this.rewards.find(r => r.minutesReward === stop.count);
-    this.storeService.claimReward(reward).subscribe(() => {
-      this.storeService.getReferralStats().subscribe((stats) => {
-        this.stats = stats;
-        this.refresh();
-      })
-    })
+    if (stop.canClaim) {
+      let reward = this.rewards.find(r => r.minutesReward === stop.count);
+      this.storeService.claimReward(reward).subscribe(() => {
+        this.storeService.getReferralStats().subscribe((stats) => {
+          this.stats = stats;
+          this.refresh();
+        });
+      });
+    }
   }
 
 }

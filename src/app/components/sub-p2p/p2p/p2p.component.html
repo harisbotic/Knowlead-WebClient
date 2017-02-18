@@ -125,10 +125,10 @@
                 <div class="col-100">
                     <div class="bottomElements-wrap">
 
-                        <div class="scheduledFooter">
+                        <div class="scheduledFooter" *ngIf="p2p.scheduledWithId">
                             <div class="row">
                                 <div class="scheduledInfo-wrap">
-                                    Scheduled with <a href="">Hepek Hepekowski</a> at <span class="dateScheduled">Feb 17, 2017 12:00</span> for <span class="priceScheduled">30</span> Minutes.
+                                    Scheduled with <a routerLink="{{p2p.scheduledWith | userProfileLink}}">{{p2p.scheduledWith | fullName}}</a> at <span class="dateScheduled">{{p2p.dateTimeAgreed | date:'medium'}}</span> for <span class="priceScheduled">{{p2p.priceAgreed}}</span> Minutes.
                                 </div>
                             </div>
                             <div class="row">
@@ -140,29 +140,31 @@
                             </div>
                         </div>
 
-                        <!-- <div class="col-60">
-                            <div class="callButton-wrap" *ngIf="callable">
-                                <button class="callButton" (click)="call()">Call</button>
+                        <div *ngIf="!p2p.scheduledWithId">
+                            <div class="col-60">
+                                <div class="callButton-wrap" *ngIf="callable">
+                                    <button class="callButton" (click)="call()">Call</button>
+                                </div>
+                            </div>
+                            <div class="col-20">
+                                <div class="bottomElementsButton-wrap">
+                                    <i class="kl-comment comment-icon"></i>
+                                    <a class="commentButton-link">
+                                        <button class="clearButton postViewCommentButton">Offer</button>
+                                    </a>
+                                    <div class="commentCounter"></div>
+                                </div>
+                            </div>
+                            <div class="col-20">
+                                <div class="bottomElementsButton-wrap">
+                                    <i class="kl-bookmark bookmark-icon"></i>
+                                    <a class="bookmarkButton-link">
+                                        <button class="clearButton postViewBookmarkButton">Bookmark</button>
+                                    </a>
+                                    <div class="bookmarkCounter"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-20">
-                            <div class="bottomElementsButton-wrap">
-                                <i class="kl-comment comment-icon"></i>
-                                <a class="commentButton-link">
-                                    <button class="clearButton postViewCommentButton">Offer</button>
-                                </a>
-                                <div class="commentCounter"></div>
-                            </div>
-                        </div>
-                        <div class="col-20">
-                            <div class="bottomElementsButton-wrap">
-                                <i class="kl-bookmark bookmark-icon"></i>
-                                <a class="bookmarkButton-link">
-                                    <button class="clearButton postViewBookmarkButton">Bookmark</button>
-                                </a>
-                                <div class="bookmarkCounter"></div>
-                            </div>
-                        </div> -->
 
 
                     </div>
@@ -171,7 +173,7 @@
         </div>
     </div>
 </div>
-<div class="row" *ngIf="p2p">
+<div class="row" *ngIf="p2p && !p2p?.scheduledWithId">
     <div class="col-100">
         <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
     </div>
