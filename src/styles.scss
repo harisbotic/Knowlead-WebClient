@@ -10,6 +10,57 @@
 ///////////////////////////////////////////////////////////
 // CALL POPUP CLASSES /////////////////////////////////////
 ///////////////////////////////////////////////////////////
+.tooltip-parent {
+    position: relative;
+    display: inline;
+
+    &:hover {
+        [class*='tooltip-'] {
+            display: inline;
+        }
+    }
+}
+.tooltip-top {
+    display: none;
+    border: 1px solid $hover-dark-color;
+    position: absolute;
+    border-radius: $border-radius;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+.tooltip-70  { width: 70px;  }
+.tooltip-100 { width: 100px; }
+.tooltip-125 { width: 125px; }
+.tooltip-150 { width: 150px; }
+.tooltip-175 { width: 175px; }
+.tooltip-200 { width: 200px; }
+.tooltip-225 { width: 225px; }
+.tooltip-250 { width: 250px; }
+.tooltip-275 { width: 275px; }
+.tooltip-300 { width: 300px; }
+
+
+///////////////////////////////////////////////////////////
+// CALL POPUP CLASSES /////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 body > app-root > app-call-dialog > ngl-modal.incomingCall-popUp > div.slds-modal.slds-fade-in-open > div {
     width: 390px !important;

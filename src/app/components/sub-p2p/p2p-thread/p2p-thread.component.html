@@ -41,7 +41,7 @@
                             <div class="profileInfo-wrap">
                                 <div class="col-10 posRel">
                                     <div class="profileImage-wrap">
-                                        <a href="" class="profile-link">
+                                        <a routerLink="{{message.messageFrom | userProfileLink}}" class="profile-link">
                                             <app-profile-picture [user]="message.messageFrom" [uploadable]="false" class="centerVl" size="x-small"></app-profile-picture>
                                         </a>
                                     </div>
@@ -51,7 +51,7 @@
                                     <div class="profileInfoText-wrap">
                                         <div class="row">
                                             <div class="col-100">
-                                                <a href="" class="profile-link">
+                                                <a routerLink="{{message.messageFrom | userProfileLink}}" class="profile-link">
                                                     <div class="profileName">{{message.messageFrom | fullName}}</div>
                                                 </a>
                                             </div>
@@ -67,8 +67,11 @@
                         </div>
                         <div class="col-30">
                             <div class="reviewStars-wrap posRel">
-                                <div class="reviewStars centerVl">
+                                <div class="reviewStars centerVl tooltip-parent">
                                     <ngl-rating [rate]="message.messageFrom.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                    <span class="tooltip-top tooltip-175">
+                                        Average User Rating: {{message.messageFrom.averageRating | number:'1.2-2'}}
+                                    </span>
                                 </div>
                             </div>
                         </div>

@@ -126,7 +126,7 @@ ng-select > div > div.single > div.toggle:hover {
     min-width: 100%;
     max-width: 100%;
     border: none;
-    min-height: 50px;
+    min-height: 100px;
     padding: 10px;
     outline: none;
     resize: none;
@@ -136,10 +136,6 @@ ng-select > div > div.single > div.toggle:hover {
 
     &::-webkit-input-placeholder {
         color: $placeholder-color;
-    }
-
-    &:focus {
-        min-height: 100px;
     }
 }
 
