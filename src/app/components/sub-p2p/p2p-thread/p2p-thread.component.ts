@@ -18,6 +18,9 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
   @Input() _thread: ThreadModel;
   @Input() openCode = 0; // When this code equals to number of messages then new offer form is displayed
   @Input() set thread(value: ThreadModel) {
+    if (this._thread && value && this._thread.messages.length === this.openCode) {
+      this.openCode = value.messages.length;
+    }
     this._thread = value;
     this.schedulable = this.thread.withId !== this.thread.p2p.createdById &&
       this.thread.p2p.scheduledWithId == null && !this.thread.p2p.isDeleted;

@@ -28,6 +28,9 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   myStream: MediaStream;
   otherStream: MediaStream;
 
+  useMic = true;
+  useCam = true;
+
   get initiator(): boolean {
     if (!this.call || !this.user) {
       return null;
@@ -53,6 +56,26 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     video.play();
   }
 
+  toggleCamera() {
+    if (this.call) {
+      this.useCam = !this.useCam;
+      for (let track of this.myStream.getVideoTracks()) {
+        track.enabled = this.useCam;
+      }
+      this.myVideo.nativeElement.muted = true;
+    }
+  }
+
+  toggleMic() {
+    if (this.call) {
+      this.useMic = !this.useMic;
+      for (let track of this.myStream.getAudioTracks()) {
+        track.enabled = this.useMic;
+      }
+      this.myVideo.nativeElement.muted = true;
+    }
+  }
+
   initPeer() {
     this.signaledSDPs = [];
     if (this.myStream) {
@@ -63,9 +86,10 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       return;
     }
     console.debug('Initializing peer');
-    navigator.mediaDevices.getUserMedia({video: true, audio: false}).then((myStream) => {
+    navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((myStream) => {
       this.myStream = myStream;
       this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
+      this.myVideo.nativeElement.muted = true;
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
       console.debug('Peer initialized');
       this.peer.on('signal', (data) => {

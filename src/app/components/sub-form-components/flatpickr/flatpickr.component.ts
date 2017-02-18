@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, forwardRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, forwardRef, Input } from '@angular/core';
 import { BaseFormInputComponent } from '../base-form-input/base-form-input.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,15 +18,31 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
   @ViewChild('flatpickr') element;
   flatpickr: any;
   initialValue: Date;
+
+  @Input() placeholder: string;
+  @Input() disablePast = false;
   constructor() { super(); }
 
   ngAfterViewInit() {
-    this.flatpickr = this.element.nativeElement.flatpickr({
+    let config = {
       altInput: true,
       onChange: (date) => this.value = date[0],
       defaultDate: this.initialValue,
-      enableTime: true
-    });
+      enableTime: true,
+      disable: [],
+      time_24hr: true
+    };
+    if (this.disablePast) {
+      config.disable.push((date: Date) => {
+        let d = new Date();
+        d.setHours(0);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        return d.getTime() > date.getTime();
+      });
+    }
+    this.flatpickr = this.element.nativeElement.flatpickr(config);
   }
 
   writeValue(value: Date) {
