@@ -28,6 +28,7 @@
         "../node_modules/flatpickr/dist/flatpickr.min.js",
         "../node_modules/webrtc-adapter/out/adapter.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
         "prod": "environments/environment.prod.ts",
         "dev": "environments/environment.dev.ts"
