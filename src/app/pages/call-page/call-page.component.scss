@@ -21,7 +21,7 @@
     &:hover > .videoButtons-wrap > .videoButton,
     &:hover > .videoButtons-wrap > .endVideoButton {
         // transform: translateY(-300px);
-        animation: videButtonTick 180ms ease-out forwards;
+        animation: videoButtonTick 180ms ease-out forwards;
     }
 }
 
