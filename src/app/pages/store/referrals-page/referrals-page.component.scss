@@ -1,3 +1,47 @@
+@import "../../../../kl-styles/variables.scss";
+
+.header-wrap {
+    width: 100%;
+    height: 300px;
+    background-color: $knowlead-secondary;
+    color: white;
+    position: relative;
+    margin-bottom: 30px;
+
+    .headerInfo-wrap {
+        height: 100%;
+        width: 100%;
+        // background-color: blue;
+    }
+
+    .headerTitle {
+        font-size: 40px;
+        font-weight: bold;
+        text-transform: uppercase;;
+        text-align: center;
+    }
+
+    #titleBelow {
+        margin-top: -20px;
+    }
+
+    .headerText {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .referralLink {
+        margin-top: 10px;
+        text-align: center;
+        padding: 5px 15px;
+        background-color: white;
+        border-radius: $border-radius;
+        color: $knowlead-primary;
+    }
+}
+
+
+
 form{
 	margin-bottom: 0;
 }
@@ -12,173 +56,11 @@ form{
     clear: both;
 }
 
-.wf-loading .brandon{
-	visibility: hidden;
-}
-
-.brandon{
-	font-family: "Brandon Grotesque", "brandon-grotesque", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
-}
-
-#refer{
-	background: #FFF;
-}
-
-#refer .page-content{
-	width: 1120px;
-	margin: 0 auto;
-	z-index: 0;
-	position: relative;
-}
-
-#refer .header{
-	height: 50px;
-	background: #074E6F;
-	width: 100%;
-	overflow:hidden;
-	z-index: 1;
-	position: relative;
-}
-
-#refer .header .content{
-	width: 315px;
-	margin: 0 auto;
-}
-
-#refer .header p{
-	float: left;
-	color: #FFF;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 50px;
-}
-
-#refer .header .byline{
-	font-size: 14px;
-}
-
-#refer .header .logo{
-	font-weight: normal;
-	font-size: 0;
-	line-height: 0;
-	margin-right: 14px;
-	letter-spacing: 1px;
-	background: image-url("refer/logo.png") 0 0 no-repeat;
-	background-size: 106px 19px;
-	height: 19px;
-	width: 106px;
-	margin-top: 15px;
-}
-
-#refer .hero{
-	background: #F1F0EE;
-	height: 391px;
-	overflow: hidden;
-}
-
-#refer .mammoth{
-	width: 612px;
-	height: 394px;
-	background: image-url("refer/mammoth.png") 0 0 no-repeat;
-	background-size: 610px 394px;
-	overflow: hidden;
-	margin-top: 15px;
-	float: left;
-}
-
-#refer .mammoth .need{
-	color: #FFF;
-	font-size: 38px;
-	text-transform: uppercase;
-	font-weight: bold;
-	margin: 102px 0 0 72px;
-	display: block;
-	line-height: 56px;
-	letter-spacing: 4px;
-	text-align: center;
-	width: 284px;
-}
-
-#refer .share-wrap{
-	float: right;
-	width: 400px;
-	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: .13em;
-	margin-right: 60px;
-}
-
-#refer .share-wrap .why{
-	font-size: 16px;
-	color: #555556;
-	font-weight: bold;
-	margin-top: 42px;
-}
-
-#refer .share-wrap .title{
-	font-size: 30px;
-	line-height: 40px;
-	text-transform: uppercase;
-	font-weight: bold;
-	color: #074E6F;
-	margin-top: 18px;
-	letter-spacing: .13em;
-}
-
-#refer .share-wrap .subtitle{
-	color: #565656;
-	font-size: 14px;
-	text-transform: none;
-	margin-top: 15px;
-}
-
-#refer .share-wrap .copy-link{
-	border: 1px solid #D1D0C7;
-	background: #FFF;
-	padding: 10px 0;
-	width: 320px;
-	text-transform: none;
-	font-size: 11px;
-	margin: 20px auto 0;
-}
-
-#refer .share-wrap .social-links{
-	width: 120px;
-	height: 37px;
-	margin: 25px auto 0;
-	text-align: center;
-}
-
-#refer .share-wrap .social-links a, #refer .share-wrap .social-links div{
-	display: inline-block;
-}
-
-#refer .share-wrap .social-links .fb{
-	background: image-url("refer/fb.png");
-	background-size: 27px 27px;
-	width: 27px;
-	height: 27px;
-}
-
-#refer .share-wrap .social-links .twit{
-	background: image-url("refer/twit.png");
-	background-size: 27px 27px;
-	width: 27px;
-	height: 27px;
-}
-
-#refer .share-wrap .social-links .sep{
-	height: 28px;
-	width: 1px;
-	background: #BAB9BA;
-	margin: 0 20px;
-}
 
 #refer .prizes{
 	width: 100%;
 	background: #FFF;
-	border-top: 1px solid #D2D1C8;
-	padding-bottom: 100px;
+    padding: 30px 45px 100px 45px;
 }
 
 #refer .prizes .page-content{
@@ -188,7 +70,7 @@ form{
 #refer .prizes .callout{
 	text-align: center;
 	font-size: 16px;
-	color: #074E6F;
+	color: $knowlead-primary;
 	font-weight: bold;
 	margin: 20px 0 0 0;
 	letter-spacing: 2px;
@@ -198,8 +80,8 @@ form{
 #refer .prizes .progress{
 	height: 4px;
 	width: 100%;
-	background: green;
-	background-size: 1px 4px;
+	background: $knowlead-primary;
+	background-size: 1px 5px;
 	position: absolute;
 	top: 100px;
 	z-index: 0;
@@ -229,7 +111,8 @@ form{
 
 #refer .prizes .products li.product{
 	height: 100%;
-	color: #074E6F;
+	color: $font-primary-color;
+    font-weight: bold;
 	width: 145px;
 	margin-right: 0px;
 	float: left;
@@ -294,8 +177,8 @@ form{
 
 #refer .prizes .products li.product:hover .circle{
 	color: #FFF;
-	background: #074E6F;
-	border-color: #074E6F;
+	background: $knowlead-primary;
+	border-color: white;
 }
 
 #refer .prizes .products li.product .tooltip{
@@ -353,4 +236,64 @@ form{
 	margin-top: 5px;
 	display: block;
 	text-decoration: none;
+}
+
+
+
+
+
+.referralBottomElements {
+    margin: 30px 0;
+
+    .cicrle-wrap {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+
+    .completedReferrals-wrap {
+        width: 250px;
+        height: 250px;
+        background-color: white;
+        border: 1px solid $hover-dark-color;
+        border-radius: 50%;
+    }
+
+    .completedRefferals-number {
+        font-weight: bold;
+        font-size: 100px;
+        margin-top: -17px;
+    }
+
+
+    .completedReferrals-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 40px);
+        font-size: 16px;
+        font-weight: bold;
+        color: $knowlead-secondary;
+        text-transform: capitalize;
+        width: 250px;
+        text-align: center;
+    }
+
+    .pendingReferrals-wrap {
+        width: 100%;
+        height: 300px;
+        background-color: white;
+        border-radius: $border-radius;
+        border: 1px solid $hover-dark-color;
+    }
+
+    .pendingReferrals-title {
+        height: 50px;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: 2px solid $divider-color;
+        line-height: 50px;
+        padding-left: 20px;
+    }
+
 }
