@@ -8,11 +8,12 @@
     background-color: $post-view-background-color;
     border: 1px solid $hover-dark-color;
     padding: 15px 15px 0 15px;
+
+    &:hover a:nth-child(1) {
+        transform: scale(1);
+    }
 }
 
-.viewPost-wrap:hover div > div:nth-child(1) > div > div > div.postOptions-wrap > a {
-    opacity: 1;
-}
 
 .topElements-wrap {
     height: 60px;
@@ -28,10 +29,10 @@
 }
 
 .postOptions-icon-wrap {
-    opacity: 0;
     transform: scale(0);
     padding: 0 5px;
     border-radius: 5px;
+    margin-top: -5px;
 
 
     &:hover {
