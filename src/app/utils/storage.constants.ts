@@ -29,3 +29,4 @@ export const STORAGE_CONFIG: {[StorageKey: string]: StorageConfiguration} = {
     'p2pMessages': {api: P2P_MESSAGES, parameters: ['id'], clearOnLogout: true}
 };
 export const STORE_ACCESS_TOKEN = 'access_token';
+export const STORE_REFRESH_TOKEN = 'refresh_token';

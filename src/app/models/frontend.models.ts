@@ -4,6 +4,7 @@ export class LoginResponse {
     expires_in: number;
     error: string;
     error_description: string;
+    refresh_token: string;
 }
 export interface LoginUserModel {
     email: string;
