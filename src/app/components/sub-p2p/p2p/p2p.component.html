@@ -11,11 +11,11 @@
                                     <div class="postOptions-content">
 
                                         <div class="row postOptions-button posRel">
-                                            <a class="posRel">
+                                            <a class="posRel" *ngIf="p2p.createdById === user?.id">
                                                 <div class="col-30 posRel">
                                                     <i class="kl-delete postOptions-icon centerV"></i>
                                                 </div>
-                                                <div class="col-70 posRel">
+                                                <div class="col-70 posRel" (click)="deleted()">
                                                     <p class="postOptions-text centerVl">Delete</p>
                                                 </div>
                                             </a>
@@ -155,13 +155,17 @@
                                     <div class="commentCounter"></div>
                                 </div>
                             </div>
-                            <div class="col-20">
+                            <div class="col-20" *ngIf="p2p.canBookmark">
                                 <div class="bottomElementsButton-wrap">
                                     <i class="kl-bookmark bookmark-icon"></i>
                                     <a class="bookmarkButton-link">
-                                        <button class="clearButton postViewBookmarkButton">Bookmark</button>
+                                        <button class="clearButton postViewBookmarkButton" (click)="bookmark()">
+                                            {{(p2p.didBookmark) ? 'Bookmarked' : 'Bookmark'}}
+                                        </button>
                                     </a>
-                                    <div class="bookmarkCounter"></div>
+                                    <div class="bookmarkCounter">
+                                        {{p2p.bookmarkCount}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { P2P_ALL, P2P_DELETE, P2P_MESSAGES, P2P_MESSAGE, P2P_SCHEDULE, P2P_ACCEPT_OFFER } from '../utils/urls';
+import { P2P_ALL, P2P_DELETE, P2P_MESSAGES, P2P_MESSAGE, P2P_SCHEDULE, P2P_ACCEPT_OFFER, P2P_REMOVE_BOOKMARK, P2P_ADD_BOOKMARK } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
 import { P2PMessageModel, P2PModel, ResponseModel } from '../models/dto';
@@ -111,5 +111,17 @@ export class P2pService {
 
   refreshP2P(p2pId: number) {
     this.storageService.refreshStorage('p2pMessages', this.p2pMessagesFiller, {id: p2pId});
+  }
+
+  bookmark(p2p: P2PModel): Observable<P2PModel> {
+    const url = p2p.didBookmark ? P2P_REMOVE_BOOKMARK : P2P_ADD_BOOKMARK;
+    const countChange = p2p.didBookmark ? -1 : 1;
+    return this.http.post(url + '/' + p2p.p2pId, {})
+      .do(response => this.storageService.modifyStorage<P2PModel>('p2p', this.p2pFiller, {id: p2p.p2pId}, (oldp2p) => {
+        oldp2p.bookmarkCount += countChange;
+        oldp2p.didBookmark = !oldp2p.didBookmark;
+        return oldp2p;
+      }))
+      .flatMap(response => this.storageService.getFromStorage('p2p', this.p2pFiller, {id: p2p.p2pId}));
   }
 }

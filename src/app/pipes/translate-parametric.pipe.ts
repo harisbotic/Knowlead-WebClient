@@ -15,6 +15,11 @@ export class TranslateParametricPipe implements PipeTransform {
   }
 
   transform(value: string, args?: any): any {
+    if (typeof value !== 'string') {
+      console.error('Translate parametric, didnt get string');
+      console.error(value);
+      return '';
+    }
     if (value.indexOf(':') === -1) {
       return this.translatePipe.transform(value);
     } else {
