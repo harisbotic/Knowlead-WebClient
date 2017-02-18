@@ -40,16 +40,20 @@
                         <div class="col-40">
                             <div class="profileInfo-wrap">
                                 <div class="col-25 posRel">
-                                    <div class="profileImage-wrap">
-                                        <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" class="centerVl" size="small"></app-profile-picture>
-                                    </div>
+                                    <a routerLink="{{p2p.createdBy | userProfileLink}}">
+                                        <div class="profileImage-wrap">
+                                            <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" class="centerVl" size="small"></app-profile-picture>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-75">
                                     <!-- NOTE: If profile name is too long (goes on second row). Set margin of .profileInfoText-wrap to margin: 13px 0 0 30px; -->
                                     <div class="profileInfoText-wrap">
                                         <div class="row">
                                             <div class="col-100">
-                                                <div class="profileName">{{p2p.createdBy | fullName}}</div>
+                                                <a routerLink="{{p2p.createdBy | userProfileLink}}">
+                                                    <div class="profileName">{{p2p.createdBy | fullName}}</div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -63,7 +67,7 @@
                         </div>
                         <div class="col-60">
                             <div class="viewPostInfo-wrap">
-                                <div class="col-25">
+                                <div class="col-25 tooltip-parent">
                                     <div class="col-35">
                                         <div class="viewPostInfo-icon">
                                             <i class="kl-subject"></i>
@@ -72,8 +76,11 @@
                                     <div class="col-65">
                                         <div class="viewPostInfo-text" *ngIf="p2p.fos" id="subjectText">{{p2p.fos.name}}</div>
                                     </div>
+                                    <span class="tooltip-top tooltip-150" *ngIf="p2p.fos">
+                                        Subject: {{p2p.fos.name}}
+                                    </span>
                                 </div>
-                                <div class="col-25">
+                                <div class="col-25 tooltip-parent">
                                     <div class="col-40">
                                         <div class="viewPostInfo-icon">
                                             <i class="kl-currency"></i>
@@ -82,8 +89,11 @@
                                     <div class="col-60">
                                         <div class="viewPostInfo-text">{{p2p.initialPrice}}</div>
                                     </div>
+                                    <span class="tooltip-top tooltip-150">
+                                        Reward: {{p2p.initialPrice}} Minutes
+                                    </span>
                                 </div>
-                                <div class="col-25">
+                                <div class="col-25 tooltip-parent">
                                     <div class="col-40">
                                         <div class="viewPostInfo-icon">
                                             <i class="kl-globe"></i>
@@ -95,9 +105,15 @@
                                                 {{language.code | uppercase}}
                                             </span>
                                         </div>
+                                        <span class="tooltip-top tooltip-150">
+                                            Language:
+                                            <span *ngFor="let language of p2p.languages">
+                                                {{language.name}}
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-25" *ngIf="p2p.deadline">
+                                <div class="col-25  tooltip-parent" *ngIf="p2p.deadline">
                                     <div class="col-40">
                                         <div class="viewPostInfo-icon">
                                             <i class="kl-clock"></i>
@@ -106,6 +122,9 @@
                                     <div class="col-60">
                                         <div class="viewPostInfo-text">{{p2p.deadline | amTimeAgo}}</div>
                                     </div>
+                                    <span class="tooltip-top tooltip-150">
+                                        Deadline: {{p2p.deadline | amTimeAgo}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
