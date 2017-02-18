@@ -154,6 +154,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
             // if (ModelUtilsService.isCallP2p(this.call)) {
             //   this.router.navigate(['/p2p/', this.call.p2pId]);
             // } else {
+              delete this.call;
               this.router.navigate(['/']);
             // }
             this.notificationService.info('Call has ended ...', call.reason);

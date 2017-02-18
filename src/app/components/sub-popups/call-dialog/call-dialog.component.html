@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col-80">
-                        <div class="incomingCall-text"><a href="" class="callerName">{{fullName(otherUser() | async)}}</a> is calling you to start Peer-to-Peer session.</div>
+                        <div class="incomingCall-text"><a href="" class="callerName">{{otherUser() | async | fullName}}</a> is calling you to start Peer-to-Peer session.</div>
                     </div>
                 </div>
             </div>

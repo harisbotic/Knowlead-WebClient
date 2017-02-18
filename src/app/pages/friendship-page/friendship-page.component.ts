@@ -12,7 +12,6 @@ import { BaseComponent } from '../../base.component';
 })
 export class FriendshipPageComponent extends BaseComponent implements OnInit {
 
-  fullName = ModelUtilsService.getUserFullName;
   friendshipStatus = FriendshipStatus;
   actions = FriendshipDTOActions;
   me: ApplicationUserModel;

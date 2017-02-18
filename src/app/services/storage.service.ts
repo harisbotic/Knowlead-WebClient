@@ -18,6 +18,7 @@ export class StorageService {
   protected fosHierarchy: FOSModel;
   protected accessTokenStream = new BehaviorSubject<string>(undefined);
 
+  public temporaryCache: {[key: string]: any} = {};
   public cache: {[key: string]: StorageSubject<any>} = {};
 
   public static getCacheKey(key: StorageKey, parameters?: {[key: string]: any}): string {
@@ -111,6 +112,10 @@ export class StorageService {
 
   public setToStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters: {[key: string]: any}, value: T) {
     this.getOrCreateSubject(key, filler, parameters).changeValue(value);
+  }
+
+  public modifyStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters: {[key: string]: any}, modifier: (value: T) => T) {
+    this.getOrCreateSubject(key, filler, parameters).modifyWithFunction(modifier);
   }
 
   public refreshStorage<T>(key: StorageKey, filler: StorageFiller<T>, parameters?: {[key: string]: any}) {

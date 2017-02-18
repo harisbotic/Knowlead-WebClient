@@ -53,6 +53,7 @@ export class StorageSubject<T> extends Observable<T> {
         };
     }
 
+    // Set value without involving filler
     private setValue(newValue: T) {
         this.value = newValue;
         this.notifyObservers();
@@ -64,6 +65,7 @@ export class StorageSubject<T> extends Observable<T> {
         this.subscribers = [];
     }
 
+    // Set value with filler
     public changeValue(newValue: T) {
         this.pause();
         if (this.fillerSubscription) {
@@ -131,6 +133,12 @@ export class StorageSubject<T> extends Observable<T> {
     public handleLogout() {
         if (STORAGE_CONFIG[this.key].clearOnLogout) {
             this.changeValue(undefined);
+        }
+    }
+
+    public modifyWithFunction(func: (oldValue: T) => T) {
+        if (this.value != null) {
+            this.changeValue(func(this.value));
         }
     }
 }

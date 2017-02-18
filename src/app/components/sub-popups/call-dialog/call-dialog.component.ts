@@ -19,7 +19,6 @@ export class CallDialogComponent extends BaseComponent implements OnInit, OnDest
   user: ApplicationUserModel;
   call: _CallModel;
   p2p: P2PModel;
-  fullName = ModelUtilsService.getUserFullName;
 
   constructor(
     protected accountService: AccountService,

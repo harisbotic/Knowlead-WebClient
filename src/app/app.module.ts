@@ -22,7 +22,7 @@ import { SessionService } from './services/session.service';
 import { HttpProvider } from './http.provider';
 import { StorageService } from './services/storage.service';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
-import { Router } from '@angular/router';
+import { Router, RouteReuseStrategy } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -78,6 +78,8 @@ import { DefaultHomePageComponent } from './pages/user-home-page/default-home-pa
 import { SingleP2pComponent } from './pages/user-home-page/single-p2p/single-p2p.component';
 import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-page.component';
 import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -128,7 +130,9 @@ import { CallChatComponent } from './pages/call-page/call-chat/call-chat.compone
     DefaultHomePageComponent,
     SingleP2pComponent,
     ReferralsPageComponent,
-    CallChatComponent
+    CallChatComponent,
+    FullNamePipe,
+    UserProfileLinkPipe
   ],
   imports: [
     BrowserModule,

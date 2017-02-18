@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../../../services/account.service';
 import { ActivatedRoute } from '@angular/router';
 import { RealtimeService } from '../../../services/realtime.service';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-call-chat',
@@ -16,9 +17,13 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
   user: ApplicationUserModel;
   messages: ChatMessageModel[] = [];
   callId: Guid;
+
+  cacheKey: string;
+
   constructor(protected accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
-    protected realtimeService: RealtimeService) { super(); }
+    protected realtimeService: RealtimeService,
+    protected storageService: StorageService) { super(); }
 
   protected addMessage(message: ChatMessageModel) {
     this.messages = [message].concat(this.messages);
@@ -31,6 +36,10 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
     });
     this.subscriptions.push(this.activatedRoute.parent.params.subscribe(params => {
       this.callId = params['id'];
+      this.cacheKey = 'call-chat-' + this.callId;
+      if (this.storageService.temporaryCache[this.cacheKey]) {
+        this.messages = this.storageService.temporaryCache[this.cacheKey];
+      }
       if (this.form) {
         this.restartForm();
       }
@@ -64,6 +73,11 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
     }
     this.realtimeService.sendCallMsg(this.getValue());
     this.restartForm();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    this.storageService.temporaryCache[this.cacheKey] = this.messages;
   }
 
 }

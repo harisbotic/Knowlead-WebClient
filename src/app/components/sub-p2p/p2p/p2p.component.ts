@@ -33,7 +33,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
   };
 
   user: ApplicationUserModel;
-  fullName = ModelUtilsService.getUserFullName;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,

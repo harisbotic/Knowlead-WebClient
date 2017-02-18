@@ -6,7 +6,7 @@
         <div class="col-60 posRel">
             <div class="notification-text-wrap">
                 <span class="fromWho">
-                    <a routerLink="/profile/{{notification.fromApplicationUserId}}">{{fullName(notification.fromApplicationUser)}}</a>
+                    <a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
                 </span>
                 <span class="notification-type">{{getBefore()}}</span>
                 <span class="post-type">{{getMiddle()}}</span>

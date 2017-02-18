@@ -11,7 +11,6 @@ import { NotificationTypes } from '../../../models/constants';
 export class SingleNotificationComponent implements OnInit {
 
   @Input() notification: NotificationModel;
-  fullName = ModelUtilsService.getUserFullName;
 
   constructor() {
   }
