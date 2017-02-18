@@ -1,10 +1,48 @@
-<form *ngIf="form" [formGroup]="form" (ngSubmit)="{}">
-    <input name="name" formControlName="name" placeholder="name">
-    <textarea name="markdown" formControlName="markdown"></textarea>
-    <button (click)="onSubmit(false)" type="button">Save</button>
-    <button (click)="onSubmit(true);" type="button">Save and close</button>
-    <button (click)="doClose();" type="button">Close</button>
-    <div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div>
-    <div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor"></div>
-    <app-single-notebook [notebook]="getValue()"></app-single-notebook>
-</form>
+<div class="row">
+    <div class="notebookForm-wrap">
+        <form *ngIf="form" [formGroup]="form" (ngSubmit)="{}">
+
+
+
+            <div class="row">
+                <div class="notebookTitleInput-wrap">
+                    <input name="name" formControlName="name" placeholder="Notebook Title" type="text" class="notebookTitleInput">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="colors-wrap">
+                    <div class="col-50">
+                        <div class="primaryColor">Primary: <div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div></div>
+                    </div>
+                    <div class="col-50">
+                        <div class="secondaryColor">Secondary: <div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="notebookText-wrap">
+                    <textarea name="markdown" placeholder="Notebook Content..." formControlName="markdown" class="notebookText"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="notebookButton-wrap">
+                    <div class="col-50">
+                        <button (click)="onSubmit(false)" type="button" class="notebookSaveButton">Save</button>
+                    </div>
+                    <div class="col-50">
+                        <button (click)="doClose();" type="button" class="notebookCloseButton">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <button (click)="onSubmit(true);" type="button">Save and close</button>
+
+            <app-single-notebook [notebook]="getValue()"></app-single-notebook>
+             -->
+        </form>
+    </div>
+</div>

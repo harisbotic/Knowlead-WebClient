@@ -1,15 +1,18 @@
-<div *ngFor="let item of getNotebookList()">
-    <app-single-notebook [notebook]="item" (click)="openNotebook(item)"></app-single-notebook>
-</div>
-<button (click)="openNotebook({userNotebookId: null})" class="addNewNotebook">
-    <i class="kl-plus"></i>
-    <div class="addNewNotebook-text">Add New Notebook</div>
-</button>
 
-<div *ngIf="modalOpened">
-    <ngl-modal [(open)]="modalOpened">
-        <div body>
-            <app-notebook-edit [notebookId]="viewingNotebook" (close)="closeModal()"></app-notebook-edit>
-        </div>
-    </ngl-modal>
+<div class="notebookList-wrap">
+    <div *ngFor="let item of getNotebookList()">
+        <app-single-notebook [notebook]="item" (click)="openNotebook(item)"></app-single-notebook>
+    </div>
+    <button (click)="openNotebook({userNotebookId: null})" class="addNewNotebook">
+        <i class="kl-plus"></i>
+        <div class="addNewNotebook-text">Add New Notebook</div>
+    </button>
+
+    <div *ngIf="modalOpened">
+        <ngl-modal [(open)]="modalOpened">
+            <div body>
+                <app-notebook-edit [notebookId]="viewingNotebook" (close)="closeModal()"></app-notebook-edit>
+            </div>
+        </ngl-modal>
+    </div>
 </div>

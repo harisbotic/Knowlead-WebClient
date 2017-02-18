@@ -36,16 +36,20 @@
                         <div class="row sidebarTopElements">
                             <div class="col-50">
                                 <div class="tabButton-wrap">
-                                    <a class="tabButton" routerLink="chat">Chat</a>
+                                    <a routerLink="chat">
+                                        <button class="tabButton">Chat</button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-50">
                                 <div class="tabButton-wrap">
-                                    <a class="tabButton" routerLink="notebook">Notebook</a>
+                                    <a routerLink="notebook">
+                                        <button class="tabButton">Notebook</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <router-outlet></router-outlet>
 
                     </div>
