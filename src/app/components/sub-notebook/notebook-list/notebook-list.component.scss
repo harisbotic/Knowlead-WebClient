@@ -12,6 +12,13 @@
     }
 }
 
+.notebookList-library-wrap {
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: none;
+    margin-left: 0;
+}
+
 .addNewNotebook {
     width: 150px;
     height: 170px;

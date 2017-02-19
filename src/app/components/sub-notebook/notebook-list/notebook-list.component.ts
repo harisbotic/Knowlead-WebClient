@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
 import { NotebookModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
@@ -14,6 +14,7 @@ export class NotebookListComponent extends BaseComponent implements OnInit {
 
   modalOpened = false;
   viewingNotebook: number;
+  @Input() inLibrary = false;
 
   constructor(protected notebookService: NotebookService, protected storageService: StorageService) { super(); }
 

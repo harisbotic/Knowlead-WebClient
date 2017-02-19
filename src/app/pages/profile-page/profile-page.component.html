@@ -25,7 +25,7 @@
                 <div class="profilePage-navigation-wrap">
                     <div class="col-17 filler"></div>
                     <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
-                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="analytics">Analytics</a></div>
+                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy" id="analyticsLink" >Analytics</div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
                     <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{user?.minutesBalance}} Minutes</div>
