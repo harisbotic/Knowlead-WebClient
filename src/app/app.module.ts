@@ -87,6 +87,7 @@ import { LibraryComponent } from './pages/profile-page/library/library.component
 import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
 import { SingleFriendshipComponent } from './pages/profile-page/friendships/single-friendship/single-friendship.component';
 import { FeedbackFormDirective } from './directives/feedback-form.directive';
+import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,8 @@ import { FeedbackFormDirective } from './directives/feedback-form.directive';
     LibraryComponent,
     FriendshipsComponent,
     SingleFriendshipComponent,
-    FeedbackFormDirective
+    FeedbackFormDirective,
+    HeaderSearchComponent
   ],
   imports: [
     BrowserModule,

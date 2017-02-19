@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { StorageService } from './storage.service';
 import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
@@ -12,7 +12,7 @@ import { Guid, ApplicationUserModel, ImageBlobModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { AnalyticsService } from './analytics.service';
-import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE } from '../utils/urls';
+import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE, PROFILE_SEARCH } from '../utils/urls';
 import { getGmtDate, getLocalDate } from '../utils/index';
 import { Observable } from 'rxjs/Rx';
 
@@ -41,6 +41,12 @@ export class AccountService {
         this.storageService.refreshStorage('user', this.userFiller);
       }
     });
+  }
+
+  public search(query: string): Observable<ApplicationUserModel[]> {
+    let googleParams = new URLSearchParams();
+    googleParams.set('q', query);
+    return this.http.get(PROFILE_SEARCH, {search: googleParams}).map(responseToResponseModel).map(resp => resp.object);
   }
 
   public getUserById(id: Guid, includeDetails = false): Observable<ApplicationUserModel> {
