@@ -20,4 +20,15 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
     }));
   }
 
+  p2pAdded(p2pId: number) {
+    this.subscriptions.push(this.p2pService.get(p2pId).subscribe(p2p => {
+      let idx = this.p2ps.findIndex(loaded => p2p.p2pId === loaded.p2pId);
+      if (idx === -1) {
+        this.p2ps = [p2p].concat(this.p2ps);
+      } else {
+        this.p2ps[idx] = p2p;
+      }
+    }));
+  }
+
 }

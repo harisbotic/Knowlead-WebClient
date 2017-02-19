@@ -26,6 +26,7 @@ import { AboutMeReviewsComponent } from './pages/profile-page/about-me/about-me-
 import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2ps/about-me-p2ps.component';
 import { LibraryComponent } from './pages/profile-page/library/library.component';
 import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
+import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
         { path: '', component: DefaultHomePageComponent },
+        { path: 'filtered/:id', component: FilteredHomePageComponent },
         { path: 'p2p/:id', component: SingleP2pComponent }
     ] },
     { path: 'translatetest', component: TranslationTestComponent },

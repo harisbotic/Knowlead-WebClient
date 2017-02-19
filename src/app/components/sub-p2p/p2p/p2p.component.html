@@ -11,7 +11,7 @@
                                     <div class="postOptions-content">
 
                                         <div class="row postOptions-button posRel">
-                                            <a class="posRel" *ngIf="p2p.createdById === user?.id">
+                                            <a class="posRel" *ngIf="p2p.createdById === user?.id && !p2p.isDeleted">
                                                 <div class="col-30 posRel">
                                                     <i class="kl-delete postOptions-icon centerV"></i>
                                                 </div>

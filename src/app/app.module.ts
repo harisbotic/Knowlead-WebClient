@@ -88,6 +88,7 @@ import { FriendshipsComponent } from './pages/profile-page/friendships/friendshi
 import { SingleFriendshipComponent } from './pages/profile-page/friendships/single-friendship/single-friendship.component';
 import { FeedbackFormDirective } from './directives/feedback-form.directive';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
+import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { HeaderSearchComponent } from './components/header/header-search/header-
     FriendshipsComponent,
     SingleFriendshipComponent,
     FeedbackFormDirective,
-    HeaderSearchComponent
+    HeaderSearchComponent,
+    FilteredHomePageComponent
   ],
   imports: [
     BrowserModule,

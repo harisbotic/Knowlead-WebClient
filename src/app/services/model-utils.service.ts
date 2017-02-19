@@ -178,7 +178,6 @@ export class ModelUtilsService {
   }
 
   public fillP2p(value: P2PModel): Observable<P2PModel> {
-    let ret = Observable.of(value);
     if (typeof(value.dateCreated) === 'string') {
       value.dateCreated = new Date(Date.parse(value.dateCreated));
     }
@@ -188,14 +187,17 @@ export class ModelUtilsService {
     if (typeof(value.deadline) === 'string') {
       value.deadline = new Date(Date.parse(value.deadline));
     }
+    let ret = Observable.of(value);
+    ret = ret.flatMap(p2p => this.storageService.getLanguages().take(1)
+      .map((languages: LanguageModel[]) => {
+        p2p.languages = (p2p.languages) ? 
+          p2p.languages.map(language => languages.find(l => l.coreLookupId === language.coreLookupId)) :
+          [];
+        return p2p;
+      }));
     ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
-    ret = ret.flatMap(p2p => this.storageService.getLanguages().take(1)
-      .map((languages: LanguageModel[]) => {
-        p2p.languages.map(language => languages.find(l => l.coreLookupId === language.coreLookupId));
-        return p2p;
-      }));
     return ret;
   }
 
