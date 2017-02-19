@@ -1,5 +1,10 @@
 @import "../../../kl-styles/variables.scss";
 
+#headerSticky {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+}
 
 nav {
     width: 100%;
