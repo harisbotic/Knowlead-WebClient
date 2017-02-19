@@ -1,4 +1,4 @@
-<div class="notebookList-wrap">
+<div class="notebookList-wrap" [class.notebookList-library-wrap]="inLibrary">
     <a *ngFor="let item of getNotebookList()" routerLink="{{item.notebookId}}">
         <app-single-notebook [notebook]="item"></app-single-notebook>
     </a>
