@@ -1,14 +1,17 @@
-<div class="grid-container-small posRel zZero">
-    <div class="row welcome-title-wrap">
+<div class="grid-container-small posRel zZero" *ngIf="user">
+    <div class="row welcome-title-wrap" *ngIf="!!!user.interests">
         <div class="col-100">
             <span class="welcome-title"> Welcome to Knowlead! </span>
         </div>
     </div>
     <div class="row welcome-text-wrap">
         <div class="col-100">
-            <span class="welcome-text">
+            <span class="welcome-text" *ngIf="!isVoting && !!!user.interests">
                 Thank you for joining and helping us spread knowledge across the world.
                 You're one step away from completing your registration.
+            </span>
+            <span class="welcome-text" *ngIf="isVoting">
+                bla bla bla ono za voting
             </span>
         </div>
     </div>
@@ -28,8 +31,8 @@
                 </div>
                 <div *ngIf="!shouldShowSelector()" class="row categories-selection-wrap">
                     <div *ngFor="let row of [0,1,2,3];">
-                        <button *ngFor="let col of [0,1,2]" class="col-32 clearButton category-box" (click)="category = root.children[col + row * 3]">
-                        {{root.children[col + row * 3].name}}
+                        <button *ngFor="let col of [0,1,2]" class="col-32 clearButton category-box" (click)="category = root.children[col + row * 3]" [disabled]="!root.children[col + row * 3].children || root.children[col + row * 3].children.length === 0">
+                            {{root.children[col + row * 3].name}}
                         </button>
                     </div>
                 </div>

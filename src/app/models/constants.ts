@@ -56,4 +56,5 @@ export class ErrorCodes
 	static alreadyInCall: string = "ALREADY_IN_CALL";
 	static feedbackAlreadyGiven: string = "FEEDBACK_ALREADY_GIVEN";
 	static alreadyBookmarked: string = "ALREADY_BOOKMARKED";
+	static wasntBookmarked: string = "WASNT_BOOKMARKED";
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { InterestModel, FOSModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-interest-setup-choice',
@@ -10,28 +11,19 @@ import { BaseComponent } from '../../../base.component';
 export class InterestSetupChoiceComponent extends BaseComponent implements OnInit {
 
   @Output() remove = new EventEmitter<FOSModel>();
-  @Input() interest: InterestModel = {
-    fosId: 0,
-    fos: {
-      name: 'MY CHOICE No1',
-      children: [],
-      parentFosId: -1,
-      coreLookupId: 0,
-      code: 'testni primjer',
-      parent: null
-    },
-    stars: 0
-  };
-  niz: string[] = [
-    'interest-setup|very low',
-    'interest-setup|low',
-    'interest-setup|good',
-    'interest-setup|very good',
-    'interest-setup|excellent'
-  ];
-  constructor() { super(); }
+  @Input() interest: InterestModel;
+  count: number;
+
+  constructor(protected storageService: StorageService) { super(); }
+
   ngOnInit() {
+    if (!this.interest.fos.unlocked) {
+      this.subscriptions.push(this.storageService.getFOSvotes(this.interest.fos).subscribe(count => {
+        this.count = count;
+      }));
+    }
   }
+
   removed() {
     this.remove.emit(this.interest.fos);
   }

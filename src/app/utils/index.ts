@@ -178,12 +178,12 @@ export function getDateIfValid(day: number, month: number, year: number): Date {
 
 export function getGmtDate(date: Date): Date {
     let ret = new Date(date.getTime());
-    ret.setMinutes(ret.getMinutes() - ret.getTimezoneOffset());
+    ret.setMinutes(ret.getMinutes() + ret.getTimezoneOffset());
     return ret;
 }
 
 export function getLocalDate(date: Date): Date {
     let ret = new Date(date.getTime());
-    ret.setMinutes(ret.getMinutes() + ret.getTimezoneOffset());
+    ret.setMinutes(ret.getMinutes() - ret.getTimezoneOffset());
     return ret;
 }
