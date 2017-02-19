@@ -1,4 +1,75 @@
-<p>
-  about-me works!
-</p>
-evo ovdje treba ici sve reviews/posts <router-outlet></router-outlet>
+
+<div class="row">
+    <div class="col-35">
+        <div class="row">
+            <div class="col-100">
+                <div class="profileSidebar">
+                    <div class="row">
+                        <div class="profileSwitchButton-wrap">
+                            <a routerLink="">
+                                <div class="profileSwitchButton">
+                                    See USERS previous posts.
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-100">
+                            <div class="profileInfoSidebar-wrap">
+                                <div class="profileInfoSidebar-title">
+                                    Personal Information
+                                    <a routerLink="">
+                                        <i class="kl-three-dots sidebarOptions"></i>
+                                    </a>
+                                </div>
+
+                                <div class="profileInfo-item-wrap">
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">First Name</div>
+                                            <div class="col-60 item">Ibrahim</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">Surname</div>
+                                            <div class="col-60 item">Bosssadaki</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">Birthdate</div>
+                                            <div class="col-60 item">17.94.2014.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">Native Language</div>
+                                            <div class="col-60 item">Bosanskaaai</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">Country</div>
+                                            <div class="col-60 item">Bosna</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profileInfo-item">
+                                            <div class="col-40 itemTopic">Email</div>
+                                            <div class="col-60 item">ejubua.hbaga@hfhva.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-65">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -76,7 +76,7 @@
                                     <div class="col-65">
                                         <div class="viewPostInfo-text" *ngIf="p2p.fos" id="subjectText">{{p2p.fos.name}}</div>
                                     </div>
-                                    <span class="tooltip-top tooltip-150" *ngIf="p2p.fos">
+                                    <span class="tooltip-postInfo tooltip-150" *ngIf="p2p.fos">
                                         Subject: {{p2p.fos.name}}
                                     </span>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="col-60">
                                         <div class="viewPostInfo-text">{{p2p.initialPrice}}</div>
                                     </div>
-                                    <span class="tooltip-top tooltip-150">
+                                    <span class="tooltip-postInfo tooltip-150">
                                         Reward: {{p2p.initialPrice}} Minutes
                                     </span>
                                 </div>
@@ -105,7 +105,7 @@
                                                 {{language.code | uppercase}}
                                             </span>
                                         </div>
-                                        <span class="tooltip-top tooltip-150">
+                                        <span class="tooltip-postInfo tooltip-150">
                                             Language:
                                             <span *ngFor="let language of p2p.languages">
                                                 {{language.name}}
@@ -122,7 +122,7 @@
                                     <div class="col-60">
                                         <div class="viewPostInfo-text">{{p2p.deadline | amTimeAgo}}</div>
                                     </div>
-                                    <span class="tooltip-top tooltip-150">
+                                    <span class="tooltip-postInfo tooltip-150">
                                         Deadline: {{p2p.deadline | amTimeAgo}}
                                     </span>
                                 </div>

@@ -1,0 +1,85 @@
+@import "../../../../kl-styles/variables.scss";
+
+.profileSidebar {
+    margin-right: 50px;
+    margin-bottom: 100px;
+}
+
+.profileSwitchButton-wrap {
+    width: 100%;
+    height: 40px;
+    padding-right: 20px;
+
+    a {
+        text-decoration: none;
+    }
+
+    .profileSwitchButton {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background-color: $knowlead-secondary;
+        border-radius: $border-radius;
+        outline: none;
+        text-decoration: none;
+
+        &:hover {
+            background-color: transparentize($knowlead-secondary, 0.1);
+        }
+    }
+}
+
+.profileInfoSidebar-wrap {
+    margin-top: 30px;
+    margin-right: 20px;
+    border-radius: $border-radius;
+    background-color: $post-view-background-color;
+    border: 1px solid $hover-dark-color;
+
+    &:hover > .profileInfoSidebar-title > a > .sidebarOptions {
+        display: inline;
+    }
+
+    .profileInfoSidebar-title {
+        height: 50px;
+        border-bottom: 2px solid $divider-color;
+        line-height: 50px;
+        padding-left: 15px;
+        font-weight: bold;
+        font-size: 15px;
+
+        .sidebarOptions {
+            display: none;
+            font-size: 40px;
+            line-height: 50px;
+            float: right;
+            color: $font-secondary-color;
+
+            &:hover {
+                color: $knowlead-primary;
+            }
+        }
+    }
+
+    .profileInfo-item-wrap {
+        margin: 10px 0;
+
+        .profileInfo-item {
+            padding: 0 15px;
+            height: 40px;
+            line-height: 40px;
+
+            .itemTopic {
+                font-weight: bold;
+            }
+
+            .item {
+                color: $font-secondary-color;
+            }
+        }
+    }
+}
