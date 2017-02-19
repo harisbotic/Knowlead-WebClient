@@ -150,6 +150,16 @@ export interface _FeedbackModel
 	studentId: Guid;
 	student: ApplicationUserModel;
 }
+export interface StickyNoteModel
+{
+	stickyNoteId: number;
+	name: string;
+	noteText: string;
+	createdAt: Date;
+	isDeleted: boolean;
+	createdById: Guid;
+	createdBy: ApplicationUserModel;
+}
 export interface NotebookModel
 {
 	notebookId: number;
@@ -245,6 +255,10 @@ export interface P2PModel
 	priceAgreed: number;
 	dateTimeAgreed: Date;
 	dateCreated: Date;
+	bookmarkCount: number;
+	offerCount: number;
+	didBookmark: boolean;
+	canBookmark: boolean;
 	isDeleted: boolean;
 	scheduledWithId: Guid;
 	scheduledWith: ApplicationUserModel;
@@ -277,6 +291,13 @@ export interface P2PFileModel
 	p2p: P2PModel;
 	fileBlobId: Guid;
 	fileBlob: FileBlobModel;
+}
+export interface P2PBookmarkModel
+{
+	p2pId: number;
+	p2p: P2PModel;
+	applicationUserId: Guid;
+	applicationUser: ApplicationUserModel;
 }
 export interface ResponseModel
 {
@@ -373,15 +394,5 @@ export interface ApplicationUserInterestModel
 	fosId: number;
 	fos: FOSModel;
 	stars: number;
-}
-export enum DayOfWeek
-{
-	Sunday = 0,
-	Monday = 1,
-	Tuesday = 2,
-	Wednesday = 3,
-	Thursday = 4,
-	Friday = 5,
-	Saturday = 6,
 }
 export type Guid = string;

@@ -3,14 +3,14 @@
         <div class="videoSection-wrap">
             <div class="video-container">
                 <video #video width="100%" height="100%"></video>
-                <video #myVideo width="150px" height="150px" muted="true" class="myVideo"></video>
+                <video #myVideo width="150px" height="150px" class="myVideo"></video>
             </div>
             <div class="watermark">
                 <i class="kl-logo-short"></i>
             </div>
             <div class="videoButtons-wrap">
-                <button class="videoButton">
-                    <i class="kl-camera"></i>
+                <button [class.videoButton]="useCam" [class.videoButton-offState]="!useCam" (click)="toggleCamera()">
+                    <i [class.kl-camera]="useCam" [class.kl-camera-off]="!useCam"></i>
                 </button>
                 <!-- <button class="videoButton-offState">
                     <i class="kl-camera-off"></i>
@@ -20,8 +20,8 @@
                     <i class="kl-phone"></i>
                 </button>
 
-                <button class="videoButton">
-                    <i class="kl-mic"></i>
+                <button [class.videoButton]="useMic" [class.videoButton-offState]="!useMic" class="videoButton" (click)="toggleMic()">
+                    <i [class.kl-mic]="useMic" [class.kl-mic-off]="!useMic"></i>
                 </button>
                 <!-- <button class="videoButton-offState">
                     <i class="kl-mic-off"></i>

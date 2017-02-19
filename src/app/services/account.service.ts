@@ -78,6 +78,9 @@ export class AccountService {
     return input
       .map(responseToResponseModel)
       .map(response => response.object)
+      .do((response) => {
+        this.sessionService.invalidateAccessToken();
+      })
       .do((user: ApplicationUserModel) => {
         if (user) {
           this.storageService.setToStorage('user', this.userFiller, null, user);

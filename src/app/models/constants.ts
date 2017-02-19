@@ -55,4 +55,5 @@ export class ErrorCodes
 	static notLastOffer: string = "NOT_LAST_OFFER";
 	static alreadyInCall: string = "ALREADY_IN_CALL";
 	static feedbackAlreadyGiven: string = "FEEDBACK_ALREADY_GIVEN";
+	static alreadyBookmarked: string = "ALREADY_BOOKMARKED";
 }

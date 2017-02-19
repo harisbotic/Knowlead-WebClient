@@ -17,7 +17,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
 
   @Input() set user(user: ApplicationUserModel) {
     delete this.url;
-    if (user && user.profilePicture) {
+    if (user && user.profilePictureId) {
       this.url = ModelUtilsService.getImageBlobUrl(user.profilePictureId);
     }
     this.profilePictureId = (user) ? user.profilePictureId : undefined;

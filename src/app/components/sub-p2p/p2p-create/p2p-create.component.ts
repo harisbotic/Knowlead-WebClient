@@ -107,7 +107,11 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       createdById: undefined,
       p2pMessageModels: undefined,
       status: undefined,
-      dateCreated: undefined
+      dateCreated: undefined,
+      bookmarkCount: undefined,
+      offerCount: undefined,
+      didBookmark: undefined,
+      canBookmark: undefined
     };
   }
 

@@ -136,18 +136,23 @@ form{
 	border-radius: 15px;
 	text-align: center;
 	line-height: 30px;
-	color: #868282;
 	overflow: hidden;
-	background: #F1F0EE;
 	font-weight: bold;
 	margin: 0 auto;
     border: 1px solid;
+    
+	color: white;
+	background: $knowlead-primary;
+	border-color: white;
+    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
 }
 
 #refer .prizes .products li.product .claimed {
     color: $disabled-color;
     background: $post-type-secondary-color;
     border-color: $disabled-color;
+    box-shadow: none;
+
 
     ~ p {
         color: $disabled-color;
@@ -158,6 +163,7 @@ form{
     color: $font-primary-color;
     background: $hover-dark-color;
     border-color: $disabled-color;
+    box-shadow: none;
 }
 
 #refer .prizes .products li.product .sep{
@@ -190,15 +196,6 @@ form{
 #refer .prizes .products li.product.selected p{
 	color: #995F5E !important;
 }
-
-
-#refer .prizes .products li.product:hover .circle {
-	color: white;
-	background: $knowlead-primary;
-	border-color: white;
-    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
-}
-
 
 
 #refer .prizes .products li.product .tooltip-claimReward {

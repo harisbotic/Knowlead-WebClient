@@ -7,6 +7,7 @@ import { CountryModel, LanguageModel, StateModel, FOSModel } from './../models/d
 import * as _ from 'lodash';
 import { SessionService, SessionEvent } from './session.service';
 import { StorageSubject, StorageFiller } from './storage.subject';
+import { STORE_REFRESH_TOKEN } from '../utils/storage.constants';
 
 @Injectable()
 export class StorageService {
@@ -39,10 +40,10 @@ export class StorageService {
   };
 
   constructor(protected injector: Injector, protected sessionService: SessionService) {
-    this.setAccessToken(localStorage.getItem(STORE_ACCESS_TOKEN));
+    this.setAccessToken(localStorage.getItem(STORE_ACCESS_TOKEN), this.getRefreshToken());
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
-        this.setAccessToken(null);
+        this.setAccessToken(null, null);
         for (let key of Object.keys(this.cache)) {
           this.cache[key].handleLogout();
         }
@@ -51,12 +52,13 @@ export class StorageService {
     console.info('Storage service created');
   }
 
-  public setAccessToken(value: string, dontEmitLogin?: boolean) {
+  public setAccessToken(value: string, refreshToken: string, dontEmitLogin?: boolean) {
     this.access_token = value;
-    if (value) {
+    if (value && refreshToken) {
       console.debug('Setting access token');
       this.access_token_value = parseJwt(value);
       localStorage.setItem(STORE_ACCESS_TOKEN, value);
+      localStorage.setItem(STORE_REFRESH_TOKEN, refreshToken);
       if (!dontEmitLogin) {
         this.sessionService.emitLogin();
       }
@@ -68,6 +70,10 @@ export class StorageService {
 
   public getAccessToken(): Observable<string> {
     return Observable.of(this.access_token);
+  }
+
+  public getRefreshToken(): string {
+    return localStorage.getItem(STORE_REFRESH_TOKEN);
   }
 
   public getAccessTokenStream(): Observable<string> {
@@ -82,6 +88,7 @@ export class StorageService {
     delete this.access_token;
     delete this.access_token_value;
     localStorage.removeItem(STORE_ACCESS_TOKEN);
+    localStorage.removeItem(STORE_REFRESH_TOKEN);
   }
 
   public hasAccessToken(): boolean {

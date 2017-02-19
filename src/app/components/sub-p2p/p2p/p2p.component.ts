@@ -57,6 +57,14 @@ export class P2pComponent extends BaseComponent implements OnInit {
     }));
   }
 
+  bookmark() {
+    if (this.user && this.p2p.createdById !== this.user.id) {
+      this.p2pService.bookmark(this.p2p).subscribe(undefined, err => {
+        this.notificationService.error('Error bookmarking', err);
+      });
+    }
+  }
+
   deleted() {
     this.subscriptions.push(this.p2pService.delete(this.p2p).subscribe(undefined, (error: ResponseModel) => {
       this.notificationService.error('p2p|delete fail', error && error.errors ? error.errors[0] : undefined);

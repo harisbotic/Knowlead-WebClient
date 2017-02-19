@@ -11,6 +11,7 @@ export interface NotificationSource {
   removeNotification(notification: NotificationModel);
   updateNotification(notification: NotificationModel): boolean;
   addNotifications(notifications: NotificationModel[]);
+  markSingleAsRead(notification: NotificationModel);
   reset();
   start();
   getStatsStream(): Observable<NotificationSourceStats>;
@@ -129,7 +130,15 @@ export abstract class BaseNotificationSource implements NotificationSource {
     this.stats.unread = 0;
     this.refreshStats();
   }
+
+  protected markSingleAsReadHelper(notification: NotificationModel) {
+    notification.seenAt = new Date();
+    this.notifyNotifications();
+    this.stats.unread = Math.max(this.stats.unread - 1 , 0);
+    this.refreshStats();
+  }
   abstract markAsRead();
   abstract loadMore();
   abstract start();
+  abstract markSingleAsRead(notification: NotificationModel);
 }

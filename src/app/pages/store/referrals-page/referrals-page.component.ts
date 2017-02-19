@@ -13,6 +13,7 @@ interface StopInterface {
   additionalString?: string;
   width: number;
 
+  claimed?: boolean;
   canClaim?: boolean;
 }
 
@@ -84,13 +85,24 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
 
   constructor(protected accountService: AccountService, protected storeService: StoreService) { super(); }
 
+  findStopByReward(reward: RewardModel): StopInterface {
+    return this.stops.find(s => s.count === parseInt(reward.code.substr(3), 10));
+  }
+  findRewardByStop(stop: StopInterface): RewardModel {
+    return this.rewards.find(r => r.code === 'ref' + stop.count);
+  }
+
   refresh() {
     if (!this.stats || !this.rewards) {
       return;
     }
+    for (let stop of this.stops) {
+      stop.canClaim = false;
+      stop.claimed = false;
+    }
     for (let claimable of this.stats.rewardsAvailable) {
       let reward = this.rewards.find(r => r.coreLookupId === claimable);
-      let stop = this.stops.find(s => s.count === parseInt(reward.code.substr(3), 10));
+      let stop = this.findStopByReward(reward);
       if (stop == null) {
         console.error('BACKEND REWARDS NOT CONSISTENT WITH FRONTEND');
       } else {
@@ -99,7 +111,8 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
     }
     for (let claimed of this.stats.rewardsClaimed) {
       let reward = this.rewards.find(r => r.coreLookupId === claimed);
-      let stop = this.stops.find(s => s.count === reward.minutesReward);
+      let stop = this.findStopByReward(reward);
+      stop.claimed = true;
       if (stop && (!this.currentStop || stop.count > this.currentStop.count)) {
         this.currentStop = stop;
       }
@@ -127,13 +140,16 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
 
   claimReward(stop: StopInterface) {
     if (stop.canClaim) {
-      let reward = this.rewards.find(r => r.minutesReward === stop.count);
-      this.storeService.claimReward(reward).subscribe(() => {
-        this.storeService.getReferralStats().subscribe((stats) => {
-          this.stats = stats;
-          this.refresh();
+      let reward = this.findRewardByStop(stop);
+      if (reward) {
+        this.storeService.claimReward(reward).subscribe(() => {
+          this.storeService.getReferralStats().subscribe((stats) => {
+            this.stats = stats;
+            this.refresh();
+          });
         });
-      });
+        console.error('Error finding backend model for claiming reward');
+      }
     }
   }
 
