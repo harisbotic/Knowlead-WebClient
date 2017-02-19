@@ -1,4 +1,44 @@
-<div *ngIf="target">
+<div class="grid-container">
+    <div class="row">
+        <div class="row">
+            <div class="coverPhoto-wrap">
+                <!-- <div class="coverPhoto-options">
+                    <i class="kl-plus"></i>
+                </div> -->
+                <div class="profilePage-profileImage-wrap">
+                    <app-profile-picture [user]="user" [uploadable]="false" size="large"></app-profile-picture>
+                </div>
+                <div class="profilePage-profileInfo-wrap">
+                    <div class="profilePage-Name">Tito Titovski</div>
+                </div>
+
+                <div class="addFriend-wrap">
+                    <i class="kl-add-friend"></i>
+                </div>
+                <div class="sendMessage-wrap">
+                    <i class="kl-messages"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-100">
+                <div class="profilePage-navigation-wrap">
+                    <div class="col-17 filler"></div>
+                    <div class="col-12_5 profilePage-nav-item"><a href="">About Me</a></div>
+                    <div class="col-12_5 profilePage-nav-item"><a href="">Analytics</a></div>
+                    <div class="col-12_5 profilePage-nav-item"><a href="">Library</a></div>
+                    <div class="col-12_5 profilePage-nav-item"><a href="">Friends</a></div>
+                    <div class="col-12_5 profile-stats" id="profile-minutes">100 Minutes</div>
+                    <div class="col-20_5 profile-stats">2015 Score</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- <div *ngIf="target">
   <div>
     Full name: {{target | fullName}}
   </div>
@@ -6,4 +46,4 @@
     i tako dalje ...
   </div>
   <app-friendship-strip *ngIf="target" [otherId]="target.id"></app-friendship-strip>
-</div>
+</div> -->

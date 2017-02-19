@@ -92,15 +92,23 @@
                     <div class="threadBottomElements-wrap">
                         <div class="col-55 proposed-wrap">
                             <div class="col-65">
-                                <div class="proposeDate-wrap">
+                                <div class="proposeDate-wrap tooltip-parent">
                                     <i class="kl-calendar proposeDate-icon"></i>
                                     <div class="proposeDate">{{message.dateTimeOffer | date:'MMM d, y HH:mm'}}</div>
+                                    <span class="tooltip-top tooltip-200">
+                                        Proposed date for a lesson
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-35">
-                                <div class="proposePrice-wrap">
+                                <div class="proposePrice-wrap tooltip-parent">
                                     <i class="kl-currency proposePrice-icon"></i>
-                                    <div class="proposePrice">{{message.priceOffer}}</div>
+                                    <div class="proposePrice">
+                                        {{message.priceOffer}}
+                                    </div>
+                                    <span class="tooltip-proposedPrice tooltip-200">
+                                        Proposed price for a lesson
+                                    </span>
                                 </div>
                             </div>
                         </div>

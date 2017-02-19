@@ -12,18 +12,27 @@
     <div class="row">
         <div class="regForm-wrap">
             <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                <div id="regEmail-wrap">
+                <div id="regEmail-wrap" class="tooltip-parent">
                     <input type="text" name="email" placeholder="{{'common|email' | translate}}" formControlName="email" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
+                    <span class="tooltip-registration tooltip-175">
+                        Please enter valid Email
+                    </span>
                 </div>
 
-                <div id="regPass-wrap">
+                <div id="regPass-wrap" class="tooltip-parent">
                     <input type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+                    <span class="tooltip-registration tooltip-250">
+                        Password must be 8 characters long
+                    </span>
                 </div>
-                <div id="regConfirm-wrap">
+                <div id="regConfirm-wrap" class="tooltip-parent">
                     <input type="password" name="confirmpassword" placeholder="{{'register-page|confirm password' | translate}}" formControlName="confirmpassword" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
+                    <span class="tooltip-registration tooltip-225">
+                        Please confirm your password
+                    </span>
                 </div>
                 <input type="submit" value="{{'register-page|submit' | translate}}" class="defaultButton" id="register-button" [disabled]="busy || !form.valid">
             </form>

@@ -1,83 +1,118 @@
 @import "../../../kl-styles/variables.scss";
 
-
-.incomingCall-wrap {
-    width: 350px;
-    height: 200px;
-    background-color: white;
-    border-radius: $border-radius;
-    border: 2px solid $hover-dark-color;
-}
-
-.incomingCall-title {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
-    border-bottom: 1px solid $divider-color;
-}
-
-.callerProfileImage-wrap {
+.coverPhoto-wrap {
     position: relative;
-    height: 70px;
+    width: 100%;
+    height: 300px;
+    background-image: url("/assets/images/covers/cover1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    .coverPhoto-options {
+        display: none;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background-color: $hover-middle-color;
+    }
+
+    .profilePage-profileImage-wrap {
+        position: absolute;
+        left: 50px;
+        bottom: -50px;
+    }
+
+    .profilePage-profileInfo-wrap {
+        position: absolute;
+        bottom: 25px;
+        left: 245px;
+        font-size: 24px;
+        font-weight: bolder;
+        color: white;
+        text-shadow: 0 0 5px $font-primary-color;
+        text-transform: capitalize;
+
+    }
+
+    .addFriend-wrap {
+        position: absolute;
+        bottom: -10px;
+        right: 90px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: $knowlead-secondary;
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        line-height: 48px;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 0 5px $font-primary-color;
+        }
 }
 
-.incomingCall-text {
-    margin-top: 15px;
+    .sendMessage-wrap {
+        position: absolute;
+        bottom: -10px;
+        right: 30px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: $knowlead-primary;
+        color: white;
+        font-size: 22px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
 
-    > a {
+        &:hover {
+            box-shadow: 0 0 5px $font-primary-color;
+        }
+    }
+
+}
+
+.profilePage-navigation-wrap {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    border-radius: 0 0 $border-radius $border-radius;
+    border-bottom: 1px solid $hover-dark-color;
+    border-left: 1px solid $hover-dark-color;
+    border-right: 1px solid $hover-dark-color;
+
+    .profilePage-nav-item {
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        font-size: 15px;
+
+        a {
+            text-decoration: none;
+            color: $font-secondary-color;
+
+            &:hover {
+                color: $font-primary-color;
+            }
+
+            &:active {
+                color: $font-primary-color;
+            }
+        }
+    }
+
+    .profile-stats {
+        line-height: 50px;
+        padding-left: 50px;
+        font-size: 16px;
         font-weight: bold;
         color: $font-primary-color;
     }
-}
 
-.callSubject {
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 10px;
-
-    > a {
-        color: $knowlead-secondary;
+    #profile-minutes {
+        border-left: 2px solid $divider-color;
     }
-}
-
-.incomingCall-buttons-wrap {
-    height: 50px;
-    position: relative;
-    border-top: 1px solid $divider-color;
-}
-
-.incomingCall-buttons {
-    padding: 10px;
-}
-
-.declineButton {
-    width: 80px;
-    height: 35px;
-    border: none;
-    outline: none;
-    border-radius: $border-radius;
-    background-color: transparentize ($disabled-color, 0.5);
-    font-weight: bold;
-    margin-right: 3px;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.answerButton {
-        width: 80px;
-        height: 35px;
-        border: none;
-        outline: none;
-        border-radius: $border-radius;
-        background-color: $knowlead-primary;
-        font-weight: bold;
-        color: white;
-        margin-left: 3px;
-
-        &:hover {
-            text-decoration: underline;
-        }
 }

@@ -6,6 +6,7 @@ nav {
     height: $nav-height;
     background-color: $knowlead-primary;
     color: white;
+    box-shadow: 0 0 3px $font-primary-color;
 }
 
 a, a:visited, a:hover, a:active {
