@@ -18,6 +18,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   root: FOSModel;
   _search: string;
   user: ApplicationUserModel;
+  backUrl: string;
 
   set search(value: string) {
     this._search = value;
@@ -44,6 +45,11 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   ngOnInit() {
     this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
       this.isVoting = !!params['vote'];
+      if (this.isVoting) {
+        this.backUrl = '/interestsetup';
+      } else {
+        this.backUrl = '/profilesetup';
+      }
       this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
         root = _.cloneDeep(root);
         let keepUnlocked = !this.isVoting;

@@ -36,11 +36,7 @@
                         </button>
                     </div>
                 </div>
-                <!-- TODO: Make go back button for sub categories also. Not to  -->
-                <button *ngIf="shouldShowSelector()" (click)="hideSelector()" class="clearButton goBack-button">
-                Go back
-                </button>
-                <app-interest-setup-selector *ngIf="shouldShowSelector()" [root]="root" [category]="category" [isRemovableCallback]="isRemovable" (fosAdded)="fosAdded($event)" (fosRemoved)="fosRemoved($event)" [search]="search">
+                <app-interest-setup-selector *ngIf="shouldShowSelector()" (removeSelector)="hideSelector()" [root]="root" [category]="category" [isRemovableCallback]="isRemovable" (fosAdded)="fosAdded($event)" (fosRemoved)="fosRemoved($event)" [search]="search">
                 </app-interest-setup-selector>
             </div>
             <div class="col-25 selection-column">
@@ -49,10 +45,11 @@
                         <div class="row">
                             <div class="col-100 myChoices-title-wrap posRel">
                                 <div class="myChoices-title">
-                                     My Choices
+                                     {{isVoting ? 'My Votes' : 'My Choices'}}
                                      <i class="kl-info moreInfo tooltip-parent">
                                          <span class="tooltip-right tooltip-175">
-                                             After choosing subjects, please specify your level of interest with stars.
+                                             {{isVoting ? 'After choosing subjects, please specify your level of interest with stars.'
+                                                : 'tooltip za votanje'}}
                                          </span>
                                      </i>
                                  </div>
@@ -79,11 +76,11 @@
         </div>
         <div class="row bottomElements">
             <div class="slider-wrap">
-                <a class="left-button-wrap" routerLink="/profilesetup">
+                <a class="left-button-wrap" [routerLink]="backUrl">
                     <button class="defaultButton" id="backToStepOne-button"> Back </button>
                 </a>
-                <div class="slider firstSlider"></div>
-                <div class="slider secondSlider"></div>
+                <div class="slider firstSlider" *ngIf="!isVoting"></div>
+                <div class="slider secondSlider" *ngIf="!isVoting"></div>
                 <div class="right-button-wrap">
                     <button class="defaultButton" id="finish-button" (click)="submit()"> Next </button>
                 </div>
