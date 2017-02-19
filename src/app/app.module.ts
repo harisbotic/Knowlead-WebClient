@@ -80,6 +80,9 @@ import { ReferralsPageComponent } from './pages/store/referrals-page/referrals-p
 import { CallChatComponent } from './pages/call-page/call-chat/call-chat.component';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
+import { AboutMeComponent } from './pages/profile-page/about-me/about-me.component';
+import { AboutMeReviewsComponent } from './pages/profile-page/about-me/about-me-reviews/about-me-reviews.component';
+import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2ps/about-me-p2ps.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +135,10 @@ import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
     ReferralsPageComponent,
     CallChatComponent,
     FullNamePipe,
-    UserProfileLinkPipe
+    UserProfileLinkPipe,
+    AboutMeComponent,
+    AboutMeReviewsComponent,
+    AboutMeP2psComponent
   ],
   imports: [
     BrowserModule,

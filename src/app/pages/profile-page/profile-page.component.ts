@@ -16,6 +16,7 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   target: ApplicationUserModel;
   user: ApplicationUserModel;
   status: string;
+  isMy: boolean;
 
   constructor(protected accountService: AccountService,
               protected route: ActivatedRoute,
@@ -23,13 +24,21 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
     super();
   }
 
+  refresh() {
+    if (this.user && this.target) {
+      this.isMy = this.user.id === this.target.id;
+    }
+  }
+
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
       this.user = user;
+      this.refresh();
     }));
     this.subscriptions.push(this.route.params.subscribe(params => {
       this.subscriptions.push(this.accountService.getUserById(params['id'], true).subscribe(user => {
         this.target = user;
+        this.refresh();
       }));
     }));
   }

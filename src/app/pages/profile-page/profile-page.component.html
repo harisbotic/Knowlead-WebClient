@@ -9,7 +9,7 @@
                     <app-profile-picture [user]="user" [uploadable]="false" size="large"></app-profile-picture>
                 </div>
                 <div class="profilePage-profileInfo-wrap">
-                    <div class="profilePage-Name">Tito Titovski</div>
+                    <div class="profilePage-Name">{{user | fullName}}</div>
                 </div>
 
                 <div class="addFriend-wrap">
@@ -24,16 +24,16 @@
             <div class="col-100">
                 <div class="profilePage-navigation-wrap">
                     <div class="col-17 filler"></div>
-                    <div class="col-12_5 profilePage-nav-item"><a href="">About Me</a></div>
-                    <div class="col-12_5 profilePage-nav-item"><a href="">Analytics</a></div>
-                    <div class="col-12_5 profilePage-nav-item"><a href="">Library</a></div>
-                    <div class="col-12_5 profilePage-nav-item"><a href="">Friends</a></div>
-                    <div class="col-12_5 profile-stats" id="profile-minutes">100 Minutes</div>
-                    <div class="col-20_5 profile-stats">2015 Score</div>
+                    <div class="col-12_5 profilePage-nav-item"><a routerLink="">About Me</a></div>
+                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="analytics">Analytics</a></div>
+                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
+                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
+                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{user?.minutesBalance}} Minutes</div>
+                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{user?.pointsBalance}} Score</div>
                 </div>
             </div>
         </div>
-
+        <router-outlet></router-outlet>
     </div>
 </div>
 
