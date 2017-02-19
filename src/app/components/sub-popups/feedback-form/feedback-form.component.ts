@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { AnalyticsService } from '../../../services/analytics.service';
-import { BaseFormComponent } from '../../../base-form.component';
 import { BaseComponent } from '../../../base.component';
 
 @Component({
@@ -13,7 +12,8 @@ import { BaseComponent } from '../../../base.component';
 })
 export class FeedbackFormComponent extends BaseComponent implements OnInit {
 
-  opened: boolean;
+  @Output() closed = new EventEmitter<any>();
+  opened = true;
   form = new FormGroup({
     text: new FormControl('', [Validators.required])
   });
@@ -30,6 +30,7 @@ export class FeedbackFormComponent extends BaseComponent implements OnInit {
   openChanged(newOpen: boolean) {
     if (!newOpen) {
       this.form.reset();
+      this.closed.emit();
     }
   }
 
@@ -39,11 +40,10 @@ export class FeedbackFormComponent extends BaseComponent implements OnInit {
     }
     this.analyticsService.sendFeedback(this.form.value.text).subscribe(() => {
       this.notificationService.info('feedback|success');
-      this.form.reset();
     }, (err) => {
       this.notificationService.error('feedback|error', err);
     });
-    this.opened = false;
+    this.closed.emit();
   }
 
 }

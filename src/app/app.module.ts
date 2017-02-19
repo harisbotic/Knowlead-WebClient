@@ -86,6 +86,7 @@ import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2p
 import { LibraryComponent } from './pages/profile-page/library/library.component';
 import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
 import { SingleFriendshipComponent } from './pages/profile-page/friendships/single-friendship/single-friendship.component';
+import { FeedbackFormDirective } from './directives/feedback-form.directive';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { SingleFriendshipComponent } from './pages/profile-page/friendships/sing
     AboutMeP2psComponent,
     LibraryComponent,
     FriendshipsComponent,
-    SingleFriendshipComponent
+    SingleFriendshipComponent,
+    FeedbackFormDirective
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-<button (click)="opened = !opened">Open feedback form</button>
 <form (ngSubmit)="submit()" [formGroup]="form">
   <ngl-modal header="{{'feedback-form|title' | translate}}" [(open)]="opened" (openChange)="openChanged($event)">
     <div body>

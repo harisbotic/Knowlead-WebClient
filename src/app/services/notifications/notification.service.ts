@@ -119,4 +119,10 @@ export class NotificationService {
     });
   }
 
+  openFeedbackForm(text?: string) {
+    if (this.notificationComponent) {
+      this.notificationComponent.openFeedbackForm(text);
+    }
+  }
+
 }

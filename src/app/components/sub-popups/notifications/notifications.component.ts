@@ -13,6 +13,7 @@ export class NotificationsComponent extends BaseComponent implements OnInit {
 
   notifications: PopupNotificationModel[] = [];
   timeout = 5000;
+  feedbackFormOpened = false;
 
   constructor(protected notificationService: NotificationService) { super(); }
 
@@ -26,6 +27,10 @@ export class NotificationsComponent extends BaseComponent implements OnInit {
 
   onNotificationClose(notification: PopupNotificationModel) {
     this.notifications = _.without(this.notifications, notification);
+  }
+
+  openFeedbackForm(text?: string) {
+    this.feedbackFormOpened = true;
   }
 
 }
