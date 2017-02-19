@@ -103,6 +103,6 @@ export class HttpProvider extends Http {
                 }
                 return Observable.throw(error);
             }
-        });
+        }).share();
     }
 }

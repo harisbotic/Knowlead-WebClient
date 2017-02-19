@@ -41,13 +41,12 @@ export class SessionService {
 
   public getAccessToken(): Observable<string> {
     if (this.refreshingAccessToken) {
-      console.debug('Sharing refresh token');
       return this.refreshingAccessToken;
     }
     return this.storageService.getAccessToken().flatMap(accessToken => {
       let parsed = parseJwt(accessToken);
       let now = new Date();
-      let expires = new Date(parsed.exp * 1000 - 3590 * 1000);
+      let expires = new Date(parsed.exp * 1000 - 60 * 1000);
       if (now.getTime() < expires.getTime() && !this.invalidate) {
         return Observable.of(accessToken);
       } else {
@@ -67,7 +66,6 @@ export class SessionService {
         this.refreshingAccessToken = tmp.share();
         return tmp.finally(() => {
           delete this.refreshingAccessToken;
-          console.log('HEPEK');
         });
       }
     });
