@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './../../services/storage.service';
-import { FOSModel, InterestModel } from './../../models/dto';
 import { AccountService } from '../../services/account.service';
-import { ApplicationUserModel } from '../../models/dto';
-import { Router } from '@angular/router';
+import { ApplicationUserModel, FOSModel, InterestModel } from '../../models/dto';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../base.component';
 
@@ -19,6 +18,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   root: FOSModel;
   _search: string;
   user: ApplicationUserModel;
+  backUrl: string;
 
   set search(value: string) {
     this._search = value;
@@ -32,21 +32,47 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   }
 
   interests: InterestModel[] = [];
+  isVoting: boolean;
 
   constructor(
     protected storageService: StorageService,
     protected accountService: AccountService,
-    protected router: Router) {
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute) {
     super();
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
-      this.root = root;
-    }));
-    this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user) => {
-      this.user = user;
-      this.interests = this.user.interests;
+    this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
+      this.isVoting = !!params['vote'];
+      if (this.isVoting) {
+        this.backUrl = '/interestsetup';
+      } else {
+        this.backUrl = '/profilesetup';
+      }
+      this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
+        root = _.cloneDeep(root);
+        let keepUnlocked = !this.isVoting;
+        const shouldKeep = (fos: FOSModel, level: number): boolean => {
+          // If this is leaf, return whether or not this should be kept
+          if (!fos.children || fos.children.length === 0) {
+            return (level < 2) || fos.unlocked === keepUnlocked;
+          }
+          // If there are any children that are kept, keep this node
+          fos.children = fos.children.filter((foss) => shouldKeep(foss, level + 1));
+          // Always keep root and main categories
+          if (level < 2) {
+            return true;
+          }
+          return fos.children.length > 0;
+        };
+        shouldKeep(root, 0);
+        this.root = root;
+      }));
+      this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user) => {
+        this.user = user;
+        this.interests = this.user.interests.filter(interest => interest.fos.unlocked === !this.isVoting);
+      }));
     }));
   }
 
@@ -91,8 +117,12 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   }
 
   submit() {
-    this.subscriptions.push(this.accountService.patchInterests(this.interests).subscribe((response) => {
-      this.router.navigate(['/']);
+    this.subscriptions.push(this.accountService.patchInterests(this.interests, this.isVoting).subscribe((response) => {
+      if (this.isVoting) {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigateByUrl('/interestsetup?vote=true');
+      }
     }));
   }
 

@@ -98,9 +98,9 @@ export class AccountService {
 
   private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {
     let cl = _.cloneDeep(user);
-    (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toUTCString() : undefined;
+    (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toISOString() : undefined;
     const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages',
-      'pointsBalance', 'minutesBalance', 'profilePictureId'];
+      'pointsBalance', 'minutesBalance', 'profilePictureId', 'averageRating'];
     toDelete.forEach((key) => {
       delete cl[key];
     });
@@ -121,7 +121,7 @@ export class AccountService {
       let patch;
       try {
         let _user = this.prepareForPatch(user, false);
-        let _newUser = this.prepareForPatch(newUser, true);
+        let _newUser = this.prepareForPatch(newUser, false);
         patch = fastjsonpatch.compare(_user, _newUser);
       } catch (e) {
         console.error('Error preparing patches: ' + e);
@@ -130,13 +130,19 @@ export class AccountService {
     });
   }
 
-  public patchInterests(interests: InterestModel[]): Observable<ApplicationUserModel> {
+  public patchInterests(interests: InterestModel[], voting: boolean): Observable<ApplicationUserModel> {
     return this.currentUser().take(1).flatMap((user) => {
 
       let tmp1 = <ApplicationUserModel>{};
-      tmp1.interests = fillArray(_.cloneDeep(user.interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp1.interests = fillArray(_.cloneDeep(
+          user.interests.filter(i => i.fos.unlocked === !voting)
+      ).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+
       let tmp2 = <ApplicationUserModel>{};
-      tmp2.interests = fillArray(_.cloneDeep(interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp2.interests = fillArray(_.cloneDeep(
+        interests.filter(i => i.fos.unlocked === !voting)
+      ).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+
       let patch = fastjsonpatch.compare(tmp1, tmp2);
       return this.patchUser(patch);
     });

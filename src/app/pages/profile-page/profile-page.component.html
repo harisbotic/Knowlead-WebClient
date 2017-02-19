@@ -6,7 +6,7 @@
                     <i class="kl-plus"></i>
                 </div> -->
                 <div class="profilePage-profileImage-wrap">
-                    <app-profile-picture [user]="target" [uploadable]="false" size="large"></app-profile-picture>
+                    <app-profile-picture [user]="target" [uploadable]="target?.id === user?.id" size="large"></app-profile-picture>
                 </div>
                 <div class="profilePage-profileInfo-wrap">
                     <div class="profilePage-Name">{{target | fullName}}</div>
@@ -24,7 +24,7 @@
             <div class="col-100">
                 <div class="profilePage-navigation-wrap">
                     <div class="col-17 filler"></div>
-                    <div class="col-12_5 profilePage-nav-item"><a routerLink="">About Me</a></div>
+                    <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="analytics">Analytics</a></div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>

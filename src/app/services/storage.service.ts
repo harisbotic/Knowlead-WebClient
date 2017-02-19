@@ -145,6 +145,10 @@ export class StorageService {
     return this.getFromStorage<FOSModel[]>('FOSes', null);
   }
 
+  public getFOSvotes(fos: FOSModel): Observable<number> {
+    return this.getFromStorage<number>('FOSvotes', null, {id: fos.coreLookupId});
+  }
+
   public getFOShierarchy(): Observable<FOSModel> {
     return this.getFOSes().map((foses: FOSModel[]) => {
       if (!!this.fosHierarchy) {

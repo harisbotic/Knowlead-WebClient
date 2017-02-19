@@ -29,11 +29,20 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
   }
   @Output() fosAdded = new EventEmitter<FOSModel>();
   @Output() fosRemoved = new EventEmitter<FOSModel>();
+  @Output() removeSelector = new EventEmitter();
 
   _search: string;
   _category: FOSModel;
   selectedCategory: FOSModel;
   subcategories: FOSModel[];
+
+  back() {
+    if (this.selectedCategory) {
+      delete this.selectedCategory;
+    } else {
+      this.removeSelector.emit();
+    }
+  }
 
   searchFos(fos: FOSModel, level: number, parent: FOSModel) {
     if (level === 0 && !!fos.children) {

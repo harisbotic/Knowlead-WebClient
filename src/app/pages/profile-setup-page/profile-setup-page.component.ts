@@ -69,8 +69,6 @@ export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUser
       if (this.user.isMale == null) {
         this.user.isMale = true;
       }
-      this.user.motherTongueId = this.user.motherTongueId ? <any>[this.user.motherTongueId] : undefined;
-      this.user.countryId = this.user.countryId ? <any>[this.user.countryId] : undefined;
       this.restartForm();
     }));
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.realUser = user));
@@ -80,11 +78,9 @@ export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUser
     super.ngOnInit();
     const countriesGetter = this.storageService.getCountries().take(1).do(countries => {
       this.countries = countries.map(this.countryForDropdown);
-      console.log(countries);
     });
     const languagesGetter = this.storageService.getLanguages().take(1).do(languages => {
       this.languages = languages.map(this.languageForDropdown);
-      console.log(languages);
     }).delay(0);
     this.subscriptions.push(countriesGetter.merge(languagesGetter).subscribe(undefined, undefined, () => {
       this.loadUser();

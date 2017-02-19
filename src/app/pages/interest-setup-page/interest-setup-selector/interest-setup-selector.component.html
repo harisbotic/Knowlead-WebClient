@@ -1,4 +1,7 @@
 <div>
+  <button (click)="back()" class="clearButton goBack-button">
+      Go back
+  </button>
   <div *ngIf="!showSubSubCategories()">
     <app-selectable-list [items]="subcategories"
       [isRemovableCallback]="isRemovableCallback"

@@ -13,6 +13,7 @@ export const LANGUAGES = API + '/api/lookup/languages';
 export const COUNTRIES = API + '/api/lookup/countries';
 export const STATES = API + '/api/lookup/states';
 export const FOSES = API + '/api/lookup/foses';
+export const FOS_VOTES = API + '/api/lookup/fosVoteCount';
 export const REWARDS = API + '/api/lookup/rewards';
 
 export const P2P_NEW = API + '/api/p2p/create';

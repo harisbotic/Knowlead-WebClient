@@ -24,6 +24,8 @@ import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/n
 import { AboutMeComponent } from './pages/profile-page/about-me/about-me.component';
 import { AboutMeReviewsComponent } from './pages/profile-page/about-me/about-me-reviews/about-me-reviews.component';
 import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2ps/about-me-p2ps.component';
+import { LibraryComponent } from './pages/profile-page/library/library.component';
+import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -51,6 +53,10 @@ const appRoutes: Routes = [
             {path: '', component: AboutMeReviewsComponent},
             {path: 'p2ps', component: AboutMeP2psComponent}
         ]
+    }, {
+        path: 'library', component: LibraryComponent
+    }, {
+        path: 'friends', component: FriendshipsComponent
     }] },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },

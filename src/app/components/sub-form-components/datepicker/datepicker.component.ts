@@ -21,8 +21,8 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   months: DropdownValueInterface<number>[];
   years: DropdownValueInterface<number>[];
   open = false;
-  monthsList = [ "January", "February", "March", "April", "May", "June",
-"July", "August", "September", "October", "November", "December" ];
+  monthsList = [ 'January', 'February', 'March', 'April', 'May', 'June',
+'July', 'August', 'September', 'October', 'November', 'December' ];
 
   @Input() text: string;
   @Input() saveText: string;
@@ -32,22 +32,6 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   dayValue: number;
   monthValue: number;
   yearValue: number;
-
-  setHours(hours: number) {
-    if (this.value == null) {
-      this.value = new Date();
-    }
-    this.value.setHours(hours);
-    this.value = this.value;
-  }
-
-  setMinutes(minutes: number) {
-    if (this.value == null) {
-      this.value = new Date();
-    }
-    this.value.setMinutes(minutes);
-    this.value = this.value;
-  }
 
   daySelected(value: DropdownValueInterface<number>) {
     this.refreshValue();
@@ -68,6 +52,7 @@ export class DatepickerComponent extends BaseFormInputComponent<Date> {
   }
 
   public writeValue(value: Date) {
+    console.log(value);
     super.writeValue(value);
     if (value) {
       this.dayValue = <any>[value.getDate()];

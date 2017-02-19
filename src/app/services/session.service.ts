@@ -46,7 +46,7 @@ export class SessionService {
     return this.storageService.getAccessToken().flatMap(accessToken => {
       let parsed = parseJwt(accessToken);
       let now = new Date();
-      let expires = new Date(parsed.exp * 1000 - 60 * 1000);
+      let expires = new Date(parsed.exp * 1000 - 30 * 60 * 1000);
       if (now.getTime() < expires.getTime() && !this.invalidate) {
         return Observable.of(accessToken);
       } else {

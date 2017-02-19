@@ -75,8 +75,9 @@ export interface _CallModel
 	failed: boolean;
 	failReason: string;
 	caller: PeerInfoModel;
-	duration: number;
+	startDate: Date;
 	endDate: Date;
+	duration: number;
 	sealed: boolean;
 	inviting: boolean;
 	inactiveSince: Date;
@@ -93,6 +94,7 @@ export interface PeerInfoModel
 }
 export interface P2PCallModel extends _CallModel
 {
+	callReceiverId: Guid;
 	p2pId: number;
 	p2p: P2PModel;
 }
@@ -191,6 +193,7 @@ export interface FOSModel extends _CoreLookupModel
 	children: FOSModel[];
 	parent: FOSModel;
 	parentFosId: number;
+	unlocked: boolean;
 }
 export interface AchievementModel extends _CoreLookupModel
 {

@@ -64,10 +64,14 @@
     -ms-transition: all 0.10s ease-in-out;
     outline: none;
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: $knowlead-primary;
         color: white;
     }
+}
+
+.category-box:disabled {
+    background-color: green;
 }
 
 .goBack-button {
