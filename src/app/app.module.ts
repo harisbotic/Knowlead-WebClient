@@ -83,6 +83,9 @@ import { UserProfileLinkPipe } from './pipes/user-profile-link.pipe';
 import { AboutMeComponent } from './pages/profile-page/about-me/about-me.component';
 import { AboutMeReviewsComponent } from './pages/profile-page/about-me/about-me-reviews/about-me-reviews.component';
 import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2ps/about-me-p2ps.component';
+import { LibraryComponent } from './pages/profile-page/library/library.component';
+import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
+import { SingleFriendshipComponent } from './pages/profile-page/friendships/single-friendship/single-friendship.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +141,10 @@ import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2p
     UserProfileLinkPipe,
     AboutMeComponent,
     AboutMeReviewsComponent,
-    AboutMeP2psComponent
+    AboutMeP2psComponent,
+    LibraryComponent,
+    FriendshipsComponent,
+    SingleFriendshipComponent
   ],
   imports: [
     BrowserModule,
