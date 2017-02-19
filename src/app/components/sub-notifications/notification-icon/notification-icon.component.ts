@@ -42,4 +42,7 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
     return ret;
   }
 
+  markSingleAsRead(notification: NotificationModel) {
+    this.notificationSource.markSingleAsRead(notification);
+  }
 }

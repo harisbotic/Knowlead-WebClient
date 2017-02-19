@@ -1,4 +1,4 @@
-<a [routerLink]="getLink()" *ngIf="notification">
+<a [routerLink]="getLink()" *ngIf="notification" (click)="sendMarkAsRead()">
     <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
         <div class="col-20 posRel profile-image-round-small">
             <app-profile-picture [user]="notification.fromApplicationUser" class="centerV"></app-profile-picture>

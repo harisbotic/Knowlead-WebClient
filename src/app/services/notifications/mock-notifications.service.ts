@@ -34,4 +34,6 @@ export class MockNotificationsService extends BaseNotificationSource {
     this.loadMore();
   }
 
+  markSingleAsRead() {}
+
 }

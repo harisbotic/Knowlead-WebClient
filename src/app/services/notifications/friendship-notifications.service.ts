@@ -55,4 +55,6 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
 
   markAsRead() {}
 
+  markSingleAsRead() {}
+
 }

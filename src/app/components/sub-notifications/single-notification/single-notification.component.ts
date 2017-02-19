@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NotificationModel } from '../../../models/dto';
-import { ModelUtilsService } from '../../../services/model-utils.service';
 import { NotificationTypes } from '../../../models/constants';
 
 @Component({
@@ -11,15 +10,22 @@ import { NotificationTypes } from '../../../models/constants';
 export class SingleNotificationComponent implements OnInit {
 
   @Input() notification: NotificationModel;
+  @Output() markAsRead = new EventEmitter<NotificationModel>();
 
   constructor() {
   }
 
   ngOnInit() { }
 
+  sendMarkAsRead() {
+    this.markAsRead.emit(this.notification);
+  }
+
   getLink() {
     if (this.notification.p2pId) {
       return '/home/p2p/' + this.notification.p2pId;
+    } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
+      return '/store';
     } else {
       return undefined;
     }
@@ -28,18 +34,27 @@ export class SingleNotificationComponent implements OnInit {
   getBefore() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment) {
       return 'commented on your';
+    } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
+      return 'accepted your';
+    } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
+      return 'You claimed your';
     }
   }
 
   getMiddle() {
-    if (this.notification.notificationType === NotificationTypes.newP2PComment) {
+    if (this.notification.notificationType === NotificationTypes.newP2PComment ||
+        this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
       return 'peer-to-peer';
+    } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
+      return 'reward';
     }
   }
 
   getAfter() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment) {
       return 'request';
+    } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
+      return 'offer';
     }
   }
 

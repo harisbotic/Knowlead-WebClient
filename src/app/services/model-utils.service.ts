@@ -11,6 +11,7 @@ import { NotebookModel, NotificationModel, Guid, LanguageModel } from '../models
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate } from '../utils/index';
 import { NotebookService } from './notebook.service';
+import { SpecialProfilePictures } from '../models/frontend.constants';
 
 @Injectable()
 export class ModelUtilsService {
@@ -35,6 +36,9 @@ export class ModelUtilsService {
   }
 
   public static getImageBlobUrl(blob: Guid) {
+    if (blob === SpecialProfilePictures.system) {
+      return '/assets/images/icons/system-message.png';
+    }
     return (blob) ?
       'https://teststorage3123.blob.core.windows.net/images/' + blob :
       undefined;
@@ -201,6 +205,11 @@ export class ModelUtilsService {
     }
     if (typeof(value.seenAt) === 'string') {
       value.scheduledAt = new Date(Date.parse(value.seenAt));
+    }
+    if (value.fromApplicationUserId == null) {
+      value.fromApplicationUser = <any>{
+        profilePictureId: SpecialProfilePictures.system
+      };
     }
     let ret = Observable.of(value);
     ret = this.fill(ret, 'fromApplicationUser', this.accountService.getUserById.bind(this.accountService));

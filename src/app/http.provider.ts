@@ -74,8 +74,16 @@ export class HttpProvider extends Http {
 
     intercept(method: string, url: string | Request, options: RequestOptionsArgs, body?: string): Observable<Response> {
         console.info(`${method}: ${url} - ${new Date().getSeconds()}:${new Date().getMilliseconds()}`);
-        let observable: Observable<Response> =
-            (body !== undefined) ? super[method](url, body, options) : super[method](url, options);
+        let observable: Observable<Response>;
+        if (method === 'get' || method === 'delete') {
+            observable = super[method](<string>url, options);
+        } else if (method === 'request') {
+            observable = super.request(url, options);
+        } else if (method === 'post' || method === 'put' || method === 'patch') {
+            observable = super[method](<string>url, body, options);
+        } else {
+            return Observable.throw('Unknown method: ' + method);
+        }
         return observable.catch((errorResponse: Response) => {
             if (errorResponse == null) {
                 errorResponse = <any>{

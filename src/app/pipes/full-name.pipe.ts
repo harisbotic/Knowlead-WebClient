@@ -8,7 +8,7 @@ export class FullNamePipe implements PipeTransform {
 
   transform(value: ApplicationUserModel, args?: any): any {
     if (value == null) {
-      return '...';
+      return '';
     }
     if (!!!value.name || !!!value.surname) {
       return value.email;

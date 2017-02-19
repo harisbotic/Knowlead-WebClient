@@ -5,6 +5,7 @@ import { NOTIFICATIONS, NOTIFICATIONS_MARK_AS_READ, NOTIFICATION_STATS } from '.
 import { responseToResponseModel } from '../../utils/converters';
 import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 import { ModelUtilsService } from '../model-utils.service';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class UserNotificationsService extends BaseNotificationSource {
@@ -44,6 +45,13 @@ export class UserNotificationsService extends BaseNotificationSource {
   start() {
     this.loadMore();
     this.loadStats();
+  }
+
+  markSingleAsRead(notification: NotificationModel) {
+    return this.http.post(NOTIFICATIONS_MARK_AS_READ + '/' + notification.notificationId, {})
+      .subscribe(() => {
+        this.markSingleAsReadHelper(notification);
+      });
   }
 
 }

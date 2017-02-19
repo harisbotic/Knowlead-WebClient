@@ -26,12 +26,12 @@
           <p class="callout brandon">Your Progress:</p>
           <ul class="products clearfix">
             <li class="first"></li>
-            <li *ngFor="let stop of stops" [class.selected]="stop.selected" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
-              <div class="circle">{{stop.count}}</div>
+            <li *ngFor="let stop of stops" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
+              <div class="circle" [class.claimed]="stop.claimed" [class.notReached]="!stop.claimed && !stop.canClaim">{{stop.count}}</div>
               <div class="sep"></div>
               <p>50<br>Minutes</p>
 
-              <div class="tooltip-claimReward">
+              <div class="tooltip-claimReward" *ngIf="stop.canClaim">
                 Claim your reward!
               </div>
             </li>
