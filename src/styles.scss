@@ -45,6 +45,66 @@
     }
 }
 
+.tooltip-left {
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    bottom: 50%;
+    right: 105%;
+    transform: translateY(50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: 50%;
+        right: -4px;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .circleState-student {
+        color: $knowlead-secondary;
+    }
+    .circleState-teacher {
+        color: $knowlead-primary;
+    }
+}
+
+.tooltip-right {
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    bottom: 60%;
+    left: 105%;
+    transform: translateY(50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: 50%;
+        left: -4px;
+        transform: translateY(-50%) rotate(45deg);
+    }
+}
+
+
 .tooltip-postInfo {
     display: none;
     position: absolute;
@@ -97,57 +157,6 @@
     }
 }
 
-.tooltip-left {
-    display: none;
-    position: absolute;
-    border-radius: $border-radius;
-    bottom: 50%;
-    right: 105%;
-    transform: translateY(50%);
-    background-color: $tooltip-background-color;
-    color: white;
-    text-align: center;
-    padding: 5px 5px;
-    z-index: 100;
-
-    &:before {
-        content: "";
-        display: inline;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        background-color: $tooltip-background-color;
-        top: 50%;
-        right: -4px;
-        transform: translateY(-50%) rotate(45deg);
-    }
-}
-
-.tooltip-right {
-    display: none;
-    position: absolute;
-    border-radius: $border-radius;
-    bottom: 60%;
-    left: 105%;
-    transform: translateY(50%);
-    background-color: $tooltip-background-color;
-    color: white;
-    text-align: center;
-    padding: 5px 5px;
-    z-index: 100;
-
-    &:before {
-        content: "";
-        display: inline;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        background-color: $tooltip-background-color;
-        top: 50%;
-        left: -4px;
-        transform: translateY(-50%) rotate(45deg);
-    }
-}
 
 .tooltip-registration {
     display: none;
@@ -231,6 +240,10 @@ body > app-root > app-call-dialog > ngl-modal.incomingCall-popUp > div.slds-moda
 ///////////////////////////////////////////////////////////
 // OTHER CLASSES //////////////////////////////////////////
 ///////////////////////////////////////////////////////////
+
+.allPagesMargin {
+    padding-top: 50px;
+}
 
 .full-height {
     height: 100vh;

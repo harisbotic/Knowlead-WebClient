@@ -109,7 +109,9 @@
 }
 
 
-// RIGHT SECTION
+// RIGHT SECTION //
+
+// STICKIES SECTION //
 
 .stickies-wrap {
     margin-left: 50px;
@@ -142,7 +144,139 @@
             color: $knowlead-primary;
         }
     }
+}
 
 
+// UPCOMING EVENTS WIDGET
 
+.upcomingEvents-wrap {
+    margin-left: 50px;
+    border-radius: $border-radius;
+    background-color: $post-background-color;
+    border-top: 2px solid $divider-color;
+
+    .upcomingEvents-title {
+        height: 50px;
+        line-height: 50px;
+        padding-left: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 2px solid $divider-color;
+
+        .upcomingEvents-info {
+            float: right;
+            margin-right: 10px;
+            line-height: 50px;
+            font-size: 14px;
+            color: $font-secondary-color;
+            cursor: pointer;
+
+            &:hover {
+                color: $font-primary-color;
+            }
+
+            > span {
+                line-height: normal;
+                float: none;
+                margin: 0;
+            }
+
+
+        }
+    }
+
+    .noEvents {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        color: $hover-dark-color;
+        padding: 0 20px 20px 20px;
+    }
+
+    .firstUpcomingEvent {
+        border-bottom: 1px solid $divider-color;
+    }
+
+    .timeLeft-wrap {
+        padding: 20px 20px 5px 20px;
+        font-weight: bold;
+
+        .circleState-student {
+            color: $knowlead-secondary;
+        }
+        .circleState-teacher {
+            color: $knowlead-primary;
+        }
+
+        .timeLeft-text {
+            text-transform: capitalize;
+            margin-left: 5px;
+        }
+    }
+
+    .subject-wrap {
+        padding: 5px 20px 0 20px;
+        font-weight: bold;
+
+        .subject {
+            max-width: 45px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+
+    .profileImage-wrap {
+        position: relative;
+        width: 75px;
+        height: 41px;
+    }
+
+    .withUser-name a {
+        color: $font-primary-color;
+        font-weight: bold;
+    }
+
+    .reward-wrap {
+        height: 50px;
+        line-height: 50px;
+
+        .reward {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .reward-icon {
+            font-size: 15px;
+        }
+    }
+
+    .otherUpcomingEvents {
+        border-bottom: 1px solid $divider-color;
+
+        .otherEventsInfo-wrap {
+            padding: 0 20px 15px 20px;
+            font-weight: bold;
+
+            .otherEventsInfo-with a {
+                color: $font-primary-color;
+            }
+        }
+    }
+
+    .checkAllevents {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background-color: $knowlead-primary;
+        border-radius: 0 0 $border-radius $border-radius;
+
+        &:hover {
+            background-color: transparentize($knowlead-primary, 0.1)
+        }
+    }
 }

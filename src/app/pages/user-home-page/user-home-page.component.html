@@ -132,6 +132,114 @@
                     </div>
                 </div>
 
+                <!-- NOTE: UPCOMING EVENTS WIDGET -->
+                <div class="row">
+                    <div class="col-100">
+                        <div class="upcomingEvents-wrap">
+                            <div class="upcomingEvents-title">
+                                Upcoming Events
+                                <i class="kl-info upcomingEvents-info tooltip-parent">
+                                    <span class="tooltip-left tooltip-175">
+                                        <div>
+                                        <i class="kl-circle circleState-student"></i>
+                                        <span>- You are Student.</span>
+                                        </div>
+                                        <div>
+                                        <i class="kl-circle circleState-teacher"></i>
+                                        <span>- You are Teacher.</span>
+                                        </div>
+                                    </span>
+                                </i>
+                            </div>
+
+                            <div class="noEvents">No Upcoming Events...</div>
+
+                            <div class="hasEvents">
+                                <div class="firstUpcomingEvent">
+                                    <div class="row">
+                                        <div class="timeLeft-wrap">
+                                            <i class="kl-circle circleState-teacher"></i>
+                                            <span class="timeLeft">1:34h</span>
+                                            <span class="timeLeft-text">before activity</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="subject-wrap">
+                                            <span class="subject">Math</span>
+                                            <span class="subject-text"> with:</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <div class="profileImage-wrap">
+                                                <a routerLink="" class="profile-link">
+                                                    <app-profile-picture [user]="url" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-50">
+                                            <div class="row">
+                                                <div class="withUser-name">
+                                                    <a routerLink="">Hana Bubu</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="withUser-stars">
+                                                    <ngl-rating [rate]="0" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-25">
+                                            <div class="reward-wrap">
+                                                <span class="reward">30</span>
+                                                <i class="kl-currency reward-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="otherUpcomingEvents">
+                                    <div class="row">
+                                        <div class="timeLeft-wrap">
+                                            <i class="kl-circle circleState-student"></i>
+                                            <span class="timeLeft">2:14h</span>
+                                            <span class="timeLeft-text">before activity</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="otherEventsInfo-wrap">
+                                            <span class="otherEventsInfo-subject">English</span>
+                                            <span class="otherEventsInfo-text">with</span>
+                                            <span class="otherEventsInfo-with"><a routerLink="">Babalo Alarotakosa</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="otherUpcomingEvents">
+                                    <div class="row">
+                                        <div class="timeLeft-wrap">
+                                            <i class="kl-circle circleState-student"></i>
+                                            <span class="timeLeft">2:44h</span>
+                                            <span class="timeLeft-text">before activity</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="otherEventsInfo-wrap">
+                                            <span class="otherEventsInfo-subject">C++ Programming</span>
+                                            <span class="otherEventsInfo-text">with</span>
+                                            <span class="otherEventsInfo-with"><a routerLink="">Hepek Hepekovski</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a routerLink="">
+                                        <div class="checkAllevents">Check All Events</div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
