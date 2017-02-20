@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { P2PModel, LanguageModel, FOSModel } from '../../../models/dto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { P2pService } from '../../../services/p2p.service';
@@ -28,6 +28,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   step = 0;
   languages: DropdownValueInterface<LanguageModel>[];
   foses: DropdownValueInterface<number>[];
+  @Output() created = new EventEmitter<number>();
 
   constructor(protected p2pService: P2pService,
       protected notificationService: NotificationService,
@@ -123,7 +124,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
       this.foses = [];
       const s = (fos: FOSModel) => {
-        if (!fos.children || fos.children.length === 0) {
+        if ((!fos.children || fos.children.length === 0) && fos.unlocked) {
           this.foses.push({
             label: fos.name,
             value: fos.coreLookupId
@@ -139,10 +140,10 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   }
 
   onSubmit() {
-    this.subscriptions.push(this.p2pService.create(this.getValue()).subscribe(response => {
-      this.notificationService.info('p2p created');
+    this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(p2p => {
       this.restartForm();
       this.step = 0;
+      this.created.emit(p2p.p2pId);
     }, (err) => {
       this.notificationService.error('error creating p2p', err);
     }));

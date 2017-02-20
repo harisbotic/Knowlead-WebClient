@@ -44,3 +44,5 @@ export const NOTIFICATIONS_MARK_AS_READ = API + '/api/notification/markAsRead';
 
 export const REFERRALS = API + '/api/store/referralStats';
 export const CLAIM_REWARD = API + '/api/reward/claim';
+
+export const FEEDBACK_P2P = API + '/api/feedback/give/p2p';

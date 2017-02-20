@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-100">
                             <div class="menuItem-wrap posRel">
-                                <a href="" class="editProfileLink">
+                                <a routerLink="/profilesetup" class="editProfileLink">
                                     <i class="menuIcon kl-edit-profile"></i>
                                     <div class="editProfile menuItem-text"> Edit Profile</div>
                                 </a>
@@ -42,9 +42,9 @@
                     <div class="row">
                         <div class="col-100">
                             <div class="menuItem-wrap posRel">
-                                <a class="sendFeedbackLink">
+                                <a class="sendFeedbackLink" appFeedbackForm>
                                     <i class="menuIcon kl-feedback"></i>
-                                    <div class="sendFeedback menuItem-text" appFeedbackForm> Send Feedback </div>
+                                    <div class="sendFeedback menuItem-text"> Send Feedback </div>
                                 </a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                                 <div class="row">
                                                 <div class="col-100">
                                                     <div class="menuItem-wrap posRel">
-                                                        <a href="" class="myPostsLink">
+                                                        <a routerLink="filtered/{{filters.My}}" class="myPostsLink">
                                                             <i class="menuIcon kl-my"></i>
                                                             <div class="myPosts menuItem-text"> My Posts </div>
                                                         </a>
@@ -72,7 +72,7 @@
                                                 <div class="row">
                                                 <div class="col-100">
                                                     <div class="menuItem-wrap posRel">
-                                                        <a href="" class="scheduledLink">
+                                                        <a routerLink="filtered/{{filters.Scheduled}}" class="scheduledLink">
                                                             <i class="menuIcon kl-calendar"></i>
                                                             <div class="scheduled menuItem-text"> Scheduled</div>
                                                         </a>
@@ -82,7 +82,7 @@
                                                 <div class="row">
                                                 <div class="col-100">
                                                     <div class="menuItem-wrap posRel">
-                                                        <a href="" class="bookmarkedLink">
+                                                        <a routerLink="filtered/{{filters.Bookmarked}}" class="bookmarkedLink">
                                                         <i class="menuIcon kl-bookmark"></i>
                                                         <div class="bookmarked menuItem-text"> Bookmarked </div>
                                                         </a>

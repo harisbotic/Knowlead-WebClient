@@ -11,7 +11,7 @@
                                     <div class="postOptions-content">
 
                                         <div class="row postOptions-button posRel">
-                                            <a class="posRel" *ngIf="p2p.createdById === user?.id">
+                                            <a class="posRel" *ngIf="p2p.createdById === user?.id && !p2p.isDeleted">
                                                 <div class="col-30 posRel">
                                                     <i class="kl-delete postOptions-icon centerV"></i>
                                                 </div>
@@ -153,7 +153,9 @@
                             <div class="row">
                                 <div class="col-100">
                                     <div class="callButton-wrap" *ngIf="callable">
-                                        <button class="callButton" (click)="call()">Call</button>
+                                        <button class="callButton" (click)="callOrFeedback()">
+                                            {{p2p.status === P2PStatus.Finished ? 'Leave feedback' : 'Call'}}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +163,6 @@
 
                         <div *ngIf="!p2p.scheduledWithId">
                             <div class="col-60">
-                                <div class="callButton-wrap" *ngIf="callable">
-                                    <button class="callButton" (click)="call()">Call</button>
-                                </div>
                             </div>
                             <div class="col-20">
                                 <div class="bottomElementsButton-wrap">
@@ -201,3 +200,16 @@
         <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
     </div>
 </div>
+<ngl-modal header="Leave feedback" [(open)]="modalOpened" (openChange)="checkClose()">
+  <div body>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          helpful <ngl-rating [(rate)]="helpfulFeedback" (rateChange)="refreshFeedback()"></ngl-rating>
+          expertise <ngl-rating [(rate)]="expertiseFeedback" (rateChange)="refreshFeedback()"></ngl-rating>
+          <textarea formControlName="feedbackText"></textarea>
+      </form>
+  </div>
+  <template ngl-modal-footer>
+    <button class="slds-button slds-button--neutral" (click)="modalOpened = false">Cancel</button>
+    <button class="slds-button slds-button--brand" (click)="onSubmit()">Save</button>
+  </template>
+</ngl-modal>

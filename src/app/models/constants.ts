@@ -1,3 +1,11 @@
+export enum ListP2PsRequest
+{
+	My = 0,
+	Scheduled = 1,
+	Bookmarked = 2,
+	ActionRequired = 3,
+	Deleted = 4,
+}
 export class CallEndReasons
 {
 	static requested: string = "CALL_END_REQUESTED";
@@ -13,6 +21,7 @@ export class NotificationTypes
 	static prepareForP2P: string = "NotificationTypes.PREPARE_FOR_P2P";
 	static rewardClaimed: string = "NotificationTypes.REWARD_CLAIMED";
 	static newFriendship: string = "NotificationTypes.NEW_FRIENDSHIP";
+	static leaveP2PFeedback: string = "NotificationTypes.LEAVE_P2P_FEEDBACK";
 }
 export class ErrorCodes
 {
@@ -57,4 +66,6 @@ export class ErrorCodes
 	static feedbackAlreadyGiven: string = "FEEDBACK_ALREADY_GIVEN";
 	static alreadyBookmarked: string = "ALREADY_BOOKMARKED";
 	static wasntBookmarked: string = "WASNT_BOOKMARKED";
+	static p2PFinished: string = "P2P_FINISHED";
+	static p2PNotFinished: string = "P2P_NOT_FINISHED";
 }

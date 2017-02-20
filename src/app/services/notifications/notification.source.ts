@@ -76,7 +76,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
     }
     this.notifications = this.notifications.concat(notifications).slice().sort((a, b) => {
       try {
-        return a.seenAt.getTime() - b.seenAt.getTime();
+        return a.scheduledAt.getTime() - b.scheduledAt.getTime();
       } catch (e) {
         return 0;
       }
