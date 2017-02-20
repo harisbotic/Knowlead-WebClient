@@ -190,7 +190,7 @@ export class ModelUtilsService {
     let ret = Observable.of(value);
     ret = ret.flatMap(p2p => this.storageService.getLanguages().take(1)
       .map((languages: LanguageModel[]) => {
-        p2p.languages = (p2p.languages) ? 
+        p2p.languages = (p2p.languages) ?
           p2p.languages.map(language => languages.find(l => l.coreLookupId === language.coreLookupId)) :
           [];
         return p2p;
@@ -206,7 +206,7 @@ export class ModelUtilsService {
       value.scheduledAt = new Date(Date.parse(value.scheduledAt));
     }
     if (typeof(value.seenAt) === 'string') {
-      value.scheduledAt = new Date(Date.parse(value.seenAt));
+      value.seenAt = new Date(Date.parse(value.seenAt));
     }
     if (value.fromApplicationUserId == null) {
       value.fromApplicationUser = <any>{

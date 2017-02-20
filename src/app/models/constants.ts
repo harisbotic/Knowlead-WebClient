@@ -67,4 +67,5 @@ export class ErrorCodes
 	static alreadyBookmarked: string = "ALREADY_BOOKMARKED";
 	static wasntBookmarked: string = "WASNT_BOOKMARKED";
 	static p2PFinished: string = "P2P_FINISHED";
+	static p2PNotFinished: string = "P2P_NOT_FINISHED";
 }
