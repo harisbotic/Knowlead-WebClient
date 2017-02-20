@@ -27,12 +27,14 @@ import { AboutMeP2psComponent } from './pages/profile-page/about-me/about-me-p2p
 import { LibraryComponent } from './pages/profile-page/library/library.component';
 import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
 import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
+import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
     { path: '', component: GuestHomePageComponent, children: [
         { path: '', component: LoginPageComponent },
         { path: 'register', component: RegisterPageComponent },
+        { path: 'terms', component: TermsConditionsPageComponent },
         { path: 'registerSuccess', component: RegisterSuccessPageComponent }
     ] },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
@@ -68,7 +70,7 @@ const appRoutes: Routes = [
 export const appRoutingProviders: any[] = [
 ];
 
-export const freePaths = ['login', 'register', '', 'confirmemail', 'registerSuccess'];
+export const freePaths = ['login', 'register', '', 'confirmemail', 'registerSuccess', 'terms'];
 
 export function isPathFree(path: string): boolean {
     if (path.startsWith('/')) {

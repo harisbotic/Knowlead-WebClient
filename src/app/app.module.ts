@@ -6,7 +6,6 @@ import { MomentModule } from 'angular2-moment';
 import { PopoverModule } from 'ngx-popover';
 import { SelectModule } from 'angular2-select';
 import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
-import { ColorPickerModule } from 'ng-color-picker';
 import { Autosize } from 'angular2-autosize/angular2-autosize';
 
 
@@ -22,7 +21,7 @@ import { SessionService } from './services/session.service';
 import { HttpProvider } from './http.provider';
 import { StorageService } from './services/storage.service';
 import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
-import { Router, RouteReuseStrategy } from '@angular/router';
+import { Router } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { ProfileSetupPageComponent } from './pages/profile-setup-page/profile-setup-page.component';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
@@ -90,6 +89,7 @@ import { FeedbackFormDirective } from './directives/feedback-form.directive';
 import { HeaderSearchComponent } from './components/header/header-search/header-search.component';
 import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 import { SingleReviewComponent } from './pages/profile-page/about-me/about-me-reviews/single-review/single-review.component';
+import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +152,8 @@ import { SingleReviewComponent } from './pages/profile-page/about-me/about-me-re
     FeedbackFormDirective,
     HeaderSearchComponent,
     FilteredHomePageComponent,
-    SingleReviewComponent
+    SingleReviewComponent,
+    TermsConditionsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -162,7 +163,6 @@ import { SingleReviewComponent } from './pages/profile-page/about-me/about-me-re
     MomentModule,
     PopoverModule,
     SelectModule,
-    ColorPickerModule,
     PerfectScrollbarModule,
     NglModule.forRoot({
       svgPath: '/assets'

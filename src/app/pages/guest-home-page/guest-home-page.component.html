@@ -14,7 +14,7 @@
                         <p class="info-text">
                             {{'guest-home-page|info text' | translate}}
                         </p>
-                        <button id="findout-button" type="button">{{'guest-home-page|button text' | translate}}</button>
+                        <button id="findout-button" type="button" (click)="videoOpened=true">{{'guest-home-page|button text' | translate}}</button>
                     </div>
                 </div>
                 <div class="row">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-40 loginForm" [ngSwitch]="param">
                 <div class="col-15">
-                    <button class="video-tab">
+                    <button class="video-tab" (click)="videoOpened=true">
                         <div>
                             <img src="/assets/images/icons/play-icon.png" alt="Play Icon for Knowlead video" class="video-icon">
                         </div>
@@ -48,7 +48,11 @@
         </div>
     </div>
 </div>
-
+<ngl-modal [(open)]="videoOpened">
+  <div body>
+      <iframe width="600" height="315" src="https://www.youtube.com/embed/xiHyfV6pJyg" frameborder="0" allowfullscreen></iframe>
+  </div>
+</ngl-modal>
 
 
 

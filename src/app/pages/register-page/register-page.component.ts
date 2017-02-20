@@ -1,10 +1,9 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AccountService } from './../../services/account.service';
-import { ResponseModel } from './../../models/dto';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PATTERN_EMAIL, PATTERN_ONE_LOWERCASE } from '../../utils/index';
-import { RegisterUserModel } from '../../models/dto';
+import { RegisterUserModel, ResponseModel } from '../../models/dto';
 import { BaseFormComponent } from '../../base-form.component';
 import { Observable } from 'rxjs/Rx';
 
@@ -20,6 +19,7 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
   response: ResponseModel;
   form: FormGroup;
   referral: string;
+  terms: boolean;
 
   constructor(protected accountService: AccountService,
               protected router: Router,
@@ -31,13 +31,24 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
     if (!this.form.valid) {
       return;
     }
+    if (!this.terms) {
+      this.response = {
+        formErrors: undefined,
+        errors: ['Please accept terms and conditions'],
+        object: undefined
+      };
+      return;
+    }
     this.busy = true;
     this.subscriptions.push(this.accountService.register(this.form.value).finally(() => { this.busy = false; })
       .subscribe((response) => {
         this.response = response;
         this.router.navigate(['/registerSuccess']);
-      }, (errorResponse) => {
+      }, (errorResponse: ResponseModel) => {
         this.response = errorResponse;
+        if (errorResponse.formErrors && errorResponse.formErrors['email']) {
+          this.response.errors.push(errorResponse.formErrors['email'][0]);
+        }
       }
     ));
   }
