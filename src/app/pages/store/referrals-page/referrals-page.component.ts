@@ -10,7 +10,8 @@ interface StopInterface {
   last: boolean;
   upperString: string;
   lowerString: string;
-  additionalString?: string;
+  upperExtraString?: string;
+  lowerExtraString?: string;
   width: number;
 
   claimed?: boolean;
@@ -59,14 +60,16 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
     width: 708,
     upperString: '1100',
     lowerString: 'Minutes',
-    additionalString: 'Knowlead Cup',
+    upperExtraString: 'Knowlead',
+    lowerExtraString: 'Cup',
     last: false,
   }, {
     count: 250,
     width: 855,
     upperString: '2200',
     lowerString: 'Minutes',
-    additionalString: 'Knowlead T-Shirt',
+    upperExtraString: 'Knowlead',
+    lowerExtraString: 'T-Shirt',
     last: false,
   }, {
     count: 404,

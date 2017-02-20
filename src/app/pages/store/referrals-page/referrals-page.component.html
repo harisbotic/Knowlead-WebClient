@@ -29,7 +29,17 @@
             <li *ngFor="let stop of stops" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
               <div class="circle" [class.claimed]="stop.claimed" [class.notReached]="!stop.claimed && !stop.canClaim">{{stop.count}}</div>
               <div class="sep"></div>
-              <p>50<br>Minutes</p>
+              <p>
+                <span [class.special]="stop.last">
+                  {{stop.upperString}}<br>
+                  {{stop.lowerString}}<br>
+                </span>
+                <span *ngIf="stop.upperExtraString">
+                  +<br>
+                  {{stop.upperExtraString}}<br>
+                  {{stop.lowerExtraString}}
+                </span>
+              </p>
 
               <div class="tooltip-claimReward" *ngIf="stop.canClaim">
                 Claim your reward!
