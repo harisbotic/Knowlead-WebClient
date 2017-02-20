@@ -153,6 +153,28 @@ ng-select > div > div.single > div.toggle:hover {
     }
 }
 
+.feedbackTextarea {
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid $hover-dark-color;
+    min-height: 150px;
+    padding: 10px;
+    outline: none;
+    border-radius: $border-radius;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+
+    &::-webkit-input-placeholder {
+        color: $placeholder-color;
+    }
+
+    &:focus {
+        box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
+        border: 1px solid transparentize($knowlead-primary, 0.6);
+    }
+}
+
 input.postNumberInput[type=number] {
     border: none;
     width: 100%;

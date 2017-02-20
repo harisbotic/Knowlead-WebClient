@@ -45,6 +45,32 @@
     }
 }
 
+.tooltip-bottom {
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    top: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+
 .tooltip-left {
     display: none;
     position: absolute;
@@ -483,6 +509,22 @@ ngl-rating {
 
     &:hover {
         background-color: white;
+    }
+}
+
+.feedbackButton {
+    width: 100px;
+    height: 40px;
+    background-color: $knowlead-primary;
+    border-radius: $border-radius;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+
+    &:hover {
+        background-color: transparentize($knowlead-primary, 0.1)
     }
 }
 

@@ -164,16 +164,16 @@
                         <div *ngIf="!p2p.scheduledWithId">
                             <div class="col-60">
                             </div>
-                            <div class="col-20">
+                            <div class="col-15">
                                 <div class="bottomElementsButton-wrap">
-                                    <i class="kl-comment comment-icon"></i>
+                                    <!-- <i class="kl-comment comment-icon"></i>
                                     <a class="commentButton-link">
                                         <button class="clearButton postViewCommentButton">Offer</button>
                                     </a>
-                                    <div class="commentCounter"></div>
+                                    <div class="commentCounter"></div> -->
                                 </div>
                             </div>
-                            <div class="col-20" *ngIf="p2p.canBookmark">
+                            <div class="col-25" *ngIf="p2p.canBookmark">
                                 <div class="bottomElementsButton-wrap">
                                     <i class="kl-bookmark bookmark-icon"></i>
                                     <a class="bookmarkButton-link">
@@ -200,16 +200,30 @@
         <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
     </div>
 </div>
-<ngl-modal header="Leave feedback" [(open)]="modalOpened" (openChange)="checkClose()">
+<ngl-modal header="Review Form" [(open)]="modalOpened" (openChange)="checkClose()">
   <div body>
       <form (ngSubmit)="onSubmit()" [formGroup]="form">
-          helpful <ngl-rating [(rate)]="helpfulFeedback" (rateChange)="refreshFeedback()"></ngl-rating>
-          expertise <ngl-rating [(rate)]="expertiseFeedback" (rateChange)="refreshFeedback()"></ngl-rating>
-          <textarea formControlName="feedbackText"></textarea>
+              <div class="col-50 reviewStars-wrap">
+                  <span class="tooltip-parent">Helpful
+                      <span class="tooltip-bottom tooltip-150">
+                          Rate how helpful teacher was to you.
+                      </span>
+                  </span>
+                  <ngl-rating colorOn="#007bb6" colorOff="#e1e2e5" size="small" [(rate)]="helpfulFeedback"  (rateChange)="refreshFeedback()"></ngl-rating>
+              </div>
+              <div class="col-50 reviewStars-wrap">
+                  <span  class="tooltip-parent">Expertise
+                      <span class="tooltip-bottom tooltip-150">
+                          Rate teacher's knowledge of the subject.
+                      </span>
+                  </span>
+                  <ngl-rating colorOn="#007bb6" colorOff="#e1e2e5" size="small" [(rate)]="expertiseFeedback"  (rateChange)="refreshFeedback()"></ngl-rating>
+              </div>
+
+          <textarea placeholder="Explain your rating..." formControlName="feedbackText" class="feedbackTextarea"></textarea>
       </form>
   </div>
   <template ngl-modal-footer>
-    <button class="slds-button slds-button--neutral" (click)="modalOpened = false">Cancel</button>
-    <button class="slds-button slds-button--brand" (click)="onSubmit()">Save</button>
+    <button class="feedbackButton" (click)="onSubmit()">Save</button>
   </template>
 </ngl-modal>
