@@ -16,5 +16,15 @@
         padding-left: 20px;
         border-bottom: 2px solid $divider-color;
         margin-bottom: 10px;
+
+        .notebook-info {
+            font-size: 14px;
+            color: $font-secondary-color;
+            cursor: pointer;
+            
+            &:hover {
+                color: $knowlead-primary;
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
         <div class="col-100">
             <div class="chatInput-wrap">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-                    <input type="text" class="chatInput" name="message" formControlName="message">
+                    <input type="text" class="chatInput" name="message" placeholder="Press Enter to Send..." autocomplete="off" formControlName="message">
                 </form>
             </div>
         </div>

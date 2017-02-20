@@ -28,8 +28,8 @@
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy" id="analyticsLink" >Analytics</div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
-                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{user?.minutesBalance}} Minutes</div>
-                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{user?.pointsBalance}} Score</div>
+                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{user?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
+                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{user?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
                 </div>
             </div>
         </div>
