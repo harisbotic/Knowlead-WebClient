@@ -108,6 +108,30 @@
     margin-left: 30px;
 }
 
+// MAIN SECTION //
+
+.loadMoreLink {
+    text-decoration: none;
+
+    .loadMore {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        color: white;
+        background-color: $disabled-color;
+        border-radius: 50%;
+        font-size: 45px;
+        margin: 20px auto 60px auto;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
+    }
+}
+
 
 // RIGHT SECTION //
 

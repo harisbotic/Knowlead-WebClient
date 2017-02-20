@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="row bottomElements-wrap">
                                     <div class="col-50" id="minutesValue">{{user.minutesBalance}} Minutes</div>
-                                    <!--<div class="col-50" id="scoreValue">{{user.score}} Score</div>-->
+                                    <div class="col-50" id="scoreValue">{{user?.pointsBalance}} Score</div>
                                 </div>
                             </div>
                         </div>
@@ -102,12 +102,21 @@
         <div class="col-50">
             <div class="mainSection-wrap">
                 <router-outlet></router-outlet>
+                <div class="row">
+                    <div class="col-100">
+                        <a href="" class="loadMoreLink">
+                            <div class="loadMore">
+                                <i class="kl-three-dots"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-25">
             <div class="rightSidebar-wrap">
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-100">
                         <div class="stickies-wrap">
                             <div class="row">
@@ -130,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- NOTE: UPCOMING EVENTS WIDGET -->
                 <div class="row">
@@ -236,9 +245,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!-- <app-p2p [p2pId]="item.p2pId" *ngFor="let item of p2ps"></app-p2p>
-<app-notebook-list></app-notebook-list> -->

@@ -11,6 +11,7 @@
 
 .welcome-text-wrap {
     max-width: 425px;
+    margin-top: 20px;
 }
 
 .stepTwo-title-wrap {
@@ -71,7 +72,8 @@
 }
 
 .category-box:disabled {
-    background-color: green;
+    border-color: $placeholder-color;
+    color: $placeholder-color;
 }
 
 .goBack-button {

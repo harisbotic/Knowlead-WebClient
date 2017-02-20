@@ -11,7 +11,8 @@
                 You're one step away from completing your registration.
             </span>
             <span class="welcome-text" *ngIf="isVoting">
-                bla bla bla ono za voting
+                Didn't find anything that you are interested in? <br>
+                Vote for it here and it will be unlocked as soon as the requirement is met.
             </span>
         </div>
     </div>
@@ -48,8 +49,8 @@
                                      {{isVoting ? 'My Votes' : 'My Choices'}}
                                      <i class="kl-info moreInfo tooltip-parent">
                                          <span class="tooltip-right tooltip-175">
-                                             {{isVoting ? 'After choosing subjects, please specify your level of interest with stars.'
-                                                : 'tooltip za votanje'}}
+                                             {{!isVoting ? 'After choosing subjects, please specify your level of interest with stars.'
+                                                : 'Once the number of votes required is met we will unlock the subject.'}}
                                          </span>
                                      </i>
                                  </div>
@@ -69,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-100 suggest-field-wrap">
-                <button class="clearButton suggestLink">
+                <button class="clearButton suggestLink" appFeedbackForm>
                     <div class="suggestField-text"> <i class="kl-plus"></i> Suggest Field</div>
                 </button>
             </div>
