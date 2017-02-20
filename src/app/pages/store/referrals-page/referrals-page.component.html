@@ -31,13 +31,13 @@
               <div class="sep"></div>
               <p>
                 <span [class.special]="stop.last">
-                  {{stop.upperString}}<br>
-                  {{stop.lowerString}}<br>
+                  <div class="refReward">{{stop.upperString}}</div>
+                  <div class="refReward">{{stop.lowerString}}</div>
                 </span>
                 <span *ngIf="stop.upperExtraString">
-                  +<br>
-                  {{stop.upperExtraString}}<br>
-                  {{stop.lowerExtraString}}
+                  <div>+</div>
+                  <div class="extraReward">{{stop.upperExtraString}}</div>
+                  <div class="extraReward">{{stop.lowerExtraString}}</div>
                 </span>
               </p>
 

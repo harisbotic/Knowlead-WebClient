@@ -3,10 +3,11 @@
 .header-wrap {
     width: 100%;
     height: 300px;
-    background-color: $knowlead-secondary;
+    background-image: url("/assets/images/referral-cover.jpg");
     color: white;
     position: relative;
     margin-bottom: 30px;
+    background-size: contain;
 
     .headerInfo-wrap {
         height: 100%;
@@ -140,7 +141,7 @@ form{
 	font-weight: bold;
 	margin: 0 auto;
     border: 1px solid;
-    
+
 	color: white;
 	background: $knowlead-primary;
 	border-color: white;
@@ -167,7 +168,18 @@ form{
 }
 
 .special {
-    color: cyan;
+    color: $knowlead-primary;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.refReward {
+    font-weight: bold;
+}
+
+.extraReward {
+    color: $knowlead-primary;
+    font-weight: bold;
 }
 
 #refer .prizes .products li.product .sep{
