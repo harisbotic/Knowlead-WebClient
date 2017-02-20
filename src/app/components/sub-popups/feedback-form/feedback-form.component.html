@@ -1,11 +1,17 @@
 <form (ngSubmit)="submit()" [formGroup]="form">
-  <ngl-modal header="{{'feedback-form|title' | translate}}" [(open)]="opened" (openChange)="openChanged($event)">
+  <ngl-modal header="Feedback Form" [(open)]="opened" (openChange)="openChanged($event)">
     <div body>
-      <textarea placeholder="{{'feedback-form|placeholder'}}" formControlName="text" name="text"></textarea>
+        <div class="feedback-subject-wrap">
+            <div class="feedback-title">Subject</div>
+            <input type="text" placeholder="Feedback Subject" class="defaultInput">
+        </div>
+        <div class="feedback-summary-wrap">
+            <div class="feedback-title">Summary</div>
+            <textarea placeholder="Feedback Summary..." formControlName="text" name="text" class="feedbackTextarea"></textarea>
+        </div>
     </div>
     <template ngl-modal-footer>
-      <button type="button" (click)="opened = false">Cancel</button>
-      <button type="submit">Submit</button>
+      <button type="submit" class="feedbackButton">Submit</button>
     </template>
   </ngl-modal>
 </form>

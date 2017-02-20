@@ -1,8 +1,10 @@
 <div class="posRel">
   <input class="searchInput" type="text" name="search" placeholder="Search people .." [formControl]="control" (focus)="swap()" (blur)="swap()">
-  <div *ngIf="results?.length > 0" class="search-results">
+  <div *ngIf="results?.length > 0" class="search-wrap">
     <a *ngFor="let user of results" routerLink="{{user | userProfileLink}}">
-      {{user | fullName}}
+      <div class="search-results">
+          {{user | fullName}}
+      </div>
     </a>
   </div>
 </div>
