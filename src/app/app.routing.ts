@@ -52,7 +52,7 @@ const appRoutes: Routes = [
         { path: 'notebook/:id', component: NotebookEditComponent, pathMatch: 'full' },
         { path: '', redirectTo: 'chat', pathMatch: 'full' }
     ] },
-    { path: 'profile/:id', component: ProfilePageComponent, children: [{
+    { path: 'profile/:id', component: ProfilePageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [{
         path: '', component: AboutMeComponent, children: [
             {path: '', component: AboutMeReviewsComponent},
             {path: 'p2ps', component: AboutMeP2psComponent}
