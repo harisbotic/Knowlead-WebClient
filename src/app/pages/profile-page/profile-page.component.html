@@ -12,10 +12,10 @@
                     <div class="profilePage-Name">{{target | fullName}}</div>
                 </div>
 
-                <div class="addFriend-wrap">
-                    <i class="kl-add-friend"></i>
+                <div class="addFriend-wrap" *ngIf="canAddFriend">
+                    <i class="kl-add-friend" (click)="addFriend()"></i>
                 </div>
-                <div class="sendMessage-wrap">
+                <div class="sendMessage-wrap" *ngIf="canMessage">
                     <i class="kl-messages"></i>
                 </div>
             </div>

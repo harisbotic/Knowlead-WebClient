@@ -6,19 +6,18 @@
 
                 <div class="userReviews-value">
                     <!-- {{message.messageFrom.averageRating | number:'1.2-2'}} -->
-                    4.25
+                    {{user?.averageRating}}
                 </div>
 
                 <div class="userReviews-stars">
-                    <ngl-rating [rate]="0" colorOn="#007bb6" colorOff="#e1e2e5" size="large" [isReadonly]="true"></ngl-rating>
+                    <ngl-rating [rate]="user?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="large" [isReadonly]="true"></ngl-rating>
                 </div>
 
                 <div class="userReview-text">Average User Rating</div>
             </div>
             <div class="row">
                 <div class="userReviews-list">
-
-
+                    <app-single-review [review]="review" *ngFor="let review of reviews"></app-single-review>
                 </div>
             </div>
         </div>

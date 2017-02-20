@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { _FeedbackModel } from '../../../../../models/dto';
 
 @Component({
   selector: 'app-single-review',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./single-review.component.scss']
 })
 export class SingleReviewComponent implements OnInit {
+
+  @Input() review: _FeedbackModel;
 
   constructor() { }
 

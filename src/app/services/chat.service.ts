@@ -40,7 +40,7 @@ export class ChatService {
     });
   }
 
-  changeFriendship(otherId: string, friendship: FriendshipModel) {
+  private changeFriendship(otherId: string, friendship: FriendshipModel) {
     this.getFriends().take(1).subscribe(friends => {
       let idx = _.findIndex(friends, x => x.applicationUserBiggerId === otherId || x.applicationUserSmallerId === otherId);
       if (idx !== -1) {

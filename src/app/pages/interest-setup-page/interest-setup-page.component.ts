@@ -16,7 +16,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
 
   category: FOSModel;
   root: FOSModel;
-  _search: string;
+  _search = '';
   user: ApplicationUserModel;
   backUrl: string;
 

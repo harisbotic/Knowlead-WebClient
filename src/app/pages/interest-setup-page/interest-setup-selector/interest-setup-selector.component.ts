@@ -3,6 +3,7 @@ import { FOSModel } from './../../../models/dto';
 import { stringContains } from '../../../utils/index';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-interest-setup-selector',
@@ -114,9 +115,13 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
       this.selectedCategory.children.length > 0;
   }
 
-  constructor() { super(); }
+  constructor(protected activatedRoute: ActivatedRoute) { super(); }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.skip(1).delay(100).subscribe((f) => {
+      delete this.selectedCategory;
+      this.removeSelector.emit();
+    });
   }
 
 }

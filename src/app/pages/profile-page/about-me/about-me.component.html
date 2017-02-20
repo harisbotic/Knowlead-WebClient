@@ -6,7 +6,7 @@
                 <div class="profileSidebar">
                     <div class="row">
                         <div class="profileSwitchButton-wrap">
-                            <a routerLink="">
+                            <a routerLink="p2ps">
                                 <div class="profileSwitchButton">
                                     See USERS previous posts.
                                 </div>
@@ -24,41 +24,41 @@
                                     </a>
                                 </div>
 
-                                <div class="profileInfo-item-wrap">
+                                <div class="profileInfo-item-wrap" *ngIf="user">
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">First Name</div>
-                                            <div class="col-60 item">Ibrahim</div>
+                                            <div class="col-60 item">{{user.name}}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">Surname</div>
-                                            <div class="col-60 item">Bosssadaki</div>
+                                            <div class="col-60 item">{{user.surname}}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">Birthdate</div>
-                                            <div class="col-60 item">17.94.2014.</div>
+                                            <div class="col-60 item">{{user.birthdate | date:'mediumDate'}}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">Native Language</div>
-                                            <div class="col-60 item">Bosanskaaai</div>
+                                            <div class="col-60 item">{{user.motherTongue?.name}}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">Country</div>
-                                            <div class="col-60 item">Bosna</div>
+                                            <div class="col-60 item">{{user.country?.name}}</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="profileInfo-item">
                                             <div class="col-40 itemTopic">Email</div>
-                                            <div class="col-60 item">ejubua.hbaga@hfhva.com</div>
+                                            <div class="col-60 item">{{user.email}}</div>
                                         </div>
                                     </div>
                                 </div>
