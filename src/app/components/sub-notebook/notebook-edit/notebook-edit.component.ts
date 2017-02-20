@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotebookModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-notebook-edit',
@@ -43,8 +43,8 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
 
   applyFullValue(value: NotebookModel) {
     super.applyFullValue(value);
-    this.primaryColor = value.primaryColor;
-    this.secondaryColor = value.secondaryColor;
+    // this.primaryColor = value.primaryColor;
+    // this.secondaryColor = value.secondaryColor;
   }
 
   getNewValue(): NotebookModel {
@@ -65,7 +65,9 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     };
   }
 
-  constructor(protected notebookSerice: NotebookService, protected activatedRoute: ActivatedRoute) {
+  constructor(protected notebookSerice: NotebookService,
+      protected activatedRoute: ActivatedRoute,
+      protected router: Router) {
     super();
   }
 
@@ -93,13 +95,15 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
 
   doClose() {
     this.close.emit();
+    this.router.navigate(['notebook'], {relativeTo: this.activatedRoute.parent});
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
-      if (params['notebookId']) {
-        this.notebookId = params['notebookId'];
+      console.log(params);
+      if (params['id']) {
+        this.notebookId = parseInt(params['id'], 10);
       }
     }));
   }

@@ -45,9 +45,9 @@ const appRoutes: Routes = [
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'interestsetup', component: InterestSetupPageComponent, canActivate: [AuthGuard] },
     { path: 'call/:id', component: CallPageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
-        { path: 'chat', component: CallChatComponent },
-        { path: 'notebook', component: NotebookListComponent },
-        { path: 'notebook/:id', component: NotebookEditComponent },
+        { path: 'chat', component: CallChatComponent, pathMatch: 'full' },
+        { path: 'notebook', component: NotebookListComponent, pathMatch: 'full' },
+        { path: 'notebook/:id', component: NotebookEditComponent, pathMatch: 'full' },
         { path: '', redirectTo: 'chat', pathMatch: 'full' }
     ] },
     { path: 'profile/:id', component: ProfilePageComponent, children: [{

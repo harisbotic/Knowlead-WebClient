@@ -23,6 +23,10 @@ export class SingleNotificationComponent implements OnInit {
 
   getLink() {
     if (this.notification.p2pId) {
+      if (this.notification.notificationType === NotificationTypes.leaveP2PFeedback) {
+        // TODO: Fix this
+        // return '/home/p2p/' + this.notification.p2pId + '?feedback=true';
+      }
       return '/home/p2p/' + this.notification.p2pId;
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return '/store';
@@ -34,6 +38,8 @@ export class SingleNotificationComponent implements OnInit {
   getBefore() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment) {
       return 'commented on your';
+    } else if (this.notification.notificationType === NotificationTypes.leaveP2PFeedback) {
+      return 'has finished';
     } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
       return 'accepted your';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
@@ -55,6 +61,8 @@ export class SingleNotificationComponent implements OnInit {
       return 'request';
     } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
       return 'offer';
+    } else if (this.notification.notificationType === NotificationTypes.leaveP2PFeedback) {
+      return 'session with you. You can leave feedback now';
     }
   }
 
