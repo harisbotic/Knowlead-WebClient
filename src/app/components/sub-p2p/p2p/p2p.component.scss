@@ -176,6 +176,7 @@
     .bookmarkCounter {
         float: left;
         margin-top: 1px;
+        margin-left: 12px;
         color: $font-secondary-color;    }
 }
 
@@ -198,4 +199,10 @@
 .callButton-wrap {
     margin-bottom: 10px;
     float: right;
+}
+
+
+.reviewStars-wrap {
+    margin-bottom: 10px;
+    padding-left: 50px;
 }
