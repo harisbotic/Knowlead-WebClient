@@ -11,10 +11,16 @@
             <div class="row">
                 <div class="colors-wrap">
                     <div class="col-50">
-                        <div class="primaryColor">Primary: <div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div></div>
+                        <div class="primaryColor">Primary:
+                            <!--<div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div>-->
+                            <input type="color" formControlName="primaryColor">
+                        </div>
                     </div>
                     <div class="col-50">
-                        <div class="secondaryColor">Secondary: <div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor"></div></div>
+                        <div class="secondaryColor">Secondary:
+                            <!--<div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor">-->
+                            <input type="color" formControlName="secondaryColor">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,6 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
   callable: boolean;
 
   @Input() set p2pId(value: number) {
-    console.log('set');
     if (typeof(value) === 'string') {
       value = parseInt(value, 10);
     }
@@ -78,6 +77,7 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
   onSubmit() {
     if (!this.form.valid) {
       this.notificationService.error('Invalid form', 'All fields are required');
+      return;
     }
     this.feedbackService.giveP2pFeedback(this.getValue()).subscribe(() => {
       this.restartForm();
@@ -88,7 +88,6 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
   }
 
   getNewValue(): P2PFeedbackModel {
-    console.log('value');
     delete this.helpfulFeedback;
     delete this.expertiseFeedback;
     return {

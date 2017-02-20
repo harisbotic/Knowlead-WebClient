@@ -115,5 +115,8 @@
     "HACK_ATTEMPT": "What are you doing here???",
     "AGE_TOO_YOUNG": "You have to be at least {{param}} years old",
     "AGE_TOO_OLD": "You can't be older then {{param}}",
-    "DISCUSSION_CLOSED": "Cannot discuss on this p2p anymore"
+    "DISCUSSION_CLOSED": "Cannot discuss on this p2p anymore",
+
+    "CALL_END_REQUESTED": "One of peers requested end of the call",
+    "CALL_INACTIVE": "We couldn't reach one of peers"
 }
