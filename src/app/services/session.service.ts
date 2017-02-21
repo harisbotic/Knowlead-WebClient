@@ -62,6 +62,9 @@ export class SessionService {
         }).map(responseToLoginResponse).map(response => {
           this.storageService.setAccessToken(response.access_token, response.refresh_token, true);
           return response.access_token;
+        }).catch(err => {
+          this.storageService.removeAccessToken();
+          return Observable.of(undefined);
         });
         this.refreshingAccessToken = tmp.share();
         return tmp.finally(() => {

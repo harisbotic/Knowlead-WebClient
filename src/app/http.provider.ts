@@ -64,7 +64,9 @@ export class HttpProvider extends Http {
         }
         if (this.storageService.hasAccessToken()) {
             return this.sessionService.getAccessToken().map((value) => {
-                options.headers.append('Authorization', 'Bearer ' + value);
+                if (value) {
+                    options.headers.append('Authorization', 'Bearer ' + value);
+                }
                 return options;
             });
         } else {
