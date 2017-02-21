@@ -1,0 +1,15 @@
+@import "../../../../kl-styles/variables.scss";
+
+.goBack-button {
+    padding: 5px 20px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid $placeholder-color;
+    color: $font-primary-color;
+    margin: 10px 0;
+
+    &:hover {
+        background-color: transparentize($font-primary-color, 0.9);
+    }
+}
