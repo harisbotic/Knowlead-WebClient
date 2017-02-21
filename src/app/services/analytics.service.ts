@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Angulartics2, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { FEEDBACK } from '../utils/urls';
 import { AccountService } from './account.service';
-import { ApplicationUserModel } from '../models/dto';
+import { ApplicationUserModel, PlatformFeedbackModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { Observable } from 'rxjs';
 
@@ -85,7 +85,10 @@ export class AnalyticsService {
   }
 
   public sendFeedback(text: string) {
-    return this.http.post(FEEDBACK, {text: text});
+    let f: PlatformFeedbackModel = {
+      feedback: text
+    };
+    return this.http.post(FEEDBACK, f);
   }
 
   public userRegistration(user: ApplicationUserModel) {
