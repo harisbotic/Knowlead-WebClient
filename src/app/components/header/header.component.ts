@@ -17,7 +17,7 @@ import { NotificationService } from '../../services/notifications/notification.s
 export class HeaderComponent extends BaseComponent implements OnInit {
 
   user: ApplicationUserModel;
-  shouldShow: boolean;
+  shouldShow = true;
 
   constructor(protected accountService: AccountService,
       protected sessionService: SessionService,
