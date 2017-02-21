@@ -90,7 +90,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       this.myStream = myStream;
       this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
       this.myVideo.nativeElement.muted = true;
-      this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
+      this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: false});
       console.debug('Peer initialized');
       this.peer.on('signal', (data) => {
         console.log('Got signal !');
