@@ -1,12 +1,12 @@
 <div class="grid-container-small posRel zZero" *ngIf="user">
-    <div class="row welcome-title-wrap" *ngIf="!!!user.interests">
+    <div class="row welcome-title-wrap" *ngIf="user?.interests?.length === 0">
         <div class="col-100">
             <span class="welcome-title"> Welcome to Knowlead! </span>
         </div>
     </div>
     <div class="row welcome-text-wrap">
         <div class="col-100">
-            <span class="welcome-text" *ngIf="!isVoting && !!!user.interests">
+            <span class="welcome-text" *ngIf="!isVoting && user?.interests?.length === 0">
                 Thank you for joining and helping us spread knowledge across the world.
                 You're one step away from completing your registration.
             </span>

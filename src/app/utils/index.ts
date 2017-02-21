@@ -202,3 +202,18 @@ export function calculateHash(str: string) {
     }
     return Math.abs(hash);
 }
+
+export function sortByDateFunction<T>(key: keyof T, reverse?: boolean) {
+    return (a: T, b: T) => {
+        try {
+            const da: Date = <any>a[key];
+            const db: Date = <any>b[key];
+            if (reverse) {
+                return da.getTime() - db.getTime();
+            }
+            return db.getTime() - da.getTime();
+        } catch (e) {
+            return 0;
+        }
+    }
+}

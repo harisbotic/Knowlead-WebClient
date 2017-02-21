@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../base.component';
 import { P2pService } from '../../../services/p2p.service';
 import { P2PModel } from '../../../models/dto';
+import { sortByDateFunction } from '../../../utils/index';
 
 @Component({
   selector: 'app-default-home-page',
@@ -16,18 +17,23 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions.push(this.p2pService.getAll().subscribe(vals => {
-      this.p2ps = vals.slice().sort((a, b) => b.dateCreated.getTime() - a.dateCreated.getTime());
+      this.p2ps = vals;
     }));
+  }
+
+  refresh() {
+    this.p2ps = this.p2ps.slice().sort(sortByDateFunction<P2PModel>('dateCreated'));
   }
 
   p2pAdded(p2pId: number) {
     this.subscriptions.push(this.p2pService.get(p2pId).subscribe(p2p => {
       let idx = this.p2ps.findIndex(loaded => p2p.p2pId === loaded.p2pId);
       if (idx === -1) {
-        this.p2ps = [p2p].concat(this.p2ps);
+        this.p2ps.push(p2p);
       } else {
         this.p2ps[idx] = p2p;
       }
+      this.refresh();
     }));
   }
 

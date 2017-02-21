@@ -16,7 +16,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 export class ProfilePageComponent extends BaseComponent implements OnInit {
 
   target: ApplicationUserModel;
-  user: ApplicationUserModel;
+  me: ApplicationUserModel;
   status: string;
   isMy: boolean;
 
@@ -33,13 +33,13 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   }
 
   refresh() {
-    if (this.user && this.target) {
-      this.isMy = this.user.id === this.target.id;
-      this.canAddFriend = ModelUtilsService.canAddFriendship(this.friendship, this.user.id);
+    if (this.me && this.target) {
+      this.isMy = this.me.id === this.target.id;
+      this.canAddFriend = ModelUtilsService.canAddFriendship(this.friendship, this.me.id);
       this.canMessage = ModelUtilsService.canRemoveFriendship(this.friendship);
     }
-    if (this.user) {
-      let num = calculateHash(this.user.id) % 37;
+    if (this.target) {
+      let num = calculateHash(this.target.id) % 37;
       this.coverUrl = this.sanitizer.bypassSecurityTrustStyle('url(/assets/images/covers/' + num + '.jpg)');
     }
   }
@@ -50,7 +50,7 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe((user) => {
-      this.user = user;
+      this.me = user;
       this.refresh();
     }));
     this.subscriptions.push(this.route.params.subscribe(params => {

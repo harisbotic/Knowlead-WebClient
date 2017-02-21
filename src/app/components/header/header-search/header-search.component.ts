@@ -3,6 +3,7 @@ import { BaseComponent } from '../../../base.component';
 import { FormControl } from '@angular/forms';
 import { AccountService } from '../../../services/account.service';
 import { ApplicationUserModel } from '../../../models/dto';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-header-search',
@@ -24,9 +25,11 @@ export class HeaderSearchComponent extends BaseComponent implements OnInit {
   }
 
   swap() {
-    let tmp = this.results;
-    this.results = this.temp;
-    this.temp = tmp;
+    this.subscriptions.push(Observable.timer(200).subscribe(() => {
+      let tmp = this.results;
+      this.results = this.temp;
+      this.temp = tmp;
+    }));
   }
 
 }

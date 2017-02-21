@@ -4,6 +4,7 @@ import { P2pService } from '../../../services/p2p.service';
 import { P2PModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
 import { ListP2PsRequest } from '../../../models/constants';
+import { sortByDateFunction } from '../../../utils/index';
 
 @Component({
   selector: 'app-filtered-home-page',
@@ -24,7 +25,7 @@ export class FilteredHomePageComponent extends BaseComponent implements OnInit {
         this.wasProblem = true;
       } else {
         this.subscriptions.push(this.p2pService.getFiltered(value).subscribe(p2ps => {
-          this.p2ps = p2ps;
+          this.p2ps = p2ps.slice().sort(sortByDateFunction<P2PModel>('dateCreated'));
         }));
       }
     }));

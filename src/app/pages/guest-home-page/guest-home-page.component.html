@@ -50,7 +50,7 @@
 </div>
 <ngl-modal [(open)]="videoOpened">
   <div body>
-      <iframe width="600" height="315" src="https://www.youtube.com/embed/xiHyfV6pJyg" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="videoOpened" width="600" height="315" src="https://www.youtube.com/embed/xiHyfV6pJyg" frameborder="0" allowfullscreen></iframe>
   </div>
 </ngl-modal>
 
