@@ -99,7 +99,7 @@ export class AccountService {
   }
 
   public patchUser(patch: fastjsonpatch.Patch[]): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.patch(USER_DETAILS, patch));
+    return this.doPatch(this.http.post(USER_DETAILS, patch));
   }
 
   private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {

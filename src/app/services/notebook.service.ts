@@ -51,7 +51,7 @@ export class NotebookService {
       const patches = fastjsonpatch.compare(old, now);
       return patches;
     }).flatMap(patches => {
-      return this.http.patch(NOTEBOOK + '/' + notebook.notebookId, patches)
+      return this.http.post(NOTEBOOK + '/patch/' + notebook.notebookId, patches)
         .map(responseToResponseModel)
         .map(a => a.object);
     }).do((newNotebook: NotebookModel) => {
