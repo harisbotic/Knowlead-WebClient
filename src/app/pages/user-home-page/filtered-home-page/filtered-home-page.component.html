@@ -2,3 +2,6 @@
   There was a problem getting p2ps for this section. Sorry about that.
 </span>
 <app-p2p *ngFor="let p2p of p2ps" [p2pId]="p2p.p2pId"></app-p2p>
+<span *ngIf="p2ps?.length === 0">
+  You don't have any Peer to Peers in this section
+</span>
