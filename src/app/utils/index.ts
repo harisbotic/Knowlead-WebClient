@@ -187,3 +187,18 @@ export function getLocalDate(date: Date): Date {
     ret.setMinutes(ret.getMinutes() - ret.getTimezoneOffset());
     return ret;
 }
+
+export function calculateHash(str: string) {
+    let hash = 0, i, chr, len;
+    if (str.length === 0) {
+        return hash;
+    };
+    for (i = 0, len = str.length; i < len; i++) {
+        chr   = str.charCodeAt(i);
+        // tslint:disable-next-line:no-bitwise
+        hash  = ((hash << 5) - hash) + chr;
+        // tslint:disable-next-line:no-bitwise
+        hash |= 0; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+}

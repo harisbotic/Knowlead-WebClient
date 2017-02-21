@@ -19,6 +19,7 @@ export const REWARDS = API + '/api/lookup/rewards';
 
 export const P2P_NEW = API + '/api/p2p/create';
 export const P2P_ALL = API + '/api/p2p/list';
+export const P2P_RECOMMEND = API + '/api/p2p/recommended';
 export const P2P_MESSAGE = API + '/api/p2p/message';
 export const P2P_MESSAGES = API + '/api/p2p/messages';
 export const P2P = API + '/api/p2p';
