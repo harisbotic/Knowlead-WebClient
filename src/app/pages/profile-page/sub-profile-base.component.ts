@@ -17,3 +17,4 @@ export class SubProfileBaseComponent extends BaseComponent implements OnInit {
     }));
   }
 
+}
