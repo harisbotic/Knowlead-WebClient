@@ -6,18 +6,18 @@
                     <i class="kl-plus"></i>
                 </div> -->
                 <div class="profilePage-profileImage-wrap">
-                    <app-profile-picture [user]="target" [uploadable]="target?.id === user?.id" size="large"></app-profile-picture>
+                    <app-profile-picture [user]="target" [uploadable]="isMy" size="large"></app-profile-picture>
                 </div>
                 <div class="profilePage-profileInfo-wrap">
                     <div class="profilePage-Name">{{target | fullName}}</div>
                 </div>
 
-                <div class="addFriend-wrap" *ngIf="canAddFriend">
+                <!--<div class="addFriend-wrap" *ngIf="canAddFriend">
                     <i class="kl-add-friend" (click)="addFriend()"></i>
                 </div>
                 <div class="sendMessage-wrap" *ngIf="canMessage">
                     <i class="kl-messages"></i>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="row">
@@ -28,8 +28,8 @@
                     <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
                     <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
                     <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Friends</div>
-                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{user?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
-                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{user?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
+                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{me?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
+                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{target?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
                 </div>
             </div>
         </div>
