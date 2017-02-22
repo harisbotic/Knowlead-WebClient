@@ -70,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-100 suggest-field-wrap">
-                <button class="clearButton suggestLink" appFeedbackForm>
+                <button class="clearButton suggestLink" appFeedbackForm *ngIf="isVoting">
                     <div class="suggestField-text"> <i class="kl-plus" app-feedback-form></i> Suggest Field</div>
                 </button>
             </div>

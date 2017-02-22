@@ -71,10 +71,7 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     super();
   }
 
-  onSubmit(shouldClose?: boolean) {
-    if (!this.form.valid) {
-      return;
-    }
+  submit(shouldClose?: boolean) {
     const o = (this.getValue().notebookId == null) ?
       this.notebookSerice.addNotebook(this.getValue()) :
       this.notebookSerice.patchNotebook(this.getValue());

@@ -90,6 +90,8 @@ import { HeaderSearchComponent } from './components/header/header-search/header-
 import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 import { SingleReviewComponent } from './pages/profile-page/about-me/about-me-reviews/single-review/single-review.component';
 import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
+import { FormControlErrorDirective } from './directives/form-control-error.directive';
+import { ErrorTooltipComponent } from './components/sub-popups/error-tooltip/error-tooltip.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +155,9 @@ import { TermsConditionsPageComponent } from './pages/terms-conditions-page/term
     HeaderSearchComponent,
     FilteredHomePageComponent,
     SingleReviewComponent,
-    TermsConditionsPageComponent
+    TermsConditionsPageComponent,
+    FormControlErrorDirective,
+    ErrorTooltipComponent
   ],
   imports: [
     BrowserModule,

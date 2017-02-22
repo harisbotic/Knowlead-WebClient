@@ -23,9 +23,9 @@
                 <span class="pleaseNote"> Please note:</span> This beta release is in early development stage so you can encounter some unexpected behavior! Many important functionalities are still NOT in place. We would greatly appreciate your feedback.
             </div>
             <div class="row">
-                <form (ngSubmit)="confirmEmail()">
-                    <div class="password-wrap">
-                        <input type="password" name="password" placeholder="{{'common|password' | translate}}" [(ngModel)]="confirm.password" class="defaultInput">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="password-wrap tooltip-parent">
+                        <input appFormControlError type="password" name="password" placeholder="{{'common|password' | translate}}" [formControl]="form.controls.password" class="defaultInput">
                     </div>
                     <div class="confirmButton-wrap">
                         <button class="defaultButton" type="submit">{{'confirm-email-page|submit' | translate}}</button>

@@ -87,17 +87,12 @@ export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUser
     }));
   }
 
-  onSubmit() {
-    if (!this.form.valid) {
-      return;
-    }
+  submit() {
     this.subscriptions.push(this.accountService
       .patchUserDetails(this.form.value)
       .subscribe((user) => {
         this.router.navigate(['/interestsetup']);
-      }, (error: ResponseModel) => {
-        this.response = error;
-      }
+      }, this.errorHandler
     ));
   }
 

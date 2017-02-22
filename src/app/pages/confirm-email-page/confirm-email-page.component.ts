@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from './../../services/account.service';
 import { ConfirmEmailModel, ResponseModel } from './../../models/dto';
 import { SessionService } from '../../services/session.service';
-import { BaseComponent } from '../../base.component';
+import { BaseFormComponent } from '../../base-form.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-confirm-email-page',
@@ -13,8 +15,7 @@ import { BaseComponent } from '../../base.component';
   providers: []
 
 })
-export class ConfirmEmailPageComponent extends BaseComponent implements OnInit {
-  confirm: ConfirmEmailModel;
+export class ConfirmEmailPageComponent extends BaseFormComponent<ConfirmEmailModel> implements OnInit {
   response: ResponseModel;
   constructor(protected route: ActivatedRoute,
               protected accountService: AccountService,
@@ -23,24 +24,29 @@ export class ConfirmEmailPageComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  confirmEmail() {
-    this.subscriptions.push(this.accountService.confirmEmail(this.confirm).subscribe((result) => {
+  getNewForm() {
+    return new FormGroup({
+      email: new FormControl('', Validators.required),
+      code: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
+  }
+
+  getNewValue(): Observable<ConfirmEmailModel> {
+    return this.route.queryParams.map((params: any) => {
+      return {code: params.code, email: params.email, password: ''};
+    });
+  }
+
+  submit() {
+    this.subscriptions.push(this.accountService.confirmEmail(this.getValue()).subscribe((result) => {
       this.subscriptions.push(this.sessionService
-        .login({email: this.confirm.email, password: this.confirm.password})
+        .login({email: this.getValue().email, password: this.getValue().password})
         .subscribe(() => {
           this.router.navigate(['/profilesetup']);
         }
       ));
-    }, (errorResult) => {
-      this.response = errorResult.json();
-    }));
-  }
-  ngOnInit() {
-    this.subscriptions.push(this.route.queryParams.subscribe((params: any) => {
-      this.confirm = {code: params.code, email: params.email, password: ''};
-      this.confirm.code = params.code;
-      this.confirm.email = params.email;
-    }));
+    }, this.errorHandler));
   }
 
 }

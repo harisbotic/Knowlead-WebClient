@@ -3,13 +3,14 @@ import { FormGroup } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
+import { ResponseModel } from './models/dto';
 export abstract class BaseFormComponent<T> extends BaseComponent implements OnInit {
     form: FormGroup;
     wasSet = false;
     protected subscriptions: Subscription[];
     abstract getNewValue(): T | Observable<T>;
     abstract getNewForm(): FormGroup;
-    abstract onSubmit();
+    abstract submit();
 
     getValue(): T {
         if (this.form) {
@@ -60,6 +61,26 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
     ngOnInit() {
         if (!this.wasSet) {
             this.restartForm();
+        }
+    }
+
+    onSubmit() {
+        for (let control of Object.keys(this.form.controls)) {
+            this.form.controls[control].markAsDirty();
+        }
+        this.applyFullValue(this.getValue());
+        if (this.form.valid) {
+            this.submit();
+        }
+    }
+
+    errorHandler = (err: ResponseModel) => {
+        for (let key of Object.keys(err.formErrors)) {
+            if (!this.form.controls[key]) {
+                console.error('Got error from backend for ' + key + ' but form doesnt contain control for that');
+                continue;
+            }
+            this.form.controls[key].setErrors({backend: err.formErrors[key][0]});
         }
     }
 }
