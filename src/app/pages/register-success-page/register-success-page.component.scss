@@ -1,17 +1,26 @@
+@import "../../../kl-styles/variables.scss";
+
+
 .reg-successful-wrap {
     width: 85%;
     margin: 0 auto;
     text-align: center;
-    margin-top: 105px;
+    margin-top: 135px;
 }
 
 .reg-successful-title {
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
 }
 
 .reg-successful-text {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: $knowlead-secondary;
+}
+
+.spamText {
+    color: $font-secondary-color;
 }
 
 .okButton-wrap {
