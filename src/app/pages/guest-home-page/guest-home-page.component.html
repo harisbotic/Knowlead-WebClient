@@ -15,10 +15,19 @@
                             {{'guest-home-page|info text' | translate}}
                         </p>
                         <button id="findout-button" type="button" (click)="videoOpened=true">{{'guest-home-page|button text' | translate}}</button>
+                        <a href="https://www.youtube.com/watch?v=xiHyfV6pJyg">
+                            <button id="smallscreen-findout-button" type="button">{{'guest-home-page|button text' | translate}}</button>
+                        </a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-100"></div>
+                    <div class="col-100">
+                        <div class="smallScreenNote">
+                            It seems you are using smaller screen size then our platform supports at the moment <div class="minReq">(minimum screen width required is 1200px).</div>
+                            This is still Beta and we are working on the support for smaller screens.<br>
+                            Thank you for your understanding.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-40 loginForm" [ngSwitch]="param">
