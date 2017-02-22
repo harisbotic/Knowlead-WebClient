@@ -23,7 +23,7 @@ export class LoginPageComponent extends BaseFormComponent<LoginUserModel> implem
     super();
   }
 
-  onSubmit() {
+  submit() {
     this.busy = true;
     delete this.response;
     this.subscriptions.push(this.sessionService.login(this.form.value).finally(() => {

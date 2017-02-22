@@ -74,11 +74,7 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
     }
   }
 
-  onSubmit() {
-    if (!this.form.valid) {
-      this.notificationService.error('Invalid form', 'All fields are required');
-      return;
-    }
+  submit() {
     this.feedbackService.giveP2pFeedback(this.getValue()).subscribe(() => {
       this.restartForm();
       this.closeModal();

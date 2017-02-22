@@ -7,6 +7,7 @@ import { RealtimeService } from '../../services/realtime.service';
 import { MockNotificationsService } from '../../services/notifications/mock-notifications.service';
 import { Router, RoutesRecognized } from '@angular/router';
 import { NotificationService } from '../../services/notifications/notification.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-header',
@@ -39,7 +40,9 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   logout() {
     this.sessionService.logout();
-    this.router.navigate(['/']);
+    this.subscriptions.push(Observable.timer(200).subscribe(() => {
+      this.router.navigate(['/']);
+    }));
   }
 
   pritisno() {

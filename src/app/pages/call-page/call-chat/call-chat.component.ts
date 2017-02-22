@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Guid, ApplicationUserModel, ChatMessageModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { StorageService } from '../../../services/storage.service';
   templateUrl: './call-chat.component.html',
   styleUrls: ['./call-chat.component.scss']
 })
-export class CallChatComponent extends BaseFormComponent<ChatMessageModel> implements OnInit {
+export class CallChatComponent extends BaseFormComponent<ChatMessageModel> implements OnInit, OnDestroy {
 
   user: ApplicationUserModel;
   messages: ChatMessageModel[] = [];
@@ -67,10 +67,7 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
     };
   }
 
-  onSubmit() {
-    if (!this.form.valid) {
-      return;
-    }
+  submit() {
     this.realtimeService.sendCallMsg(this.getValue());
     this.restartForm();
   }

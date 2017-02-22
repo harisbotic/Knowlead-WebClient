@@ -94,11 +94,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     };
   }
 
-  onSubmit() {
-    console.log(this.form);
-    if (!this.form.valid) {
-      return;
-    }
+  submit() {
     this.subscriptions.push(this.p2pService.message(this.getValue()).subscribe(() => {
       this.restartForm();
     }, (err) => {

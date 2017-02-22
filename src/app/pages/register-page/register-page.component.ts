@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, ViewContainerRef } from '@angular/core';
 import { AccountService } from './../../services/account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -23,14 +23,12 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
 
   constructor(protected accountService: AccountService,
               protected router: Router,
-              protected route: ActivatedRoute) {
+              protected route: ActivatedRoute,
+              protected ve: ViewContainerRef) {
     super();
   }
 
-  onSubmit() {
-    if (!this.form.valid) {
-      return;
-    }
+  submit() {
     if (!this.terms) {
       this.response = {
         formErrors: undefined,

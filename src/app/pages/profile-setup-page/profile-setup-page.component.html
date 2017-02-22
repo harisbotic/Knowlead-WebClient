@@ -29,7 +29,7 @@
                         <div class="col-70">
                             <div class="row name-wrap">
                                 <div class="col-100 tooltip-parent">
-                                    <input type="text" name="First Name" formControlName="name" placeholder="First Name" class="defaultInput">
+                                    <input appFormControlError type="text" name="First Name" formControlName="name" placeholder="First Name" class="defaultInput">
                                     <!-- <app-error-list [formControlProperty]="form.controls.name"></app-error-list> -->
                                     <span class="tooltip-right tooltip-100">
                                         First Name
@@ -39,7 +39,7 @@
 
                             <div class="row surname-wrap">
                                 <div class="col-100 tooltip-parent">
-                                    <input type="text" name="surname" formControlName="surname" placeholder="Surname" class="defaultInput">
+                                    <input appFormControlError type="text" name="surname" formControlName="surname" placeholder="Surname" class="defaultInput">
                                     <!-- <app-error-list [formControlProperty]="form.controls.surname"></app-error-list> -->
                                     <span class="tooltip-right tooltip-100">
                                         Last Name
@@ -57,8 +57,8 @@
                                     </div>
                                 </div>
                                 <div class="col-71 birthdate-wrap tooltip-parent">
-                                    <app-datepicker formControlName="birthdate"></app-datepicker>
-                                    <app-error-list [formControlProperty]="form.controls.birthdate"></app-error-list>
+                                    <app-datepicker appFormControlError formControlName="birthdate"></app-datepicker>
+                                    <!--<app-error-list [formControlProperty]="form.controls.birthdate"></app-error-list>-->
                                     <span class="tooltip-right tooltip-100">
                                         Date of Birth
                                     </span>
@@ -68,13 +68,13 @@
                     </div>
                     <div class="row lang-country-wrap">
                         <div class="col-50 tooltip-parent">
-                            <ng-select formControlName="motherTongueId" [options]="languages" placeholder="Language" class="languageSelect profileSetupInput"></ng-select>
+                            <ng-select appFormControlError formControlName="motherTongueId" [options]="languages" placeholder="Language" class="languageSelect profileSetupInput"></ng-select>
                             <span class="tooltip-left tooltip-150">
                                 Native Language
                             </span>
                         </div>
                         <div class="col-50 tooltip-parent">
-                            <ng-select formControlName="countryId" [options]="countries" placeholder="Country" class="countrySelect profileSetupInput"></ng-select>
+                            <ng-select appFormControlError formControlName="countryId" [options]="countries" placeholder="Country" class="countrySelect profileSetupInput"></ng-select>
                             <span class="tooltip-right tooltip-100">
                                 Country
                             </span>

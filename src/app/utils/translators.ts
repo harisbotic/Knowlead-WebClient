@@ -44,12 +44,17 @@ function translateDateValidator(key: string, value: DateValidationErrorValue): s
     }
 }
 
+function dontProcess(key: string, value: string): string {
+    return value;
+}
+
 let dict: {[index: string]: translatable} = {
     'minlength': translateMinLengthValidator,
     'required': translateByKeyValidator,
     'pattern': translatePatternValidator,
     'passwords_dont_match': translateByKeyValidator,
-    'dateInvalid': translateDateValidator
+    'dateInvalid': translateDateValidator,
+    'backend': dontProcess
 };
 
 export function translateValidations(object: {[key: string]: any}): string[] {
