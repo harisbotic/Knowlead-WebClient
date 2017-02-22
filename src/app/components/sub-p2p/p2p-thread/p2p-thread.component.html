@@ -68,9 +68,9 @@
                         <div class="col-30">
                             <div class="reviewStars-wrap posRel">
                                 <div class="reviewStars centerVl tooltip-parent">
-                                    <ngl-rating [rate]="message.messageFrom.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                    <ngl-rating [rate]="message.messageFrom?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
                                     <span class="tooltip-top tooltip-175">
-                                        Average User Rating: {{message.messageFrom.averageRating | number:'1.2-2'}}
+                                        Average User Rating: {{message.messageFrom?.averageRating | number:'1.2-2'}}
                                     </span>
                                 </div>
                             </div>
