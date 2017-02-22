@@ -1,68 +1,269 @@
 @import "../../../kl-styles/variables.scss";
 
-.wrap {
-    background-image: url("/assets/images/main-bg.jpg");
-    background-size: contain;
-    width: auto;
-    height: 100%;
-}
+@media (min-width: 1200px) {
 
-.loginForm {
-    margin-top: 9%;
-}
-
-.viewH {
-    height: 100vh;
-}
-.logo {
-    max-width: 475px;
-    margin-top: 15%;
-}
-
-.welcome-text {
-    width: 450px;
-    margin-top: 20px;
-    color: white;
-    font-weight: 300;
-
-    .title {
-        font-size: 33px;
+    .wrap {
+        background-image: url("/assets/images/main-bg.jpg");
+        background-size: contain;
+        width: auto;
+        height: 100%;
     }
-    .sub-title {
-        font-size: 24px;
+
+    .loginForm {
+        margin-top: 9%;
     }
-    .info-text {
-        margin-top: 10px;
-        font-size: 14px;
-        max-width: 425px;
+
+    .viewH {
+        height: 100vh;
     }
-    #findout-button {
-        margin-top: 10px;
-        padding: 7px 40px;
-        border: 2px solid white;
-        border-radius: 5px;
-        background-color: transparent;
+    .logo {
+        max-width: 475px;
+        margin-top: 15%;
+    }
+
+    .welcome-text {
+        width: 450px;
+        margin-top: 20px;
         color: white;
-        font-size: 16px;
-        font-weight: 400;
+        font-weight: 300;
 
-            &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+        .title {
+            font-size: 33px;
+        }
+        .sub-title {
+            font-size: 24px;
+        }
+        .info-text {
+            margin-top: 10px;
+            font-size: 14px;
+            max-width: 425px;
+        }
+        #findout-button {
+            margin-top: 10px;
+            padding: 7px 40px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+            font-size: 16px;
+            font-weight: 400;
+
+                &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+        #smallscreen-findout-button {
+            display: none;
         }
     }
+
+    .smallScreenNote {
+        display: none;
+    }
+
+    .footer-wrap {
+        position: absolute;
+        bottom: 20px;
+        color: white;
+        width: 1200px;
+     }
+
+     .footer-element {
+         margin-right: 100px;
+     }
+
+     // #footnote {
+     //     margin-right: 100px;
+     // }
 }
 
-.footer-wrap {
-    position: absolute;
-    bottom: 20px;
-    color: white;
-    width: 1200px;
- }
 
- .footer-element {
-     margin-right: 100px;
- }
+@media (max-width: 1199px){
 
- // #footnote {
- //     margin-right: 100px;
- // }
+    .wrap {
+        background-image: url("/assets/images/main-bg.jpg");
+        background-size: contain;
+        width: 100%;
+        height: auto;
+        background-repeat: repeat;
+    }
+
+    .loginForm {
+        display: none;
+    }
+
+    .viewH {
+       //  height: 100vh;
+    }
+    .logo {
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 20%;
+        text-align: center;
+        background-position: center;
+
+        img {
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    .welcome-text {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 20px;
+        color: white;
+        font-weight: 300;
+
+        .title {
+            font-size: 40px;
+        }
+        .sub-title {
+            font-size: 28px;
+        }
+        .info-text {
+            margin: 0 auto;
+            margin-top: 10px;
+            font-size: 22px;
+            max-width: 70%;
+        }
+
+       #findout-button {
+            display: none;
+        }
+        #smallscreen-findout-button {
+            display: block;
+            margin: 0 auto;
+            text-decoration: none;
+            margin-top: 10px;
+            padding: 7px 40px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+            font-size: 18px;
+            font-weight: 400;
+
+                &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+
+    .smallScreenNote {
+        display: block;
+        width: 95%;
+        font-size: 20px;
+        margin: 15% auto;
+        text-align: center;
+        background-color: $background-color;
+        color: $font-primary-color;
+        padding: 10px;
+        border-radius: $border-radius;
+
+        .minReq {
+            font-weight: bold;
+        }
+
+    }
+
+    .footer-wrap {
+       display: none;
+     }
+}
+
+
+@media (max-width: 600px) {
+
+     .wrap {
+         background-image: url("/assets/images/main-bg.jpg");
+         background-size: contain;
+         width: 100%;
+         height: auto;
+         background-repeat: repeat;
+     }
+
+     .loginForm {
+         display: none;
+     }
+
+     .viewH {
+        //  height: 100vh;
+     }
+     .logo {
+         max-width: 100%;
+         margin: 0 auto;
+         margin-top: 20%;
+         text-align: center;
+         background-position: center;
+
+         img {
+             width: 80%;
+             margin: 0 auto;
+         }
+     }
+
+     .welcome-text {
+         width: 80%;
+         margin: 0 auto;
+         text-align: center;
+         margin-top: 20px;
+         color: white;
+         font-weight: 300;
+
+         .title {
+             font-size: 24px;
+         }
+         .sub-title {
+             font-size: 20px;
+         }
+         .info-text {
+             margin: 0 auto;
+             margin-top: 10px;
+             font-size: 14px;
+             max-width: 70%;
+         }
+
+        #findout-button {
+             display: none;
+         }
+         #smallscreen-findout-button {
+             display: block;
+             margin: 0 auto;
+             text-decoration: none;
+             margin-top: 10px;
+             padding: 7px 40px;
+             border: 2px solid white;
+             border-radius: 5px;
+             background-color: transparent;
+             color: white;
+             font-size: 16px;
+             font-weight: 400;
+
+                 &:hover {
+                 background-color: rgba(255, 255, 255, 0.2);
+             }
+         }
+     }
+
+     .smallScreenNote {
+         display: block;
+         width: 95%;
+         margin: 15% auto;
+         text-align: center;
+         background-color: $background-color;
+         color: $font-primary-color;
+         padding: 10px;
+         border-radius: $border-radius;
+
+         .minReq {
+             font-weight: bold;
+         }
+
+     }
+
+     .footer-wrap {
+        display: none;
+      }
+}
