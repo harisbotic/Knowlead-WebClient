@@ -22,7 +22,7 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
     }
     this.profilePictureId = (user) ? user.profilePictureId : undefined;
     if (!this.url) {
-      this.url = 'https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif';
+      this.url = '/assets/images/default_profile.jpg';
     }
     this.url = this.sanitizer.bypassSecurityTrustStyle('url(' + this.url + ')');
   }
