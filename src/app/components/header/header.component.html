@@ -14,13 +14,13 @@
                     </a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a routerLink="/store" class="centerVl">Store</a>
+                    <a routerLink="/store" class="centerVl">Referrals</a>
                 </div>
                 <div class="col-25 headerPosRel">
                     <a routerLink="/" class="centerVl">Home</a>
                 </div>
                 <div class="col-25 headerPosRel">
-                    <a routerLink="/profile/{{user.id}}" class="centerVl headerUsername">{{user.name || 'Profile'}}</a>
+                    <a routerLink="{{user | userProfileLink}}" class="centerVl headerUsername">{{user.name || 'Profile'}}</a>
                 </div>
             </div>
             <div class="col-40">
