@@ -2,8 +2,10 @@
     <a *ngFor="let item of getNotebookList()" routerLink="{{item.notebookId}}">
         <app-single-notebook [notebook]="item"></app-single-notebook>
     </a>
-    <a [routerLink]="['new']" class="addNewNotebook">
+    <a routerLink="new" class="addNewNotebook">
         <i class="kl-plus"></i>
         <div class="addNewNotebook-text">Add New Notebook</div>
     </a>
 </div>
+
+<router-outlet></router-outlet>

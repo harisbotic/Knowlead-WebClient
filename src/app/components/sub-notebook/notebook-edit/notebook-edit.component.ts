@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
 import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -17,12 +17,10 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
   primaryColor: string;
   secondaryColor: string;
 
-  @Output() close = new EventEmitter<any>();
-
-  @Input() set notebookId(value: number) {
-    if (value != null) {
+  setNotebookId(value: string) {
+    if (value != null && value !== 'new') {
       this.subscriptions.push(
-        this.notebookSerice.getNotebook(value).take(1).subscribe(notebook =>
+        this.notebookSerice.getNotebook(parseInt(value, 10)).take(1).subscribe(notebook =>
           this.applyFullValue(_.cloneDeep(notebook))
         )
       );
@@ -71,15 +69,13 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     super();
   }
 
-  submit(shouldClose?: boolean) {
+  submit() {
     const o = (this.getValue().notebookId == null) ?
       this.notebookSerice.addNotebook(this.getValue()) :
       this.notebookSerice.patchNotebook(this.getValue());
     this.subscriptions.push(o.take(1).subscribe(notebook => {
-      this.notebookId = notebook.notebookId;
-      if (shouldClose) {
-        this.doClose();
-      }
+      this.setNotebookId(notebook.notebookId.toString());
+      this.doClose();
     }));
   }
 
@@ -91,7 +87,6 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
   }
 
   doClose() {
-    this.close.emit();
     this.router.navigate(['notebook'], {relativeTo: this.activatedRoute.parent});
   }
 
@@ -100,7 +95,7 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
       console.log(params);
       if (params['id']) {
-        this.notebookId = parseInt(params['id'], 10);
+        this.setNotebookId(params['id']);
       }
     }));
   }

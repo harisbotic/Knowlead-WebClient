@@ -92,6 +92,7 @@ import { SingleReviewComponent } from './pages/profile-page/about-me/about-me-re
 import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
 import { FormControlErrorDirective } from './directives/form-control-error.directive';
 import { ErrorTooltipComponent } from './components/sub-popups/error-tooltip/error-tooltip.component';
+import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import { ErrorTooltipComponent } from './components/sub-popups/error-tooltip/err
     SingleReviewComponent,
     TermsConditionsPageComponent,
     FormControlErrorDirective,
-    ErrorTooltipComponent
+    ErrorTooltipComponent,
+    NotebookEditPopupComponent
   ],
   imports: [
     BrowserModule,

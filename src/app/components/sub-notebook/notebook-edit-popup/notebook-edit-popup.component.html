@@ -1,0 +1,9 @@
+<ngl-modal [(open)]="opened" (openChange)="doClose()">
+  <div body>
+    notebook edit component
+  </div>
+  <template ngl-modal-footer *ngIf="!noFooter">
+    <button class="" (click)="doClose();">Cancel</button>
+    <button class="" (click)="doClose();">Save</button>
+  </template>
+</ngl-modal>

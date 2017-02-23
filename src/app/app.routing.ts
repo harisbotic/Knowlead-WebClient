@@ -28,6 +28,7 @@ import { LibraryComponent } from './pages/profile-page/library/library.component
 import { FriendshipsComponent } from './pages/profile-page/friendships/friendships.component';
 import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
+import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -58,7 +59,13 @@ const appRoutes: Routes = [
             {path: 'p2ps', component: AboutMeP2psComponent}
         ]
     }, {
-        path: 'library', component: LibraryComponent
+        path: 'library', component: LibraryComponent, children: [{
+            path: '',
+            children: []
+        }, {
+            path: ':id',
+            component: NotebookEditPopupComponent
+        }]
     }, {
         path: 'friends', component: FriendshipsComponent
     }] },
