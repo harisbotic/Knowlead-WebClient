@@ -8,7 +8,7 @@
                             <div class="profileInfo-wrap">
                                 <div class="row topElements-wrap">
                                     <div class="col-25">
-                                        <a routerLink="/profile/{{user.id}}">
+                                        <a routerLink="{{user | userProfileLink}}">
                                             <div class="profileImage-wrap">
                                                 <app-profile-picture [user]="user" [uploadable]="false" size="small"></app-profile-picture>
                                             </div>

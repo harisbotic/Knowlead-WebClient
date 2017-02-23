@@ -40,9 +40,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
   logout() {
     this.sessionService.logout();
-    this.subscriptions.push(Observable.timer(200).subscribe(() => {
-      this.router.navigate(['/']);
-    }));
+    this.router.navigate(['/']);
   }
 
   pritisno() {
