@@ -3,7 +3,12 @@
   <div *ngIf="results?.length > 0" class="search-wrap">
     <a *ngFor="let user of results" routerLink="{{user | userProfileLink}}">
       <div class="search-results">
-          {{user | fullName}}
+          <div class="targetPhoto">
+              <div class="profileImage-wrap">
+                  <app-profile-picture [user]="user" [uploadable]="false" size="x-small"></app-profile-picture>
+              </div>
+          </div>
+          <div class="targetName">{{user | fullName}}</div>
       </div>
     </a>
   </div>

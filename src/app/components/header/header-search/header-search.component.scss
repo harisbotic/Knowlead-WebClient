@@ -14,9 +14,9 @@
     z-index: 1000;
     width: 95%;
     margin: 0 auto;
-    height: 40px;
+    height: 50px;
     top: 38px;
-    line-height: 40px;
+    line-height: 50px;
     font-weight: bold;
     background-color: white;
     border-left: 1px solid $hover-dark-color;
@@ -27,4 +27,14 @@
     &:hover {
         background-color: $hover-middle-color;
     }
+}
+
+.targetPhoto {
+    position: absolute;
+
+}
+
+.targetName {
+    position: absolute;
+    left: 70px;
 }
