@@ -49,6 +49,7 @@ export class AccountService {
     return this.http.get(PROFILE_SEARCH, {search: googleParams})
       .map(responseToResponseModel)
       .map(resp => resp.object)
+      .map(arr => arr || [])
       .do((resp: ApplicationUserModel[]) => this.analyticsService.sendEvent('searchRequest', undefined, resp.length));
   }
 
