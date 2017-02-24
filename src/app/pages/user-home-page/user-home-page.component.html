@@ -23,8 +23,21 @@
                                     </div>
                                 </div>
                                 <div class="row bottomElements-wrap">
-                                    <div class="col-50" id="minutesValue">{{user.minutesBalance}} Minutes</div>
-                                    <div class="col-50" id="scoreValue">{{user?.pointsBalance}} Score</div>
+                                    <div class="col-50 tooltip-parent" id="minutesValue">
+                                        {{user.minutesBalance}} Minutes
+                                        <span class="tooltip-bottom tooltip-200">
+                                            How minutes work: <br><br>
+                                            Student gives minutes. <br>
+                                            Teacher gains minutes. <br><br>
+                                            Go to <a routerLink="/store">Store</a> page for more.
+                                        </span>
+                                    </div>
+                                    <div class="col-50 tooltip-parent" id="scoreValue">
+                                        {{user?.pointsBalance}} Score
+                                        <span class="tooltip-bottom tooltip-175">
+                                            You gain score both by studying and teaching.
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -41,9 +54,9 @@
                     </div>
                     <div class="row">
                         <div class="col-100">
-                            <div class="menuItem-wrap posRel">
+                            <div class="posRel" id="highlightFeedbackButton">
                                 <a class="sendFeedbackLink" appFeedbackForm>
-                                    <i class="menuIcon kl-feedback"></i>
+                                    <i class="menuIcon kl-feedback" id="highlightFeedbackIcon"></i>
                                     <div class="sendFeedback menuItem-text"> Send Feedback </div>
                                 </a>
                             </div>
@@ -168,7 +181,7 @@
                                     <div class="firstUpcomingEvent" *ngIf="idx === 0">
                                         <div class="row">
                                             <div class="timeLeft-wrap">
-                                                <i class="kl-circle" 
+                                                <i class="kl-circle"
                                                     [class.circleState-teacher]="event.scheduledWithId === user?.id"
                                                     [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
                                                 <!--<span class="timeLeft"></span>
@@ -213,7 +226,7 @@
                                     <div class="otherUpcomingEvents" *ngIf="idx > 0">
                                         <div class="row">
                                             <div class="timeLeft-wrap">
-                                                <i class="kl-circle" 
+                                                <i class="kl-circle"
                                                     [class.circleState-teacher]="event.scheduledWithId === user?.id"
                                                     [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
                                                 <!--<span class="timeLeft">2</span>

@@ -51,6 +51,11 @@ a, a:visited, a:hover, a:active {
 #accOptionsIcon {
     font-size: 28px;
     color: $icon-dark-color;
+
+    &:hover {
+        background-color: $button-header-hover-color;
+        border-radius: $border-radius;
+    }
 }
 
 .verticalLine {
