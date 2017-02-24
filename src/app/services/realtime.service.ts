@@ -8,6 +8,7 @@ import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { PopupNotificationModel } from '../models/frontend.models';
+import { AnalyticsService } from './analytics.service';
 
 export enum CallEventType {
   CALL_UPDATE,
@@ -103,6 +104,7 @@ export class RealtimeService {
 
   respondToCall(callId: string, accepted: boolean) {
     this.invoke(this.callErrorSubject, 'CallRespond', callId, accepted);
+    this.analyticsService.sendEvent('callRespond', JSON.stringify(accepted));
   }
 
   addCallSDP(callId: string, sdp: string) {
@@ -118,10 +120,12 @@ export class RealtimeService {
 
   stopCall(callId: string, reason: string) {
     this.invoke(this.callErrorSubject, 'StopCall', callId, reason);
+    this.analyticsService.sendEvent('callStop', reason);
   }
 
   disconnectFromCall(callId: string) {
     this.invoke(this.callErrorSubject, 'DisconnectFromCall', callId);
+    this.analyticsService.sendEvent('callDisconnect');
   }
 
   getCallUpdate(callId: string): Promise<_CallModel> {
@@ -132,6 +136,7 @@ export class RealtimeService {
 
   sendCallMsg(message: ChatMessageModel) {
     this.invoke(this.callErrorSubject, 'CallMsg', message);
+    this.analyticsService.sendEvent('callMsg');
   }
 
   private invoke(errorSubject: Subject<any>, nameOfFunction: string, ...params) {
@@ -150,7 +155,8 @@ export class RealtimeService {
 
   constructor(protected storageService: StorageService,
               protected sessionService: SessionService,
-              protected router: Router) {
+              protected router: Router,
+              protected analyticsService: AnalyticsService) {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
         if (this.rpcConnection) {

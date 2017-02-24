@@ -196,11 +196,11 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
     ModelUtilsService,
     AccountService,
     ChatService,
+    AnalyticsService,
     P2pService,
     NotebookService,
     StorageService,
     RealtimeService,
-    AnalyticsService,
     {
       provide: Http,
       useClass: HttpProvider,

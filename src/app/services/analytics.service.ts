@@ -7,19 +7,31 @@ import { ApplicationUserModel, PlatformFeedbackModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { Observable } from 'rxjs';
 
-type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'call' | 'p2pCall' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
-  | 'p2pRespond';
+type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
+  | 'p2pRespond' | 'p2pDelete' | 'p2pSchedule' | 'p2pBookmark' | 'changeInfo' | 'searchRequest' | 'changeProfilePicture' | 'changeNotebook'
+  | 'addNotebook' | 'callStop' | 'callStart' | 'callDisconnect' | 'callRespond' | 'callMsg' | 'claimReward';
 
 const categories: {[index: string]: string} = {
   'register': 'account',
+  'confirmEmail': 'account',
+  'changeInfo': 'account',
+  'searchRequest': 'account',
+  'changeProfilePicture': 'account',
   'login': 'session',
   'logout': 'session',
-  'confirmEmail': 'account',
-  'call': 'call',
-  'p2pCall': 'call',
   'p2pCreate': 'p2p',
   'p2pRespond': 'p2p',
-  'userPatch': 'account'
+  'p2pDelete': 'p2p',
+  'p2pSchedule': 'p2p',
+  'p2pBookmark': 'p2p',
+  'changeNotebook': 'notebook',
+  'addNotebook': 'notebook',
+  'callStop': 'call',
+  'callStart': 'call',
+  'callMsg': 'call',
+  'callDisconnect': 'call',
+  'callRespond': 'call',
+  'claimReward': 'store'
 };
 
 @Injectable()
@@ -65,7 +77,7 @@ export class AnalyticsService {
     });
   }
 
-  protected sendEvent(action: EventType, label?: any) {
+  public sendEvent(action: EventType, label?: any, value?: any) {
     if (action === 'login') {
       if (this.lastLogin === this.user.id) {
         return;
@@ -73,7 +85,10 @@ export class AnalyticsService {
         this.lastLogin = this.user.id;
       }
     }
-    this.analytics.eventTrack.next({action: action, properties: {category: categories[action], label: label}});
+    if (!categories[action]) {
+      console.warn(action + ' action doesnt have analytics category');
+    }
+    this.analytics.eventTrack.next({action: action, properties: {category: categories[action], label: label, value: value}});
   }
 
   protected refreshUserId() {

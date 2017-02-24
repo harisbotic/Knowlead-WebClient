@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 import { NOTEBOOK } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { ModelUtilsService } from './model-utils.service';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable()
 export class NotebookService {
@@ -18,7 +19,13 @@ export class NotebookService {
     return this.injector.get(ModelUtilsService);
   }
 
-  constructor(protected storageService: StorageService, protected http: Http, protected injector: Injector) {
+  get analyticsService(): AnalyticsService {
+    return this.injector.get(AnalyticsService);
+  }
+
+  constructor(protected storageService: StorageService,
+      protected http: Http,
+      protected injector: Injector) {
     this.notebookFiller = this.modelUtilsService.fillNotebook.bind(this.modelUtilsService);
   }
 
@@ -56,6 +63,7 @@ export class NotebookService {
         .map(a => a.object);
     }).do((newNotebook: NotebookModel) => {
       this.storageService.setToStorage('notebook', this.notebookFiller, {id: newNotebook.notebookId}, newNotebook);
+      this.analyticsService.sendEvent('changeNotebook');
     });
   }
 
@@ -63,6 +71,7 @@ export class NotebookService {
     return this.http.post(NOTEBOOK, notebook)
       .map(responseToResponseModel)
       .map(a => a.object)
-      .do((n: NotebookModel) => this.storageService.setToStorage('notebook', this.notebookFiller, {id: n.notebookId}, n));
+      .do((n: NotebookModel) => this.storageService.setToStorage('notebook', this.notebookFiller, {id: n.notebookId}, n))
+      .do(() => this.analyticsService.sendEvent('addNotebook'));
   }
 }

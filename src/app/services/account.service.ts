@@ -46,7 +46,10 @@ export class AccountService {
   public search(query: string): Observable<ApplicationUserModel[]> {
     let googleParams = new URLSearchParams();
     googleParams.set('q', query);
-    return this.http.get(PROFILE_SEARCH, {search: googleParams}).map(responseToResponseModel).map(resp => resp.object);
+    return this.http.get(PROFILE_SEARCH, {search: googleParams})
+      .map(responseToResponseModel)
+      .map(resp => resp.object)
+      .do((resp: ApplicationUserModel[]) => this.analyticsService.sendEvent('searchRequest', undefined, resp.length));
   }
 
   public getUserById(id: Guid, includeDetails = false): Observable<ApplicationUserModel> {
@@ -73,11 +76,13 @@ export class AccountService {
   }
 
   public changeProfilePicture(image: ImageBlobModel): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {}));
+    return this.doPatch(this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {}))
+      .do(() => this.analyticsService.sendEvent('changeProfilePicture', 'set'));
   }
 
   public removeProfilePicture(): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.delete(REMOVE_PROFILE_PICTURE));
+    return this.doPatch(this.http.delete(REMOVE_PROFILE_PICTURE))
+      .do(() => this.analyticsService.sendEvent('changeProfilePicture', 'remove'));
   }
 
   protected doPatch(input: Observable<Response>): Observable<ApplicationUserModel> {
@@ -95,6 +100,7 @@ export class AccountService {
         } else {
           console.error('No object in user patch response');
         }
+        this.analyticsService.sendEvent('changeInfo');
       });
   }
 

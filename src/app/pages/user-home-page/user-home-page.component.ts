@@ -25,11 +25,15 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
   }
 
   getUpcoming(): P2PModel[] {
+    if (!this.user) {
+      return;
+    }
     let p2ps = [];
     for (let key of Object.keys(this.storageService.cache)) {
       const storage: StorageSubject<P2PModel> = this.storageService.cache[key];
       if (storage.key === 'p2p' &&
           storage.value != null &&
+          storage.value.createdById === this.user.id &&
           storage.value.status === P2PStatus.Scheduled &&
           !storage.value.isDeleted) {
         p2ps.push(storage.value);

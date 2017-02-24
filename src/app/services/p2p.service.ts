@@ -12,6 +12,7 @@ import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
 import { P2P_ALL } from '../utils/urls';
+import { AnalyticsService } from './analytics.service';
 
 @Injectable()
 export class P2pService {
@@ -21,6 +22,10 @@ export class P2pService {
 
   get modelUtilsService(): ModelUtilsService {
     return this.injector.get(ModelUtilsService);
+  }
+
+  get analyticsService(): AnalyticsService {
+    return this.injector.get(AnalyticsService);
   }
 
   constructor(
@@ -33,7 +38,8 @@ export class P2pService {
 
   create(value: P2PModel): Observable<P2PModel> {
     let tmp = _(value).omitBy(_.isNull).value();
-    return this.modifyP2p(this.http.post(P2P_NEW, tmp).map(responseToResponseModel).map(o => o.object));
+    return this.modifyP2p(this.http.post(P2P_NEW, tmp).map(responseToResponseModel).map(o => o.object))
+      .do((val) => this.analyticsService.sendEvent('p2pCreate', val.fos.code, val.initialPrice));
   }
 
   getAll(): Observable<P2PModel[]> {
@@ -78,7 +84,8 @@ export class P2pService {
   delete(p2p: P2PModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.delete(P2P_DELETE + '/' + p2p.p2pId)
       .map(responseToResponseModel)
-      .map(v => v.object));
+      .map(v => v.object))
+      .do(p => this.analyticsService.sendEvent('p2pDelete', p.fos.code));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
@@ -95,6 +102,7 @@ export class P2pService {
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
       this.addP2Pmessage(newMessage);
+      this.analyticsService.sendEvent('p2pRespond');
     });
   }
 
@@ -107,13 +115,15 @@ export class P2pService {
        .map(responseToResponseModel)
        .map(v => v.object))
        .do(obj => {
+         this.analyticsService.sendEvent('p2pSchedule', undefined, obj.priceAgreed);
        });
   }
 
   acceptOffer(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.modifyP2pMessage(this.http.post(P2P_ACCEPT_OFFER + '/' + message.p2pMessageId, {})
         .map(responseToResponseModel)
-        .map(v => v.object));
+        .map(v => v.object))
+        .do(() => this.analyticsService.sendEvent('p2pRespond', undefined, message.priceOffer));
   }
 
   refreshP2P(p2pId: number) {
@@ -136,6 +146,7 @@ export class P2pService {
     const url = p2p.didBookmark ? P2P_REMOVE_BOOKMARK : P2P_ADD_BOOKMARK;
     const countChange = p2p.didBookmark ? -1 : 1;
     return this.http.post(url + '/' + p2p.p2pId, {})
+      .do(() => this.analyticsService.sendEvent('p2pBookmark'))
       .do(response => this.storageService.modifyStorage<P2PModel>('p2p', this.p2pFiller, {id: p2p.p2pId}, (oldp2p) => {
         oldp2p.bookmarkCount += countChange;
         oldp2p.didBookmark = !oldp2p.didBookmark;
