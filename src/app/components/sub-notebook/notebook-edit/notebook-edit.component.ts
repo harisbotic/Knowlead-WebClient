@@ -46,8 +46,8 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
   }
 
   getNewValue(): NotebookModel {
-    const pc = '#00ff00';
-    const sc = '#ff0000';
+    const sc = '#071923';
+    const pc = '#007bb6';
     this.primaryColor = pc;
     this.secondaryColor = sc;
     return {
@@ -56,6 +56,7 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
       name: '',
       primaryColor: pc,
       secondaryColor: sc,
+
       createdAt: undefined,
       createdBy: undefined,
       createdById: undefined,

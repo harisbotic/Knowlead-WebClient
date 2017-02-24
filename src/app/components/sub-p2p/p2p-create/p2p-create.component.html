@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-100">
                     <div class="createForm-wrap">
-                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <form (ngSubmit)="confirmationOpened = true" [formGroup]="form">
                             <div class="row">
                                 <div class="col-100">
                                     <div class="postTextarea-wrap">
@@ -133,3 +133,12 @@
     </div>
 </div>
 <!-- 100 -->
+<ngl-modal [(open)]="confirmationOpened">
+  <div body>
+      Please note:  this field is not yet popular among the users, so you may not get the response. Do you still want to proceed?
+  </div>
+  <template ngl-modal-footer>
+    <button class="" (click)="confirmationOpened=false">Cancel</button>
+    <button class="" (click)="onSubmit();confirmationOpened=false" type="button">Post anyway</button>
+  </template>
+</ngl-modal>

@@ -2,7 +2,7 @@
   <div body>
     <div class="row">
         <div class="notebookForm-wrap">
-            <form [formGroup]="form" (ngSubmit)="{}">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <div class="row">
                     <div class="notebookTitleInput-wrap">
@@ -41,6 +41,6 @@
   </div>
   <template ngl-modal-footer *ngIf="!noFooter">
     <button class="notebookCloseButton" (click)="doClose();">Cancel</button>
-    <button class="notebookSaveButton" (click)="doClose();" type="button">Save and close</button>
+    <button class="notebookSaveButton" (click)="onSubmit();" type="button">Save and close</button>
   </template>
 </ngl-modal>

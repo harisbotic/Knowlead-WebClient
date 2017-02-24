@@ -120,5 +120,6 @@
     "DISCUSSION_CLOSED": "Cannot discuss on this p2p anymore",
 
     "CALL_END_REQUESTED": "One of peers requested end of the call",
-    "CALL_INACTIVE": "We couldn't reach one of peers"
+    "CALL_INACTIVE": "We couldn't reach one of peers",
+    "CALL_START_PROBLEM": "Couldn't start call. Make sure your webcam and microphone are plugged in and you allowed access to them."
 }
