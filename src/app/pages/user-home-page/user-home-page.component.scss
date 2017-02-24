@@ -58,7 +58,7 @@
         padding-right: 10px;
         text-align: right;
         cursor: default;
-        
+
         > span {
             font-weight: normal;
             font-size: 14px;
@@ -99,6 +99,29 @@
         -webkit-transform: translateY(0);
         opacity: .8;
     }
+}
+
+#highlightFeedbackButton {
+    margin: 5px 0;
+    padding: 2px 11px 2px 5px;
+    max-width: 155px;
+    background-color: $knowlead-primary;
+    border-radius: $border-radius;
+    display: inline-block;
+
+
+    > a, a:visited, a:active {
+        text-decoration: none;
+        color: white;
+    }
+
+    &:hover {
+        background-color: transparentize($knowlead-primary, 0.2);
+    }
+}
+
+#highlightFeedbackIcon {
+    top: 1px;
 }
 
 .menuIcon {
