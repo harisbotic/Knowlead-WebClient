@@ -22,6 +22,7 @@ export class NotificationTypes
 	static rewardClaimed: string = "NotificationTypes.REWARD_CLAIMED";
 	static newFriendship: string = "NotificationTypes.NEW_FRIENDSHIP";
 	static leaveP2PFeedback: string = "NotificationTypes.LEAVE_P2P_FEEDBACK";
+	static p2PScheduled: string = "NotificationTypes.P2P_SCHEDULED";
 }
 export class ErrorCodes
 {

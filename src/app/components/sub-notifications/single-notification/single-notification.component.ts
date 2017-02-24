@@ -42,6 +42,8 @@ export class SingleNotificationComponent implements OnInit {
       return 'has finished';
     } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
       return 'accepted your';
+    } else if (this.notification.notificationType === NotificationTypes.p2PScheduled) {
+      return 'scheduled';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return 'You claimed your';
     }
@@ -49,7 +51,8 @@ export class SingleNotificationComponent implements OnInit {
 
   getMiddle() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment ||
-        this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
+        this.notification.notificationType === NotificationTypes.p2POfferAccepted ||
+        this.notification.notificationType === NotificationTypes.p2PScheduled) {
       return 'peer-to-peer';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return 'reward';
@@ -57,7 +60,8 @@ export class SingleNotificationComponent implements OnInit {
   }
 
   getAfter() {
-    if (this.notification.notificationType === NotificationTypes.newP2PComment) {
+    if (this.notification.notificationType === NotificationTypes.newP2PComment ||
+        this.notification.notificationType === NotificationTypes.p2PScheduled) {
       return 'request';
     } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
       return 'offer';
