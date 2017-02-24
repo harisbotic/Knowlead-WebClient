@@ -1,13 +1,13 @@
 <div class="row" *ngFor="let message of thread.messages; let idx = index;">
     <div class="col-100" *ngIf="!message.offerAcceptedId">
         <div [class.thread-wrap]="idx === 0" [class.thread-reply-wrap]="idx !== 0">
-            <div class="offerOptions-wrap">
+            <!--<div class="offerOptions-wrap">
                 <a class="centerVr offerOptions-icon-wrap">
                     <i class="kl-more offerOptions-icon" [popover]="popover"></i>
                     <popover-content #popover placement="bottom" [closeOnClickOutside]="true">
                         <div class="offerOptions-content">
 
-                            <!-- <div class="row offerOptions-button posRel">
+                            <div class="row offerOptions-button posRel">
                                 <a class="posRel">
                                     <div class="col-30 posRel">
                                         <i class="kl-delete offerOptions-icon centerV"></i>
@@ -16,9 +16,8 @@
                                         <p class="offerOptions-text centerVl">Delete</p>
                                     </div>
                                 </a>
-                            </div> -->
+                            </div>
 
-                            <!-- NOTE: REPORT Button -->
                             <div class="row offerOptions-button posRel">
                                 <a class="posRel">
                                     <div class="col-30 posRel">
@@ -33,7 +32,7 @@
                         </div>
                     </popover-content>
                 </a>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-100">
                     <div class="threadTopElements-wrap">

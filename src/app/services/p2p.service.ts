@@ -94,7 +94,7 @@ export class P2pService {
 
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
-      this.addP2Pmessage(message);
+      this.addP2Pmessage(newMessage);
     });
   }
 
@@ -105,7 +105,9 @@ export class P2pService {
   schedule(message: P2PMessageModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.post(P2P_SCHEDULE + '/' + message.p2pMessageId, {})
        .map(responseToResponseModel)
-       .map(v => v.object));
+       .map(v => v.object))
+       .do(obj => {
+       });
   }
 
   acceptOffer(message: P2PMessageModel): Observable<P2PMessageModel> {
@@ -115,7 +117,11 @@ export class P2pService {
   }
 
   refreshP2P(p2pId: number) {
-    this.storageService.refreshStorage('p2p', this.p2pFiller, {id: p2pId});
+    this.storageService.refreshStorage('p2p', this.p2pFiller, {'id': p2pId});
+  }
+
+  refreshP2Pmessages(p2pId: number) {
+    this.storageService.refreshStorage('p2pMessages', this.p2pMessagesFiller, {'id': p2pId});
   }
 
   addP2Pmessage(newMessage: P2PMessageModel) {

@@ -124,7 +124,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
       this.foses = [];
       const s = (fos: FOSModel) => {
-        if ((!fos.children || fos.children.length === 0) && fos.unlocked) {
+        if (!fos.children || fos.children.length === 0) {
           this.foses.push({
             label: fos.name,
             value: fos.coreLookupId

@@ -7,6 +7,7 @@ import { dateValidator } from '../../../validators/date.validator';
 import { P2pService } from '../../../services/p2p.service';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { AccountService } from '../../../services/account.service';
+import { RealtimeService } from '../../../services/realtime.service';
 
 @Component({
   selector: 'app-p2p-thread',
@@ -38,7 +39,8 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
   constructor(
       protected p2pService: P2pService,
       protected notificationService: NotificationService,
-      protected accountService: AccountService) {
+      protected accountService: AccountService,
+      protected realtimeService: RealtimeService) {
     super();
   }
 
@@ -95,6 +97,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
   }
 
   submit() {
+    console.log('SUBMIT');
     this.subscriptions.push(this.p2pService.message(this.getValue()).subscribe(() => {
       this.restartForm();
     }, (err) => {
@@ -119,6 +122,16 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
       this.user = user;
       this.refresh();
+    }));
+    this.subscriptions.push(this.realtimeService.notificationSubject.subscribe(notification => {
+      if (notification.p2pMessageId !== undefined && notification.fromApplicationUserId === this.thread.withId) {
+        if (notification.p2pMessage) {
+          this.p2pService.addP2Pmessage(notification.p2pMessage);
+        } else {
+          console.warn('P2P message not filled, refreshing notifications');
+          this.p2pService.refreshP2Pmessages(this.thread.p2p.p2pId);
+        }
+      }
     }));
   }
 

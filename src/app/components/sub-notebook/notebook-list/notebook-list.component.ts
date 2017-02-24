@@ -3,6 +3,7 @@ import { NotebookService } from '../../../services/notebook.service';
 import { NotebookModel } from '../../../models/dto';
 import { BaseComponent } from '../../../base.component';
 import { StorageService } from '../../../services/storage.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-notebook-list',
@@ -15,11 +16,15 @@ export class NotebookListComponent extends BaseComponent implements OnInit {
   modalOpened = false;
   viewingNotebook: number;
   @Input() inLibrary = false;
+  notebookList: NotebookModel[];
 
   constructor(protected notebookService: NotebookService, protected storageService: StorageService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.notebookService.getNotebooks().subscribe());
+    this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
+      this.notebookList = this.getNotebookList();
+    }));
   }
 
   closeModal() {
@@ -35,7 +40,7 @@ export class NotebookListComponent extends BaseComponent implements OnInit {
   getNotebookList(): NotebookModel[] {
     let ret = [];
     for (let key of Object.keys(this.storageService.cache)) {
-      if (key.startsWith('notebook') && this.storageService.cache[key].value != null) {
+      if (this.storageService.cache[key].key === 'notebook' && this.storageService.cache[key].value != null) {
         ret.push(this.storageService.cache[key].value);
       }
     }

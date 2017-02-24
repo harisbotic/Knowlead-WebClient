@@ -173,7 +173,7 @@
                                     <div class="commentCounter"></div> 
                                 </div>
                             </div>
-                            <div class="col-25" *ngIf="p2p.canBookmark">
+                            <div class="col-25">
                                 <div class="bottomElementsButton-wrap">
                                     <i class="kl-bookmark bookmark-icon"></i>
                                     <a class="bookmarkButton-link tooltip-parent">
@@ -201,7 +201,7 @@
         </div>
     </div>
 </div>
-<div class="row" *ngIf="p2p && !p2p?.scheduledWithId">
+<div class="row" *ngIf="p2p && !p2p?.scheduledWithId && discussionOpened">
     <div class="col-100">
         <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
     </div>

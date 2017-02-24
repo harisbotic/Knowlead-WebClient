@@ -4,6 +4,7 @@ import { P2pService } from '../../../services/p2p.service';
 import { AccountService } from '../../../services/account.service';
 import { BaseComponent } from '../../../base.component';
 import { ModelUtilsService } from '../../../services/model-utils.service';
+import { sortByDateFunction } from '../../../utils/index';
 
 export interface ThreadModel {
   withId: Guid;
@@ -68,9 +69,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
       if (!this.messages || !this.user || !this.p2p) {
         return;
       }
-      this.messages.slice().sort((a, b) => {
-        return a.timestamp.getTime() - b.timestamp.getTime();
-      });
+      this.messages.slice().sort(sortByDateFunction<P2PMessageModel>('timestamp', true));
       this.refreshThreads();
     }));
   }

@@ -17,7 +17,7 @@ export class StorageSubject<T> extends Observable<T> {
     fillerSubscription: Subscription;
 
     constructor(
-            protected key: StorageKey,
+            public key: StorageKey,
             protected parameters: {[key: string]: string},
             protected http: Http,
             protected filler?: StorageFiller<T>) {
