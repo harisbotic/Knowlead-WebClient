@@ -73,35 +73,65 @@
                                             <div class="peer-to-peer-category-title menuItem-text"> Peer-to-Peer </div>
                                             <div class="peer-to-peer-sub-category">
                                                 <div class="row">
-                                                <div class="col-100">
-                                                    <div class="menuItem-wrap posRel">
-                                                        <a routerLink="filtered/{{filters.My}}" class="myPostsLink">
-                                                            <i class="menuIcon kl-my"></i>
-                                                            <div class="myPosts menuItem-text"> My Posts </div>
-                                                        </a>
+                                                    <div class="col-100">
+                                                        <div class="menuItem-wrap posRel">
+                                                            <a routerLink="filtered/{{filters.My}}" class="myPostsLink">
+                                                                <i class="menuIcon kl-my"></i>
+                                                                <div class="myPosts menuItem-text"> My Posts </div>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                                 <div class="row">
-                                                <div class="col-100">
-                                                    <div class="menuItem-wrap posRel">
-                                                        <a routerLink="filtered/{{filters.Scheduled}}" class="scheduledLink">
-                                                            <i class="menuIcon kl-calendar"></i>
-                                                            <div class="scheduled menuItem-text"> Scheduled</div>
-                                                        </a>
+                                                    <div class="col-100">
+                                                        <div class="menuItem-wrap posRel">
+                                                            <a routerLink="filtered/{{filters.Scheduled}}" class="scheduledLink">
+                                                                <i class="menuIcon kl-calendar"></i>
+                                                                <div class="scheduled menuItem-text"> Scheduled</div>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                                 <div class="row">
-                                                <div class="col-100">
-                                                    <div class="menuItem-wrap posRel">
-                                                        <a routerLink="filtered/{{filters.Bookmarked}}" class="bookmarkedLink">
-                                                        <i class="menuIcon kl-bookmark"></i>
-                                                        <div class="bookmarked menuItem-text"> Bookmarked </div>
-                                                        </a>
+                                                    <div class="col-100">
+                                                        <div class="menuItem-wrap posRel">
+                                                            <a routerLink="filtered/{{filters.Bookmarked}}" class="bookmarkedLink">
+                                                            <i class="menuIcon kl-bookmark"></i>
+                                                            <div class="bookmarked menuItem-text"> Bookmarked </div>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-100">
+                            <div class="filterSection-wrap">
+                                <div class="row">
+                                    <div class="col-100">
+                                        <div class="scheduleTitle"> Filter </div>
+                                        <div class="filterItem-wrap posRel">
+                                            <div class="filter-sub-category">
+
+                                                <!-- NOTE: ALL POSTS FILTER -->
+                                                <div class="filter-interest">
+                                                    <input id="filter-interest-1" name="radio" type="radio" checked>
+                                                    <label for="filter-interest-1" class="radio-label">All</label>
+                                                </div>
+
+                                                <!-- NOTE: ITEMS BELLOW SHOULD BE CHANGED PER USER -->
+                                                <div class="filter-interest">
+                                                    <input id="filter-interest-2" name="radio" type="radio">
+                                                    <label  for="filter-interest-2" class="radio-label">Technical Drawing in Architecture</label>
+                                                </div>
+
+
+                                                
                                             </div>
                                         </div>
                                     </div>
