@@ -2,7 +2,7 @@
 
 
 .single-friend-wrap {
-    height: 150px;
+    height: 130px;
     margin: 10px;
     background-color: white;
     border-radius: $border-radius;
@@ -11,6 +11,24 @@
 
     .profileImage-wrap {
         position: relative;
-        height: 150px;
+        height: 130px;
     }
+
+    .friend-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0 0 5px;
+    }
+
+    .friend-country {
+        color: $font-secondary-color;
+        margin-left: 5px;
+    }
+
+    .friend-score {
+        margin: 10px 0 0 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
 }
