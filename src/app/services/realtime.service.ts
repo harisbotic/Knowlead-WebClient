@@ -33,6 +33,8 @@ export class RealtimeService {
   public connectionStateSubject = new BehaviorSubject<boolean>(false);
   public callMessageSubject = new Subject<ChatMessageModel>();
 
+  public notificationSubject = new Subject<NotificationModel>();
+
   protected parseIfString<T>(value: T): T {
     if (typeof(value) === 'string') {
       return JSON.parse(value);
@@ -53,9 +55,8 @@ export class RealtimeService {
         return;
       }
       this.connectionStateSubject.next(true);
-      this.rpcConnection.on('notify', (value: PopupNotificationModel) => {
-        this.notificationService.notify(value);
-      });
+
+      // CALL STUFF
       this.rpcConnection.on('callInvitation', (call: _CallModel) => {
         call = this.parseIfString(call);
         this.callInvitations.next(call);
@@ -75,10 +76,6 @@ export class RealtimeService {
         value = this.parseIfString(value);
         this.callModelUpdateSubject.next({type: CallEventType.CALL_RESET, call: value});
       });
-      this.rpcConnection.on('displayNotification', (value: string) => {
-        let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
-        this.notificationService.receiveNotification(notification);
-      });
       this.rpcConnection.on('stopCall', (reason: string) => {
         this.callModelUpdateSubject.next({type: CallEventType.CALL_END, call: null, reason: reason});
       });
@@ -88,6 +85,12 @@ export class RealtimeService {
           new Date(Date.parse(chatMessage.timestamp)) :
           chatMessage.timestamp;
         this.callMessageSubject.next(chatMessage);
+      });
+
+      // NOTIFICATION STUFF
+      this.rpcConnection.on('displayNotification', (value: string) => {
+        let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
+        this.notificationSubject.next(notification);
       });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
@@ -146,7 +149,6 @@ export class RealtimeService {
   }
 
   constructor(protected storageService: StorageService,
-              protected notificationService: NotificationService,
               protected sessionService: SessionService,
               protected router: Router) {
     this.sessionService.eventStream.subscribe(evt => {

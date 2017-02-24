@@ -166,8 +166,8 @@
                                 <app-profile-picture [user]="user" class="centerV" size="x-small"></app-profile-picture>
                             </div>
                         </div>
-                        <div class="col-90">
-                            <textarea formControlName="text" placeholder="Propose a new offer ..." class="writeofferTextarea"></textarea>
+                        <div class="col-90 tooltip-parent">
+                            <textarea formControlName="text" appFormControlError placeholder="Propose a new offer ..." class="writeofferTextarea"></textarea>
                         </div>
                     </div>
                 </div>
@@ -177,8 +177,8 @@
                             <div class="col-15">
                                 <i class="kl-calendar writeOfferDate-icon"></i>
                             </div>
-                            <div class="col-85">
-                                <app-flatpickr placeholder="Select date for studying" formControlName="dateTimeOffer" class="writeOfferDatepickInput" [disablePast]="true" [disableMax]="thread.p2p.deadline"></app-flatpickr>
+                            <div class="col-85 tooltip-parent">
+                                <app-flatpickr appFormControlError placeholder="Select date for studying" formControlName="dateTimeOffer" class="writeOfferDatepickInput" [disablePast]="true" [disableMax]="thread.p2p.deadline"></app-flatpickr>
                             </div>
                         </div>
                         <div class="col-40">
@@ -186,8 +186,8 @@
                                 <div class="col-20">
                                     <i class="kl-currency writeOfferPrice-icon"></i>
                                 </div>
-                                <div class="col-80">
-                                    <input type="number" placeholder="Price" formControlName="priceOffer" min="10" name="priceOffer" class="writeOfferPrice">
+                                <div class="col-80 tooltip-parent">
+                                    <input appFormControlError type="number" placeholder="Price" formControlName="priceOffer" min="10" name="priceOffer" class="writeOfferPrice">
                                 </div>
                             </div>
                         </div>

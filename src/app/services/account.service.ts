@@ -136,18 +136,14 @@ export class AccountService {
     });
   }
 
-  public patchInterests(interests: InterestModel[], voting: boolean): Observable<ApplicationUserModel> {
+  public patchInterests(interests: InterestModel[]): Observable<ApplicationUserModel> {
     return this.currentUser().take(1).flatMap((user) => {
 
       let tmp1 = <ApplicationUserModel>{};
-      tmp1.interests = fillArray(_.cloneDeep(
-          user.interests.filter(i => i.fos.unlocked === !voting)
-      ).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp1.interests = fillArray(_.cloneDeep(user.interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
 
       let tmp2 = <ApplicationUserModel>{};
-      tmp2.interests = fillArray(_.cloneDeep(
-        interests.filter(i => i.fos.unlocked === !voting)
-      ).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp2.interests = fillArray(_.cloneDeep(interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
 
       let patch = fastjsonpatch.compare(tmp1, tmp2);
       return this.patchUser(patch);

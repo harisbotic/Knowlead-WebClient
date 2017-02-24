@@ -48,9 +48,12 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
   user: ApplicationUserModel;
   P2PStatus = P2PStatus;
   modalOpened = false;
+  discussionOpened: boolean;
 
   helpfulFeedback: number;
   expertiseFeedback: number;
+
+  isMy: boolean;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
@@ -125,6 +128,16 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
       return;
     }
     this.callable = !this.p2p.isDeleted && !!this.p2p.scheduledWithId && this.p2p.createdById === this.user.id;
+    this.isMy = this.p2p.createdById === this.user.id;
+    if (this.discussionOpened === undefined) {
+      this.discussionOpened = this.isMy;
+    }
+  }
+
+  toggleDiscussion() {
+    if (this.discussionOpened !== undefined) {
+      this.discussionOpened = !this.discussionOpened;
+    }
   }
 
   ngOnInit() {
@@ -135,6 +148,11 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
     }));
     this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
       this.modalOpened = params['feedback'] === 'true';
+    }));
+    this.subscriptions.push(this.realtimeService.notificationSubject.subscribe(notification => {
+      if (this._p2pId === notification.p2pId && notification.p2pId !== undefined && notification.p2pMessageId !== undefined) {
+        this.p2pService.refreshP2P(this._p2pId);
+      }
     }));
   }
 

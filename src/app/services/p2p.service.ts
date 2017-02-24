@@ -94,11 +94,7 @@ export class P2pService {
 
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
-      this.storageService.getFromStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId})
-        .take(1)
-        .subscribe((messages: P2PMessageModel[]) => {
-          this.storageService.setToStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId}, messages.concat(newMessage));
-        });
+      this.addP2Pmessage(message);
     });
   }
 
@@ -119,7 +115,15 @@ export class P2pService {
   }
 
   refreshP2P(p2pId: number) {
-    this.storageService.refreshStorage('p2pMessages', this.p2pMessagesFiller, {id: p2pId});
+    this.storageService.refreshStorage('p2p', this.p2pFiller, {id: p2pId});
+  }
+
+  addP2Pmessage(newMessage: P2PMessageModel) {
+    this.storageService.getFromStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId})
+        .take(1)
+        .subscribe((messages: P2PMessageModel[]) => {
+          this.storageService.setToStorage('p2pMessages', this.p2pMessagesFiller, {'id': newMessage.p2pId}, messages.concat(newMessage));
+        });
   }
 
   bookmark(p2p: P2PModel): Observable<P2PModel> {

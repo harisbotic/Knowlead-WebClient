@@ -4,7 +4,6 @@
         <button type="button" class="clearButton fosCloseButton" (click)="removed()">
             <i class="kl-close closeIcon"></i>
         </button>
-        <ngl-rating *ngIf="interest.fos.unlocked" [(rate)]="interest.stars" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small"></ngl-rating>
-        <span *ngIf="!interest.fos.unlocked">{{count}}/100</span>
+        <ngl-rating [(rate)]="interest.stars" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small"></ngl-rating>
     </section>
 </div>

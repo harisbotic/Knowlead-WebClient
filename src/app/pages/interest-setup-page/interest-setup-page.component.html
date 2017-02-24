@@ -4,15 +4,11 @@
             <span class="welcome-title"> Welcome to Knowlead! </span>
         </div>
     </div>
-    <div class="row welcome-text-wrap">
+    <div class="row welcome-text-wrap" *ngIf="user?.interests?.length === 0">
         <div class="col-100">
-            <span class="welcome-text" *ngIf="!isVoting && user?.interests?.length === 0">
+            <span class="welcome-text">
                 Thank you for joining and helping us spread knowledge across the world.
                 You're one step away from completing your registration.
-            </span>
-            <span class="welcome-text" *ngIf="isVoting">
-                Didn't find anything that you are interested in? <br>
-                Vote for it here and it will be unlocked as soon as the requirement is met.
             </span>
         </div>
     </div>
@@ -46,11 +42,10 @@
                         <div class="row">
                             <div class="col-100 myChoices-title-wrap posRel">
                                 <div class="myChoices-title">
-                                     {{isVoting ? 'My Votes' : 'My Choices'}}
+                                     My choices
                                      <i class="kl-info moreInfo tooltip-parent">
                                          <span class="tooltip-right tooltip-175">
-                                             {{!isVoting ? 'After choosing subjects, please specify your level of interest with stars.'
-                                                : 'Once the number of votes required is met we will unlock the subject.'}}
+                                             'After choosing subjects, please specify your level of interest with stars.'
                                          </span>
                                      </i>
                                  </div>
@@ -70,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-100 suggest-field-wrap">
-                <button class="clearButton suggestLink" appFeedbackForm *ngIf="isVoting">
+                <button class="clearButton suggestLink" appFeedbackForm>
                     <div class="suggestField-text"> <i class="kl-plus" app-feedback-form></i> Suggest Field</div>
                 </button>
             </div>
@@ -80,10 +75,10 @@
                 <a class="left-button-wrap" [routerLink]="backUrl">
                     <button class="defaultButton" id="backToStepOne-button"> Back </button>
                 </a>
-                <div class="slider firstSlider" *ngIf="!isVoting"></div>
-                <div class="slider secondSlider" *ngIf="!isVoting"></div>
+                <div class="slider firstSlider"></div>
+                <div class="slider secondSlider"></div>
                 <div class="right-button-wrap">
-                    <button class="defaultButton" id="finish-button" (click)="submit()"> Next </button>
+                    <button class="defaultButton" id="finish-button" (click)="submit()"> Finish </button>
                 </div>
             </div>
         </div>

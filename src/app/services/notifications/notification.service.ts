@@ -10,6 +10,7 @@ import { ModelUtilsService } from '../model-utils.service';
 import { Subscription } from 'rxjs';
 import { NotificationSource } from './notification.source';
 import { P2pService } from '../p2p.service';
+import { RealtimeService } from '../realtime.service';
 
 @Injectable()
 export class NotificationService {
@@ -22,6 +23,7 @@ export class NotificationService {
               public userNotificationsService: UserNotificationsService,
               // WHEN ADDING NEW SOURCE DON'T FORGET TO RESET IT ON LOG OUT
               protected sessionService: SessionService,
+              public realtimeService: RealtimeService,
               protected p2pService: P2pService,
               protected modelUtilsService: ModelUtilsService) {
     this.resetSources();
@@ -31,6 +33,9 @@ export class NotificationService {
       } else if (evt === SessionEvent.LOGGED_IN) {
         this.startSources();
       }
+    });
+    this.realtimeService.notificationSubject.subscribe((notification) => {
+      this.receiveNotification(notification);
     });
   }
 
@@ -52,12 +57,6 @@ export class NotificationService {
     if (this.subscriptions[notification.notificationId]) {
       console.error('Received duplicate notification: ' + notification.notificationId);
       return;
-    }
-
-    // TODO: MAKE THIS CLEANER
-    console.log(notification);
-    if (notification.p2pId) {
-      this.p2pService.refreshP2P(notification.p2pId);
     }
 
     const tmp = this.getSource(notification);
