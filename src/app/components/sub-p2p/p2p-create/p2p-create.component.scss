@@ -95,3 +95,19 @@ ng-select > div {
     padding: 0;
     height: 30px;
 }
+
+.popUpPostButton {
+    width: 130px;
+    height: 30px;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $knowlead-secondary;
+    color: white;
+    font-weight: bold;
+    padding-right: 10px;
+    outline: none;
+
+    &:hover {
+        background-color: transparentize($knowlead-secondary, 0.2);
+    }
+}

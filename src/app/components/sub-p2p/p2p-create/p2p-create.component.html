@@ -135,10 +135,13 @@
 <!-- 100 -->
 <ngl-modal [(open)]="confirmationOpened">
   <div body>
-      Please note:  this field is not yet popular among the users, so you may not get the response. Do you still want to proceed?
+      <div class="row betaNote">
+          <span class="pleaseNote"> Please note:</span> This field is not yet popular among the users, so you may have to wait some time or you may not get the response at all. However, we encourage you to post it.<br><br>
+          Do you still want to proceed?
+      </div>
   </div>
   <template ngl-modal-footer>
-    <button class="" (click)="confirmationOpened=false">Cancel</button>
-    <button class="" (click)="onSubmit();confirmationOpened=false" type="button">Post anyway</button>
+    <button class="defaultCloseButton" (click)="confirmationOpened=false">Cancel</button>
+    <button class="popUpPostButton" (click)="onSubmit();confirmationOpened=false" type="button">Post</button>
   </template>
 </ngl-modal>

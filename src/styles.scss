@@ -343,6 +343,13 @@ ngl-rating {
     outline: none;
 }
 
+.pleaseNote {
+    padding: 3px;
+    border-radius: 3px;
+    background-color: $knowlead-secondary;
+    color: white;
+}
+
 ///////////////////////////////////////////////////////////
 // CHECKBOX CLASSES ///////////////////////////////////////
 ///////////////////////////////////////////////////////////
@@ -573,6 +580,21 @@ ngl-rating {
 
     &:hover {
         background-color: transparentize($knowlead-primary, 0.1)
+    }
+}
+
+.defaultCloseButton {
+    width: 100px;
+    height: 30px;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $hover-middle-color;
+    font-weight: bold;
+    padding-left: 10px;
+    outline: none;
+
+    &:hover {
+        background-color: $hover-dark-color;
     }
 }
 
