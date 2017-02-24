@@ -130,6 +130,32 @@
     }
 }
 
+.tooltip-counter {
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    bottom: 60%;
+    left: 200%;
+    transform: translateY(50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: 50%;
+        left: -4px;
+        transform: translateY(-50%) rotate(45deg);
+    }
+}
+
 
 .tooltip-postInfo {
     display: none;
@@ -363,6 +389,15 @@ ngl-rating {
     // &:disabled {
     //     background-color: $disabled-color;
     // }
+}
+
+.headerMainButtons {
+    padding: 5px;
+
+    &:hover {
+        background-color: $button-header-hover-color;
+        border-radius: $border-radius;
+    }
 }
 
 .postButton {

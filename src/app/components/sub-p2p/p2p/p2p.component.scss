@@ -176,8 +176,10 @@
     .bookmarkCounter {
         float: left;
         margin-top: 1px;
-        margin-left: 12px;
-        color: $font-secondary-color;    }
+        margin-left: 15px;
+        color: $font-secondary-color;
+        cursor: default;
+    }
 }
 
 .scheduledInfo-wrap {

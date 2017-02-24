@@ -176,13 +176,19 @@
                             <div class="col-25" *ngIf="p2p.canBookmark">
                                 <div class="bottomElementsButton-wrap">
                                     <i class="kl-bookmark bookmark-icon"></i>
-                                    <a class="bookmarkButton-link">
+                                    <a class="bookmarkButton-link tooltip-parent">
                                         <button class="clearButton postViewBookmarkButton" (click)="bookmark()">
                                             {{(p2p.didBookmark) ? 'Bookmarked' : 'Bookmark'}}
                                         </button>
+                                        <span class="tooltip-top tooltip-150">
+                                            Bookmark post so you can respond to it later.
+                                        </span>
                                     </a>
-                                    <div class="bookmarkCounter">
+                                    <div class="bookmarkCounter tooltip-parent">
                                         {{p2p.bookmarkCount}}
+                                        <span class="tooltip-counter tooltip-150">
+                                            Number of bookmarks by other users.
+                                        </span>
                                     </div>
                                 </div>
                             </div>
