@@ -1,9 +1,46 @@
 <ngl-modal [(open)]="opened" (openChange)="doClose()">
   <div body>
-    notebook edit component
+    <div class="row">
+        <div class="notebookForm-wrap">
+            <form [formGroup]="form" (ngSubmit)="{}">
+
+                <div class="row">
+                    <div class="notebookTitleInput-wrap">
+                        <div class="notebookHeadline">Notebook Title</div>
+                        <input name="name" formControlName="name" placeholder="Notebook Title" type="text" class="notebookTitleInput">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="colors-wrap">
+                        <div class="col-50">
+                            <div class="primaryColor">Primary:
+                                <!--<div class="color-picker" [(colorPicker)]="primaryColor" (colorPickerChange)="reapply()" [style.background-color]="primaryColor"></div>-->
+                                <input type="color" formControlName="primaryColor">
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="secondaryColor">Secondary:
+                                <!--<div class="color-picker" [(colorPicker)]="secondaryColor" (colorPickerChange)="reapply()" [style.background-color]="secondaryColor">-->
+                                <input type="color" formControlName="secondaryColor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-single-notebook [notebook]="getValue()" class="previewNotebook"></app-single-notebook>
+
+                <div class="row">
+                    <div class="notebookText-wrap">
+                        <textarea name="markdown" placeholder="Notebook Content..." formControlName="markdown" class="notebookText"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
   </div>
   <template ngl-modal-footer *ngIf="!noFooter">
-    <button class="" (click)="doClose();">Cancel</button>
-    <button class="" (click)="doClose();">Save</button>
+    <button class="notebookCloseButton" (click)="doClose();">Cancel</button>
+    <button class="notebookSaveButton" (click)="doClose();" type="button">Save and close</button>
   </template>
 </ngl-modal>

@@ -2,7 +2,14 @@
 <div class="row">
     <div class="col-100">
         <div class="notebookList-container">
-            <div class="notebookList-title">Notebooks <i class="kl-info notebook-info"></i></div>
+            <div class="notebookList-title">
+                Notebooks
+                <i class="kl-info notebook-info tooltip-parent">
+                    <span class="tooltip-counter tooltip-200">
+                        Private notebooks where you can write whatever you want both during the peer-to-peer session and also here.
+                    </span>
+                </i>
+            </div>
             <app-notebook-list [inLibrary]="true"></app-notebook-list>
         </div>
     </div>
