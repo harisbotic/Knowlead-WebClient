@@ -149,6 +149,11 @@ export class P2pComponent extends BaseFormComponent<P2PFeedbackModel> implements
     this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
       this.modalOpened = params['feedback'] === 'true';
     }));
+    this.subscriptions.push(this.p2pService.getMessages(this.p2pId).subscribe(messages => {
+      if (messages.length > 0) {
+        this.discussionOpened = true;
+      }
+    }))
   }
 
   bookmark() {
