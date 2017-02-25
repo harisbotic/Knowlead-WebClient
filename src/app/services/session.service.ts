@@ -9,6 +9,7 @@ import { urlFormEncode } from './../utils/index';
 import { responseToLoginResponse, loginResponseToResponseModel } from './../utils/converters';
 import { LoginUserModel, LoginResponse } from '../models/frontend.models';
 import { parseJwt } from '../utils/index';
+import { Router } from '@angular/router';
 
 export enum SessionEvent {
   LOGGED_IN,
@@ -31,7 +32,7 @@ export class SessionService {
     return this.injector.get(Http);
   }
 
-  constructor(protected injector: Injector) {
+  constructor(protected injector: Injector, protected router: Router) {
     this.eventStream.subscribe(val => {
       if (val !== undefined) {
         this.lastEvent = val;
@@ -99,6 +100,7 @@ export class SessionService {
       this.storageService.setAccessToken(login.access_token, login.refresh_token, true);
       this.emitLogin();
       subject.next(login);
+      this.router.navigate(['/home']);
     }, (errorResponse: any) => {
       let error: ResponseModel = errorResponse;
       if (errorResponse.error != null) {
