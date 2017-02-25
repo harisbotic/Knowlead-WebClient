@@ -132,7 +132,9 @@ export class StorageSubject<T> extends Observable<T> {
 
     public handleLogout() {
         if (STORAGE_CONFIG[this.key].clearOnLogout) {
-            this.changeValue(undefined);
+            Observable.timer(0).take(1).subscribe(() => {
+                this.changeValue(undefined);
+            });
         }
     }
 
