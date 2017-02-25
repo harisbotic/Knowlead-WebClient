@@ -13,6 +13,7 @@ import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
 import { P2P_ALL } from '../utils/urls';
 import { AnalyticsService } from './analytics.service';
+import { RealtimeService } from './realtime.service';
 
 @Injectable()
 export class P2pService {
@@ -28,12 +29,30 @@ export class P2pService {
     return this.injector.get(AnalyticsService);
   }
 
+  get realtimeService(): RealtimeService {
+    return this.injector.get(RealtimeService);
+  }
+
   constructor(
     protected http: Http,
     protected storageService: StorageService,
     protected injector: Injector) {
     this.p2pFiller = this.modelUtilsService.fillP2p.bind(this.modelUtilsService);
     this.p2pMessagesFiller = this.modelUtilsService.fillP2pMessages.bind(this.modelUtilsService);
+
+    this.realtimeService.notificationSubject.subscribe(notification => {
+      if (notification.p2pMessageId != null) {
+        if (notification.p2pMessage) {
+          this.addP2Pmessage(notification.p2pMessage);
+        } else {
+          console.warn('P2P message not filled, refreshing notifications');
+          this.refreshP2Pmessages(notification.p2pId);
+        }
+      }
+      if (notification.p2pId != null && notification.p2pMessageId == null) {
+        this.refreshP2P(notification.p2pId);
+      }
+    });
   }
 
   create(value: P2PModel): Observable<P2PModel> {

@@ -80,12 +80,7 @@ export class NotificationService {
   }
 
   getSource(notification: NotificationModel): NotificationSource {
-    if (notification.notificationType === NotificationTypes.newP2PComment) {
-      return this.userNotificationsService;
-    } else {
-      console.error('Unsupported notification type');
-      return undefined;
-    }
+    return this.userNotificationsService;
   }
 
   setCallback(notificationComponent: NotificationsComponent) {

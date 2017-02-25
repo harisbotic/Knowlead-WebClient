@@ -97,8 +97,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
   }
 
   submit() {
-    console.log('SUBMIT');
-    this.subscriptions.push(this.p2pService.message(this.getValue()).subscribe(() => {
+    this.subscriptions.push(this.p2pService.message(this.getValue()).delay(100).subscribe(() => {
       this.restartForm();
     }, (err) => {
       this.notificationService.error('Error posting message', err);
@@ -122,16 +121,6 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
       this.user = user;
       this.refresh();
-    }));
-    this.subscriptions.push(this.realtimeService.notificationSubject.subscribe(notification => {
-      if (notification.p2pMessageId !== undefined && notification.fromApplicationUserId === this.thread.withId) {
-        if (notification.p2pMessage) {
-          this.p2pService.addP2Pmessage(notification.p2pMessage);
-        } else {
-          console.warn('P2P message not filled, refreshing notifications');
-          this.p2pService.refreshP2Pmessages(this.thread.p2p.p2pId);
-        }
-      }
     }));
   }
 
