@@ -12,7 +12,7 @@ import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
 import { P2P_ALL } from '../utils/urls';
-import { AnalyticsService } from './analytics.service';
+import { AnalyticsService, AnalyticsEventType } from './analytics.service';
 import { RealtimeService } from './realtime.service';
 
 @Injectable()
@@ -60,7 +60,7 @@ export class P2pService {
     return this.modifyP2p(this.http.post(P2P_NEW, tmp)
         .map(responseToResponseModel)
         .map(o => o.object)
-        .do((val) => this.analyticsService.sendEvent('p2pCreate', val.fos.code, val.initialPrice)));
+        .do((val: P2PModel) => this.sendFosEvent(val, 'p2pCreate', val.initialPrice)));
   }
 
   getAll(): Observable<P2PModel[]> {
@@ -102,11 +102,17 @@ export class P2pService {
         }));
   }
 
+  private sendFosEvent(val: P2PModel, event: AnalyticsEventType, value?: number) {
+    this.storageService.getFosById(val.fosId).take(1).subscribe(fos =>
+      this.analyticsService.sendEvent(event, fos.code, value)
+    );
+  }
+
   delete(p2p: P2PModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.delete(P2P_DELETE + '/' + p2p.p2pId)
       .map(responseToResponseModel)
       .map(v => v.object)
-      .do(p => this.analyticsService.sendEvent('p2pDelete', p.fos.code)));
+      .do(val => this.sendFosEvent(val, 'p2pDelete')));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
@@ -123,7 +129,7 @@ export class P2pService {
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
       this.addP2Pmessage(newMessage);
-      this.analyticsService.sendEvent('p2pRespond');
+      this.analyticsService.sendEvent('p2pRespond', undefined, newMessage.priceOffer);
     });
   }
 
