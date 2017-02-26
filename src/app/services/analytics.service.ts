@@ -77,7 +77,7 @@ export class AnalyticsService {
     });
   }
 
-  public sendEvent(action: EventType, label?: any, value?: any) {
+  public sendEvent(action: AnalyticsEventType, label?: any, value?: any) {
     if (action === 'login') {
       if (this.lastLogin === this.user.id) {
         return;

@@ -16,6 +16,22 @@ import { SpecialProfilePictures } from '../models/frontend.constants';
 @Injectable()
 export class ModelUtilsService {
 
+  public static getOtherUserIdInP2P(p2p: P2PModel, myId: Guid): Guid {
+    if (p2p.createdById === myId) {
+      return p2p.scheduledWithId;
+    } else {
+      return p2p.createdById;
+    }
+  }
+
+  public static getOtherUserInP2P(p2p: P2PModel, myId: Guid): ApplicationUserModel {
+    if (p2p.createdById === myId) {
+      return p2p.scheduledWith;
+    } else {
+      return p2p.createdBy;
+    }
+  }
+
   public static getOtherUserIdInP2PMessage(message: P2PMessageModel, myId: Guid): Guid {
     if (message.messageFromId === myId) {
       return message.messageToId;

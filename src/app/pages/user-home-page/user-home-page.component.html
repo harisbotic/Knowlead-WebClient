@@ -198,20 +198,20 @@
                                         <div class="row">
                                             <div class="col-25">
                                                 <div class="profileImage-wrap">
-                                                    <a routerLink="{{event.scheduledWith | userProfileLink}}" class="profile-link">
-                                                        <app-profile-picture [user]="event.scheduledWith" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
+                                                    <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}" class="profile-link">
+                                                        <app-profile-picture [user]="otherUser(event, user?.id)" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="col-50">
                                                 <div class="row">
                                                     <div class="withUser-name">
-                                                        <a routerLink="{{event.scheduledWith | userProfileLink}}">{{event.scheduledWith | fullName}}</a>
+                                                        <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="withUser-stars">
-                                                        <ngl-rating [rate]="event.scheduledWith?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                                        <ngl-rating [rate]="otherUser(event, user?.id)?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,7 +238,7 @@
                                             <div class="otherEventsInfo-wrap">
                                                 <span class="otherEventsInfo-subject">{{event.fos?.name}}</span>
                                                 <span class="otherEventsInfo-text">with</span>
-                                                <span class="otherEventsInfo-with"><a routerLink="{{event.scheduledWith | userProfileLink}}">{{event.scheduledWith | fullName}}</a></span>
+                                                <span class="otherEventsInfo-with"><a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a></span>
                                             </div>
                                         </div>
                                     </div>
