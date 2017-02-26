@@ -57,8 +57,10 @@ export class P2pService {
 
   create(value: P2PModel): Observable<P2PModel> {
     let tmp = _(value).omitBy(_.isNull).value();
-    return this.modifyP2p(this.http.post(P2P_NEW, tmp).map(responseToResponseModel).map(o => o.object))
-      .do((val) => this.analyticsService.sendEvent('p2pCreate', val.fos.code, val.initialPrice));
+    return this.modifyP2p(this.http.post(P2P_NEW, tmp)
+        .map(responseToResponseModel)
+        .map(o => o.object)
+        .do((val) => this.analyticsService.sendEvent('p2pCreate', val.fos.code, val.initialPrice)));
   }
 
   getAll(): Observable<P2PModel[]> {
@@ -103,8 +105,8 @@ export class P2pService {
   delete(p2p: P2PModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.delete(P2P_DELETE + '/' + p2p.p2pId)
       .map(responseToResponseModel)
-      .map(v => v.object))
-      .do(p => this.analyticsService.sendEvent('p2pDelete', p.fos.code));
+      .map(v => v.object)
+      .do(p => this.analyticsService.sendEvent('p2pDelete', p.fos.code)));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
@@ -132,17 +134,17 @@ export class P2pService {
   schedule(message: P2PMessageModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.post(P2P_SCHEDULE + '/' + message.p2pMessageId, {})
        .map(responseToResponseModel)
-       .map(v => v.object))
+       .map(v => v.object)
        .do(obj => {
          this.analyticsService.sendEvent('p2pSchedule', undefined, obj.priceAgreed);
-       });
+       }));
   }
 
   acceptOffer(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.modifyP2pMessage(this.http.post(P2P_ACCEPT_OFFER + '/' + message.p2pMessageId, {})
         .map(responseToResponseModel)
-        .map(v => v.object))
-        .do(() => this.analyticsService.sendEvent('p2pRespond', undefined, message.priceOffer));
+        .map(v => v.object)
+        .do(() => this.analyticsService.sendEvent('p2pRespond', undefined, message.priceOffer)));
   }
 
   refreshP2P(p2pId: number) {
