@@ -77,16 +77,55 @@ export class AccountService {
   }
 
   public changeProfilePicture(image: ImageBlobModel): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {}))
-      .do(() => this.analyticsService.sendEvent('changeProfilePicture', 'set'));
+    return this.http.post(CHANGE_PROFILE_PICTURE + '/' + image.blobId, {})
+      .map(responseToResponseModel)
+      .map(v => v.object)
+      .do(() => this.updatePictureInStorage(image));
+  }
+
+  protected updatePictureInStorage(blob: ImageBlobModel) {
+    const f = (user: ApplicationUserModel): ApplicationUserModel => {
+      if (!user) {
+        return user;
+      }
+      if (blob) {
+        user.profilePictureId = blob.blobId;
+        user.profilePicture = blob;
+      } else {
+        user.profilePictureId = undefined;
+        user.profilePicture = undefined;
+      }
+      return user;
+    };
+    this.analyticsService.sendEvent('changeProfilePicture', (blob) ? 'set' : 'reset');
+    this.storageService.modifyStorage<ApplicationUserModel>('user', this.userFiller, null, f);
+    this.currentUser().take(1).subscribe(user => {
+      this.storageService.modifyStorage<ApplicationUserModel>('otherUser', this.userFiller, {id: user.id, includeDetails: false}, f);
+      this.storageService.modifyStorage<ApplicationUserModel>('otherUser', this.userFiller, {id: user.id, includeDetails: true}, f);
+    });
   }
 
   public removeProfilePicture(): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.delete(REMOVE_PROFILE_PICTURE))
-      .do(() => this.analyticsService.sendEvent('changeProfilePicture', 'remove'));
+    return this.http.delete(REMOVE_PROFILE_PICTURE)
+      .map(responseToResponseModel)
+      .map(v => v.object)
+      .do(() => this.updatePictureInStorage(undefined));
   }
 
-  protected doPatch(input: Observable<Response>): Observable<ApplicationUserModel> {
+  protected updateUser(user: ApplicationUserModel, includeDetails: boolean) {
+    if (user) {
+      this.storageService.setToStorage('user', this.userFiller, null, user);
+      this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
+      if (includeDetails) {
+        this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: true}, user);
+      }
+    } else {
+      console.error('No object in user patch response');
+    }
+    this.analyticsService.sendEvent('changeInfo');
+  }
+
+  protected doPatch(input: Observable<Response>, includesDetails: boolean): Observable<ApplicationUserModel> {
     return input
       .map(responseToResponseModel)
       .map(response => response.object)
@@ -94,19 +133,12 @@ export class AccountService {
         this.sessionService.invalidateAccessToken();
       })
       .do((user: ApplicationUserModel) => {
-        if (user) {
-          this.storageService.setToStorage('user', this.userFiller, null, user);
-          this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: true}, user);
-          this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
-        } else {
-          console.error('No object in user patch response');
-        }
-        this.analyticsService.sendEvent('changeInfo');
+        this.updateUser(user, includesDetails);
       });
   }
 
   public patchUser(patch: fastjsonpatch.Patch[]): Observable<ApplicationUserModel> {
-    return this.doPatch(this.http.post(USER_DETAILS, patch));
+    return this.doPatch(this.http.post(USER_DETAILS, patch), true);
   }
 
   private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {
