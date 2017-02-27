@@ -76,7 +76,7 @@ export class StorageSubject<T> extends Observable<T> {
         if (this.filler && newValue) {
             this.fetching = true;
             this.fillerSubscription = this.filler(newValue).finally(() => this.fetching = false).subscribe(filledValue => {
-                this.setValue(newValue);
+                this.setValue(filledValue);
             });
         } else {
             this.setValue(newValue);
@@ -132,13 +132,15 @@ export class StorageSubject<T> extends Observable<T> {
 
     public handleLogout() {
         if (STORAGE_CONFIG[this.key].clearOnLogout) {
-            this.changeValue(undefined);
+            Observable.timer(0).take(1).subscribe(() => {
+                this.changeValue(undefined);
+            });
         }
     }
 
     public modifyWithFunction(func: (oldValue: T) => T) {
         if (this.value != null) {
-            this.changeValue(func(this.value));
+            this.changeValue(func(_.cloneDeep(this.value)));
         }
     }
 }

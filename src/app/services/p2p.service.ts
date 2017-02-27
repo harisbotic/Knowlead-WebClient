@@ -12,7 +12,8 @@ import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
 import { P2P_ALL } from '../utils/urls';
-import { AnalyticsService } from './analytics.service';
+import { AnalyticsService, AnalyticsEventType } from './analytics.service';
+import { RealtimeService } from './realtime.service';
 
 @Injectable()
 export class P2pService {
@@ -28,18 +29,38 @@ export class P2pService {
     return this.injector.get(AnalyticsService);
   }
 
+  get realtimeService(): RealtimeService {
+    return this.injector.get(RealtimeService);
+  }
+
   constructor(
     protected http: Http,
     protected storageService: StorageService,
     protected injector: Injector) {
     this.p2pFiller = this.modelUtilsService.fillP2p.bind(this.modelUtilsService);
     this.p2pMessagesFiller = this.modelUtilsService.fillP2pMessages.bind(this.modelUtilsService);
+
+    this.realtimeService.notificationSubject.subscribe(notification => {
+      if (notification.p2pMessageId != null) {
+        if (notification.p2pMessage) {
+          this.addP2Pmessage(notification.p2pMessage);
+        } else {
+          console.warn('P2P message not filled, refreshing notifications');
+          this.refreshP2Pmessages(notification.p2pId);
+        }
+      }
+      if (notification.p2pId != null && notification.p2pMessageId == null) {
+        this.refreshP2P(notification.p2pId);
+      }
+    });
   }
 
   create(value: P2PModel): Observable<P2PModel> {
     let tmp = _(value).omitBy(_.isNull).value();
-    return this.modifyP2p(this.http.post(P2P_NEW, tmp).map(responseToResponseModel).map(o => o.object))
-      .do((val) => this.analyticsService.sendEvent('p2pCreate', val.fos.code, val.initialPrice));
+    return this.modifyP2p(this.http.post(P2P_NEW, tmp)
+        .map(responseToResponseModel)
+        .map(o => o.object)
+        .do((val: P2PModel) => this.sendFosEvent(val, 'p2pCreate', val.initialPrice)));
   }
 
   getAll(): Observable<P2PModel[]> {
@@ -81,11 +102,17 @@ export class P2pService {
         }));
   }
 
+  private sendFosEvent(val: P2PModel, event: AnalyticsEventType, value?: number) {
+    this.storageService.getFosById(val.fosId).take(1).subscribe(fos =>
+      this.analyticsService.sendEvent(event, fos.code, value)
+    );
+  }
+
   delete(p2p: P2PModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.delete(P2P_DELETE + '/' + p2p.p2pId)
       .map(responseToResponseModel)
-      .map(v => v.object))
-      .do(p => this.analyticsService.sendEvent('p2pDelete', p.fos.code));
+      .map(v => v.object)
+      .do(val => this.sendFosEvent(val, 'p2pDelete')));
   }
 
   get(id: number | P2PModel): Observable<P2PModel> {
@@ -102,7 +129,7 @@ export class P2pService {
   message(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.http.post(P2P_MESSAGE, message).map(responseToResponseModel).map(v => v.object).do((newMessage: P2PMessageModel) => {
       this.addP2Pmessage(newMessage);
-      this.analyticsService.sendEvent('p2pRespond');
+      this.analyticsService.sendEvent('p2pRespond', undefined, newMessage.priceOffer);
     });
   }
 
@@ -113,17 +140,17 @@ export class P2pService {
   schedule(message: P2PMessageModel): Observable<P2PModel> {
     return this.modifyP2p(this.http.post(P2P_SCHEDULE + '/' + message.p2pMessageId, {})
        .map(responseToResponseModel)
-       .map(v => v.object))
+       .map(v => v.object)
        .do(obj => {
          this.analyticsService.sendEvent('p2pSchedule', undefined, obj.priceAgreed);
-       });
+       }));
   }
 
   acceptOffer(message: P2PMessageModel): Observable<P2PMessageModel> {
     return this.modifyP2pMessage(this.http.post(P2P_ACCEPT_OFFER + '/' + message.p2pMessageId, {})
         .map(responseToResponseModel)
-        .map(v => v.object))
-        .do(() => this.analyticsService.sendEvent('p2pRespond', undefined, message.priceOffer));
+        .map(v => v.object)
+        .do(() => this.analyticsService.sendEvent('p2pRespond', undefined, message.priceOffer)));
   }
 
   refreshP2P(p2pId: number) {

@@ -7,7 +7,7 @@ import { ApplicationUserModel, PlatformFeedbackModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { Observable } from 'rxjs';
 
-type EventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
+export type AnalyticsEventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
   | 'p2pRespond' | 'p2pDelete' | 'p2pSchedule' | 'p2pBookmark' | 'changeInfo' | 'searchRequest' | 'changeProfilePicture' | 'changeNotebook'
   | 'addNotebook' | 'callStop' | 'callStart' | 'callDisconnect' | 'callRespond' | 'callMsg' | 'claimReward';
 
@@ -77,7 +77,7 @@ export class AnalyticsService {
     });
   }
 
-  public sendEvent(action: EventType, label?: any, value?: any) {
+  public sendEvent(action: AnalyticsEventType, label?: any, value?: any) {
     if (action === 'login') {
       if (this.lastLogin === this.user.id) {
         return;

@@ -17,6 +17,10 @@
     text-transform: uppercase;
 }
 
+.disabled {
+    opacity: 0.3;
+}
+
 .header-title {
     color: $font-secondary-color;
 }

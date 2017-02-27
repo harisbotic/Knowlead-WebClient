@@ -1,4 +1,4 @@
-<span [popover]="popover" class="icon">
+<span [popover]="popover" class="icon" [class.disabled]="!notificationSource">
     <i [class]="iconClass"></i>
     <span class="unread-bedge" *ngIf="stats?.unread > 0">{{Math.min(stats.unread, 99)}}</span>
 </span>
