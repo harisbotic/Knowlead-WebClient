@@ -31,7 +31,7 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
     if (!this.user) {
       return;
     }
-    let p2ps = [];
+    let p2ps: P2PModel[] = [];
     for (let key of Object.keys(this.storageService.cache)) {
       const storage: StorageSubject<P2PModel> = this.storageService.cache[key];
       if (storage.key === 'p2p' &&
@@ -42,15 +42,24 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
         p2ps.push(storage.value);
       }
     }
-    p2ps.sort(sortByDateFunction<P2PModel>('dateTimeAgreed', true));
+    p2ps.sort((a, b) => {
+      try {
+        const now = new Date().getTime();
+        return Math.abs(a.dateTimeAgreed.getTime() - now) -
+          Math.abs(b.dateTimeAgreed.getTime() - now);
+      } catch (e) {
+        return 0;
+      }
+    });
     return p2ps.filter((val, idx) => idx < 3);
   }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.user = user));
-    this.subscriptions.push(this.p2pService.getFiltered(ListP2PsRequest.Scheduled).subscribe());
-    this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
-      this.upcoming = this.getUpcoming();
+    this.subscriptions.push(this.p2pService.getFiltered(ListP2PsRequest.Scheduled).subscribe(() => {
+      this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
+        this.upcoming = this.getUpcoming();
+      }));
     }));
   }
 
