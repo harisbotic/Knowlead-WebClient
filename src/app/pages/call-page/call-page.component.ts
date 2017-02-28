@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { CallEndReasons } from '../../models/constants';
 import { NotificationService } from '../../services/notifications/notification.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-call-page',
@@ -30,6 +31,11 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
 
   useMic = true;
   useCam = true;
+
+  startTime: Date;
+  duration = 0;
+
+  Math = Math;
 
   get initiator(): boolean {
     if (!this.call || !this.user) {
@@ -56,23 +62,27 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     video.play();
   }
 
+  refreshStreamMuting() {
+    for (let track of this.myStream.getVideoTracks()) {
+      track.enabled = this.useCam;
+    }
+    for (let track of this.myStream.getAudioTracks()) {
+      track.enabled = this.useMic;
+    }
+    this.myVideo.nativeElement.muted = true;
+  }
+
   toggleCamera() {
     if (this.call) {
       this.useCam = !this.useCam;
-      for (let track of this.myStream.getVideoTracks()) {
-        track.enabled = this.useCam;
-      }
-      this.myVideo.nativeElement.muted = true;
+      this.refreshStreamMuting();
     }
   }
 
   toggleMic() {
     if (this.call) {
       this.useMic = !this.useMic;
-      for (let track of this.myStream.getAudioTracks()) {
-        track.enabled = this.useMic;
-      }
-      this.myVideo.nativeElement.muted = true;
+      this.refreshStreamMuting();
     }
   }
 
@@ -90,6 +100,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       this.myStream = myStream;
       this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
       this.myVideo.nativeElement.muted = true;
+      this.refreshStreamMuting();
       this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
       console.debug('Peer initialized');
       this.peer.on('signal', (data) => {
@@ -152,6 +163,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   }
 
   ngOnInit() {
+    this.startTime = new Date();
     this.subscriptions.push(this.realtimeService.callErrorSubject.subscribe(err => {
       this.router.navigate(['/']);
       this.notificationService.error('There was an error with this call');
@@ -159,14 +171,13 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     this.subscriptions.push(this.realtimeService.connectionStateSubject.filter(val => val).subscribe(() => {
       this.subscriptions.push(this.route.params.subscribe((params) => {
         this.realtimeService.resetCall(params['id']);
-        // this.realtimeService.getCallUpdate(params['id']).then(call => {
-        //   this.call = call;
-        //   this.initPeer();
-        // });
         this.accountService.currentUser().subscribe((user) => {
           this.user = user;
         });
         this.subscriptions.push(this.realtimeService.callModelUpdateSubject.subscribe((call) => {
+          if (call.call) {
+            this.startTime = call.call.startDate;
+          }
           if (call.type === CallEventType.CALL_RESET) {
             this.call = call.call;
             this.cleanup();
@@ -175,18 +186,17 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
             this.call = call.call;
             this.setOtherSDP();
           } else if (call.type === CallEventType.CALL_END) {
-            // if (ModelUtilsService.isCallP2p(this.call)) {
-            //   this.router.navigate(['/p2p/', this.call.p2pId]);
-            // } else {
-              delete this.call;
-              this.router.navigate(['/']);
-            // }
+            delete this.call;
+            this.router.navigate(['/']);
             this.notificationService.info('Call has ended ...', call.reason);
           }
         }));
       }));
     }));
     this.notificationService.hideHeader();
+    Observable.timer(1000, 1000).subscribe(() => {
+      this.duration = new Date().getTime() - this.startTime.getTime();
+    });
   }
 
   ngOnDestroy() {

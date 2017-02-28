@@ -1,3 +1,4 @@
+import {ModelUtilsService} from './model-utils.service';
 import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
@@ -59,8 +60,9 @@ export class RealtimeService {
 
       // CALL STUFF
       this.rpcConnection.on('callInvitation', (call: _CallModel) => {
-        call = this.parseIfString(call);
-        this.callInvitations.next(call);
+        this.modelUtilsService.fillCall(this.parseIfString(call)).subscribe(filled =>
+          this.callInvitations.next(filled)
+        );
       });
       this.rpcConnection.on('startCall', (call: _CallModel) => {
         console.debug('STARTING CALL');
@@ -69,13 +71,16 @@ export class RealtimeService {
       });
       this.rpcConnection.on('callModelUpdate', (value: _CallModel) => {
         console.debug('NEW CALL MODEL');
-        value = this.parseIfString(value);
-        this.callModelUpdateSubject.next({type: CallEventType.CALL_UPDATE, call: value});
+        this.modelUtilsService.fillCall(this.parseIfString(value)).subscribe(call =>
+          this.callModelUpdateSubject.next({type: CallEventType.CALL_UPDATE, call: call})
+        );
       });
       this.rpcConnection.on('callReset', (value: _CallModel) => {
         console.debug('CALL RESET');
         value = this.parseIfString(value);
-        this.callModelUpdateSubject.next({type: CallEventType.CALL_RESET, call: value});
+        this.modelUtilsService.fillCall(this.parseIfString(value)).subscribe(call =>
+          this.callModelUpdateSubject.next({type: CallEventType.CALL_RESET, call: call})
+        );
       });
       this.rpcConnection.on('stopCall', (reason: string) => {
         this.callModelUpdateSubject.next({type: CallEventType.CALL_END, call: null, reason: reason});
@@ -156,7 +161,8 @@ export class RealtimeService {
   constructor(protected storageService: StorageService,
               protected sessionService: SessionService,
               protected router: Router,
-              protected analyticsService: AnalyticsService) {
+              protected analyticsService: AnalyticsService,
+              protected modelUtilsService: ModelUtilsService) {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
         if (this.rpcConnection) {

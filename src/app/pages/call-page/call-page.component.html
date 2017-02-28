@@ -9,7 +9,11 @@
                 <i class="kl-logo-short"></i>
             </div>
             <div class="timer-wrap">
-                <span class="timer">14:34</span>
+                <span class="timer">
+                  {{Math.floor(duration / (60*60*1000)) | number:'2.0-0'}}:
+                  {{Math.floor(duration / (60*1000) % 24) | number:'2.0-0'}}:
+                  {{Math.floor(duration / (1000) % 60) | number:'2.0-0'}}
+                </span>
             </div>
             <div class="videoButtons-wrap">
                 <button [class.videoButton]="useCam" [class.videoButton-offState]="!useCam" (click)="toggleCamera()">

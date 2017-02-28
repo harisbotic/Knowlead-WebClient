@@ -1,3 +1,4 @@
+import {parseDateIfNecessary} from './../utils/index';
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
 import { P2PMessageModel, P2PModel, ApplicationUserModel, _CallModel,
@@ -161,6 +162,13 @@ export class ModelUtilsService {
     return this.fillArray(values, this.fillNotification.bind(this), 'notificationId');
   }
 
+  public fillCall(call: _CallModel): Observable<_CallModel> {
+    parseDateIfNecessary<_CallModel>(call, 'startDate');
+    parseDateIfNecessary<_CallModel>(call, 'endDate');
+    parseDateIfNecessary<_CallModel>(call, 'inactiveSince');
+    return Observable.of(call);
+  }
+
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: keyof T): Observable<T[]> {
     values = values.filter(val => val != null);
     if (!values || values.length === 0) {
@@ -183,9 +191,7 @@ export class ModelUtilsService {
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
-    if (typeof(value.timestamp) === 'string') {
-      value.timestamp = new Date(Date.parse(value.timestamp));
-    }
+    parseDateIfNecessary<P2PMessageModel>(value, 'timestamp');
     let ret = Observable.of(value);
     ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService));
     ret = this.fill(ret, 'messageFrom', this.accountService.getUserById.bind(this.accountService));
@@ -194,15 +200,9 @@ export class ModelUtilsService {
   }
 
   public fillP2p(value: P2PModel): Observable<P2PModel> {
-    if (typeof(value.dateCreated) === 'string') {
-      value.dateCreated = new Date(Date.parse(value.dateCreated));
-    }
-    if (typeof(value.dateTimeAgreed) === 'string') {
-      value.dateTimeAgreed = new Date(Date.parse(value.dateTimeAgreed));
-    }
-    if (typeof(value.deadline) === 'string') {
-      value.deadline = new Date(Date.parse(value.deadline));
-    }
+    parseDateIfNecessary<P2PModel>(value, 'dateCreated');
+    parseDateIfNecessary<P2PModel>(value, 'dateTimeAgreed');
+    parseDateIfNecessary<P2PModel>(value, 'deadline');
     let ret = Observable.of(value);
     ret = ret.flatMap(p2p => this.storageService.getLanguages().take(1)
       .map((languages: LanguageModel[]) => {
@@ -218,12 +218,8 @@ export class ModelUtilsService {
   }
 
   public fillNotification(value: NotificationModel): Observable<NotificationModel> {
-    if (typeof(value.scheduledAt) === 'string') {
-      value.scheduledAt = new Date(Date.parse(value.scheduledAt));
-    }
-    if (typeof(value.seenAt) === 'string') {
-      value.seenAt = new Date(Date.parse(value.seenAt));
-    }
+    parseDateIfNecessary<NotificationModel>(value, 'seenAt');
+    parseDateIfNecessary<NotificationModel>(value, 'scheduledAt');
     if (value.fromApplicationUserId == null) {
       value.fromApplicationUser = <any>{
         profilePictureId: SpecialProfilePictures.system
@@ -236,9 +232,7 @@ export class ModelUtilsService {
   }
 
   public fillNotebook(value: NotebookModel): Observable<NotebookModel> {
-    if (value.createdAt != null && typeof(value.createdAt) === 'string') {
-      value.createdAt = new Date(Date.parse(value.createdAt));
-    }
+    parseDateIfNecessary<NotebookModel>(value, 'createdAt');
     let ret = Observable.of(value);
     ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
     return ret;
@@ -270,12 +264,8 @@ export class ModelUtilsService {
   }
 
   public fillFriendship(value: FriendshipModel): Observable<FriendshipModel> {
-    if (value.updatedAt != null && typeof(value.updatedAt) === 'string') {
-      value.updatedAt = new Date(Date.parse(value.updatedAt));
-    }
-    if (value.createdAt != null && typeof(value.createdAt) === 'string') {
-      value.createdAt = new Date(Date.parse(value.createdAt));
-    }
+    parseDateIfNecessary<FriendshipModel>(value, 'createdAt');
+    parseDateIfNecessary<FriendshipModel>(value, 'updatedAt');
     let ret = Observable.of(value);
     ret = this.fill(ret, 'applicationUserBigger', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'applicationUserSmaller', this.accountService.getUserById.bind(this.accountService));
