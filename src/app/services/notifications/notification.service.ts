@@ -7,7 +7,7 @@ import { UserNotificationsService } from './user-notifications.service';
 import { NotificationTypes } from '../../models/constants';
 import { SessionService, SessionEvent } from '../session.service';
 import { ModelUtilsService } from '../model-utils.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { NotificationSource } from './notification.source';
 import { P2pService } from '../p2p.service';
 import { RealtimeService } from '../realtime.service';
@@ -16,6 +16,8 @@ import { RealtimeService } from '../realtime.service';
 export class NotificationService {
 
   notificationComponent: NotificationsComponent;
+
+  showHeaderSubject = new BehaviorSubject<boolean>(true);
 
   subscriptions: {[index: string]: Subscription} = {};
 
@@ -68,6 +70,14 @@ export class NotificationService {
         }
       });
     }
+  }
+
+  public showHeader() {
+    this.showHeaderSubject.next(true);
+  }
+
+  public hideHeader() {
+    this.showHeaderSubject.next(false);
   }
 
   private removeNotification(notification: NotificationModel) {

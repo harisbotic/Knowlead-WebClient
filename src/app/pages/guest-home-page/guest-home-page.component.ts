@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {NotificationService} from './../../services/notifications/notification.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RealtimeService } from '../../services/realtime.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../services/account.service';
@@ -9,7 +10,7 @@ import { BaseComponent } from '../../base.component';
   templateUrl: './guest-home-page.component.html',
   styleUrls: ['./guest-home-page.component.scss']
 })
-export class GuestHomePageComponent extends BaseComponent implements OnInit {
+export class GuestHomePageComponent extends BaseComponent implements OnInit, OnDestroy {
 
   // showRegister = false;
 
@@ -17,7 +18,8 @@ export class GuestHomePageComponent extends BaseComponent implements OnInit {
       protected realtimeService: RealtimeService,
       protected router: Router,
       protected accountService: AccountService,
-      protected activatedRoute: ActivatedRoute) {
+      protected activatedRoute: ActivatedRoute,
+      protected notificationService: NotificationService) {
     super();
   }
 
@@ -27,12 +29,12 @@ export class GuestHomePageComponent extends BaseComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     }));
-    // this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
-    //   console.log(params);
-    //   if (params['type'] === 'register') {
-    //     this.showRegister = true;
-    //   }
-    // }));
+    this.notificationService.hideHeader();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    this.notificationService.showHeader();
   }
 
 }

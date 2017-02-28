@@ -21,10 +21,11 @@ export class NotebookListComponent extends BaseComponent implements OnInit {
   constructor(protected notebookService: NotebookService, protected storageService: StorageService) { super(); }
 
   ngOnInit() {
-    this.subscriptions.push(this.notebookService.getNotebooks().subscribe());
-    this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
-      this.notebookList = this.getNotebookList();
-    }));
+    this.subscriptions.push(this.notebookService.getNotebooks().subscribe(() =>
+      this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
+        this.notebookList = this.getNotebookList();
+      }))
+    ));
   }
 
   closeModal() {
