@@ -20,7 +20,8 @@
     overflow: hidden;
 
     &:hover > .videoButtons-wrap > .videoButton,
-    &:hover > .videoButtons-wrap > .endVideoButton {
+    &:hover > .videoButtons-wrap > .endVideoButton,
+    &:hover > .timer-wrap {
         // transform: translateY(-300px);
         animation: videoButtonTick 180ms ease-out forwards;
     }
@@ -52,6 +53,18 @@
     color: transparentize($icon-dark-color, 0.5);
     text-align: center;
     font-size: 30px;
+}
+
+.timer-wrap {
+    position: absolute;
+    bottom: 70px;
+    width: calc(100% - 400px);
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 3px $hover-dark-color;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+    transform: scale(0);
 }
 
 .videoButtons-wrap {
