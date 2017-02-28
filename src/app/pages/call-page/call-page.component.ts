@@ -186,6 +186,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
         }));
       }));
     }));
+    this.notificationService.hideHeader();
   }
 
   ngOnDestroy() {
@@ -194,6 +195,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     if (this.call) {
       this.realtimeService.disconnectFromCall(this.call.callId);
     }
+    this.notificationService.showHeader();
   }
 
 }

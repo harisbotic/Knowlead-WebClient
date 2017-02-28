@@ -18,7 +18,6 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   root: FOSModel;
   _search = '';
   user: ApplicationUserModel;
-  backUrl: string;
 
   set search(value: string) {
     this._search = value;
