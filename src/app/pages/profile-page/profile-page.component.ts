@@ -35,6 +35,8 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   refresh() {
     if (this.me && this.target) {
       this.isMy = this.me.id === this.target.id;
+    }
+    if (this.friendship !== undefined) {
       this.canAddFriend = ModelUtilsService.canAddFriendship(this.friendship, this.me.id);
       this.canMessage = ModelUtilsService.canRemoveFriendship(this.friendship);
     }

@@ -1,11 +1,31 @@
-app-chat-converisation {
-    float: right;
-    margin-right: 20px;
+@import "../../../../kl-styles/variables.scss";
+
+.chat-selector {
+    background-color: white;
+    width: 100%;
+    height: $chat-height;
+    border: 1px black solid;
+}
+.chat-selector-wrap {
+    width: 300px;
+    cursor: pointer;
+}
+.spacer {
+    width: 30px;
+    height: 30px;
+}
+.inline-ltr, app-chat-converisation {
+    display: inline-block;
+    direction: ltr;
+}
+.single-friend {
+    height: 40px;
+    background-color: green;
 }
 .chat-tabs {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: auto;
+    // PLEASE REMOVE THIS AND MAKE A BETTER SOLUTION
+    // Note: currently this hack works on all of the tested browsers:
+    //       firefox, chrome, edge
+    position: relative;
+    top: 3px;
 }

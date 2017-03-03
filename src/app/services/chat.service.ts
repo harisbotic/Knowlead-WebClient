@@ -23,7 +23,9 @@ export class ChatService {
     if (refresh) {
       this.storageService.refreshStorage('friends', this.fillerArr);
     }
-    return this.storageService.getFromStorage<FriendshipModel[]>('friends', this.fillerArr);
+    return this.storageService.getFromStorage<FriendshipModel[]>('friends', this.fillerArr)
+      .map(friends => friends ? friends.filter(friend => this.me && (friend.applicationUserBiggerId === this.me.id ||
+                                                friend.applicationUserSmallerId === this.me.id)) : friends);
   }
 
   constructor(protected accountService: AccountService,

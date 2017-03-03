@@ -2,7 +2,6 @@
   "name": "knowlead",
   "version": "0.0.0",
   "license": "MIT",
-  "angular-cli": {},
   "scripts": {
     "start": "ng serve --host 0.0.0.0 --ssl --ssl-key key.pem --ssl-cert certificate.pem --port 443",
     "lint": "tslint \"src/**/*.ts\" --exclude \"src/typings/**\" --exclude \"src/typings.d.ts\" --exclude \"src/app/signalr/**\" --exclude \"src/app/models/dto.ts\" --exclude \"src/app/models/constants.ts\"",

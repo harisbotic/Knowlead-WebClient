@@ -11,6 +11,8 @@ export class ChatConverisationComponent implements OnInit {
   @Input() user: ApplicationUserModel;
   @Output() close = new EventEmitter();
 
+  opened = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +20,14 @@ export class ChatConverisationComponent implements OnInit {
 
   closed() {
     this.close.emit();
+  }
+
+  open() {
+    this.opened = true;
+  }
+
+  toggleOpen() {
+    this.opened = !this.opened;
   }
 
 }

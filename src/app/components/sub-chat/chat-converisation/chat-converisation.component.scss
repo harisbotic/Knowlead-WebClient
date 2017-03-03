@@ -1,0 +1,18 @@
+@import "../../../../kl-styles/variables.scss";
+
+.tab {
+    height: $chat-height;
+    background: white;
+    border: 1px black solid;
+    width: 100%;
+    cursor: pointer;
+}
+.tab-wrap {
+    display: inline-block;
+    width: 300px;
+    margin-right: 10px;
+}
+.converisation {
+    height: 500px;
+    background-color: yellow;
+}

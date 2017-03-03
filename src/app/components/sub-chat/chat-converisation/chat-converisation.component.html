@@ -1,6 +1,10 @@
-<div class="tab">
-  {{user | fullName}}
-  <button nglButtonIcon type="button">
-    <ngl-icon icon="close" (click)="closed()"></ngl-icon>
-  </button>
+<div class="tab-wrap">
+  <div class="converisation" *ngIf="opened">
+  </div>
+  <div class="tab" (click)="toggleOpen()">
+    {{user | fullName}}
+    <button type="button">
+      x
+    </button>
+  </div>
 </div>

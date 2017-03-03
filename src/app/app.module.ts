@@ -211,7 +211,8 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
     FriendshipNotificationsService,
     UserNotificationsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ChatConverisationComponent]
 })
 export class AppModule { }
 

@@ -1,6 +1,28 @@
-<div *ngFor="let item of friends" (click)="openConverisation(item)">
+<!--<div *ngFor="let item of friends" (click)="openConverisation(item)">
   {{item | fullName}}
+</div>-->
+<div class="chat-wrap" *ngIf="shouldShow">
+  <div class="spacer inline-ltr"></div>
+  <div class="chat-selector-wrap inline-ltr">
+    <div class="friends-list" *ngIf="friendsOpened">
+      <div class="single-friend" *ngFor="let friend of friends" (click)="openConverisation(friend)">
+        <app-profile-picture [user]="friend" size="x-small" class="inline-ltr"></app-profile-picture>
+        <div class="inline-ltr">
+          {{friend | fullName}}
+        </div>
+      </div>
+      <div class="single-friend" *ngIf="friends?.length === 0">
+        You have no friends. Get a life bro.
+      </div>
+    </div>
+    <div class="chat-selector" (click)="toggleFriends()">
+      Chat
+    </div>
+  </div>
+  <div class="chat-tabs inline-ltr">
+    <div #tabs></div>
+  </div>
 </div>
-<div class="chat-tabs">
+<!--<div class="chat-tabs">
   <app-chat-converisation [user]="item" *ngFor="let item of converisations" (close)="closeConverisation(item)"></app-chat-converisation>
-</div>
+</div>-->
