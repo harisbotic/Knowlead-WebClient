@@ -8,9 +8,10 @@ import { responseToResponseModel } from './../utils/converters';
 import { CHANGE_FRIENDSHIP } from './../utils/urls';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { ApplicationUserModel, FriendshipModel, FriendshipStatus } from '../models/dto';
+import { ApplicationUserModel, FriendshipModel, FriendshipStatus, NewChatMessage } from '../models/dto';
 import { AccountService } from './account.service';
 import * as _ from 'lodash';
+import { RealtimeService } from './realtime.service';
 
 @Injectable()
 export class ChatService {
@@ -31,7 +32,8 @@ export class ChatService {
   constructor(protected accountService: AccountService,
       protected storageService: StorageService,
       protected http: Http,
-      protected modelUtilsService: ModelUtilsService) {
+      protected modelUtilsService: ModelUtilsService,
+      protected realtimeService: RealtimeService) {
     this.filler = this.modelUtilsService.fillFriendship.bind(this.modelUtilsService);
     this.fillerArr = this.modelUtilsService.fillFriendships.bind(this.modelUtilsService);
     this.accountService.currentUser().subscribe((user) => {
@@ -40,6 +42,10 @@ export class ChatService {
         storageService.refreshStorage('friends', this.fillerArr, undefined);
       }
     });
+  }
+
+  public sendMessage(message: NewChatMessage) {
+    this.realtimeService.sendChatMessage(message);
   }
 
   private changeFriendship(otherId: string, friendship: FriendshipModel) {

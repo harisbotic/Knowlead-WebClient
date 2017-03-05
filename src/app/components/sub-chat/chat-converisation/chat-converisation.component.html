@@ -1,5 +1,8 @@
 <div class="tab-wrap">
   <div class="converisation" *ngIf="opened">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input type="text" autocomplete="false" formControlName="message">
+    </form>
   </div>
   <div class="tab" (click)="toggleOpen()">
     {{user | fullName}}

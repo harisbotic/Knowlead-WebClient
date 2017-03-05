@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
 import { NotificationService } from './notifications/notification.service';
-import { _CallModel, NotificationModel, ChatMessageModel } from '../models/dto';
+import { _CallModel, NotificationModel, ChatMessageModel, NewChatMessage } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
@@ -107,6 +107,7 @@ export class RealtimeService {
     console.warn('Websockets connetion closed: ' + e);
   }
 
+  // CALL COMMANDS
   respondToCall(callId: string, accepted: boolean) {
     this.invoke(this.callErrorSubject, 'CallRespond', callId, accepted);
     this.analyticsService.sendEvent('callRespond', JSON.stringify(accepted));
@@ -142,6 +143,11 @@ export class RealtimeService {
   sendCallMsg(message: ChatMessageModel) {
     this.invoke(this.callErrorSubject, 'CallMsg', message);
     this.analyticsService.sendEvent('callMsg');
+  }
+
+  // CHAT COMMANDS
+  sendChatMessage(message: NewChatMessage) {
+    this.rpcConnection.invoke('msg', message);
   }
 
   private invoke(errorSubject: Subject<any>, nameOfFunction: string, ...params) {
