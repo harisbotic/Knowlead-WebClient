@@ -1,4 +1,3 @@
-import {parseDateIfNecessary} from './../utils/index';
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
 import { P2PMessageModel, P2PModel, ApplicationUserModel, _CallModel,
@@ -8,9 +7,9 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { NotebookModel, NotificationModel, Guid, LanguageModel } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
-import { getGmtDate } from '../utils/index';
+import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
 
@@ -162,11 +161,8 @@ export class ModelUtilsService {
     return this.fillArray(values, this.fillNotification.bind(this), 'notificationId');
   }
 
-  public fillCall(call: _CallModel): Observable<_CallModel> {
-    parseDateIfNecessary<_CallModel>(call, 'startDate');
-    parseDateIfNecessary<_CallModel>(call, 'endDate');
-    parseDateIfNecessary<_CallModel>(call, 'inactiveSince');
-    return Observable.of(call);
+  public fillChatMessages(values: ChatMessageModel[]): Observable<ChatMessageModel[]> {
+    return this.fillArray(values, this.fillChatMessage.bind(this), 'rowKey');
   }
 
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: keyof T): Observable<T[]> {
@@ -188,6 +184,13 @@ export class ModelUtilsService {
     return reduced
       .map(() => arr)
       .filter((arrr) => !arrr.some(_.isNull));
+  }
+
+  public fillCall(call: _CallModel): Observable<_CallModel> {
+    parseDateIfNecessary<_CallModel>(call, 'startDate');
+    parseDateIfNecessary<_CallModel>(call, 'endDate');
+    parseDateIfNecessary<_CallModel>(call, 'inactiveSince');
+    return Observable.of(call);
   }
 
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
@@ -270,6 +273,12 @@ export class ModelUtilsService {
     ret = this.fill(ret, 'applicationUserBigger', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'applicationUserSmaller', this.accountService.getUserById.bind(this.accountService));
     ret = this.fill(ret, 'lastActionBy', this.accountService.getUserById.bind(this.accountService));
+    return ret;
+  }
+
+  public fillChatMessage(value: ChatMessageModel): Observable<ChatMessageModel> {
+    parseDateIfNecessary<ChatMessageModel>(value, 'timestamp');
+    let ret = Observable.of(value);
     return ret;
   }
 

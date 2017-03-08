@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ApplicationUserModel, NewChatMessage } from '../../../models/dto';
+import { ApplicationUserModel, NewChatMessage, ChatMessageModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -44,9 +44,11 @@ export class ChatConverisationComponent extends BaseFormComponent<NewChatMessage
     });
   }
   submit() {
-    console.log(this.getValue());
     this.chatService.sendMessage(this.getValue());
     this.restartForm();
+  }
+  getConverisation(): Observable<ChatMessageModel[]> {
+    return this.chatService.getConverisation(this.user.id);
   }
 
 }

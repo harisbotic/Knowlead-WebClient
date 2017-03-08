@@ -16,6 +16,7 @@ import { BaseComponent } from '../../../base.component';
 export class ChatComponent extends BaseComponent implements OnInit {
 
   friends: ApplicationUserModel[] = [];
+  allFriends: ApplicationUserModel[] = [];
   converisations: ComponentRef<ChatConverisationComponent>[] = [];
   friendsOpened = false;
   shouldShow = false;
@@ -32,11 +33,25 @@ export class ChatComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.chatService.getAcceptedFriendsIds()
       .flatMap(ids => this.modelUtilsService.fillUsersById(ids))
       .subscribe(friends => {
-        this.friends = friends;
+        this.allFriends = friends;
       }));
     this.subscriptions.push(this.notificationService.showHeaderSubject.subscribe(val => {
       this.shouldShow = val;
     }));
+  }
+
+  searchUpdate(newSearch: string) {
+    if (!!!newSearch) {
+      this.friends = this.allFriends;
+    } else {
+      this.friends = this.allFriends.filter(user => {
+        if (!!!user.name || !!!user.surname) {
+          return user.email.includes(newSearch);
+        } else {
+          return user.name.toLowerCase().includes(newSearch) || user.surname.toLowerCase().includes(newSearch);
+        }
+      });
+    }
   }
 
   private getConverisationIndex(other: ApplicationUserModel): number {
@@ -67,6 +82,7 @@ export class ChatComponent extends BaseComponent implements OnInit {
 
   toggleFriends() {
     this.friendsOpened = !this.friendsOpened;
+    this.searchUpdate('');
   }
 
 }

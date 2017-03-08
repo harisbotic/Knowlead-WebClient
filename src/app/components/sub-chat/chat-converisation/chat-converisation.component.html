@@ -1,5 +1,8 @@
 <div class="tab-wrap">
   <div class="converisation" *ngIf="opened">
+    <div *ngFor="let message of getConverisation() | async">
+      {{message.senderId}}: {{message.message}}
+    </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <input type="text" autocomplete="false" formControlName="message">
     </form>

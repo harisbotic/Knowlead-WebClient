@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { StorageFiller } from './storage.subject';
 import { ModelUtilsService } from './model-utils.service';
 import { FriendshipDTOActions } from './../models/dto';
@@ -6,12 +6,17 @@ import { ChangeFriendshipStatusModel } from './../models/dto';
 import { StorageService } from './storage.service';
 import { responseToResponseModel } from './../utils/converters';
 import { CHANGE_FRIENDSHIP } from './../utils/urls';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { ApplicationUserModel, FriendshipModel, FriendshipStatus, NewChatMessage } from '../models/dto';
+import { Http, URLSearchParams } from '@angular/http';
+import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
+import { ApplicationUserModel, FriendshipModel, FriendshipStatus, NewChatMessage, ChatMessageModel, Guid } from '../models/dto';
 import { AccountService } from './account.service';
 import * as _ from 'lodash';
 import { RealtimeService } from './realtime.service';
+import { GET_CHAT_CONVERISATION } from '../utils/urls';
+
+export interface ConverisationMessageModel extends ChatMessageModel {
+  converisation: Guid;
+}
 
 @Injectable()
 export class ChatService {
@@ -19,6 +24,17 @@ export class ChatService {
   private me: ApplicationUserModel;
   private filler: StorageFiller<FriendshipModel>;
   private fillerArr: StorageFiller<FriendshipModel[]>;
+
+  // All messages grouped by converisations
+  private converisations: {[index: string]: BehaviorSubject<ConverisationMessageModel[]>} = {};
+  // Only latest messages from converisations, sorted by timestamp
+  // private history: ConverisationMessageModel[] = [];
+  // Message source
+  public allMessages = new Subject<ConverisationMessageModel>();
+
+  private static messageSorting(a: ChatMessageModel, b: ChatMessageModel): number {
+    return a.timestamp.getTime() - b.timestamp.getTime();
+  }
 
   public getFriends(refresh?: boolean): Observable<FriendshipModel[]> {
     if (refresh) {
@@ -29,11 +45,15 @@ export class ChatService {
                                                 friend.applicationUserSmallerId === this.me.id)) : friends);
   }
 
+  get realtimeService(): RealtimeService {
+    return this.injector.get(RealtimeService);
+  }
+
   constructor(protected accountService: AccountService,
       protected storageService: StorageService,
       protected http: Http,
       protected modelUtilsService: ModelUtilsService,
-      protected realtimeService: RealtimeService) {
+      protected injector: Injector) {
     this.filler = this.modelUtilsService.fillFriendship.bind(this.modelUtilsService);
     this.fillerArr = this.modelUtilsService.fillFriendships.bind(this.modelUtilsService);
     this.accountService.currentUser().subscribe((user) => {
@@ -46,6 +66,59 @@ export class ChatService {
 
   public sendMessage(message: NewChatMessage) {
     this.realtimeService.sendChatMessage(message);
+  }
+
+  private messageToConverisationMessage = (message: ChatMessageModel): ConverisationMessageModel => {
+    const ret: ConverisationMessageModel = <any>message;
+    if (message.senderId !== this.me.id) {
+      ret.converisation = message.sendToId;
+    } else {
+      ret.converisation = message.senderId;
+    }
+    return ret;
+  }
+
+  public receiveMessage(message: ChatMessageModel) {
+    if (!this.me) {
+      console.error('Me was not loaded ... couldn\'t store chat message');
+      return;
+    }
+    let converisationMessage = this.messageToConverisationMessage(message);
+    this.allMessages.next(converisationMessage);
+    this.changeMessages(converisationMessage.converisation, messages => {
+      messages.push(converisationMessage);
+      return messages;
+    });
+  }
+
+  private changeMessages(converisation: Guid, modificator: (messages: ConverisationMessageModel[]) => ConverisationMessageModel[]) {
+    if (this.converisations[converisation]) {
+      this.converisations[converisation].take(1).subscribe(messages => {
+        messages = modificator(messages);
+        messages.sort(ChatService.messageSorting);
+        this.converisations[converisation].next(messages);
+      });
+    }
+  }
+
+  public getConverisation(converisation: Guid): Observable<ConverisationMessageModel[]> {
+    if (!this.converisations[converisation]) {
+      this.converisations[converisation] = new BehaviorSubject<ConverisationMessageModel[]>([]);
+      const params = new URLSearchParams();
+      params.set('numItems', '20');
+      params.set('fromRowKey', '636245926772626749');
+      this.http.get(GET_CHAT_CONVERISATION + '/' + converisation, {search: params})
+        .map(responseToResponseModel)
+        .map(a => a.object)
+        .subscribe((messages: ChatMessageModel[]) => {
+          this.modelUtilsService.fillChatMessages(messages).take(1).subscribe(filled => {
+            this.changeMessages(converisation, old => old.concat(
+              filled.map(this.messageToConverisationMessage)
+            ));
+          });
+        });
+    }
+    return this.converisations[converisation];
   }
 
   private changeFriendship(otherId: string, friendship: FriendshipModel) {

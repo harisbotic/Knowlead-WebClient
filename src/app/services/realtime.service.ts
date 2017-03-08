@@ -10,6 +10,7 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { PopupNotificationModel } from '../models/frontend.models';
 import { AnalyticsService } from './analytics.service';
+import { ChatService } from './chat.service';
 
 export enum CallEventType {
   CALL_UPDATE,
@@ -98,6 +99,14 @@ export class RealtimeService {
         let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
         this.notificationSubject.next(notification);
       });
+
+      // CHAT STUFF
+      this.rpcConnection.on('displayChatMsg', (value: ChatMessageModel) => {
+        let message = this.parseIfString<ChatMessageModel>(value);
+        this.modelUtilsService.fillChatMessage(message).take(1).subscribe(filled => {
+          this.chatService.receiveMessage(filled);
+        });
+      });
     });
     this.rpcConnection.connectionClosed = this.connectionClosed;
   }
@@ -168,7 +177,8 @@ export class RealtimeService {
               protected sessionService: SessionService,
               protected router: Router,
               protected analyticsService: AnalyticsService,
-              protected modelUtilsService: ModelUtilsService) {
+              protected modelUtilsService: ModelUtilsService,
+              protected chatService: ChatService) {
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_OUT) {
         if (this.rpcConnection) {
