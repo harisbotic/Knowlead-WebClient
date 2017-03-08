@@ -23,7 +23,7 @@
         <input type="text" placeholder="Search..." class="friends-search" *ngIf="friendsOpened" ngModel (ngModelChange)="searchUpdate($event)">
         <div *ngIf="!friendsOpened">
           <span class="chat-selector-text">Chat</span>
-          <span class="chat-selector-counter">(1)</span>
+          <span class="chat-selector-counter">({{allFriends?.length}})</span>
         </div>
     </div>
   </div>
