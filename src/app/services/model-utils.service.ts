@@ -7,7 +7,7 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel, ConversationModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
@@ -165,6 +165,10 @@ export class ModelUtilsService {
     return this.fillArray(values, this.fillChatMessage.bind(this), 'rowKey');
   }
 
+  public fillConversations(values: ConversationModel[]): Observable<ConversationModel[]> {
+    return this.fillArray(values, this.fillConversation.bind(this), 'rowKey');
+  }
+
   public fillArray<T>(values: T[], filler: StorageFiller<T>, idKey: keyof T): Observable<T[]> {
     values = values.filter(val => val != null);
     if (!values || values.length === 0) {
@@ -278,6 +282,12 @@ export class ModelUtilsService {
 
   public fillChatMessage(value: ChatMessageModel): Observable<ChatMessageModel> {
     parseDateIfNecessary<ChatMessageModel>(value, 'timestamp');
+    let ret = Observable.of(value);
+    return ret;
+  }
+
+  public fillConversation(value: ConversationModel): Observable<ConversationModel> {
+    parseDateIfNecessary<ConversationModel>(value, 'timestamp');
     let ret = Observable.of(value);
     return ret;
   }

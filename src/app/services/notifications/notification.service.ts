@@ -11,6 +11,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import { NotificationSource } from './notification.source';
 import { P2pService } from '../p2p.service';
 import { RealtimeService } from '../realtime.service';
+import { ChatNotificationsService } from './chat-notifications.service';
 
 @Injectable()
 export class NotificationService {
@@ -23,6 +24,7 @@ export class NotificationService {
 
   constructor(public friendshipNotificationService: FriendshipNotificationsService,
               public userNotificationsService: UserNotificationsService,
+              public chatNotificationsService: ChatNotificationsService,
               // WHEN ADDING NEW SOURCE DON'T FORGET TO RESET IT ON LOG OUT
               protected sessionService: SessionService,
               public realtimeService: RealtimeService,
@@ -44,11 +46,13 @@ export class NotificationService {
   private resetSources() {
     this.friendshipNotificationService.reset();
     this.userNotificationsService.reset();
+    this.chatNotificationsService.reset();
   }
 
   private startSources() {
     this.friendshipNotificationService.start();
     this.userNotificationsService.start();
+    this.chatNotificationsService.start();
   }
 
   receiveNotification(notification: NotificationModel) {

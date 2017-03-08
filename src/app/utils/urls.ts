@@ -48,4 +48,5 @@ export const CLAIM_REWARD = API + '/api/reward/claim';
 
 export const FEEDBACK_P2P = API + '/api/feedback/give/p2p';
 
+export const GET_CONVERSATION_HISTORY = API + '/api/chat/getConversations';
 export const GET_CHAT_CONVERISATION = API + '/api/chat/getConversation';

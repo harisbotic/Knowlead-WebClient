@@ -93,6 +93,7 @@ import { TermsConditionsPageComponent } from './pages/terms-conditions-page/term
 import { FormControlErrorDirective } from './directives/form-control-error.directive';
 import { ErrorTooltipComponent } from './components/sub-popups/error-tooltip/error-tooltip.component';
 import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
+import { ChatNotificationsService } from './services/notifications/chat-notifications.service';
 
 @NgModule({
   declarations: [
@@ -209,7 +210,8 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
     SessionService,
     NotificationService,
     FriendshipNotificationsService,
-    UserNotificationsService
+    UserNotificationsService,
+    ChatNotificationsService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ChatConverisationComponent]

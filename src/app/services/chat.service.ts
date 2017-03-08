@@ -8,11 +8,14 @@ import { responseToResponseModel } from './../utils/converters';
 import { CHANGE_FRIENDSHIP } from './../utils/urls';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
-import { ApplicationUserModel, FriendshipModel, FriendshipStatus, NewChatMessage, ChatMessageModel, Guid } from '../models/dto';
+import { ApplicationUserModel, FriendshipModel, FriendshipStatus, NewChatMessage,
+  ChatMessageModel, Guid } from '../models/dto';
 import { AccountService } from './account.service';
 import * as _ from 'lodash';
 import { RealtimeService } from './realtime.service';
-import { GET_CHAT_CONVERISATION } from '../utils/urls';
+import { GET_CHAT_CONVERISATION, GET_CONVERSATION_HISTORY } from '../utils/urls';
+import { sortByDateFunction } from '../utils/index';
+import { ConversationModel } from '../models/dto';
 
 export interface ConverisationMessageModel extends ChatMessageModel {
   converisation: Guid;
@@ -27,14 +30,10 @@ export class ChatService {
 
   // All messages grouped by converisations
   private converisations: {[index: string]: BehaviorSubject<ConverisationMessageModel[]>} = {};
-  // Only latest messages from converisations, sorted by timestamp
-  // private history: ConverisationMessageModel[] = [];
   // Message source
-  public allMessages = new Subject<ConverisationMessageModel>();
-
-  private static messageSorting(a: ChatMessageModel, b: ChatMessageModel): number {
-    return a.timestamp.getTime() - b.timestamp.getTime();
-  }
+  public allMessagesSubject = new Subject<ConverisationMessageModel>();
+  // History source
+  public historySubject = new BehaviorSubject<ConversationModel[]>([]);
 
   public getFriends(refresh?: boolean): Observable<FriendshipModel[]> {
     if (refresh) {
@@ -84,10 +83,44 @@ export class ChatService {
       return;
     }
     let converisationMessage = this.messageToConverisationMessage(message);
-    this.allMessages.next(converisationMessage);
+    this.allMessagesSubject.next(converisationMessage);
     this.changeMessages(converisationMessage.converisation, messages => {
       messages.push(converisationMessage);
       return messages;
+    });
+    this.changeHistory(history => history.concat([{
+      rowKey: converisationMessage.converisation,
+      isMessageSender: this.me.id === converisationMessage.senderId,
+      lastMessage: converisationMessage.message,
+      timestamp: converisationMessage.timestamp
+    }]));
+  }
+
+  public loadMoreHistory() {
+    this.historySubject.take(1).subscribe(conversations => {
+      let from = new Date();
+      if (conversations && conversations.length > 0) {
+        from = conversations[0].timestamp;
+      }
+      const params = new URLSearchParams();
+      params.set('fromDateTime', from.toISOString());
+      params.set('numItems', '5');
+      this.http.get(GET_CONVERSATION_HISTORY, {search: params})
+        .map(responseToResponseModel)
+        .map(v => v.object)
+        .flatMap(this.modelUtilsService.fillConversations.bind(this.modelUtilsService))
+        .take(1)
+        .subscribe((newConversations: ConversationModel[]) => {
+          this.changeHistory(history => history.concat(newConversations));
+        });
+    });
+  }
+
+  private changeHistory(modificator: (history: ConversationModel[]) => ConversationModel[]) {
+    this.historySubject.take(1).subscribe(history => {
+      history = modificator(history);
+      history.sort(sortByDateFunction<ConversationModel>('timestamp'));
+      history = _.uniqBy(history, 'rowKey');
     });
   }
 
@@ -95,7 +128,7 @@ export class ChatService {
     if (this.converisations[converisation]) {
       this.converisations[converisation].take(1).subscribe(messages => {
         messages = modificator(messages);
-        messages.sort(ChatService.messageSorting);
+        messages.sort(sortByDateFunction<ConverisationMessageModel>('timestamp'));
         this.converisations[converisation].next(messages);
       });
     }
