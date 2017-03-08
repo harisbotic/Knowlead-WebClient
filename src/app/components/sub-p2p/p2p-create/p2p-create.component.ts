@@ -112,7 +112,8 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       bookmarkCount: undefined,
       offerCount: undefined,
       didBookmark: undefined,
-      canBookmark: undefined
+      canBookmark: undefined,
+      teacherReady: undefined
     };
   }
 
