@@ -59,7 +59,7 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
   getNewValue(): ChatMessageModel {
     return {
       message: '',
-      sendToId: this.callId,
+      recipientId: this.callId,
 
       rowKey: undefined,
       senderId: undefined,
