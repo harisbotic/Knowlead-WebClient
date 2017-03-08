@@ -1,7 +1,15 @@
 <div class="tab-wrap">
   <div class="converisation" *ngIf="opened">
-    <div *ngFor="let message of getConverisation() | async">
-      {{message.senderId}}: {{message.message}}
+    <div *ngFor="let message of getConverisation() | async" class="full">
+      <app-profile-picture
+          [user]="message.from"
+          size="x-small"
+          [class.pullRight]="message.isMine"
+          [class.pullLeft]="!message.isMine"
+          *ngIf="message.showProfile"></app-profile-picture>
+      <div [class.myMessage]="message.isMine" class="message">
+        {{message.message}}
+      </div>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <input type="text" autocomplete="false" formControlName="message">

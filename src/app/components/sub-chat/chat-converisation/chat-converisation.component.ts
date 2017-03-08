@@ -3,7 +3,14 @@ import { ApplicationUserModel, ChatMessageModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ChatService } from '../../../services/chat.service';
+import { ChatService, ConverisationMessageModel } from '../../../services/chat.service';
+import { AccountService } from '../../../services/account.service';
+
+interface ExtendedConverisationMessage extends ConverisationMessageModel {
+  isMine: boolean;
+  from: ApplicationUserModel;
+  showProfile: boolean;
+}
 
 @Component({
   selector: 'app-chat-converisation',
@@ -14,10 +21,11 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
 
   @Input() user: ApplicationUserModel;
   @Output() close = new EventEmitter();
+  me: ApplicationUserModel;
 
   opened = false;
 
-  constructor(protected chatService: ChatService) { super(); }
+  constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
   ngOnInit() {
     super.ngOnInit();
@@ -25,6 +33,9 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
       if (message.converisation === this.user.id) {
         this.open();
       }
+    }));
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
+      this.me = user;
     }));
   }
 
@@ -60,8 +71,21 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
     this.chatService.sendMessage(this.getValue());
     this.restartForm();
   }
-  getConverisation(): Observable<ChatMessageModel[]> {
-    return this.chatService.getConverisation(this.user.id);
+  getConverisation(): Observable<ExtendedConverisationMessage[]> {
+    return this.chatService.getConverisation(this.user.id)
+      .map(messages => messages.map(this.extendMessage.bind(this)).map((extended: ExtendedConverisationMessage, index) => {
+        extended.showProfile = index === messages.length - 1 || messages[index].senderId !== messages[index + 1].senderId;
+        return extended;
+      }));
+  }
+
+  private extendMessage(message: ConverisationMessageModel): ExtendedConverisationMessage {
+    const ret: ExtendedConverisationMessage = <any>message;
+    if (this.me && this.user) {
+      ret.from = (message.senderId === this.me.id) ? this.me : this.user;
+      ret.isMine = message.senderId === this.me.id;
+    }
+    return ret;
   }
 
 }

@@ -21,6 +21,31 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 ///////////////////////////////////////////////////////////
+// MESSAGE CLASSES ////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+.message {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 3px 0;
+    width: auto;
+    max-width: 260px;
+    word-wrap: break-word;
+}
+
+.message.myMessage {
+    background-color: $knowlead-primary;
+    color: white;
+    float: right;
+}
+
+.message:not(.myMessage) {
+    background-color: white;
+    color: $font-primary-color;
+    float: left;
+}
+
+///////////////////////////////////////////////////////////
 // CALL POPUP CLASSES /////////////////////////////////////
 ///////////////////////////////////////////////////////////
 .tooltip-parent {

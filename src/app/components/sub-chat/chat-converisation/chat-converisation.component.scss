@@ -15,4 +15,15 @@
 .converisation {
     height: 500px;
     background-color: yellow;
+    overflow-y: scroll;
+}
+.pullLeft {
+    float: left;
+}
+.pullRight {
+    float: right;
+}
+.full {
+    width: 100%;
+    display: inline-block;
 }
