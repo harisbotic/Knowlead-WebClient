@@ -103,11 +103,6 @@ export interface FriendCallModel extends _CallModel
 	receiverId: Guid;
 	receiver: ApplicationUserModel;
 }
-export interface NewChatMessage
-{
-	message: string;
-	sendToId: Guid;
-}
 export interface ChangeFriendshipStatusModel
 {
 	applicationUserId: Guid;
@@ -135,7 +130,7 @@ export interface ConversationModel
 export interface ChatMessageModel
 {
 	message: string;
-	sendToId: Guid;
+	recipientId: Guid;
 	senderId: Guid;
 	rowKey: string;
 	timestamp: Date;
