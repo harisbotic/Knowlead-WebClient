@@ -2,21 +2,33 @@
   {{item | fullName}}
 </div>-->
 <div class="chat-wrap" *ngIf="shouldShow">
-  <div class="spacer inline-ltr"></div>
   <div class="chat-selector-wrap inline-ltr">
     <div class="friends-list" *ngIf="friendsOpened">
-      <div class="single-friend" *ngFor="let friend of friends" (click)="openConverisation(friend)">
-        <app-profile-picture [user]="friend" size="x-small" class="inline-ltr"></app-profile-picture>
-        <div class="inline-ltr">
-          {{friend | fullName}}
+        <div class="chat-selector-header" (click)="toggleFriends()">
+            Chat
+            <i class="kl-settings"></i>
+            <i class="kl-messages"></i>
         </div>
+      <div class="single-friend" *ngFor="let friend of friends" (click)="openConverisation(friend)">
+        <app-profile-picture [user]="friend" size="x-small" class="inline-ltr single-friend-photo"></app-profile-picture>
+        <span class="inline-ltr single-friend-name">
+          {{friend | fullName}}
+      </span>
       </div>
       <div class="single-friend" *ngIf="friends?.length === 0">
         You have no friends. Get a life bro.
       </div>
     </div>
     <div class="chat-selector" (click)="toggleFriends()">
-      Chat
+
+        <!-- NOTE: Opened Chat Tab -->
+        <!-- <input type="text" placeholder="Search..." class="friends-search"> -->
+
+        <!-- NOTE: Closed Chat Tab -->
+        <span class="chat-selector-text">Chat</span>
+        <span class="chat-selector-counter">(1)</span>
+
+
     </div>
   </div>
   <div class="chat-tabs inline-ltr">

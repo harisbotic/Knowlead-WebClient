@@ -1,27 +1,106 @@
 @import "../../../../kl-styles/variables.scss";
 
+.chat-selector-wrap {
+    width: $chat-width;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
 .chat-selector {
     background-color: white;
     width: 100%;
     height: $chat-height;
-    border: 1px black solid;
+    border: 1px solid $placeholder-color;
+    // border-radius: 5px 5px 0 0;
+
+    input.friends-search {
+        width: 100%;
+        height: $chat-height;
+        border: none;
+        border-radius: 5px 5px 0 0;
+        padding-left: 10px;
+        outline: none;
+    }
+
+    .chat-selector-text {
+        margin-left: 20px;
+        line-height: $chat-height;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .chat-selector-counter {
+        margin-left: 3px;
+        line-height: $chat-height;
+        font-size: 13px;
+        font-weight: bold;
+    }
 }
-.chat-selector-wrap {
-    width: 300px;
-    cursor: pointer;
-}
-.spacer {
-    width: 30px;
-    height: 30px;
-}
+
+
+
 .inline-ltr, app-chat-converisation {
     display: inline-block;
     direction: ltr;
 }
-.single-friend {
-    height: 40px;
-    background-color: green;
+
+.chat-selector-header {
+    width: $chat-width;
+    width: $chat-width;
+    border-radius: 5px 5px 0 0;
+    background-color: $knowlead-primary;
+    border: 1px solid $placeholder-color;
+    color: white;
+    font-weight: bold;
+    line-height: $chat-height;
+    padding-left: 10px;
+
+    > .kl-settings {
+        float: right;
+        line-height: $chat-height;
+        margin-right: 10px;
+        color: transparentize(white, 0.3);
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    > .kl-messages {
+        float: right;
+        line-height: $chat-height;
+        margin-right: 10px;
+        color: transparentize(white, 0.3);
+
+        &:hover {
+            color: white;
+        }
+    }
 }
+
+.single-friend {
+    position: relative;
+    height: 45px;
+    background-color: white;
+    border-left: 1px solid $placeholder-color;
+    border-right: 1px solid $placeholder-color;
+
+    &:hover {
+        background-color: $hover-middle-color;
+    }
+}
+
+.single-friend-photo {
+    margin-left: 10px;
+    margin-top: -1px;
+}
+
+.single-friend-name {
+    position: absolute;
+    top: 14px;
+    left: 55px;
+}
+
 .chat-tabs {
     // PLEASE REMOVE THIS AND MAKE A BETTER SOLUTION
     // Note: currently this hack works on all of the tested browsers:
