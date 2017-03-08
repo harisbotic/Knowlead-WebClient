@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ApplicationUserModel, NewChatMessage, ChatMessageModel } from '../../../models/dto';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { ApplicationUserModel, ChatMessageModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { ChatService } from '../../../services/chat.service';
   templateUrl: './chat-converisation.component.html',
   styleUrls: ['./chat-converisation.component.scss']
 })
-export class ChatConverisationComponent extends BaseFormComponent<NewChatMessage> {
+export class ChatConverisationComponent extends BaseFormComponent<ChatMessageModel> implements OnInit {
 
   @Input() user: ApplicationUserModel;
   @Output() close = new EventEmitter();
@@ -18,6 +18,15 @@ export class ChatConverisationComponent extends BaseFormComponent<NewChatMessage
   opened = false;
 
   constructor(protected chatService: ChatService) { super(); }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.subscriptions.push(this.chatService.allMessagesSubject.subscribe(message => {
+      if (message.converisation === this.user.id) {
+        this.open();
+      }
+    }));
+  }
 
   closed() {
     this.close.emit();
@@ -31,15 +40,19 @@ export class ChatConverisationComponent extends BaseFormComponent<NewChatMessage
     this.opened = !this.opened;
   }
 
-  getNewValue(): NewChatMessage | Observable<NewChatMessage> {
+  getNewValue(): ChatMessageModel {
     return {
-      sendToId: this.user.id,
-      message: ''
+      recipientId: this.user.id,
+      message: '',
+
+      senderId: undefined,
+      rowKey: undefined,
+      timestamp: undefined
     };
   }
   getNewForm(): FormGroup {
     return new FormGroup({
-      sendToId: new FormControl('', Validators.required),
+      recipientId: new FormControl('', Validators.required),
       message: new FormControl('', Validators.required)
     });
   }

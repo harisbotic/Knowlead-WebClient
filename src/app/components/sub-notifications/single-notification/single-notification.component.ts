@@ -46,6 +46,8 @@ export class SingleNotificationComponent implements OnInit {
       return 'scheduled';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return 'You claimed your';
+    } else if (this.notification.customText) {
+      return this.notification.customText;
     }
   }
 

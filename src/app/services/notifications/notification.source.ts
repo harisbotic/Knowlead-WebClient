@@ -1,7 +1,9 @@
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
-import { NotificationModel, NotificationSourceStats, NotebookModel } from '../../models/dto';
+import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 import { ModelUtilsService } from '../model-utils.service';
 import { Subscription } from 'rxjs';
+import * as _ from 'underscore';
+import { sortByDateFunction } from '../../utils/index';
 
 export interface NotificationSource {
   canLoadMore: boolean;
@@ -74,13 +76,11 @@ export abstract class BaseNotificationSource implements NotificationSource {
       this.fillSubscription.unsubscribe();
       delete this.fillSubscription;
     }
-    this.notifications = this.notifications.concat(notifications).slice().sort((a, b) => {
-      try {
-        return a.scheduledAt.getTime() - b.scheduledAt.getTime();
-      } catch (e) {
-        return 0;
-      }
-    });
+    this.notifications = _.uniq(this.notifications
+      .concat(notifications)
+      .slice()
+      .sort(sortByDateFunction<NotificationModel>('scheduledAt', false)),
+    'notificationId');
     this.notifyNotifications();
     if (this.modelUtilsService) {
       this.fillSubscription = this.modelUtilsService.fillNotifications(this.notifications).subscribe(filled => {

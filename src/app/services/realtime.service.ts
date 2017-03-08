@@ -2,13 +2,11 @@ import {ModelUtilsService} from './model-utils.service';
 import { Injectable } from '@angular/core';
 import { API } from '../utils/urls';
 import { StorageService } from './storage.service';
-import { NotificationService } from './notifications/notification.service';
-import { _CallModel, NotificationModel, ChatMessageModel, NewChatMessage } from '../models/dto';
+import { _CallModel, NotificationModel, ChatMessageModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { HubConnection } from '../signalr/HubConnection';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { PopupNotificationModel } from '../models/frontend.models';
 import { AnalyticsService } from './analytics.service';
 import { ChatService } from './chat.service';
 
@@ -155,7 +153,7 @@ export class RealtimeService {
   }
 
   // CHAT COMMANDS
-  sendChatMessage(message: NewChatMessage) {
+  sendChatMessage(message: ChatMessageModel) {
     this.rpcConnection.invoke('msg', message);
   }
 

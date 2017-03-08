@@ -4,9 +4,9 @@ import { ApplicationUserModel } from '../../../models/dto';
 import { ModelUtilsService } from '../../../services/model-utils.service';
 import * as _ from 'lodash';
 import { ChatConverisationComponent } from '../chat-converisation/chat-converisation.component';
-import { SessionService } from '../../../services/session.service';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { BaseComponent } from '../../../base.component';
+import { AccountService } from '../../../services/account.service';
 
 @Component({
   selector: 'app-chat',
@@ -25,7 +25,8 @@ export class ChatComponent extends BaseComponent implements OnInit {
   constructor(protected chatService: ChatService,
               protected modelUtilsService: ModelUtilsService,
               protected componentFactoryResolver: ComponentFactoryResolver,
-              protected notificationService: NotificationService) {
+              protected notificationService: NotificationService,
+              protected accountService: AccountService) {
     super();
   }
 
@@ -37,6 +38,11 @@ export class ChatComponent extends BaseComponent implements OnInit {
       }));
     this.subscriptions.push(this.notificationService.showHeaderSubject.subscribe(val => {
       this.shouldShow = val;
+    }));
+    this.subscriptions.push(this.chatService.allMessagesSubject.subscribe(message => {
+      this.subscriptions.push(this.accountService.getUserById(message.converisation).take(1).subscribe(other => {
+        this.openConverisation(other);
+      }));
     }));
   }
 
@@ -65,6 +71,7 @@ export class ChatComponent extends BaseComponent implements OnInit {
     let factory = this.componentFactoryResolver.resolveComponentFactory(ChatConverisationComponent);
     let componentRef = this.tabs.createComponent(factory, 0);
     componentRef.instance.user = other;
+    componentRef.instance.open();
     componentRef.instance.close.take(1).subscribe(() => {
       this.closeConverisation(other);
     });

@@ -243,6 +243,7 @@ export interface NotificationModel
 	p2p: P2PModel;
 	scheduledAt: Date;
 	seenAt: Date;
+	customText: string;
 }
 export interface P2PModel
 {
