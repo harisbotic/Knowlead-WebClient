@@ -69,4 +69,7 @@ export class ErrorCodes
 	static wasntBookmarked: string = "WASNT_BOOKMARKED";
 	static p2PFinished: string = "P2P_FINISHED";
 	static p2PNotFinished: string = "P2P_NOT_FINISHED";
+	static cantDeleteScheduledP2P: string = "CANT_DELETE_SCHEDULED_P2P";
+	static alreadyReady: string = "ALREADY_READY";
+	static cantBeReadyNow: string = "CANT_BE_READY_NOW";
 }

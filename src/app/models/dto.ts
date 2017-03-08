@@ -33,6 +33,7 @@ export enum P2PStatus
 	Active = 0,
 	Scheduled = 1,
 	Finished = 2,
+	Deleted = 3,
 }
 export interface P2PMessageModel
 {
@@ -264,6 +265,7 @@ export interface P2PModel
 	isDeleted: boolean;
 	scheduledWithId: Guid;
 	scheduledWith: ApplicationUserModel;
+	teacherReady: Date;
 	createdById: Guid;
 	createdBy: ApplicationUserModel;
 	languages: LanguageModel[];
@@ -318,6 +320,12 @@ export interface ReferralStatsModel
 export interface PlatformFeedbackModel
 {
 	feedback: string;
+}
+export interface PasswordResetModel
+{
+	email: string;
+	token: string;
+	newPassword: string;
 }
 export interface ConfirmEmailModel
 {
