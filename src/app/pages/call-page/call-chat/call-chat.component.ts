@@ -52,7 +52,7 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
   getNewForm(): FormGroup {
     return new FormGroup({
       message: new FormControl('', Validators.required),
-      sendToId: new FormControl('', Validators.required)
+      recipientId: new FormControl('', Validators.required)
     });
   }
 
