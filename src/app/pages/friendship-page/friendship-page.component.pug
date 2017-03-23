@@ -1,0 +1,4 @@
+
+div(*ngFor="let item of chatService.getFriends() | async")
+  | {{otherUser(item) | fullName}} - {{friendshipStatus[item.status]}}
+  app-friendship-strip([otherId]="otherUserId(item)")
