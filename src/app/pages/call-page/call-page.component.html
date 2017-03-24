@@ -1,67 +1,77 @@
 <div class="row">
-    <div class="main-wrap">
-        <div class="videoSection-wrap">
-            <div class="video-container">
-                <video #video width="100%" height="100%"></video>
-                <video #myVideo width="150px" height="150px" class="myVideo"></video>
-            </div>
-            <div class="watermark">
-                <i class="kl-logo-short"></i>
-            </div>
-            <div class="timer-wrap">
-                <span class="timer">
-                  {{Math.floor(duration / (60*60*1000)) | number:'2.0-0'}}:
-                  {{Math.floor(duration / (60*1000) % 24) | number:'2.0-0'}}:
-                  {{Math.floor(duration / (1000) % 60) | number:'2.0-0'}}
-                </span>
-            </div>
-            <div class="videoButtons-wrap">
-                <button [class.videoButton]="useCam" [class.videoButton-offState]="!useCam" (click)="toggleCamera()">
-                    <i [class.kl-camera]="useCam" [class.kl-camera-off]="!useCam"></i>
-                </button>
-                <!-- <button class="videoButton-offState">
-                    <i class="kl-camera-off"></i>
-                </button> -->
+  <div class="main-wrap">
+    <div class="videoSection-wrap">
+      <div class="video-container">
+        <video #video width="100%" height="100%"></video>
+        <video #myVideo width="221.25px" height="125px" class="myVideo"></video>
+      </div>
+      <div class="watermark">
+        <i class="kl-logo-short"></i>
+      </div>
+      <div class="timer-wrap">
+        <span class="timer">
+          {{Math.floor(duration / (60*60*1000)) | number:'2.0-0'}}:
+          {{Math.floor(duration / (60*1000) % 24) | number:'2.0-0'}}:
+          {{Math.floor(duration / (1000) % 60) | number:'2.0-0'}}
+        </span>
+      </div>
+      <div class="videoButtons-wrap">
+        <button [class.videoButton]="useCam" [class.videoButton-offState]="!useCam" (click)="toggleCamera()" class="firstVideoButton">
+          <i [class.kl-camera]="useCam" [class.kl-camera-off]="!useCam"></i>
+        </button>
 
-                <button (click)="requestStop()" class="endVideoButton">
-                    <i class="kl-phone"></i>
-                </button>
+        <!-- <button class="videoButton-offState firstVideoButton">
+          <i class="kl-camera-off"></i>
+        </button> -->
 
-                <button [class.videoButton]="useMic" [class.videoButton-offState]="!useMic" class="videoButton" (click)="toggleMic()">
-                    <i [class.kl-mic]="useMic" [class.kl-mic-off]="!useMic"></i>
-                </button>
-                <!-- <button class="videoButton-offState">
-                    <i class="kl-mic-off"></i>
-                </button> -->
+        <button [class.videoButton]="useMic" [class.videoButton-offState]="!useMic" class="videoButton" (click)="toggleMic()">
+          <i [class.kl-mic]="useMic" [class.kl-mic-off]="!useMic"></i>
+        </button>
 
-            </div>
-        </div>
-        <div class="sidebar-wrap">
-            <div class="row full-height">
-                <div class="col-100 full-height">
-                    <div class="sidebar-container">
-                        <div class="row sidebarTopElements">
-                            <div class="col-50">
-                                <div class="tabButton-wrap">
-                                    <a routerLink="chat">
-                                        <button class="tabButton">Chat</button>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-50">
-                                <div class="tabButton-wrap">
-                                    <a routerLink="notebook">
-                                        <button class="tabButton">Notebook</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+        <!-- <button class="videoButton-offState">
+          <i class="kl-mic-off"></i>
+        </button> -->
 
-                        <router-outlet></router-outlet>
+        <button (click)="requestStop()" class="endVideoButton">
+          <i class="kl-phone"></i>
+        </button>
 
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="videoButton">
+          <i class="kl-display"></i>
+        </button>
+
+        <button class="videoButton lastVideoButton">
+          <i class="kl-settings"></i>
+        </button>
+
+      </div>
     </div>
+    <div class="sidebar-wrap">
+      <div class="row full-height">
+        <div class="col-100 full-height">
+          <div class="sidebar-container">
+            <div class="row sidebarTopElements">
+              <div class="col-50">
+                <div class="tabButton-wrap">
+                  <a routerLink="chat">
+                    <button class="tabButton">Chat</button>
+                  </a>
+                </div>
+              </div>
+              <div class="col-50">
+                <div class="tabButton-wrap">
+                  <a routerLink="notebook">
+                    <button class="tabButton">Notebook</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <router-outlet></router-outlet>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
