@@ -3,15 +3,15 @@
     <div class="videoSection-wrap">
       <div class="video-container">
         <video #video width="100%" height="100%"></video>
-        <video #myVideo width="221.25px" height="125px" class="myVideo"></video>
+        <video #myVideo width="194.7px" height="110px" class="myVideo"></video>
       </div>
       <div class="watermark">
         <i class="kl-logo-short"></i>
       </div>
       <div class="timer-wrap">
         <span class="timer">
-          {{Math.floor(duration / (60*60*1000)) | number:'2.0-0'}}:
-          {{Math.floor(duration / (60*1000) % 24) | number:'2.0-0'}}:
+          {{Math.floor(duration / (60*60*1000)) | number:'2.0-0'}} :
+          {{Math.floor(duration / (60*1000) % 24) | number:'2.0-0'}} :
           {{Math.floor(duration / (1000) % 60) | number:'2.0-0'}}
         </span>
       </div>

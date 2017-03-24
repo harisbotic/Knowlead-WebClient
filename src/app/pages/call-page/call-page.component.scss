@@ -13,7 +13,7 @@
   //SIDEBAR WIDTH HAS TO BE WRITEN MANUALLY IN CALC FUNCTION
   width: calc(100% - 340px);
   height: auto;
-  background-image: url("/assets/images/video_bg.jpg");
+  background-color: $call-video-background-color;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,8 +36,9 @@
 
   > .myVideo {
     position: absolute;
-    bottom: 3%;
-    left: 3%;
+    bottom: 0;
+    left: 0;
+    background-color: $call-video-primary-color;
   }
 }
 
@@ -57,15 +58,17 @@
 
 .timer-wrap {
   position: absolute;
-  bottom: 70px;
-  //SIDEBAR WIDTH HAS TO BE WRITEN MANUALLY IN CALC FUNCTION
-  width: calc(100% - 340px);
-  text-align: center;
+  bottom: 110px;
+  background-color: $call-video-secondary-color;
   color: white;
-  text-shadow: 0 0 3px $hover-dark-color;
-  font-size: 14px;
+  width: 194.7px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 15px;
+  font-weight: normal;
+  text-align: center;
+  // text-shadow: 0 0 3px $hover-dark-color;
   transition: all 0.15s ease-in-out;
-  transform: scale(0);
 }
 
 .videoButtons-wrap {
