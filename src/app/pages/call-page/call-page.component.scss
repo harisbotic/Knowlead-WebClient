@@ -152,13 +152,13 @@
   width: $call-sidebar-width;
   right: 0;
   top: 0;
-  border-left: 2px solid $hover-dark-color;
+  // border-left: 2px solid $call-video-accent-color;
 }
 
 .sidebar-container {
   height: 100%;
   width: 100%;
-  background-color: $background-color;
+  background-color: $call-video-primary-color;
 }
 
 .sidebarTopElements {

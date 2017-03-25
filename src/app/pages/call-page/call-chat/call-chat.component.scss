@@ -2,7 +2,7 @@
 
 .chatSection-wrap {
   position: relative;
-  height: 84vh;
+  height: 86vh;
 }
 
 .chatSection {
@@ -14,7 +14,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   display: -webkit-flex;
   -webkit-flex-direction: column-reverse;
@@ -43,12 +43,12 @@
   float: left;
 }
 
-.chatInput-wrap {
-  margin-top: 8px;
-  width: 100%;
-  padding: 0 20px;
+.sidebarBottomElements {
+  height: 6vh;
 }
 
-.sidebarBottomElements {
-  height: 8vh;
+.chatInput-wrap {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }

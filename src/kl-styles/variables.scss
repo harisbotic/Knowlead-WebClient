@@ -30,6 +30,7 @@ $call-video-background-color: #181818;
 $call-video-primary-color: #222222;
 $call-video-secondary-color: #363636;
 $call-video-accent-color: #555555;
+$call-video-font-color: #aaaaaa;
 
 
 ///////////////////////////////////////////////////////////
@@ -44,4 +45,6 @@ $single-notification-height: 75px;
 $border-radius: 5px;
 $icon-header-size: 20px;
 $post-space-between-margin: 25px;
+
+//Sidebar width has to be writen manually in calc functions (call.page.component.scss)
 $call-sidebar-width: 340px;
