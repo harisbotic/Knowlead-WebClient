@@ -88,3 +88,13 @@ declare class RecordRTC {
     toURL(): any;
 }
 declare class StereoAudioRecorder {}
+
+declare namespace DetectRTC {
+    namespace screen {
+        var chromeMediaSource: string;
+        var sourceId: string;
+        function getSourceId(callback: (data: string) => void);
+        function isChromeExtensionAvailable(callback: (result: boolean) => void);
+        function onMessageCallback(data: string);
+    }
+}
