@@ -29,6 +29,8 @@ import { FriendshipsComponent } from './pages/profile-page/friendships/friendshi
 import { FilteredHomePageComponent } from './pages/user-home-page/filtered-home-page/filtered-home-page.component';
 import { TermsConditionsPageComponent } from './pages/terms-conditions-page/terms-conditions-page.component';
 import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
+import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.component';
+import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -71,7 +73,8 @@ const appRoutes: Routes = [
     }] },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },
-    { path: 'store', component: ReferralsPageComponent, canActivate: [AuthGuard, RegisteredGuard] }
+    { path: 'store', component: ReferralsPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
+    { path: 'p2p', component: P2pCreatePageComponent, canActivate: [AuthGuard, RegisteredGuard]}
 ];
 
 export const appRoutingProviders: any[] = [
