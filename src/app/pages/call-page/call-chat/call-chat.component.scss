@@ -6,7 +6,7 @@
 }
 
 .chatSection {
-  padding: 15px;
+  padding: 5px;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -23,23 +23,23 @@
 }
 
 .message {
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 5px 15px 5px 5px;
   margin: 3px 0;
   width: auto;
   max-width: 225px;
   word-wrap: break-word;
+  border-bottom: 1px solid $call-video-font-color;
 }
 
 .message.myMessage {
-  background-color: $knowlead-primary;
-  color: white;
+  color: $call-video-font-color;
+  border-color: $knowlead-primary;
   float: right;
+  padding: 5px 5px 5px 15px;
 }
 
 .message:not(.myMessage) {
-  background-color: white;
-  color: $font-primary-color;
+  color: white;
   float: left;
 }
 
