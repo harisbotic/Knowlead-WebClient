@@ -1,6 +1,13 @@
+@import "../../../../kl-styles/variables.scss";
+
 .p2p-wrap {
-    width: 50%;
-    height: 300px;
-    border: 1px black solid;
-    display: inline-block;
+    width: 31%;
+    height: 230px;
+    display: inline-flex;
+    background-color: white;
+    border-radius: $border-radius;
+    margin: 5px;
+    word-break: break-word;
+    padding: 5px;
+    overflow-y: auto;
 }
