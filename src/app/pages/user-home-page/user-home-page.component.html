@@ -1,6 +1,6 @@
 <div class="grid-container">
     <div class="row firstRow">
-        <div class="col-30">
+        <div class="col-25">
             <div class="leftSidebar-wrap">
                 <div class="leftSidebar-Menu">
                     <div class="row">
@@ -109,140 +109,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="rightSidebar-wrap">
-
-                        <!-- <div class="row">
-                            <div class="col-100">
-                                <div class="stickies-wrap">
-                                    <div class="row">
-                                        <div class="stickiesTitle-wrap">
-                                            <div class="col-15" id="leftIcon">
-                                                <i class="kl-stickies"></i>
-                                            </div>
-                                            <div class="col-65">
-                                                <div class="stickiesTitle">Stickies</div>
-                                            </div>
-                                            <div class="col-20">
-                                                <button class="clearButton addStickies">
-                                                    <i class="kl-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="stickiesList"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- NOTE: UPCOMING EVENTS WIDGET -->
-                        <div class="row">
-                            <div class="col-100">
-                                <div class="upcomingEvents-wrap">
-                                    <div class="upcomingEvents-title">
-                                        Upcoming Events
-                                        <i class="kl-info upcomingEvents-info tooltip-parent">
-                                            <span class="tooltip-left tooltip-175">
-                                                <div>
-                                                <i class="kl-circle circleState-student"></i>
-                                                <span>- You are Student.</span>
-                                                </div>
-                                                <div>
-                                                <i class="kl-circle circleState-teacher"></i>
-                                                <span>- You are Teacher.</span>
-                                                </div>
-                                            </span>
-                                        </i>
-                                    </div>
-
-                                    <div *ngIf="upcoming?.length === 0" class="noEvents">No Upcoming Events...</div>
-
-                                    <div class="hasEvents">
-                                        <div *ngFor="let event of upcoming; let idx = index;">
-                                            <div class="firstUpcomingEvent" *ngIf="idx === 0">
-                                                <div class="row">
-                                                    <div class="timeLeft-wrap">
-                                                        <i class="kl-circle"
-                                                            [class.circleState-teacher]="event.scheduledWithId === user?.id"
-                                                            [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
-                                                        <!--<span class="timeLeft"></span>
-                                                        <span class="timeLeft-text">before activity</span>-->
-                                                        {{event.dateTimeAgreed | amTimeAgo}}
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="subject-wrap">
-                                                        <span class="subject">{{event.fos?.name}}</span>
-                                                        <span class="subject-text"> with:</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-25">
-                                                        <div class="profileImage-wrap">
-                                                            <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}" class="profile-link">
-                                                                <app-profile-picture [user]="otherUser(event, user?.id)" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-50">
-                                                        <div class="row">
-                                                            <div class="withUser-name">
-                                                                <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="withUser-stars">
-                                                                <ngl-rating [rate]="otherUser(event, user?.id)?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-25">
-                                                        <div class="reward-wrap">
-                                                            <span class="reward">{{event.priceAgreed}}</span>
-                                                            <i class="kl-currency reward-icon"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="otherUpcomingEvents" *ngIf="idx > 0">
-                                                <div class="row">
-                                                    <div class="timeLeft-wrap">
-                                                        <i class="kl-circle"
-                                                            [class.circleState-teacher]="event.scheduledWithId === user?.id"
-                                                            [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
-                                                        <!--<span class="timeLeft">2</span>
-                                                        <span class="timeLeft-text">before activity</span>-->
-                                                        {{event.dateTimeAgreed | amTimeAgo}}
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="otherEventsInfo-wrap">
-                                                        <span class="otherEventsInfo-subject">{{event.fos?.name}}</span>
-                                                        <span class="otherEventsInfo-text">with</span>
-                                                        <span class="otherEventsInfo-with"><a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" *ngIf="upcoming?.length > 0">
-                                            <a routerLink="filtered/{{filters.Scheduled}}">
-                                                <div class="checkAllevents">Check All Events</div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
         </div>
-        <div class="col-70">
+        <div class="col-50">
             <div class="mainSection-wrap">
                 <router-outlet></router-outlet>
                 <!--<div class="row">
@@ -254,6 +124,136 @@
                         </a>
                     </div>
                 </div>-->
+            </div>
+        </div>
+        <div class="col-25">
+            <div class="rightSidebar-wrap">
+
+                <!-- <div class="row">
+                    <div class="col-100">
+                        <div class="stickies-wrap">
+                            <div class="row">
+                                <div class="stickiesTitle-wrap">
+                                    <div class="col-15" id="leftIcon">
+                                        <i class="kl-stickies"></i>
+                                    </div>
+                                    <div class="col-65">
+                                        <div class="stickiesTitle">Stickies</div>
+                                    </div>
+                                    <div class="col-20">
+                                        <button class="clearButton addStickies">
+                                            <i class="kl-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="stickiesList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- NOTE: UPCOMING EVENTS WIDGET -->
+                <div class="row">
+                    <div class="col-100">
+                        <div class="upcomingEvents-wrap">
+                            <div class="upcomingEvents-title">
+                                Upcoming Events
+                                <i class="kl-info upcomingEvents-info tooltip-parent">
+                                    <span class="tooltip-left tooltip-175">
+                                        <div>
+                                        <i class="kl-circle circleState-student"></i>
+                                        <span>- You are Student.</span>
+                                        </div>
+                                        <div>
+                                        <i class="kl-circle circleState-teacher"></i>
+                                        <span>- You are Teacher.</span>
+                                        </div>
+                                    </span>
+                                </i>
+                            </div>
+
+                            <div *ngIf="upcoming?.length === 0" class="noEvents">No Upcoming Events...</div>
+
+                            <div class="hasEvents">
+                                <div *ngFor="let event of upcoming; let idx = index;">
+                                    <div class="firstUpcomingEvent" *ngIf="idx === 0">
+                                        <div class="row">
+                                            <div class="timeLeft-wrap">
+                                                <i class="kl-circle"
+                                                    [class.circleState-teacher]="event.scheduledWithId === user?.id"
+                                                    [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
+                                                <!--<span class="timeLeft"></span>
+                                                <span class="timeLeft-text">before activity</span>-->
+                                                {{event.dateTimeAgreed | amTimeAgo}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="subject-wrap">
+                                                <span class="subject">{{event.fos?.name}}</span>
+                                                <span class="subject-text"> with:</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-25">
+                                                <div class="profileImage-wrap">
+                                                    <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}" class="profile-link">
+                                                        <app-profile-picture [user]="otherUser(event, user?.id)" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-50">
+                                                <div class="row">
+                                                    <div class="withUser-name">
+                                                        <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="withUser-stars">
+                                                        <ngl-rating [rate]="otherUser(event, user?.id)?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-25">
+                                                <div class="reward-wrap">
+                                                    <span class="reward">{{event.priceAgreed}}</span>
+                                                    <i class="kl-currency reward-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="otherUpcomingEvents" *ngIf="idx > 0">
+                                        <div class="row">
+                                            <div class="timeLeft-wrap">
+                                                <i class="kl-circle"
+                                                    [class.circleState-teacher]="event.scheduledWithId === user?.id"
+                                                    [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
+                                                <!--<span class="timeLeft">2</span>
+                                                <span class="timeLeft-text">before activity</span>-->
+                                                {{event.dateTimeAgreed | amTimeAgo}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="otherEventsInfo-wrap">
+                                                <span class="otherEventsInfo-subject">{{event.fos?.name}}</span>
+                                                <span class="otherEventsInfo-text">with</span>
+                                                <span class="otherEventsInfo-with"><a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="upcoming?.length > 0">
+                                    <a routerLink="filtered/{{filters.Scheduled}}">
+                                        <div class="checkAllevents">Check All Events</div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
