@@ -94,6 +94,7 @@ import { FormControlErrorDirective } from './directives/form-control-error.direc
 import { ErrorTooltipComponent } from './components/sub-popups/error-tooltip/error-tooltip.component';
 import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
 import { ChatNotificationsService } from './services/notifications/chat-notifications.service';
+import { P2pCardComponent } from './components/sub-p2p/p2p-card/p2p-card.component';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,8 @@ import { ChatNotificationsService } from './services/notifications/chat-notifica
     TermsConditionsPageComponent,
     FormControlErrorDirective,
     ErrorTooltipComponent,
-    NotebookEditPopupComponent
+    NotebookEditPopupComponent,
+    P2pCardComponent
   ],
   imports: [
     BrowserModule,
