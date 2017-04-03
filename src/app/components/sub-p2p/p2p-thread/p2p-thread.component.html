@@ -111,12 +111,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- TODO: FIX THIS STATUS CHECK -->
                         <div class="col-45 threadOptions-wrap" *ngIf="message.last">
                             <div class="col-65">
-                                <div class="threadOptionsButtons" *ngIf="message.messageFromId !== user?.id || message.scheduleOverride">
-                                    <button [class.scheduleButton]="isMyP2p || message.scheduleOverride" [class.teacherAcceptButton]="!isMyP2p && !message.scheduleOverride" (click)="acceptOrSchedule()">
-                                        {{(isMyP2p || message.scheduleOverride) ? 'Schedule' : 'Accept'}}
+                                <div class="threadOptionsButtons" *ngIf="message.canAct">
+                                    <button class="teacherAcceptButton" *ngIf="message.canAccept" (click)="accept()">
+                                        Accept
+                                    </button>
+                                    <button class="scheduleButton" *ngIf="message.canSchedule" (click)="schedule()">
+                                        Schedule
                                     </button>
                                 </div>
                                 <div *ngIf="message.messageFromId === user?.id && !message.scheduleOverride" class="waitingForResponse">

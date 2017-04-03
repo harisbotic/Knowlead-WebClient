@@ -8,7 +8,7 @@ import { ModelUtilsService } from '../../../services/model-utils.service';
 import { RealtimeService } from '../../../services/realtime.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../../../base.component';
-import { P2pModelExtended } from '../../../models/frontend.models';
+import { P2PModelExtended } from '../../../models/frontend.models';
 
 @Component({
   selector: 'app-p2p',
@@ -17,7 +17,7 @@ import { P2pModelExtended } from '../../../models/frontend.models';
 })
 export class P2pComponent extends BaseComponent implements OnInit {
 
-  _p2p: P2pModelExtended;
+  _p2p: P2PModelExtended;
   _p2pId: number;
 
   @Input() set p2pId(value: number) {
@@ -38,7 +38,7 @@ export class P2pComponent extends BaseComponent implements OnInit {
     return this._p2pId;
   }
 
-  get p2p(): P2pModelExtended {
+  get p2p(): P2PModelExtended {
     return this._p2p;
   };
 

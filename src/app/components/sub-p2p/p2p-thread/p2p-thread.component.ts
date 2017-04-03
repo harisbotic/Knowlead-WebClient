@@ -50,14 +50,19 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
     }
     let i;
     for (i = 0; i < this.thread.messages.length; i++) {
-      this.thread.messages[i]['last'] = this.thread.messages.length - 1 === i;
+      this.thread.messages[i].last = this.thread.messages.length - 1 === i;
     }
     for (i = this.thread.messages.length - 1; i >= 0 && this.thread.messages[i].offerAcceptedId; i--) {
-      this.thread.messages[i]['last'] = true;
+      this.thread.messages[i].last = true;
     }
     if (i >= 0 && i < this.thread.messages.length - 1 && this.isMyP2p) {
-      this.thread.messages[i]['scheduleOverride'] = true;
-      this.thread.messages[i]['last'] = true;
+      this.thread.messages[i].canSchedule = true;
+      this.thread.messages[i].last = true;
+    }
+    for (let message of this.thread.messages) {
+      message.canAct = (this.user) ? message.last && (message.messageFromId !== this.user.id || message.scheduleOverride) : false;
+      message.canSchedule = this.isMyP2p || message['scheduleOverride'];
+      message.canAccept = !message.canSchedule;
     }
   }
 
