@@ -7,18 +7,19 @@ import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel, ConversationModel, P2PModel, P2PStatus } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid, LanguageModel,
+         ChatMessageModel, ConversationModel, P2PModel, P2PStatus } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
-import { P2pModelExtended } from '../models/frontend.models';
+import { P2PModelExtended } from '../models/frontend.models';
 
 @Injectable()
 export class ModelUtilsService {
 
-  public static expandP2p(p2p: P2PModel, myId: Guid): P2pModelExtended {
-    let ret = <P2pModelExtended>p2p;
+  public static expandP2p(p2p: P2PModel, myId: Guid): P2PModelExtended {
+    let ret = <P2PModelExtended>p2p;
     ret.isMy = p2p.createdById === myId;
     ret.actualPrice = p2p.priceAgreed ? p2p.priceAgreed : p2p.initialPrice;
     ret.canDelete = ret.isMy && !ret.isDeleted;

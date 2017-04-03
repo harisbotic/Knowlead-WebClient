@@ -49,7 +49,7 @@ export class P2pDiscussionComponent extends BaseComponent implements OnInit {
       if (this.threadWith.indexOf(otherId) === -1) {
         this.addThread(otherId);
       }
-      this.threads[this.threadWith.indexOf(otherId)].messages.push(message);
+      this.threads[this.threadWith.indexOf(otherId)].messages.push(<P2PMessageModelExtended>message);
     }
     if (this.p2p.createdById !== this.user.id && this.threadWith.indexOf(this.p2p.createdById) === -1) {
       this.addThread(this.p2p.createdById);

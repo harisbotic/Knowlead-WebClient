@@ -5,9 +5,9 @@
 declare var System: any;
 declare var module: { id: string };
 declare var require: any;
-declare type DataReceived = (data: any) => void;
-declare type ErrorHandler = (e: any) => void;
-declare type ConnectionClosed = (e?: any) => void;
+// declare type DataReceived = (data: any) => void;
+// declare type ErrorHandler = (e: any) => void;
+// declare type ConnectionClosed = (e?: any) => void;
 declare interface SimplePeerConfiguration {
   initiator: boolean,
   channelConfig?: any,
