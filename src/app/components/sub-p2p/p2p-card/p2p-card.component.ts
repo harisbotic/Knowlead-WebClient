@@ -7,13 +7,11 @@ import { NotificationService } from '../../../services/notifications/notificatio
 import { ModelUtilsService } from '../../../services/model-utils.service';
 import { RealtimeService } from '../../../services/realtime.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FeedbackService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-p2p-card',
   templateUrl: './p2p-card.component.html',
-  styleUrls: ['./p2p-card.component.scss'],
-  providers: [FeedbackService]
+  styleUrls: ['./p2p-card.component.scss']
 })
 export class P2pCardComponent extends P2pComponent implements OnInit {
   @Input() set p2pId(value: number) {
@@ -30,9 +28,8 @@ export class P2pCardComponent extends P2pComponent implements OnInit {
               protected modelUtilsService: ModelUtilsService,
               protected realtimeService: RealtimeService,
               protected router: Router,
-              protected activatedRoute: ActivatedRoute,
-              protected feedbackService: FeedbackService) {
+              protected activatedRoute: ActivatedRoute) {
     super(accountService, storageService, p2pService, notificationService,
-          modelUtilsService, realtimeService, router, activatedRoute, feedbackService);
+          modelUtilsService, realtimeService, router, activatedRoute);
   }
 }

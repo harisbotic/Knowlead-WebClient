@@ -96,6 +96,7 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
 import { ChatNotificationsService } from './services/notifications/chat-notifications.service';
 import { P2pCardComponent } from './components/sub-p2p/p2p-card/p2p-card.component';
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
+import { P2pFeedbackFormComponent } from './components/sub-popups/p2p-feedback-form/p2p-feedback-form.component';
 
 @NgModule({
   declarations: [
@@ -164,7 +165,8 @@ import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.
     ErrorTooltipComponent,
     NotebookEditPopupComponent,
     P2pCardComponent,
-    P2pCreatePageComponent
+    P2pCreatePageComponent,
+    P2pFeedbackFormComponent
   ],
   imports: [
     BrowserModule,

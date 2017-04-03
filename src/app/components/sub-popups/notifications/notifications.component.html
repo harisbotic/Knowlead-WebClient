@@ -5,3 +5,4 @@
   </ngl-notification>
 </div>
 <app-feedback-form *ngIf="feedbackFormOpened" (closed)="feedbackFormOpened=false"></app-feedback-form>
+<app-p2p-feedback-form *ngIf="p2pFeedbackFormOpened" (closed)="p2pFeedbackFormOpened=false" [p2pId]="p2pFeedbackFormId"></app-p2p-feedback-form>

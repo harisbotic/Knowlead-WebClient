@@ -133,4 +133,10 @@ export class NotificationService {
     }
   }
 
+  openP2pFeedbackForm(id: number) {
+    if (this.notificationComponent) {
+      this.notificationComponent.openP2pFeedbackForm(id);
+    }
+  }
+
 }
