@@ -1,3 +1,4 @@
+import { P2PModel } from './dto';
 export class LoginResponse {
     token_type: string;
     access_token: string;
@@ -21,4 +22,12 @@ export interface PopupNotificationModel {
 export interface DropdownValueInterface<T> {
     label: string;
     value: T;
+}
+
+export interface P2pModelExtended extends P2PModel {
+    canCall: boolean;
+    canDelete: boolean;
+    canLeaveFeedback: boolean;
+    actualPrice: number; // if p2p is scheduled this is price agreed, else it is initial actual
+    isMy: boolean;
 }

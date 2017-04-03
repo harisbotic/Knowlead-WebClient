@@ -11,7 +11,7 @@
                                     <div class="postOptions-content">
 
                                         <div class="row postOptions-button posRel">
-                                            <a class="posRel" *ngIf="p2p.createdById === user?.id && !p2p.isDeleted">
+                                            <a class="posRel" *ngIf="p2p.canDelete">
                                                 <div class="col-30 posRel">
                                                     <i class="kl-delete postOptions-icon centerV"></i>
                                                 </div>
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="col-60">
-                                        <div class="viewPostInfo-text">{{p2p.priceAgreed ? p2p.priceAgreed : p2p.initialPrice}}</div>
+                                        <div class="viewPostInfo-text">{{p2p.actualPrice}}</div>
                                     </div>
                                     <span class="tooltip-postInfo tooltip-150">
                                         Reward: {{p2p.initialPrice}} Minutes
@@ -152,9 +152,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-100">
-                                    <div class="callButton-wrap" *ngIf="callable">
-                                        <button class="callButton" (click)="callOrFeedback()">
-                                            {{p2p.status === P2PStatus.Finished ? 'Leave feedback' : 'Call'}}
+                                    <div class="callButton-wrap" *ngIf="p2p.canCall || p2p.canLeaveFeedback">
+                                        <button class="callButton" (click)="call()" *ngIf="p2p.canCall">
+                                            Call
+                                        </button>
+                                        <button class="callButton" (click)="leaveFeedback()" *ngIf="p2p.canLeaveFeedback">
+                                            Leave feedback
                                         </button>
                                     </div>
                                 </div>

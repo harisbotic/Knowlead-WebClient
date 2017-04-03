@@ -1,20 +1,31 @@
 import { Injectable, Injector } from '@angular/core';
 import { AccountService } from './account.service';
-import { P2PMessageModel, P2PModel, ApplicationUserModel, _CallModel,
+import { P2PMessageModel, ApplicationUserModel, _CallModel,
   PeerInfoModel, FriendshipModel, P2PCallModel, FriendshipStatus } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
-import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel, ConversationModel } from '../models/dto';
+import { NotebookModel, NotificationModel, Guid, LanguageModel, ChatMessageModel, ConversationModel, P2PModel, P2PStatus } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
+import { P2pModelExtended } from '../models/frontend.models';
 
 @Injectable()
 export class ModelUtilsService {
+
+  public static expandP2p(p2p: P2PModel, myId: Guid): P2pModelExtended {
+    let ret = <P2pModelExtended>p2p;
+    ret.isMy = p2p.createdById === myId;
+    ret.actualPrice = p2p.priceAgreed ? p2p.priceAgreed : p2p.initialPrice;
+    ret.canDelete = ret.isMy && !ret.isDeleted;
+    ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
+    ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
+    return ret;
+  }
 
   public static getOtherUserIdInP2P(p2p: P2PModel, myId: Guid): Guid {
     if (p2p.createdById === myId) {
