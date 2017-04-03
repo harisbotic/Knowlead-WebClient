@@ -5,10 +5,11 @@ import { AccountService } from '../../../services/account.service';
 import { BaseComponent } from '../../../base.component';
 import { ModelUtilsService } from '../../../services/model-utils.service';
 import { sortByDateFunction } from '../../../utils/index';
+import { P2PMessageModelExtended } from '../../../models/frontend.models';
 
 export interface ThreadModel {
   withId: Guid;
-  messages: P2PMessageModel[];
+  messages: P2PMessageModelExtended[];
   p2p: P2PModel;
 }
 

@@ -3,17 +3,22 @@ import { NotificationService } from '../../../services/notifications/notificatio
 import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
 import { PopupNotificationModel } from '../../../models/frontend.models';
+import { FeedbackService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss']
+  styleUrls: ['./notifications.component.scss'],
+  providers: [FeedbackService]
 })
 export class NotificationsComponent extends BaseComponent implements OnInit {
 
   notifications: PopupNotificationModel[] = [];
   timeout = 5000;
   feedbackFormOpened = false;
+
+  p2pFeedbackFormOpened = false;
+  p2pFeedbackFormId: number;
 
   constructor(protected notificationService: NotificationService) { super(); }
 
@@ -31,6 +36,11 @@ export class NotificationsComponent extends BaseComponent implements OnInit {
 
   openFeedbackForm(text?: string) {
     this.feedbackFormOpened = true;
+  }
+
+  openP2pFeedbackForm(id: number) {
+    this.p2pFeedbackFormId = id;
+    this.p2pFeedbackFormOpened = true;
   }
 
 }

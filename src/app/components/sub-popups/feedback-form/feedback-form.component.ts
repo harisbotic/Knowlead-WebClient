@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
 import { NotificationService } from '../../../services/notifications/notification.service';
@@ -10,7 +10,7 @@ import { BaseComponent } from '../../../base.component';
   templateUrl: './feedback-form.component.html',
   styleUrls: ['./feedback-form.component.scss']
 })
-export class FeedbackFormComponent extends BaseComponent implements OnInit {
+export class FeedbackFormComponent extends BaseComponent {
 
   @Output() closed = new EventEmitter<any>();
   opened = true;
@@ -22,9 +22,6 @@ export class FeedbackFormComponent extends BaseComponent implements OnInit {
       protected notificationService: NotificationService,
       protected analyticsService: AnalyticsService) {
     super();
-  }
-
-  ngOnInit() {
   }
 
   openChanged(newOpen: boolean) {
