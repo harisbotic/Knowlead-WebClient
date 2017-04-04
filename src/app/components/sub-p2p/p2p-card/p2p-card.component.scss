@@ -5,6 +5,7 @@
     height: 308px;
     display: inline-flex;
     margin: 5px 7px;
+    cursor: pointer;
 }
 
 .p2p-card-level-wrap {
@@ -73,9 +74,34 @@
   height: 100%;
   padding-left: 15px;
 
-  .p2p-section-wrap {
-    margin-bottom: 3px;
+  .bookmark-wrap {
+    position: relative;
+
+    .kl-bookmark2 {
+      position: absolute;
+      right: 10px;
+      top: -1px;
+      font-size: 26px;
+      color: $hover-middle-color;
+
+      &:hover {
+        cursor: pointer;
+        color: $knowlead-primary;
+      }
+    }
+
+    .bookmarked {
+      color: $knowlead-primary;
+
+      &:hover {
+        color: $hover-middle-color;
+      }
+    }
   }
+
+  // .p2p-section-wrap {
+  //   margin-bottom: 3px;
+  // }
 
   .section-title {
     text-transform: uppercase;
@@ -91,11 +117,45 @@
   .section-icon-wrap {
     font-size: 23px;
     margin: 8px 0 0 5px;
+    color: $hover-dark-color;
+    opacity: 0.7;
   }
 
   .profile-name {
     font-weight: bold;
     font-size: 15px;
-    margin: 22px 0 2px 7px;
+    margin: 10px 0 0 7px;
+
+    > a {
+      text-decoration: none;
+      color: $font-primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+
+  .p2p-summary-wrap {
+    // margin-top should be 30px if there is no deadline
+    // margin-top: 30px;
+    max-width: 194px;
+    height: auto;
+    max-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+}
+
+.low {
+  color: $level-low !important;
+}
+
+.mediocre {
+  color: $level-mediocre !important;
+}
+
+.high {
+  color: $level-high !important;
 }

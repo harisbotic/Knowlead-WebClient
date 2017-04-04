@@ -7,13 +7,23 @@
         span.level-text.
           Beginner
   .p2p-card-content-wrap
+    .row.bookmark-wrap
+      i.kl-bookmark2
+      .bookmark-counter
     .row.profile-info-wrap
       .col-25
         .profile-picture
-          app-profile-picture([user]="undefined" [uploadable]="false" size="small")
+          //- Link to profile
+          a(href="#")
+            app-profile-picture([user]="undefined" [uploadable]="false" size="small")
       .col-75
-        .profile-name.
-          Ejub Hadzic
+        .profile-name
+          //- Link to profile
+          a(href="#")
+            .row.name.
+              Adnan
+            .row.surname.
+              Hadzihafizbegovic
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -21,17 +31,19 @@
         .row.section-item.
           CSS Master
       .col-20
+        //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap
-          .kl-subject
+          i.kl-subject
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
           REWARD
         .row.section-item.
-          420 Minutes
+          420 Minutes 
       .col-20
-        .section-icon-wrap
-          .kl-currency
+        //- ICON COLOR CLASSES (low, mediocre, high)
+        .section-icon-wrap.mediocre
+          i.kl-currency
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -39,8 +51,9 @@
         .row.section-item.
           English
       .col-20
-        .section-icon-wrap
-          .kl-globe
+        //- ICON COLOR CLASSES (low, mediocre, high)
+        .section-icon-wrap.high
+          i.kl-globe
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -48,11 +61,13 @@
         .row.section-item.
           4.April, 2017. 15:00
       .col-20
-        .section-icon-wrap
-          .kl-clock
-    .row.p2p-section-wrap
+        //- ICON COLOR CLASSES (low, mediocre, high)
+        .section-icon-wrap.mediocre
+          i.kl-clock
+    //-NOTE IF THERE IS NO DEADLINE p2p-summary-wrap SHOULD HAVE margin-top: 30px;
+    .row.p2p-summary-wrap
       .col-100
         .row.section-title.
           SUMMARY
         .row.section-item.
-          Lorem ipsum dolor asfkh asb ofuasb fas sit amet, consectetur adipisicing elit...
+          Hello everyone, I am interested in learning japanese for beginners. I know harigana and katakana already.

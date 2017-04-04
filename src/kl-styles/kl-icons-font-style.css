@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'Knowlead-Icons-Font';
-  src:  url('fonts/Knowlead-Icons-Font.eot?dzkw6z');
-  src:  url('fonts/Knowlead-Icons-Font.eot?dzkw6z#iefix') format('embedded-opentype'),
-    url('fonts/Knowlead-Icons-Font.ttf?dzkw6z') format('truetype'),
-    url('fonts/Knowlead-Icons-Font.woff?dzkw6z') format('woff'),
-    url('fonts/Knowlead-Icons-Font.svg?dzkw6z#Knowlead-Icons-Font') format('svg');
+  font-family: 'knowlead-icons-font';
+  src:  url('fonts/knowlead-icons-font.eot?o4haji');
+  src:  url('fonts/knowlead-icons-font.eot?o4haji#iefix') format('embedded-opentype'),
+    url('fonts/knowlead-icons-font.ttf?o4haji') format('truetype'),
+    url('fonts/knowlead-icons-font.woff?o4haji') format('woff'),
+    url('fonts/knowlead-icons-font.svg?o4haji#knowlead-icons-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="kl-"], [class*=" kl-"] {
+i, .icomoon-liga {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'Knowlead-Icons-Font' !important;
+  font-family: 'knowlead-icons-font' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -19,120 +19,138 @@
   text-transform: none;
   line-height: 1;
 
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.kl-circle:before {
-  content: "\e924";
-}
-.kl-add-friend:before {
-  content: "\e922";
-}
-.kl-stickies:before {
-  content: "\e923";
-}
-.kl-camera:before {
-  content: "\e91d";
-}
-.kl-camera-off:before {
-  content: "\e91e";
-}
-.kl-mic:before {
-  content: "\e91f";
-}
-.kl-mic-off:before {
-  content: "\e920";
-}
-.kl-phone:before {
-  content: "\e921";
-}
-.kl-search:before {
-  content: "\e91c";
-}
-.kl-more:before {
-  content: "\e91b";
-}
-.kl-delete:before {
-  content: "\e91a";
-}
-.kl-comment:before {
-  content: "\e915";
-}
-.kl-currency:before {
-  content: "\e912";
-}
-.kl-globe:before {
-  content: "\e913";
-}
-.kl-clock:before {
-  content: "\e911";
-}
-.kl-subject:before {
-  content: "\e914";
-}
-.kl-edit-profile:before {
-  content: "\e910";
-}
-.kl-bookmark:before {
-  content: "\e90d";
-}
-.kl-feedback:before {
-  content: "\e90e";
-}
-.kl-calendar:before {
-  content: "\e90f";
-}
-.kl-my:before {
-  content: "\e916";
-}
-.kl-peer:before {
-  content: "\e917";
-}
-.kl-settings:before {
-  content: "\e918";
-}
-.kl-edit:before {
-  content: "\e919";
-}
-.kl-info:before {
-  content: "\e90c";
-}
-.kl-logo-short:before {
-  content: "\e90b";
-}
-.kl-back:before {
-  content: "\e90a";
-}
-.kl-female:before {
+.kl-account-options:before {
   content: "\e900";
 }
-.kl-friends:before {
+.kl-add-friend:before {
   content: "\e901";
 }
-.kl-logout:before {
+.kl-back:before {
   content: "\e902";
 }
-.kl-male:before {
+.kl-bookmark:before {
   content: "\e903";
 }
-.kl-messages:before {
+.kl-calendar:before {
   content: "\e904";
 }
-.kl-notifications:before {
+.kl-camera:before {
   content: "\e905";
 }
-.kl-three-dots:before {
+.kl-camera-off:before {
   content: "\e906";
 }
-.kl-close:before {
+.kl-circle:before {
   content: "\e907";
 }
-.kl-account-options:before {
+.kl-clock:before {
   content: "\e908";
 }
-.kl-plus:before {
+.kl-close:before {
   content: "\e909";
 }
-
+.kl-comment:before {
+  content: "\e90a";
+}
+.kl-currency:before {
+  content: "\e90b";
+}
+.kl-delete:before {
+  content: "\e90c";
+}
+.kl-edit:before {
+  content: "\e90d";
+}
+.kl-edit-profile:before {
+  content: "\e90e";
+}
+.kl-feedback:before {
+  content: "\e90f";
+}
+.kl-female:before {
+  content: "\e910";
+}
+.kl-friends:before {
+  content: "\e911";
+}
+.kl-globe:before {
+  content: "\e912";
+}
+.kl-info:before {
+  content: "\e913";
+}
+.kl-logo-short:before {
+  content: "\e914";
+}
+.kl-logout:before {
+  content: "\e915";
+}
+.kl-male:before {
+  content: "\e916";
+}
+.kl-messages:before {
+  content: "\e917";
+}
+.kl-mic:before {
+  content: "\e918";
+}
+.kl-mic-off:before {
+  content: "\e919";
+}
+.kl-more:before {
+  content: "\e91a";
+}
+.kl-my:before {
+  content: "\e91b";
+}
+.kl-notifications:before {
+  content: "\e91c";
+}
+.kl-peer:before {
+  content: "\e91d";
+}
+.kl-phone:before {
+  content: "\e91e";
+}
+.kl-plus:before {
+  content: "\e91f";
+}
+.kl-search:before {
+  content: "\e920";
+}
+.kl-settings:before {
+  content: "\e921";
+}
+.kl-stickies:before {
+  content: "\e922";
+}
+.kl-subject:before {
+  content: "\e923";
+}
+.kl-three-dots:before {
+  content: "\e924";
+}
+.kl-display:before {
+  content: "\e956";
+}
+.kl-cog:before {
+  content: "\e994";
+}
+.kl-bookmark2:before {
+  content: "\e9d2";
+}
