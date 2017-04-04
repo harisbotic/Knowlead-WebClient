@@ -17,13 +17,10 @@
           a(href="#")
             app-profile-picture([user]="undefined" [uploadable]="false" size="small")
       .col-75
-        .profile-name
+        .profile-name-wrap
           //- Link to profile
-          a(href="#")
-            .row.name.
-              Adnan
-            .row.surname.
-              Hadzihafizbegovic
+          .row.profile-name
+            a(href="#") Ejub Hadzic
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -64,7 +61,7 @@
         //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap.mediocre
           i.kl-clock
-    //-NOTE IF THERE IS NO DEADLINE p2p-summary-wrap SHOULD HAVE margin-top: 30px;
+    //- ADD MARGIN CLASS IF NO DEADLINE .addMargin
     .row.p2p-summary-wrap
       .col-100
         .row.section-title.

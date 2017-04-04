@@ -99,10 +99,6 @@
     }
   }
 
-  // .p2p-section-wrap {
-  //   margin-bottom: 3px;
-  // }
-
   .section-title {
     text-transform: uppercase;
     color: $knowlead-primary;
@@ -121,30 +117,39 @@
     opacity: 0.7;
   }
 
-  .profile-name {
+  .profile-name-wrap {
+    display: flex;
     font-weight: bold;
     font-size: 15px;
-    margin: 10px 0 0 7px;
+    margin: 7px 0 0 7px;
+    height: 50px;
+    align-items: center;
 
-    > a {
-      text-decoration: none;
-      color: $font-primary-color;
+    .profile-name {
+      max-width: 130px;
 
-      &:hover {
-        text-decoration: underline;
+      > a {
+        text-decoration: none;
+        color: $font-primary-color;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
 
   .p2p-summary-wrap {
-    // margin-top should be 30px if there is no deadline
-    // margin-top: 30px;
     max-width: 194px;
     height: auto;
     max-height: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
+  }
+
+  .addMargin {
+    margin-top: 30px;
   }
 }
 
