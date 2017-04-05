@@ -2,10 +2,12 @@
 
 .p2p-card-wrap {
     width: 230px;
-    height: 308px;
+    height: 310px;
     display: inline-flex;
     margin: 5px 7px;
     cursor: pointer;
+    border: 1px solid $hover-dark-color;
+    border-radius: $border-radius;
 }
 
 .p2p-card-level-wrap {

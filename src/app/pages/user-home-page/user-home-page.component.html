@@ -1,258 +1,140 @@
+
 <div class="grid-container">
-    <div class="row firstRow">
-        <div class="col-25">
-            <div class="leftSidebar-wrap">
-                <div class="leftSidebar-Menu">
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="profileInfo-wrap">
-                                <div class="row topElements-wrap">
-                                    <div class="col-25">
-                                        <a routerLink="{{user | userProfileLink}}">
-                                            <div class="profileImage-wrap">
-                                                <app-profile-picture [user]="user" [uploadable]="false" size="small"></app-profile-picture>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-75">
-                                        <div class="row">
-                                            <div class="col-100 profileInfo-name">
-                                                <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row bottomElements-wrap">
-                                    <div class="col-50 tooltip-parent" id="minutesValue">
-                                        {{user?.minutesBalance}} Minutes
-                                        <span class="tooltip-bottom tooltip-200">
-                                            How minutes work: <br><br>
-                                            Student gives minutes. <br>
-                                            Teacher gains minutes. <br><br>
-                                            Go to <a routerLink="/store">Store</a> page for more.
-                                        </span>
-                                    </div>
-                                    <div class="col-50 tooltip-parent" id="scoreValue">
-                                        {{user?.pointsBalance}} Score
-                                        <span class="tooltip-bottom tooltip-175">
-                                            You gain score both by studying and teaching.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="menuItem-wrap posRel">
-                                <a routerLink="/profilesetup" class="editProfileLink">
-                                    <i class="menuIcon kl-edit-profile"></i>
-                                    <div class="editProfile menuItem-text"> Edit Profile</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="posRel" id="highlightFeedbackButton">
-                                <a class="sendFeedbackLink" appFeedbackForm>
-                                    <i class="menuIcon kl-feedback" id="highlightFeedbackIcon"></i>
-                                    <div class="sendFeedback menuItem-text"> Send Feedback </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="scheduleSection-wrap">
-                                <div class="row">
-                                    <div class="col-100">
-                                        <div class="scheduleTitle"> Schedule </div>
-                                        <div class="menuItem-wrap posRel">
-                                            <i class="menuIcon kl-peer"></i>
-                                            <div class="peer-to-peer-category-title menuItem-text"> Peer-to-Peer </div>
-                                            <div class="peer-to-peer-sub-category">
-                                                <div class="row">
-                                                    <div class="col-100">
-                                                        <div class="menuItem-wrap posRel">
-                                                            <a routerLink="filtered/{{filters.My}}" class="myPostsLink">
-                                                                <i class="menuIcon kl-my"></i>
-                                                                <div class="myPosts menuItem-text"> My Posts </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-100">
-                                                        <div class="menuItem-wrap posRel">
-                                                            <a routerLink="filtered/{{filters.Scheduled}}" class="scheduledLink">
-                                                                <i class="menuIcon kl-calendar"></i>
-                                                                <div class="scheduled menuItem-text"> Scheduled</div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-100">
-                                                        <div class="menuItem-wrap posRel">
-                                                            <a routerLink="filtered/{{filters.Bookmarked}}" class="bookmarkedLink">
-                                                            <i class="menuIcon kl-bookmark"></i>
-                                                            <div class="bookmarked menuItem-text"> Bookmarked </div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="col-100 main-wrap">
+    <div class="col-25">
+      <div class="sidebar-wrap">
+        <div class="row">
+          <div class="col-25">
+            <div class="profile-picture"><a href="#">
+                <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
+          </div>
+          <div class="col-75">
+            <div class="profile-name-wrap">
+              <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
             </div>
-
-                <div class="rightSidebar-wrap">
-
-                    <!-- <div class="row">
-                        <div class="col-100">
-                            <div class="stickies-wrap">
-                                <div class="row">
-                                    <div class="stickiesTitle-wrap">
-                                        <div class="col-15" id="leftIcon">
-                                            <i class="kl-stickies"></i>
-                                        </div>
-                                        <div class="col-65">
-                                            <div class="stickiesTitle">Stickies</div>
-                                        </div>
-                                        <div class="col-20">
-                                            <button class="clearButton addStickies">
-                                                <i class="kl-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="stickiesList"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- NOTE: UPCOMING EVENTS WIDGET -->
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="upcomingEvents-wrap">
-                                <div class="upcomingEvents-title">
-                                    Upcoming Events
-                                    <i class="kl-info upcomingEvents-info tooltip-parent">
-                                        <span class="tooltip-left tooltip-175">
-                                            <div>
-                                            <i class="kl-circle circleState-student"></i>
-                                            <span>- You are Student.</span>
-                                            </div>
-                                            <div>
-                                            <i class="kl-circle circleState-teacher"></i>
-                                            <span>- You are Teacher.</span>
-                                            </div>
-                                        </span>
-                                    </i>
-                                </div>
-
-                                <div *ngIf="upcoming?.length === 0" class="noEvents">No Upcoming Events...</div>
-
-                                <div class="hasEvents">
-                                    <div *ngFor="let event of upcoming; let idx = index;">
-                                        <div class="firstUpcomingEvent" *ngIf="idx === 0">
-                                            <div class="row">
-                                                <div class="timeLeft-wrap">
-                                                    <i class="kl-circle"
-                                                        [class.circleState-teacher]="event.scheduledWithId === user?.id"
-                                                        [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
-                                                    <!--<span class="timeLeft"></span>
-                                                    <span class="timeLeft-text">before activity</span>-->
-                                                    {{event.dateTimeAgreed | amTimeAgo}}
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="subject-wrap">
-                                                    <span class="subject">{{event.fos?.name}}</span>
-                                                    <span class="subject-text"> with:</span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-25">
-                                                    <div class="profileImage-wrap">
-                                                        <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}" class="profile-link">
-                                                            <app-profile-picture [user]="otherUser(event, user?.id)" [uploadable]="false" class="centerV" size="x-small"></app-profile-picture>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-50">
-                                                    <div class="row">
-                                                        <div class="withUser-name">
-                                                            <a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="withUser-stars">
-                                                            <ngl-rating [rate]="otherUser(event, user?.id)?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-25">
-                                                    <div class="reward-wrap">
-                                                        <span class="reward">{{event.priceAgreed}}</span>
-                                                        <i class="kl-currency reward-icon"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="otherUpcomingEvents" *ngIf="idx > 0">
-                                            <div class="row">
-                                                <div class="timeLeft-wrap">
-                                                    <i class="kl-circle"
-                                                        [class.circleState-teacher]="event.scheduledWithId === user?.id"
-                                                        [class.circleState-student]="event.scheduledWithId !== user?.id"></i>
-                                                    <!--<span class="timeLeft">2</span>
-                                                    <span class="timeLeft-text">before activity</span>-->
-                                                    {{event.dateTimeAgreed | amTimeAgo}}
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="otherEventsInfo-wrap">
-                                                    <span class="otherEventsInfo-subject">{{event.fos?.name}}</span>
-                                                    <span class="otherEventsInfo-text">with</span>
-                                                    <span class="otherEventsInfo-with"><a routerLink="{{otherUser(event, user?.id) | userProfileLink}}">{{otherUser(event, user?.id) | fullName}}</a></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" *ngIf="upcoming?.length > 0">
-                                        <a routerLink="filtered/{{filters.Scheduled}}">
-                                            <div class="checkAllevents">Check All Events</div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-50">
+            <div class="profile-minutes">140 Minutes</div>
+          </div>
+          <div class="col-50">
+            <div class="profile-score">259 Score</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-item-wrap"><a href="#">
+                <div class="col-25">
+                  <div class="sidebar-item-icon"><i class="kl-edit-profile"></i></div>
                 </div>
+                <div class="col-75">
+                  <div class="sidebar-item">Edit Profile              </div>
+                </div></a></div>
+          </div>
         </div>
-        <div class="col-75">
-            <div class="mainSection-wrap">
-                <router-outlet></router-outlet>
-
-                <!--<div class="row">
-                    <div class="col-100">
-                        <a class="loadMoreLink">
-                            <div class="loadMore">
-                                <i class="kl-three-dots"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>-->
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-item-wrap"><a href="#">
+                <div class="col-25">
+                  <div class="sidebar-item-icon"><i class="kl-feedback"></i></div>
+                </div>
+                <div class="col-75">
+                  <div class="sidebar-item">Send Feedback</div>
+                </div></a></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-item-wrap">
+              <div class="col-25">
+                <div class="sidebar-item-icon"><i class="kl-peer"></i></div>
+              </div>
+              <div class="col-75">
+                <div class="sidebar-item">Peer-to-Peer</div>
+              </div>
             </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-subitem-wrap"><a href="#">
+                <div class="col-25">
+                  <div class="sidebar-subitem-icon"><i class="kl-my"></i></div>
+                </div>
+                <div class="col-75">
+                  <div class="sidebar-item">My Posts</div>
+                </div></a></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-subitem-wrap"><a href="#">
+                <div class="col-25">
+                  <div class="sidebar-subitem-icon"><i class="kl-calendar"></i></div>
+                </div>
+                <div class="col-75">
+                  <div class="sidebar-item">Scheduled</div>
+                </div></a></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-100">
+            <div class="sidebar-subitem-wrap"><a href="#">
+                <div class="col-25">
+                  <div class="sidebar-subitem-icon"><i class="kl-bookmark"></i></div>
+                </div>
+                <div class="col-75">
+                  <div class="sidebar-item">Bookmarked</div>
+                </div></a></div>
+          </div>
+        </div>
+        <div class="upcoming-events-wraap">
+          <div class="row">
+            <div class="col-100">
+              <div class="sidebar-item-wrap">
+                <div class="col-80">
+                  <div class="sidebar-item">Upcoming Events                </div>
+                </div>
+                <div class="col-20">
+                  <div class="sidebar-item-icon"><i class="kl-info"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-100">
+              <div class="timer-wrap"><i class="kl-circle"></i><span class="timer-text">in 13 days</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-100">
+              <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with:</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-75">
+              <div class="col-25">
+                <div class="profile-picture"><a href="#">
+                    <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
+              </div>
+              <div class="col-75">
+                <div class="profile-name-wrap">
+                  <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-25"><span class="reward-text">13</span><i class="kl-currency"></i></div>
+          </div>
+          <div class="row">
+            <div class="all-events-wrap"><a href="#">
+                <div class="all-events">Check All Events</div></a></div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="col-75">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,127 @@
+.grid-container
+  .col-100.main-wrap
+    .col-25
+      .sidebar-wrap
+        .row
+          .col-25
+            .profile-picture
+              //- Link to profile
+              a(href="#")
+                app-profile-picture([user]="undefined" [uploadable]="false" size="small")
+          .col-75
+            .profile-name-wrap
+              //- Link to profile
+              .profile-name
+                a(href="#") Ejub Hadzic
+        .row
+          .col-50
+            .profile-minutes.
+              140 Minutes
+          .col-50
+            .profile-score.
+              259 Score
+        .row
+          .col-100
+            .sidebar-item-wrap
+              a(href="#")
+                .col-25
+                  .sidebar-item-icon
+                    i.kl-edit-profile
+                .col-75
+                  .sidebar-item.
+                    Edit Profile              
+        .row
+          .col-100
+            .sidebar-item-wrap
+              a(href="#")
+                .col-25
+                  .sidebar-item-icon
+                    i.kl-feedback
+                .col-75
+                  .sidebar-item.
+                    Send Feedback
+        .row
+          .col-100
+            .sidebar-item-wrap
+              .col-25
+                .sidebar-item-icon
+                  i.kl-peer
+              .col-75
+                .sidebar-item.
+                  Peer-to-Peer
+        .row
+          .col-100
+            .sidebar-subitem-wrap
+              a(href="#")
+                .col-25
+                  .sidebar-subitem-icon
+                    i.kl-my
+                .col-75
+                  .sidebar-item.
+                    My Posts
+        .row
+          .col-100
+            .sidebar-subitem-wrap
+              a(href="#")
+                .col-25
+                  .sidebar-subitem-icon
+                    i.kl-calendar
+                .col-75
+                  .sidebar-item.
+                    Scheduled
+        .row
+          .col-100
+            .sidebar-subitem-wrap
+              a(href="#")
+                .col-25
+                  .sidebar-subitem-icon
+                    i.kl-bookmark
+                .col-75
+                  .sidebar-item.
+                    Bookmarked
+        .upcoming-events-wraap
+          .row
+            .col-100
+              .sidebar-item-wrap
+                .col-80
+                  .sidebar-item.
+                    Upcoming Events                
+                .col-20
+                  .sidebar-item-icon
+                    i.kl-info
+          .row
+            .col-100
+              .timer-wrap
+                i.kl-circle
+                span.timer-text.
+                  in 13 days
+          .row
+            .col-100
+              .with-wrap
+                span.with-subject.
+                  3D Animation 
+                span.with-text.
+                  with:
+          .row
+            .col-75
+              .col-25
+                .profile-picture
+                  //- Link to profile
+                  a(href="#")
+                    app-profile-picture([user]="undefined" [uploadable]="false" size="small")
+              .col-75
+                .profile-name-wrap
+                  //- Link to profile
+                  .profile-name
+                    a(href="#") Ejub Hadzic
+            .col-25
+              span.reward-text.
+                13
+              i.kl-currency
+          .row
+            .all-events-wrap
+              a(href="#")
+                .all-events.
+                  Check All Events
+    .col-75
+        router-outlet
