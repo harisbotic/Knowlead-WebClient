@@ -4,11 +4,11 @@
     <div class="col-25">
       <div class="sidebar-wrap">
         <div class="row">
-          <div class="col-25">
+          <div class="col-35">
             <div class="profile-picture"><a href="#">
                 <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
           </div>
-          <div class="col-75">
+          <div class="col-65">
             <div class="profile-name-wrap">
               <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
             </div>
@@ -23,15 +23,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-100">
-            <div class="sidebar-item-wrap"><a href="#">
-                <div class="col-25">
-                  <div class="sidebar-item-icon"><i class="kl-edit-profile"></i></div>
-                </div>
-                <div class="col-75">
-                  <div class="sidebar-item">Edit Profile              </div>
-                </div></a></div>
-          </div>
+          <div class="sidebar-item-wrap"><a href="#">
+              <div class="col-25">
+                <div class="sidebar-item-icon"><i class="kl-edit-profile"></i></div>
+              </div>
+              <div class="col-75">
+                <div class="sidebar-item">Edit Profile              </div>
+              </div></a></div>
         </div>
         <div class="row">
           <div class="col-100">
@@ -46,12 +44,15 @@
         </div>
         <div class="row">
           <div class="col-100">
-            <div class="sidebar-item-wrap">
+            <div class="sidebar-item-wrap dropdown-item">
               <div class="col-25">
                 <div class="sidebar-item-icon"><i class="kl-peer"></i></div>
               </div>
-              <div class="col-75">
+              <div class="col-65">
                 <div class="sidebar-item">Peer-to-Peer</div>
+              </div>
+              <div class="col-10">
+                <div class="dropdown-icon-wrap"><i class="kl-more"></i></div>
               </div>
             </div>
           </div>
@@ -60,7 +61,7 @@
           <div class="col-100">
             <div class="sidebar-subitem-wrap"><a href="#">
                 <div class="col-25">
-                  <div class="sidebar-subitem-icon"><i class="kl-my"></i></div>
+                  <div class="sidebar-item-icon"><i class="kl-my"></i></div>
                 </div>
                 <div class="col-75">
                   <div class="sidebar-item">My Posts</div>
@@ -71,7 +72,7 @@
           <div class="col-100">
             <div class="sidebar-subitem-wrap"><a href="#">
                 <div class="col-25">
-                  <div class="sidebar-subitem-icon"><i class="kl-calendar"></i></div>
+                  <div class="sidebar-item-icon"><i class="kl-calendar"></i></div>
                 </div>
                 <div class="col-75">
                   <div class="sidebar-item">Scheduled</div>
@@ -82,49 +83,53 @@
           <div class="col-100">
             <div class="sidebar-subitem-wrap"><a href="#">
                 <div class="col-25">
-                  <div class="sidebar-subitem-icon"><i class="kl-bookmark"></i></div>
+                  <div class="sidebar-item-icon"><i class="kl-bookmark"></i></div>
                 </div>
                 <div class="col-75">
                   <div class="sidebar-item">Bookmarked</div>
                 </div></a></div>
           </div>
         </div>
-        <div class="upcoming-events-wraap">
+        <div class="upcoming-events-wrap">
           <div class="row">
             <div class="col-100">
-              <div class="sidebar-item-wrap">
+              <div class="title-wrap">
                 <div class="col-80">
-                  <div class="sidebar-item">Upcoming Events                </div>
+                  <div class="title">Upcoming Events                </div>
                 </div>
                 <div class="col-20">
-                  <div class="sidebar-item-icon"><i class="kl-info"></i></div>
+                  <div class="info-icon"><i class="kl-info"></i></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-100">
-              <div class="timer-wrap"><i class="kl-circle"></i><span class="timer-text">in 13 days</span></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-100">
-              <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with:</span></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-75">
-              <div class="col-25">
-                <div class="profile-picture"><a href="#">
-                    <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
+          <div class="upcoming-events-content">
+            <div class="row">
+              <div class="col-100">
+                <div class="timer-wrap"><i class="kl-circle"></i><span class="timer-text">in 13 days</span></div>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-100">
+                <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with:</span></div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-75">
-                <div class="profile-name-wrap">
-                  <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
+                <div class="col-25">
+                  <div class="profile-picture"><a href="#">
+                      <app-profile-picture [user]="undefined" [uploadable]="false" size="x-small"></app-profile-picture></a></div>
+                </div>
+                <div class="col-75">
+                  <div class="profile-name-wrap">
+                    <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
+                  </div>
                 </div>
               </div>
+              <div class="col-25">
+                <div class="reward-wrap"><span class="reward-text">135</span><i class="kl-currency"></i></div>
+              </div>
             </div>
-            <div class="col-25"><span class="reward-text">13</span><i class="kl-currency"></i></div>
           </div>
           <div class="row">
             <div class="all-events-wrap"><a href="#">
@@ -134,7 +139,12 @@
       </div>
     </div>
     <div class="col-75">
-      <router-outlet></router-outlet>
+      <div class="main-section-wrap">
+        <div class="top-elements"></div>
+        <div class="p2p-post-cards">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
   </div>
 </div>

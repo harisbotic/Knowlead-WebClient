@@ -2,159 +2,205 @@
 
 
 .main-wrap {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-.leftSidebar-Menu {
-    font-size: 16px;
-    background-color: white;
-    border-radius: $border-radius;
+.sidebar-wrap {
+  font-size: 15px;
+  background-color: white;
+  border-radius: $border-radius;
+  border: $outline;
 }
 
-.topElements-wrap {
-    margin-right: 50px;
-    border-bottom: 2px solid $hover-dark-color;
+.profile-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.profileInfo-wrap {
-    height: 120px;
-    position: relative;
+.profile-name-wrap {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  font-size: 16px;
 
-    .profileInfo-name {
-        margin-top: 20px;
-
-        > a, a:visited, a:active {
-            text-decoration: none;
-            color: $font-primary-color;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-}
-
-.bottomElements-wrap {
+  .profile-name a {
+    text-decoration: none;
+    color: $font-primary-color;
     font-weight: bold;
-    margin-right: 50px;
-
-    #minutesValue {
-        padding-top: 5px;
-        padding-left: 10px;
-        cursor: default;
-
-        > span {
-            font-weight: normal;
-            font-size: 14px;
-
-            > a {
-                text-decoration: none;
-                color: $knowlead-secondary;
-                font-weight: bold;
-            }
-        }
-    }
-
-    #scoreValue {
-        padding-top: 5px;
-        padding-right: 10px;
-        text-align: right;
-        cursor: default;
-
-        > span {
-            font-weight: normal;
-            font-size: 14px;
-        }
-    }
-}
-
-.menuItem-wrap {
-    margin: 5px 0;
-    max-width: 155px;
-
-    > a, a:visited, a:active {
-        text-decoration: none;
-        color: $font-primary-color;
-        transition-property: color;
-        transition-duration: .2s;
-
-        &:hover {
-            color: $knowlead-primary;
-        }
-    }
-
-    > a:before {
-        position: absolute;
-        top: 110%;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: $knowlead-primary;
-        content: '';
-        -webkit-transform: translateY(8px);
-        opacity: 0;
-        transition-property: -webkit-transform, opacity;
-        transition-duration: .2s;
-    }
-
-    > a:hover:before {
-        -webkit-transform: translateY(0);
-        opacity: .8;
-    }
-}
-
-#highlightFeedbackButton {
-    margin: 5px 0;
-    padding: 2px 11px 2px 5px;
-    max-width: 155px;
-    background-color: $knowlead-primary;
-    border-radius: $border-radius;
-    display: inline-block;
-
-
-    > a, a:visited, a:active {
-        text-decoration: none;
-        color: white;
-    }
 
     &:hover {
-        background-color: transparentize($knowlead-primary, 0.2);
+      text-decoration: underline;
     }
+
+    &:visited, &:active {
+      text-decoration: none;
+      color: $font-primary-color;
+    }
+  }
 }
 
-#highlightFeedbackIcon {
-    top: 1px;
+.profile-minutes, .profile-score {
+  border-top: 1px solid $hover-dark-color;
+  border-bottom: 1px solid $hover-dark-color;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 0 40px 0;
+  cursor: pointer;
 }
 
-.menuIcon {
-    font-size: 22px;
-    position: absolute;
-    top: -1px;
+.sidebar-item-wrap, .sidebar-subitem-wrap {
+  border-bottom: 1px solid $hover-dark-color;
+  height: 38px;
+  padding: 2px 0;
+
+  &:hover {
+    background-color: transparentize($hover-middle-color, 0.2);
+  }
+
+  > a {
+    text-decoration: none;
+    color: $font-primary-color;
+
+    &:visited, &:active {
+      text-decoration: none;
+      color: $font-primary-color;
+    }
+  }
 }
 
-.menuItem-text {
-    margin-left: 30px;
-}
-
-.scheduleTitle {
-    margin-top: 20px;
-    font-size: 19px;
-    font-weight: bold;
+.sidebar-subitem-wrap {
+  background-color: $dropdown-item-color;
 
 }
 
-.peer-to-peer-category-title {
-    font-weight: bold;
+.sidebar-item-icon {
+  font-size: 22px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.peer-to-peer-sub-category {
-    margin-left: 30px;
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  height: 34px;
 }
 
-.filter-sub-category {
-    margin-left: 0px;
-
+.dropdown-item {
+  cursor: pointer;
+  font-weight: bold;
 }
+
+.dropdown-icon-wrap {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  color: $font-secondary-color;
+}
+
+.upcoming-events-wrap {
+  .title-wrap {
+    border-top: 1px solid $hover-dark-color;
+    border-bottom: 1px solid $hover-dark-color;
+    height: 62px;
+
+    .title {
+      font-size: 17px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      height: 62px;
+      padding-left: 20px;
+    }
+
+    .info-icon {
+      font-size: 14px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.upcoming-events-content {
+  padding: 10px 10px 10px 20px;;
+
+  .timer-wrap {
+  font-weight: bold;
+  font-size: 14px;
+
+    i {
+      font-size: 13px;
+      margin-right: 3px;
+    }
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  .profile-picture {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-name-wrap {
+    display: flex;
+    align-items: center;
+    height: 47px;
+
+    .profile-name {
+      font-size: 14px;
+    }
+  }
+
+  .reward-wrap {
+    display: flex;
+    align-items: center;
+    height: 47px;
+
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      margin-right: 3px;
+    }
+  }
+}
+
+.all-events-wrap {
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  .all-events {
+    background-color: $knowlead-primary;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    border-radius: 0 0 $border-radius $border-radius;
+
+    &:hover {
+      background-color: transparentize($knowlead-primary, 0.1)
+    }
+  }
+}
+
+
+// Main Section
+
+.main-section-wrap {
+  margin-left: 10px;
+}
+
+.top-elements {
+  height: 57px;
+}
+
+
+
 
 // Radio Buttons //
 
@@ -227,31 +273,6 @@
     }
   }
 }
-
-// MAIN SECTION //
-
-.loadMoreLink {
-    text-decoration: none;
-
-    .loadMore {
-        width: 45px;
-        height: 45px;
-        line-height: 45px;
-        text-align: center;
-        color: white;
-        background-color: $disabled-color;
-        border-radius: 50%;
-        font-size: 45px;
-        margin: 20px auto 60px auto;
-        opacity: 0.7;
-
-        &:hover {
-            opacity: 1;
-        }
-
-    }
-}
-
 
 // RIGHT SECTION //
 

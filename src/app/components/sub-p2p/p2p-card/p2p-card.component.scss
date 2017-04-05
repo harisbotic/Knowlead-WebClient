@@ -6,7 +6,7 @@
     display: inline-flex;
     margin: 5px 7px;
     cursor: pointer;
-    border: 1px solid $hover-dark-color;
+    border: $outline;
     border-radius: $border-radius;
 }
 
@@ -148,6 +148,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: break-word;
+
+    div:nth-child(2) {
+      color: $font-secondary-color;
+    }
   }
 
   .addMargin {

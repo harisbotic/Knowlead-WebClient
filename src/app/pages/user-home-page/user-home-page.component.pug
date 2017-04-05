@@ -3,12 +3,12 @@
     .col-25
       .sidebar-wrap
         .row
-          .col-25
+          .col-35
             .profile-picture
               //- Link to profile
               a(href="#")
                 app-profile-picture([user]="undefined" [uploadable]="false" size="small")
-          .col-75
+          .col-65
             .profile-name-wrap
               //- Link to profile
               .profile-name
@@ -21,15 +21,14 @@
             .profile-score.
               259 Score
         .row
-          .col-100
-            .sidebar-item-wrap
-              a(href="#")
-                .col-25
-                  .sidebar-item-icon
-                    i.kl-edit-profile
-                .col-75
-                  .sidebar-item.
-                    Edit Profile              
+          .sidebar-item-wrap
+            a(href="#")
+              .col-25
+                .sidebar-item-icon
+                  i.kl-edit-profile
+              .col-75
+                .sidebar-item.
+                  Edit Profile              
         .row
           .col-100
             .sidebar-item-wrap
@@ -42,19 +41,22 @@
                     Send Feedback
         .row
           .col-100
-            .sidebar-item-wrap
+            .sidebar-item-wrap.dropdown-item
               .col-25
                 .sidebar-item-icon
                   i.kl-peer
-              .col-75
+              .col-65
                 .sidebar-item.
                   Peer-to-Peer
+              .col-10
+                .dropdown-icon-wrap
+                  i.kl-more
         .row
           .col-100
             .sidebar-subitem-wrap
               a(href="#")
                 .col-25
-                  .sidebar-subitem-icon
+                  .sidebar-item-icon
                     i.kl-my
                 .col-75
                   .sidebar-item.
@@ -64,7 +66,7 @@
             .sidebar-subitem-wrap
               a(href="#")
                 .col-25
-                  .sidebar-subitem-icon
+                  .sidebar-item-icon
                     i.kl-calendar
                 .col-75
                   .sidebar-item.
@@ -74,54 +76,59 @@
             .sidebar-subitem-wrap
               a(href="#")
                 .col-25
-                  .sidebar-subitem-icon
+                  .sidebar-item-icon
                     i.kl-bookmark
                 .col-75
                   .sidebar-item.
                     Bookmarked
-        .upcoming-events-wraap
+        .upcoming-events-wrap
           .row
             .col-100
-              .sidebar-item-wrap
+              .title-wrap
                 .col-80
-                  .sidebar-item.
+                  .title.
                     Upcoming Events                
                 .col-20
-                  .sidebar-item-icon
+                  .info-icon
                     i.kl-info
-          .row
-            .col-100
-              .timer-wrap
-                i.kl-circle
-                span.timer-text.
-                  in 13 days
-          .row
-            .col-100
-              .with-wrap
-                span.with-subject.
-                  3D Animation 
-                span.with-text.
-                  with:
-          .row
-            .col-75
-              .col-25
-                .profile-picture
-                  //- Link to profile
-                  a(href="#")
-                    app-profile-picture([user]="undefined" [uploadable]="false" size="small")
+          .upcoming-events-content
+            .row
+              .col-100
+                .timer-wrap
+                  i.kl-circle
+                  span.timer-text.
+                    in 13 days
+            .row
+              .col-100
+                .with-wrap
+                  span.with-subject.
+                    3D Animation 
+                  span.with-text.
+                    with:
+            .row
               .col-75
-                .profile-name-wrap
-                  //- Link to profile
-                  .profile-name
-                    a(href="#") Ejub Hadzic
-            .col-25
-              span.reward-text.
-                13
-              i.kl-currency
+                .col-25
+                  .profile-picture
+                    //- Link to profile
+                    a(href="#")
+                      app-profile-picture([user]="undefined" [uploadable]="false" size="x-small")
+                .col-75
+                  .profile-name-wrap
+                    //- Link to profile
+                    .profile-name
+                      a(href="#") Ejub Hadzic
+              .col-25
+                .reward-wrap
+                  span.reward-text.
+                    135
+                  i.kl-currency
           .row
             .all-events-wrap
               a(href="#")
                 .all-events.
                   Check All Events
     .col-75
-        router-outlet
+      .main-section-wrap
+        .top-elements
+        .p2p-post-cards
+          router-outlet
