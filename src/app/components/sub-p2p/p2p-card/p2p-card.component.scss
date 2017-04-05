@@ -152,6 +152,21 @@
     div:nth-child(2) {
       color: $font-secondary-color;
     }
+
+    .fade {
+      position: relative;
+      height: 4.3em; /* exactly three lines */
+    }
+    .fade:after {
+      content: "";
+      text-align: right;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 30%;
+      height: 1em;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 60%);
+    }
   }
 
   .addMargin {
