@@ -10,12 +10,12 @@
     <div class="row bookmark-wrap"><i class="kl-bookmark2"></i></div>
     <div class="row profile-info-wrap">
       <div class="col-25">
-        <div class="profile-picture"><a href="#">
-            <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
+        <div class="profile-picture"><a routerLink="{{p2p.user | userProfileLink}}">
+            <app-profile-picture [user]="p2p.user" [uploadable]="false" size="small"></app-profile-picture></a></div>
       </div>
       <div class="col-75">
         <div class="profile-name-wrap">
-          <div class="row profile-name"><a href="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div>
+          <div class="row profile-name"><a routerLink="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="row p2p-summary-wrap">
-      <div class="col-100">
+      <div class="col-100" [ngClass]="{'addMargin': p2p.deadline == null}">
         <div class="row section-title">SUMMARY</div>
         <div class="row section-item fade">{{p2p.text}}</div>
       </div>

@@ -1,4 +1,3 @@
-
 .p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos")
   .p2p-card-level-wrap
     .level-base.level-beginner
@@ -14,13 +13,12 @@
       .col-25
         .profile-picture
           //- Link to profile
-          a(href="#")
-            app-profile-picture([user]="undefined" [uploadable]="false" size="small")
+          a(routerLink="{{p2p.user | userProfileLink}}")
+            app-profile-picture([user]="p2p.user" [uploadable]="false" size="small")
       .col-75
         .profile-name-wrap
-          //- Link to profile
           .row.profile-name
-            a(href="{{p2p.createdBy | userProfileLink}}") {{p2p.createdBy | fullName}}
+            a(routerLink="{{p2p.createdBy | userProfileLink}}") {{p2p.createdBy | fullName}}
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -28,7 +26,6 @@
         .row.section-item.
           {{p2p.fos.name}}
       .col-20
-        //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap([ngClass]="fosColor")
           i.kl-subject
     .row.p2p-section-wrap
@@ -38,7 +35,6 @@
         .row.section-item.
           {{p2p.actualPrice}}
       .col-20
-        //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap([ngClass]="priceColor")
           i.kl-currency
     .row.p2p-section-wrap
@@ -49,7 +45,6 @@
           div(*ngFor="let item of p2p.languages").
             {{item.code | uppercase}}
       .col-20
-        //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap([ngClass]="languageColor")
           i.kl-globe
     .row.p2p-section-wrap(*ngIf="p2p.deadline")
@@ -59,12 +54,11 @@
         .row.section-item.
           {{p2p.deadline | date:'short'}}
       .col-20
-        //- ICON COLOR CLASSES (low, mediocre, high)
         .section-icon-wrap([ngClass]="deadlineColor")
           i.kl-clock
     //- ADD MARGIN CLASS IF NO DEADLINE .addMargin
     .row.p2p-summary-wrap
-      .col-100
+      .col-100([ngClass]="{'addMargin': p2p.deadline == null}")
         .row.section-title.
           SUMMARY
         .row.section-item.fade.
