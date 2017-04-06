@@ -40,7 +40,7 @@
                   .sidebar-item.
                     Send Feedback
         .row
-          .col-100
+          .col-100((click)="togglePeerToPeerOptions()")
             .sidebar-item-wrap.dropdown-item
               .col-25
                 .sidebar-item-icon
@@ -50,37 +50,35 @@
                   Peer-to-Peer
               .col-10
                 .dropdown-icon-wrap
-                  i.kl-more
-        .row
-          .col-100
-            .sidebar-subitem-wrap
-              a(routerLink="/home/filtered/My")
-                .col-25
-                  .sidebar-item-icon
-                    i.kl-my
-                .col-75
-                  .sidebar-item.
-                    My Posts
-        .row
-          .col-100
-            .sidebar-subitem-wrap
-              a(routerLink="/home/filtered/Scheduled")
-                .col-25
-                  .sidebar-item-icon
-                    i.kl-calendar
-                .col-75
-                  .sidebar-item.
-                    Scheduled
-        .row
-          .col-100
-            .sidebar-subitem-wrap
-              a(routerLink="/home/filtered/Bookmarked")
-                .col-25
-                  .sidebar-item-icon
-                    i.kl-bookmark
-                .col-75
-                  .sidebar-item.
-                    Bookmarked
+                  i.kl-more([@peerToPeerRotate]="peerToPeerOptionsState")
+          .col-100.overflow-hidden([@peerToPeerOptions]="peerToPeerOptionsState")
+              .col-100
+                .sidebar-subitem-wrap
+                  a(routerLink="/home/filtered/My")
+                    .col-25
+                      .sidebar-item-icon
+                        i.kl-my
+                    .col-75
+                      .sidebar-item.
+                        My Posts
+              .col-100
+                .sidebar-subitem-wrap
+                  a(routerLink="/home/filtered/Scheduled")
+                    .col-25
+                      .sidebar-item-icon
+                        i.kl-calendar
+                    .col-75
+                      .sidebar-item.
+                        Scheduled
+              .col-100
+                .sidebar-subitem-wrap
+                  a(routerLink="/home/filtered/Bookmarked")
+                    .col-25
+                      .sidebar-item-icon
+                        i.kl-bookmark
+                    .col-75
+                      .sidebar-item.
+                        Bookmarked
         .upcoming-events-wrap
           .row
             .col-100

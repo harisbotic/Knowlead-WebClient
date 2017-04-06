@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.0.1",
     "@angular/platform-browser-dynamic": "^4.0.1",
     "@angular/router": "^4.0.1",
+    "@angular/animations": "^4.0.1",
     "@salesforce-ux/design-system": "^2.2.2",
     "@types/fast-json-patch": "^1.0.4",
     "@types/lodash": "^4.14.61",

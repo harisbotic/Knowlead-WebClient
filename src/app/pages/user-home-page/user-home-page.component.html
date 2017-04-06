@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-100">
+          <div class="col-100" (click)="togglePeerToPeerOptions()">
             <div class="sidebar-item-wrap dropdown-item">
               <div class="col-25">
                 <div class="sidebar-item-icon"><i class="kl-peer"></i></div>
@@ -52,42 +52,38 @@
                 <div class="sidebar-item">Peer-to-Peer</div>
               </div>
               <div class="col-10">
-                <div class="dropdown-icon-wrap"><i class="kl-more"></i></div>
+                <div class="dropdown-icon-wrap"><i class="kl-more" [@peerToPeerRotate]="peerToPeerOptionsState"></i></div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/My">
-                <div class="col-25">
-                  <div class="sidebar-item-icon"><i class="kl-my"></i></div>
-                </div>
-                <div class="col-75">
-                  <div class="sidebar-item">My Posts</div>
-                </div></a></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Scheduled">
-                <div class="col-25">
-                  <div class="sidebar-item-icon"><i class="kl-calendar"></i></div>
-                </div>
-                <div class="col-75">
-                  <div class="sidebar-item">Scheduled</div>
-                </div></a></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Bookmarked">
-                <div class="col-25">
-                  <div class="sidebar-item-icon"><i class="kl-bookmark"></i></div>
-                </div>
-                <div class="col-75">
-                  <div class="sidebar-item">Bookmarked</div>
-                </div></a></div>
+          <div class="col-100 overflow-hidden" [@peerToPeerOptions]="peerToPeerOptionsState">
+            <div class="col-100">
+              <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/My">
+                  <div class="col-25">
+                    <div class="sidebar-item-icon"><i class="kl-my"></i></div>
+                  </div>
+                  <div class="col-75">
+                    <div class="sidebar-item">My Posts</div>
+                  </div></a></div>
+            </div>
+            <div class="col-100">
+              <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Scheduled">
+                  <div class="col-25">
+                    <div class="sidebar-item-icon"><i class="kl-calendar"></i></div>
+                  </div>
+                  <div class="col-75">
+                    <div class="sidebar-item">Scheduled</div>
+                  </div></a></div>
+            </div>
+            <div class="col-100">
+              <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Bookmarked">
+                  <div class="col-25">
+                    <div class="sidebar-item-icon"><i class="kl-bookmark"></i></div>
+                  </div>
+                  <div class="col-75">
+                    <div class="sidebar-item">Bookmarked</div>
+                  </div></a></div>
+            </div>
           </div>
         </div>
         <div class="upcoming-events-wrap">

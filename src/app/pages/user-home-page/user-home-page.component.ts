@@ -9,13 +9,28 @@ import { sortByDateFunction } from '../../utils/index';
 import { StorageSubject } from '../../services/storage.subject';
 import { Observable } from 'rxjs';
 import { ModelUtilsService } from '../../services/model-utils.service';
+import { trigger, state, style, transition, animate } from "@angular/animations";
 
 @Component({
   selector: 'app-user-home-page',
   templateUrl: './user-home-page.component.html',
-  styleUrls: ['./user-home-page.component.scss']
+  styleUrls: ['./user-home-page.component.scss'],
+  animations: [
+    trigger('peerToPeerOptions', [
+      state('open', style({ height: '*' })),
+      state('closed', style({ height: '0px' })),
+      transition('open <=> closed', animate('100ms ease-out'))
+    ]),
+    trigger('peerToPeerRotate', [
+      state('open', style({ transform: 'rotate(180deg)'})),
+      state('closed', style({ transform: 'rotate(0deg)'})),
+      transition('open <=> closed', animate('100ms ease-out'))
+    ])
+  ]
 })
 export class UserHomePageComponent extends BaseComponent implements OnInit {
+
+  peerToPeerOptionsState = "open";
 
   user: ApplicationUserModel;
   filters = ListP2PsRequest;
@@ -61,6 +76,14 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
         this.upcoming = this.getUpcoming();
       }));
     }));
+  }
+
+  togglePeerToPeerOptions() {
+    if (this.peerToPeerOptionsState === "open") {
+      this.peerToPeerOptionsState = "closed";
+    } else {
+      this.peerToPeerOptionsState = "open";
+    }
   }
 
 }

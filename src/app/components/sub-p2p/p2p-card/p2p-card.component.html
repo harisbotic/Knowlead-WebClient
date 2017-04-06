@@ -57,8 +57,8 @@
         <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
       </div>
     </div>
-    <div class="row p2p-summary-wrap">
-      <div class="col-100" [ngClass]="{'addMargin': p2p.deadline == null}">
+    <div class="row p2p-summary-wrap" [ngClass]="{'addMargin': p2p.deadline == null}">
+      <div class="col-100">
         <div class="row section-title">SUMMARY</div>
         <div class="row section-item fade">{{p2p.text}}</div>
       </div>
