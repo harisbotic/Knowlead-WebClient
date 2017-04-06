@@ -12,17 +12,17 @@
             .profile-name-wrap
               //- Link to profile
               .profile-name
-                a(href="#") Ejub Hadzic
+                a(href="{{user | userProfileLink}}") {{user | fullName}}
         .row
           .col-50
             .profile-minutes.
-              140 Minutes
+              {{user.minutesBalance}} Minutes
           .col-50
             .profile-score.
-              259 Score
+              {{user.pointsBalance}} Score
         .row
           .sidebar-item-wrap
-            a(href="#")
+            a(routerLink="/profilesetup")
               .col-25
                 .sidebar-item-icon
                   i.kl-edit-profile
@@ -32,7 +32,7 @@
         .row
           .col-100
             .sidebar-item-wrap
-              a(href="#")
+              a(app-feedback-form)
                 .col-25
                   .sidebar-item-icon
                     i.kl-feedback
@@ -54,7 +54,7 @@
         .row
           .col-100
             .sidebar-subitem-wrap
-              a(href="#")
+              a(routerLink="/home/filtered/My")
                 .col-25
                   .sidebar-item-icon
                     i.kl-my
@@ -64,7 +64,7 @@
         .row
           .col-100
             .sidebar-subitem-wrap
-              a(href="#")
+              a(routerLink="/home/filtered/Scheduled")
                 .col-25
                   .sidebar-item-icon
                     i.kl-calendar
@@ -74,7 +74,7 @@
         .row
           .col-100
             .sidebar-subitem-wrap
-              a(href="#")
+              a(routerLink="/home/filtered/Bookmarked")
                 .col-25
                   .sidebar-item-icon
                     i.kl-bookmark
@@ -111,7 +111,7 @@
                   .profile-picture
                     //- Link to profile
                     a(href="#")
-                      app-profile-picture([user]="undefined" [uploadable]="false" size="x-small")
+                      app-profile-picture([user]="user" size="x-small")
                 .col-75
                   .profile-name-wrap
                     //- Link to profile
@@ -124,7 +124,7 @@
                   i.kl-currency
           .row
             .all-events-wrap
-              a(href="#")
+              a(routerLink="/home/filtered/Scheduled")
                 .all-events.
                   Check All Events
     .col-75

@@ -10,20 +10,20 @@
           </div>
           <div class="col-65">
             <div class="profile-name-wrap">
-              <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
+              <div class="profile-name"><a href="{{user | userProfileLink}}">{{user | fullName}}</a></div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-50">
-            <div class="profile-minutes">140 Minutes</div>
+            <div class="profile-minutes">{{user.minutesBalance}} Minutes</div>
           </div>
           <div class="col-50">
-            <div class="profile-score">259 Score</div>
+            <div class="profile-score">{{user.pointsBalance}} Score</div>
           </div>
         </div>
         <div class="row">
-          <div class="sidebar-item-wrap"><a href="#">
+          <div class="sidebar-item-wrap"><a routerLink="/profilesetup">
               <div class="col-25">
                 <div class="sidebar-item-icon"><i class="kl-edit-profile"></i></div>
               </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="row">
           <div class="col-100">
-            <div class="sidebar-item-wrap"><a href="#">
+            <div class="sidebar-item-wrap"><a app-feedback-form>
                 <div class="col-25">
                   <div class="sidebar-item-icon"><i class="kl-feedback"></i></div>
                 </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
           <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a href="#">
+            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/My">
                 <div class="col-25">
                   <div class="sidebar-item-icon"><i class="kl-my"></i></div>
                 </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="row">
           <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a href="#">
+            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Scheduled">
                 <div class="col-25">
                   <div class="sidebar-item-icon"><i class="kl-calendar"></i></div>
                 </div>
@@ -81,7 +81,7 @@
         </div>
         <div class="row">
           <div class="col-100">
-            <div class="sidebar-subitem-wrap"><a href="#">
+            <div class="sidebar-subitem-wrap"><a routerLink="/home/filtered/Bookmarked">
                 <div class="col-25">
                   <div class="sidebar-item-icon"><i class="kl-bookmark"></i></div>
                 </div>
@@ -118,7 +118,7 @@
               <div class="col-75">
                 <div class="col-25">
                   <div class="profile-picture"><a href="#">
-                      <app-profile-picture [user]="undefined" [uploadable]="false" size="x-small"></app-profile-picture></a></div>
+                      <app-profile-picture [user]="user" size="x-small"></app-profile-picture></a></div>
                 </div>
                 <div class="col-75">
                   <div class="profile-name-wrap">
@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="all-events-wrap"><a href="#">
+            <div class="all-events-wrap"><a routerLink="/home/filtered/Scheduled">
                 <div class="all-events">Check All Events</div></a></div>
           </div>
         </div>

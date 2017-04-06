@@ -1,5 +1,5 @@
 
-<div class="p2p-card-wrap">
+<div class="p2p-card-wrap" *ngIf="p2p.createdBy &amp;&amp; p2p.languages &amp;&amp; p2p.fos">
   <div class="p2p-card-level-wrap">
     <div class="level-base level-beginner">
       <div class="level-anglebox"></div>
@@ -15,50 +15,52 @@
       </div>
       <div class="col-75">
         <div class="profile-name-wrap">
-          <div class="row profile-name"><a href="#">Ejub Hadzic</a></div>
+          <div class="row profile-name"><a href="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div>
         </div>
       </div>
     </div>
     <div class="row p2p-section-wrap">
       <div class="col-80">
         <div class="row section-title">SUBJECT</div>
-        <div class="row section-item">CSS Master</div>
+        <div class="row section-item">{{p2p.fos.name}}</div>
       </div>
       <div class="col-20">
-        <div class="section-icon-wrap"><i class="kl-subject"></i></div>
+        <div class="section-icon-wrap" [ngClass]="fosColor"><i class="kl-subject"></i></div>
       </div>
     </div>
     <div class="row p2p-section-wrap">
       <div class="col-80">
         <div class="row section-title">REWARD</div>
-        <div class="row section-item">420 Minutes </div>
+        <div class="row section-item">{{p2p.actualPrice}}</div>
       </div>
       <div class="col-20">
-        <div class="section-icon-wrap mediocre"><i class="kl-currency"></i></div>
+        <div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div>
       </div>
     </div>
     <div class="row p2p-section-wrap">
       <div class="col-80">
         <div class="row section-title">LANGUAGES</div>
-        <div class="row section-item">English</div>
+        <div class="row section-item">
+          <div *ngFor="let item of p2p.languages">{{item.code | uppercase}}</div>
+        </div>
       </div>
       <div class="col-20">
-        <div class="section-icon-wrap high"><i class="kl-globe"></i></div>
+        <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>
       </div>
     </div>
-    <div class="row p2p-section-wrap">
+    <div class="row p2p-section-wrap" *ngIf="p2p.deadline">
       <div class="col-80">
         <div class="row section-title">DEADLINE</div>
-        <div class="row section-item">4.April, 2017. 15:00</div>
+        <div class="row section-item">{{p2p.deadline | date:'short'}}</div>
       </div>
       <div class="col-20">
-        <div class="section-icon-wrap mediocre"><i class="kl-clock"></i></div>
+        <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
       </div>
     </div>
     <div class="row p2p-summary-wrap">
       <div class="col-100">
         <div class="row section-title">SUMMARY</div>
-        <div class="row section-item fade">Hello everyone, I am interested in learning japanese for beginners. I know harigana and katakana already.</div>
+        <div class="row section-item fade">{{p2p.text}}</div>
       </div>
     </div>
   </div>

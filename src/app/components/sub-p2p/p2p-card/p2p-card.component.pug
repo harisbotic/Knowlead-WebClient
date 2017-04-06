@@ -1,5 +1,5 @@
 
-.p2p-card-wrap
+.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos")
   .p2p-card-level-wrap
     .level-base.level-beginner
       .level-anglebox
@@ -20,46 +20,47 @@
         .profile-name-wrap
           //- Link to profile
           .row.profile-name
-            a(href="#") Ejub Hadzic
+            a(href="{{p2p.createdBy | userProfileLink}}") {{p2p.createdBy | fullName}}
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
           SUBJECT
         .row.section-item.
-          CSS Master
+          {{p2p.fos.name}}
       .col-20
         //- ICON COLOR CLASSES (low, mediocre, high)
-        .section-icon-wrap
+        .section-icon-wrap([ngClass]="fosColor")
           i.kl-subject
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
           REWARD
         .row.section-item.
-          420 Minutes 
+          {{p2p.actualPrice}}
       .col-20
         //- ICON COLOR CLASSES (low, mediocre, high)
-        .section-icon-wrap.mediocre
+        .section-icon-wrap([ngClass]="priceColor")
           i.kl-currency
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
           LANGUAGES
-        .row.section-item.
-          English
+        .row.section-item
+          div(*ngFor="let item of p2p.languages").
+            {{item.code | uppercase}}
       .col-20
         //- ICON COLOR CLASSES (low, mediocre, high)
-        .section-icon-wrap.high
+        .section-icon-wrap([ngClass]="languageColor")
           i.kl-globe
-    .row.p2p-section-wrap
+    .row.p2p-section-wrap(*ngIf="p2p.deadline")
       .col-80
         .row.section-title.
           DEADLINE
         .row.section-item.
-          4.April, 2017. 15:00
+          {{p2p.deadline | date:'short'}}
       .col-20
         //- ICON COLOR CLASSES (low, mediocre, high)
-        .section-icon-wrap.mediocre
+        .section-icon-wrap([ngClass]="deadlineColor")
           i.kl-clock
     //- ADD MARGIN CLASS IF NO DEADLINE .addMargin
     .row.p2p-summary-wrap
@@ -67,4 +68,4 @@
         .row.section-title.
           SUMMARY
         .row.section-item.fade.
-          Hello everyone, I am interested in learning japanese for beginners. I know harigana and katakana already.
+          {{p2p.text}}
