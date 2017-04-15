@@ -5,7 +5,7 @@
       .level-widebox
         span.level-text.
           Beginner
-  .p2p-card-content-wrap
+  .p2p-card-content-wrap.fade
     .row.bookmark-wrap
       //- ADD bookmarked CLASS TO THE ICON BELOW WHEN IT IS CLICKED
       i.kl-bookmark2
@@ -33,7 +33,7 @@
         .row.section-title.
           REWARD
         .row.section-item.
-          {{p2p.actualPrice}}
+          {{p2p.actualPrice}} Minutes
       .col-20
         .section-icon-wrap([ngClass]="priceColor")
           i.kl-currency
@@ -47,19 +47,19 @@
       .col-20
         .section-icon-wrap([ngClass]="languageColor")
           i.kl-globe
-    .row.p2p-section-wrap(*ngIf="p2p.deadline")
-      .col-80
-        .row.section-title.
-          DEADLINE
-        .row.section-item.
-          {{p2p.deadline | date:'short'}}
-      .col-20
-        .section-icon-wrap([ngClass]="deadlineColor")
-          i.kl-clock
-    //- ADD MARGIN CLASS IF NO DEADLINE .addMargin
-    .row.p2p-summary-wrap([ngClass]="{'addMargin': p2p.deadline == null}")
+    //- .row.p2p-section-wrap(*ngIf="p2p.deadline")
+    //-   .col-80
+    //-     .row.section-title.
+    //-       DEADLINE
+    //-     .row.section-item.
+    //-       {{p2p.deadline | date:'short'}}
+    //-   .col-20
+    //-     .section-icon-wrap([ngClass]="deadlineColor")
+    //-       i.kl-clock
+    //- ADD MARGIN CLASS IF NO DEADLINE .addMargin -> ([ngClass]="{'addMargin': p2p.deadline == null}")
+    .row.p2p-summary-wrap
       .col-100
         .row.section-title.
           SUMMARY
-        .row.section-item.fade.
+        .row.section-item.
           {{p2p.text}}

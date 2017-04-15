@@ -2,12 +2,13 @@
 
 .p2p-card-wrap {
     width: 230px;
-    height: 310px;
+    height: auto;
     display: inline-flex;
     margin: 5px 7px;
     cursor: pointer;
     border: $outline;
     border-radius: $border-radius;
+    position: relative;
 }
 
 .p2p-card-level-wrap {
@@ -69,12 +70,23 @@
   }
 }
 
+.fade:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  width: 35%;
+  height: 1.5em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 60%);
+}
+
 .p2p-card-content-wrap {
   border-radius: 0 $border-radius $border-radius 0;
   background-color: white;
   width: 100%;
   height: 100%;
-  padding-left: 15px;
+  padding: 0 0 5px 17px;
 
   .bookmark-wrap {
     position: relative;
@@ -114,9 +126,11 @@
 
   .section-icon-wrap {
     font-size: 23px;
-    margin: 8px 0 0 5px;
+    margin-left: 5px;
+    padding-top: 5px;
     color: $hover-dark-color;
     opacity: 0.7;
+    height: 36px;
   }
 
   .profile-name-wrap {
@@ -152,27 +166,14 @@
     div:nth-child(2) {
       color: $font-secondary-color;
     }
-
-    .fade {
-      position: relative;
-      height: 4.3em; /* exactly three lines */
-    }
-    .fade:after {
-      content: "";
-      text-align: right;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 30%;
-      height: 1em;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 60%);
-    }
   }
 
   .addMargin {
     margin-top: 30px;
   }
 }
+
+
 
 .low {
   color: $level-low !important;

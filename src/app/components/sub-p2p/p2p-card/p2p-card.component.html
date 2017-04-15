@@ -6,7 +6,7 @@
       <div class="level-widebox"><span class="level-text">Beginner</span></div>
     </div>
   </div>
-  <div class="p2p-card-content-wrap">
+  <div class="p2p-card-content-wrap fade">
     <div class="row bookmark-wrap"><i class="kl-bookmark2"></i></div>
     <div class="row profile-info-wrap">
       <div class="col-25">
@@ -31,7 +31,7 @@
     <div class="row p2p-section-wrap">
       <div class="col-80">
         <div class="row section-title">REWARD</div>
-        <div class="row section-item">{{p2p.actualPrice}}</div>
+        <div class="row section-item">{{p2p.actualPrice}} Minutes</div>
       </div>
       <div class="col-20">
         <div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div>
@@ -48,19 +48,10 @@
         <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>
       </div>
     </div>
-    <div class="row p2p-section-wrap" *ngIf="p2p.deadline">
-      <div class="col-80">
-        <div class="row section-title">DEADLINE</div>
-        <div class="row section-item">{{p2p.deadline | date:'short'}}</div>
-      </div>
-      <div class="col-20">
-        <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
-      </div>
-    </div>
-    <div class="row p2p-summary-wrap" [ngClass]="{'addMargin': p2p.deadline == null}">
+    <div class="row p2p-summary-wrap">
       <div class="col-100">
         <div class="row section-title">SUMMARY</div>
-        <div class="row section-item fade">{{p2p.text}}</div>
+        <div class="row section-item">{{p2p.text}}</div>
       </div>
     </div>
   </div>
