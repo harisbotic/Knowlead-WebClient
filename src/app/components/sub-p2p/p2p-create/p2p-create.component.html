@@ -1,147 +1,60 @@
-<div class="row">
-    <div class="col-100">
-        <div class="createPost-wrap">
-            <div class="row">
-                <div class="col-100">
-                    <div class="postType-wrap">
-                        <div class="row postType-row-bg-color">
-                            <div class="col-25">
-                                <div class="postTypeButton-wrap">
-                                    <button class="clearButton postTypeButton">
-                                        <i class="kl-peer postIcon"></i>
-                                        <div class="postText">Peer-to-Peer</div>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- COMING SOON! :P -->
-                            <!-- <div class="col-25">
-                                <div class="postTypeButton-wrap"></div>
-                            </div>
-                            <div class="col-25">
-                                <div class="postTypeButton-wrap"></div>
-                            </div>
-                            <div class="col-25">
-                                <div class="postTypeButton-wrap"></div>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-100">
-                    <div class="createForm-wrap">
-                        <form (ngSubmit)="confirmationOpened = true" [formGroup]="form">
-                            <div class="row">
-                                <div class="col-100">
-                                    <div class="postTextarea-wrap">
-                                        <textarea formControlName="text" placeholder="Share what are you interested to learn..." class="postTextarea"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row attachment-border-wrap">
-                                <div class="col-100">
-                                    <div class="attachment-wrap">
-                                        <!-- NOTE: ATTACHMENT PILLS GO HERE xD -->
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row input-elements-wrap">
-                                <div class="col-75">
-                                    <div class="postInput-wrap">
-                                        <div [ngSwitch]="stepStr">
-
-                                            <div *ngSwitchCase="'fosId'">
-                                                <div class="col-16">
-                                                    <div class="inputTitle-wrap">
-                                                        <div class="inputTitle centerV">Subject</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-84">
-                                                    <ng-select outputType="id" formControlName="fosId" [options]="foses" placeholder="Select the subject you want to study" class="postSubjectInput"></ng-select>
-                                                </div>
-                                            </div>
-
-                                            <div *ngSwitchCase="'initialPrice'">
-                                                <div class="col-16">
-                                                    <div class="inputTitle-wrap">
-                                                        <div class="inputTitle centerV">Reward</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-84">
-                                                    <input type="number" formControlName="initialPrice" placeholder="How many minutes are you offering?" class="postNumberInput" min="10">
-                                                </div>
-                                            </div>
-
-                                            <div *ngSwitchCase="'languages'">
-                                                <div class="col-16">
-                                                    <div class="inputTitle-wrap">
-                                                        <div class="inputTitle centerV">Language</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-84">
-                                                    <ng-select [options]="languages" [multiple]="true" formControlName="languages" placeholder="On which languages do you want to study?" class="postLanguageInput"></ng-select>
-                                                </div>
-                                            </div>
-
-                                            <div *ngSwitchCase="'deadline'">
-                                                <div class="col-16">
-                                                    <div class="inputTitle-wrap">
-                                                        <div class="inputTitle centerV">Deadline</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-84">
-                                                    <app-flatpickr [disablePast]="true" formControlName="deadline" placeholder="Pick a deadline till when you need to study" class="postDatepickInput"></app-flatpickr>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-10">
-                                    <div class="nextStep-wrap">
-                                        <button [disabled]="step >= availableSteps.length - 1" (click)="setStep(step + 1)" type="button" class="clearButton nextStepButton">
-                                            Next
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-15">
-                                    <div class="addFile-wrap">
-                                        <button class="clearButton addFileButton" disabled="true">
-                                            Add Files
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-80">
-                                    <button *ngFor="let stepValue of steps; let idx = index" [disabled]="availableSteps.indexOf(stepValue) == -1" type="button" (click)="setStep(idx)" class="postButton">
-                                        <i [class]="iconMapping[stepValue]" [class.currentStep]="idx === step"></i>
-                                    </button>
-                                </div>
-                                <div class="col-20">
-                                    <div class="submitPost-wrap">
-                                        <button type="submit" [disabled]="!form.valid" class="submitPostButton">Post</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 100 -->
-<ngl-modal [(open)]="confirmationOpened">
-  <div body>
-      <div class="row betaNote">
-          <span class="pleaseNote"> Please note:</span> This field is not yet popular among the users, so you may have to wait some time or you may not get the response at all. However, we encourage you to post it.<br><br>
-          Do you still want to proceed?
+<div class="p2p-create-wrap">
+  <div class="p2p-create-headline">Post a Peer-to-Peer Request</div>
+  <form (ngSubmit)="confirmationOpened = true" [formGroup]="form">
+    <div class="choose-subject-wrap">
+      <div class="title">Choose a field of study</div>
+      <div class="fos-selection">
+        <app-fos-selector></app-fos-selector>
       </div>
-  </div>
-  <template ngl-modal-footer>
-    <button class="defaultCloseButton" (click)="confirmationOpened=false">Cancel</button>
-    <button class="popUpPostButton" (click)="onSubmit();confirmationOpened=false" type="button">Post</button>
-  </template>
-</ngl-modal>
+    </div>
+    <div class="describe-post-wrap">
+      <div class="headline">Describe the Request</div>
+      <div class="title">Describe the work to be done</div>
+      <div class="description-text">
+        <textarea class="description" placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you."></textarea>
+      </div>
+      <div class="attachments-wrap">
+        <div class="title">Attachments</div>
+        <div class="attachment-field">
+          <app-file-upload></app-file-upload>
+        </div>
+      </div>
+      <div class="language-wrap">
+        <div class="title">Choose a language on which you want to study</div>
+        <ng-select class="select-language" [options]="languages" [multiple]="true" formControlName="languages" placeholder="EXAMPLE: English, Bosnian..."></ng-select>
+      </div>
+    </div>
+    <div class="rate-reward-wrap">
+      <div class="headline">Rate and Reward</div>
+      <div class="title">How many minutes are you offering?</div>
+      <input class="reward" type="number" min="10" placeholder="Minutes">
+      <div class="difficulty-level-wrap">
+        <div class="title">Desired Level of Knowledge</div>
+        <div class="difficulty-options-wrap">
+          <div class="difficulty-options">
+            <input type="radio" name="difficulty" id="match_1" value="basic" checked>
+            <label class="basic" for="match_1">
+              <div class="level">I</div>
+              <div class="level-text">Basic</div>
+            </label>
+          </div>
+          <div class="difficulty-options">
+            <input type="radio" name="difficulty" id="match_2" value="intermediate" checked>
+            <label class="intermediate" for="match_2">
+              <div class="level">II</div>
+              <div class="level-text">Intermediate</div>
+            </label>
+          </div>
+          <div class="difficulty-options">
+            <input type="radio" name="difficulty" id="match_3" value="advanced" checked>
+            <label class="advanced" for="match_3">
+              <div class="level">III</div>
+              <div class="level-text">Advanced</div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

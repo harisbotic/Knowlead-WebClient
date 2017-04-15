@@ -1,0 +1,56 @@
+.p2p-create-wrap
+  .p2p-create-headline.
+    Post a Peer-to-Peer Request
+  form((ngSubmit)="confirmationOpened = true" [formGroup]="form")
+    .choose-subject-wrap
+      .title.
+        Choose a field of study
+      .fos-selection
+        app-fos-selector
+    .describe-post-wrap
+      .headline.
+        Describe the Request
+      .title.
+        Describe the work to be done
+      .description-text
+        textarea.description(placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you.")
+      .attachments-wrap
+        .title.
+          Attachments
+        .attachment-field
+          app-file-upload
+      .language-wrap
+        .title.
+          Choose a language on which you want to study
+        ng-select([options]="languages", [multiple]="true", formControlName="languages", placeholder="EXAMPLE: English, Bosnian...").select-language
+    .rate-reward-wrap
+      .headline.
+        Rate and Reward
+      .title.
+        How many minutes are you offering?
+      input(type="number", min="10" placeholder="Minutes").reward
+      .difficulty-level-wrap
+        .title.
+          Desired Level of Knowledge
+        .difficulty-options-wrap
+          .difficulty-options
+            input(type="radio", name="difficulty", id="match_1", value="basic", checked)
+            label(for="match_1").basic
+              .level
+                | I
+              .level-text
+                | Basic
+          .difficulty-options
+            input(type="radio", name="difficulty", id="match_2", value="intermediate", checked)
+            label(for="match_2").intermediate
+              .level
+                | II
+              .level-text
+                | Intermediate
+          .difficulty-options
+            input(type="radio", name="difficulty", id="match_3", value="advanced", checked)
+            label(for="match_3").advanced
+              .level
+                | III
+              .level-text
+                | Advanced
