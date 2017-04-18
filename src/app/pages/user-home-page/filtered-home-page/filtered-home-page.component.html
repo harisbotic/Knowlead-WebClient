@@ -1,7 +1,4 @@
 <span *ngIf="wasProblem">
   There was a problem getting p2ps for this section. Sorry about that.
 </span>
-<app-p2p-card *ngFor="let p2p of p2ps" [p2pId]="p2p.p2pId"></app-p2p-card>
-<span *ngIf="p2ps?.length === 0">
-  You don't have any Peer to Peers in this section
-</span>
+<app-p2p-masonry-list [p2ps]="p2ps"></app-p2p-masonry-list>

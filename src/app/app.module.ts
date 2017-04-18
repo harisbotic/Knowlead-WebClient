@@ -8,6 +8,7 @@ import { PopoverModule } from 'ngx-popover';
 import { SelectModule } from 'angular2-select';
 import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
 import { Autosize } from 'angular2-autosize/angular2-autosize';
+import { MasonryModule } from 'angular2-masonry';
 
 
 import { AppRouting } from './app.routing';
@@ -98,6 +99,7 @@ import { ChatNotificationsService } from './services/notifications/chat-notifica
 import { P2pCardComponent } from './components/sub-p2p/p2p-card/p2p-card.component';
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
 import { P2pFeedbackFormComponent } from './components/sub-popups/p2p-feedback-form/p2p-feedback-form.component';
+import { P2pMasonryListComponent } from './components/sub-p2p/p2p-masonry-list/p2p-masonry-list.component';
 
 @NgModule({
   declarations: [
@@ -167,7 +169,8 @@ import { P2pFeedbackFormComponent } from './components/sub-popups/p2p-feedback-f
     NotebookEditPopupComponent,
     P2pCardComponent,
     P2pCreatePageComponent,
-    P2pFeedbackFormComponent
+    P2pFeedbackFormComponent,
+    P2pMasonryListComponent
   ],
   imports: [
     BrowserModule,
@@ -178,6 +181,7 @@ import { P2pFeedbackFormComponent } from './components/sub-popups/p2p-feedback-f
     MomentModule,
     PopoverModule,
     SelectModule,
+    MasonryModule,
     PerfectScrollbarModule,
     NglModule.forRoot({
       svgPath: '/assets'

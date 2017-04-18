@@ -1,0 +1,9 @@
+<masonry *ngIf="p2ps?.length > 0">
+  <masonry-brick class="brick" *ngFor="let p2p of p2ps">
+    <app-p2p-card [p2pId]="p2p.p2pId"></app-p2p-card>
+  </masonry-brick>
+</masonry>
+
+<span *ngIf="p2ps?.length === 0">
+  There are no Peer-to-peers here.
+</span>
