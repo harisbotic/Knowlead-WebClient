@@ -4,7 +4,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
 @import "kl-styles/variables.scss";
-@import "kl-styles/kl-icons-font-style.css"; 
+@import "kl-styles/kl-icons-font-style.css";
 
 
 
@@ -706,6 +706,7 @@ ngl-rating {
     //background-color: #FFDCDC;
 }
 
+.col-5   { width: 5%;   }
 .col-10  { width: 10%;  }
 .col-12_5{ width: 12.5%;}
 .col-13  { width: 13%;  }
@@ -744,6 +745,7 @@ ngl-rating {
 .col-84  { width: 84%;  }
 .col-85  { width: 85%;  }
 .col-90  { width: 90%;  }
+.col-95  { width: 95%;  }
 .col-100 { width: 100%; }
 
 .outline, .outline * {

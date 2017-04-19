@@ -28,29 +28,74 @@
         Rate and Reward
       .title.
         How many minutes are you offering?
-      input(type="number", min="10" placeholder="Minutes").reward
+      .col-5#minutes-icon
+        i.kl-currency
+      .col-95
+        input(type="number", min="10" placeholder="Minutes").reward
       .difficulty-level-wrap
         .title.
-          Desired Level of Knowledge
+          Desired Level of Knowledge from Teacher
         .difficulty-options-wrap
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_1", value="basic", checked)
+            input(type="radio", name="difficulty", id="match_1", value="basic")
             label(for="match_1").basic
-              .level
+              .item
                 | I
-              .level-text
+              .item-text
                 | Basic
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_2", value="intermediate", checked)
+            input(type="radio", name="difficulty", id="match_2", value="intermediate")
             label(for="match_2").intermediate
-              .level
+              .item
                 | II
-              .level-text
+              .item-text
                 | Intermediate
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_3", value="advanced", checked)
+            input(type="radio", name="difficulty", id="match_3", value="advanced")
             label(for="match_3").advanced
-              .level
+              .item
                 | III
-              .level-text
+              .item-text
                 | Advanced
+    .deadline-wrap
+      .headline
+        | Deadline 
+        span
+          | (Optional)
+      .deadline-selection-wrap
+        .deadline-options-wrap
+          .deadline-options
+            input(type="radio", name="deadline", id="time_1", value="24h")
+            label(for="time_1")#one-day
+              .item
+                i.kl-one-day
+              .item-text
+                | 24 Hours
+          .deadline-options
+            input(type="radio", name="deadline", id="time_2", value="3days")
+            label(for="time_2")#three-days
+              .item
+                i.kl-three-days
+              .item-text
+                | 3 Days
+          .deadline-options
+            input(type="radio", name="deadline", id="time_3", value="7days")
+            label(for="time_3")#seven-days
+              .item
+                i.kl-seven-days
+              .item-text
+                | 7 Days
+          .deadline-options
+            input(type="radio", name="deadline", id="time_4", value="none", checked)
+            label(for="time_4")#none
+              .item
+                i.kl-no-deadline
+              .item-text
+                | No Deadline
+        .specific-date-wrap
+          .title#specific-date-text
+            | Select Specific Date and Time
+          app-flatpickr(placeholder="select specific date")
+    .footer-buttons
+      button.post-button
+        | Post
