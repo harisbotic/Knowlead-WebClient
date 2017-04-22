@@ -95,7 +95,11 @@
         .specific-date-wrap
           .title#specific-date-text
             | Select Specific Date and Time
-          app-flatpickr(placeholder="select specific date")
-    .footer-buttons
-      button.post-button
+          app-flatpickr(placeholder="Select specific date").specific-date-input
+    .footer-elements
+      .row#note
+        span#noteTitle NOTE:  
+        |  Selected field is not yet popular among the users, so you may have to wait some time or you may not get the response at all. 
+        span#noteText  However, we encourage you to post it.
+      button.post-p2p-button
         | Post

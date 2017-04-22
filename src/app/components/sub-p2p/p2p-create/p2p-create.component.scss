@@ -61,7 +61,7 @@
     .description {
       min-width: 70%;
       max-width: 70%;
-      border: $outline;
+      border: 1px solid #d8dde6;
       border-radius: $border-radius;
       min-height: 150px;
       padding: 12px;
@@ -74,13 +74,13 @@
       -ms-transition: min-height 0.20s ease-in-out;
 
       &::-webkit-input-placeholder {
-          color: $placeholder-new-color;
+          color: $placeholder-secondary-color;
       }
     }
   }
 
   .attachment-field {
-    width: 70%;
+    width: 18%;
     margin-top: 10px;
     margin-bottom: 40px;
   }
@@ -102,7 +102,7 @@
 
     input.reward[type="number"] {
       border-radius: $border-radius;
-      border: $outline;
+      border: $outline-dark;
       width: 150px;
       height: 40px;
       line-height: 40px;
@@ -117,7 +117,7 @@
       }
 
       &::-webkit-input-placeholder {
-          color: $placeholder-new-color;
+          color: $placeholder-secondary-color;
       }
     }
 
@@ -136,17 +136,17 @@
           margin-right: 10px;
 
           label {
-            border: 2px solid $placeholder-new-color;
+            border: 2px solid $placeholder-secondary-color;
             box-sizing: border-box;
 	          display: block;
             width: 100%;
             height: 100%;
             padding: 20px 10px 0 10px;
             cursor: pointer;
-            opacity: .6;
+            opacity: .5;
             transition: all .2s ease-in-out;
             &:hover, &:focus, &:active {
-              border-color: rgba($placeholder-new-color,.7);
+              border-color: rgba($placeholder-secondary-color,.7);
             }
           }
 
@@ -156,7 +156,7 @@
             font-family: "Cambria";
             position: relative;
             margin-bottom: 20px;
-            color: $placeholder-new-color;
+            color: $placeholder-secondary-color;
             transition: all .2s ease-in-out;
 
             &:after {
@@ -166,14 +166,14 @@
               left: 65px;
               height: 2px;
               width: 50px;
-              background-color: $placeholder-new-color;
+              background-color: $placeholder-secondary-color;
               transition: all .2s ease-in-out;
             }
           }
 
           .item-text {
             font-size: 16px;
-            color: $placeholder-new-color;
+            color: $placeholder-secondary-color;
             transition: all .2s ease-in-out;
           }
 
@@ -255,17 +255,17 @@
         margin-right: 10px;
 
         label {
-          border: 2px solid $placeholder-new-color;
+          border: 2px solid $placeholder-secondary-color;
           box-sizing: border-box;
           display: block;
           width: 100%;
           height: 100%;
           padding: 20px 10px 0 10px;
           cursor: pointer;
-          opacity: .6;
+          opacity: .5;
           transition: all .2s ease-in-out;
           &:hover, &:focus, &:active {
-            border-color: rgba($placeholder-new-color,.7);
+            border-color: rgba($placeholder-secondary-color,.7);
           }
         }
 
@@ -275,7 +275,7 @@
           font-family: "Cambria";
           position: relative;
           margin-bottom: 20px;
-          color: $placeholder-new-color;
+          color: $placeholder-secondary-color;
           transition: all .2s ease-in-out;
 
           &:after {
@@ -285,14 +285,14 @@
             left: 55px;
             height: 2px;
             width: 65px;
-            background-color: $placeholder-new-color;
+            background-color: $placeholder-secondary-color;
             transition: all .2s ease-in-out;
           }
         }
 
         .item-text {
           font-size: 16px;
-          color: $placeholder-new-color;
+          color: $placeholder-secondary-color;
           transition: all .2s ease-in-out;
         }
 
@@ -369,21 +369,40 @@
 
   .specific-date-wrap {
     #specific-date-text {
-      margin-top: 25px;
+      margin: 25px 0;
     }
-    
-    app-flatpickr > input.flatpickr-input.flatpickr-input.form-control.input {
-      width: 200px;
-      height: 40px;
-      line-height: 40px;
-      font-size: 15px;
-      border: $outline;
-      padding: 0 5px;
+  }
 
-      &::-webkit-input-placeholder {
-          color: $placeholder-color;
+  .footer-elements {
+    padding: $padding-create-p2p-sections;
+
+    #note {
+      width: 80%;
+      margin-bottom: 20px;
+
+      span#noteTitle {
+        font-weight: bold;
+        margin-right: 3px;
+      }
+
+      span#noteText {
+        margin-left: 45px;
       }
     }
 
+    .post-p2p-button {
+      width: 130px;
+      height: 40px;
+      background-color: $knowlead-primary;
+      border: none;
+      border-radius: $border-radius;
+      outline: none;
+      color: white;
+
+      &:hover {
+        background-color: transparentize($knowlead-primary, 0.1);
+      }
+
+    }
   }
 }

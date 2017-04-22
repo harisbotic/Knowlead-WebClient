@@ -221,6 +221,20 @@ input.postNumberInput[type=number] {
 
 }
 
+.specific-date-input > input[type="text"] {
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
+  border: $outline-dark;
+  padding: 0 5px;
+  border-radius: $border-radius;
+
+  &::-webkit-input-placeholder {
+      color: $placeholder-secondary-color;
+  }
+}
+
 
 .writeOfferDatepickInput > input[type=text] {
     width: 100%;

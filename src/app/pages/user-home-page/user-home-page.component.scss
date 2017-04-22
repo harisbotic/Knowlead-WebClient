@@ -199,7 +199,31 @@
 }
 
 .top-elements {
+  padding-left: 8px;
   height: 57px;
+  display: flex;
+  align-items: center;
+
+  span#searchTitle {
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  input.search-p2p-input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #7d7d7d;
+    height: 30px;
+    background: transparent;
+    width: 270px;
+    outline: none;
+    padding: 0 5px;
+    margin-top: 1px;
+
+    &::-webkit-input-placeholder {
+        color: transparentize($placeholder-secondary-color, 0.4);
+    }
+  }
 }
 
 
