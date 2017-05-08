@@ -96,7 +96,7 @@ export class HttpProvider extends Http {
                 return Observable.throw(errorResponse);
             }
             let error = responseToResponseModel(errorResponse);
-            if (error != null && error.errors != null && error.errors.indexOf(ErrorCodes.notLoggedIn) > -1) {
+            if (errorResponse.status === 401) {
                 this.sessionService.logout();
                 if (!isPathFree(this.router.url)) {
                     console.warn('Redirecting to login');
