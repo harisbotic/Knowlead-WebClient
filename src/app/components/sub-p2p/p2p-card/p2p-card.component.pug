@@ -14,7 +14,7 @@
         .profile-picture
           //- Link to profile
           a(routerLink="{{p2p.user | userProfileLink}}")
-            app-profile-picture([user]="p2p.user" [uploadable]="false" size="small")
+            app-profile-picture([user]="p2p.createdBy" [uploadable]="false" size="small")
       .col-75
         .profile-name-wrap
           .row.profile-name

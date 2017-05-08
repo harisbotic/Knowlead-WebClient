@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-35">
             <div class="profile-picture"><a href="#">
-                <app-profile-picture [user]="undefined" [uploadable]="false" size="small"></app-profile-picture></a></div>
+                <app-profile-picture [user]="user" [uploadable]="false" size="small"></app-profile-picture></a></div>
           </div>
           <div class="col-65">
             <div class="profile-name-wrap">
@@ -86,52 +86,53 @@
             </div>
           </div>
         </div>
-        <div class="upcoming-events-wrap">
-          <div class="row">
-            <div class="col-100">
-              <div class="title-wrap">
-                <div class="col-80">
-                  <div class="title">Upcoming Events                </div>
-                </div>
-                <div class="col-20">
-                  <div class="info-icon"><i class="kl-info"></i></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="upcoming-events-content">
-            <div class="row">
-              <div class="col-100">
-                <div class="timer-wrap"><i class="kl-circle"></i><span class="timer-text">in 13 days</span></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-100">
-                <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with:</span></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-75">
-                <div class="col-25">
-                  <div class="profile-picture"><a href="#">
-                      <app-profile-picture [user]="user" size="x-small"></app-profile-picture></a></div>
-                </div>
-                <div class="col-75">
-                  <div class="profile-name-wrap">
-                    <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-25">
-                <div class="reward-wrap"><span class="reward-text">135</span><i class="kl-currency"></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="all-events-wrap"><a routerLink="/home/filtered/Scheduled">
-                <div class="all-events">Check All Events</div></a></div>
-          </div>
-        </div>
+        <!--.upcoming-events-wrap
+        .row
+          .col-100
+            .title-wrap
+              .col-80
+                .title.
+                  Upcoming Events                
+              .col-20
+                .info-icon
+                  i.kl-info
+        .upcoming-events-content
+          .row
+            .col-100
+              .timer-wrap
+                i.kl-circle
+                span.timer-text.
+                  in 13 days
+          .row
+            .col-100
+              .with-wrap
+                span.with-subject.
+                  3D Animation 
+                span.with-text.
+                  with:
+          .row
+            .col-75
+              .col-25
+                .profile-picture
+                  //- Link to profile
+                  a(href="#")
+                    app-profile-picture([user]="user" size="x-small")
+              .col-75
+                .profile-name-wrap
+                  //- Link to profile
+                  .profile-name
+                    a(href="#") Ejub Hadzic
+            .col-25
+              .reward-wrap
+                span.reward-text.
+                  135
+                i.kl-currency
+        .row
+          .all-events-wrap
+            a(routerLink="/home/filtered/Scheduled")
+              .all-events.
+                Check All Events
+        -->
       </div>
     </div>
     <div class="col-75">
