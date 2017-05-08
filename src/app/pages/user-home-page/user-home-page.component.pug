@@ -79,7 +79,7 @@
                     .col-75
                       .sidebar-item.
                         Bookmarked
-        //.upcoming-events-wrap
+        .upcoming-events-wrap
           .row
             .col-100
               .title-wrap
@@ -128,7 +128,48 @@
     .col-75
       .main-section-wrap
         .top-elements
-          span#searchTitle Search
-          input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
+          .col-50
+            span#searchTitle Search
+            input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
+          .col-50
+            .create-request-button-wrap
+              button.create-request-button Create a Request
+        .create-dropdown-wrap
+          .row
+            .request-section-wrap
+              .section-title Student Section
+          .row.request-type-wrap#last-study-section
+            .col-20
+              .request-type-image-wrap P2P
+                //- img(src="#" alt="p2p-request")              
+            .col-65
+              .row
+                .request-type-title Peer-to-Peer
+              .row
+                .request-type-description.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing
+                  elit, sed do eiusmod tempor incididunt ut labore.
+                  sed do eiusmod tempor incididunt ut labore.
+                  sed do eiusmod tempor incididunt ut labore.
+            .col-15
+              button.create-p2p-button Create
+          .row
+            .request-section-wrap
+              .section-title Teacher Section
+          .row.request-type-wrap
+            .col-20
+              .request-type-image-wrap#teachingImg Course
+                //- img(src="#" alt="p2p-request")              
+            .col-65
+              .row
+                .request-type-title Course
+              .row
+                .request-type-description.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing
+                  elit, sed do eiusmod tempor incididunt ut labore.
+                  sed do eiusmod tempor incididunt ut labore.
+                  sed do eiusmod tempor incididunt ut labore.
+            .col-15
+              button.create-p2p-button Create
         .p2p-post-cards
           router-outlet

@@ -224,6 +224,81 @@
         color: transparentize($placeholder-secondary-color, 0.4);
     }
   }
+
+  .create-request-button-wrap {
+    .create-request-button {
+      float: right;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $knowlead-secondary;
+      outline: none;
+      height: 37px;
+      width: 220px;
+      color: white;
+      font-size: 15px;
+    }
+  }
+}
+
+.create-dropdown-wrap {
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: $border-radius;
+  border: $outline;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.request-section-wrap {
+  padding: 0 10px 5px 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#last-study-section {
+  border-bottom: $divider;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.request-type-image-wrap {
+  background-color: transparent;
+  border: 2px solid $knowlead-secondary;
+  border-radius: $border-radius;
+  width: 100%;
+  height: 85px;
+  text-align: center;
+  color: $knowlead-secondary;
+  line-height: 85px;
+  font-size: 37px;
+  font-weight: bold;
+}
+
+#teachingImg {
+  border-color: $knowlead-primary;
+  color: $knowlead-primary;
+  font-size: 30px;
+}
+
+.request-type-title, .request-type-description {
+  margin-left: 15px;
+}
+
+.request-type-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.create-p2p-button {
+  border: none;
+  border-radius: $border-radius;
+  background-color: $knowlead-primary;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  height: 46px;
+  width: 100%;
+  margin-top: 17px;
 }
 
 
