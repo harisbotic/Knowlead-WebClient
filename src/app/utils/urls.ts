@@ -1,6 +1,7 @@
 export const API = 'https://knowlead.co:8080';
+export const AUTH = 'https://knowlead.co:5005';
 export const FRONTEND = 'https://knowlead.co';
-export const LOGIN = API + '/connect/token';
+export const LOGIN = AUTH + '/connect/token';
 export const REGISTER = API + '/api/account/register';
 export const CONFIRMEMAIL = API + '/api/account/confirmEmail';
 export const USER = API + '/api/account';

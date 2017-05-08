@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 import { LOGIN, API } from './../utils';
 import { StorageService } from './storage.service';
@@ -56,10 +56,12 @@ export class SessionService {
           'grant_type': 'refresh_token',
           'refresh_token': this.storageService.getRefreshToken(),
           'resource': API,
-          'client_id': 'angular',
           'scope': 'offline_access'
         }), {
-          headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
+          headers: new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization':'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
+          })
         }).map(responseToLoginResponse).map(response => {
           this.storageService.setAccessToken(response.access_token, response.refresh_token, true);
           return response.access_token;
@@ -86,10 +88,12 @@ export class SessionService {
       'username': cridentials.email,
       'password': cridentials.password,
       'resource': API,
-      'client_id': 'angular',
       'scope': 'offline_access'
     }), {
-      headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
+      headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization':'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
+      })
     }).finally(() => {
       subject.complete();
     }).subscribe((response: Response) => {
