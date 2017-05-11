@@ -2,7 +2,7 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 import { ModelUtilsService } from '../model-utils.service';
 import { Subscription } from 'rxjs';
-import * as _ from 'underscore';
+import * as _ from 'lodash';
 import { sortByDateFunction } from '../../utils/index';
 
 export interface NotificationSource {
@@ -76,7 +76,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
       this.fillSubscription.unsubscribe();
       delete this.fillSubscription;
     }
-    this.notifications = _.uniq(this.notifications
+    this.notifications = _.uniqBy(this.notifications
       .concat(notifications)
       .slice()
       .sort(sortByDateFunction<NotificationModel>('scheduledAt', false)),
