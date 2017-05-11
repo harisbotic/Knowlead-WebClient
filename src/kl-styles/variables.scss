@@ -36,6 +36,14 @@ $level-low: #DE3C4B;
 $level-mediocre: #FE8A40;
 $level-high: #109648;
 
+// Call Page Colors //
+$call-video-background-color: #181818;
+$call-video-primary-color: #222222;
+$call-video-secondary-color: #363636;
+$call-video-accent-color: #555555;
+$call-video-font-color: #aaaaaa;
+
+
 ///////////////////////////////////////////////////////////
 // SIZE CLASSES ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
@@ -61,3 +69,5 @@ $divider: 2px solid #e1e2e5;
 
 // PADDING
 $padding-create-p2p-sections: 25px 20px 40px 30px;
+//Sidebar width has to be writen manually in calc functions (call.page.component.scss)
+$call-sidebar-width: 340px;

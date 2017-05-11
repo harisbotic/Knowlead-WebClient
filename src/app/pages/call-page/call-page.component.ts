@@ -31,6 +31,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
 
   useMic = true;
   useCam = true;
+  useScreenShare = false;
 
   startTime: Date;
   duration = 0;
@@ -58,7 +59,7 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
   }
 
   private addStreamToVideo(video: HTMLVideoElement, theStream: MediaStream) {
-    video.src = window.URL.createObjectURL(theStream);
+    video.srcObject = theStream;
     video.play();
   }
 
@@ -86,6 +87,119 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
     }
   }
 
+  toggleScreenShare() {
+    if (this.call) {
+      this.useScreenShare = !this.useScreenShare;
+      this.realtimeService.resetCall(this.call.callId);
+    }
+  }
+
+  getChromeScreenShareConstraints(): Promise<any> {
+    let constraintResolver = (resolve, reject) => {
+      // this statement defines getUserMedia constraints
+      // that will be used to capture content of screen
+      const screen_constraints = {
+          mandatory: {
+              chromeMediaSource: DetectRTC.screen.chromeMediaSource,
+              maxWidth: 1920,
+              maxHeight: 1080,
+              minAspectRatio: 1.77,
+            chromeMediaSourceId: undefined
+          },
+          optional: [],
+      };
+
+      // this statement verifies chrome extension availability
+      // if installed and available then it will invoke extension API
+      // otherwise it will fallback to command-line based screen capturing API
+      if (DetectRTC.screen.chromeMediaSource === 'desktop' && !DetectRTC.screen.sourceId) {
+          DetectRTC.screen.getSourceId(function (error) {
+              // if exception occurred or access denied
+              if (error && error === 'PermissionDeniedError') {
+                reject(error);
+              } else {
+                constraintResolver(resolve, reject);
+              }
+          });
+          return;
+      }
+
+      // this statement sets gets 'sourceId" and sets "chromeMediaSourceId"
+      if (DetectRTC.screen.chromeMediaSource === 'desktop') {
+          screen_constraints.mandatory.chromeMediaSourceId = DetectRTC.screen.sourceId;
+      }
+
+      // it is the session that we want to be captured
+      // audio must be false
+      const session = {
+          video: screen_constraints
+      };
+      resolve(session);
+
+      // now invoking native getUserMedia API
+    };
+
+    let extensionResolver = (resolve, reject) => {
+      DetectRTC.screen.isChromeExtensionAvailable(result => {
+        if (result) {
+          constraintResolver(resolve, reject);
+        } else {
+          reject('Extension not installed!');
+        }
+      });
+    };
+
+    let ret = new Promise(extensionResolver);
+    return ret;
+  }
+
+  getFirefoxScreenShareConstraints(): Promise<any> {
+    console.log('REQUEST FOR FIREFOX CONSTRAINTS');
+    return new Promise(resolve => {
+      resolve({
+        video: {
+            mozMediaSource: 'window',
+            mediaSource: 'window',
+            maxWidth: 1920,
+            maxHeight: 1080,
+            minAspectRatio: 1.77
+        }
+      });
+    });
+  }
+
+  captureUserMedia(onStreamApproved: (stream: MediaStream) => void, onStreamDenied: (reason: any) => void) {
+      // the TMP variable is here to get arond a bug in typescript: https://github.com/Microsoft/TypeScript/issues/10242
+      let handler = (session) => {
+        let tmp = <any>(navigator.mediaDevices.getUserMedia(session).then((stream) => {
+          navigator.mediaDevices.getUserMedia({audio: true}).then((audioStream) => {
+            for (let track of audioStream.getAudioTracks()) {
+              stream.addTrack(track);
+            }
+            onStreamApproved.call(this, stream);
+          });
+        }));
+        tmp.catch(onStreamDenied.bind(this));
+      };
+      let promise: any;
+      if (this.useScreenShare) {
+        if ((!!(<any>navigator).mozGetUserMedia)) {
+          // FIREFOX SCREEN SHARE
+          promise = this.getFirefoxScreenShareConstraints();
+        } else {
+          // CHROME SCREEN SHARE
+          promise = this.getChromeScreenShareConstraints();
+        }
+        promise.then(session => {
+          handler(session);
+        });
+        promise.catch(onStreamDenied.bind(this));
+      } else {
+        handler({video: true});
+      }
+      // handler({audio: false, video: true});
+  };
+
   initPeer() {
     this.signaledSDPs = [];
     if (this.myStream) {
@@ -96,26 +210,31 @@ export class CallPageComponent extends BaseComponent implements OnInit, OnDestro
       return;
     }
     console.debug('Initializing peer');
-    navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((myStream) => {
-      this.myStream = myStream;
-      this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
-      this.myVideo.nativeElement.muted = true;
-      this.refreshStreamMuting();
-      this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
-      console.debug('Peer initialized');
-      this.peer.on('signal', (data) => {
-        console.log('Got signal !');
-        this.mySDP = data;
-        this.realtimeService.addCallSDP(this.call.callId, data);
-      });
-      this.peer.on('stream', (otherStream) => {
-        this.otherStream = otherStream;
-        this.addStreamToVideo(this.video.nativeElement, otherStream);
-      });
-      this.setOtherSDP();
-    }, (error) => {
-      this.realtimeService.stopCall(this.call.callId, CallEndReasons.startProblem);
+    this.captureUserMedia(this.onGotStream, this.onGotStreamError);
+  }
+
+  onGotStream(myStream: MediaStream) {
+    this.myStream = myStream;
+    this.addStreamToVideo(this.myVideo.nativeElement, this.myStream);
+    this.myVideo.nativeElement.muted = true;
+    this.refreshStreamMuting();
+    this.peer = new SimplePeer({initiator: this.initiator, stream: myStream, trickle: true});
+    console.debug('Peer initialized');
+    this.peer.on('signal', (data) => {
+      console.log('Got signal !');
+      this.mySDP = data;
+      this.realtimeService.addCallSDP(this.call.callId, data);
     });
+    this.peer.on('stream', (otherStream) => {
+      this.otherStream = otherStream;
+      this.addStreamToVideo(this.video.nativeElement, otherStream);
+    });
+    this.setOtherSDP();
+  }
+
+  onGotStreamError(reason: any) {
+    console.error(reason);
+    this.realtimeService.stopCall(this.call.callId, CallEndReasons.startProblem);
   }
 
   cleanup() {
