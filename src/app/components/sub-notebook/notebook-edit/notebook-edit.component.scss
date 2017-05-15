@@ -13,7 +13,7 @@
 }
 
 .notebookForm-wrap {
-    width: 395px;
+    width: 345px;
     height: 92vh;
 }
 
@@ -32,34 +32,33 @@
 }
 
 .notebookTitleInput {
-    border: 1px solid $hover-dark-color;
-    border-radius: 5px;
+    border: none;
     width: 100%;
     padding: 12px 10px;
+    background-color: $call-video-secondary-color;
+    color: white;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     outline: none;
 
+
     &::-webkit-input-placeholder {
         color: $placeholder-color;
-    }
-    &:focus {
-        box-shadow: 0 0 5px transparentize($knowlead-primary, 0.6);
-        border: 1px solid transparentize($knowlead-primary, 0.6);
     }
 }
 
 .notebookText {
     margin: 10px 20px;
-    min-width: 351px;
-    max-width: 351px;
-    border: 1px solid $hover-dark-color;
+    min-width: 306px;
+    max-width: 306px;
+    border: none;
     min-height: 65vh;
     padding: 10px;
     outline: none;
-    border-radius: $border-radius;
+    background-color: $call-video-secondary-color;
     resize: none;
+    color: white;
 
     &::-webkit-input-placeholder {
         color: $placeholder-color;

@@ -47,6 +47,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 
 ///////////////////////////////////////////////////////////
 // CALL POPUP CLASSES /////////////////////////////////////
+// TOOLTIP CLASSES ////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 .tooltip-parent {
     position: relative;
@@ -583,9 +584,10 @@ ngl-rating {
     background-color: transparent;
     font-weight: bold;
     font-size: 15px;
-    color: $font-primary-color;
+    color: $call-video-font-color;
     outline: none;
-    border: 1px solid $hover-dark-color;
+    border: none;
+    border-bottom: 2px solid $call-video-accent-color;
 
     &:hover {
         background-color: white;
