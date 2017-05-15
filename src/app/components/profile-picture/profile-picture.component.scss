@@ -56,6 +56,10 @@
     transition: all 0.3s;
 }
 
+.profileImage-wrap .uploadButton a {
+    text-decoration: none;
+}
+
 .profileImage-wrap .uploadButton .kl-plus,
 .profileImage-wrap .uploadButton .kl-delete {
     background: white;
@@ -78,6 +82,8 @@
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     opacity: 0;
+    outline: none;
+    text-decoration: none;
 }
 .profileImage-wrap:hover .profileImage-container {
     -webkit-filter: blur(2px);

@@ -21,16 +21,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-100">
-                <div class="profilePage-navigation-wrap">
-                    <div class="col-17 filler"></div>
-                    <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
-                    <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
-                    <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
-                    <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Friends</div>
-                    <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{me?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
-                    <div class="col-20_5 profile-stats" *ngIf="isMy">{{target?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
-                </div>
+            <div class="profilePage-navigation-wrap">
+                <div class="col-17 filler"></div>
+                <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
+                <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
+                <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
+                <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Friends</div>
+                <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{me?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
+                <div class="col-20_5 profile-stats" *ngIf="isMy">{{target?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
             </div>
         </div>
         <div class="aboutMe-content">

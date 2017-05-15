@@ -12,8 +12,12 @@
     <div class="ovrly" *ngIf="uploadable"></div>
     <div class="uploadButton centerV" *ngIf="uploadable">
         <label [attr.for]="id">
-            <a rel="nofollow" rel="noreferrer" class="kl-plus"></a>
+            <a rel="nofollow" rel="noreferrer">
+                <i class="kl-plus"></i>
+            </a>
         </label>
-        <a rel="nofollow" rel="noreferrer" (click)="remove()" class="kl-delete" *ngIf="profilePictureId"></a>
+        <a rel="nofollow" rel="noreferrer" (click)="remove()" *ngIf="profilePictureId">
+            <i class="kl-delete"></i>
+        </a>
     </div>
 </div>

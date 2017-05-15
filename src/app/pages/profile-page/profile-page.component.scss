@@ -2,7 +2,7 @@
 
 .coverPhoto-wrap {
     position: relative;
-    width: 100%;
+    width: $full-grid-width;
     height: 300px;
     // background-image: url("/assets/images/covers/cover1.jpg");
     background-repeat: no-repeat;
@@ -110,7 +110,7 @@
 
 .profilePage-navigation-wrap {
     height: 50px;
-    width: 100%;
+    width: $full-grid-width;
     background-color: white;
     border-radius: 0 0 $border-radius $border-radius;
     border-bottom: 1px solid $hover-dark-color;
@@ -157,4 +157,5 @@
 
 .aboutMe-content {
     margin-top: 30px;
+    width: $full-grid-width;
 }

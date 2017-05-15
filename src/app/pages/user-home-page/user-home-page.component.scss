@@ -6,6 +6,7 @@
 
 .main-wrap {
   margin-top: 20px;
+  width: $full-grid-width;
 }
 
 .sidebar-wrap {
@@ -213,7 +214,7 @@
   input.search-p2p-input[type="text"] {
     border: none;
     border-bottom: 2px solid #7d7d7d;
-    height: 30px;
+    height: 20px;
     background: transparent;
     width: 270px;
     outline: none;
@@ -255,7 +256,7 @@
 
 .create-dropdown-wrap {
   background-color: white;
-  padding: 10px 15px;
+  // padding: 10px 15px;
   border-radius: $border-radius;
   border: $outline;
   margin-top: -11px;
@@ -267,12 +268,19 @@
   padding: 0 10px 5px 5px;
   font-size: 18px;
   font-weight: bold;
+
+  .section-title {
+    margin: 10px 0 0 15px;
+  }
+}
+
+.request-type-wrap {
+  padding: 0 15px 10px 15px;
 }
 
 #last-study-section {
   border-bottom: $divider;
   padding-bottom: 15px;
-  margin-bottom: 10px;
 }
 
 .request-type-image-wrap {
@@ -313,6 +321,10 @@
   height: 46px;
   width: 100%;
   margin-top: 17px;
+
+  &:hover {
+    background-color: transparentize($knowlead-primary, 0.1);
+  }
 }
 
 
