@@ -142,11 +142,11 @@
           </div>
           <div class="col-50">
             <div class="create-request-button-wrap">
-              <button class="create-request-button">Create a Request</button>
+              <button class="create-request-button" (click)="toggleCreateRequest()" [class.create-request-button-opened]="createRequestState === 'open'">Create a Request</button>
             </div>
           </div>
         </div>
-        <div class="create-dropdown-wrap">
+        <div class="create-dropdown-wrap" [@peerToPeerOptions]="createRequestState">
           <div class="row">
             <div class="request-section-wrap">
               <div class="section-title">Student Section</div>

@@ -133,8 +133,11 @@
             input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
           .col-50
             .create-request-button-wrap
-              button.create-request-button Create a Request
-        .create-dropdown-wrap
+              button.create-request-button(
+                (click)="toggleCreateRequest()"
+                [class.create-request-button-opened]="createRequestState === 'open'"
+              ) Create a Request
+        .create-dropdown-wrap([@peerToPeerOptions]="createRequestState")
           .row
             .request-section-wrap
               .section-title Student Section

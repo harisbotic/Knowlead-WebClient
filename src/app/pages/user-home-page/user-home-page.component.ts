@@ -17,8 +17,8 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
   styleUrls: ['./user-home-page.component.scss'],
   animations: [
     trigger('peerToPeerOptions', [
-      state('open', style({ height: '*' })),
-      state('closed', style({ height: '0px' })),
+      state('open', style({ height: '*', padding: '*', border: '*' })),
+      state('closed', style({ height: '0px', padding: '0', border: '0' })),
       transition('open <=> closed', animate('100ms ease-out'))
     ]),
     trigger('peerToPeerRotate', [
@@ -31,6 +31,7 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
 export class UserHomePageComponent extends BaseComponent implements OnInit {
 
   peerToPeerOptionsState = "open";
+  createRequestState = "open";
 
   user: ApplicationUserModel;
   filters = ListP2PsRequest;
@@ -83,6 +84,14 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
       this.peerToPeerOptionsState = "closed";
     } else {
       this.peerToPeerOptionsState = "open";
+    }
+  }
+
+  toggleCreateRequest() {
+    if (this.createRequestState === "open") {
+      this.createRequestState = "closed";
+    } else {
+      this.createRequestState = "open";
     }
   }
 
