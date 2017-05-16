@@ -1,210 +1,111 @@
 @import "../../../../kl-styles/variables.scss";
 
-
-.viewPost-wrap {
-    margin-bottom: $post-space-between-margin;
-    height: auto;
-    border-radius: 5px 5px 0 0;
-    background-color: $post-view-background-color;
-    border: 1px solid $hover-dark-color;
-    padding: 15px 15px 0 15px;
-
-    &:hover a:nth-child(1) {
-        transform: scale(1);
-    }
+.view-p2p-wrap {
+  background-color: $post-view-background-color;
+  border-radius: $border-radius;
+  border: $outline;
+  padding: 25px;
+  margin-left: 10px;
+  overflow: hidden;
 }
 
+.profile-name-wrap {
+    display: flex;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 6px;
+    height: 50px;
+    align-items: center;
 
-.topElements-wrap {
-    height: 60px;
-}
+    .profile-name {
+      max-width: 200px;
 
-.postOptions-wrap {
-    position: relative;
-
-    > a, a:visited, a:hover, a:active {
+      > a {
         text-decoration: none;
         color: $font-primary-color;
-    }
-}
 
-.postOptions-icon-wrap {
-    transform: scale(0);
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+.bookmark-wrap {
+  margin-top: -26px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+
+  i {
+    font-size: 40px;
+    color: $hover-middle-color;
+
+    &:hover {
+        cursor: pointer;
+        color: $knowlead-primary;
+      }
+  }
+
+  .bookmarked {
+      color: $knowlead-primary;
+
+      &:hover {
+        color: $hover-middle-color;
+      }
+    }
+
+  .bookmark-counter {
+    background-color: $background-color;
+    border-radius: $border-radius;
+    border: $outline;
     padding: 0 5px;
-    border-radius: 5px;
-    margin-top: -10px;
-    right: -10px;
-    z-index: 10;
-
+    font-size: 13px;
 
     &:hover {
-        background-color: $hover-middle-color;
-        color: white;
+      cursor: pointer;
     }
+  }
 }
 
-.postOptions-content {
-    margin-top: 5px;
-    border-radius: 3px;
-    background-color: white;
-    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+.p2p-info-wrap {
+  margin: 15px 0;
+  padding: 20px 15px 20px 115px;
+  border-top: $divider;
+  border-bottom: $divider;
+
+  #firstRow {
+    margin-bottom: 15px;
+  }
 }
 
-.postOptions-button {
-    width: 100px;
-    height: 30px;
-    padding: 15px 10px;
+.p2p-section-wrap {
+  .section-icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    height: 61px;
+  }
 
-    &:hover {
-        background-color: $hover-middle-color;
-    }
-
-    .postOptions-icon {
-        margin: -2px 5px;
-        font-size: 18px;
-        color: $font-primary-color;
-    }
-
-    .postOptions-text {
-        color: $font-primary-color;
-        font-weight: bold;
-        margin-left: 10px;
-    }
-}
-.profileImage-wrap {
+  .section-text-wrap {
+    display: flex;
+    align-items: center;
     height: 60px;
-    position: relative;
-}
+    flex-wrap: wrap;
 
-.profileInfoText-wrap {
-    margin-top: 13px;
+    .section-title {
+        font-size: 12px;
+        font-weight: bold;
+        color: $knowlead-primary;
+        flex-basis: 100%;
+      }
 
-    .profileName {
+      .section-item {
+        display: flex;
+        align-items: center;
         font-size: 14px;
-        font-weight: bold;
-        color: $font-primary-color;
-
-        &:hover {
-            text-decoration: underline;
-            color: $font-primary-color;
-        }
-    }
-
-    .dateCreated {
-        font-size: 11px;
-        color: $disabled-color;
-    }
-}
-
-.viewPostInfo-wrap {
-    height: 60px;
-    max-height: 60px;
-    width: 100%;
-    color: $font-secondary-color;
-
-
-    .viewPostInfo-icon {
-        line-height: 60px;
-        font-size: 25px;
-    }
-
-    .viewPostInfo-text {
-        line-height: 58px;
-        overflow: hidden;
-        max-width: 45px;
-        display: inline-block;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    #subjectText {
-        max-width: 50px;
-    }
-
-}
-
-.viewPost-text-wrap {
-    border-bottom: 2px solid $divider-color;
-    min-height: 60px;
-
-    .viewPost-text {
-        margin: 15px 0;
-        max-width: 100%;
-        word-wrap: break-word;
-    }
-}
-
-.bottomElementsButton-wrap {
-    margin: 15px 0;
-    height: 25px;
-
-    > a, a:visited, a:active {
-        text-decoration: none;
-        color: $font-secondary-color;
-
-        &:hover {
-            color: $knowlead-primary;
-        }
-    }
-
-    .comment-icon {
-        float: left;
-        font-size: 20px;
-        color: $font-secondary-color;
-    }
-
-    .commentButton-link {
-        float: left;
-    }
-
-    .commentCounter {
-        float: left;
-        margin-top: 1px;
-        color: $font-secondary-color;
-    }
-
-    .bookmark-icon {
-        float: left;
-        font-size: 20px;
-        color: $font-secondary-color;
-    }
-
-    .bookmarkButton-link {
-        float: left;
-    }
-
-    .bookmarkCounter {
-        float: left;
-        margin-top: 1px;
-        margin-left: 15px;
-        color: $font-secondary-color;
-        cursor: default;
-    }
-}
-
-.scheduledInfo-wrap {
-    width: 100%;
-    margin: 10px 0;
-    text-align: center;
-    font-size: 14px;
-
-    a {
-        color: $font-primary-color;
-        font-weight: bold;
-    }
-
-    .dateScheduled, .priceScheduled {
-        font-weight: bold;
-    }
-}
-
-.callButton-wrap {
-    margin-bottom: 10px;
-    float: right;
-}
-
-
-.reviewStars-wrap {
-    margin-bottom: 10px;
-    padding-left: 50px;
+        flex-basis: 100%;
+      }
+  }
 }

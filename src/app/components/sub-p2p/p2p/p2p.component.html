@@ -1,80 +1,68 @@
 
-<div class="view-p2p-wrap outline" *ngIf="p2p">
+<div class="view-p2p-wrap" *ngIf="p2p">
   <div class="row profile-info-wrap">
-    <div class="col-60">
-      <div class="col-30">
+    <div class="col-85">
+      <div class="col-10">
         <div class="profile-picture"><a routerLink="{{p2p.createdBy | userProfileLink}}">
             <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" size="small"></app-profile-picture></a></div>
       </div>
-      <div class="col-70">
+      <div class="col-90">
         <div class="profile-name-wrap">
           <div class="row profile-name"><a routerLink="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div>
         </div>
       </div>
     </div>
-    <div class="col-40">
-      <div class="col-60">
-        <div class="offer-button-wrap">
-          <button class="offer-button">Offer <span class="offer-counter">34</span></button>
-        </div>
-      </div>
-      <div class="col-40">
-        <div class="bookmark-wrap"><i class="kl-bookmark2"></i><span class="bookmark-counter">14</span></div>
-      </div>
+    <div class="col-15">
+      <div class="bookmark-wrap"><i class="kl-bookmark2"></i><span class="bookmark-counter">1</span></div>
     </div>
   </div>
   <div class="row p2p-info-wrap">
-    <div class="col-3">
-      <div class="expected-level"></div>
-    </div>
-    <div class="col-97">
-      <div class="row">
-        <div class="col-50">
-          <div class="p2p-section-wrap">
-            <div class="col-20">
-              <div class="section-icon-wrap" [ngClass]="fosColor"><i class="kl-subject"></i></div>
-            </div>
-            <div class="col-80">
-              <div class="row section-title">SUBJECT</div>
-              <div class="row section-item">Management</div>
-            </div>
+    <div class="row" id="firstRow">
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="fosColor"><i class="kl-subject"></i></div>
           </div>
-        </div>
-        <div class="col-50">
-          <div class="p2p-section-wrap">
-            <div class="col-20">
-              <div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div>
-            </div>
-            <div class="col-80">
-              <div class="row section-title">REWARD</div>
-              <div class="row section-item">154 Minutes</div>
-            </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">SUBJECT</div>
+            <div class="row section-item">Management</div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-50">
-          <div class="p2p-section-wrap">
-            <div class="col-20">
-              <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>
-            </div>
-            <div class="col-80">
-              <div class="row section-title">LANGUAGES</div>
-              <div class="row section-item">EN, BiH</div>
-            </div>
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">REWARD</div>
+            <div class="row section-item">154 Minutes</div>
           </div>
         </div>
-        <div class="col-50">
-          <div class="p2p-section-wrap">
-            <div class="col-20">
-              <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
-            </div>
-            <div class="col-80">
-              <div class="row section-title">DEADLINE</div>
-              <div class="row section-item">
-                05.95.1925. 15:96
-                
-              </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">LANGUAGES</div>
+            <div class="row section-item">EN, BiH</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">DEADLINE</div>
+            <div class="row section-item">
+              05.95.1925. 15:96
+              
             </div>
           </div>
         </div>
