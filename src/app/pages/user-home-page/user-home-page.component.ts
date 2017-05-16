@@ -31,7 +31,7 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
 export class UserHomePageComponent extends BaseComponent implements OnInit {
 
   peerToPeerOptionsState = "open";
-  createRequestState = "open";
+  createRequestState = "closed";
 
   user: ApplicationUserModel;
   filters = ListP2PsRequest;
