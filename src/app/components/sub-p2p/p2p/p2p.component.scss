@@ -4,15 +4,20 @@
   background-color: $post-view-background-color;
   border-radius: $border-radius;
   border: $outline;
-  padding: 25px;
+  // padding: 25px;
   margin-left: 10px;
   overflow: hidden;
+  margin-bottom: 100px;
+}
+
+.profile-info-wrap {
+  padding: 25px 25px 0 25px;
 }
 
 .profile-name-wrap {
     display: flex;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 6px;
     height: 50px;
     align-items: center;
@@ -107,5 +112,96 @@
         font-size: 14px;
         flex-basis: 100%;
       }
+  }
+}
+
+.p2p-description-wrap {
+  padding: 0 25px 15px;
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .summary-wrap {
+    margin-bottom: 20px;
+    min-height: 65px;
+
+    .summary {
+      line-height: 20px;
+      font-size: 14px;
+    }
+  }
+
+  .download-all-button {
+    border: 2px solid $knowlead-secondary;
+    border-radius: $border-radius;
+    background-color: transparent;
+    color: $knowlead-secondary;
+    width: 150px;
+    height: 35px;
+    outline: none;
+
+    &:hover {
+      background-color: transparentize($font-primary-color, 0.9);
+    }
+  }
+
+  .attachments-wrap {
+    height: 100px;
+
+    .item {
+      height: 95px;
+      width: 19%;
+      background-color: blue;
+      display: inline-block;
+      border-radius: $border-radius;
+    }
+
+    #att-2 {
+      background-color: green;
+    }
+    #att-3 {
+      background-color: yellow;
+    }
+    #att-4 {
+      background-color: grey;
+    }
+    #att-5 {
+      background-color: red;
+    }
+  }
+//p2p-description-wrap
+}
+
+.offer-button-wrap {
+  padding: 25px;
+
+  .offer-button {
+    border: none;
+    border-radius: $border-radius;
+    background-color: $knowlead-primary;
+    color: white;
+    width: 150px;
+    height: 35px;
+    outline: none;
+
+    &:hover {
+      background-color: transparentize($knowlead-primary, 0.1);
+    }
+  }
+
+  .offer-counter {
+    background-color: $background-color;
+    border-radius: $border-radius;
+    border: $outline;
+    padding: 3px 6px;
+    font-size: 15px;
+    margin-left: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

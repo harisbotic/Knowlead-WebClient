@@ -79,7 +79,16 @@
         Eu porttitor magna vehicula at. Vestibulum sit amet sem feugiat, eleifend leo eget.
       </div>
     </div>
-    <div class="row title">Attachments</div>
+    <div class="row">
+      <div class="col-80">
+        <div class="title">Attachments</div>
+      </div>
+      <div class="col-20">
+        <div class="download-all-button-wrap">
+          <button class="download-all-button">Download All</button>
+        </div>
+      </div>
+    </div>
     <div class="row attachments-wrap">
       <div class="item" id="att-1"></div>
       <div class="item" id="att-2"></div>
@@ -88,10 +97,8 @@
       <div class="item" id="att-5"></div>
     </div>
   </div>
-  <div class="bottom-offer-button-wrap">
-    <div class="offer-button-wrap">
-      <button class="offer-button">Offer <span class="offer-counter">34</span></button>
-    </div>
+  <div class="offer-button-wrap">
+    <button class="offer-button">Write Offer</button><span class="offer-counter">34</span>
   </div>
   <div class="discussion-wrap">
     <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>

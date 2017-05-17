@@ -67,17 +67,21 @@
         Nulla facilisi. Donec ac risus massa. Morbi fermentum molestie augue sit amet pulvinar.
         Sed luctus dui in metus eleifend viverra. Fusce suscipit aliquam lacinia. Donec placerat diam est.
         Eu porttitor magna vehicula at. Vestibulum sit amet sem feugiat, eleifend leo eget.
-    .row.title Attachments
+    .row
+      .col-80
+        .title Attachments
+      .col-20
+        .download-all-button-wrap
+          button.download-all-button Download All
     .row.attachments-wrap
       .item#att-1
       .item#att-2
       .item#att-3
       .item#att-4
       .item#att-5
-  .bottom-offer-button-wrap
-    .offer-button-wrap
-      button.offer-button
-        | Offer 
-        span.offer-counter 34
+  .offer-button-wrap
+    button.offer-button
+      | Write Offer
+    span.offer-counter 34
   .discussion-wrap
     app-p2p-discussion([p2p]="p2p")

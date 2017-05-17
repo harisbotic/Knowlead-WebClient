@@ -1,5 +1,6 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
     "tslint.rulesDirectory": "./node_modules/codelyzer",
-    "editor.renderIndentGuides": true
+    "editor.renderIndentGuides": true,
+    "editor.tabSize": 2
 }
