@@ -1,24 +1,24 @@
+
 <div class="tab-wrap">
+  <div class="tab" click="toggleOpen()"> <a routerLink="#">{{user | fullName}}</a>
+    <button type="button"><i class="kl-close"></i></button>
+  </div>
   <div class="converisation" *ngIf="opened">
-    <div *ngFor="let message of getConverisation() | async" class="full">
-      <app-profile-picture
-          [user]="message.from"
-          size="x-small"
-          [class.pullRight]="message.isMine"
-          [class.pullLeft]="!message.isMine"
-          *ngIf="message.showProfile"></app-profile-picture>
-      <div [class.myMessage]="message.isMine" class="message">
-        {{message.message}}
-      </div>
+    <div class="start-friendship-wrap">
+      <div class="start-friendship-icon"><i class="kl-peer"></i></div>
+      <div class="start-friendship-timestamp">MAY 13TH, 3:41PM</div>
+      <div class="start-friendship-text">You are now friends on Knowlead.</div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input type="text" autocomplete="false" formControlName="message">
-    </form>
+    <div class="full" *ngFor="let message of getConverisation() | async">
+      <div class="col-17"><span></span></div>
+      <div class="col-80 posRel"><a routerLink="#">
+          <app-profile-picture class="chat-profile-picture" [user]="message.from" size="x-small" [class.pullRight]="message.isMine" [class.pullLeft]="!message.isMine" *ngIf="message.showProfile" [class.displayNone]="message.isMine"></app-profile-picture></a>
+        <div class="message" [class.myMessage]="message.isMine">{{message.message}}</div>
+      </div>
+      <div class="col-3"><span></span></div>
+    </div>
   </div>
-  <div class="tab" (click)="toggleOpen()">
-    {{user | fullName}}
-    <button type="button">
-      x
-    </button>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" autocomplete="false" formControlName="message" placeholder="Type your message...">
+  </form>
 </div>

@@ -10,22 +10,22 @@
 .chat-selector {
     background-color: white;
     width: 100%;
-    height: $chat-height;
+    height: 33px;
     border: 1px solid $placeholder-color;
     // border-radius: 5px 5px 0 0;
 
     input.friends-search {
         width: 100%;
-        height: $chat-height;
+        height: 30px;
         border: none;
-        border-radius: 5px 5px 0 0;
+        border-radius: $border-radius $border-radius 0 0;
         padding-left: 10px;
         outline: none;
     }
 
     .chat-selector-text {
         margin-left: 20px;
-        line-height: $chat-height;
+        line-height: normal;
         font-size: 13px;
         font-weight: bold;
     }
@@ -48,7 +48,7 @@
 .chat-selector-header {
     width: $chat-width;
     width: $chat-width;
-    border-radius: 5px 5px 0 0;
+    border-radius: $border-radius $border-radius 0 0;
     background-color: $knowlead-primary;
     border: 1px solid $placeholder-color;
     color: white;

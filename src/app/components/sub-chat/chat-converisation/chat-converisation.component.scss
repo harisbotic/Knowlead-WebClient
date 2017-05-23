@@ -1,22 +1,101 @@
 @import "../../../../kl-styles/variables.scss";
 
-.tab {
-    height: $chat-height;
-    background: white;
-    border: 1px black solid;
-    width: 100%;
-    cursor: pointer;
+.displayNone {
+    display: none;
 }
+
+.converisation > div > .col-80 > .message {
+    margin: -2px 0 0 0;
+    max-width: 166px;
+}
+
 .tab-wrap {
     display: inline-block;
-    width: 300px;
+    width: 280px;
     margin-right: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+
+    input[type="text"] {
+        height: 32px;
+        width: 100%;
+        border: none;
+        border-top: 1px solid #e1e2e5;
+        outline: none;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+
+        &::-webkit-input-placeholder {
+            color: $placeholder-color;
+        }
+    }
 }
+
+.tab {
+    height: $chat-height;
+    background-color: #f6f7f9;
+    border-radius: $border-radius $border-radius 0 0;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .20);
+    border-bottom: 1px solid $hover-dark-color;
+    padding: 5px 7px;
+
+    &:hover {
+        background-color: #edeef1;
+    }
+
+    a {
+        color: $font-primary-color;
+    }
+
+    button {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        float: right;
+        color: #888da8;
+
+        &:hover {
+            color: $font-primary-color;
+        }
+    }
+}
+
 .converisation {
-    height: 500px;
-    background-color: yellow;
+    height: 330px;
+    background-color: white;
     overflow-y: scroll;
+    // display: -webkit-flex;
+    // -webkit-flex-direction: column-reverse;
+    // display: flex;
+    // flex-direction: column-reverse;
 }
+
+.start-friendship-wrap {
+    margin: 15px 0;
+    text-align: center;
+    color: $font-secondary-color;
+}
+
+.start-friendship-icon {
+    font-size: 28px;
+}
+
+.start-friendship-timestamp {
+    font-size: 11px;
+}
+
+.start-friendship-text {
+    font-size: 12px;
+}
+
+.chat-profile-picture {
+    position: absolute;
+    bottom: 0;
+    left: -35px;
+}
+
 .pullLeft {
     float: left;
 }

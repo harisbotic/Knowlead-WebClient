@@ -1,0 +1,25 @@
+.tab-wrap
+  .tab(click="toggleOpen()") 
+    a(routerLink="#") {{user | fullName}}
+    button(type="button")
+      i.kl-close
+  .converisation(*ngIf="opened")
+    .start-friendship-wrap
+      .start-friendship-icon
+        i.kl-peer
+      .start-friendship-timestamp.
+        MAY 13TH, 3:41PM
+      .start-friendship-text.
+        You are now friends on Knowlead.
+    div(*ngFor="let message of getConverisation() | async" class="full")
+      .col-17
+        span
+      .col-80.posRel
+        a(routerLink="#")
+          app-profile-picture.chat-profile-picture([user]="message.from" size="x-small" [class.pullRight]="message.isMine" [class.pullLeft]="!message.isMine" *ngIf="message.showProfile" [class.displayNone]="message.isMine")
+        .message([class.myMessage]="message.isMine") {{message.message}}
+      .col-3
+        span
+  form([formGroup]="form" (ngSubmit)="onSubmit()")
+    input(type="text" autocomplete="false" formControlName="message" placeholder="Type your message...")
+    //- REMOVE ERRORS!!!
