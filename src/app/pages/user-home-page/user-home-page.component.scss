@@ -130,31 +130,48 @@
 }
 
 .upcoming-events-content {
-  padding: 10px 10px 10px 20px;;
+  #bottom-row {
+    padding-bottom: 5px;
+  }
 
   .timer-wrap {
   font-weight: bold;
   font-size: 14px;
+  padding: 10px 0 0 20px;
 
     i {
       font-size: 13px;
       margin-right: 3px;
     }
+
+    .student-color {
+      color: $knowlead-secondary;
+    }
+
+    .teacher-color {
+      color: $knowlead-primary;
+    }
   }
 
+  .with-wrap {
+    padding-left: 20px;
+  } 
+
   span {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .profile-picture {
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
 
   .profile-name-wrap {
     display: flex;
     align-items: center;
     height: 47px;
+    padding-left: 10px;
 
     .profile-name {
       font-size: 14px;
@@ -165,12 +182,18 @@
     display: flex;
     align-items: center;
     height: 47px;
+    padding-right: 10px;
 
     span {
       font-size: 18px;
       font-weight: bold;
       margin-right: 3px;
     }
+  }
+
+  .other-upcoming-events {
+    border-top: 1px solid $hover-dark-color;
+    padding-bottom: 10px;
   }
 }
 
