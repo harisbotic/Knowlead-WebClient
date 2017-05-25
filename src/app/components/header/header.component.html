@@ -1,6 +1,6 @@
 <!--OVAJ NGIF MORA BITI PRISUTAN-->
 <nav *ngIf="user && shouldShow">
-    <div class="grid-container posRel zOne">
+    <div class="grid-container posRel zOne header-wrap">
         <div  *ngIf="!user.name || user.interests?.length === 0">
             <a routerLink="/">
                 <img class="centerVl logo-beta-short" src="/assets/images/logo/knowlead_logo_white_beta.png">
