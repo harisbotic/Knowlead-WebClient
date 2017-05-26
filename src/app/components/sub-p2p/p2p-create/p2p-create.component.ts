@@ -8,6 +8,8 @@ import { StorageService } from '../../../services/storage.service';
 import { ArrayValidator } from '../../../validators/array.validator';
 import { dateValidator } from '../../../validators/date.validator';
 import { BaseFormComponent } from '../../../base-form.component';
+import { addHoursToDate } from '../../../utils/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-p2p-create',
@@ -28,11 +30,12 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   step = 0;
   languages: DropdownValueInterface<LanguageModel>[];
   foses: DropdownValueInterface<number>[];
-  @Output() created = new EventEmitter<number>();
+  initialDate = new Date();
 
   constructor(protected p2pService: P2pService,
       protected notificationService: NotificationService,
-      protected storageService: StorageService) {
+      protected storageService: StorageService,
+      protected router: Router) {
     super();
   }
 
@@ -117,6 +120,10 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     };
   }
 
+  getDateAfterHours(hours: number): string {
+    return addHoursToDate(this.initialDate, hours).toISOString();
+  }
+
   ngOnInit() {
     super.ngOnInit();
     this.subscriptions.push(this.storageService.getLanguages().subscribe(languages => {
@@ -141,21 +148,14 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   }
 
   submit() {
+    console.log(this.getValue());
     this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(p2p => {
       this.restartForm();
       this.step = 0;
-      this.created.emit(p2p.p2pId);
+      this.router.navigate(['/']);
     }, (err) => {
       this.notificationService.error('error creating p2p', err);
     }));
-  }
-
-  getValue(): P2PModel {
-    const ret = super.getValue();
-    if (typeof(ret.fosId) !== 'number') {
-      ret.fosId = ret.fosId[0];
-    }
-    return ret;
   }
 
 }

@@ -1,19 +1,22 @@
 .p2p-create-wrap
   .p2p-create-headline.
     Post a Peer-to-Peer Request
-  form((ngSubmit)="confirmationOpened = true" [formGroup]="form")
+  form((ngSubmit)="onSubmit()" [formGroup]="form")
     .choose-subject-wrap
       .title.
         Choose a field of study
-      .fos-selection
-        app-fos-selector
+      .fos-selection.tooltip-parent
+        app-fos-selector(formControlName="fosId" [outputType]="id" appFormControlError)
     .describe-post-wrap
       .headline.
         Describe the Request
       .title.
         Describe the work to be done
-      .description-text
-        textarea.description(placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you.")
+      .description-text.tooltip-parent
+        textarea.description(
+          placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you."
+          formControlName="text"
+          appFormControlError)
       .attachments-wrap
         .title.
           Attachments
@@ -22,7 +25,8 @@
       .language-wrap
         .title.
           Choose a language on which you want to study
-        ng-select([options]="languages", [multiple]="true", formControlName="languages", placeholder="EXAMPLE: English, Bosnian...").select-language
+        .tooltip-parent
+          ng-select([options]="languages", [multiple]="true", formControlName="languages", placeholder="EXAMPLE: English, Bosnian...", appFormControlError).select-language
     .rate-reward-wrap
       .headline.
         Rate and Reward
@@ -30,8 +34,8 @@
         How many minutes are you offering?
       .col-5#minutes-icon
         i.kl-currency
-      .col-95
-        input(type="number", min="10" placeholder="Minutes").reward
+      .col-95.tooltip-parent
+        input(type="number" min="10" placeholder="Minutes" formControlName="initialPrice" appFormControlError).reward
       .difficulty-level-wrap
         .title.
           Desired Level of Knowledge from Teacher
@@ -65,28 +69,28 @@
       .deadline-selection-wrap
         .deadline-options-wrap
           .deadline-options
-            input(type="radio", name="deadline", id="time_1", value="24h")
+            input#time_1(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24)")
             label(for="time_1")#one-day
               .item
                 i.kl-one-day
               .item-text
                 | 24 Hours
           .deadline-options
-            input(type="radio", name="deadline", id="time_2", value="3days")
+            input#time_2(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*3)")
             label(for="time_2")#three-days
               .item
                 i.kl-three-days
               .item-text
                 | 3 Days
           .deadline-options
-            input(type="radio", name="deadline", id="time_3", value="7days")
+            input#time_3(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*7)")
             label(for="time_3")#seven-days
               .item
                 i.kl-seven-days
               .item-text
                 | 7 Days
           .deadline-options
-            input(type="radio", name="deadline", id="time_4", value="none", checked)
+            input#time_4(type="radio", name="deadline", formControlName="deadline", [value]="undefined", checked)
             label(for="time_4")#none
               .item
                 i.kl-no-deadline

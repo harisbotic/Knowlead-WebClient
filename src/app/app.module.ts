@@ -63,7 +63,6 @@ import { ProfilePictureComponent } from './components/profile-picture/profile-pi
 import { NotebookListComponent } from './components/sub-notebook/notebook-list/notebook-list.component';
 import { NotebookEditComponent } from './components/sub-notebook/notebook-edit/notebook-edit.component';
 import { TextInputComponent } from './components/sub-form-components/text-input/text-input.component';
-import { SingleNotificationComponent } from './components/sub-notifications/single-notification/single-notification.component';
 import { NotificationIconComponent } from './components/sub-notifications/notification-icon/notification-icon.component';
 import { RegisteredGuard } from './guards/registered.guard';
 import { UiSwitchComponent } from './components/sub-form-components/ui-switch/ui-switch.component';
@@ -100,6 +99,13 @@ import { P2pCardComponent } from './components/sub-p2p/p2p-card/p2p-card.compone
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
 import { P2pFeedbackFormComponent } from './components/sub-popups/p2p-feedback-form/p2p-feedback-form.component';
 import { P2pMasonryListComponent } from './components/sub-p2p/p2p-masonry-list/p2p-masonry-list.component';
+import { DynamicModule } from 'ng-dynamic-component';
+import { MessageSingleNotificationComponent } from
+  './components/sub-notifications/message-single-notification/message-single-notification.component';
+import { UserSingleNotificationComponent } from
+  './components/sub-notifications/user-single-notification/user-single-notification.component';
+import { FriendsSingleNotificationComponent } from
+  './components/sub-notifications/friends-single-notification/friends-single-notification.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +144,6 @@ import { P2pMasonryListComponent } from './components/sub-p2p/p2p-masonry-list/p
     NotebookListComponent,
     NotebookEditComponent,
     TextInputComponent,
-    SingleNotificationComponent,
     NotificationIconComponent,
     UiSwitchComponent,
     SingleNotebookComponent,
@@ -170,7 +175,10 @@ import { P2pMasonryListComponent } from './components/sub-p2p/p2p-masonry-list/p
     P2pCardComponent,
     P2pCreatePageComponent,
     P2pFeedbackFormComponent,
-    P2pMasonryListComponent
+    P2pMasonryListComponent,
+    MessageSingleNotificationComponent,
+    UserSingleNotificationComponent,
+    FriendsSingleNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -183,6 +191,7 @@ import { P2pMasonryListComponent } from './components/sub-p2p/p2p-masonry-list/p
     SelectModule,
     MasonryModule,
     PerfectScrollbarModule,
+    DynamicModule.withComponents([FriendsSingleNotificationComponent, MessageSingleNotificationComponent, UserSingleNotificationComponent]),
     NglModule.forRoot({
       svgPath: '/assets'
     }),

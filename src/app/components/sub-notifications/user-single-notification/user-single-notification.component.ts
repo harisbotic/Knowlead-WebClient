@@ -1,19 +1,17 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NotificationModel } from '../../../models/dto';
 import { NotificationTypes } from '../../../models/constants';
+import { BaseComponent } from '../../../base.component';
 
 @Component({
-  selector: 'app-single-notification',
-  templateUrl: './single-notification.component.html',
-  styleUrls: ['./single-notification.component.scss']
+  selector: 'app-user-single-notification',
+  templateUrl: './user-single-notification.component.html',
+  styleUrls: ['./user-single-notification.component.scss']
 })
-export class SingleNotificationComponent implements OnInit {
+export class UserSingleNotificationComponent extends BaseComponent implements OnInit {
 
   @Input() notification: NotificationModel;
   @Output() markAsRead = new EventEmitter<NotificationModel>();
-
-  constructor() {
-  }
 
   ngOnInit() { }
 

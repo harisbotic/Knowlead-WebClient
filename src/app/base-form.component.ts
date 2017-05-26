@@ -53,8 +53,18 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
         });
         for (let key of Object.keys(this.form.controls)) {
             this.form.controls[key].setErrors(null);
+            this.form.controls[key].disable();
+            this.form.controls[key].markAsPristine();
         }
         this.form.setErrors(null);
+
+        // This is necessary because custom forms need a status change event
+        // so that form control directive registers it is pristine
+        setTimeout(() => {
+            for (let key of Object.keys(this.form.controls)) {
+                this.form.controls[key].enable();
+            }
+        }, 200);
     }
 
     constructor() {
@@ -69,6 +79,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
     }
 
     onSubmit() {
+        this.form.markAsDirty();
         for (let control of Object.keys(this.form.controls)) {
             this.form.controls[control].markAsDirty();
         }

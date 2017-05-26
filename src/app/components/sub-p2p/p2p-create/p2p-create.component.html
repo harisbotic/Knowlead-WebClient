@@ -1,18 +1,18 @@
 
 <div class="p2p-create-wrap">
   <div class="p2p-create-headline">Post a Peer-to-Peer Request</div>
-  <form (ngSubmit)="confirmationOpened = true" [formGroup]="form">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="choose-subject-wrap">
       <div class="title">Choose a field of study</div>
-      <div class="fos-selection">
-        <app-fos-selector></app-fos-selector>
+      <div class="fos-selection tooltip-parent">
+        <app-fos-selector formControlName="fosId" [outputType]="id" appFormControlError></app-fos-selector>
       </div>
     </div>
     <div class="describe-post-wrap">
       <div class="headline">Describe the Request</div>
       <div class="title">Describe the work to be done</div>
-      <div class="description-text">
-        <textarea class="description" placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you."></textarea>
+      <div class="description-text tooltip-parent">
+        <textarea class="description" placeholder="Describe the request and the subject you want to study as concretely as you can so other users can easily see what are they required to teach you." formControlName="text" appFormControlError></textarea>
       </div>
       <div class="attachments-wrap">
         <div class="title">Attachments</div>
@@ -22,15 +22,17 @@
       </div>
       <div class="language-wrap">
         <div class="title">Choose a language on which you want to study</div>
-        <ng-select class="select-language" [options]="languages" [multiple]="true" formControlName="languages" placeholder="EXAMPLE: English, Bosnian..."></ng-select>
+        <div class="tooltip-parent">
+          <ng-select class="select-language" [options]="languages" [multiple]="true" formControlName="languages" placeholder="EXAMPLE: English, Bosnian..." appFormControlError></ng-select>
+        </div>
       </div>
     </div>
     <div class="rate-reward-wrap">
       <div class="headline">Rate and Reward</div>
       <div class="title">How many minutes are you offering?</div>
       <div class="col-5" id="minutes-icon"><i class="kl-currency"></i></div>
-      <div class="col-95">
-        <input class="reward" type="number" min="10" placeholder="Minutes">
+      <div class="col-95 tooltip-parent">
+        <input class="reward" type="number" min="10" placeholder="Minutes" formControlName="initialPrice" appFormControlError>
       </div>
       <div class="difficulty-level-wrap">
         <div class="title">Desired Level of Knowledge from Teacher</div>
@@ -64,28 +66,28 @@
       <div class="deadline-selection-wrap">
         <div class="deadline-options-wrap">
           <div class="deadline-options">
-            <input type="radio" name="deadline" id="time_1" value="24h">
+            <input id="time_1" type="radio" name="deadline" formControlName="deadline" [value]="getDateAfterHours(24)">
             <label for="time_1" id="one-day">
               <div class="item"><i class="kl-one-day"></i></div>
               <div class="item-text">24 Hours</div>
             </label>
           </div>
           <div class="deadline-options">
-            <input type="radio" name="deadline" id="time_2" value="3days">
+            <input id="time_2" type="radio" name="deadline" formControlName="deadline" [value]="getDateAfterHours(24*3)">
             <label for="time_2" id="three-days">
               <div class="item"><i class="kl-three-days"></i></div>
               <div class="item-text">3 Days</div>
             </label>
           </div>
           <div class="deadline-options">
-            <input type="radio" name="deadline" id="time_3" value="7days">
+            <input id="time_3" type="radio" name="deadline" formControlName="deadline" [value]="getDateAfterHours(24*7)">
             <label for="time_3" id="seven-days">
               <div class="item"><i class="kl-seven-days"></i></div>
               <div class="item-text">7 Days</div>
             </label>
           </div>
           <div class="deadline-options">
-            <input type="radio" name="deadline" id="time_4" value="none" checked>
+            <input id="time_4" type="radio" name="deadline" formControlName="deadline" [value]="undefined" checked>
             <label for="time_4" id="none">
               <div class="item"><i class="kl-no-deadline"></i></div>
               <div class="item-text">No Deadline</div>

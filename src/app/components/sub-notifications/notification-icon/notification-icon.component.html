@@ -12,7 +12,11 @@
                 <a class="markRead" (click)="markAsRead()">Mark all as read</a>
             </div>
         </div>
-        <app-single-notification *ngFor="let item of notifications" [notification]="item" (markAsRead)="markSingleAsRead($event)"></app-single-notification>
+        <div *ngFor="let item of notifications">
+            <ndc-dynamic [ndcDynamicInputs]="{notification: item}"
+                          [ndcDynamicOutputs]="{markAsRead: markSingleAsRead.bind(this)}"
+                          [ndcDynamicComponent]="component"></ndc-dynamic>
+        </div>
         <button (click)="scrolled()" class="clearButton loadMoreButton" *ngIf="notifications.length != stats.total">Load more</button>
     </perfect-scrollbar>
 </popover-content>

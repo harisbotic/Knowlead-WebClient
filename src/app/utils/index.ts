@@ -150,6 +150,12 @@ export function tomorrow(): Date {
     return ret;
 }
 
+export function addHoursToDate(date: Date, hours: number): Date {
+    const ret = new Date(date.getTime());
+    ret.setHours(ret.getHours() + hours);
+    return ret;
+}
+
 export function stopMediaStream(mediaStream: MediaStream) {
     for (let track of mediaStream.getTracks()) {
         track.stop();

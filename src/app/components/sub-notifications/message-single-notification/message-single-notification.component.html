@@ -1,0 +1,27 @@
+<a *ngIf="notification">
+    <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
+        <div class="col-20 posRel profile-image-round-small">
+            <app-profile-picture [user]="notification.fromApplicationUser" class="centerV"></app-profile-picture>
+        </div>
+        <div class="col-60 posRel">
+            <div class="notification-text-wrap">
+                <span class="fromWho">
+                    <a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
+                </span>
+                <span class="notification-type">hepek</span>
+                <span class="post-type">hepek</span>
+                <span class="notification-type">hepeeeek</span>
+                <span class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</span>
+            </div>
+        </div>
+        <div class="col-20">
+            <div class="row">
+                <div class="col-100 posRel">
+                    <div class="notification-icon hardPosRel">
+                        <i class="kl-peer centerV"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
