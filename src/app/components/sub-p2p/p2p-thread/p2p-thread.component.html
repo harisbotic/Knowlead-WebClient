@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-30">
                             <div class="reviewStars-wrap posRel">
-                                <div class="reviewStars centerVl tooltip-parent">
+                                <div class="reviewStars centerVr tooltip-parent">
                                     <ngl-rating [rate]="message.messageFrom?.averageRating" colorOn="#007bb6" colorOff="#e1e2e5" size="x-small" [isReadonly]="true"></ngl-rating>
                                     <span class="tooltip-top tooltip-175">
                                         Average User Rating: {{message.messageFrom?.averageRating | number:'1.2-2'}}
@@ -90,7 +90,7 @@
                 <div class="col-100">
                     <div class="threadBottomElements-wrap">
                         <div class="col-55 proposed-wrap">
-                            <div class="col-65">
+                            <div class="col-55">
                                 <div class="proposeDate-wrap tooltip-parent">
                                     <i class="kl-calendar proposeDate-icon"></i>
                                     <div class="proposeDate">{{message.dateTimeOffer | date:'MMM d, y HH:mm'}}</div>
@@ -99,7 +99,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-35">
+                            <div class="col-45">
                                 <div class="proposePrice-wrap tooltip-parent">
                                     <i class="kl-currency proposePrice-icon"></i>
                                     <div class="proposePrice">

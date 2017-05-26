@@ -20,6 +20,10 @@ a, a:visited, a:hover, a:active {
     color: white;
 }
 
+.header-wrap {
+    min-width: 870px;
+}
+
 .headerPosRel {
     position: relative;
     height: $nav-height;
