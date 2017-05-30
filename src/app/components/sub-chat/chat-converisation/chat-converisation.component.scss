@@ -31,6 +31,27 @@
     }
 }
 
+.tabClosed {
+    width: 210px !important;
+}
+
+.tabActive {
+    background-color: $knowlead-primary !important;
+
+    a {
+        color: white !important;
+    }
+
+    button {
+        color: transparentize(white, 0.3) !important;
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: white !important;
+        }
+    }
+}
+
 .tab {
     height: $chat-height;
     background-color: #f6f7f9;

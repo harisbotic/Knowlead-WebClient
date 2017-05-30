@@ -1,5 +1,5 @@
-.tab-wrap
-  .tab((click)="toggleOpen()") 
+.tab-wrap([class.tabClosed]="!opened")
+  .tab.tabActive((click)="toggleOpen()") 
     a(routerLink="{{user | userProfileLink}}") {{user | fullName}}
     button(type="button" (click)="closed()")
       i.kl-close
