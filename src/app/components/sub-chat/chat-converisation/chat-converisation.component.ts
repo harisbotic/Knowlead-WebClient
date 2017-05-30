@@ -79,7 +79,7 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
           extended.showProfile = index === messages.length - 1 || messages[index].senderId !== messages[index + 1].senderId;
           return extended;
         })
-        .sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
+        .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
       )
       .do(messages => {
         this.isEmpty = messages.length === 0;
