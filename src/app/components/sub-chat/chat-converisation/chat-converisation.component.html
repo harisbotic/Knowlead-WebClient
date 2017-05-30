@@ -1,6 +1,6 @@
 
-<div class="tab-wrap">
-  <div class="tab" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
+<div class="tab-wrap" [class.tabClosed]="!opened">
+  <div class="tab tabActive" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
     <button type="button" (click)="closed()"><i class="kl-close"></i></button>
   </div>
   <div class="converisation" *ngIf="opened">
