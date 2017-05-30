@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-15">
-      <div class="bookmark-wrap"><i class="kl-bookmark2"></i><span class="bookmark-counter">1</span></div>
+      <div class="bookmark-wrap"><i class="kl-bookmark2" [class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)"></i><span class="bookmark-counter">{{p2p.bookmarkCount}}</span></div>
     </div>
   </div>
   <div class="row p2p-info-wrap">

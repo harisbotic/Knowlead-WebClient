@@ -8,7 +8,7 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
   .p2p-card-content-wrap.fade
     .row.bookmark-wrap
       //- ADD bookmarked CLASS TO THE ICON BELOW WHEN IT IS CLICKED
-      i.kl-bookmark2
+      i.kl-bookmark2([class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)")
     .row.profile-info-wrap
       .col-25
         .profile-picture

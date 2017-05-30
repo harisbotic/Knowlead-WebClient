@@ -90,8 +90,10 @@ export class P2pComponent extends BaseComponent implements OnInit {
     }));
   }
 
-  bookmark() {
-    if (this.user && this.p2p.createdById !== this.user.id) {
+  bookmark(event: MouseEvent) {
+    event.preventDefault();
+    event.cancelBubble = true;
+    if (this.user && this.p2p.canBookmark) {
       this.p2pService.bookmark(this.p2p).subscribe(undefined, err => {
         this.notificationService.error('Error bookmarking', err);
       });

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="p2p-card-content-wrap fade">
-    <div class="row bookmark-wrap"><i class="kl-bookmark2"></i></div>
+    <div class="row bookmark-wrap"><i class="kl-bookmark2" [class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)"></i></div>
     <div class="row profile-info-wrap">
       <div class="col-25">
         <div class="profile-picture"><a routerLink="{{p2p.createdBy | userProfileLink}}">

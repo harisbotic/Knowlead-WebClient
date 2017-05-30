@@ -12,8 +12,8 @@
             a(routerLink="{{p2p.createdBy | userProfileLink}}") {{p2p.createdBy | fullName}}
     .col-15
       .bookmark-wrap
-        i.kl-bookmark2
-        span.bookmark-counter 1
+        i.kl-bookmark2([class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)")
+        span.bookmark-counter {{p2p.bookmarkCount}}
 
   .row.p2p-info-wrap
     .row#firstRow
