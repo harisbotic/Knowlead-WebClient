@@ -24,6 +24,7 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
   me: ApplicationUserModel;
 
   opened = false;
+  isEmpty = false;
 
   constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
@@ -73,10 +74,16 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
   }
   getConverisation(): Observable<ExtendedConverisationMessage[]> {
     return this.chatService.getConverisation(this.user.id)
-      .map(messages => messages.map(this.extendMessage.bind(this)).map((extended: ExtendedConverisationMessage, index) => {
-        extended.showProfile = index === messages.length - 1 || messages[index].senderId !== messages[index + 1].senderId;
-        return extended;
-      }));
+      .map(messages => messages.map(this.extendMessage.bind(this))
+        .map((extended: ExtendedConverisationMessage, index) => {
+          extended.showProfile = index === messages.length - 1 || messages[index].senderId !== messages[index + 1].senderId;
+          return extended;
+        })
+        .sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
+      )
+      .do(messages => {
+        this.isEmpty = messages.length === 0;
+      });
   }
 
   private extendMessage(message: ConverisationMessageModel): ExtendedConverisationMessage {

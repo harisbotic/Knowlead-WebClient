@@ -1,10 +1,10 @@
 .tab-wrap
-  .tab(click="toggleOpen()") 
-    a(routerLink="#") {{user | fullName}}
-    button(type="button")
+  .tab((click)="toggleOpen()") 
+    a(routerLink="{{user | userProfileLink}}") {{user | fullName}}
+    button(type="button" (click)="closed()")
       i.kl-close
   .converisation(*ngIf="opened")
-    .start-friendship-wrap
+    .start-friendship-wrap(*ngIf="isEmpty")
       .start-friendship-icon
         i.kl-peer
       .start-friendship-timestamp.
@@ -15,11 +15,12 @@
       .col-17
         span
       .col-80.posRel
-        a(routerLink="#")
+        a(routerLink="{{message.from | userProfileLink}}")
           app-profile-picture.chat-profile-picture([user]="message.from" size="x-small" [class.pullRight]="message.isMine" [class.pullLeft]="!message.isMine" *ngIf="message.showProfile" [class.displayNone]="message.isMine")
         .message([class.myMessage]="message.isMine") {{message.message}}
       .col-3
         span
-  form([formGroup]="form" (ngSubmit)="onSubmit()")
+  form([formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="opened")
     input(type="text" autocomplete="false" formControlName="message" placeholder="Type your message...")
     //- REMOVE ERRORS!!!
+    //- WHAT ERRORS???
