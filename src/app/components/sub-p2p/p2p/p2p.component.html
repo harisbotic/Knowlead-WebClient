@@ -25,7 +25,7 @@
           </div>
           <div class="col-80 section-text-wrap">
             <div class="row section-title">SUBJECT</div>
-            <div class="row section-item">Management</div>
+            <div class="row section-item">{{p2p.fos?.name}}</div>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           </div>
           <div class="col-80 section-text-wrap">
             <div class="row section-title">REWARD</div>
-            <div class="row section-item">154 Minutes</div>
+            <div class="row section-item">{{p2p.actualPrice}}</div>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
           </div>
           <div class="col-80 section-text-wrap">
             <div class="row section-title">LANGUAGES</div>
-            <div class="row section-item">EN, BiH</div>
+            <div class="row section-item"><span *ngFor="let language of p2p.languages">{{language.code | uppercase}}</span></div>
           </div>
         </div>
       </div>
@@ -60,9 +60,8 @@
           </div>
           <div class="col-80 section-text-wrap">
             <div class="row section-title">DEADLINE</div>
-            <div class="row section-item">
-              05.95.1925. 15:96
-              
+            <div class="row section-item"><span *ngIf="p2p.deadline != null; else noDeadline">{{p2p.deadline | date:'y MMM d, H:m'}} ({{p2p.deadline | amTimeAgo}})</span>
+              <template #noDeadline>No deadline</template>
             </div>
           </div>
         </div>
@@ -72,12 +71,7 @@
   <div class="p2p-description-wrap">
     <div class="row title">Request Description</div>
     <div class="row summary-wrap">
-      <div class="summary">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a pulvinar turpis.
-        Nulla facilisi. Donec ac risus massa. Morbi fermentum molestie augue sit amet pulvinar.
-        Sed luctus dui in metus eleifend viverra. Fusce suscipit aliquam lacinia. Donec placerat diam est.
-        Eu porttitor magna vehicula at. Vestibulum sit amet sem feugiat, eleifend leo eget.
-      </div>
+      <div class="summary">{{p2p.text}}</div>
     </div>
     <div class="row">
       <div class="col-80">
@@ -98,7 +92,7 @@
     </div>
   </div>
   <div class="offer-button-wrap">
-    <button class="offer-button">Write Offer</button><span class="offer-counter">34</span>
+    <button class="offer-button">Write Offer</button><span class="offer-counter">{{p2p.offerCount}}</span>
   </div>
   <div class="discussion-wrap">
     <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>

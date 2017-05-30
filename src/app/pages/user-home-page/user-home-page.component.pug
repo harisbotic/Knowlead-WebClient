@@ -6,7 +6,7 @@
           .col-35
             .profile-picture
               //- Link to profile
-              a(href="#")
+              a(href="{{user | userProfileLink}}")
                 app-profile-picture([user]="user" [uploadable]="false" size="small")
           .col-65
             .profile-name-wrap

@@ -53,7 +53,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
         });
         for (let key of Object.keys(this.form.controls)) {
             this.form.controls[key].setErrors(null);
-            this.form.controls[key].disable();
+            // this.form.controls[key].disable();
             this.form.controls[key].markAsPristine();
         }
         this.form.setErrors(null);
@@ -62,7 +62,7 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
         // so that form control directive registers it is pristine
         setTimeout(() => {
             for (let key of Object.keys(this.form.controls)) {
-                this.form.controls[key].enable();
+                // this.form.controls[key].enable();
             }
         }, 200);
     }
