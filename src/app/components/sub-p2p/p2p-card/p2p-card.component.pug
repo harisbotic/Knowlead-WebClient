@@ -1,10 +1,10 @@
 a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/home/p2p/{{p2p.p2pId}}")
   .p2p-card-level-wrap
-    .level-base.level-beginner
+    .level-base.level-basic
       .level-anglebox
       .level-widebox
         span.level-text.
-          Beginner
+          Basic
   .p2p-card-content-wrap.fade
     .row.bookmark-wrap
       //- ADD bookmarked CLASS TO THE ICON BELOW WHEN IT IS CLICKED
@@ -13,7 +13,7 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
       .col-25
         .profile-picture
           //- Link to profile
-          a(routerLink="{{p2p.user | userProfileLink}}")
+          a(routerLink="{{p2p.createdBy | userProfileLink}}")
             app-profile-picture([user]="p2p.createdBy" [uploadable]="false" size="small")
       .col-75
         .profile-name-wrap

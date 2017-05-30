@@ -1,15 +1,15 @@
 <a class="p2p-card-wrap" *ngIf="p2p.createdBy &amp;&amp; p2p.languages &amp;&amp; p2p.fos" routerLink="/home/p2p/{{p2p.p2pId}}">
   <div class="p2p-card-level-wrap">
-    <div class="level-base level-beginner">
+    <div class="level-base level-basic">
       <div class="level-anglebox"></div>
-      <div class="level-widebox"><span class="level-text">Beginner</span></div>
+      <div class="level-widebox"><span class="level-text">Basic</span></div>
     </div>
   </div>
   <div class="p2p-card-content-wrap fade">
     <div class="row bookmark-wrap"><i class="kl-bookmark2"></i></div>
     <div class="row profile-info-wrap">
       <div class="col-25">
-        <div class="profile-picture"><a routerLink="{{p2p.user | userProfileLink}}">
+        <div class="profile-picture"><a routerLink="{{p2p.createdBy | userProfileLink}}">
             <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" size="small"></app-profile-picture></a></div>
       </div>
       <div class="col-75">

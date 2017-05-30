@@ -1,14 +1,23 @@
 @import "../../../../kl-styles/variables.scss";
 
+a, a:link, a:hover, a:visited a:active {
+  text-decoration: none;
+  color: $font-primary-color;
+}
+
 .p2p-card-wrap {
-    width: 230px;
-    height: auto;
-    display: inline-flex;
-    margin: 5px 7px;
-    cursor: pointer;
-    border: $outline;
-    border-radius: $border-radius;
-    position: relative;
+  width: 230px;
+  height: auto;
+  display: inline-flex;
+  margin: 5px 7px;
+  cursor: pointer;
+  border: $outline;
+  border-radius: $border-radius;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  }
 }
 
 .p2p-card-level-wrap {
@@ -50,11 +59,11 @@
     }
 }
 
-.level-beginner, .level-beginner > div {
-  background-color: $level-beginner-color;
+.level-basic, .level-basic > div {
+  background-color: $level-basic-color;
 
   > span {
-    left: -28px !important;
+    left: -15px !important;
   }
 }
 

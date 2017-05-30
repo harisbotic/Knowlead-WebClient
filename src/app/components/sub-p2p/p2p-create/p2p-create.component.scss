@@ -190,15 +190,15 @@
 
           input[type="radio"]:checked ~ .basic {
             opacity: 1;
-          	border-color: $level-beginner-color;
+          	border-color: $level-basic-color;
             > .item {
-              color: $level-beginner-color;
+              color: $level-basic-color;
               &:after {
-                background-color: $level-beginner-color;
+                background-color: $level-basic-color;
               }
             }
             > .item-text {
-              color: $level-beginner-color;
+              color: $level-basic-color;
             }
           }
 
