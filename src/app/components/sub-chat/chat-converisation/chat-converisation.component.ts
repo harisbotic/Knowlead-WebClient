@@ -24,7 +24,7 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
   me: ApplicationUserModel;
 
   opened = false;
-  isEmpty = false;
+  isEmpty = true;
 
   constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
