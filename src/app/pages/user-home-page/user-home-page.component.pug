@@ -152,6 +152,8 @@
               a(routerLink="/home/filtered/Scheduled")
                 .all-events.
                   Check All Events
+
+                  
     .col-75
       .main-section-wrap
         .top-elements
@@ -183,23 +185,28 @@
                   sed do eiusmod tempor incididunt ut labore.
             .col-15
               a.create-p2p-button(routerLink="/p2p") Create
-          .row
-            .request-section-wrap
-              .section-title Teacher Section
-          .row.request-type-wrap
-            .col-20
-              .request-type-image-wrap#teachingImg Course
-                //- img(src="#" alt="p2p-request")              
-            .col-65
-              .row
-                .request-type-title Course
-              .row
-                .request-type-description.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit, sed do eiusmod tempor incididunt ut labore.
-                  sed do eiusmod tempor incididunt ut labore.
-                  sed do eiusmod tempor incididunt ut labore.
-            .col-15
-              button.create-p2p-button Create
+
+          //- TEACHER SECTION for courses and videos
+          //- .row
+          //-   .request-section-wrap
+          //-     .section-title Teacher Section
+          //- .row.request-type-wrap
+          //-   .col-20
+          //-     .request-type-image-wrap#teachingImg Course
+          //-       //- img(src="#" alt="p2p-request")              
+          //-   .col-65
+          //-     .row
+          //-       .request-type-title Course
+          //-     .row
+          //-       .request-type-description.
+          //-         Lorem ipsum dolor sit amet, consectetur adipisicing
+          //-         elit, sed do eiusmod tempor incididunt ut labore.
+          //-         sed do eiusmod tempor incididunt ut labore.
+          //-         sed do eiusmod tempor incididunt ut labore.
+          //-   .col-15
+          //-     button.create-p2p-button Create
+
+
+
         .p2p-post-cards
           router-outlet
