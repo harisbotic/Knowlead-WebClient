@@ -5,7 +5,7 @@
 }
 
 .converisation > div > .col-80 > .message {
-    margin: -2px 0 0 0;
+    margin: 2px 0 0 0;
     max-width: 166px;
 }
 
@@ -87,10 +87,14 @@
     height: 330px;
     background-color: white;
     overflow-y: scroll;
-    // display: -webkit-flex;
-    // -webkit-flex-direction: column-reverse;
-    // display: flex;
-    // flex-direction: column-reverse;
+    display: -webkit-flex;
+    -webkit-flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column-reverse;
+
+    div:first-child {
+        margin-bottom: 15px;
+    }
 }
 
 .start-friendship-wrap {
