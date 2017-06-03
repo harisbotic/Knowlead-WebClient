@@ -4,11 +4,11 @@
     button(type="button" (click)="closed()")
       i.kl-close
   .converisation(*ngIf="opened")
-    .start-friendship-wrap(*ngIf="isEmpty")
+    .start-friendship-wrap(*ngIf="isEmpty && friendship")
       .start-friendship-icon
         i.kl-peer
       .start-friendship-timestamp.
-        MAY 13TH, 3:41PM
+        {{friendship.updatedAt | date:'mediumDate'}}
       .start-friendship-text.
         You are now friends on Knowlead.
     div(*ngFor="let message of getConverisation() | async" class="full")

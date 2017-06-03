@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
-import { ApplicationUserModel, ChatMessageModel } from '../../../models/dto';
+import { ApplicationUserModel, ChatMessageModel, FriendshipModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { Observable } from 'rxjs/Rx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -25,6 +25,7 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
 
   opened = false;
   isEmpty = true;
+  friendship: FriendshipModel;
 
   constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
@@ -37,6 +38,9 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
     }));
     this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
       this.me = user;
+    }));
+    this.subscriptions.push(this.chatService.getFriendshipStatus(this.user.id).subscribe(friendship => {
+      this.friendship = friendship;
     }));
   }
 

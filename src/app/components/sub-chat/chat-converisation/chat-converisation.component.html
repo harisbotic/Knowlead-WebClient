@@ -4,9 +4,9 @@
     <button type="button" (click)="closed()"><i class="kl-close"></i></button>
   </div>
   <div class="converisation" *ngIf="opened">
-    <div class="start-friendship-wrap" *ngIf="isEmpty">
+    <div class="start-friendship-wrap" *ngIf="isEmpty &amp;&amp; friendship">
       <div class="start-friendship-icon"><i class="kl-peer"></i></div>
-      <div class="start-friendship-timestamp">MAY 13TH, 3:41PM</div>
+      <div class="start-friendship-timestamp">{{friendship.updatedAt | date:'mediumDate'}}</div>
       <div class="start-friendship-text">You are now friends on Knowlead.</div>
     </div>
     <div class="full" *ngFor="let message of getConverisation() | async">
