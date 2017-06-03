@@ -307,13 +307,13 @@
 }
 
 .request-type-image-wrap {
-  background-color: transparent;
-  border: 2px solid $knowlead-secondary;
+  background-color: $knowlead-secondary;
+  // border: 2px solid $knowlead-secondary;
   border-radius: $border-radius;
   width: 100%;
   height: 85px;
   text-align: center;
-  color: $knowlead-secondary;
+  color: white;
   line-height: 85px;
   font-size: 37px;
   font-weight: bold;
@@ -335,15 +335,17 @@
 }
 
 .create-p2p-button {
-  border: none;
   border-radius: $border-radius;
   background-color: $knowlead-primary;
   color: white;
   font-size: 18px;
   font-weight: bold;
-  height: 46px;
-  width: 100%;
-  margin-top: 17px;
+  padding: 11px 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+ 
 
   &:hover {
     background-color: transparentize($knowlead-primary, 0.1);
