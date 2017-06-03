@@ -1,9 +1,9 @@
 .tab-wrap([class.tabClosed]="!opened")
-  .tab.tabActive((click)="toggleOpen()") 
+  .tab([class.tabActive]="focused" (click)="toggleOpen()") 
     a(routerLink="{{user | userProfileLink}}") {{user | fullName}}
-    button(type="button" (click)="closed()")
+    button(type="button" (click)="closed($event)")
       i.kl-close
-  .converisation(*ngIf="opened")
+  .converisation(*ngIf="opened" (click)="focus()")
     .start-friendship-wrap(*ngIf="isEmpty && friendship")
       .start-friendship-icon
         i.kl-peer
@@ -11,7 +11,7 @@
         {{friendship.updatedAt | date:'mediumDate'}}
       .start-friendship-text.
         You are now friends on Knowlead.
-    div(*ngFor="let message of getConverisation() | async" class="full")
+    div.full(*ngFor="let message of getConverisation() | async")
       .col-17
         span
       .col-80.posRel
@@ -21,6 +21,13 @@
       .col-3
         span
   form([formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="opened")
-    input(type="text" autocomplete="false" formControlName="message" placeholder="Type your message...")
+    input(
+      type="text"
+      autocomplete="false"
+      formControlName="message"
+      placeholder="Type your message..."
+      (focus)="focused = true"
+      (blur)="focused = false"
+      #chatInput)
     //- REMOVE ERRORS!!!
     //- WHAT ERRORS???

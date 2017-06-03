@@ -1,9 +1,9 @@
 
 <div class="tab-wrap" [class.tabClosed]="!opened">
-  <div class="tab tabActive" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
-    <button type="button" (click)="closed()"><i class="kl-close"></i></button>
+  <div class="tab" [class.tabActive]="focused" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
+    <button type="button" (click)="closed($event)"><i class="kl-close"></i></button>
   </div>
-  <div class="converisation" *ngIf="opened">
+  <div class="converisation" *ngIf="opened" (click)="focus()">
     <div class="start-friendship-wrap" *ngIf="isEmpty &amp;&amp; friendship">
       <div class="start-friendship-icon"><i class="kl-peer"></i></div>
       <div class="start-friendship-timestamp">{{friendship.updatedAt | date:'mediumDate'}}</div>
@@ -19,6 +19,6 @@
     </div>
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="opened">
-    <input type="text" autocomplete="false" formControlName="message" placeholder="Type your message...">
+    <input type="text" autocomplete="false" formControlName="message" placeholder="Type your message..." (focus)="focused = true" (blur)="focused = false" #chatInput>
   </form>
 </div>

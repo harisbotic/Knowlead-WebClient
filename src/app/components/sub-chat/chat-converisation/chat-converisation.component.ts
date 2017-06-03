@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApplicationUserModel, ChatMessageModel, FriendshipModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { Observable } from 'rxjs/Rx';
@@ -22,10 +22,12 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
   @Input() user: ApplicationUserModel;
   @Output() close = new EventEmitter();
   me: ApplicationUserModel;
+  @ViewChild('chatInput') chatInput: ElementRef;
 
   opened = false;
   isEmpty = true;
   friendship: FriendshipModel;
+  focused: boolean;
 
   constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
@@ -44,16 +46,38 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
     }));
   }
 
-  closed() {
+  get chatElement(): HTMLInputElement {
+    return (this.chatInput) ? this.chatInput.nativeElement : undefined;
+  }
+
+  closed(event: MouseEvent) {
+    event.cancelBubble = true;
     this.close.emit();
   }
 
   open() {
     this.opened = true;
+    setTimeout(this.focus.bind(this), 200);
+  }
+
+  minimize() {
+    this.opened = false;
   }
 
   toggleOpen() {
-    this.opened = !this.opened;
+    if (this.opened) {
+      this.minimize();
+    } else {
+      this.open();
+    }
+  }
+
+  focus() {
+    if (this.chatElement) {
+      this.chatElement.focus();
+    } else {
+      console.warn('Chat element not found, cannot focus');
+    }
   }
 
   getNewValue(): ChatMessageModel {
