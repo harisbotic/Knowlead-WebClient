@@ -1,0 +1,17 @@
+
+a(*ngIf="notification")
+  .row.single-notification-container([class.unread]="!notification?.seenAt")
+    .col-20.posRel.profile-image-round-small
+      app-profile-picture.centerV([user]="notification.fromApplicationUser")
+    .col-60.posRel
+      .notification-text-wrap
+        .row.fromWho
+          a(routerLink="{{notification.fromApplicationUserId | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
+          .last-message-text.
+            Last Message Text Goes Here
+          .timeAgo {{notification.scheduledAt | amTimeAgo}}
+    .col-20
+      .row
+        .col-100.posRel
+          .notification-icon.hardPosRel
+            i.kl-messages.centerV

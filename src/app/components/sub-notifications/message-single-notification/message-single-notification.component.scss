@@ -1,7 +1,6 @@
 @import "../../../../kl-styles/variables.scss";
 
 
-
 .single-notification-container {
     width: 100%;
     height: $single-notification-height;
@@ -39,6 +38,11 @@
 .post-type {
     color: $knowlead-secondary;
     font-weight: bold;
+}
+
+.last-message-text {
+    color: $font-secondary-color;
+    text-decoration: none;
 }
 
 .timeAgo {
