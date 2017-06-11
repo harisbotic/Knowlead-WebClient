@@ -20,15 +20,16 @@
 		.row
 			.profilePage-navigation-wrap
 				.col-17.filler
-				.col-12_5.profilePage-nav-item
-					a(routerLink=".") About Me
-				.col-12_5.profilePage-nav-item.disabledLink(*ngIf="isMy") Analytics
-				.col-12_5.profilePage-nav-item(*ngIf="isMy")
-					a(routerLink="library") Library
-				.col-12_5.profilePage-nav-item(*ngIf="isMy")
-					a(routerLink="friends") Friends
+				.profilePage-nav-main-section
+					.profilePage-nav-item
+						a(routerLink=".") About Me
+					.profilePage-nav-item.disabledLink(*ngIf="isMy") Analytics
+					.profilePage-nav-item(*ngIf="isMy")
+						a(routerLink="library") Library
+					.profilePage-nav-item(*ngIf="isMy")
+						a(routerLink="friends") Friends
 				.profile-stats-wrap
-					.col-50.profile-stats(*ngIf="isMy")
+					.col-50.profile-stats
 						.row
 							.text.
 								Score
@@ -42,5 +43,12 @@
 						.row
 							.value.
 								{{me?.minutesBalance}}
+				.edit-profile-button-wrap(*ngIf="isMy")
+					a(routerLink="/profilesetup")
+						button.edit-profile-button 
+							i.kl-edit-profile 
+							span  Edit Profile
+				.friendship-options-wrap(*ngIf="!isMy")
+					app-friendship-strip
 		.aboutMe-content
 			router-outlet
