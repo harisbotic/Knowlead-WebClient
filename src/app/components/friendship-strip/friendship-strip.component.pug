@@ -1,15 +1,14 @@
-div(*ngIf='!isSelf()')
-	.select
-		select
-			option(*ngIf='canRemove()', (click)='doAction(actions.RemoveFriend)') {{"friendship|remove" | translate}}
-			option(*ngIf='canBlock()', (click)='doAction(actions.BlockUser)') {{"friendship|block" | translate}}
-			option(*ngIf='canCancel()', (click)='doAction(actions.CancelRequest)') {{"friendship|cancel" | translate}}
-			option(*ngIf='canUnblock()', (click)='doAction(actions.UnblockUser)') {{"friendship|unblock" | translate}}
-			option(*ngIf='canAdd()', (click)='doAction(actions.NewRequest)') {{"friendship|add" | translate}}
-			option(*ngIf='canAccept()', (click)='doAction(actions.AcceptRequest)') {{"friendship|accept" | translate}}
-			option(*ngIf='canDecline()', (click)='doAction(actions.DeclineRequest)') {{"friendship|decline" | translate}}
-		.select__arrow
-
+.friendship-strip-wrap(*ngIf='!isSelf()')
+	.col-90
+		button.first-option Send Friend Request
+	.col-10
+		span.dropdown-icon
+			i.kl-more
+	.dropdown-content
+		button.other-option Remove Friend
+		button.other-option Block Friend
+		button.other-option Remove Friend
+		button.other-option Remove Friend
 
 
 	//- button(*ngIf='canRemove()', (click)='doAction(actions.RemoveFriend)') {{"friendship|remove" | translate}}

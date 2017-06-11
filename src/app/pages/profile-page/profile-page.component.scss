@@ -122,7 +122,7 @@
     border-right: 1px solid $hover-dark-color;
 
     .profilePage-nav-main-section {
-        width: 550px;
+        width: 500px;
         height: 100%;
         float: left;
 
@@ -131,8 +131,6 @@
             line-height: 50px;
             font-weight: bold;
             font-size: 15px;
-            width: 137.25px;
-            float: left;
 
             a {
                 text-decoration: none;
@@ -154,14 +152,15 @@
     .profile-stats-wrap {
         border-left: 2px solid $divider-color;
         // border-right: 2px solid $divider-color;
-        width: 200px;
+        width: 210px;
         float: left;
         height: 100%;
         display: flex;
         align-items: center;
+        padding-left: 20px;
 
         .profile-stats {
-            padding-left: 20px;
+            padding-left: 10px;
 
             .text {
                 text-transform: uppercase;

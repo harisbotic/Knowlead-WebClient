@@ -1,15 +1,13 @@
 
-<div *ngIf="!isSelf()">
-  <div class="select">
-    <select>
-      <option *ngIf="canRemove()" (click)="doAction(actions.RemoveFriend)">{{"friendship|remove" | translate}}</option>
-      <option *ngIf="canBlock()" (click)="doAction(actions.BlockUser)">{{"friendship|block" | translate}}</option>
-      <option *ngIf="canCancel()" (click)="doAction(actions.CancelRequest)">{{"friendship|cancel" | translate}}</option>
-      <option *ngIf="canUnblock()" (click)="doAction(actions.UnblockUser)">{{"friendship|unblock" | translate}}</option>
-      <option *ngIf="canAdd()" (click)="doAction(actions.NewRequest)">{{"friendship|add" | translate}}</option>
-      <option *ngIf="canAccept()" (click)="doAction(actions.AcceptRequest)">{{"friendship|accept" | translate}}</option>
-      <option *ngIf="canDecline()" (click)="doAction(actions.DeclineRequest)">{{"friendship|decline" | translate}}</option>
-    </select>
-    <div class="select__arrow"></div>
+<div class="friendship-strip-wrap" *ngIf="!isSelf()">
+  <div class="col-90">
+    <button class="first-option">Send Friend Request</button>
+  </div>
+  <div class="col-10"><span class="dropdown-icon"><i class="kl-more"></i></span></div>
+  <div class="dropdown-content">
+    <button class="other-option">Remove Friend</button>
+    <button class="other-option">Block Friend</button>
+    <button class="other-option">Remove Friend</button>
+    <button class="other-option">Remove Friend</button>
   </div>
 </div>

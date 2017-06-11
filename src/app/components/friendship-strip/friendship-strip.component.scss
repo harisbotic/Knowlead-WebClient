@@ -1,1 +1,70 @@
 @import "../../../kl-styles/variables.scss";
+
+
+.friendship-strip-wrap {
+  position: relative;
+  width: 165px;
+
+    &:hover {
+      .dropdown-content {
+        display: block;
+      }
+    }
+
+  .first-option {
+    border: 1px solid $placeholder-color;
+    background-color: $hover-middle-color;
+    color: $font-primary-color;
+    border-radius: $border-radius 0 0 $border-radius;
+    height: 32px;
+    outline: none;
+    width: 100%;
+
+    &:hover {
+      background-color: $knowlead-primary;
+      color: white;
+      border-color: $knowlead-primary;
+    }
+  }
+
+  .dropdown-icon {
+    border: 1px solid $placeholder-color;
+    background-color: $hover-middle-color;
+    color: $font-primary-color;
+    border-radius: 0 $border-radius $border-radius 0;
+    position: absolute;
+    right: -8px;
+    padding: 6px 5px 5px 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $knowlead-primary;
+      color: white;
+    }
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: -8px;
+    top: 31px;
+    width: 173px;
+    border-bottom: 1px solid $placeholder-color;
+
+    button {
+      width: 100%;
+      height: 32px;
+      border: 1px solid $placeholder-color;
+      border-bottom: none;
+      background-color: $hover-middle-color;
+      color: $font-primary-color;
+      outline: none;
+
+      &:hover {
+        background-color: $knowlead-primary;
+        color: white;
+        border-color: $knowlead-primary;
+      }
+    }
+  }
+}
