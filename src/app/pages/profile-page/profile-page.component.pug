@@ -27,12 +27,20 @@
 					a(routerLink="library") Library
 				.col-12_5.profilePage-nav-item(*ngIf="isMy")
 					a(routerLink="friends") Friends
-				#profile-minutes.col-12_5.profile-stats(*ngIf="isMy")
-					| {{me?.minutesBalance}} 
-					span.profile-stats-text Minutes
-				.col-20_5.profile-stats(*ngIf="isMy")
-					| {{target?.pointsBalance}} 
-					span.profile-stats-text Score
+				.profile-stats-wrap
+					.col-50.profile-stats(*ngIf="isMy")
+						.row
+							.text.
+								Score
+						.row
+							.value.
+								{{target?.pointsBalance}}
+					.col-50.profile-stats(*ngIf="isMy")
+						.row
+							.text.
+								Minutes
+						.row
+							.value.
+								{{me?.minutesBalance}}
 		.aboutMe-content
 			router-outlet
-

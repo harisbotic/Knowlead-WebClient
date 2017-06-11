@@ -137,21 +137,31 @@
         }
     }
 
-    .profile-stats {
-        line-height: 50px;
-        padding-left: 40px;
-        font-size: 16px;
-        font-weight: bold;
-        color: $font-primary-color;
-    }
-
-    #profile-minutes {
+    .profile-stats-wrap {
         border-left: 2px solid $divider-color;
+        border-right: 2px solid $divider-color;
+        width: 200px;
+        float: left;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .profile-stats {
+            padding-left: 20px;
+
+            .text {
+                text-transform: uppercase;
+                color: $font-secondary-color;
+                font-size: 11px;
+            }
+
+            .value {
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
     }
 
-    .profile-stats-text {
-        font-size: 14px;
-    }
 }
 
 
