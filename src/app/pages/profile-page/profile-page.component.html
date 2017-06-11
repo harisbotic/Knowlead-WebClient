@@ -28,10 +28,10 @@
       <div class="profilePage-navigation-wrap">
         <div class="col-17 filler"></div>
         <div class="profilePage-nav-main-section">
-          <div class="profilePage-nav-item"><a routerLink=".">About Me</a></div>
+          <div class="profilePage-nav-item"><a routerLink="." routerLinkActive="active-link">About Me</a></div>
           <div class="profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
-          <div class="profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
-          <div class="profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
+          <div class="profilePage-nav-item" *ngIf="isMy"><a routerLink="library" routerLinkActive="active-link">Library</a></div>
+          <div class="profilePage-nav-item" *ngIf="isMy"><a routerLink="friends" routerLinkActive="active-link">Friends</a></div>
         </div>
         <div class="profile-stats-wrap">
           <div class="col-50 profile-stats">

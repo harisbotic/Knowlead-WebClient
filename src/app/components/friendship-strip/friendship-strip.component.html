@@ -1,9 +1,15 @@
+
 <div *ngIf="!isSelf()">
-  <button *ngIf="canAccept()" (click)="doAction(actions.AcceptRequest)">{{"friendship|accept" | translate}}</button>
-  <button *ngIf="canDecline()" (click)="doAction(actions.DeclineRequest)">{{"friendship|decline" | translate}}</button>
-  <button *ngIf="canRemove()" (click)="doAction(actions.RemoveFriend)">{{"friendship|remove" | translate}}</button>
-  <button *ngIf="canBlock()" (click)="doAction(actions.BlockUser)">{{"friendship|block" | translate}}</button>
-  <button *ngIf="canCancel()" (click)="doAction(actions.CancelRequest)">{{"friendship|cancel" | translate}}</button>
-  <button *ngIf="canUnblock()" (click)="doAction(actions.UnblockUser)">{{"friendship|unblock" | translate}}</button>
-  <button *ngIf="canAdd()" (click)="doAction(actions.NewRequest)">{{"friendship|add" | translate}}</button>
+  <div class="select">
+    <select>
+      <option *ngIf="canRemove()" (click)="doAction(actions.RemoveFriend)">{{"friendship|remove" | translate}}</option>
+      <option *ngIf="canBlock()" (click)="doAction(actions.BlockUser)">{{"friendship|block" | translate}}</option>
+      <option *ngIf="canCancel()" (click)="doAction(actions.CancelRequest)">{{"friendship|cancel" | translate}}</option>
+      <option *ngIf="canUnblock()" (click)="doAction(actions.UnblockUser)">{{"friendship|unblock" | translate}}</option>
+      <option *ngIf="canAdd()" (click)="doAction(actions.NewRequest)">{{"friendship|add" | translate}}</option>
+      <option *ngIf="canAccept()" (click)="doAction(actions.AcceptRequest)">{{"friendship|accept" | translate}}</option>
+      <option *ngIf="canDecline()" (click)="doAction(actions.DeclineRequest)">{{"friendship|decline" | translate}}</option>
+    </select>
+    <div class="select__arrow"></div>
+  </div>
 </div>

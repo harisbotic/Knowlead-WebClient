@@ -108,6 +108,10 @@
     color: $placeholder-color !important;
 }
 
+.active-link {
+    color: $font-primary-color !important;
+}
+
 .profilePage-navigation-wrap {
     height: 50px;
     width: $full-grid-width;
@@ -177,6 +181,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        font-weight: bold;
 
         a {
             text-decoration: none;
@@ -196,6 +201,13 @@
                 border-color: $knowlead-primary;
             }
         }
+    }
+
+    .friendship-options-wrap {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 }

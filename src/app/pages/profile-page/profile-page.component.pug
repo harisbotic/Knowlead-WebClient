@@ -22,12 +22,12 @@
 				.col-17.filler
 				.profilePage-nav-main-section
 					.profilePage-nav-item
-						a(routerLink=".") About Me
+						a(routerLink=".", routerLinkActive="active-link") About Me
 					.profilePage-nav-item.disabledLink(*ngIf="isMy") Analytics
 					.profilePage-nav-item(*ngIf="isMy")
-						a(routerLink="library") Library
+						a(routerLink="library", routerLinkActive="active-link") Library
 					.profilePage-nav-item(*ngIf="isMy")
-						a(routerLink="friends") Friends
+						a(routerLink="friends", routerLinkActive="active-link") Friends
 				.profile-stats-wrap
 					.col-50.profile-stats
 						.row
