@@ -10,6 +10,7 @@ import { dateValidator } from '../../../validators/date.validator';
 import { BaseFormComponent } from '../../../base-form.component';
 import { addHoursToDate } from '../../../utils/index';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-p2p-create',
@@ -128,6 +129,15 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     }, (err) => {
       this.notificationService.error('error creating p2p', err);
     }));
+  }
+
+  getValue(): P2PModel {
+    // clone value so that we don't mess with original one
+    const ret = super.getValue();
+    ret.blobs = _.cloneDeep(ret.blobs);
+    // remove all files which are undefined/null
+    ret.blobs = ret.blobs.filter(blob => blob);
+    return ret;
   }
 
 }
