@@ -6,6 +6,7 @@ import { FileService } from '../../services/file.service';
 import { BaseComponent } from '../../base.component';
 import { AccountService } from '../../services/account.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FileStatus } from '../../models/frontend.models';
 
 @Component({
   selector: 'app-profile-picture',
@@ -42,9 +43,20 @@ export class ProfilePictureComponent extends BaseComponent implements OnInit {
   fileSelected(event: Event) {
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
+      console.log('FILE SELECTED');
       this.subscriptions.push(
-        this.fileService.upload(element.files[0]).map(response => <ImageBlobModel>response.object).subscribe(image => {
-          this.subscriptions.push(this.accountService.changeProfilePicture(image).subscribe());
+        // First upload the picture
+        this.fileService.upload(element.files[0])
+          .do(file => console.log(file.status.toString()))
+          .filter(blob => blob.status === FileStatus.UPLOADED).subscribe(image => {
+            // Then set the profile picture to uploaded image
+            const oldImage = this.profilePictureId;
+            this.subscriptions.push(this.accountService.changeProfilePicture(<any>image).subscribe(() => {
+              // Remove old profile picture from server
+              if (oldImage) {
+                this.fileService.remove(oldImage);
+              }
+            }));
         })
       );
     } else {

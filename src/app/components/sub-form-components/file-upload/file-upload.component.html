@@ -20,10 +20,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="subscription">
+  <div *ngIf="value">
     <span class="slds-size--1-of-1 slds-grid slds-grid--align-end slds-grid--vertical-align-center">
       <span class="slds-text-align--left slds-size--1-of-1">
-        {{(value?.blobId ? "file|uploaded" : "file|uploading") | translate}}
+        {{("file|" + FileStatus[value.status].toLowerCase()) | translate}}
       </span>
       <button type="button" nglButtonIcon (click)="deleted()">
         <ngl-icon icon="delete" size="large" type="error">

@@ -5,12 +5,12 @@
       <div class="sidebar-wrap">
         <div class="row">
           <div class="col-35">
-            <div class="profile-picture"><a href="{{user | userProfileLink}}">
+            <div class="profile-picture"><a routerLink="{{user | userProfileLink}}">
                 <app-profile-picture [user]="user" [uploadable]="false" size="small"></app-profile-picture></a></div>
           </div>
           <div class="col-65">
             <div class="profile-name-wrap">
-              <div class="profile-name"><a href="{{user | userProfileLink}}">{{user | fullName}}</a></div>
+              <div class="profile-name"><a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a></div>
             </div>
           </div>
         </div>
