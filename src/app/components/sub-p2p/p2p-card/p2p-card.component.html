@@ -39,9 +39,7 @@
     <div class="row p2p-section-wrap">
       <div class="col-80">
         <div class="row section-title">LANGUAGES</div>
-        <div class="row section-item">
-          <div *ngFor="let item of p2p.languages">{{item.code | uppercase}}</div>
-        </div>
+        <div class="row section-item"><span *ngFor="let item of p2p.languages">{{item.code | uppercase}} </span></div>
       </div>
       <div class="col-20">
         <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>

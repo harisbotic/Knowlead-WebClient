@@ -47,8 +47,8 @@
             .row.section-title.
               LANGUAGES
             .row.section-item
-              span(*ngFor="let language of p2p.languages").
-                {{language.code | uppercase}}
+              span(*ngFor="let language of p2p.languages")
+                 span.single-language {{language.code | uppercase}} 
       .col-50
         .p2p-section-wrap
           .col-20

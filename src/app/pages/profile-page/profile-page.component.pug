@@ -1,0 +1,38 @@
+.grid-container
+	.row
+		.row
+			.coverPhoto-wrap([style.background-image]='coverUrl')
+				//
+					<div class="coverPhoto-options">
+					<i class="kl-plus"></i>
+					</div>
+				.profilePage-profileImage-wrap
+					app-profile-picture([user]='target', [uploadable]='isMy', size='large')
+				.profilePage-profileInfo-wrap
+					.profilePage-Name {{target | fullName}}
+				//
+					<div class="addFriend-wrap" *ngIf="canAddFriend">
+					<i class="kl-add-friend" (click)="addFriend()"></i>
+					</div>
+					<div class="sendMessage-wrap" *ngIf="canMessage">
+					<i class="kl-messages"></i>
+					</div>
+		.row
+			.profilePage-navigation-wrap
+				.col-17.filler
+				.col-12_5.profilePage-nav-item
+					a(routerLink=".") About Me
+				.col-12_5.profilePage-nav-item.disabledLink(*ngIf="isMy") Analytics
+				.col-12_5.profilePage-nav-item(*ngIf="isMy")
+					a(routerLink="library") Library
+				.col-12_5.profilePage-nav-item(*ngIf="isMy")
+					a(routerLink="friendships") Friends
+				#profile-minutes.col-12_5.profile-stats(*ngIf="isMy")
+					| {{me?.minutesBalance}} 
+					span.profile-stats-text Minutes
+				.col-20_5.profile-stats(*ngIf="isMy")
+					| {{target?.pointsBalance}} 
+					span.profile-stats-text Score
+		.aboutMe-content
+			router-outlet
+
