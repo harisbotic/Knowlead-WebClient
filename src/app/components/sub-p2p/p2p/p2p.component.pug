@@ -73,13 +73,8 @@
         .title Attachments
       .col-20
         .download-all-button-wrap
-          button.download-all-button Download All
     .row.attachments-wrap
-      .item#att-1
-      .item#att-2
-      .item#att-3
-      .item#att-4
-      .item#att-5
+      app-file-thumbnail.item(*ngFor="let file of p2p.blobs" [file]="file")
   .offer-button-wrap
     button.offer-button
       | Write Offer

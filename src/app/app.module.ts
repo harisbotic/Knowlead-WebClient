@@ -107,6 +107,7 @@ import { UserSingleNotificationComponent } from
 import { FriendsSingleNotificationComponent } from
   './components/sub-notifications/friends-single-notification/friends-single-notification.component';
 import { FileNamePipe } from './pipes/file-name.pipe';
+import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +181,8 @@ import { FileNamePipe } from './pipes/file-name.pipe';
     MessageSingleNotificationComponent,
     UserSingleNotificationComponent,
     FriendsSingleNotificationComponent,
-    FileNamePipe
+    FileNamePipe,
+    FileThumbnailComponent
   ],
   imports: [
     BrowserModule,
@@ -195,7 +197,7 @@ import { FileNamePipe } from './pipes/file-name.pipe';
     PerfectScrollbarModule,
     DynamicModule.withComponents([FriendsSingleNotificationComponent, MessageSingleNotificationComponent, UserSingleNotificationComponent]),
     NglModule.forRoot({
-      svgPath: '/assets'
+      svgPath: '/assets/icons'
     }),
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     ReactiveFormsModule,
