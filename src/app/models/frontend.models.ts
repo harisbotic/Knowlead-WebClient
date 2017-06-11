@@ -1,4 +1,4 @@
-import { P2PModel, P2PMessageModel } from './dto';
+import { P2PModel, P2PMessageModel, _BlobModel } from './dto';
 export class LoginResponse {
     token_type: string;
     access_token: string;
@@ -38,4 +38,12 @@ export interface P2PMessageModelExtended extends P2PMessageModel {
     canSchedule: boolean;
     canAccept: boolean;
     scheduleOverride: boolean;
+}
+
+export enum FileStatus {
+    UPLOADING, UPLOADED, CANCELING, CANCELED
+}
+
+export interface BlobModelExtended extends _BlobModel {
+    status: FileStatus;
 }

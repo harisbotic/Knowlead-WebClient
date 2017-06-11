@@ -16,13 +16,13 @@
       </div>
       <div class="attachments-wrap">
         <div class="title">Attachments</div>
-        <div class="attachment-field">
-          <app-file-upload></app-file-upload>
+        <div class="attachment-field" formArrayName="blobs">
+          <app-file-upload *ngFor="let control of form.controls.blobs.controls; let idx = index" [formControlName]="idx" (removed)="removeFile(idx)"></app-file-upload>
         </div>
       </div>
       <div class="language-wrap">
         <div class="title">Choose a language on which you want to study</div>
-        <div class="tooltip-parent">
+        <div class="tooltip-parent" *ngIf="languages">
           <ng-select class="select-language" [options]="languages" [multiple]="true" formControlName="languages" placeholder="EXAMPLE: English, Bosnian..." appFormControlError></ng-select>
         </div>
       </div>

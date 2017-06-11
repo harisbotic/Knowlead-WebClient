@@ -13,7 +13,8 @@ import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
-import { P2PModelExtended } from '../models/frontend.models';
+import { P2PModelExtended, FileStatus, BlobModelExtended } from '../models/frontend.models';
+import { _BlobModel } from '../models/dto';
 
 @Injectable()
 export class ModelUtilsService {
@@ -25,6 +26,12 @@ export class ModelUtilsService {
     ret.canDelete = ret.isMy && !ret.isDeleted;
     ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
     ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
+    return ret;
+  }
+
+  public static extendBlob(blob: _BlobModel, status: FileStatus): BlobModelExtended {
+    let ret = <BlobModelExtended>blob;
+    ret.status = status;
     return ret;
   }
 

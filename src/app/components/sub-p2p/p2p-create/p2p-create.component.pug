@@ -20,12 +20,12 @@
       .attachments-wrap
         .title.
           Attachments
-        .attachment-field
-          app-file-upload
+        .attachment-field(formArrayName="blobs")
+          app-file-upload(*ngFor="let control of form.controls.blobs.controls; let idx = index" [formControlName]="idx" (removed)="removeFile(idx)")
       .language-wrap
         .title.
           Choose a language on which you want to study
-        .tooltip-parent
+        .tooltip-parent(*ngIf="languages")
           ng-select([options]="languages", [multiple]="true", formControlName="languages", placeholder="EXAMPLE: English, Bosnian...", appFormControlError).select-language
     .rate-reward-wrap
       .headline.

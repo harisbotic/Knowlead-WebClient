@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { BaseFormInputComponent } from '../base-form-input/base-form-input.component';
+import { BlobModelExtended, FileStatus } from '../../../models/frontend.models';
 
 
 @Component({
@@ -25,9 +26,9 @@ import { BaseFormInputComponent } from '../base-form-input/base-form-input.compo
 export class FileUploadComponent extends BaseFormInputComponent<_BlobModel> implements OnInit, OnDestroy {
   id: string;
   subscription: Subscription;
-  @Output() removed = new EventEmitter<any>();
-  @Output() uploading = new EventEmitter<any>();
+  @Output() removed = new EventEmitter<_BlobModel>();
   @Input() outputType = 'object';
+  FileStatus = FileStatus;
 
   emitChange() {
     if (this.outputType === 'object') {
@@ -45,51 +46,56 @@ export class FileUploadComponent extends BaseFormInputComponent<_BlobModel> impl
     this.id = getGuid();
   }
 
-  fileRemoved(index: number) {
-    console.log(index);
-  }
-
   fileSelected(event: Event) {
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
       this.value = <_BlobModel>{};
-      this.uploading.emit();
+      console.log(element.files[0]);
       this.subscription = this.fileService.upload(element.files[0])
-        .subscribe(response => {
-          this.value = response.object;
-        }, (response: ResponseModel) => {
+        .subscribe(this.fileStatusChanged.bind(this), (response: ResponseModel) => {
           this.notificationService.error('file|fail', response);
           this.deleted();
         });
+      this.subscriptions.push(this.subscription);
     } else {
-      console.error('No file selected');
+      console.warn('No file selected');
+    }
+  }
+
+  protected removeSubscription() {
+      this.subscription.unsubscribe();
+      delete this.subscription;
+  }
+
+  fileStatusChanged(file: BlobModelExtended) {
+    if (file.status !== FileStatus.CANCELED) {
+      this.value = file;
+    } else {
+      this.value = undefined;
+      this.removeSubscription();
     }
   }
 
   deleted(): void {
-    if (!this.subscription) {
-      return;
-    }
-    let tmp: Observable<any>;
-    if (!this.subscription.closed) {
-      tmp = Observable.of(null);
-      this.subscription.unsubscribe();
-      console.debug('Canceling request');
-    } else {
-      tmp = this.fileService.remove(this.value);
-      console.debug('Removing file from backend');
-    }
-    this.subscriptions.push(tmp.subscribe(response => {
-      this.removed.emit();
-      this.subscription = null;
-      this.value = null;
-    }));
+    this.fileService.remove(this.value);
+    this.removed.emit(this.value);
   }
 
-  ngOnDestroy() {
-    super.ngOnDestroy();
+  writeValue(value: _BlobModel) {
     if (this.subscription) {
-      this.subscription.unsubscribe();
+      this.removeSubscription();
+    }
+    if (value) {
+      const fileStatus = this.fileService.getFileStatus(value);
+      if (fileStatus) {
+        this.subscription = fileStatus.subscribe(this.fileStatusChanged.bind(this));
+        super.writeValue(value);
+      } else {
+        // This shouldn't happen. This happens if value written to this component is non-existing file.
+        super.writeValue(undefined);
+      }
+    } else {
+      super.writeValue(undefined);
     }
   }
 
