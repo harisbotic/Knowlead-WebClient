@@ -106,6 +106,7 @@ import { UserSingleNotificationComponent } from
   './components/sub-notifications/user-single-notification/user-single-notification.component';
 import { FriendsSingleNotificationComponent } from
   './components/sub-notifications/friends-single-notification/friends-single-notification.component';
+import { FileNamePipe } from './pipes/file-name.pipe';
 
 @NgModule({
   declarations: [
@@ -178,7 +179,8 @@ import { FriendsSingleNotificationComponent } from
     P2pMasonryListComponent,
     MessageSingleNotificationComponent,
     UserSingleNotificationComponent,
-    FriendsSingleNotificationComponent
+    FriendsSingleNotificationComponent,
+    FileNamePipe
   ],
   imports: [
     BrowserModule,

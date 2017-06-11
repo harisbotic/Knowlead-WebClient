@@ -23,7 +23,7 @@ export class FileService {
     const fileModel: BlobModelExtended = {
       blobId: fileId,
       blobType: undefined,
-      filename: undefined,
+      filename: file.name,
       extension: undefined,
       filesize: 0,
       uploadedById: undefined,

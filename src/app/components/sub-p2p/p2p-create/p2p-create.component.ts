@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { P2PModel, LanguageModel, FOSModel } from '../../../models/dto';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { P2PModel, LanguageModel, FOSModel, _BlobModel } from '../../../models/dto';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { P2pService } from '../../../services/p2p.service';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { DropdownValueInterface } from '../../../models/frontend.models';
@@ -19,15 +19,7 @@ import { Router } from '@angular/router';
 export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements OnInit {
 
   form: FormGroup;
-  steps = ['fosId', 'initialPrice', 'languages', 'deadline'];
-  iconMapping = {
-    'fosId': 'kl-subject',
-    'initialPrice': 'kl-currency',
-    'languages': 'kl-globe',
-    'deadline': 'kl-clock'
-  };
-  iconClass: string;
-  step = 0;
+  files: FormArray;
   languages: DropdownValueInterface<LanguageModel>[];
   foses: DropdownValueInterface<number>[];
   initialDate = new Date();
@@ -39,52 +31,17 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     super();
   }
 
-  getControlForStep(step: string | number): FormControl {
-    if (typeof(step) === 'number') {
-      step = this.steps[step];
-    }
-    return <FormControl>this.form.controls[step];
-  }
-
-  checkStep() {
-    for (let i = 1; i < Math.min(this.steps.length, this.step + 1); i++) {
-      if (!this.getControlForStep(i).valid) {
-        if (this.step > i) {
-          this.step = i;
-        }
-        break;
-      }
-    }
-  }
-
-  setStep(value: number) {
-    this.step = value;
-    this.checkStep();
-    this.iconClass = this.iconMapping[this.stepStr];
-  }
-
-  get stepStr(): string {
-    return this.steps[this.step];
-  }
-
-  get availableSteps() {
-    const ret = [this.steps[0]];
-    for (let i = 1; i < this.steps.length; i++) {
-      if (this.getControlForStep(i - 1).valid) {
-        ret.push(this.steps[i]);
-      } else {
-        this.checkStep();
-        break;
-      }
-    }
-    return ret;
+  protected getNewFileControl() {
+    return new FormControl();
   }
 
   getNewForm() {
+    this.files = new FormArray([this.getNewFileControl()], null);
+    this.subscriptions.push(this.files.valueChanges.subscribe(this.checkFiles.bind(this)));
     return new FormGroup({
       text: new FormControl(null, Validators.required),
       fosId: new FormControl(null, Validators.required),
-      // blobs: new FormArray([]),
+      blobs: this.files,
       initialPrice: new FormControl(null, [Validators.required]),
       deadline: new FormControl(null, dateValidator({minDate: new Date()})),
       languages: new FormControl(null, [Validators.required, ArrayValidator({min: 1})])
@@ -98,7 +55,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       initialPrice: undefined,
       deadline: undefined,
       languages: undefined,
-      blobs: undefined,
+      blobs: [undefined],
 
       fos: undefined,
       p2pId: undefined,
@@ -122,6 +79,22 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
 
   getDateAfterHours(hours: number): string {
     return addHoursToDate(this.initialDate, hours).toISOString();
+  }
+
+  removeFile(index: number) {
+    // this.files.removeAt(index);
+  }
+
+  checkFiles() {
+    const blobs: _BlobModel[] = this.files.value;
+    for (let idx = 0; idx < blobs.length; idx++) {
+      if (blobs[idx] == null && idx < blobs.length - 1) {
+        this.files.removeAt(idx);
+      }
+    }
+    if (blobs[blobs.length - 1] != null) {
+      this.files.push(this.getNewFileControl());
+    }
   }
 
   ngOnInit() {
@@ -151,7 +124,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     console.log(this.getValue());
     this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(p2p => {
       this.restartForm();
-      this.step = 0;
       this.router.navigate(['/']);
     }, (err) => {
       this.notificationService.error('error creating p2p', err);

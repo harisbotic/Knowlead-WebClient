@@ -50,6 +50,7 @@ export class FileUploadComponent extends BaseFormInputComponent<_BlobModel> impl
     let element: any = event.srcElement;
     if (element.files && element.files.length > 0) {
       this.value = <_BlobModel>{};
+      console.log(element.files[0]);
       this.subscription = this.fileService.upload(element.files[0])
         .subscribe(this.fileStatusChanged.bind(this), (response: ResponseModel) => {
           this.notificationService.error('file|fail', response);
@@ -84,12 +85,16 @@ export class FileUploadComponent extends BaseFormInputComponent<_BlobModel> impl
     if (this.subscription) {
       this.removeSubscription();
     }
-    const fileStatus = this.fileService.getFileStatus(value);
-    if (fileStatus) {
-      this.subscription = fileStatus.subscribe(this.fileStatusChanged.bind(this));
-      super.writeValue(value);
+    if (value) {
+      const fileStatus = this.fileService.getFileStatus(value);
+      if (fileStatus) {
+        this.subscription = fileStatus.subscribe(this.fileStatusChanged.bind(this));
+        super.writeValue(value);
+      } else {
+        // This shouldn't happen. This happens if value written to this component is non-existing file.
+        super.writeValue(undefined);
+      }
     } else {
-      // This shouldn't happen. This happens if value written to this component is non-existing file.
       super.writeValue(undefined);
     }
   }

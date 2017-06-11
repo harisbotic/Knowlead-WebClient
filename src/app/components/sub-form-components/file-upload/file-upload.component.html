@@ -1,5 +1,5 @@
 <div class="slds-form-element">
-  <div class="slds-form-element__control" *ngIf="!subscription">
+  <div class="slds-form-element__control" *ngIf="!value">
     <div class="slds-file-selector slds-file-selector--files">
       <div class="slds-file-selector__dropzone">
         <div>
@@ -23,7 +23,7 @@
   <div *ngIf="value">
     <span class="slds-size--1-of-1 slds-grid slds-grid--align-end slds-grid--vertical-align-center">
       <span class="slds-text-align--left slds-size--1-of-1">
-        {{("file|" + FileStatus[value.status].toLowerCase()) | translate}}
+        {{value | fileName}} - {{("file|" + FileStatus[value.status].toLowerCase()) | translate}}
       </span>
       <button type="button" nglButtonIcon (click)="deleted()">
         <ngl-icon icon="delete" size="large" type="error">
