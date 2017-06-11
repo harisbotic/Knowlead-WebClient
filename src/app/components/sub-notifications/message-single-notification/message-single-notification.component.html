@@ -6,7 +6,7 @@
     <div class="col-60 posRel">
       <div class="notification-text-wrap">
         <div class="row fromWho"><a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
-          <div class="last-message-text">Last Message Text Goes Here</div>
+          <div class="last-message-text">{{notification.customText}}</div>
           <div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div>
         </div>
       </div>

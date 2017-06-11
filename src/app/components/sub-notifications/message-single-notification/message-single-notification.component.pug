@@ -8,7 +8,7 @@ a(*ngIf="notification")
         .row.fromWho
           a(routerLink="{{notification.fromApplicationUserId | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
           .last-message-text.
-            Last Message Text Goes Here
+            {{notification.customText}}
           .timeAgo {{notification.scheduledAt | amTimeAgo}}
     .col-20
       .row
