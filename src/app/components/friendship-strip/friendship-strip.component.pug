@@ -1,0 +1,21 @@
+div(*ngIf='!isSelf()')
+	.select
+		select
+			option(*ngIf='canRemove()', (click)='doAction(actions.RemoveFriend)') {{"friendship|remove" | translate}}
+			option(*ngIf='canBlock()', (click)='doAction(actions.BlockUser)') {{"friendship|block" | translate}}
+			option(*ngIf='canCancel()', (click)='doAction(actions.CancelRequest)') {{"friendship|cancel" | translate}}
+			option(*ngIf='canUnblock()', (click)='doAction(actions.UnblockUser)') {{"friendship|unblock" | translate}}
+			option(*ngIf='canAdd()', (click)='doAction(actions.NewRequest)') {{"friendship|add" | translate}}
+			option(*ngIf='canAccept()', (click)='doAction(actions.AcceptRequest)') {{"friendship|accept" | translate}}
+			option(*ngIf='canDecline()', (click)='doAction(actions.DeclineRequest)') {{"friendship|decline" | translate}}
+		.select__arrow
+
+
+
+	//- button(*ngIf='canRemove()', (click)='doAction(actions.RemoveFriend)') {{"friendship|remove" | translate}}
+	//- button(*ngIf='canBlock()', (click)='doAction(actions.BlockUser)') {{"friendship|block" | translate}}
+	//- button(*ngIf='canCancel()', (click)='doAction(actions.CancelRequest)') {{"friendship|cancel" | translate}}
+	//- button(*ngIf='canUnblock()', (click)='doAction(actions.UnblockUser)') {{"friendship|unblock" | translate}}
+	//- button(*ngIf='canAdd()', (click)='doAction(actions.NewRequest)') {{"friendship|add" | translate}}
+	//- button(*ngIf='canAccept()', (click)='doAction(actions.AcceptRequest)') {{"friendship|accept" | translate}}
+	//- button(*ngIf='canDecline()', (click)='doAction(actions.DeclineRequest)') {{"friendship|decline" | translate}}

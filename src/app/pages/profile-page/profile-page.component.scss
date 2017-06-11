@@ -108,6 +108,10 @@
     color: $placeholder-color !important;
 }
 
+.active-link {
+    color: $font-primary-color !important;
+}
+
 .profilePage-navigation-wrap {
     height: 50px;
     width: $full-grid-width;
@@ -117,41 +121,95 @@
     border-left: 1px solid $hover-dark-color;
     border-right: 1px solid $hover-dark-color;
 
-    .profilePage-nav-item {
-        text-align: center;
-        line-height: 50px;
-        font-weight: bold;
-        font-size: 15px;
+    .profilePage-nav-main-section {
+        width: 550px;
+        height: 100%;
+        float: left;
 
-        a {
-            text-decoration: none;
-            color: $font-secondary-color;
+        .profilePage-nav-item {
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 15px;
+            width: 137.25px;
+            float: left;
 
-            &:hover {
-                color: $font-primary-color;
-            }
+            a {
+                text-decoration: none;
+                color: $font-secondary-color;
 
-            &:active {
-                color: $font-primary-color;
+                &:hover {
+                    color: $font-primary-color;
+                }
+
+                &:active {
+                    color: $font-primary-color;
+                }
             }
         }
     }
 
-    .profile-stats {
-        line-height: 50px;
-        padding-left: 40px;
-        font-size: 16px;
-        font-weight: bold;
-        color: $font-primary-color;
-    }
 
-    #profile-minutes {
+
+    .profile-stats-wrap {
         border-left: 2px solid $divider-color;
+        // border-right: 2px solid $divider-color;
+        width: 200px;
+        float: left;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        .profile-stats {
+            padding-left: 20px;
+
+            .text {
+                text-transform: uppercase;
+                color: $font-secondary-color;
+                font-size: 11px;
+            }
+
+            .value {
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
     }
 
-    .profile-stats-text {
-        font-size: 14px;
+    .edit-profile-button-wrap {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+
+        a {
+            text-decoration: none;
+        }
+
+        .edit-profile-button {
+            border: 1px solid $placeholder-color;
+            background-color: $hover-middle-color;
+            color: $font-primary-color;
+            border-radius: $border-radius;
+            padding: 5px 20px;
+            outline: none;
+
+            &:hover {
+                background-color: $knowlead-primary;
+                color: white;
+                border-color: $knowlead-primary;
+            }
+        }
     }
+
+    .friendship-options-wrap {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
 
 
