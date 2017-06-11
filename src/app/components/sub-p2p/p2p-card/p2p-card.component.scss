@@ -6,7 +6,7 @@ a, a:link, a:hover, a:visited a:active {
 }
 
 .p2p-card-wrap {
-  width: 230px;
+  width: 257px;
   height: auto;
   display: inline-flex;
   margin: 5px 7px;
@@ -83,7 +83,7 @@ a, a:link, a:hover, a:visited a:active {
   content: "";
   text-align: right;
   position: absolute;
-  bottom: 5px;
+  bottom: 8px;
   right: 0;
   width: 35%;
   height: 1.5em;
@@ -120,6 +120,10 @@ a, a:link, a:hover, a:visited a:active {
         color: $hover-middle-color;
       }
     }
+  }
+
+  .p2p-section-wrap {
+    margin-top: 3px;
   }
 
   .section-title {
@@ -165,7 +169,8 @@ a, a:link, a:hover, a:visited a:active {
   }
 
   .p2p-summary-wrap {
-    max-width: 194px;
+    max-width: 220px;
+    margin-top: 3px;
     height: auto;
     max-height: 80px;
     overflow: hidden;
