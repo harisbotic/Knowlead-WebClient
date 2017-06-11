@@ -109,10 +109,14 @@
       .section-item {
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 1.12em;
         flex-basis: 100%;
       }
   }
+}
+
+.single-language {
+  padding-right: 3px;
 }
 
 .p2p-description-wrap {

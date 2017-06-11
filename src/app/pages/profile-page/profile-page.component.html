@@ -1,49 +1,42 @@
+
 <div class="grid-container">
+  <div class="row">
     <div class="row">
-        <div class="row">
-            <div class="coverPhoto-wrap" [style.background-image]="coverUrl">
-                <!-- <div class="coverPhoto-options">
-                    <i class="kl-plus"></i>
-                </div> -->
-                <div class="profilePage-profileImage-wrap">
-                    <app-profile-picture [user]="target" [uploadable]="isMy" size="large"></app-profile-picture>
-                </div>
-                <div class="profilePage-profileInfo-wrap">
-                    <div class="profilePage-Name">{{target | fullName}}</div>
-                </div>
-
-                <div class="addFriend-wrap" *ngIf="canAddFriend">
-                    <i class="kl-add-friend" (click)="addFriend()"></i>
-                </div>
-                <div class="sendMessage-wrap" *ngIf="canMessage">
-                    <i class="kl-messages"></i>
-                </div>
-            </div>
+      <div class="coverPhoto-wrap" [style.background-image]="coverUrl">
+        <!--
+        <div class="coverPhoto-options">
+        <i class="kl-plus"></i>
         </div>
-        <div class="row">
-            <div class="profilePage-navigation-wrap">
-                <div class="col-17 filler"></div>
-                <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
-                <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
-                <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
-                <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
-                <div class="col-12_5 profile-stats" *ngIf="isMy" id="profile-minutes">{{me?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
-                <div class="col-20_5 profile-stats" *ngIf="isMy">{{target?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
-            </div>
+        -->
+        <div class="profilePage-profileImage-wrap">
+          <app-profile-picture [user]="target" [uploadable]="isMy" size="large"></app-profile-picture>
         </div>
-        <div class="aboutMe-content">
-            <router-outlet></router-outlet>
+        <div class="profilePage-profileInfo-wrap">
+          <div class="profilePage-Name">{{target | fullName}}</div>
         </div>
+        <!--
+        <div class="addFriend-wrap" *ngIf="canAddFriend">
+        <i class="kl-add-friend" (click)="addFriend()"></i>
+        </div>
+        <div class="sendMessage-wrap" *ngIf="canMessage">
+        <i class="kl-messages"></i>
+        </div>
+        -->
+      </div>
     </div>
+    <div class="row">
+      <div class="profilePage-navigation-wrap">
+        <div class="col-17 filler"></div>
+        <div class="col-12_5 profilePage-nav-item"><a routerLink=".">About Me</a></div>
+        <div class="col-12_5 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
+        <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="library">Library</a></div>
+        <div class="col-12_5 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends">Friends</a></div>
+        <div class="col-12_5 profile-stats" id="profile-minutes" *ngIf="isMy">{{me?.minutesBalance}} <span class="profile-stats-text">Minutes</span></div>
+        <div class="col-20_5 profile-stats" *ngIf="isMy">{{target?.pointsBalance}} <span class="profile-stats-text">Score</span></div>
+      </div>
+    </div>
+    <div class="aboutMe-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
-
-
-<!-- <div *ngIf="target">
-  <div>
-    Full name: {{target | fullName}}
-  </div>
-  <div>
-    i tako dalje ...
-  </div>
-  <app-friendship-strip *ngIf="target" [otherId]="target.id"></app-friendship-strip>
-</div> -->

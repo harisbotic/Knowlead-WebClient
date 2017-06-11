@@ -42,8 +42,8 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
         .row.section-title.
           LANGUAGES
         .row.section-item
-          div(*ngFor="let item of p2p.languages").
-            {{item.code | uppercase}}
+          span(*ngFor="let item of p2p.languages").
+            {{item.code | uppercase}} 
       .col-20
         .section-icon-wrap([ngClass]="languageColor")
           i.kl-globe
