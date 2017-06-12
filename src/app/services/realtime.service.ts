@@ -46,7 +46,7 @@ export class RealtimeService {
 
   initConnection = () => {
     console.info('Init websockets');
-    this.rpcConnection = new HubConnection(API + '/mainHub', 'accessToken=' + this.accessToken);
+    this.rpcConnection = new HubConnection(API + '/mainHub?accessToken=' + this.accessToken);
     this.rpcConnection.start().then(() => {
       if (!this.rpcConnection) {
         const tmp = Observable.timer(5000).subscribe(() => {
@@ -106,7 +106,7 @@ export class RealtimeService {
         });
       });
     });
-    this.rpcConnection.connectionClosed = this.connectionClosed;
+    this.rpcConnection.onClosed = this.connectionClosed;
   }
 
   connectionClosed = (e) => {

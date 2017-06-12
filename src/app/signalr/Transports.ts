@@ -1,11 +1,18 @@
+import { DataReceived, TransportClosed } from "./Common"
 import { IHttpClient } from "./HttpClient"
 
+export enum TransportType {
+    WebSockets,
+    ServerSentEvents,
+    LongPolling
+}
+
 export interface ITransport {
-    connect(url: string, queryString: string): Promise<void>;
+    connect(url: string): Promise<void>;
     send(data: any): Promise<void>;
     stop(): void;
     onDataReceived: DataReceived;
-    onError: ErrorHandler;
+    onClosed: TransportClosed;
 }
 
 export class WebSocketTransport implements ITransport {
@@ -14,14 +21,12 @@ export class WebSocketTransport implements ITransport {
     connect(url: string, queryString: string = ""): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             url = url.replace(/^http/, "ws");
-            let connectUrl = url + "/ws?" + queryString;
 
-            let webSocket = new WebSocket(connectUrl);
-            let thisWebSocketTransport = this;
+            let webSocket = new WebSocket(url);
 
             webSocket.onopen = (event: Event) => {
-                console.log(`WebSocket connected to ${connectUrl}`);
-                thisWebSocketTransport.webSocket = webSocket;
+                console.log(`WebSocket connected to ${url}`);
+                this.webSocket = webSocket;
                 resolve();
             };
 
@@ -30,17 +35,20 @@ export class WebSocketTransport implements ITransport {
             };
 
             webSocket.onmessage = (message: MessageEvent) => {
-                // console.log(`(WebSockets transport) data received: ${message.data}`);
-                if (thisWebSocketTransport.onDataReceived) {
-                    thisWebSocketTransport.onDataReceived(message.data);
+                console.log(`(WebSockets transport) data received: ${message.data}`);
+                if (this.onDataReceived) {
+                    this.onDataReceived(message.data);
                 }
             }
 
             webSocket.onclose = (event: CloseEvent) => {
                 // webSocket will be null if the transport did not start successfully
-                if (thisWebSocketTransport.webSocket && (event.wasClean === false || event.code !== 1000)) {
-                    if (thisWebSocketTransport.onError) {
-                        thisWebSocketTransport.onError(event);
+                if (this.onClosed && this.webSocket) {
+                    if (event.wasClean === false || event.code !== 1000) {
+                        this.onClosed(new Error(`Websocket closed with status code: ${event.code} (${event.reason})`));
+                    }
+                    else {
+                        this.onClosed();
                     }
                 }
             }
@@ -64,7 +72,7 @@ export class WebSocketTransport implements ITransport {
     }
 
     onDataReceived: DataReceived;
-    onError: ErrorHandler;
+    onClosed: TransportClosed;
 }
 
 export class ServerSentEventsTransport implements ITransport {
@@ -73,41 +81,46 @@ export class ServerSentEventsTransport implements ITransport {
     private queryString: string;
     private httpClient: IHttpClient;
 
-    constructor(httpClient :IHttpClient) {
+    constructor(httpClient: IHttpClient) {
         this.httpClient = httpClient;
     }
 
-    connect(url: string, queryString: string): Promise<void> {
+    connect(url: string): Promise<void> {
         if (typeof (EventSource) === "undefined") {
             Promise.reject("EventSource not supported by the browser.")
         }
-
-        this.queryString = queryString;
         this.url = url;
-        let tmp = `${this.url}/sse?${this.queryString}`;
 
         return new Promise<void>((resolve, reject) => {
-            let eventSource = new EventSource(`${this.url}/sse?${this.queryString}`);
+            let eventSource = new EventSource(this.url);
 
             try {
-                let thisEventSourceTransport = this;
                 eventSource.onmessage = (e: MessageEvent) => {
-                    if (thisEventSourceTransport.onDataReceived) {
-                        thisEventSourceTransport.onDataReceived(e.data);
+                    if (this.onDataReceived) {
+                        try {
+                            console.log(`(SSE transport) data received: ${e.data}`);
+                            this.onDataReceived(e.data);
+                        } catch (error) {
+                            if (this.onClosed) {
+                                this.onClosed(error);
+                            }
+                            return;
+                        }
                     }
                 };
 
-                eventSource.onerror = (e: Event) => {
+                eventSource.onerror = (e: ErrorEvent) => {
                     reject();
 
                     // don't report an error if the transport did not start successfully
-                    if (thisEventSourceTransport.eventSource && thisEventSourceTransport.onError) {
-                        thisEventSourceTransport.onError(e);
+                    if (this.eventSource && this.onClosed) {
+                        this.onClosed(new Error(e.message || "Error occurred"));
                     }
                 }
 
                 eventSource.onopen = () => {
-                    thisEventSourceTransport.eventSource = eventSource;
+                    console.log(`SSE connected to ${this.url}`);
+                    this.eventSource = eventSource;
                     resolve();
                 }
             }
@@ -118,7 +131,7 @@ export class ServerSentEventsTransport implements ITransport {
     }
 
     async send(data: any): Promise<void> {
-        await this.httpClient.post(this.url + "/send?" + this.queryString, data);
+        return send(this.httpClient, this.url, data);
     }
 
     stop(): void {
@@ -129,25 +142,23 @@ export class ServerSentEventsTransport implements ITransport {
     }
 
     onDataReceived: DataReceived;
-    onError: ErrorHandler;
+    onClosed: TransportClosed;
 }
 
 export class LongPollingTransport implements ITransport {
     private url: string;
-    private queryString: string;
     private httpClient: IHttpClient;
     private pollXhr: XMLHttpRequest;
     private shouldPoll: boolean;
 
-    constructor(httpClient :IHttpClient) {
+    constructor(httpClient: IHttpClient) {
         this.httpClient = httpClient;
     }
 
-    connect(url: string, queryString: string): Promise<void> {
+    connect(url: string): Promise<void> {
         this.url = url;
-        this.queryString = queryString;
         this.shouldPoll = true;
-        this.poll(url + "/poll?" + this.queryString)
+        this.poll(this.url);
         return Promise.resolve();
     }
 
@@ -156,51 +167,60 @@ export class LongPollingTransport implements ITransport {
             return;
         }
 
-        let thisLongPollingTransport = this;
         let pollXhr = new XMLHttpRequest();
 
         pollXhr.onload = () => {
             if (pollXhr.status == 200) {
-                if (thisLongPollingTransport.onDataReceived) {
-                    thisLongPollingTransport.onDataReceived(pollXhr.response);
+                if (this.onDataReceived) {
+                    try {
+                        if (pollXhr.response) {
+                            console.log(`(LongPolling transport) data received: ${pollXhr.response}`);
+                            this.onDataReceived(pollXhr.response);
+                        }
+                        else {
+                            console.log(`(LongPolling transport) timed out`);
+                        }
+                    } catch (error) {
+                        if (this.onClosed) {
+                            this.onClosed(error);
+                        }
+                        return;
+                    }
                 }
-                thisLongPollingTransport.poll(url);
+                this.poll(url);
             }
             else if (this.pollXhr.status == 204) {
-                // TODO: closed event?
+                if (this.onClosed) {
+                    this.onClosed();
+                }
             }
             else {
-                if (thisLongPollingTransport.onError) {
-                    thisLongPollingTransport.onError({
-                        status: pollXhr.status,
-                        statusText: pollXhr.statusText
-                    });
+                if (this.onClosed) {
+                    this.onClosed(new Error(`Status: ${pollXhr.status}, Message: ${pollXhr.responseText}`));
                 }
             }
         };
 
         pollXhr.onerror = () => {
-            if (thisLongPollingTransport.onError) {
-                thisLongPollingTransport.onError({
-                    status: pollXhr.status,
-                    statusText: pollXhr.statusText
-                });
+            if (this.onClosed) {
+                // network related error or denied cross domain request
+                this.onClosed(new Error("Sending HTTP request failed."));
             }
         };
 
         pollXhr.ontimeout = () => {
-            thisLongPollingTransport.poll(url);
+            this.poll(url);
         }
 
         this.pollXhr = pollXhr;
         this.pollXhr.open("GET", url, true);
         // TODO: consider making timeout configurable
-        this.pollXhr.timeout = 110000;
+        this.pollXhr.timeout = 120000;
         this.pollXhr.send();
     }
 
     async send(data: any): Promise<void> {
-        await this.httpClient.post(this.url + "/send?" + this.queryString, data);
+        return send(this.httpClient, this.url, data);
     }
 
     stop(): void {
@@ -212,5 +232,12 @@ export class LongPollingTransport implements ITransport {
     }
 
     onDataReceived: DataReceived;
-    onError: ErrorHandler;
+    onClosed: TransportClosed;
+}
+
+const headers = new Map<string, string>();
+headers.set("Content-Type", "application/vnd.microsoft.aspnetcore.endpoint-messages.v1+text");
+
+async function send(httpClient: IHttpClient, url: string, data: any): Promise<void> {
+    await httpClient.post(url, data, headers);
 }
