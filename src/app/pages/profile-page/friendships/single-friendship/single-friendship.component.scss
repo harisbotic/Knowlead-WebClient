@@ -3,8 +3,9 @@
 
 .single-friend-wrap {
 	height: 140px;
-	width: 33%;
-	margin: 10px;
+	display: inline-block;
+	width: 32%;
+	margin: 5px;
 	background-color: white;
 	border-radius: $border-radius;
 	border: 1px solid $hover-dark-color;
