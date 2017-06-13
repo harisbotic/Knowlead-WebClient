@@ -1,0 +1,71 @@
+@import "../../../../kl-styles/variables.scss";
+
+
+.single-notification-container {
+    width: 100%;
+    height: $single-notification-height;
+    background-color: $notification-read-color;
+    border-bottom: 1px solid $divider-color;
+}
+
+.notification-text-wrap {
+    margin: 10px auto;
+}
+
+
+.fromWho > a {
+    text-decoration: none;
+    font-weight: bold;
+    color: $font-primary-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.notification-text {
+    color: $font-secondary-color;
+    text-decoration: none;
+}
+
+.timeAgo {
+    position: absolute;
+    font-size: 10px;
+    color: $disabled-color;
+    bottom: 7px;
+    left: 0;
+}
+
+.request-response-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $single-notification-height;
+}
+
+.request-response {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 30px;
+  width: 30px;
+  background-color: $placeholder-color;
+  border-radius: $border-radius;
+  font-size: 18px;
+}
+
+.request-response-wrap #accept {
+  margin-left: 20px;
+
+  &:hover {
+    background-color: $knowlead-primary;
+  }
+}
+
+
+.request-response-wrap #decline {
+  &:hover {
+    background-color: $knowlead-secondary;
+  }
+}

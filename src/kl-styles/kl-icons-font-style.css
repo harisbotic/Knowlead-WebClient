@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'knowlead-icons-font';
-  src:  url('fonts/knowlead-icons-font.eot?cwtag9');
-  src:  url('fonts/knowlead-icons-font.eot?cwtag9#iefix') format('embedded-opentype'),
-    url('fonts/knowlead-icons-font.ttf?cwtag9') format('truetype'),
-    url('fonts/knowlead-icons-font.woff?cwtag9') format('woff'),
-    url('fonts/knowlead-icons-font.svg?cwtag9#knowlead-icons-font') format('svg');
+  src:  url('fonts/knowlead-icons-font.eot?fg8z3i');
+  src:  url('fonts/knowlead-icons-font.eot?fg8z3i#iefix') format('embedded-opentype'),
+    url('fonts/knowlead-icons-font.ttf?fg8z3i') format('truetype'),
+    url('fonts/knowlead-icons-font.woff?fg8z3i') format('woff'),
+    url('fonts/knowlead-icons-font.svg?fg8z3i#knowlead-icons-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,6 +34,9 @@ i, .icomoon-liga {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.kl-plus2:before {
+  content: "\e929";
+}
 .kl-seven-days:before {
   content: "\e925";
 }
@@ -166,4 +169,9 @@ i, .icomoon-liga {
 .kl-bookmark2:before {
   content: "\e9d2";
 }
-
+.kl-cross:before {
+  content: "\ea0f";
+}
+.kl-check:before {
+  content: "\ea10";
+}
