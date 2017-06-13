@@ -78,17 +78,11 @@
         <div class="title">Attachments</div>
       </div>
       <div class="col-20">
-        <div class="download-all-button-wrap">
-          <button class="download-all-button">Download All</button>
-        </div>
+        <div class="download-all-button-wrap"></div>
       </div>
     </div>
     <div class="row attachments-wrap">
-      <div class="item" id="att-1"></div>
-      <div class="item" id="att-2"></div>
-      <div class="item" id="att-3"></div>
-      <div class="item" id="att-4"></div>
-      <div class="item" id="att-5"></div>
+      <app-file-thumbnail class="item" *ngFor="let file of p2p.blobs" [file]="file"></app-file-thumbnail>
     </div>
   </div>
   <div class="offer-button-wrap">
