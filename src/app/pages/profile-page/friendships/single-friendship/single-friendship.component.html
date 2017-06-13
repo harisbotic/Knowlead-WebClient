@@ -1,31 +1,33 @@
-<div class="row">
-    <div class="col-33">
-        <div class="single-friend-wrap">
 
-            <div class="col-30">
-                <div class="profileImage-wrap">
-                    <a routerLink="" class="profile-link">
-                        <app-profile-picture [user]="user" [uploadable]="false" class="centerV" size="medium"></app-profile-picture>
-                    </a>
-                </div>
-            </div>
-            <div class="col-70">
-                <div class="row">
-                    <div class="friend-name">Adnan Hadzicahmetoavdagic</div>
-                </div>
-                <div class="row">
-                    <div class="friend-country">Bosnia and Hercegovina</div>
-                </div>
-                <div class="row">
-                    <div class="col-50">
-                        <div class="friend-score">2144 <span>Score</span></div>
-                    </div>
-                    <div class="col-50">
-                        <!-- <div class="friend-rank">1940 <div>Rank</div></div> -->
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<div class="single-friend-wrap">
+  <div class="col-35">
+    <div class="profileImage-wrap"><a class="profile-link" routerLink="">
+        <app-profile-picture [user]="user" [uploadable]="false" size="medium"></app-profile-picture></a></div>
+  </div>
+  <div class="col-65">
+    <div class="row" id="friend-options">
+      <app-friendship-strip></app-friendship-strip>
     </div>
+    <div class="row">
+      <div class="friend-name"><a routerLink="#">Adnan Hadzicahmetoavdagic</a></div>
+    </div>
+    <div class="row friend-info-wrap">
+      <div class="col-50">
+        <div class="row">
+          <div class="info-title">Score</div>
+        </div>
+        <div class="row">
+          <div class="info-value">2144 </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="row">
+          <div class="info-title">Rank</div>
+        </div>
+        <div class="row">
+          <div class="info-value">156 </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
