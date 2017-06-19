@@ -10,6 +10,7 @@ import { responseToLoginResponse, loginResponseToResponseModel } from './../util
 import { LoginUserModel, LoginResponse } from '../models/frontend.models';
 import { parseJwt } from '../utils/index';
 import { Router } from '@angular/router';
+import { ApplicationUserModel } from '../models/dto';
 
 export enum SessionEvent {
   LOGGED_IN,
@@ -60,7 +61,7 @@ export class SessionService {
         }), {
           headers: new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization':'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
+            'Authorization': 'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
           })
         }).map(responseToLoginResponse).map(response => {
           this.storageService.setAccessToken(response.access_token, response.refresh_token, true);
@@ -92,7 +93,7 @@ export class SessionService {
     }), {
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization':'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
+        'Authorization': 'Basic a2x3ZWJjbGllbnQ6NHZjcW04Tlk='
       })
     }).finally(() => {
       subject.complete();
