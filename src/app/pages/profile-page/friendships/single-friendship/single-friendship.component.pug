@@ -1,0 +1,22 @@
+.single-friend-wrap
+	.col-35
+		.profileImage-wrap
+			a.profile-link(routerLink='')
+				app-profile-picture([user]='user', [uploadable]='false', size='medium')
+	.col-65
+		.row#friend-options
+			app-friendship-strip
+		.row
+			.friend-name
+				a(routerLink="#") Adnan Hadzicahmetoavdagic
+		.row.friend-info-wrap
+			.col-50
+				.row
+					.info-title Score
+				.row
+					.info-value 2144 
+			.col-50
+				.row
+					.info-title Rank
+				.row
+					.info-value 156

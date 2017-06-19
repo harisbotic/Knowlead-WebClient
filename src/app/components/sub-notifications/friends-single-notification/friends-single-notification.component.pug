@@ -1,17 +1,20 @@
-
 a(*ngIf="notification")
-  .row.single-notification-container([class.unread]="!notification?.seenAt")
-    .col-20.posRel.profile-image-round-small
-      app-profile-picture.centerV([user]="notification.fromApplicationUser")
-    .col-60.posRel
-      .notification-text-wrap
-        .row.fromWho
-          a(routerLink="{{notification.fromApplicationUserId | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
-          .last-message-text.
-            Last Message Text Goes Here
-          .timeAgo {{notification.scheduledAt | amTimeAgo}}
-    .col-20
-      .row
-        .col-100.posRel
-          .notification-icon.hardPosRel
-            i.kl-messages.centerV
+	.row.single-notification-container([class.unread]="!notification?.seenAt")
+		.col-20.posRel.profile-image-round-small
+			app-profile-picture.centerV([user]="notification.fromApplicationUser")
+		.col-50.posRel
+			.notification-text-wrap
+				.row.fromWho
+					a(routerLink="{{notification.fromApplicationUserId | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
+					.notification-text.
+						Sent you a friend request.
+					.timeAgo {{notification.scheduledAt | amTimeAgo}}
+		.col-30
+			.row
+				.request-response-wrap
+					.col-50
+						.request-response#accept
+							i.kl-check
+					.col-50
+						.request-response#decline
+							i.kl-cross
