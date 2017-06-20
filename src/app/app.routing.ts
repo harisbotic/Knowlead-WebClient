@@ -31,6 +31,7 @@ import { TermsConditionsPageComponent } from './pages/terms-conditions-page/term
 import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-edit-popup/notebook-edit-popup.component';
 import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.component';
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
+import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
         { path: '', component: DefaultHomePageComponent },
         { path: 'filtered/:id', component: FilteredHomePageComponent },
-        { path: 'p2p/:id', component: SingleP2pComponent }
+        { path: 'p2p/:id', component: SingleP2pComponent },
+        { path: 'messages', component: AllMessagesPageComponent }
     ] },
     { path: 'translatetest', component: TranslationTestComponent },
     { path: 'profilesetup', component: ProfileSetupPageComponent, canActivate: [AuthGuard] },

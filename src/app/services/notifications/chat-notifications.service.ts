@@ -3,6 +3,7 @@ import { BaseNotificationSource } from './notification.source';
 import { ModelUtilsService } from '../model-utils.service';
 import { NotificationModel, ConversationModel } from '../../models/dto';
 import { ChatService } from '../chat.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ChatNotificationsService extends BaseNotificationSource {
@@ -24,7 +25,7 @@ export class ChatNotificationsService extends BaseNotificationSource {
     };
   }
 
-  constructor(modelUtilsService: ModelUtilsService, protected chatService: ChatService) {
+  constructor(modelUtilsService: ModelUtilsService, protected chatService: ChatService, protected router: Router) {
     super(modelUtilsService);
     this.chatService.historySubject
       .map(history => history.map(ChatNotificationsService.conversationToNotification))
@@ -36,10 +37,10 @@ export class ChatNotificationsService extends BaseNotificationSource {
   markAsRead() {
   }
   loadMore() {
-    this.chatService.loadMoreHistory();
+    this.router.navigate(['/home/messages']);
   }
   start() {
-    this.loadMore();
+    this.chatService.loadMoreHistory();
   }
   markSingleAsRead(notification: NotificationModel) {
   }

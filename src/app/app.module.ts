@@ -108,6 +108,7 @@ import { FriendsSingleNotificationComponent } from
   './components/sub-notifications/friends-single-notification/friends-single-notification.component';
 import { FileNamePipe } from './pipes/file-name.pipe';
 import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbnail.component';
+import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +183,8 @@ import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbna
     UserSingleNotificationComponent,
     FriendsSingleNotificationComponent,
     FileNamePipe,
-    FileThumbnailComponent
+    FileThumbnailComponent,
+    AllMessagesPageComponent
   ],
   imports: [
     BrowserModule,
