@@ -1,4 +1,7 @@
-<a *ngIf="notification">
+
+<div class="no-friend-requests-wrap">
+  <div class="row no-notifications">No current friend requests.</div>
+</div><a *ngIf="notification">
   <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
     <div class="col-20 posRel profile-image-round-small">
       <app-profile-picture class="centerV" [user]="notification.fromApplicationUser"></app-profile-picture>

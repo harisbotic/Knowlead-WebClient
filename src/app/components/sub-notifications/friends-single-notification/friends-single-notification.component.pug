@@ -1,3 +1,7 @@
+.no-friend-requests-wrap
+	.row.no-notifications
+		| No current friend requests.
+
 a(*ngIf="notification")
 	.row.single-notification-container([class.unread]="!notification?.seenAt")
 		.col-20.posRel.profile-image-round-small

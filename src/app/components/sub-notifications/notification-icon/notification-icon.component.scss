@@ -1,4 +1,13 @@
 @import "../../../../kl-styles/variables.scss";
+
+.no-notifications {
+  color: $font-primary-color;
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #c8cddd;
+  font-weight: bold;
+}
+
 .notification-content {
     width: 400px;
     max-height: 370px;
