@@ -5,8 +5,7 @@
     border-radius: $border-radius;
     border: 1px solid $hover-dark-color;
     min-height: 170px;
-    margin-bottom: 100px;
-
+    margin-bottom: 20px;
 
     .friends-title {
         height: 50px;
@@ -21,4 +20,8 @@
     .friendships-container {
       margin: 20px 5px;
     }
+}
+
+#last-container {
+    margin-bottom: 100px;
 }
