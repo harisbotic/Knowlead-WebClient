@@ -153,28 +153,6 @@
   }
 
   .attachments-wrap {
-    height: 100px;
-
-    .item {
-      height: 95px;
-      width: 19%;
-      background-color: blue;
-      display: inline-block;
-      border-radius: $border-radius;
-    }
-
-    #att-2 {
-      background-color: green;
-    }
-    #att-3 {
-      background-color: yellow;
-    }
-    #att-4 {
-      background-color: grey;
-    }
-    #att-5 {
-      background-color: red;
-    }
   }
 //p2p-description-wrap
 }
