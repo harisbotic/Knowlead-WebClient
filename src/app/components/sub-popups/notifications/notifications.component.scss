@@ -1,3 +1,16 @@
 .notification-wrap {
+  width: 200px;
+  height: 100px;
+  padding-top: 20px;
+  border: solid;
+  background: red;
+  color: white;  
+  bottom: 0;
+  right: 270px;
   position: fixed;
+  text-align: center;
+}
+
+.closeNotification {
+  color: black;
 }
