@@ -26,12 +26,17 @@ export class ModelUtilsService {
     ret.canDelete = ret.isMy && !ret.isDeleted;
     ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
     ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
-    if (ret.isMy) {
-      ret.otherScheduledUser = ret.scheduledWith;
-      ret.otherScheduledUserId = ret.scheduledWithId;
-    } else {
-      ret.otherScheduledUser = ret.createdBy;
-      ret.otherScheduledUserId = ret.createdById;
+    if (ret.scheduledWithId) {
+      // If I created this p2p, or I am watching at someone's p2p, and that
+      // p2p is not scheduled with me, display it is scheduled with other user
+      if (ret.isMy || (ret.scheduledWithId !== myId && !ret.isMy)) {
+        ret.otherScheduledUser = ret.scheduledWith;
+        ret.otherScheduledUserId = ret.scheduledWithId;
+      } else {
+        // Display p2p is scheduled with creator.
+        ret.otherScheduledUser = ret.createdBy;
+        ret.otherScheduledUserId = ret.createdById;
+      }
     }
     return ret;
   }
