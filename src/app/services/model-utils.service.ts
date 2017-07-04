@@ -26,6 +26,13 @@ export class ModelUtilsService {
     ret.canDelete = ret.isMy && !ret.isDeleted;
     ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
     ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
+    if (ret.isMy) {
+      ret.otherScheduledUser = ret.scheduledWith;
+      ret.otherScheduledUserId = ret.scheduledWithId;
+    } else {
+      ret.otherScheduledUser = ret.createdBy;
+      ret.otherScheduledUserId = ret.createdById;
+    }
     return ret;
   }
 
