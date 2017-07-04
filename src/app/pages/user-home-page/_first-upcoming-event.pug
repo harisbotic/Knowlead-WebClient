@@ -3,28 +3,30 @@
     .timer-wrap
       i.kl-circle.student-color
       span.timer-text.
-        in 13 days
+        {{ p2p.dateTimeAgreed | amTimeAgo }}
 .row
   .col-100
     .with-wrap
       span.with-subject.
-        3D Animation 
+        {{ p2p.fos.name }}
+      br
+      | 
       span.with-text.
-        with:
+        with: 
 .row#bottom-row
   .col-75
     .col-25
       .profile-picture
         //- Link to profile
-        a(href="#")
+        a(href="{{ p2p.scheduledWith | userProfileLink }}")
           app-profile-picture([user]="user" size="x-small")
     .col-75
       .profile-name-wrap
         //- Link to profile
         .profile-name
-          a(href="#") Ejub Hadzic
+          a(href="{{ p2p.scheduledWith | userProfileLink }}") {{ p2p.scheduledWith | fullName }}
   .col-25
     .reward-wrap
       span.reward-text.
-        135
+        {{ p2p.priceAgreed }}
       i.kl-currency

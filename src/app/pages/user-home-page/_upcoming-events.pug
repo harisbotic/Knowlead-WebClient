@@ -3,11 +3,13 @@
       .timer-wrap
         i.kl-circle.teacher-color
         span.timer-text.
-          in 13 days
+          {{ p2p.dateTimeAgreed | amTimeAgo }}
   .row
     .col-100
       .with-wrap
         span.with-subject.
-          3D Animation 
+          {{ p2p.fos.name }}
+        br
+        |
         span.with-text.
-          with: Ejub Hadzic
+           with: {{ p2p.scheduledWith | fullName }}

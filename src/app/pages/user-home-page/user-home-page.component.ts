@@ -9,7 +9,7 @@ import { sortByDateFunction } from '../../utils/index';
 import { StorageSubject } from '../../services/storage.subject';
 import { Observable } from 'rxjs';
 import { ModelUtilsService } from '../../services/model-utils.service';
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-home-page',
@@ -30,8 +30,8 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
 })
 export class UserHomePageComponent extends BaseComponent implements OnInit {
 
-  peerToPeerOptionsState = "open";
-  createRequestState = "closed";
+  peerToPeerOptionsState = 'open';
+  createRequestState = 'closed';
 
   user: ApplicationUserModel;
   filters = ListP2PsRequest;
@@ -55,7 +55,7 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
           (storage.value.createdById === this.user.id || storage.value.scheduledWithId === this.user.id) &&
           storage.value.status === P2PStatus.Scheduled &&
           !storage.value.isDeleted) {
-        p2ps.push(storage.value);
+        p2ps.push(ModelUtilsService.expandP2p(storage.value, this.user.id));
       }
     }
     p2ps.sort((a, b) => {
@@ -80,18 +80,18 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
   }
 
   togglePeerToPeerOptions() {
-    if (this.peerToPeerOptionsState === "open") {
-      this.peerToPeerOptionsState = "closed";
+    if (this.peerToPeerOptionsState === 'open') {
+      this.peerToPeerOptionsState = 'closed';
     } else {
-      this.peerToPeerOptionsState = "open";
+      this.peerToPeerOptionsState = 'open';
     }
   }
 
   toggleCreateRequest() {
-    if (this.createRequestState === "open") {
-      this.createRequestState = "closed";
+    if (this.createRequestState === 'open') {
+      this.createRequestState = 'closed';
     } else {
-      this.createRequestState = "open";
+      this.createRequestState = 'open';
     }
   }
 
