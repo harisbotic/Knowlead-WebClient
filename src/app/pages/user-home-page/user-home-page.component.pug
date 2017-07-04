@@ -90,9 +90,12 @@
                   .info-icon
                     i.kl-info
           .upcoming-events-content(*ngFor="let p2p of getUpcoming(); index as i; trackBy: trackByFn")
-            div(*ngIf="i === 0")
+            div(*ngIf="i === 0;then firstevent else upcomingevents")
+
+            ng-template(#firstevent)
               include _first-upcoming-event.pug
-            include _upcoming-events.pug
+            ng-template(#upcomingevents)
+              include _upcoming-events.pug
           .row
             .all-events-wrap
               a(routerLink="/home/filtered/Scheduled")
