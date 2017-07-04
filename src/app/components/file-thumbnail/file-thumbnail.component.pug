@@ -1,4 +1,5 @@
 .file-wrap(*ngIf="file")
-  ngl-icon(icon="unknown" category="doctype")
+  ngl-icon.preview.icon(icon="unknown" category="doctype" *ngIf="!isImage")
+  img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
   .file-name.
     {{file | fileName}}
