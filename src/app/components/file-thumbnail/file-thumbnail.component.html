@@ -1,5 +1,5 @@
 
 <div class="file-wrap" *ngIf="file">
-  <ngl-icon icon="unknown" category="doctype"></ngl-icon>
+  <ngl-icon class="preview icon" icon="unknown" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage">
   <div class="file-name">{{file | fileName}}</div>
 </div>

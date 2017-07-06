@@ -1,4 +1,4 @@
-import { P2PModel, P2PMessageModel, _BlobModel } from './dto';
+import { P2PModel, P2PMessageModel, _BlobModel, Guid, ApplicationUserModel } from './dto';
 export class LoginResponse {
     token_type: string;
     access_token: string;
@@ -30,6 +30,8 @@ export interface P2PModelExtended extends P2PModel {
     canLeaveFeedback: boolean;
     actualPrice: number; // if p2p is scheduled this is price agreed, else it is initial actual
     isMy: boolean;
+    otherScheduledUserId: Guid;
+    otherScheduledUser: ApplicationUserModel;
 }
 
 export interface P2PMessageModelExtended extends P2PMessageModel {

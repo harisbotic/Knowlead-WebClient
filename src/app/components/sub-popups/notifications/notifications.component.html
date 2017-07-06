@@ -1,8 +1,7 @@
-<div class="slds-notify_container">
-  <ngl-notification *ngFor="let item of notifications" type="alert" [severity]="item.type" (nglNotificationClose)="onNotificationClose(item)" [timeout]="timeout">
-    <h2>{{item.title | translateParametric }}</h2>
-    <span *ngIf="item.subtitle" class="slds-small-show">{{item.subtitle | translateParametric }}</span>
-  </ngl-notification>
+<div class="notification-wrap" *ngIf="notification">
+  <h1>{{ notification.title | translateParametric }}</h1>
+  <h4>{{ notification.subtitle | translateParametric }}</h4>
+  <button class="closeNotification" name="close" (click)="onNotificationClose()">Close</button>
 </div>
 <app-feedback-form *ngIf="feedbackFormOpened" (closed)="feedbackFormOpened=false"></app-feedback-form>
 <app-p2p-feedback-form *ngIf="p2pFeedbackFormOpened" (closed)="p2pFeedbackFormOpened=false" [p2pId]="p2pFeedbackFormId"></app-p2p-feedback-form>

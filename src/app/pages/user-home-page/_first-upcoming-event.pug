@@ -1,0 +1,36 @@
+.row
+  .col-100
+    .timer-wrap
+      div(*ngIf="p2p.isMy;then student else teacher")
+      ng-template(#student)
+        i.kl-circle.student-color
+      ng-template(#teacher)
+        i.kl-circle.teacher-color
+      span.timer-text.
+        {{ p2p.dateTimeAgreed | amTimeAgo }}
+.row
+  .col-100
+    .with-wrap
+      span.with-subject.
+        {{ p2p.fos?.name }}
+      br
+      | 
+      span.with-text.
+        with: 
+.row#bottom-row
+  .col-75
+    .col-25
+      .profile-picture
+        //- Link to profile
+        a(href="{{ p2p.otherScheduledUser | userProfileLink }}")
+          app-profile-picture([user]="user" size="x-small")
+    .col-75
+      .profile-name-wrap
+        //- Link to profile
+        .profile-name
+          a(href="{{ p2p.otherScheduledUser | userProfileLink }}") {{ p2p.otherScheduledUser | fullName }}
+  .col-25
+    .reward-wrap
+      span.reward-text.
+        {{ p2p.priceAgreed }}
+      i.kl-currency

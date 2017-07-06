@@ -13,25 +13,34 @@ import { FeedbackService } from '../../../services/feedback.service';
 })
 export class NotificationsComponent extends BaseComponent implements OnInit {
 
-  notifications: PopupNotificationModel[] = [];
+  notification: PopupNotificationModel;
   timeout = 5000;
   feedbackFormOpened = false;
 
   p2pFeedbackFormOpened = false;
   p2pFeedbackFormId: number;
+  timeoutNotification: any;
 
-  constructor(protected notificationService: NotificationService) { super(); }
+  constructor(protected notificationService: NotificationService) { super();
+ }
 
   ngOnInit() {
     this.notificationService.setCallback(this);
   }
 
   notify(notification: PopupNotificationModel) {
-    this.notifications.push(notification);
+      if ( this.notification ) {
+        clearTimeout(this.timeoutNotification);
+      }
+
+      this.timeoutNotification = setTimeout( () => {
+        this.onNotificationClose()
+      }, this.timeout);
+      this.notification = notification;
   }
 
-  onNotificationClose(notification: PopupNotificationModel) {
-    this.notifications = _.without(this.notifications, notification);
+  onNotificationClose() {
+    delete this.notification;
   }
 
   openFeedbackForm(text?: string) {

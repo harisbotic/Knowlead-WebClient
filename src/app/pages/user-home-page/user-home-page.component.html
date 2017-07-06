@@ -99,55 +99,56 @@
               </div>
             </div>
           </div>
-          <div class="upcoming-events-content">
-            <div class="row">
-              <div class="col-100">
-                <div class="timer-wrap"><i class="kl-circle student-color"></i><span class="timer-text">in 13 days</span></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-100">
-                <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with:</span></div>
-              </div>
-            </div>
-            <div class="row" id="bottom-row">
-              <div class="col-75">
-                <div class="col-25">
-                  <div class="profile-picture"><a href="#">
-                      <app-profile-picture [user]="user" size="x-small"></app-profile-picture></a></div>
-                </div>
-                <div class="col-75">
-                  <div class="profile-name-wrap">
-                    <div class="profile-name"><a href="#">Ejub Hadzic</a></div>
+          <div class="upcoming-events-content" *ngFor="let p2p of getUpcoming(); index as i; trackBy: trackByFn">
+            <div *ngIf="i === 0;then firstevent else upcomingevents"></div>
+            <ng-template #firstevent>
+              <div class="row">
+                <div class="col-100">
+                  <div class="timer-wrap">
+                    <div *ngIf="p2p.isMy;then student else teacher"></div>
+                    <ng-template #student><i class="kl-circle student-color"></i></ng-template>
+                    <ng-template #teacher><i class="kl-circle teacher-color"></i></ng-template><span class="timer-text">{{ p2p.dateTimeAgreed | amTimeAgo }}</span>
                   </div>
                 </div>
               </div>
-              <div class="col-25">
-                <div class="reward-wrap"><span class="reward-text">135</span><i class="kl-currency"></i></div>
-              </div>
-            </div>
-            <div class="row other-upcoming-events">
-              <div class="col-100">
-                <div class="timer-wrap"><i class="kl-circle teacher-color"></i><span class="timer-text">in 13 days</span></div>
-              </div>
               <div class="row">
                 <div class="col-100">
-                  <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">with: Ejub Hadzic</span></div>
+                  <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }}</span><br> <span class="with-text">with: </span></div>
                 </div>
               </div>
-            </div>
-            <div class="row other-upcoming-events">
-              <div class="col-100">
-                <div class="timer-wrap"><i class="kl-circle"></i><span class="timer-text">in 13 days</span></div>
+              <div class="row" id="bottom-row">
+                <div class="col-75">
+                  <div class="col-25">
+                    <div class="profile-picture"><a href="{{ p2p.otherScheduledUser | userProfileLink }}">
+                        <app-profile-picture [user]="user" size="x-small"></app-profile-picture></a></div>
+                  </div>
+                  <div class="col-75">
+                    <div class="profile-name-wrap">
+                      <div class="profile-name"><a href="{{ p2p.otherScheduledUser | userProfileLink }}">{{ p2p.otherScheduledUser | fullName }}</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-25">
+                  <div class="reward-wrap"><span class="reward-text">{{ p2p.priceAgreed }}</span><i class="kl-currency"></i></div>
+                </div>
               </div>
-              <div class="row">
+            </ng-template>
+            <ng-template #upcomingevents>
+              <div class="row other-upcoming-events">
                 <div class="col-100">
-                  <div class="with-wrap"><span class="with-subject">3D Animation </span><span class="with-text">
-                      with: Ejub Hadzic
-                      </span></div>
+                  <div class="timer-wrap">
+                    <div *ngIf="p2p.isMy;then student else teacher"></div>
+                    <ng-template #student><i class="kl-circle student-color"></i></ng-template>
+                    <ng-template #teacher><i class="kl-circle teacher-color"></i></ng-template><span class="timer-text">{{ p2p.dateTimeAgreed | amTimeAgo }}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-100">
+                    <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }}</span><br><span class="with-text">with: {{ p2p.otherScheduledUser | fullName }}</span></div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ng-template>
           </div>
           <div class="row">
             <div class="all-events-wrap"><a routerLink="/home/filtered/Scheduled">

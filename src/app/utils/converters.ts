@@ -28,7 +28,7 @@ export function loginResponseToResponseModel(loginResponse: LoginResponse): Resp
         return <ResponseModel>{errors: [FrontendErrorCodes.networkError]};
     }
     if (loginResponse.error_description != null && loginResponse.error_description !== '') {
-        return <ResponseModel>{errors: [loginResponse.error.toUpperCase()]};
+        return <ResponseModel>{errors: [loginResponse.error_description.toUpperCase()]};
     } else {
         return null;
     }
