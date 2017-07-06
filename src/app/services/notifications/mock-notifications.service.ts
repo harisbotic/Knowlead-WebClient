@@ -22,7 +22,8 @@ export class MockNotificationsService extends BaseNotificationSource {
         seenAt: Math.random() < 0.5 ? new Date() : undefined,
         p2pMessageId: undefined,
         p2pMessage: undefined,
-        customText: undefined
+        customText: undefined,
+        createdAt: undefined
       };
     }));
   }

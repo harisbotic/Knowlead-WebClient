@@ -76,7 +76,8 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
       this.interests.push({
         fos: fos,
         fosId: fos.coreLookupId,
-        stars: 0
+        stars: 0,
+        createdAt: undefined
       });
     }
   }

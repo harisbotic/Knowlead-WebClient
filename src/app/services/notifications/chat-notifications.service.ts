@@ -21,7 +21,8 @@ export class ChatNotificationsService extends BaseNotificationSource {
       p2p: undefined,
       scheduledAt: conversation.timestamp,
       seenAt: conversation.timestamp,
-      customText: conversation.lastMessage
+      customText: conversation.lastMessage,
+      createdAt: conversation.timestamp
     };
   }
 

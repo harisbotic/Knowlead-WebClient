@@ -98,6 +98,7 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
       messageFrom: undefined,
       messageFromId: undefined,
       offerAccepted: undefined,
+      createdAt: undefined,
     };
   }
 

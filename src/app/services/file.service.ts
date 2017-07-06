@@ -28,7 +28,8 @@ export class FileService {
       filesize: 0,
       uploadedById: undefined,
       uploadedBy: undefined,
-      status: FileStatus.UPLOADING
+      status: FileStatus.UPLOADING,
+      createdAt: undefined
     };
 
     this.blobs[fileId] = new BehaviorSubject<BlobModelExtended>(fileModel);

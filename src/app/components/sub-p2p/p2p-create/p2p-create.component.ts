@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { P2PModel, LanguageModel, FOSModel, _BlobModel } from '../../../models/dto';
+import { P2PModel, LanguageModel, FOSModel, _BlobModel, P2PDifficultyLevel } from '../../../models/dto';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { P2pService } from '../../../services/p2p.service';
 import { NotificationService } from '../../../services/notifications/notification.service';
@@ -45,7 +45,8 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       blobs: this.files,
       initialPrice: new FormControl(null, [Validators.required]),
       deadline: new FormControl(null, dateValidator({minDate: new Date()})),
-      languages: new FormControl(null, [Validators.required, ArrayValidator({min: 1})])
+      languages: new FormControl(null, [Validators.required, ArrayValidator({min: 1})]),
+      difficultyLevel: new FormControl(null, null)
     });
   }
 
@@ -57,6 +58,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       deadline: undefined,
       languages: undefined,
       blobs: [undefined],
+      difficultyLevel: P2PDifficultyLevel.Basic,
 
       fos: undefined,
       p2pId: undefined,
@@ -74,7 +76,8 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       offerCount: undefined,
       didBookmark: undefined,
       canBookmark: undefined,
-      teacherReady: undefined
+      teacherReady: undefined,
+      createdAt: undefined
     };
   }
 

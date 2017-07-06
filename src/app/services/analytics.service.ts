@@ -43,7 +43,7 @@ export class AnalyticsService {
 
   protected initialize() {
     if (!this.initialized) {
-      new Angulartics2GoogleAnalytics(this.analytics);
+      const tmp = new Angulartics2GoogleAnalytics(this.analytics);
       this.initialized = true;
     }
   }
@@ -101,7 +101,8 @@ export class AnalyticsService {
 
   public sendFeedback(text: string) {
     let f: PlatformFeedbackModel = {
-      feedback: text
+      feedback: text,
+      createdAt: undefined
     };
     return this.http.post(FEEDBACK, f);
   }

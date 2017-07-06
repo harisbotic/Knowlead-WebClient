@@ -47,7 +47,8 @@ export class P2pFeedbackFormComponent extends BaseFormComponent<P2PFeedbackModel
       fosId: undefined,
       fos: undefined,
       studentId: undefined,
-      student: undefined
+      student: undefined,
+      createdAt: undefined,
     };
   }
 

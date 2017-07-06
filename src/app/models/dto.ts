@@ -28,6 +28,12 @@ export enum FriendshipStatus
 	Declined = 2,
 	Blocked = 3,
 }
+export enum P2PDifficultyLevel
+{
+	Basic = 0,
+	Intermediate = 1,
+	Advanced = 2,
+}
 export enum P2PStatus
 {
 	Active = 0,
@@ -35,23 +41,11 @@ export enum P2PStatus
 	Finished = 2,
 	Deleted = 3,
 }
-export interface P2PMessageModel
+export interface EntityBaseModel
 {
-	p2pMessageId: number;
-	text: string;
-	dateTimeOffer: Date;
-	priceOffer: number;
-	timestamp: Date;
-	p2pId: number;
-	p2p: P2PModel;
-	messageToId: Guid;
-	messageTo: ApplicationUserModel;
-	messageFromId: Guid;
-	messageFrom: ApplicationUserModel;
-	offerAcceptedId: number;
-	offerAccepted: P2PMessageModel;
+	createdAt: Date;
 }
-export interface _BlobModel
+export interface _BlobModel extends EntityBaseModel
 {
 	blobId: Guid;
 	blobType: string;
@@ -69,7 +63,7 @@ export interface ImageBlobModel extends _BlobModel
 export interface FileBlobModel extends _BlobModel
 {
 }
-export interface _CallModel
+export interface _CallModel extends EntityBaseModel
 {
 	callId: Guid;
 	failed: boolean;
@@ -135,7 +129,7 @@ export interface ChatMessageModel
 	rowKey: string;
 	timestamp: Date;
 }
-export interface _FeedbackModel
+export interface _FeedbackModel extends EntityBaseModel
 {
 	feedbackId: number;
 	feedbackText: string;
@@ -147,24 +141,22 @@ export interface _FeedbackModel
 	studentId: Guid;
 	student: ApplicationUserModel;
 }
-export interface StickyNoteModel
+export interface StickyNoteModel extends EntityBaseModel
 {
 	stickyNoteId: number;
 	name: string;
 	noteText: string;
-	createdAt: Date;
 	isDeleted: boolean;
 	createdById: Guid;
 	createdBy: ApplicationUserModel;
 }
-export interface NotebookModel
+export interface NotebookModel extends EntityBaseModel
 {
 	notebookId: number;
 	name: string;
 	markdown: string;
 	primaryColor: string;
 	secondaryColor: string;
-	createdAt: Date;
 	isDeleted: boolean;
 	createdById: Guid;
 	createdBy: ApplicationUserModel;
@@ -231,7 +223,7 @@ export interface NotificationSourceStats
 	unread: number;
 	total: number;
 }
-export interface NotificationModel
+export interface NotificationModel extends EntityBaseModel
 {
 	notificationId: Guid;
 	notificationType: string;
@@ -245,7 +237,7 @@ export interface NotificationModel
 	seenAt: Date;
 	customText: string;
 }
-export interface P2PModel
+export interface P2PModel extends EntityBaseModel
 {
 	p2pId: number;
 	text: string;
@@ -270,29 +262,46 @@ export interface P2PModel
 	fosId: number;
 	fos: FOSModel;
 	status: P2PStatus;
+	difficultyLevel: P2PDifficultyLevel;
 }
-export interface P2PLanguageModel
+export interface P2PMessageModel extends EntityBaseModel
+{
+	p2pMessageId: number;
+	text: string;
+	dateTimeOffer: Date;
+	priceOffer: number;
+	timestamp: Date;
+	p2pId: number;
+	p2p: P2PModel;
+	messageToId: Guid;
+	messageTo: ApplicationUserModel;
+	messageFromId: Guid;
+	messageFrom: ApplicationUserModel;
+	offerAcceptedId: number;
+	offerAccepted: P2PMessageModel;
+}
+export interface P2PLanguageModel extends EntityBaseModel
 {
 	p2pId: number;
 	p2p: P2PModel;
 	languageId: number;
 	language: LanguageModel;
 }
-export interface P2PImageModel
+export interface P2PImageModel extends EntityBaseModel
 {
 	p2pId: number;
 	p2p: P2PModel;
 	imageBlobId: Guid;
 	imageBlob: ImageBlobModel;
 }
-export interface P2PFileModel
+export interface P2PFileModel extends EntityBaseModel
 {
 	p2pId: number;
 	p2p: P2PModel;
 	fileBlobId: Guid;
 	fileBlob: FileBlobModel;
 }
-export interface P2PBookmarkModel
+export interface P2PBookmarkModel extends EntityBaseModel
 {
 	p2pId: number;
 	p2p: P2PModel;
@@ -313,7 +322,7 @@ export interface ReferralStatsModel
 	rewardsAvailable: number[];
 	unregisteredReferrals: { [index: string]: string };
 }
-export interface PlatformFeedbackModel
+export interface PlatformFeedbackModel extends EntityBaseModel
 {
 	feedback: string;
 }
@@ -335,27 +344,25 @@ export interface RegisterUserModel
 	password: string;
 	referralUserId: Guid;
 }
-export interface UserCertificateModel
+export interface UserCertificateModel extends EntityBaseModel
 {
 	userCertificateId: number;
 	name: string;
 	desc: string;
-	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
 	imageBlobId: Guid;
 	imageBlob: ImageBlobModel;
 }
-export interface UserAchievementModel
+export interface UserAchievementModel extends EntityBaseModel
 {
 	userAchievementId: number;
-	createdAt: Date;
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
 	achievementId: number;
 	achievement: AchievementModel;
 }
-export interface InterestModel
+export interface InterestModel extends EntityBaseModel
 {
 	fosId: number;
 	fos: FOSModel;
@@ -386,14 +393,14 @@ export interface ApplicationUserModel
 	interests: InterestModel[];
 	status: UserStatus;
 }
-export interface ApplicationUserLanguageModel
+export interface ApplicationUserLanguageModel extends EntityBaseModel
 {
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
 	languageId: number;
 	language: LanguageModel;
 }
-export interface ApplicationUserInterestModel
+export interface ApplicationUserInterestModel extends EntityBaseModel
 {
 	applicationUserId: Guid;
 	applicationUser: ApplicationUserModel;
