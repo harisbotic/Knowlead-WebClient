@@ -1,14 +1,12 @@
-.friendship-strip-wrap(*ngIf='!isSelf()')
+.friendship-strip-wrap(*ngIf='!isSelf() && availableOptions')
 	.col-90
-		button.first-option Send Friend Request
+		button.first-option((click)="doAction(availableOptions[0].action)") {{ availableOptions[0].title }}
 	.col-10
 		span.dropdown-icon
 			i.kl-more
 	.dropdown-content
-		button.other-option Remove Friend
-		button.other-option Block Friend
-		button.other-option Remove Friend
-		button.other-option Remove Friend
+		button(*ngFor="let option of availableOptions.slice(1); index as i" (click)="doAction(option.action)").
+			{{ option.title }}
 
 
 	//- button(*ngIf='canRemove()', (click)='doAction(actions.RemoveFriend)') {{"friendship|remove" | translate}}

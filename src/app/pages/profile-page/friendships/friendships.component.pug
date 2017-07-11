@@ -1,7 +1,48 @@
-.row
-	.col-100
-		.friendships-wrap
-			.friends-title
-				| Friends
-			.friendships-container
-				app-single-friendship
+ng-template(#showErrorMessage)
+	p No friends in this section
+
+.page-wrap(*ngIf="friendList && me")
+	.row
+		.col-100
+			.friendships-wrap
+				.friends-title
+					| Friends
+				.friendships-container
+					div(*ngIf="acceptedRequests.length !== 0; else showErrorMessage")
+						div(*ngFor="let item of acceptedRequests")
+							app-single-friendship([userId]="otherUserId(item)")
+	.row
+		.col-100
+			.friendships-wrap
+				.friends-title
+					| Sent requests
+				.friendships-container
+					div(*ngIf="pendingRequests.filter( myRequest.bind(this) ) as sentRequests")
+						div(*ngIf="sentRequests.length !== 0; else showErrorMessage")
+							div(*ngFor="let item of sentRequests")
+								app-single-friendship([userId]="otherUserId(item)")
+	.row
+		.col-100
+			.friendships-wrap
+				.friends-title
+					| Received requests
+				.friendships-container 
+					div(*ngIf="pendingRequests.filter( notMyRequest.bind(this) ) as receivedRequests")
+						div(*ngIf="receivedRequests.length !== 0; else showErrorMessage")
+							div(*ngFor="let item of receivedRequests")
+								app-single-friendship([userId]="otherUserId(item)")
+	.row
+		.col-100
+			.friendships-wrap
+				.friends-title
+					| Blocked users
+				.friendships-container 
+					div(*ngIf="blockedUsers.length !== 0; else showErrorMessage")
+						div(*ngFor="let item of blockedUsers")
+							app-single-friendship([userId]="otherUserId(item)")
+
+	//- div(*ngIf="pendingRequests.length === 0; then showErrorMessage else listFriends")
+					ng-template(#listFriends)
+						div(*ngFor="let item of pendingRequests")
+							div(*ngIf="myRequest(item)")
+								app-single-friendship([userId]="otherUserId(item)").

@@ -1,10 +1,65 @@
 
-<div class="row">
-  <div class="col-100">
-    <div class="friendships-wrap">
-      <div class="friends-title">Friends</div>
-      <div class="friendships-container">
-        <app-single-friendship></app-single-friendship>
+<ng-template #showErrorMessage>
+  <p>No friends in this section</p>
+</ng-template>
+<div class="page-wrap" *ngIf="friendList &amp;&amp; me">
+  <div class="row">
+    <div class="col-100">
+      <div class="friendships-wrap">
+        <div class="friends-title">Friends</div>
+        <div class="friendships-container">
+          <div *ngIf="acceptedRequests.length !== 0; else showErrorMessage">
+            <div *ngFor="let item of acceptedRequests">
+              <app-single-friendship [userId]="otherUserId(item)"></app-single-friendship>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-100">
+      <div class="friendships-wrap">
+        <div class="friends-title">Sent requests</div>
+        <div class="friendships-container">
+          <div *ngIf="pendingRequests.filter( myRequest.bind(this) ) as sentRequests">
+            <div *ngIf="sentRequests.length !== 0; else showErrorMessage">
+              <div *ngFor="let item of sentRequests">
+                <app-single-friendship [userId]="otherUserId(item)"></app-single-friendship>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-100">
+      <div class="friendships-wrap">
+        <div class="friends-title">Received requests</div>
+        <div class="friendships-container"> 
+          <div *ngIf="pendingRequests.filter( notMyRequest.bind(this) ) as receivedRequests">
+            <div *ngIf="receivedRequests.length !== 0; else showErrorMessage">
+              <div *ngFor="let item of receivedRequests">
+                <app-single-friendship [userId]="otherUserId(item)"></app-single-friendship>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-100">
+      <div class="friendships-wrap">
+        <div class="friends-title">Blocked users</div>
+        <div class="friendships-container"> 
+          <div *ngIf="blockedUsers.length !== 0; else showErrorMessage">
+            <div *ngFor="let item of blockedUsers">
+              <app-single-friendship [userId]="otherUserId(item)"></app-single-friendship>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

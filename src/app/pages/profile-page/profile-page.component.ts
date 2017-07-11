@@ -20,9 +20,6 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   status: string;
   isMy: boolean;
 
-  canAddFriend: boolean;
-  canMessage: boolean;
-  friendship: FriendshipModel;
   coverUrl: SafeStyle;
 
   constructor(protected accountService: AccountService,
@@ -37,10 +34,6 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
       this.isMy = this.me.id === this.target.id;
     } else {
       return;
-    }
-    if (this.friendship !== undefined) {
-      this.canAddFriend = ModelUtilsService.canAddFriendship(this.friendship, this.me.id);
-      this.canMessage = ModelUtilsService.canRemoveFriendship(this.friendship);
     }
     if (this.target) {
       let num = calculateHash(this.target.id) % 37;
@@ -59,10 +52,6 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
     }));
     this.subscriptions.push(this.route.params.subscribe(params => {
       const id = params['id'];
-      this.subscriptions.push(this.chatService.getFriendshipStatus(id).subscribe(friendship => {
-        this.friendship = friendship;
-        this.refresh();
-      }));
       this.subscriptions.push(this.accountService.getUserById(id, true).subscribe(user => {
         this.target = user;
         this.refresh();

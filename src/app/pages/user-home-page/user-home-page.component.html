@@ -113,7 +113,7 @@
               </div>
               <div class="row">
                 <div class="col-100">
-                  <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }}</span><br> <span class="with-text">with: </span></div>
+                  <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }} </span><span class="with-text">with: </span></div>
                 </div>
               </div>
               <div class="row" id="bottom-row">
@@ -124,7 +124,7 @@
                   </div>
                   <div class="col-75">
                     <div class="profile-name-wrap">
-                      <div class="profile-name"><a href="{{ p2p.otherScheduledUser | userProfileLink }}">{{ p2p.otherScheduledUser | fullName }}</a></div>
+                      <div class="profile-name"><a routerLink="{{ p2p.otherScheduledUser | userProfileLink }}">{{ p2p.otherScheduledUser | fullName }}</a></div>
                     </div>
                   </div>
                 </div>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="row">
                   <div class="col-100">
-                    <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }}</span><br><span class="with-text">with: {{ p2p.otherScheduledUser | fullName }}</span></div>
+                    <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }} </span><span class="with-text">with: {{ p2p.otherScheduledUser | fullName }}</span></div>
                   </div>
                 </div>
               </div>
