@@ -1,3 +1,7 @@
+ng-template(#noUpcomingEvents).
+  There are no upcoming events
+
+
 .grid-container
   .main-wrap
     .col-25
@@ -89,13 +93,15 @@
                 .col-20
                   .info-icon
                     i.kl-info
-          .upcoming-events-content(*ngFor="let p2p of getUpcoming(); index as i; trackBy: trackByFn")
-            div(*ngIf="i === 0;then firstevent else upcomingevents")
+          div(*ngIf="getUpcoming().length !== 0; else noUpcomingEvents")
+            .upcoming-events-content(*ngFor="let p2p of getUpcoming(); index as i; trackBy: trackByFn")
+            
+              div(*ngIf="i === 0;then firstevent else upcomingevents")
 
-            ng-template(#firstevent)
-              include _first-upcoming-event.pug
-            ng-template(#upcomingevents)
-              include _upcoming-events.pug
+              ng-template(#firstevent)
+                include _first-upcoming-event.pug
+              ng-template(#upcomingevents)
+                include _upcoming-events.pug
           .row
             .all-events-wrap
               a(routerLink="/home/filtered/Scheduled")
