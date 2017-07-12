@@ -1,5 +1,16 @@
 
 <div class="file-wrap" *ngIf="file">
-  <ngl-icon class="preview icon" icon="unknown" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage">
-  <div class="file-name">{{file | fileName}}</div>
+  <div *ngIf="extensionData[file.extension] !== undefined; else showUnknownIcon">
+    <ngl-icon class="preview icon" icon="{{ extensionData[file.extension] }}" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage">
+    <div class="file-name">
+      {{file | fileName}}
+      
+    </div>
+  </div>
 </div>
+<ng-template #showUnknownIcon>
+  <div class="file-wrap">
+    <ngl-icon class="preview icon" icon="unknown" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage">
+    <div class="file-name">{{file | fileName}}</div>
+  </div>
+</ng-template>

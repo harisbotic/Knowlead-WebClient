@@ -12,6 +12,16 @@ export class FileThumbnailComponent implements OnInit {
   @Input() file: _BlobModel;
   isImage: boolean;
   backgroundUrl: string;
+  extensionData: Object = {
+    'exe': 'exe',
+    'zip': 'zip',
+    'xlsx': 'excel',
+    'xls': 'excel',
+    'csv': 'csv',
+    'docx': 'word',
+    'doc': 'word',
+    'pdf': 'pdf'
+  };
 
   constructor() { }
 
@@ -21,5 +31,4 @@ export class FileThumbnailComponent implements OnInit {
       this.backgroundUrl = ModelUtilsService.getImageBlobUrl(this.file.blobId);
     }
   }
-
 }

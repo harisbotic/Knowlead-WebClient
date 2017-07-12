@@ -1,5 +1,13 @@
 .file-wrap(*ngIf="file")
-  ngl-icon.preview.icon(icon="unknown" category="doctype" *ngIf="!isImage")
-  img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
-  .file-name.
-    {{file | fileName}}
+  div(*ngIf="extensionData[file.extension] !== undefined; else showUnknownIcon")
+    ngl-icon.preview.icon(icon="{{ extensionData[file.extension] }}" category="doctype" *ngIf="!isImage")
+    img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
+    .file-name.
+      {{file | fileName}}
+
+ng-template(#showUnknownIcon)
+  .file-wrap
+    ngl-icon.preview.icon(icon="unknown" category="doctype" *ngIf="!isImage")
+    img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
+    .file-name.
+      {{file | fileName}}
