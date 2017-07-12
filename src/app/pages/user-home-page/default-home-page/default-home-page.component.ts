@@ -13,11 +13,23 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
 
   p2ps: P2PModel[];
 
+
   constructor(protected p2pService: P2pService) { super(); }
 
   ngOnInit() {
-    this.subscriptions.push(this.p2pService.getAll().subscribe(vals => {
+    this.subscriptions.push(this.p2pService.getAll(undefined).subscribe(vals => {
       this.p2ps = vals;
+    }));
+  }
+
+  loadMore() {
+    let oldest: Date = undefined;
+    if (this.p2ps.length !== 0) {
+      oldest = this.p2ps[this.p2ps.length - 1].dateCreated;
+    }
+    this.subscriptions.push(this.p2pService.getAll(oldest).subscribe(vals => {
+      this.p2ps = this.p2ps.concat(vals.slice());
+      this.refresh();
     }));
   }
 
