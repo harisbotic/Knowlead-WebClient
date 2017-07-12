@@ -1,5 +1,5 @@
 ng-template(#showErrorMessage)
-	p No friends in this section
+	.noFriends-Message No items in this section.
 
 .page-wrap(*ngIf="friendList && me")
 	.row
@@ -33,7 +33,7 @@ ng-template(#showErrorMessage)
 								app-single-friendship([userId]="otherUserId(item)")
 	.row
 		.col-100
-			.friendships-wrap
+			.friendships-wrap#last-container
 				.friends-title
 					| Blocked users
 				.friendships-container 

@@ -1,6 +1,6 @@
 
 <ng-template #showErrorMessage>
-  <p>No friends in this section</p>
+  <div class="noFriends-Message">No items in this section.</div>
 </ng-template>
 <div class="page-wrap" *ngIf="friendList &amp;&amp; me">
   <div class="row">
@@ -51,7 +51,7 @@
   </div>
   <div class="row">
     <div class="col-100">
-      <div class="friendships-wrap">
+      <div class="friendships-wrap" id="last-container">
         <div class="friends-title">Blocked users</div>
         <div class="friendships-container"> 
           <div *ngIf="blockedUsers.length !== 0; else showErrorMessage">

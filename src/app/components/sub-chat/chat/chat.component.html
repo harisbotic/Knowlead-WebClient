@@ -16,7 +16,7 @@
         </span>
       </div>
       <div class="single-friend" *ngIf="friends?.length === 0">
-        No friends to show here.
+        <div class="noFriends-Message">No friends to show here</div>
       </div>
     </div>
     <div class="chat-selector" (click)="(!friendsOpened) ? toggleFriends() : false">

@@ -1,4 +1,6 @@
-<ng-template #showFallbackMessage>There are no notifications</ng-template>
+<ng-template #showFallbackMessage>
+    <div class="no-notifications"> There are no notifications </div>
+</ng-template>
 
 <span [popover]="popover" class="icon" [class.disabled]="!notificationSource">
     <i [class]="iconClass"></i>

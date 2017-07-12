@@ -1,9 +1,10 @@
 @import "../../../../kl-styles/variables.scss";
 
 .no-notifications {
-  color: $font-primary-color;
+  color: $placeholder-color;
   text-align: center;
-  padding: 20px 0;
+  font-size: 16px;
+  padding: 14px 0;
   border-bottom: 1px solid #c8cddd;
   font-weight: bold;
 }

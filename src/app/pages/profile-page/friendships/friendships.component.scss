@@ -1,11 +1,23 @@
 @import "../../../../kl-styles/variables.scss";
 
+.noFriends-Message {
+    line-height: 70px;
+    margin-left: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: $placeholder-color;
+}
+
+#last-container {
+    margin-bottom: 80px;
+}
+
 .friendships-wrap {
     background-color: white;
     border-radius: $border-radius;
     border: 1px solid $hover-dark-color;
     min-height: 170px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 
 
     .friends-title {
