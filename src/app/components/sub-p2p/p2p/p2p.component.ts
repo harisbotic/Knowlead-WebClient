@@ -44,7 +44,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
 
   user: ApplicationUserModel;
   P2PStatus = P2PStatus;
-  discussionOpened: boolean;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
@@ -62,15 +61,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
       return;
     }
     this._p2p = ModelUtilsService.expandP2p(this._p2p, this.user.id);
-    if (this.discussionOpened === undefined) {
-      this.discussionOpened = this.p2p.isMy;
-    }
-  }
-
-  toggleDiscussion() {
-    if (this.discussionOpened !== undefined) {
-      this.discussionOpened = !this.discussionOpened;
-    }
   }
 
   ngOnInit() {
@@ -81,11 +71,6 @@ export class P2pComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.activatedRoute.params.subscribe(params => {
       if (params['feedback'] === 'true') {
         this.notificationService.openP2pFeedbackForm(this.p2pId);
-      }
-    }));
-    this.subscriptions.push(this.p2pService.getMessages(this.p2pId).subscribe(messages => {
-      if (messages.length > 0) {
-        this.discussionOpened = true;
       }
     }));
   }

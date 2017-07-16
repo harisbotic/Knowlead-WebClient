@@ -5,7 +5,7 @@
     </div>
     <div class="col-50 posRel">
       <div class="notification-text-wrap">
-        <div class="row fromWho"><a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
+        <div class="row fromWho"><a routerLink="{{notification.fromApplicationUser | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
           <div class="notification-text">Sent you a friend request.</div>
           <div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div>
         </div>
