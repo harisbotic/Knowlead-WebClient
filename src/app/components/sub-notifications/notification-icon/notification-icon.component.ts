@@ -36,7 +36,8 @@ export class NotificationIconComponent extends BaseComponent implements OnInit {
       }));
     }
     if (this.notificationSource instanceof FriendshipNotificationsService) {
-      this.component = FriendsSingleNotificationComponent;
+      // I have no idea why <any> is necessary here ...
+      this.component = <any>FriendsSingleNotificationComponent;
     }
     if (this.notificationSource instanceof ChatNotificationsService) {
       this.component = MessageSingleNotificationComponent;

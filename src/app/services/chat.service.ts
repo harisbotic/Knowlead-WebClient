@@ -41,7 +41,8 @@ export class ChatService {
     return this.storageService.getFromStorage<FriendshipModel[]>('friends', this.fillerArr)
       .combineLatest(this.accountService.currentUser(), (friends, user) => { return {friends: friends, me: user}; })
       .map(data => data.friends ? data.friends.filter(friend => data.me && (friend.applicationUserBiggerId === data.me.id ||
-                                                friend.applicationUserSmallerId === this.me.id)) : data.friends);
+                                                friend.applicationUserSmallerId === data.me.id) &&
+                                                friend.status !== FriendshipStatus.Declined) : data.friends);
   }
 
   get realtimeService(): RealtimeService {

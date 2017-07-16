@@ -19,9 +19,10 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
 
   loadMore() {
     this.reset();
-    this.chatService.getFriends(true).take(1).subscribe(friendships => {
+    this.chatService.getFriends(true).subscribe(friendships => {
       if (friendships) {
         this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
+          this.reset();
           const canAccept = friendships.filter(f =>
                 ModelUtilsService.canAcceptFriendship(f, user.id)
               );
@@ -30,7 +31,7 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
           this.refreshStats();
           this.addNotifications(canAccept.map(f => {
               return {
-                notificationId: '',
+                notificationId: f.applicationUserSmallerId + '/' + f.applicationUserBiggerId,
                 notificationType: NotificationTypes.newFriendship,
                 fromApplicationUserId: ModelUtilsService.getOtherFriendId(f, user.id),
                 fromApplicationUser: ModelUtilsService.getOtherFriend(f, user.id),

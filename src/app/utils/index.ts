@@ -226,6 +226,6 @@ export function sortByDateFunction<T>(key: keyof T, reverse?: boolean) {
 
 export function parseDateIfNecessary<T>(obj: T, key: keyof T) {
     if (obj[key] && typeof obj[key] === 'string') {
-      obj[key] = <any>(new Date(Date.parse(<any>obj[key])));
+      obj[key] = <any>getLocalDate((new Date(Date.parse(<any>obj[key]))));
     }
 }
