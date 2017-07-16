@@ -39,8 +39,9 @@ export class ChatService {
       this.storageService.refreshStorage('friends', this.fillerArr);
     }
     return this.storageService.getFromStorage<FriendshipModel[]>('friends', this.fillerArr)
-      .map(friends => friends ? friends.filter(friend => this.me && (friend.applicationUserBiggerId === this.me.id ||
-                                                friend.applicationUserSmallerId === this.me.id)) : friends);
+      .combineLatest(this.accountService.currentUser(), (friends, user) => { return {friends: friends, me: user}; })
+      .map(data => data.friends ? data.friends.filter(friend => data.me && (friend.applicationUserBiggerId === data.me.id ||
+                                                friend.applicationUserSmallerId === this.me.id)) : data.friends);
   }
 
   get realtimeService(): RealtimeService {
@@ -57,7 +58,7 @@ export class ChatService {
     this.accountService.currentUser().subscribe((user) => {
       this.me = user;
       if (user) {
-        storageService.refreshStorage('friends', this.fillerArr, undefined);
+        storageService.refreshStorage('friends', this.fillerArr);
       }
     });
   }

@@ -21,14 +21,14 @@ export class FriendshipNotificationsService extends BaseNotificationSource {
     this.reset();
     this.chatService.getFriends(true).take(1).subscribe(friendships => {
       if (friendships) {
-        this.stats.total = friendships.length;
-        this.stats.unread = friendships.length;
-        this.refreshStats();
         this.accountService.currentUser().filter(user => !!user).take(1).subscribe(user => {
-          this.addNotifications(
-            friendships.filter(f =>
-              ModelUtilsService.canAcceptFriendship(f, user.id)
-            ).map(f => {
+          const canAccept = friendships.filter(f =>
+                ModelUtilsService.canAcceptFriendship(f, user.id)
+              );
+          this.stats.total = canAccept.length;
+          this.stats.unread = canAccept.length;
+          this.refreshStats();
+          this.addNotifications(canAccept.map(f => {
               return {
                 notificationId: '',
                 notificationType: NotificationTypes.newFriendship,
