@@ -67,7 +67,7 @@ export class P2pService {
   getAll(offset: Date): Observable<P2PModel[]> {
 
     const query = {
-      offset: 9,
+      offset: 1000,
       dateTimeStart: offset ? (getLocalDate(offset)).toISOString() : undefined
     };
 
