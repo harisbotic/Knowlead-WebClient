@@ -1,9 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FriendshipModel, FriendshipDTOActions, ApplicationUserModel } from '../../models/dto';
+import { FriendshipModel, FriendshipDTOActions, ApplicationUserModel, FriendCallModel } from '../../models/dto';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { ChatService } from '../../services/chat.service';
 import { AccountService } from '../../services/account.service';
 import { BaseComponent } from '../../base.component';
+import { Observable } from '../../signalr/Observable';
+
+interface ButtonOption {
+  title: string;
+  isShown: () => boolean;
+  action: FriendshipDTOActions;
+}
 
 @Component({
   selector: 'app-friendship-strip',
@@ -16,16 +23,69 @@ export class FriendshipStripComponent extends BaseComponent implements OnInit {
   actions = FriendshipDTOActions;
   friendship: FriendshipModel;
   _otherId: string;
+  options: ButtonOption[];
+  availableOptions: ButtonOption[];
 
   constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
 
   @Input() set otherId(value: string) {
     this._otherId = value;
-    this.subscriptions.push(this.chatService.getFriendshipStatus(value).subscribe(friendship => this.friendship = friendship));
+    this.subscriptions.push(this.chatService.getFriendshipStatus(value).subscribe(friendship => {
+      this.friendship = friendship;
+      this.refresh();
+    }));
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.accountService.currentUser().subscribe(user => this.me = user));
+    this.options = [
+      {
+        action: FriendshipDTOActions.NewRequest,
+        title: 'Send Friend Request',
+        isShown: this.canAdd.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.AcceptRequest,
+        title: 'Accept Request',
+        isShown: this.canAccept.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.DeclineRequest,
+        title: 'Decline Request',
+        isShown: this.canDecline.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.CancelRequest,
+        title: 'Cancel Request',
+        isShown: this.canCancel.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.RemoveFriend,
+        title: 'Remove Friend',
+        isShown: this.canRemove.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.BlockUser,
+        title: 'Block',
+        isShown: this.canBlock.bind(this)
+      },
+      {
+        action: FriendshipDTOActions.UnblockUser,
+        title: 'Unblock',
+        isShown: this.canUnblock.bind(this)
+      }
+    ];
+    this.subscriptions.push(this.accountService.currentUser().subscribe(user => {
+      this.me = user;
+      this.refresh();
+    }));
+  }
+
+  refresh() {
+    if (this.friendship !== undefined && this.me) {
+      this.availableOptions = this.options.filter( (option) => {
+        return option.isShown();
+      });
+    }
   }
 
   isSelf() {

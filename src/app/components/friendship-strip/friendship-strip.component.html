@@ -1,13 +1,14 @@
 
-<div class="friendship-strip-wrap" *ngIf="!isSelf()">
+<div class="friendship-strip-wrap" *ngIf="!isSelf() &amp;&amp; availableOptions">
   <div class="col-90">
-    <button class="first-option">Send Friend Request</button>
+    <button class="first-option" (click)="doAction(availableOptions[0].action)">{{ availableOptions[0].title }}</button>
   </div>
   <div class="col-10"><span class="dropdown-icon"><i class="kl-more"></i></span></div>
   <div class="dropdown-content">
-    <button class="other-option">Remove Friend</button>
-    <button class="other-option">Block Friend</button>
-    <button class="other-option">Remove Friend</button>
-    <button class="other-option">Remove Friend</button>
+    <button *ngFor="let option of availableOptions.slice(1); index as i" (click)="doAction(option.action)">
+      {{ option.title }}
+      
+      
+    </button>
   </div>
 </div>

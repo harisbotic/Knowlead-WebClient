@@ -12,9 +12,7 @@
   .col-100
     .with-wrap
       span.with-subject.
-        {{ p2p.fos?.name }}
-      br
-      | 
+        {{ p2p.fos?.name }} 
       span.with-text.
         with: 
 .row#bottom-row
@@ -28,7 +26,7 @@
       .profile-name-wrap
         //- Link to profile
         .profile-name
-          a(href="{{ p2p.otherScheduledUser | userProfileLink }}") {{ p2p.otherScheduledUser | fullName }}
+          a(routerLink="{{ p2p.otherScheduledUser | userProfileLink }}") {{ p2p.otherScheduledUser | fullName }}
   .col-25
     .reward-wrap
       span.reward-text.

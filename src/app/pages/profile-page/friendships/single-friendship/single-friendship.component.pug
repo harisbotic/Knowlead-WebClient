@@ -1,20 +1,20 @@
-.single-friend-wrap
+.single-friend-wrap(*ngIf="user")
 	.col-35
 		.profileImage-wrap
-			a.profile-link(routerLink='')
+			a.profile-link(routerLink='{{ user | userProfileLink }}')
 				app-profile-picture([user]='user', [uploadable]='false', size='medium')
 	.col-65
 		.row#friend-options
-			app-friendship-strip
+			app-friendship-strip([otherId]="user.id") 
 		.row
 			.friend-name
-				a(routerLink="#") Adnan Hadzicahmetoavdagic
+				a(routerLink="{{ user | userProfileLink }}") {{ user | fullName}} 
 		.row.friend-info-wrap
 			.col-50
 				.row
 					.info-title Score
 				.row
-					.info-value 2144 
+					.info-value  {{ user.pointsBalance }}
 			.col-50
 				.row
 					.info-title Rank

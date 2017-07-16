@@ -109,6 +109,7 @@ import { FriendsSingleNotificationComponent } from
 import { FileNamePipe } from './pipes/file-name.pipe';
 import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbnail.component';
 import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-pa
     SelectModule,
     MasonryModule,
     PerfectScrollbarModule,
+    FilterPipeModule,
     DynamicModule.withComponents([FriendsSingleNotificationComponent, MessageSingleNotificationComponent, UserSingleNotificationComponent]),
     NglModule.forRoot({
       svgPath: '/assets/icons'
