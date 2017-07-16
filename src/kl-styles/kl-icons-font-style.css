@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'knowlead-icons-font';
-  src:  url('fonts/knowlead-icons-font.eot?fg8z3i');
-  src:  url('fonts/knowlead-icons-font.eot?fg8z3i#iefix') format('embedded-opentype'),
-    url('fonts/knowlead-icons-font.ttf?fg8z3i') format('truetype'),
-    url('fonts/knowlead-icons-font.woff?fg8z3i') format('woff'),
-    url('fonts/knowlead-icons-font.svg?fg8z3i#knowlead-icons-font') format('svg');
+  src:  url('fonts/knowlead-icons-font.eot');
+  src:  url('fonts/knowlead-icons-font.eot#iefix') format('embedded-opentype'),
+    url('fonts/knowlead-icons-font.ttf') format('truetype'),
+    url('fonts/knowlead-icons-font.woff') format('woff'),
+    url('fonts/knowlead-icons-font.svg#knowlead-icons-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
