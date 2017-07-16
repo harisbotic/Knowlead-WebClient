@@ -67,7 +67,7 @@ export class P2pService {
   getAll(offset: Date): Observable<P2PModel[]> {
 
     const query = {
-      offset: 9,
+      offset: 1000,
       dateTimeStart: offset ? (getLocalDate(offset)).toISOString() : undefined
     };
 
@@ -82,6 +82,9 @@ export class P2pService {
     return this.transformP2ps(this.http.get(P2P_ALL + '/' + filter)
       .map(responseToResponseModel)
       .map(v => v.object));
+  }
+
+  getByFosId(fosId: number) {
   }
 
   private transformP2ps(all: Observable<P2PModel[]>): Observable<P2PModel[]> {

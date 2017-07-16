@@ -3,6 +3,7 @@ import { BaseComponent } from '../../../base.component';
 import { P2pService } from '../../../services/p2p.service';
 import { P2PModel } from '../../../models/dto';
 import { sortByDateFunction } from '../../../utils/index';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-default-home-page',
@@ -14,11 +15,20 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
   p2ps: P2PModel[];
 
 
-  constructor(protected p2pService: P2pService) { super(); }
+  constructor(protected p2pService: P2pService, protected activatedRoute: ActivatedRoute) { super(); }
 
   ngOnInit() {
-    this.subscriptions.push(this.p2pService.getAll(undefined).subscribe(vals => {
-      this.p2ps = vals;
+    this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
+      if (params['fos']) {
+        const fosId = params['fos'];
+        // this.subscriptions.push(this.p2pService.getByFos(fosId).subscribe(vals => {
+        //   this.p2ps = vals;
+        // }));
+      } else {
+        this.subscriptions.push(this.p2pService.getAll(undefined).subscribe(vals => {
+          this.p2ps = vals;
+        }));
+      }
     }));
   }
 
