@@ -1,8 +1,6 @@
 
 <ng-template #noUpcomingEvents>
-  There are no upcoming events
-  
-  
+  <div class="noEvents-message">There are no upcoming events</div>
 </ng-template>
 <div class="grid-container">
   <div class="main-wrap">
@@ -171,7 +169,13 @@
     <div class="col-75">
       <div class="main-section-wrap">
         <div class="top-elements">
+<<<<<<< HEAD
           <div class="col-50"><span id="searchTitle">All P2P requests are displayed</span></div>
+=======
+          <div class="col-50"><span id="searchTitle">Filter</span>
+            <input class="search-p2p-input" type="text" placeholder="interests, bookmarked, math, angular...">
+          </div>
+>>>>>>> origin/redesign-1-attachments
           <div class="col-50">
             <div class="create-request-button-wrap">
               <button class="create-request-button" (click)="toggleCreateRequest()" [class.create-request-button-opened]="createRequestState === 'open'">Create a Request</button>
