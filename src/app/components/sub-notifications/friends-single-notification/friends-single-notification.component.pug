@@ -5,7 +5,7 @@ a(*ngIf="notification")
 		.col-50.posRel
 			.notification-text-wrap
 				.row.fromWho
-					a(routerLink="{{notification.fromApplicationUserId | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
+					a(routerLink="{{notification.fromApplicationUser | userProfileLink}}") {{notification.fromApplicationUser | fullName}}
 					.notification-text.
 						Sent you a friend request.
 					.timeAgo {{notification.scheduledAt | amTimeAgo}}

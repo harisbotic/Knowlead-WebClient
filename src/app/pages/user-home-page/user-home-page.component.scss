@@ -1,5 +1,14 @@
 @import "../../../kl-styles/variables.scss";
 
+
+.noEvents-message {
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: $placeholder-color;
+}
+
 .overflow-hidden {
   overflow: hidden
 }

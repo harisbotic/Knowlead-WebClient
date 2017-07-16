@@ -1,5 +1,12 @@
 @import "../../../../kl-styles/variables.scss";
 
+.noFriends-Message {
+    line-height: 40px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: $disabled-color;
+}
 
 .chat-selector-wrap {
     width: $chat-width;
