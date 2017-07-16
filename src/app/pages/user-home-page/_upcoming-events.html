@@ -1,0 +1,15 @@
+
+<div class="row other-upcoming-events">
+  <div class="col-100">
+    <div class="timer-wrap">
+      <div *ngIf="p2p.isMy;then student else teacher"></div>
+      <ng-template #student><i class="kl-circle student-color"></i></ng-template>
+      <ng-template #teacher><i class="kl-circle teacher-color"></i></ng-template><span class="timer-text">{{ p2p.dateTimeAgreed | amTimeAgo }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-100">
+      <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }} </span><span class="with-text">with: {{ p2p.otherScheduledUser | fullName }}</span></div>
+    </div>
+  </div>
+</div>

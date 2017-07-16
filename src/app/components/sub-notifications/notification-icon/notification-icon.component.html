@@ -1,3 +1,5 @@
+<ng-template #showFallbackMessage>There are no notifications</ng-template>
+
 <span [popover]="popover" class="icon" [class.disabled]="!notificationSource">
     <i [class]="iconClass"></i>
     <span class="unread-bedge" *ngIf="stats?.unread > 0">{{Math.min(stats.unread, 99)}}</span>
@@ -12,10 +14,12 @@
                 <a class="markRead" (click)="markAsRead()">Mark all as read</a>
             </div>
         </div>
-        <div *ngFor="let item of notifications">
-            <ndc-dynamic [ndcDynamicInputs]="{notification: item}"
-                          [ndcDynamicOutputs]="{markAsRead: markSingleAsRead.bind(this)}"
-                          [ndcDynamicComponent]="component"></ndc-dynamic>
+        <div *ngIf="notifications.length !== 0; else showFallbackMessage">
+            <div *ngFor="let item of notifications">
+                <ndc-dynamic [ndcDynamicInputs]="{notification: item}"
+                            [ndcDynamicOutputs]="{markAsRead: markSingleAsRead.bind(this)}"
+                            [ndcDynamicComponent]="component"></ndc-dynamic>
+            </div>
         </div>
         <button (click)="scrolled()" class="clearButton loadMoreButton" *ngIf="notifications.length != stats.total">Load more</button>
     </perfect-scrollbar>
