@@ -93,8 +93,8 @@ ng-template(#noUpcomingEvents)
                 .col-20
                   .info-icon
                     i.kl-info
-          div(*ngIf="getUpcoming().length !== 0; else noUpcomingEvents")
-            .upcoming-events-content(*ngFor="let p2p of getUpcoming(); index as i; trackBy: trackByFn")
+          div(*ngIf="upcoming.length !== 0; else noUpcomingEvents")
+            .upcoming-events-content(*ngFor="let p2p of upcoming; index as i; trackBy: trackByFn")
             
               div(*ngIf="i === 0;then firstevent else upcomingevents")
 
