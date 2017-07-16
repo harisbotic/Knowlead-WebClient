@@ -2,12 +2,11 @@
   div(*ngIf="extensionData[file.extension] !== undefined; else showUnknownIcon")
     ngl-icon.preview.icon(icon="{{ extensionData[file.extension] }}" category="doctype" *ngIf="!isImage")
     img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
-    .file-name.
-      {{file | fileName}}
+    .file-name
+      a(href="https://teststorage3123.blob.core.windows.net/blobs/{{file.blobId}}") {{file | fileName}}
 
 ng-template(#showUnknownIcon)
   .file-wrap
     ngl-icon.preview.icon(icon="unknown" category="doctype" *ngIf="!isImage")
-    img.preview.thumbnail(src="{{backgroundUrl}}" *ngIf="isImage")
     .file-name.
       {{file | fileName}}

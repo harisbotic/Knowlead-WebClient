@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptionsArgs } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
@@ -14,6 +14,7 @@ import { ListP2PsRequest } from '../models/constants';
 import { P2P_ALL } from '../utils/urls';
 import { AnalyticsService, AnalyticsEventType } from './analytics.service';
 import { RealtimeService } from './realtime.service';
+import { getGmtDate, getLocalDate } from '../utils/index';
 
 @Injectable()
 export class P2pService {
@@ -63,8 +64,16 @@ export class P2pService {
         .do((val: P2PModel) => this.sendFosEvent(val, 'p2pCreate', val.initialPrice)));
   }
 
-  getAll(): Observable<P2PModel[]> {
-    return this.transformP2ps(this.http.get(P2P_RECOMMEND)
+  getAll(offset: Date): Observable<P2PModel[]> {
+
+    const query = {
+      offset: 9,
+      dateTimeStart: offset ? (getLocalDate(offset)).toISOString() : undefined
+    };
+
+    let tmp = getLocalDate(offset ? offset : new Date());
+
+    return this.transformP2ps(this.http.get(P2P_RECOMMEND, {search: query})
       .map(responseToResponseModel)
       .map(v => v.object));
   }
