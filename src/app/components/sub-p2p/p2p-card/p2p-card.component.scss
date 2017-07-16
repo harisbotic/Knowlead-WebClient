@@ -59,7 +59,7 @@ a, a:link, a:hover, a:visited a:active {
     }
 }
 
-.level-basic, .level-basic > div {
+.level-Basic, .level-Basic > div {
   background-color: $level-basic-color;
 
   > span {
@@ -67,11 +67,11 @@ a, a:link, a:hover, a:visited a:active {
   }
 }
 
-.level-intermediate, .level-intermediate > div {
+.level-Intermediate, .level-Intermediate > div {
   background-color: $level-intermediate-color;
 }
 
-.level-advanced, .level-advanced > div {
+.level-Advanced, .level-Advanced > div {
   background-color: $level-advanced-color;
 
   > span {

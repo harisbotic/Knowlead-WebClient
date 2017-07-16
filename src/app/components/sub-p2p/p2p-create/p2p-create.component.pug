@@ -41,21 +41,21 @@
           Desired Level of Knowledge from Teacher
         .difficulty-options-wrap
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_1", value="basic")
+            input(type="radio", name="difficultyLevel", formControlName="difficultyLevel", id="match_1", [value]="difficulties.Basic")
             label(for="match_1").basic
               .item
                 | I
               .item-text
                 | Basic
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_2", value="intermediate")
+            input(type="radio", name="difficultyLevel", formControlName="difficultyLevel", id="match_2", [value]="difficulties.Intermediate")
             label(for="match_2").intermediate
               .item
                 | II
               .item-text
                 | Intermediate
           .difficulty-options
-            input(type="radio", name="difficulty", id="match_3", value="advanced")
+            input(type="radio", name="difficultyLevel", formControlName="difficultyLevel", id="match_3", [value]="difficulties.Advanced")
             label(for="match_3").advanced
               .item
                 | III

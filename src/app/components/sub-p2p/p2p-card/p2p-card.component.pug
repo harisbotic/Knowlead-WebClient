@@ -1,10 +1,10 @@
 a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/home/p2p/{{p2p.p2pId}}")
   .p2p-card-level-wrap
-    .level-base.level-basic
+    .level-base([ngClass]="difficultyColor")
       .level-anglebox
       .level-widebox
         span.level-text.
-          Basic
+          {{P2PDifficultyLevel[p2p.difficultyLevel]}}
   .p2p-card-content-wrap.fade
     .row.bookmark-wrap
       //- ADD bookmarked CLASS TO THE ICON BELOW WHEN IT IS CLICKED

@@ -24,6 +24,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   languages: DropdownValueInterface<LanguageModel>[];
   foses: DropdownValueInterface<number>[];
   initialDate = new Date();
+  difficulties = P2PDifficultyLevel;
 
   constructor(protected p2pService: P2pService,
       protected notificationService: NotificationService,

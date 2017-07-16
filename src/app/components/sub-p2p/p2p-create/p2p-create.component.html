@@ -38,21 +38,21 @@
         <div class="title">Desired Level of Knowledge from Teacher</div>
         <div class="difficulty-options-wrap">
           <div class="difficulty-options">
-            <input type="radio" name="difficulty" id="match_1" value="basic">
+            <input type="radio" name="difficultyLevel" formControlName="difficultyLevel" id="match_1" [value]="difficulties.Basic">
             <label class="basic" for="match_1">
               <div class="item">I</div>
               <div class="item-text">Basic</div>
             </label>
           </div>
           <div class="difficulty-options">
-            <input type="radio" name="difficulty" id="match_2" value="intermediate">
+            <input type="radio" name="difficultyLevel" formControlName="difficultyLevel" id="match_2" [value]="difficulties.Intermediate">
             <label class="intermediate" for="match_2">
               <div class="item">II</div>
               <div class="item-text">Intermediate</div>
             </label>
           </div>
           <div class="difficulty-options">
-            <input type="radio" name="difficulty" id="match_3" value="advanced">
+            <input type="radio" name="difficultyLevel" formControlName="difficultyLevel" id="match_3" [value]="difficulties.Advanced">
             <label class="advanced" for="match_3">
               <div class="item">III</div>
               <div class="item-text">Advanced</div>

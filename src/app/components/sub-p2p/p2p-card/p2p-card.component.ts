@@ -7,6 +7,7 @@ import { NotificationService } from '../../../services/notifications/notificatio
 import { ModelUtilsService } from '../../../services/model-utils.service';
 import { RealtimeService } from '../../../services/realtime.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { P2PDifficultyLevel } from '../../../models/dto';
 
 @Component({
   selector: 'app-p2p-card',
@@ -26,6 +27,8 @@ export class P2pCardComponent extends P2pComponent implements OnInit {
   fosColor: string;
   priceColor: string;
   languageColor: string;
+  difficultyColor: string;
+  P2PDifficultyLevel = P2PDifficultyLevel;
 
   constructor(protected accountService: AccountService,
               protected storageService: StorageService,
@@ -102,11 +105,18 @@ export class P2pCardComponent extends P2pComponent implements OnInit {
     }
   }
 
+  calculateDifficultyColor() {
+    if (this.p2p) {
+      this.difficultyColor = 'level-' + P2PDifficultyLevel[this.p2p.difficultyLevel];
+    }
+  }
+
   refresh() {
     super.refresh();
     this.calculateDeadlineColor();
     this.calculateFosColor();
     this.calculatePriceColor();
     this.calculateLanguageColor();
+    this.calculateDifficultyColor();
   }
 }
