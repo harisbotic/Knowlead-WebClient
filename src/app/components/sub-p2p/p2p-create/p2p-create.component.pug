@@ -69,28 +69,28 @@
       .deadline-selection-wrap
         .deadline-options-wrap
           .deadline-options
-            input#time_1(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24)")
+            input#time_1(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24)" (click)="removeSpecificDate()")
             label(for="time_1")#one-day
               .item
                 i.kl-one-day
               .item-text
                 | 24 Hours
           .deadline-options
-            input#time_2(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*3)")
+            input#time_2(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*3)" (click)="removeSpecificDate()")
             label(for="time_2")#three-days
               .item
                 i.kl-three-days
               .item-text
                 | 3 Days
           .deadline-options
-            input#time_3(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*7)")
+            input#time_3(type="radio", name="deadline", formControlName="deadline", [value]="getDateAfterHours(24*7)" (click)="removeSpecificDate()")
             label(for="time_3")#seven-days
               .item
                 i.kl-seven-days
               .item-text
                 | 7 Days
           .deadline-options
-            input#time_4(type="radio", name="deadline", formControlName="deadline", [value]="undefined", checked)
+            input#time_4(type="radio", name="deadline", formControlName="deadline", [value]="undefined", checked (click)="removeSpecificDate()")
             label(for="time_4")#none
               .item
                 i.kl-no-deadline
@@ -99,11 +99,18 @@
         .specific-date-wrap
           .title#specific-date-text
             | Select Specific Date and Time
-          app-flatpickr(placeholder="Select specific date").specific-date-input
+          app-flatpickr(
+            placeholder="Select specific date"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="specificDate"
+            (ngModelChange)="setSpecificDate($value)"
+            [disablePast]="true").specific-date-input
     .footer-elements
       .row#note
         span#noteTitle NOTE:  
         |  Selected field is not yet popular among the users, so you may have to wait some time or you may not get the response at all. 
         span#noteText  However, we encourage you to post it.
-      button.post-p2p-button
+      button.post-p2p-button([disabled]="!form.valid")
         | Post
+      .error(*ngIf="!form.valid").
+        Form is not valid

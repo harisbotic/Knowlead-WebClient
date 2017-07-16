@@ -25,6 +25,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   foses: DropdownValueInterface<number>[];
   initialDate = new Date();
   difficulties = P2PDifficultyLevel;
+  specificDate = new Date();
 
   constructor(protected p2pService: P2pService,
       protected notificationService: NotificationService,
@@ -142,6 +143,18 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     // remove all files which are undefined/null
     ret.blobs = ret.blobs.filter(blob => blob);
     return ret;
+  }
+
+  setSpecificDate() {
+    if (this.specificDate) {
+      this.form.patchValue({
+        deadline: this.specificDate
+      });
+    }
+  }
+
+  removeSpecificDate() {
+    delete this.specificDate;
   }
 
 }

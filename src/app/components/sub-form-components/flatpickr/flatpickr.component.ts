@@ -22,12 +22,18 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
   @Input() placeholder: string;
   @Input() disablePast = false;
   @Input() disableMax: Date;
+
+  used = false;
   constructor() { super(); }
+
+  onDateChanged(date) {
+    this.value = date[0];
+  }
 
   ngAfterViewInit() {
     let config = {
       altInput: true,
-      onChange: (date) => this.value = date[0],
+      onChange: this.onDateChanged.bind(this),
       defaultDate: this.initialValue,
       enableTime: true,
       enable: [],
@@ -51,6 +57,10 @@ export class FlatpickrComponent extends BaseFormInputComponent<Date> implements 
   }
 
   writeValue(value: Date) {
+    if (!this.used && value) {
+      this.used = true;
+      return;
+    }
     super.writeValue(value);
     if (typeof value === 'string') {
       value = new Date(Date.parse(value));

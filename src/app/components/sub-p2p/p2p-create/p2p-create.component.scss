@@ -403,6 +403,14 @@
         background-color: transparentize($knowlead-primary, 0.1);
       }
 
+      &:disabled {
+        background-color: $disabled-color;
+      }
+
+    }
+
+    .error {
+      color: $error-color;
     }
   }
 }
