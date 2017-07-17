@@ -5,6 +5,33 @@ a, a:link, a:hover, a:visited a:active {
   color: $font-primary-color;
 }
 
+.fontCorrection {
+  font-size: 13px;
+  text-align: left;
+}
+
+.red_dot, .orange_dot, .green_dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-bottom: -1px;
+}
+
+.red_dot {
+    background-color: $level-low;
+}
+
+.orange_dot {
+    background-color: $level-mediocre;
+}
+
+.green_dot {
+    background-color: $level-high;
+}
+
+
 .p2p-card-wrap {
   width: 257px;
   height: auto;
@@ -142,7 +169,6 @@ a, a:link, a:hover, a:visited a:active {
     margin-left: 5px;
     padding-top: 5px;
     color: $hover-dark-color;
-    opacity: 0.7;
     height: 36px;
   }
 
