@@ -1,5 +1,7 @@
 a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/home/p2p/{{p2p.p2pId}}")
-  .p2p-card-level-wrap
+  .p2p-card-level-wrap.tooltip-parent
+    .tooltip-desired-knowleadge.tooltip-175
+      | Desired level of knowleadge from tutor (You).
     .level-base.level-basic
       .level-anglebox
       .level-widebox
@@ -8,7 +10,9 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
   .p2p-card-content-wrap.fade
     .row.bookmark-wrap
       //- ADD bookmarked CLASS TO THE ICON BELOW WHEN IT IS CLICKED
-      i.kl-bookmark2([class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)")
+      i.kl-bookmark2([class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)").tooltip-parent
+        .tooltip-left.tooltip-70.fontCorrection
+          span Bookmark
     .row.profile-info-wrap
       .col-25
         .profile-picture
@@ -27,7 +31,16 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
           {{p2p.fos.name}}
       .col-20
         .section-icon-wrap([ngClass]="fosColor")
-          i.kl-subject
+          i.kl-subject.tooltip-parent
+            .tooltip-left.tooltip-125.fontCorrection
+              span.green_dot
+              span - High interest
+              br
+              span.orange_dot
+              span - Low interest
+              br
+              span.red_dot
+              span - Not in interests
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -36,7 +49,16 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
           {{p2p.actualPrice}} Minutes
       .col-20
         .section-icon-wrap([ngClass]="priceColor")
-          i.kl-currency
+          i.kl-currency.tooltip-parent
+            .tooltip-left.tooltip-110.fontCorrection
+              span.green_dot
+              span - 40+ Minutes
+              br
+              span.orange_dot
+              span - 20+ Minutes
+              br
+              span.red_dot
+              span - 10+ Minutes
     .row.p2p-section-wrap
       .col-80
         .row.section-title.
@@ -46,7 +68,16 @@ a.p2p-card-wrap(*ngIf="p2p.createdBy && p2p.languages && p2p.fos" routerLink="/h
             {{item.code | uppercase}} 
       .col-20
         .section-icon-wrap([ngClass]="languageColor")
-          i.kl-globe
+          i.kl-globe.tooltip-parent
+            .tooltip-left.tooltip-155.fontCorrection
+              span.green_dot
+              span - Primary language
+              br
+              span.orange_dot
+              span - Secondary language
+              br
+              span.red_dot
+              span - Neither
     //- .row.p2p-section-wrap(*ngIf="p2p.deadline")
     //-   .col-80
     //-     .row.section-title.

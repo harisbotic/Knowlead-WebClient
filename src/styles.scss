@@ -59,6 +59,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
     }
 }
 .tooltip-top {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -85,6 +86,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 .tooltip-bottom {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -111,6 +113,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 .tooltip-left {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -144,6 +147,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 .tooltip-right {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -170,6 +174,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 .tooltip-counter {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -197,6 +202,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 
 
 .tooltip-postInfo {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -223,6 +229,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 }
 
 .tooltip-proposedPrice {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -250,6 +257,7 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
 
 
 .tooltip-registration {
+    font-family: "Roboto";
     display: none;
     position: absolute;
     border-radius: $border-radius;
@@ -275,10 +283,41 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
     }
 }
 
+
+.tooltip-desired-knowleadge {
+    font-family: "Roboto";
+    opacity: 1;
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    bottom: 24%;
+    left: 27px !important;
+    transform: translateY(50%) !important;
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: 50%;
+        left: -4px;
+        transform: translateY(-50%) rotate(45deg);
+    }
+}
+
 .tooltip-70  { width: 70px;  }
 .tooltip-100 { width: 100px; }
+.tooltip-110 { width: 110px; }
 .tooltip-125 { width: 125px; }
 .tooltip-150 { width: 150px; }
+.tooltip-155 { width: 155px; }
 .tooltip-175 { width: 175px; }
 .tooltip-200 { width: 200px; }
 .tooltip-225 { width: 225px; }
