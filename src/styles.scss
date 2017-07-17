@@ -283,6 +283,34 @@ app-single-notebook.previewNotebook > div:nth-child(1) > svg {
     }
 }
 
+.tooltip-minutes {
+    font-family: "Roboto";
+    font-weight: normal;
+    font-size: 14px;
+    display: none;
+    position: absolute;
+    border-radius: $border-radius;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $tooltip-background-color;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        display: inline;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: $tooltip-background-color;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
 
 .tooltip-desired-knowleadge {
     font-family: "Roboto";
