@@ -335,6 +335,10 @@ export interface RegisterUserModel
 	password: string;
 	referralUserId: Guid;
 }
+export interface sendResetPasswordToken
+{
+	email: string;
+}
 export interface UserCertificateModel
 {
 	userCertificateId: number;

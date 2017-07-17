@@ -19,7 +19,7 @@ export class NotificationsComponent extends BaseComponent implements OnInit {
 
   p2pFeedbackFormOpened = false;
   p2pFeedbackFormId: number;
-  timeoutNotification: NodeJS.Timer;
+  timeoutNotification: any;
 
   constructor(protected notificationService: NotificationService) { super();
  }

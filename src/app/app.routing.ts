@@ -32,6 +32,8 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
 import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.component';
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
 import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
+import { SendResetPasswordComponent } from './pages/send-reset-password/send-reset-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -39,7 +41,9 @@ const appRoutes: Routes = [
         { path: '', component: LoginPageComponent },
         { path: 'register', component: RegisterPageComponent },
         { path: 'terms', component: TermsConditionsPageComponent },
-        { path: 'registerSuccess', component: RegisterSuccessPageComponent }
+        { path: 'registerSuccess', component: RegisterSuccessPageComponent },
+        { path: 'sendResetPassword', component: SendResetPasswordComponent },
+        { path: 'resetpassword', component: ResetPasswordComponent }
     ] },
     { path: 'confirmemail', component: ConfirmEmailPageComponent },
     { path: 'home', component: UserHomePageComponent, canActivate: [AuthGuard, RegisteredGuard], children: [
@@ -82,7 +86,7 @@ const appRoutes: Routes = [
 export const appRoutingProviders: any[] = [
 ];
 
-export const freePaths = ['login', 'register', '', 'confirmemail', 'registerSuccess', 'terms'];
+export const freePaths = ['login', 'register', '', 'confirmemail', 'registerSuccess', 'terms', 'resetpassword'];
 
 export function isPathFree(path: string): boolean {
     if (path.startsWith('/')) {

@@ -8,11 +8,11 @@ import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
-import { Guid, ApplicationUserModel, ImageBlobModel } from '../models/dto';
+import { Guid, ApplicationUserModel, ImageBlobModel, PasswordResetModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { AnalyticsService } from './analytics.service';
-import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE, PROFILE_SEARCH } from '../utils/urls';
+import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE, PROFILE_SEARCH, RESET_PASSWORD_TOKEN, RESET_PASSWORD } from '../utils/urls';
 import { getGmtDate, getLocalDate } from '../utils/index';
 import { Observable } from 'rxjs/Rx';
 
@@ -35,7 +35,7 @@ export class AccountService {
               protected storageService: StorageService,
               protected sessionService: SessionService,
               protected injector: Injector) {
-    console.log('ACCOUTN SERVICE');
+    console.log('ACCOUNT SERVICE');
     this.sessionService.eventStream.subscribe(evt => {
       if (evt === SessionEvent.LOGGED_IN) {
         this.storageService.refreshStorage('user', this.userFiller);
@@ -62,6 +62,14 @@ export class AccountService {
     return this.http.post(REGISTER, cridentials).map(responseToResponseModel).do(response => {
       this.analyticsService.userRegistration(response.object);
     });
+  }
+
+  public getPasswordResetToken (mail: string) {
+    return this.http.post(RESET_PASSWORD_TOKEN + mail, null);
+  }
+
+  public resetPassword (data: PasswordResetModel) {
+    return this.http.post(RESET_PASSWORD, data);
   }
 
   public confirmEmail(data: ConfirmEmailModel): Observable<ResponseModel> {

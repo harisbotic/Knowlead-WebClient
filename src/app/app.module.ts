@@ -109,6 +109,8 @@ import { FriendsSingleNotificationComponent } from
 import { FileNamePipe } from './pipes/file-name.pipe';
 import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbnail.component';
 import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
+import { SendResetPasswordComponent } from './pages/send-reset-password/send-reset-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -184,7 +186,9 @@ import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-pa
     FriendsSingleNotificationComponent,
     FileNamePipe,
     FileThumbnailComponent,
-    AllMessagesPageComponent
+    AllMessagesPageComponent,
+    SendResetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
