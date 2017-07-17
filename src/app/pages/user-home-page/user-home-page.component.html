@@ -169,8 +169,9 @@
     <div class="col-75">
       <div class="main-section-wrap">
         <div class="top-elements">
-          <div class="col-50"><span id="searchTitle">Search</span>
-            <ng-select class="search-p2p-input" placeholder="Field of study" [options]="foses"></ng-select>
+          <div class="col-50">
+            <ng-select class="search-p2p-input" placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch"></ng-select>
+            <button [disabled]="!!!fosToSearch" (click)="searchByFoses()">Search</button>
           </div>
           <div class="col-50">
             <div class="create-request-button-wrap">

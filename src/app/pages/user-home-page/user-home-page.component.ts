@@ -38,6 +38,7 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
   filters = ListP2PsRequest;
   upcoming: P2PModel[];
   foses: DropdownValueInterface<number[]>[];
+  fosToSearch: number[];
 
   otherUser = ModelUtilsService.getOtherUserInP2P;
 
@@ -122,6 +123,10 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
     } else {
       this.createRequestState = 'open';
     }
+  }
+
+  searchByFoses() {
+
   }
 
 }
