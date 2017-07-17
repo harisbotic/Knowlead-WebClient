@@ -102,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="upcoming.length !== 0; else noUpcomingEvents">
+          <div *ngIf="upcoming &amp;&amp; upcoming.length !== 0; else noUpcomingEvents">
             <div class="upcoming-events-content" *ngFor="let p2p of upcoming; index as i; trackBy: trackByFn">
               <div *ngIf="i === 0;then firstevent else upcomingevents"></div>
               <ng-template #firstevent>
@@ -169,7 +169,9 @@
     <div class="col-75">
       <div class="main-section-wrap">
         <div class="top-elements">
-          <div class="col-50"><span id="searchTitle">All P2P requests are displayed</span></div>
+          <div class="col-50"><span id="searchTitle">Search</span>
+            <ng-select class="search-p2p-input" placeholder="Field of study" [options]="foses"></ng-select>
+          </div>
           <div class="col-50">
             <div class="create-request-button-wrap">
               <button class="create-request-button" (click)="toggleCreateRequest()" [class.create-request-button-opened]="createRequestState === 'open'">Create a Request</button>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../base.component';
 import { P2pService } from '../../../services/p2p.service';
-import { P2PModel } from '../../../models/dto';
+import { P2PModel, FOSModel } from '../../../models/dto';
 import { sortByDateFunction } from '../../../utils/index';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../../../services/storage.service';
+import { DropdownValueInterface } from '../../../models/frontend.models';
 
 @Component({
   selector: 'app-default-home-page',
@@ -14,16 +16,18 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
 
   p2ps: P2PModel[];
 
-
-  constructor(protected p2pService: P2pService, protected activatedRoute: ActivatedRoute) { super(); }
+  constructor(protected p2pService: P2pService,
+              protected activatedRoute: ActivatedRoute,
+              protected storageService: StorageService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
       if (params['fos']) {
-        const fosId = params['fos'];
-        // this.subscriptions.push(this.p2pService.getByFos(fosId).subscribe(vals => {
-        //   this.p2ps = vals;
-        // }));
+        const foses = <string>params['fos'];
+        const fosIds = foses.split(',').map(parseInt);
+        this.subscriptions.push(this.p2pService.getByFosIds(fosIds).subscribe(vals => {
+          this.p2ps = vals;
+        }));
       } else {
         this.subscriptions.push(this.p2pService.getAll(undefined).subscribe(vals => {
           this.p2ps = vals;

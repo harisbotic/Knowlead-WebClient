@@ -93,7 +93,7 @@ ng-template(#noUpcomingEvents)
                 .col-20
                   .info-icon
                     i.kl-info
-          div(*ngIf="upcoming.length !== 0; else noUpcomingEvents")
+          div(*ngIf="upcoming && upcoming.length !== 0; else noUpcomingEvents")
             .upcoming-events-content(*ngFor="let p2p of upcoming; index as i; trackBy: trackByFn")
             
               div(*ngIf="i === 0;then firstevent else upcomingevents")
@@ -113,8 +113,8 @@ ng-template(#noUpcomingEvents)
       .main-section-wrap
         .top-elements
           .col-50
-            span#searchTitle All P2P requests are displayed
-            //- input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
+            span#searchTitle Search
+            ng-select(placeholder="Field of study" [options]="foses").search-p2p-input
           .col-50
             .create-request-button-wrap
               button.create-request-button(

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationUserModel, P2PModel, P2PStatus } from '../../models/dto';
+import { ApplicationUserModel, P2PModel, P2PStatus, FOSModel } from '../../models/dto';
 import { AccountService } from '../../services/account.service';
 import { BaseComponent } from '../../base.component';
 import { ListP2PsRequest } from '../../models/constants';
@@ -10,6 +10,7 @@ import { StorageSubject } from '../../services/storage.subject';
 import { Observable } from 'rxjs';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { DropdownValueInterface } from '../../models/frontend.models';
 
 @Component({
   selector: 'app-user-home-page',
@@ -36,6 +37,7 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
   user: ApplicationUserModel;
   filters = ListP2PsRequest;
   upcoming: P2PModel[];
+  foses: DropdownValueInterface<number[]>[];
 
   otherUser = ModelUtilsService.getOtherUserInP2P;
 
@@ -76,6 +78,33 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
       this.subscriptions.push(Observable.timer(0, 1000).subscribe(() => {
         this.upcoming = this.getUpcoming();
       }));
+    }));
+    this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
+      this.foses = [];
+      const getChildren = (fos: FOSModel): FOSModel[] => {
+        let ret = [fos];
+        if (fos.children) {
+          for (let child of fos.children) {
+            ret = ret.concat(getChildren(child));
+          }
+        }
+        return ret;
+      }
+      const s = (fos: FOSModel) => {
+        const children = getChildren(fos).map(f => f.coreLookupId);
+        let name = fos.name;
+        for (let parent = fos.parent; parent && parent.parent; parent = parent.parent) {
+          name = parent.name + ' > ' + name;
+        }
+        this.foses.push({
+          label: name,
+          value: getChildren(fos).map(f => f.coreLookupId)
+        });
+        if (fos.children) {
+          fos.children.forEach(s);
+        }
+      };
+      root.children.forEach(s);
     }));
   }
 

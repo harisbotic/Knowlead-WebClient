@@ -4,14 +4,13 @@ import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
 import { P2P_DELETE, P2P_MESSAGE, P2P_SCHEDULE, P2P_ACCEPT_OFFER, P2P_REMOVE_BOOKMARK, P2P_ADD_BOOKMARK,
-    P2P_RECOMMEND } from '../utils/urls';
+    P2P_RECOMMEND, P2P_ALL } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
 import { P2PMessageModel, P2PModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
-import { P2P_ALL } from '../utils/urls';
 import { AnalyticsService, AnalyticsEventType } from './analytics.service';
 import { RealtimeService } from './realtime.service';
 import { getGmtDate, getLocalDate } from '../utils/index';
@@ -84,7 +83,12 @@ export class P2pService {
       .map(v => v.object));
   }
 
-  getByFosId(fosId: number) {
+  getByFosIds(fosIds: number[]): Observable<P2PModel[]> {
+    let url = P2P_RECOMMEND + '?' + fosIds.map(v => 'fosId=' + v.toString()).join('&');
+    url += '&offset=1000';
+    return this.transformP2ps(this.http.get(url)
+      .map(responseToResponseModel)
+      .map(v => v.object));
   }
 
   private transformP2ps(all: Observable<P2PModel[]>): Observable<P2PModel[]> {
