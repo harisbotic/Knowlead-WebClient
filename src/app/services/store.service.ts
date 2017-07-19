@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { ReferralStatsModel, RewardModel } from '../models/dto';
-import { REFERRALS, CLAIM_REWARD } from '../utils/urls';
+import { REFERRALS, CLAIM_REWARD, REDEEM } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { Observable } from 'rxjs/Rx';
 import { StorageService } from './storage.service';
@@ -23,6 +23,15 @@ export class StoreService {
   claimReward(rewardModel: RewardModel): Observable<any> {
     this.analyticsService.sendEvent('claimReward', rewardModel.code);
     return this.http.post(CLAIM_REWARD, rewardModel);
+  }
+
+  redeem(code: string): Observable<any> {
+    let searchParams = new URLSearchParams();
+    searchParams.set('promocode', code);
+    return this.http.post(REDEEM, null, {search : searchParams})
+      .do(() => {
+        this.analyticsService.sendEvent('redeemCode', code);
+      })
   }
 
 }

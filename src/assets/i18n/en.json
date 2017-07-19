@@ -121,5 +121,9 @@
 
     "CALL_END_REQUESTED": "One of peers requested end of the call",
     "CALL_INACTIVE": "We couldn't reach one of peers",
-    "CALL_START_PROBLEM": "Couldn't start call. Make sure your webcam and microphone are plugged in and you allowed access to them."
+    "CALL_START_PROBLEM": "Couldn't start call. Make sure your webcam and microphone are plugged in and you allowed access to them.",
+
+    "PROMOCODE_INVALID": "Invalid promo code.",
+    "PROMOCODE_ALREADY_USED": "This promo code was already used.",
+    "PROMOCODE_EXPIRED": "Promocode is expired."
 }

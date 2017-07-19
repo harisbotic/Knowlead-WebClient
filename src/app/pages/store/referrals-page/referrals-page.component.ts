@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { BaseComponent } from '../../../base.component';
-import { ReferralStatsModel, RewardModel, ApplicationUserModel } from '../../../models/dto';
+import { ReferralStatsModel, RewardModel, ApplicationUserModel, PromoCodeModel } from '../../../models/dto';
 import { AccountService } from '../../../services/account.service';
 import { ModelUtilsService } from '../../../services/model-utils.service';
+import { NotificationService } from '../../../services/notifications/notification.service';
+import { AnalyticsService } from '../../../services/analytics.service';
 
 interface StopInterface {
   count: number;
@@ -86,7 +88,11 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
   getReferralLink = ModelUtilsService.getReferralLink;
   statuses: ReferralStatus[];
 
-  constructor(protected accountService: AccountService, protected storeService: StoreService) { super(); }
+  redeemCode: string;
+
+  constructor(protected accountService: AccountService,
+              protected storeService: StoreService,
+              protected notificationService: NotificationService) { super(); }
 
   findStopByReward(reward: RewardModel): StopInterface {
     return this.stops.find(s => s.count === parseInt(reward.code.substr(3), 10));
@@ -154,6 +160,19 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
         console.error('Error finding backend model for claiming reward');
       }
     }
+  }
+
+  redeem() {
+    this.subscriptions.push(this.storeService.redeem(this.redeemCode).subscribe((promo: PromoCodeModel) => {
+      let infoStr;
+      if (this.rewards) {
+        infoStr = 'You have earned ' + this.rewards.find(reward => reward.coreLookupId === promo.rewardId).minutesReward + ' minutes';
+      }
+      this.notificationService.info('Redeem successful', infoStr);
+      this.redeemCode = '';
+    }, (error) => {
+      this.notificationService.error('Redeem error', error);
+    }));
   }
 
 }

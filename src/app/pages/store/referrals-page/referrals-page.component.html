@@ -6,12 +6,12 @@
             </div>
             <div class="col-40">
                 <div class="redeem-input-wrap">
-                    <input type="text" name="redeem-code" placeholder="Type in your code here..." class="redeem-input" />
+                    <input type="text" name="redeemCode" [(ngModel)]="redeemCode" placeholder="Type in your code here..." class="redeem-input" />
                 </div>
             </div>
             <div class="col-20">
                 <div class="redeem-button-wrap">
-                    <button type="submit" class="redeem-button">Get Minutes</button>
+                    <button class="redeem-button" (click)="redeem()">Get Minutes</button>
                 </div>
             </div>
         </form>
