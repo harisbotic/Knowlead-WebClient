@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ModelUtilsService } from '../../services/model-utils.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DropdownValueInterface } from '../../models/frontend.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-home-page',
@@ -42,7 +43,10 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
 
   otherUser = ModelUtilsService.getOtherUserInP2P;
 
-  constructor(protected accountService: AccountService, protected p2pService: P2pService, protected storageService: StorageService) {
+  constructor(protected accountService: AccountService,
+              protected p2pService: P2pService,
+              protected storageService: StorageService,
+              protected router: Router) {
     super();
   }
 
@@ -126,7 +130,9 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
   }
 
   searchByFoses() {
-
+    if (this.fosToSearch) {
+      this.router.navigate(['/home'], {queryParams: {fos: this.fosToSearch.join(',')}});
+    }
   }
 
 }

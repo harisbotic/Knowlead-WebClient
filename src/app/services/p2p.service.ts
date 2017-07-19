@@ -84,7 +84,7 @@ export class P2pService {
   }
 
   getByFosIds(fosIds: number[]): Observable<P2PModel[]> {
-    let url = P2P_RECOMMEND + '?' + fosIds.map(v => 'fosId=' + v.toString()).join('&');
+    let url = P2P_RECOMMEND + '?' + fosIds.map(v => 'fosIds=' + v).join('&');
     url += '&offset=1000';
     return this.transformP2ps(this.http.get(url)
       .map(responseToResponseModel)
