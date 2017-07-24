@@ -98,7 +98,11 @@ export class RealtimeService {
       // NOTIFICATION STUFF
       this.rpcConnection.on('displayNotification', (value: string) => {
         let notification: NotificationModel = (typeof value === 'string') ? JSON.parse(value) : value;
-        this.notificationSubject.next(notification);
+        this.modelUtilsService.fillNotification(notification)
+          .debounceTime(1000)
+          .subscribe((newNotification) => {
+            this.notificationSubject.next(notification);
+          })
       });
 
       // CHAT STUFF

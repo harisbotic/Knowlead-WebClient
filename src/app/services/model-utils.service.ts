@@ -8,13 +8,13 @@ import { StorageService } from './storage.service';
 import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
 import { NotebookModel, NotificationModel, Guid, LanguageModel,
-         ChatMessageModel, ConversationModel, P2PModel, P2PStatus } from '../models/dto';
+         ChatMessageModel, ConversationModel, P2PModel } from '../models/dto';
 import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
 import { P2PModelExtended, FileStatus, BlobModelExtended } from '../models/frontend.models';
-import { _BlobModel } from '../models/dto';
+import { _BlobModel, P2PStatus } from '../models/dto';
 
 @Injectable()
 export class ModelUtilsService {
@@ -26,6 +26,7 @@ export class ModelUtilsService {
     ret.canDelete = ret.isMy && !ret.isDeleted;
     ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
     ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
+    ret.canDiscuss = ret.status === P2PStatus.Active;
     if (ret.scheduledWithId) {
       // If I created this p2p, or I am watching at someone's p2p, and that
       // p2p is not scheduled with me, display it is scheduled with other user
