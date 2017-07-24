@@ -9,6 +9,8 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { AnalyticsService } from './analytics.service';
 import { ChatService } from './chat.service';
+import { IConnection } from '../signalr/IConnection';
+import { HttpConnection } from '../signalr/HttpConnection';
 
 export enum CallEventType {
   CALL_UPDATE,
@@ -46,7 +48,8 @@ export class RealtimeService {
 
   initConnection = () => {
     console.info('Init websockets');
-    this.rpcConnection = new HubConnection(API + '/mainHub?accessToken=' + this.accessToken);
+    const connection = new HttpConnection(API + '/mainHub?accessToken=' + this.accessToken);
+    this.rpcConnection = new HubConnection(connection);
     this.rpcConnection.start().then(() => {
       if (!this.rpcConnection) {
         const tmp = Observable.timer(5000).subscribe(() => {
