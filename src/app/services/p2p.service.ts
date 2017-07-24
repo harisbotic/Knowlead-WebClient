@@ -102,7 +102,17 @@ export class P2pService {
 
   private modifyP2p(o: Observable<P2PModel>): Observable<P2PModel> {
     return o.flatMap(p2p => this.modelUtilsService.fillP2p(p2p))
-      .do((p2p: P2PModel) => this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p));
+      .do(this.setP2pToStorage.bind(this));
+  }
+
+  public setP2pToStorage(p2p: P2PModel) {
+    this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p);
+  }
+
+  public setP2pMessagesToStorage(p2pMessages: P2PMessageModel[]) {
+    if (p2pMessages && p2pMessages.length > 0) {
+      this.storageService.setToStorage('p2pMessages', this.p2pMessagesFiller, {id: p2pMessages[0].p2pId}, p2pMessages);
+    }
   }
 
   private modifyP2pMessage(o: Observable<P2PMessageModel>): Observable<P2PMessageModel> {
@@ -136,7 +146,7 @@ export class P2pService {
     if (typeof(id) === 'number' || typeof(id) === 'string') {
       return this.storageService.getFromStorage<P2PModel>('p2p', this.p2pFiller, {id: id});
     } else {
-      this.storageService.setToStorage<P2PModel>('p2p', this.p2pFiller, {id: id.p2pId}, id);
+      this.setP2pToStorage(id);
       return this.get(id.p2pId);
     }
     // return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);

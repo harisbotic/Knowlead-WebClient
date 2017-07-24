@@ -2,8 +2,8 @@ import { Injectable, Injector } from '@angular/core';
 import { STORE_ACCESS_TOKEN, StorageKey } from './../utils/storage.constants';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Http } from '@angular/http';
-import { parseJwt, iterateObjectAlphabetically, treeify } from './../utils/index';
-import { CountryModel, LanguageModel, StateModel, FOSModel } from './../models/dto';
+import { parseJwt, iterateObjectAlphabetically, treeify } from '../utils/index';
+import { CountryModel, LanguageModel, StateModel, FOSModel } from '../models/dto';
 import * as _ from 'lodash';
 import { SessionService, SessionEvent } from './session.service';
 import { StorageSubject, StorageFiller } from './storage.subject';
@@ -177,6 +177,10 @@ export class StorageService {
     return this.getFOShierarchy().map(() => {
       return this.fosByIds[id];
     });
+  }
+
+  public setFosToStorage(fos: FOSModel) {
+    console.warn('Not setting fos value to storage');
   }
 
 }

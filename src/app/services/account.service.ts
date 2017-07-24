@@ -58,6 +58,10 @@ export class AccountService {
     return this.storageService.getFromStorage<ApplicationUserModel>('otherUser', this.userFiller, {id: id, includeDetails: includeDetails});
   }
 
+  public setUserToStorageWithoutDetails(user: ApplicationUserModel) {
+    this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
+  }
+
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
     return this.http.post(REGISTER, cridentials).map(responseToResponseModel).do(response => {
       this.analyticsService.userRegistration(response.object);

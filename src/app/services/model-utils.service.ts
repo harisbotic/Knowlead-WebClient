@@ -156,14 +156,23 @@ export class ModelUtilsService {
   constructor(protected injector: Injector) {
   }
 
-  private fill<T>(value: Observable<T>, modelKey: keyof T, getter: (id: any) => Observable<any>, idKey?: string): Observable<T> {
+  private fill<T>(value: Observable<T>,
+                  modelKey: keyof T,
+                  getter: (id: any) => Observable<T[keyof T]>,
+                  setter: (value: T[keyof T]) => void,
+                  idKey?: string): Observable<T> {
     if (!idKey) {
       idKey = modelKey + 'Id';
     }
+    let alreadySet = false;
     return value.merge(value.flatMap(val => {
       if (val[idKey] == null) {
         return Observable.of(val);
       } else {
+        if (val[modelKey] && !alreadySet) {
+          alreadySet = true;
+          setter(val[modelKey]);
+        }
         return getter(val[idKey]).map(obj => {
           val[modelKey] = obj;
           return val;
@@ -232,9 +241,11 @@ export class ModelUtilsService {
   public fillP2pMessage(value: P2PMessageModel): Observable<P2PMessageModel> {
     parseDateIfNecessary<P2PMessageModel>(value, 'timestamp');
     let ret = Observable.of(value);
-    ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService));
-    ret = this.fill(ret, 'messageFrom', this.accountService.getUserById.bind(this.accountService));
-    ret = this.fill(ret, 'messageTo', this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService), this.p2pService.setP2pToStorage.bind(this.p2pService));
+    ret = this.fill(ret, 'messageFrom', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
+    ret = this.fill(ret, 'messageTo', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
     return ret;
   }
 
@@ -250,9 +261,12 @@ export class ModelUtilsService {
           [];
         return p2p;
       }));
-    ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService));
-    ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
-    ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, 'fos', this.storageService.getFosById.bind(this.storageService),
+                                this.storageService.setFosToStorage.bind(this.storageService));
+    ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
+    ret = this.fill(ret, 'scheduledWith', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
     return ret;
   }
 
@@ -265,15 +279,18 @@ export class ModelUtilsService {
       };
     }
     let ret = Observable.of(value);
-    ret = this.fill(ret, 'fromApplicationUser', this.accountService.getUserById.bind(this.accountService));
-    ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService));
+    ret = this.fill(ret, 'fromApplicationUser', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
+    ret = this.fill(ret, 'p2p', this.p2pService.get.bind(this.p2pService),
+                                this.p2pService.setP2pToStorage.bind(this.p2pService));
     return ret;
   }
 
   public fillNotebook(value: NotebookModel): Observable<NotebookModel> {
     parseDateIfNecessary<NotebookModel>(value, 'createdAt');
     let ret = Observable.of(value);
-    ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, 'createdBy', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
     return ret;
   }
 
@@ -306,9 +323,12 @@ export class ModelUtilsService {
     parseDateIfNecessary<FriendshipModel>(value, 'createdAt');
     parseDateIfNecessary<FriendshipModel>(value, 'updatedAt');
     let ret = Observable.of(value);
-    ret = this.fill(ret, 'applicationUserBigger', this.accountService.getUserById.bind(this.accountService));
-    ret = this.fill(ret, 'applicationUserSmaller', this.accountService.getUserById.bind(this.accountService));
-    ret = this.fill(ret, 'lastActionBy', this.accountService.getUserById.bind(this.accountService));
+    ret = this.fill(ret, 'applicationUserBigger', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
+    ret = this.fill(ret, 'applicationUserSmaller', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
+    ret = this.fill(ret, 'lastActionBy', this.accountService.getUserById.bind(this.accountService),
+                                this.accountService.setUserToStorageWithoutDetails.bind(this.accountService));
     return ret;
   }
 
