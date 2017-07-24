@@ -274,6 +274,20 @@
     }
   }
 
+  button {
+    margin-left: 10px;
+    border: none;
+    border-radius: 3px;
+    padding: 6px 25px;
+    font-weight: bold;
+    background-color: $knowlead-primary;
+    color: white;
+
+    &:disabled {
+      background-color: $disabled-color;
+    }
+  }
+
   .create-request-button-wrap {
     padding-right: 8px;
     

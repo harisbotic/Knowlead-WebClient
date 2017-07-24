@@ -135,8 +135,9 @@ ng-template(#noUpcomingEvents)
           .col-50
             //- span#searchTitle Search
             ng-select(placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch").search-p2p-input
+          .col-20
             button([disabled]="!!!fosToSearch" (click)="searchByFoses()") Search
-          .col-50
+          .col-30
             .create-request-button-wrap
               button.create-request-button(
                 (click)="toggleCreateRequest()"

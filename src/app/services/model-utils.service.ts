@@ -25,7 +25,7 @@ export class ModelUtilsService {
     ret.actualPrice = p2p.priceAgreed ? p2p.priceAgreed : p2p.initialPrice;
     ret.canDelete = ret.isMy && !ret.isDeleted;
     ret.canLeaveFeedback = ret.isMy && ret.status === P2PStatus.Finished;
-    ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted;
+    ret.canCall = ret.status === P2PStatus.Scheduled && !ret.isDeleted && ret.isMy;
     ret.canDiscuss = ret.status === P2PStatus.Active;
     if (ret.scheduledWithId) {
       // If I created this p2p, or I am watching at someone's p2p, and that

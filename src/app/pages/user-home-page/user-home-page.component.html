@@ -172,9 +172,11 @@
         <div class="top-elements">
           <div class="col-50">
             <ng-select class="search-p2p-input" placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch"></ng-select>
+          </div>
+          <div class="col-20">
             <button [disabled]="!!!fosToSearch" (click)="searchByFoses()">Search</button>
           </div>
-          <div class="col-50">
+          <div class="col-30">
             <div class="create-request-button-wrap">
               <button class="create-request-button" (click)="toggleCreateRequest()" [class.create-request-button-opened]="createRequestState === 'open'">Create a Request</button>
             </div>
