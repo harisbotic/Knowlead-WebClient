@@ -85,6 +85,9 @@
 
     "feedback|success": "Feedback successfuly submitted",
 
+    "store-page|redeem-success": "Redeem successful",
+    "store-page|redeem-minutes": "You have been successfuly awarded with {{param}} minutes",
+
     "INVALID_REQUEST": "Email/password is missing",
 
     "NETWORK_ERROR": "Network error has occured (maybe you are not connected to internet or Knowlead server is not working)",

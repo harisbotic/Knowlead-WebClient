@@ -3,11 +3,10 @@
 
 .notification-wrap {
   width: 250px;
-  height: 100px;
+  min-height: 100px;
   padding-top: 10px;
   border: none;
   border-radius: $border-radius;
-  background-color: $knowlead-secondary;
   color: white;  
   bottom: 30px;
   left: 30px;
@@ -24,6 +23,22 @@
     font-weight: bold;
     margin-top: 10px;
   }
+}
+
+.notification-error {
+  background-color: $knowlead-secondary;
+}
+
+.notification-info {
+  background-color: $knowlead-primary;
+}
+
+.notification-warning {
+  background-color: $warning-color;
+}
+
+.notification-success {
+  background-color: $success-color;
 }
 
 .closeNotification {

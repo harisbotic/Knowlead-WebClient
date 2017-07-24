@@ -165,10 +165,10 @@ export class ReferralsPageComponent extends BaseComponent implements OnInit {
   redeem() {
     this.subscriptions.push(this.storeService.redeem(this.redeemCode).subscribe((promo: PromoCodeModel) => {
       let infoStr;
-      if (this.rewards) {
-        infoStr = 'You have earned ' + this.rewards.find(reward => reward.coreLookupId === promo.rewardId).minutesReward + ' minutes';
+      if (promo.reward) {
+        infoStr = 'store-page|redeem-minutes:' + promo.reward.minutesReward;
       }
-      this.notificationService.info('Redeem successful', infoStr);
+      this.notificationService.notify({title: 'store-page|redeem-success', subtitle: infoStr, type: 'success'});
       this.redeemCode = '';
     }, (error) => {
       this.notificationService.error('Redeem error', error);

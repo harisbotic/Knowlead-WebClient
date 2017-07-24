@@ -29,6 +29,8 @@ export class StoreService {
     let searchParams = new URLSearchParams();
     searchParams.set('promocode', code);
     return this.http.post(REDEEM, null, {search : searchParams})
+      .map(responseToResponseModel)
+      .map(o => o.object)
       .do(() => {
         this.analyticsService.sendEvent('redeemCode', code);
       })
