@@ -55,8 +55,11 @@ export class StorageSubject<T> extends Observable<T> {
 
     // Set value without involving filler
     private setValue(newValue: T) {
+        const oldValue = this.value;
         this.value = newValue;
-        this.notifyObservers();
+        if (!_.isEqual(oldValue, newValue)) {
+            this.notifyObservers();
+        }
     }
 
     public dispose() {
