@@ -24,7 +24,7 @@ export class DefaultHomePageComponent extends BaseComponent implements OnInit {
     this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
       if (params['fos']) {
         const foses = <string>params['fos'];
-        const fosIds = foses.split(',').map(parseInt);
+        const fosIds = foses.split(',').map(f => parseInt(f, 10));
         this.subscriptions.push(this.p2pService.getByFosIds(fosIds).subscribe(vals => {
           this.p2ps = vals;
         }));

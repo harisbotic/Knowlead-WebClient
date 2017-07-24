@@ -180,7 +180,7 @@ export class StorageService {
   }
 
   public setFosToStorage(fos: FOSModel) {
-    console.warn('Not setting fos value to storage');
+    // console.warn('Not setting fos value to storage');
   }
 
 }

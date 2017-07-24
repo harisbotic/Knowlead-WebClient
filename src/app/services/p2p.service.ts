@@ -72,7 +72,7 @@ export class P2pService {
 
     let tmp = getLocalDate(offset ? offset : new Date());
 
-    return this.transformP2ps(this.http.get(P2P_RECOMMEND, {search: query})
+    return this.transformP2ps(this.http.get(P2P_ALL + '/' + ListP2PsRequest.Recommended, {search: query})
       .map(responseToResponseModel)
       .map(v => v.object));
   }
@@ -84,7 +84,7 @@ export class P2pService {
   }
 
   getByFosIds(fosIds: number[]): Observable<P2PModel[]> {
-    let url = P2P_RECOMMEND + '?' + fosIds.map(v => 'fosIds=' + v).join('&');
+    let url = P2P_ALL + '/' + ListP2PsRequest.Recommended + '?' + fosIds.map(v => 'fosIds=' + v).join('&');
     url += '&offset=1000';
     return this.transformP2ps(this.http.get(url)
       .map(responseToResponseModel)
