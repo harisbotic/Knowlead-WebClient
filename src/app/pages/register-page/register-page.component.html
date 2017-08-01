@@ -9,7 +9,7 @@
             </button>
         </a>
     </div>
-    <div class="row">
+    <div class="row global-errors-wrap">
         <div class="regForm-wrap">
             <div class="row">
                 <div class="col-100">
@@ -23,7 +23,7 @@
                     <input appFormControlError type="text" name="email" placeholder="{{'common|email' | translate}}" formControlName="email" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.email"></app-error-list> -->
                     <span class="tooltip-registration tooltip-175">
-                        Please enter valid Email
+                        Please enter a valid email.
                     </span>
                 </div>
 
@@ -31,27 +31,27 @@
                     <input appFormControlError type="password" name="password" placeholder="{{'common|password' | translate}}" formControlName="password" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
                     <span class="tooltip-registration tooltip-250">
-                        Password must be 8 characters long
+                        Password must be 8 characters long.
                     </span>
                 </div>
                 <div id="regConfirm-wrap" class="tooltip-parent">
                     <input appFormControlError type="password" name="confirmpassword" placeholder="{{'register-page|confirm password' | translate}}" formControlName="confirmpassword" class="defaultInput">
                     <!-- <app-error-list [formControlProperty]="form.controls.password"></app-error-list> -->
                     <span class="tooltip-registration tooltip-225">
-                        Please confirm your password
+                        Please confirm your password.
                     </span>
                 </div>
+                    <div class="row">
+                        <div class="termsTxt">
+                            <form class="terms-box">
+                                <label class="check-label">
+                                    <input type="checkbox" name="Terms-and-Conditions" [(ngModel)]="terms">
+                                    <span class="check-label-text">I accept the <a id="termsLink" routerLink="/terms">Terms and Conditions</a> of this website</span>
+                                </label>
+                            </form>
+                        </div>
+                    </div>
                 <input type="submit" value="{{'register-page|submit' | translate}}" class="defaultButton" id="register-button" [disabled]="busy">
-            </form>
-        </div>
-    </div>
-    <div class="row regForm-wrap">
-        <div class="termsTxt">
-            <form class="terms-box">
-                <label class="check-label">
-                    <input type="checkbox" name="Terms-and-Conditions" [(ngModel)]="terms">
-                    <span class="check-label-text">I accept the <a id="termsLink" routerLink="/terms">Terms and Conditions</a> of this website</span>
-                </label>
             </form>
         </div>
     </div>

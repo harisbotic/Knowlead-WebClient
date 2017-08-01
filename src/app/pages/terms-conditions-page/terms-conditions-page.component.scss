@@ -1,5 +1,50 @@
+@import "../../../kl-styles/variables.scss";
+
+
+#terms-title {
+  padding: 15px 0 15px 30px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.backIcon-wrap {
+    position: relative;
+    height: 32px;
+    margin-top: 15px;
+}
+
+.backIcon {
+    font-size: 18px;
+    color: $placeholder-color;
+
+    &:hover {
+        color: $knowlead-primary;
+    }
+}
+
+#bottBorder {
+    border-bottom: 2px solid $divider-color;
+}
+
 .terms {
     overflow-y: scroll;
     height: 350px;
-    margin-top: 19px;
+    padding: 0 20px;
+    line-height: 18px;
+    font-size: 14px;
+    text-align: justify;
+    color: $font-secondary-color;
+
+    .terms-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: $font-primary-color;
+    }
+
+    .terms-subtitle {
+        font-size: 15px;
+        color: $font-primary-color;
+        font-style: italic;   
+    }
 }
+
