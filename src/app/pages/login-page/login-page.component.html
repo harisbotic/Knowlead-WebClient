@@ -5,14 +5,14 @@
                 <h2>{{"login-page|title" | translate}}</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row global-errors-wrap">
             <div class="col-100">
                 <div class="global-errors">
                     <app-error-list [errors]="response?.errors"></app-error-list>
                 </div>
             </div>
         </div>
-        <div class="row logForm-wrap">
+        <div class="row logForm-wrap" id="buffer">
             <div class="col-100">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
                     <div id="email-wrap">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-50">
                             <div id="forgot-password">
-                                <!--<a href="#">{{'login-page|forgot password' | translate}}</a>-->
+                                <a href="#">{{'login-page|forgot password' | translate}}</a>
                             </div>
                         </div>
                     </div>

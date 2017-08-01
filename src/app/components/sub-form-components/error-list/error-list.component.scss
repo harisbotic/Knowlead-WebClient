@@ -1,0 +1,23 @@
+@import "../../../../kl-styles/variables.scss";
+
+ul > li {
+    background-color: $error-color !important;
+    color: white;
+    text-align: center;
+    border-radius: $border-radius;
+    width: 317px;
+    padding: 10px 20px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+    
+    &:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: $error-color;
+      position: absolute;
+      transform: rotate(45deg);
+      bottom: -8px;
+      border-radius: 2px;
+      box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+    }
+}

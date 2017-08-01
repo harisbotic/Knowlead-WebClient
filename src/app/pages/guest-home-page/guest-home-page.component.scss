@@ -65,11 +65,19 @@
         position: absolute;
         bottom: 20px;
         color: white;
-        width: 1000px;
+        width: 1095px;
      }
 
      .footer-element {
          margin-right: 100px;
+
+         > a {
+             color: white;
+         }
+     }
+
+     #copyright {
+         text-align: right;
      }
 
      // #footnote {

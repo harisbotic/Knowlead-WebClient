@@ -7,14 +7,19 @@
   border-bottom: 2px solid $divider-color;
 }
 
+.global-errors-wrap {
+    position: relative;
+}
+
 .global-errors {
-    // position: relative;
-    height: 20px;
-    // background-color: $hover-dark-color;
-    text-align: center;
-    width: 85%;
-    margin: 0 auto;
-    margin-top: 15px;
+    position: absolute;
+    height: auto;
+    bottom: -10px;
+    left: 29px;
+}
+
+#buffer {
+    margin-top: 28px;
 }
 
 .logForm-wrap {
