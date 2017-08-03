@@ -85,10 +85,14 @@
       <app-file-thumbnail class="item" *ngFor="let file of p2p.blobs" [file]="file"></app-file-thumbnail>
     </div>
   </div>
-  <div class="offer-button-wrap">
-    <button class="offer-button">Write Offer</button><span class="offer-counter">{{p2p.offerCount}}</span>
+  <div class="offer-button-wrap"><span>Offer count:</span><span class="offer-counter">{{p2p.offerCount}}</span></div>
+  <div class="scheduled-wrap" *ngIf="p2p.status === P2PStatus.Scheduled || p2p.status === P2PStatus.Finished">
+    <div>Scheduled with:<a routerLink="{{p2p.scheduledWith | userProfileLink}}">{{p2p.scheduledWith | fullName}}</a></div>
+    <div>Schedule time:<span class="scheduled-time">{{p2p.dateTimeAgreed | date}}</span></div>
+    <button class="call-button" *ngIf="p2p.canCall" (click)="call()">Call {{p2p.scheduledWith | fullName}}</button>
+    <button class="call-button" *ngIf="p2p.canLeaveFeedback" (click)="leaveFeedback()">Leave feedback</button>
   </div>
-  <div class="discussion-wrap">
+  <div class="discussion-wrap" *ngIf="p2p.canDiscuss">
     <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="notification-wrap" *ngIf="notification">
+<div class="notification-wrap" [ngClass]="'notification-' + notification.type" *ngIf="notification">
   <h1>{{ notification.title | translateParametric }}</h1>
   <h4>{{ notification.subtitle | translateParametric }}</h4>
   <button class="closeNotification" name="close" (click)="onNotificationClose()">Close</button>

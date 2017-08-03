@@ -76,8 +76,14 @@
     .row.attachments-wrap
       app-file-thumbnail.item(*ngFor="let file of p2p.blobs" [file]="file")
   .offer-button-wrap
-    button.offer-button
-      | Write Offer
+    span Offer count:
     span.offer-counter {{p2p.offerCount}}
-  .discussion-wrap
+  .scheduled-wrap(*ngIf="p2p.status === P2PStatus.Scheduled || p2p.status === P2PStatus.Finished")
+    div Scheduled with:
+      a(routerLink="{{p2p.scheduledWith | userProfileLink}}") {{p2p.scheduledWith | fullName}}
+    div Schedule time:
+      span.scheduled-time {{p2p.dateTimeAgreed | date}}
+    button.call-button(*ngIf="p2p.canCall" (click)="call()") Call {{p2p.scheduledWith | fullName}}
+    button.call-button(*ngIf="p2p.canLeaveFeedback" (click)="leaveFeedback()") Leave feedback
+  .discussion-wrap(*ngIf="p2p.canDiscuss")
     app-p2p-discussion([p2p]="p2p")

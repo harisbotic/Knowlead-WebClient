@@ -28,7 +28,7 @@
     padding: 0 20px;
 }
 
-.message {
+.call-message {
   padding: 5px 15px 5px 5px;
   margin: 3px 0;
   width: auto;
@@ -37,14 +37,14 @@
   border-bottom: 1px solid $call-video-font-color;
 }
 
-.message.myMessage {
+.call-message.myMessage {
   color: $call-video-font-color;
   border-color: $knowlead-primary;
   float: right;
   padding: 5px 5px 5px 15px;
 }
 
-.message:not(.myMessage) {
+.call-message:not(.myMessage) {
   color: white;
   float: left;
 }

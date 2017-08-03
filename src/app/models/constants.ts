@@ -5,6 +5,7 @@ export enum ListP2PsRequest
 	Bookmarked = 2,
 	ActionRequired = 3,
 	Deleted = 4,
+	Recommended = 5,
 }
 export class CallEndReasons
 {
@@ -72,4 +73,7 @@ export class ErrorCodes
 	static cantDeleteScheduledP2P: string = "CANT_DELETE_SCHEDULED_P2P";
 	static alreadyReady: string = "ALREADY_READY";
 	static cantBeReadyNow: string = "CANT_BE_READY_NOW";
+	static promoCodeInvalid: string = "PROMOCODE_INVALID";
+	static promoCodeAlreadyUsed: string = "PROMOCODE_ALREADY_USED";
+	static promoCodeExpired: string = "PROMOCODE_EXPIRED";
 }

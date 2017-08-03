@@ -41,6 +41,16 @@ export enum P2PStatus
 	Finished = 2,
 	Deleted = 3,
 }
+export interface PromoCodeModel extends EntityBaseModel
+{
+	code: string;
+	expirationDate: Date;
+	activatedAt: Date;
+	rewardId: number;
+	reward: RewardModel;
+	activatorId: Guid;
+	activator: ApplicationUserModel;
+}
 export interface EntityBaseModel
 {
 	createdAt: Date;

@@ -44,6 +44,8 @@ export class UserSingleNotificationComponent extends BaseComponent implements On
       return 'scheduled';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return 'You claimed your';
+    } else if (this.notification.notificationType === NotificationTypes.prepareForP2P) {
+      return 'Get ready for'
     } else if (this.notification.customText) {
       return this.notification.customText;
     }
@@ -52,7 +54,8 @@ export class UserSingleNotificationComponent extends BaseComponent implements On
   getMiddle() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment ||
         this.notification.notificationType === NotificationTypes.p2POfferAccepted ||
-        this.notification.notificationType === NotificationTypes.p2PScheduled) {
+        this.notification.notificationType === NotificationTypes.p2PScheduled ||
+        this.notification.notificationType === NotificationTypes.prepareForP2P) {
       return 'peer-to-peer';
     } else if (this.notification.notificationType === NotificationTypes.rewardClaimed) {
       return 'reward';
@@ -62,11 +65,13 @@ export class UserSingleNotificationComponent extends BaseComponent implements On
   getAfter() {
     if (this.notification.notificationType === NotificationTypes.newP2PComment ||
         this.notification.notificationType === NotificationTypes.p2PScheduled) {
-      return 'request';
+      return 'request.';
     } else if (this.notification.notificationType === NotificationTypes.p2POfferAccepted) {
-      return 'offer';
+      return 'offer.';
     } else if (this.notification.notificationType === NotificationTypes.leaveP2PFeedback) {
-      return 'session with you. You can leave feedback now';
+      return 'session with you. You can leave feedback now.';
+    } else if (this.notification.notificationType === NotificationTypes.prepareForP2P) {
+      return 'session.';
     }
   }
 

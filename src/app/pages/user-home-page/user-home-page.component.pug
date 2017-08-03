@@ -133,9 +133,11 @@ ng-template(#noUpcomingEvents)
       .main-section-wrap
         .top-elements
           .col-50
-            span#searchTitle All P2P requests are displayed
-            //- input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
-          .col-50
+            //- span#searchTitle Search
+            ng-select(placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch").search-p2p-input
+          .col-20
+            button([disabled]="!!!fosToSearch" (click)="searchByFoses()") Search
+          .col-30
             .create-request-button-wrap
               button.create-request-button(
                 (click)="toggleCreateRequest()"

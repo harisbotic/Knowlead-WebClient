@@ -1,14 +1,44 @@
+@import "../../../../kl-styles/variables.scss";
+
+
 .notification-wrap {
-  width: 200px;
-  height: 100px;
-  padding-top: 20px;
-  border: solid;
-  background: red;
+  width: 250px;
+  min-height: 100px;
+  padding-top: 10px;
+  border: none;
+  border-radius: $border-radius;
   color: white;  
-  bottom: 0;
-  right: 270px;
+  bottom: 30px;
+  left: 30px;
   position: fixed;
   text-align: center;
+
+
+  button {
+    border: none;
+    border-radius: $border-radius;
+    color: $font-primary-color;
+    padding: 5px 10px;
+    background-color: white;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}
+
+.notification-error {
+  background-color: $knowlead-secondary;
+}
+
+.notification-info {
+  background-color: $knowlead-primary;
+}
+
+.notification-warning {
+  background-color: $warning-color;
+}
+
+.notification-success {
+  background-color: $success-color;
 }
 
 .closeNotification {
