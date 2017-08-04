@@ -12,20 +12,21 @@
 .search-results {
     position: relative;
     z-index: 1000;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     height: 50px;
-    top: 38px;
+    top: 0px;
     line-height: 50px;
+    color: white;
     font-weight: bold;
-    background-color: white;
-    border-left: 1px solid $hover-dark-color;
-    border-right: 1px solid $hover-dark-color;
-    border-bottom: 1px solid $hover-dark-color;
+    background-color: $button-header-hover-color;
+    border: none;
+    border-top: 1px solid $knowlead-primary;
+    border-bottom: 1px solid $knowlead-primary;
     padding-left: 20px;
 
     &:hover {
-        background-color: $hover-middle-color;
+        background-color: $knowlead-primary;
     }
 }
 
