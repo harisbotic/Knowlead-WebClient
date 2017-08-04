@@ -1,0 +1,4 @@
+ng-template(#showValue)
+  span {{ value | date }}
+div(*ngIf='editable; else showValue')
+  app-flatpickr([(ngModel)]='value' [placeholder]="placeholder")

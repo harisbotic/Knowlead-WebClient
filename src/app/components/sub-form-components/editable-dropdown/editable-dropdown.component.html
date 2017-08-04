@@ -1,0 +1,5 @@
+
+<ng-template #showValue>{{ getValue() }}</ng-template>
+<div *ngIf="editable; else showValue">
+  <ng-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></ng-select>
+</div>

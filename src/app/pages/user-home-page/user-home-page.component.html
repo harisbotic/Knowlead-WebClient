@@ -102,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="upcoming.length !== 0; else noUpcomingEvents">
+          <div *ngIf="upcoming?.length !== 0; else noUpcomingEvents">
             <div class="upcoming-events-content" *ngFor="let p2p of upcoming; index as i; trackBy: trackByFn">
               <div *ngIf="i === 0;then firstevent else upcomingevents"></div>
               <ng-template #firstevent>

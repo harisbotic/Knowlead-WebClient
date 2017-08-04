@@ -1,0 +1,41 @@
+form((submit)="onSubmit()" [formGroup]="form")
+  .row
+    .col-100
+      .profileInfoSidebar-wrap
+        .profileInfoSidebar-title
+          | Personal Information
+          a(routerlink='' *ngIf="isMy()")
+            button(type="submit") Save
+            button((click)="cancelAction()") Cancel
+            i.kl-three-dots.sidebarOptions((click)="setEditable()")
+        .profileInfo-item-wrap(*ngIf='user')
+          .row
+            .profileInfo-item
+              .col-37.itemTopic First Name
+              .col-63.item
+                app-editable-text([editable]="editable" formControlName="name" placeholder="Name")
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Surname
+              .col-63.item 
+                app-editable-text([editable]="editable" formControlName="surname" placeholder="Surname")
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Birth Date
+              .col-63.item
+                app-editable-flatpickr([editable]="editable" formControlName="birthdate") 
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Native Language
+              .col-63.item 
+                app-editable-dropdown([editable]="editable" [options]="languages" formControlName="motherTongueId" placeholder="Language")
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Country
+              .col-63.item
+                app-editable-dropdown([editable]="editable" [options]="countries" formControlName="countryId" placeholder="Country") 
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Email
+              .col-63.item.
+                {{ user.email }}  

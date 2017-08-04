@@ -1,76 +1,24 @@
-
 <div class="row">
-    <div class="col-30">
-        <div class="row">
-            <div class="col-100">
-                <div class="profileSidebar">
-                    <div class="row">
-                        <div class="profileSwitchButton-wrap">
-                            <a routerLink="p2ps">
-                                <div class="profileSwitchButton">
-                                    See {{user?.name}}'s previous posts
-                                    <!--IZMJENITI USER SA IMENOM USERA!!!-->
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-100">
-                            <div class="profileInfoSidebar-wrap">
-                                <div class="profileInfoSidebar-title">
-                                    Personal Information
-                                    <a routerLink="">
-                                        <i class="kl-three-dots sidebarOptions"></i>
-                                    </a>
-                                </div>
-
-                                <div class="profileInfo-item-wrap" *ngIf="user">
-                                    <div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-37 itemTopic">First Name</div>
-                                            <div class="col-63 item">{{user.name}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-37 itemTopic">Surname</div>
-                                            <div class="col-63 item">{{user.surname}}</div>
-                                        </div>
-                                    </div>
-                                    <!--<div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-40 itemTopic">Birthdate</div>
-                                            <div class="col-60 item">{{user.birthdate | date:'mediumDate'}}</div>
-                                        </div>
-                                    </div>-->
-                                    <div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-37 itemTopic">Native Language</div>
-                                            <div class="col-63 item">{{user.motherTongue?.name}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-37 itemTopic">Country</div>
-                                            <div class="col-63 item">{{user.country?.name}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="profileInfo-item">
-                                            <div class="col-37 itemTopic">Email</div>
-                                            <div class="col-63 item">{{user.email}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="col-30">
+    <div class="row">
+      <div class="col-100">
+        <div class="profileSidebar">
+          <div class="row">
+            <div class="profileSwitchButton-wrap">
+              <a routerLink="p2ps">
+                <div class="profileSwitchButton">
+                  See {{user?.name}}'s previous posts
+                  <!--IZMJENITI USER SA IMENOM USERA!!!-->
                 </div>
+              </a>
             </div>
+          </div>
+          <app-profile-info></app-profile-info>
         </div>
+      </div>
     </div>
-    <div class="col-70">
-        <router-outlet></router-outlet>
-    </div>
+  </div>
+  <div class="col-70">
+    <router-outlet></router-outlet>
+  </div>
 </div>

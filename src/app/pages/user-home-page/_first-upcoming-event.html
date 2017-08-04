@@ -1,0 +1,31 @@
+
+<div class="row">
+  <div class="col-100">
+    <div class="timer-wrap">
+      <div *ngIf="p2p.isMy;then student else teacher"></div>
+      <ng-template #student><i class="kl-circle student-color"></i></ng-template>
+      <ng-template #teacher><i class="kl-circle teacher-color"></i></ng-template><span class="timer-text">{{ p2p.dateTimeAgreed | amTimeAgo }}</span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-100">
+    <div class="with-wrap"><span class="with-subject">{{ p2p.fos?.name }} </span><span class="with-text">with: </span></div>
+  </div>
+</div>
+<div class="row" id="bottom-row">
+  <div class="col-75">
+    <div class="col-25">
+      <div class="profile-picture"><a href="{{ p2p.otherScheduledUser | userProfileLink }}">
+          <app-profile-picture [user]="user" size="x-small"></app-profile-picture></a></div>
+    </div>
+    <div class="col-75">
+      <div class="profile-name-wrap">
+        <div class="profile-name"><a routerLink="{{ p2p.otherScheduledUser | userProfileLink }}">{{ p2p.otherScheduledUser | fullName }}</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-25">
+    <div class="reward-wrap"><span class="reward-text">{{ p2p.priceAgreed }}</span><i class="kl-currency"></i></div>
+  </div>
+</div>

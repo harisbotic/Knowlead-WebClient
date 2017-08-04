@@ -110,6 +110,10 @@ import { FileNamePipe } from './pipes/file-name.pipe';
 import { FileThumbnailComponent } from './components/file-thumbnail/file-thumbnail.component';
 import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { ProfileInfoComponent } from './pages/profile-page/about-me/profile-info/profile-info.component';
+import { EditableTextComponent } from './components/sub-form-components/editable-text/editable-text.component';
+import { EditableDropdownComponent } from './components/sub-form-components/editable-dropdown/editable-dropdown.component';
+import { EditableFlatpickrComponent } from './components/sub-form-components/editable-flatpickr/editable-flatpickr.component';
 
 @NgModule({
   declarations: [
@@ -185,7 +189,11 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     FriendsSingleNotificationComponent,
     FileNamePipe,
     FileThumbnailComponent,
-    AllMessagesPageComponent
+    AllMessagesPageComponent,
+    ProfileInfoComponent,
+    EditableTextComponent,
+    EditableDropdownComponent,
+    EditableFlatpickrComponent
   ],
   imports: [
     BrowserModule,

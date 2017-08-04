@@ -1,0 +1,4 @@
+ng-template(#showValue)
+  span {{ value }}
+div(*ngIf='editable; else showValue')
+  input(type='text', [(ngModel)]='value' [placeholder]="placeholder")
