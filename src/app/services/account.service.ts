@@ -144,7 +144,7 @@ export class AccountService {
   private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {
     let cl = _.cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toISOString() : undefined;
-    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture', 'languages',
+    const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture',
       'pointsBalance', 'minutesBalance', 'profilePictureId', 'averageRating'];
     toDelete.forEach((key) => {
       delete cl[key];

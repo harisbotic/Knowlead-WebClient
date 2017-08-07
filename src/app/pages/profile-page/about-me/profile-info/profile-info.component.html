@@ -43,6 +43,14 @@
           </div>
           <div class="row">
             <div class="profileInfo-item">
+              <div class="col-37 itemTopic">Other Languages</div>
+              <div class="col-63 item">
+                <app-editable-dropdown [editable]="editable" [options]="languagesFilled" [multiple]="true" formControlName="languages" placeholder="Language"> </app-editable-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="profileInfo-item">
               <div class="col-37 itemTopic">Country</div>
               <div class="col-63 item">
                 <app-editable-dropdown [editable]="editable" [options]="countries" formControlName="countryId" placeholder="Country"> </app-editable-dropdown>

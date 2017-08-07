@@ -23,6 +23,7 @@ export class ProfileInfoComponent extends BaseFormComponent<ApplicationUserModel
 
   countries: DropdownValueInterface<number>[];
   languages: DropdownValueInterface<number>[];
+  languagesFilled: DropdownValueInterface<LanguageModel>[];
 
   ngOnInit() {
     super.ngOnInit();
@@ -31,6 +32,7 @@ export class ProfileInfoComponent extends BaseFormComponent<ApplicationUserModel
     });
     this.storageService.getLanguages().take(1).subscribe(languages => {
       this.languages = languages.map(this.languageForDropdown);
+      this.languagesFilled = languages.map(this.languageFilledForDropdown);
     });
     this.subscriptions.push(this.activatedRoute.parent.params.subscribe((params) => {
       this.accountService.getUserById(params['id'], true).subscribe(user => {
@@ -68,7 +70,8 @@ export class ProfileInfoComponent extends BaseFormComponent<ApplicationUserModel
       name: new FormControl(null, Validators.required),
       surname: new FormControl(null, Validators.required),
       motherTongueId: new FormControl(null, Validators.required),
-      countryId: new FormControl(null),
+      languages: new FormControl(null),
+      countryId: new FormControl(null, Validators.required),
       birthdate: new FormControl(null, Validators.required)
     });
   }
@@ -79,6 +82,10 @@ export class ProfileInfoComponent extends BaseFormComponent<ApplicationUserModel
 
   private languageForDropdown(language: LanguageModel): DropdownValueInterface<number> {
     return {label: language.name, value: language.coreLookupId};
+  }
+
+  private languageFilledForDropdown(language: LanguageModel): DropdownValueInterface<LanguageModel> {
+    return {label: language.name, value: language};
   }
 
   submit() {

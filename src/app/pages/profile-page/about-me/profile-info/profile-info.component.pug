@@ -33,6 +33,11 @@ form((submit)="onSubmit()" [formGroup]="form")
                 app-editable-dropdown([editable]="editable" [options]="languages" formControlName="motherTongueId" placeholder="Language")
           .row
             .profileInfo-item
+              .col-37.itemTopic Other Languages
+              .col-63.item
+                app-editable-dropdown([editable]="editable" [options]="languagesFilled" [multiple]="true" formControlName="languages" placeholder="Language") 
+          .row
+            .profileInfo-item
               .col-37.itemTopic Country
               .col-63.item
                 app-editable-dropdown([editable]="editable" [options]="countries" formControlName="countryId" placeholder="Country") 
