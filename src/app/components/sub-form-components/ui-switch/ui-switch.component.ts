@@ -140,7 +140,7 @@ export class UiSwitchComponent implements ControlValueAccessor {
   @Input() defaultBgColor: string = '#fff';
   defaultBoColor: string = '#dfdfdf';
 
-  getColor(flag) {
+  getColor(flag?) {
     if (flag === 'borderColor') return this.defaultBoColor;
     if (flag === 'switchColor') {
       if (this.reverse) return !this.checked ? this.switchColor : this.switchOffColor || this.switchColor;

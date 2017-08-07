@@ -87,10 +87,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return addHoursToDate(this.initialDate, hours).toISOString();
   }
 
-  removeFile(index: number) {
-    // this.files.removeAt(index);
-  }
-
   checkFiles() {
     const blobs: _BlobModel[] = this.files.value;
     for (let idx = 0; idx < blobs.length; idx++) {
@@ -101,6 +97,11 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     if (blobs[blobs.length - 1] != null) {
       this.files.push(this.getNewFileControl());
     }
+  }
+
+  // this fixes some aot compilation problems in html
+  anyFormGet(): any {
+    return this.form;
   }
 
   ngOnInit() {

@@ -5,7 +5,7 @@
     <div class="choose-subject-wrap">
       <div class="title">Choose a field of study</div>
       <div class="fos-selection tooltip-parent">
-        <app-fos-selector formControlName="fosId" [outputType]="id" appFormControlError></app-fos-selector>
+        <app-fos-selector formControlName="fosId" outputType="id" appFormControlError></app-fos-selector>
       </div>
     </div>
     <div class="describe-post-wrap">
@@ -17,7 +17,7 @@
       <div class="attachments-wrap">
         <div class="title">Attachments</div>
         <div class="attachment-field" formArrayName="blobs">
-          <app-file-upload *ngFor="let control of form.controls.blobs.controls; let idx = index" [formControlName]="idx" (removed)="removeFile(idx)"></app-file-upload>
+          <app-file-upload *ngFor="let control of anyFormGet().controls['blobs'].controls; let idx = index" [formControlName]="idx"></app-file-upload>
         </div>
       </div>
       <div class="language-wrap">
@@ -96,7 +96,7 @@
         </div>
         <div class="specific-date-wrap">
           <div class="title" id="specific-date-text">Select Specific Date and Time</div>
-          <app-flatpickr class="specific-date-input" placeholder="Select specific date" [ngModelOptions]="{standalone: true}" [(ngModel)]="specificDate" (ngModelChange)="setSpecificDate($value)" [disablePast]="true"></app-flatpickr>
+          <app-flatpickr class="specific-date-input" placeholder="Select specific date" [ngModelOptions]="{standalone: true}" [(ngModel)]="specificDate" (ngModelChange)="setSpecificDate()" [disablePast]="true"></app-flatpickr>
         </div>
       </div>
     </div>

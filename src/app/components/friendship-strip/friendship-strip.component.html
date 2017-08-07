@@ -1,5 +1,5 @@
 
-<div class="friendship-strip-wrap" *ngIf="!isSelf() &amp;&amp; availableOptions">
+<div class="friendship-strip-wrap" *ngIf="!isSelf() &amp;&amp; !!availableOptions">
   <div class="col-90">
     <button class="first-option" (click)="doAction(availableOptions[0].action)">{{ availableOptions[0].title }}</button>
   </div>
