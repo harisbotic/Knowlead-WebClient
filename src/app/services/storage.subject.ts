@@ -2,9 +2,9 @@ import { Observable, Subscriber } from 'rxjs/Rx';
 import { URLSearchParams, Http } from '@angular/http';
 import { STORAGE_CONFIG, StorageKey } from '../utils/storage.constants';
 import { responseToResponseModel } from '../utils/converters';
-import * as _ from 'lodash';
 import { StorageService } from './storage.service';
 import { Subscription } from 'rxjs';
+import { cloneDeep, clone, find, isEqual } from 'lodash';
 
 export type StorageFiller<T> = (value: T) => Observable<T>;
 
@@ -57,7 +57,7 @@ export class StorageSubject<T> extends Observable<T> {
     private setValue(newValue: T) {
         const oldValue = this.value;
         this.value = newValue;
-        if (!_.isEqual(oldValue, newValue)) {
+        if (!isEqual(oldValue, newValue)) {
             this.notifyObservers();
         }
     }
@@ -96,7 +96,7 @@ export class StorageSubject<T> extends Observable<T> {
             if (cfg.mock.type === 'object') {
                 this.changeValue(cfg.mock.value);
             } else if (cfg.mock.type === 'array') {
-                this.changeValue(<T>_.find(cfg.mock.value, v => v[cfg.mock.idKey] === this.parameters['id']));
+                this.changeValue(<T>find(cfg.mock.value, v => v[cfg.mock.idKey] === this.parameters['id']));
             }
             return;
         }
@@ -104,7 +104,7 @@ export class StorageSubject<T> extends Observable<T> {
         let params: URLSearchParams;
         let suffix = '';
         if (this.parameters != null) {
-            let parameters = _.clone(this.parameters);
+            let parameters = clone(this.parameters);
             if (parameters['id']) {
                 suffix = '/' + parameters['id'];
                 delete parameters['id'];
@@ -143,7 +143,7 @@ export class StorageSubject<T> extends Observable<T> {
 
     public modifyWithFunction(func: (oldValue: T) => T) {
         if (this.value != null) {
-            this.changeValue(func(_.cloneDeep(this.value)));
+            this.changeValue(func(cloneDeep(this.value)));
         }
     }
 }

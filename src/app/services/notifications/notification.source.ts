@@ -2,8 +2,8 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { NotificationModel, NotificationSourceStats } from '../../models/dto';
 import { ModelUtilsService } from '../model-utils.service';
 import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
 import { sortByDateFunction } from '../../utils/index';
+import { uniqBy } from 'lodash';
 
 export interface NotificationSource {
   canLoadMore: boolean;
@@ -76,7 +76,7 @@ export abstract class BaseNotificationSource implements NotificationSource {
       this.fillSubscription.unsubscribe();
       delete this.fillSubscription;
     }
-    this.notifications = _.uniqBy(this.notifications
+    this.notifications = uniqBy(this.notifications
       .concat(notifications)
       .slice()
       .sort(sortByDateFunction<NotificationModel>('scheduledAt', false)),

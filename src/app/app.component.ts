@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { RealtimeService } from './services/realtime.service';
 import { StorageService } from './services/storage.service';
-import * as _ from 'lodash';
+import { values } from 'lodash';
 import { BaseComponent } from './base.component';
 import { AnalyticsService } from './services/analytics.service';
 
@@ -25,7 +25,7 @@ export class AppComponent extends BaseComponent {
     translate.setDefaultLang('en');
     translate.use('en');
     setInterval(() => {
-      this.caches = _.values(this.storageService.cache).map(cache => {
+      this.caches = values(this.storageService.cache).map(cache => {
         return {
           cacheKey: cache.cacheKey,
           subscribers: {
