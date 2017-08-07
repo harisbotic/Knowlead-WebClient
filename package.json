@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "ng serve --host 0.0.0.0 --ssl --ssl-key key.pem --ssl-cert certificate.pem --port 443",
+    "start": "ng serve --host knowlead.co --ssl --ssl-key key.pem --ssl-cert certificate.pem --port 443",
     "lint": "tslint \"src/**/*.ts\" --exclude \"src/typings/**\" --exclude \"src/typings.d.ts\" --exclude \"src/app/signalr/**\" --exclude \"src/app/models/dto.ts\" --exclude \"src/app/models/constants.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^4.0.1",
     "@angular/router": "^4.0.1",
     "@salesforce-ux/design-system": "^2.2.2",
-    "@types/core-js": "^0.9.36",
     "@types/fast-json-patch": "1.0.4",
     "@types/lodash": "^4.14.61",
     "angular2-autosize": "^1.0.1",
