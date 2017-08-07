@@ -1,5 +1,5 @@
 <div class="posRel">
-  <input class="searchInput" type="text" name="search" autocomplete="off" placeholder="Search people .." [formControl]="control" (focus)="swap()" (blur)="swap()">
+  <input class="searchInput" type="text" name="search" autocomplete="off" placeholder="Search people..." [formControl]="control" (focus)="swap()" (blur)="swap()">
   <div *ngIf="results?.length > 0" class="search-wrap">
     <a *ngFor="let user of results" routerLink="{{user | userProfileLink}}">
       <div class="search-results">

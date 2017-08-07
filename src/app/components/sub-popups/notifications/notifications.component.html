@@ -1,7 +1,9 @@
 <div class="notification-wrap" [ngClass]="'notification-' + notification.type" *ngIf="notification">
-  <h1>{{ notification.title | translateParametric }}</h1>
+	<button class="closeNotification" name="close" (click)="onNotificationClose()">
+		<i class="kl-close"></i>
+	</button>
+	<h1>{{ notification.title | translateParametric }}</h1>
   <h4>{{ notification.subtitle | translateParametric }}</h4>
-  <button class="closeNotification" name="close" (click)="onNotificationClose()">Close</button>
 </div>
 <app-feedback-form *ngIf="feedbackFormOpened" (closed)="feedbackFormOpened=false"></app-feedback-form>
 <app-p2p-feedback-form *ngIf="p2pFeedbackFormOpened" (closed)="p2pFeedbackFormOpened=false" [p2pId]="p2pFeedbackFormId"></app-p2p-feedback-form>
