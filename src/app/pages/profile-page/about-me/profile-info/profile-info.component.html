@@ -1,11 +1,13 @@
 
+<ng-template #editButton>
+  <button type="submit">Save</button>
+  <button (click)="cancelAction()">Cancel</button>
+</ng-template>
 <form (submit)="onSubmit()" [formGroup]="form">
   <div class="row">
     <div class="col-100">
       <div class="profileInfoSidebar-wrap">
-        <div class="profileInfoSidebar-title">Personal Information<a routerlink="" *ngIf="isMy()">
-            <button type="submit">Save</button>
-            <button (click)="cancelAction()">Cancel</button><i class="kl-three-dots sidebarOptions" (click)="setEditable()"></i></a></div>
+        <div class="profileInfoSidebar-title">Personal Information<a routerlink="" *ngIf="isMy() &amp;&amp; !editable; else editButton"><i class="kl-three-dots sidebarOptions" (click)="setEditable()"></i></a></div>
         <div class="profileInfo-item-wrap" *ngIf="user">
           <div class="row">
             <div class="profileInfo-item">

@@ -1,12 +1,14 @@
+ng-template(#editButton)
+  button(type="submit") Save
+  button((click)="cancelAction()") Cancel
+
 form((submit)="onSubmit()" [formGroup]="form")
   .row
     .col-100
       .profileInfoSidebar-wrap
         .profileInfoSidebar-title
           | Personal Information
-          a(routerlink='' *ngIf="isMy()")
-            button(type="submit") Save
-            button((click)="cancelAction()") Cancel
+          a(routerlink='' *ngIf="isMy() && !editable; else editButton")
             i.kl-three-dots.sidebarOptions((click)="setEditable()")
         .profileInfo-item-wrap(*ngIf='user')
           .row
