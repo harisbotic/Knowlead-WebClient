@@ -15,6 +15,7 @@ export class StorageSubject<T> extends Observable<T> {
     fetching: boolean;
     public cacheKey: string;
     fillerSubscription: Subscription;
+    firstTime = true;
 
     constructor(
             public key: StorageKey,
@@ -31,6 +32,43 @@ export class StorageSubject<T> extends Observable<T> {
                 }
             });
         }
+        if (STORAGE_CONFIG[key].storeOffline) {
+            this.value = this.getLocalStorageValue();
+        }
+    }
+
+    private getLocalStorageKey(): string {
+        return 'storage-cache:' + this.cacheKey;
+    }
+
+    private hasValueInLocalStorage(): boolean {
+        return !!localStorage.getItem(this.getLocalStorageKey());
+    }
+
+    private setValueToLocalStorage() {
+        if (this.value) {
+            const obj = {
+                value: this.value,
+                version: 0
+            };
+            localStorage.setItem(this.getLocalStorageKey(), JSON.stringify(obj));
+        } else {
+            this.clearValueInLocalStorage();
+        }
+    }
+
+    private getLocalStorageValue() {
+        if (this.hasValueInLocalStorage()) {
+            console.log('Loading from local storage: ' + this.key);
+            return <T>JSON.parse(localStorage.getItem(this.getLocalStorageKey())).value;
+        } else {
+            console.log('No data to load from local storage: ' + this.key);
+        }
+    }
+
+    private clearValueInLocalStorage() {
+        console.log('Clearing local storage: ' + this.key);
+        localStorage.removeItem(this.getLocalStorageKey());
     }
 
     protected pause() {
@@ -58,6 +96,9 @@ export class StorageSubject<T> extends Observable<T> {
         const oldValue = this.value;
         this.value = newValue;
         if (!isEqual(oldValue, newValue)) {
+            if (STORAGE_CONFIG[this.key].storeOffline) {
+                this.setValueToLocalStorage();
+            }
             this.notifyObservers();
         }
     }
@@ -88,9 +129,10 @@ export class StorageSubject<T> extends Observable<T> {
 
     public refresh(force?: boolean) {
         // console.debug(`Cache ${this.cacheKey}: Loading from API`);
-        if (this.fetching && !force) {
+        if (this.fetching && !force && !this.firstTime) {
             return;
         }
+        this.firstTime = false;
         const cfg = STORAGE_CONFIG[this.key];
         if (cfg.mock) {
             if (cfg.mock.type === 'object') {
@@ -138,6 +180,7 @@ export class StorageSubject<T> extends Observable<T> {
             Observable.timer(0).take(1).subscribe(() => {
                 this.changeValue(undefined);
             });
+            this.clearValueInLocalStorage();
         }
     }
 

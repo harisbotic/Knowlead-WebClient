@@ -137,16 +137,8 @@ export class StorageService {
     return this.getFromStorage<LanguageModel[]>('languages', null);
   }
 
-  public getStates(country: CountryModel): Observable<StateModel[]> {
-    return this.getFromStorage<StateModel[]>('states', null, {countryId: country.geoLookupId});
-  }
-
   public getFOSes(): Observable<FOSModel[]> {
     return this.getFromStorage<FOSModel[]>('FOSes', null);
-  }
-
-  public getFOSvotes(fos: FOSModel): Observable<number> {
-    return this.getFromStorage<number>('FOSvotes', null, {id: fos.coreLookupId});
   }
 
   public getFOShierarchy(): Observable<FOSModel> {
