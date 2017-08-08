@@ -10,7 +10,7 @@ import { dateValidator } from '../../../validators/date.validator';
 import { BaseFormComponent } from '../../../base-form.component';
 import { addHoursToDate } from '../../../utils/index';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-p2p-create',
@@ -87,10 +87,6 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     return addHoursToDate(this.initialDate, hours).toISOString();
   }
 
-  removeFile(index: number) {
-    // this.files.removeAt(index);
-  }
-
   checkFiles() {
     const blobs: _BlobModel[] = this.files.value;
     for (let idx = 0; idx < blobs.length; idx++) {
@@ -101,6 +97,11 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
     if (blobs[blobs.length - 1] != null) {
       this.files.push(this.getNewFileControl());
     }
+  }
+
+  // this fixes some aot compilation problems in html
+  anyFormGet(): any {
+    return this.form;
   }
 
   ngOnInit() {
@@ -139,7 +140,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   getValue(): P2PModel {
     // clone value so that we don't mess with original one
     const ret = super.getValue();
-    ret.blobs = _.cloneDeep(ret.blobs);
+    ret.blobs = cloneDeep(ret.blobs);
     // remove all files which are undefined/null
     ret.blobs = ret.blobs.filter(blob => blob);
     return ret;

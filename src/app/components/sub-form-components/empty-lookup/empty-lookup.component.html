@@ -6,8 +6,8 @@
       </svg>
       <input class="slds-lookup__search-input slds-input" type="search"
         [placeholder]="placeholder"
-        (focus)="focused($event)"
-        (blur)="blured($event)"
+        (focus)="focused()"
+        (blur)="blured()"
         [(ngModel)]="value"
         (ngModelChange)="refresh()"
         #inputElement>

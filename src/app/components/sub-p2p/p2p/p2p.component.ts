@@ -20,7 +20,7 @@ export class P2pComponent extends BaseComponent implements OnInit {
   _p2p: P2PModelExtended;
   _p2pId: number;
 
-  @Input() set p2pId(value: number) {
+  @Input() public set p2pId(value: number) {
     if (typeof(value) === 'string') {
       value = parseInt(value, 10);
     }
@@ -34,7 +34,7 @@ export class P2pComponent extends BaseComponent implements OnInit {
       this._p2p = null;
     }
   };
-  get p2pId(): number {
+  public get p2pId(): number {
     return this._p2pId;
   }
 

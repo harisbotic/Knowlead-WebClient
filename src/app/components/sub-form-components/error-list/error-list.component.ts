@@ -1,6 +1,6 @@
 import { Component, Input, DoCheck } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import * as _ from 'lodash';
+import { clone } from 'lodash';
 import { translateValidations } from '../../../utils/translators';
 import { BaseComponent } from '../../../base.component';
 
@@ -19,7 +19,7 @@ export class ErrorListComponent extends BaseComponent implements DoCheck {
   refresh = () => {
     this.display = [];
     if (this._errors) {
-      this.display = _.clone(this._errors);
+      this.display = clone(this._errors);
     }
     if (this._formControl && (!this.checkDirty || this._formControl.dirty)) {
       this.display = this.display.concat(translateValidations(this._formControl.errors));

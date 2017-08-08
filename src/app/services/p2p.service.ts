@@ -2,7 +2,6 @@ import { Injectable, Injector } from '@angular/core';
 import { Http, RequestOptionsArgs } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
-import * as _ from 'lodash';
 import { P2P_DELETE, P2P_MESSAGE, P2P_SCHEDULE, P2P_ACCEPT_OFFER, P2P_REMOVE_BOOKMARK, P2P_ADD_BOOKMARK,
     P2P_RECOMMEND, P2P_ALL } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
@@ -14,6 +13,7 @@ import { ListP2PsRequest } from '../models/constants';
 import { AnalyticsService, AnalyticsEventType } from './analytics.service';
 import { RealtimeService } from './realtime.service';
 import { getGmtDate, getLocalDate } from '../utils/index';
+import { isNull, omitBy } from 'lodash';
 
 @Injectable()
 export class P2pService {
@@ -56,7 +56,7 @@ export class P2pService {
   }
 
   create(value: P2PModel): Observable<P2PModel> {
-    let tmp = _(value).omitBy(_.isNull).value();
+    let tmp = omitBy(value, isNull);
     return this.modifyP2p(this.http.post(P2P_NEW, tmp)
         .map(responseToResponseModel)
         .map(o => o.object)

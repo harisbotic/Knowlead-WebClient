@@ -4,10 +4,10 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { parseJwt, iterateObjectAlphabetically, treeify } from '../utils/index';
 import { CountryModel, LanguageModel, StateModel, FOSModel } from '../models/dto';
-import * as _ from 'lodash';
 import { SessionService, SessionEvent } from './session.service';
 import { StorageSubject, StorageFiller } from './storage.subject';
 import { STORE_REFRESH_TOKEN } from '../utils/storage.constants';
+import { cloneDeep, sortBy } from 'lodash';
 
 @Injectable()
 export class StorageService {
@@ -155,14 +155,14 @@ export class StorageService {
         return this.fosHierarchy;
       }
       console.debug('Creating fos hierarchy');
-      let ret = <FOSModel>{children: treeify(_.cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
+      let ret = <FOSModel>{children: treeify(cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
       this.fosByIds = {};
       let recurse = (model: FOSModel) => {
         if (model.coreLookupId) {
           this.fosByIds[model.coreLookupId] = model;
         }
         if (model.children != null) {
-          model.children = _.sortBy(model.children, 'name');
+          model.children = sortBy(model.children, 'name');
           model.children.forEach(child => child.parent = model);
           model.children.forEach(recurse);
         }

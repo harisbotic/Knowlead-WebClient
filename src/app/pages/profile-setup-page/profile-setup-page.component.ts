@@ -3,12 +3,12 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ApplicationUserModel, CountryModel, LanguageModel, ResponseModel } from './../../models/dto';
 import { StorageService } from './../../services/storage.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
-import * as _ from 'lodash';
 import { AccountService } from './../../services/account.service';
 import { Router } from '@angular/router';
 import { dateValidator } from '../../validators/date.validator';
 import { DropdownValueInterface } from '../../models/frontend.models';
 import { BaseFormComponent } from '../../base-form.component';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-profile-setup-page',
@@ -65,7 +65,7 @@ export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUser
 
   private loadUser() {
     this.subscriptions.push(this.accountService.currentUser().filter(user => !!user).take(1).subscribe((user: ApplicationUserModel) => {
-      this.user = _.cloneDeep(user);
+      this.user = cloneDeep(user);
       if (this.user.isMale == null) {
         this.user.isMale = true;
       }

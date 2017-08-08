@@ -1,6 +1,6 @@
 import { FOSModel } from '../models/dto';
-import * as _ from 'lodash';
 import { Subscriber, Observable } from 'rxjs/Rx';
+import { filter } from 'lodash';
 
 export * from './urls';
 export * from './storage.constants';
@@ -35,7 +35,7 @@ interface NameInterface {
 
 export function baseLookup(source: Observable<NameInterface[]>, query: string): Observable<any[]> {
     return source.map((entry: NameInterface[]) => {
-        return _.filter(entry, val => stringContains(val.name, query));
+        return filter(entry, val => stringContains(val.name, query));
     }).map(value => value.length > 0 ? value : null);
 }
 

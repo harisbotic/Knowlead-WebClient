@@ -6,7 +6,7 @@
       .title.
         Choose a field of study
       .fos-selection.tooltip-parent
-        app-fos-selector(formControlName="fosId" [outputType]="id" appFormControlError)
+        app-fos-selector(formControlName="fosId" outputType="id" appFormControlError)
     .describe-post-wrap
       .headline.
         Describe the Request
@@ -21,7 +21,7 @@
         .title.
           Attachments
         .attachment-field(formArrayName="blobs")
-          app-file-upload(*ngFor="let control of form.controls.blobs.controls; let idx = index" [formControlName]="idx" (removed)="removeFile(idx)")
+          app-file-upload(*ngFor="let control of anyFormGet().controls['blobs'].controls; let idx = index" [formControlName]="idx")
       .language-wrap
         .title.
           Choose a language on which you want to study
@@ -103,7 +103,7 @@
             placeholder="Select specific date"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="specificDate"
-            (ngModelChange)="setSpecificDate($value)"
+            (ngModelChange)="setSpecificDate()"
             [disablePast]="true").specific-date-input
     .footer-elements
       .row#note

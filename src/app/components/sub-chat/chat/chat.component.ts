@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver, Componen
 import { ChatService } from '../../../services/chat.service';
 import { ApplicationUserModel } from '../../../models/dto';
 import { ModelUtilsService } from '../../../services/model-utils.service';
-import * as _ from 'lodash';
+import { findIndex } from 'lodash';
 import { ChatConverisationComponent } from '../chat-converisation/chat-converisation.component';
 import { NotificationService } from '../../../services/notifications/notification.service';
 import { BaseComponent } from '../../../base.component';
@@ -61,7 +61,7 @@ export class ChatComponent extends BaseComponent implements OnInit {
   }
 
   private getConverisationIndex(other: ApplicationUserModel): number {
-    return _.findIndex(this.converisations, conv => conv.instance.user.id === other.id);
+    return findIndex(this.converisations, conv => conv.instance.user.id === other.id);
   }
 
   openConverisation(other: ApplicationUserModel) {

@@ -45,7 +45,7 @@
         </div>
         <div class="edit-profile-button-wrap" *ngIf="isMy"><a routerLink="/profilesetup">
             <button class="edit-profile-button"> <i class="kl-edit-profile"> </i><span> Edit Profile</span></button></a></div>
-        <div class="friendship-options-wrap" *ngIf="!isMy &amp;&amp; target">
+        <div class="friendship-options-wrap" *ngIf="!isMy &amp;&amp; !!target">
           <app-friendship-strip [otherId]="target.id"></app-friendship-strip>
         </div>
       </div>

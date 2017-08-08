@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "ng serve --host 0.0.0.0 --ssl --ssl-key key.pem --ssl-cert certificate.pem --port 443",
+    "start": "ng serve --host knowlead.co --ssl --ssl-key key.pem --ssl-cert certificate.pem --port 443",
     "lint": "tslint \"src/**/*.ts\" --exclude \"src/typings/**\" --exclude \"src/typings.d.ts\" --exclude \"src/app/signalr/**\" --exclude \"src/app/models/dto.ts\" --exclude \"src/app/models/constants.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.1",
-    "@angular/cli": "1.0.0",
+    "@angular/cli": "^1.3.0-rc.5",
     "@angular/common": "^4.0.1",
     "@angular/compiler": "^4.0.1",
     "@angular/compiler-cli": "^4.0.1",
@@ -47,6 +47,7 @@
     "ng2-translate": "^5.0.0",
     "ngx-filter-pipe": "^1.0.0",
     "ngx-popover": "0.0.16",
+    "promise-polyfill": "^6.0.2",
     "pug": "^2.0.0-beta11",
     "pug-plugin-ng": "0.0.2",
     "recordrtc": "^5.4.1",
@@ -60,7 +61,6 @@
     "@types/flatpickr": "^2.2.1",
     "@types/jasmine": "^2.5.47",
     "codelyzer": "~2.1.1",
-    "dts-gen": "^0.5.4",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "3.2.0",
     "karma": "1.5.0",
@@ -69,6 +69,6 @@
     "karma-remap-istanbul": "^0.6.0",
     "ts-node": "3.0.2",
     "tslint": "^5.0.0",
-    "typescript": "2.2.2"
+    "typescript": "~2.3.0"
   }
 }

@@ -5,7 +5,6 @@ import { P2PMessageModel, ApplicationUserModel, _CallModel,
 import { Observable } from 'rxjs/Rx';
 import { P2pService } from './p2p.service';
 import { StorageService } from './storage.service';
-import * as _ from 'lodash';
 import { StorageFiller } from './storage.subject';
 import { NotebookModel, NotificationModel, Guid, LanguageModel,
          ChatMessageModel, ConversationModel, P2PModel } from '../models/dto';
@@ -15,6 +14,7 @@ import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
 import { P2PModelExtended, FileStatus, BlobModelExtended } from '../models/frontend.models';
 import { _BlobModel, P2PStatus } from '../models/dto';
+import { findIndex, isNull } from 'lodash';
 
 @Injectable()
 export class ModelUtilsService {
@@ -218,7 +218,7 @@ export class ModelUtilsService {
     let arr = values.map(() => null);
     let reduced: Observable<T> = values.reduce((o: Observable<T>, msg: T) => {
       let ret = filler(msg).takeWhile(val => val != null).do(filled => {
-        let idx = _.findIndex(values, val => val[idKey] === filled[idKey]);
+        let idx = findIndex(values, val => val[idKey] === filled[idKey]);
         if (idx === -1) {
           throw new Error('Item was not found: ' + filled[idKey]);
         }
@@ -228,7 +228,7 @@ export class ModelUtilsService {
     }, null);
     return reduced
       .map(() => arr)
-      .filter((arrr) => !arrr.some(_.isNull));
+      .filter((arrr) => !arrr.some(isNull));
   }
 
   public fillCall(call: _CallModel): Observable<_CallModel> {
@@ -308,7 +308,7 @@ export class ModelUtilsService {
     }
     return Observable.from(userIds)
       .flatMap(id => this.accountService.getUserById(id).do(user => {
-        let idx = _.findIndex(ret, u => u.id === user.id);
+        let idx = findIndex(ret, u => u.id === user.id);
         if (idx === -1) {
           ret.push(user);
         } else {
