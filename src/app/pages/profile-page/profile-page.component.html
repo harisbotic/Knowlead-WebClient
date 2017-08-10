@@ -1,3 +1,57 @@
-<div class="grid-container"><div class="row"><div class="row"><div class="coverPhoto-wrap" [style.background-image]="coverUrl"><!--<div class="coverPhoto-options">
-<i class="kl-plus"></i>
-</div>--><div class="profilePage-profileImage-wrap"><app-profile-picture [user]="target" [uploadable]="isMy" size="large"></app-profile-picture></div><div class="profilePage-profileInfo-wrap"><div class="profilePage-Name">{{target | fullName}}</div></div></div></div><div class="row"><div class="profilePage-navigation-wrap"><div class="col-17 filler"></div><div class="profilePage-nav-main-section"><div class="col-25 profilePage-nav-item"><a routerLink="." routerLinkActive="active-link">About Me</a></div><div class="col-25 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div><div class="col-25 profilePage-nav-item" *ngIf="isMy"><a routerLink="library" routerLinkActive="active-link">Library</a></div><div class="col-25 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends" routerLinkActive="active-link">Friends</a></div></div><div class="profile-stats-wrap"><div class="col-50 profile-stats"><div class="row"><div class="text">Score</div></div><div class="row"><div class="value">{{target?.pointsBalance}}</div></div></div><div class="col-50 profile-stats" *ngIf="isMy"><div class="row"><div class="text">Minutes</div></div><div class="row"><div class="value">{{me?.minutesBalance}}</div></div></div></div><div class="edit-profile-button-wrap" *ngIf="isMy"><a routerLink="/profilesetup"><button class="edit-profile-button"> <i class="kl-edit-profile"> </i><span> Edit Profile</span></button></a></div><div class="friendship-options-wrap" *ngIf="!isMy &amp;&amp; !!target"><app-friendship-strip [otherId]="target.id"></app-friendship-strip></div></div></div><div class="aboutMe-content"><router-outlet></router-outlet></div></div></div>
+
+<div class="grid-container">
+  <div class="row">
+    <div class="row">
+      <div class="coverPhoto-wrap" [style.background-image]="coverUrl">
+        <!--
+        <div class="coverPhoto-options">
+        <i class="kl-plus"></i>
+        </div>
+        -->
+        <div class="profilePage-profileImage-wrap">
+          <app-profile-picture [user]="target" [uploadable]="isMy" size="large"></app-profile-picture>
+        </div>
+        <div class="profilePage-profileInfo-wrap">
+          <div class="profilePage-Name">{{target | fullName}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="profilePage-navigation-wrap">
+        <div class="col-17 filler"></div>
+        <div class="profilePage-nav-main-section">
+          <div class="col-25 profilePage-nav-item"><a routerLink="." routerLinkActive="active-link">About Me</a></div>
+          <div class="col-25 profilePage-nav-item disabledLink" *ngIf="isMy">Analytics</div>
+          <div class="col-25 profilePage-nav-item" *ngIf="isMy"><a routerLink="library" routerLinkActive="active-link">Library</a></div>
+          <div class="col-25 profilePage-nav-item" *ngIf="isMy"><a routerLink="friends" routerLinkActive="active-link">Friends</a></div>
+        </div>
+        <div class="profile-stats-wrap">
+          <div class="col-50 profile-stats">
+            <div class="row">
+              <div class="text">Score</div>
+            </div>
+            <div class="row">
+              <div class="value">{{target?.pointsBalance}}</div>
+            </div>
+          </div>
+          <div class="col-50 profile-stats" *ngIf="isMy">
+            <div class="row">
+              <div class="text">Minutes</div>
+            </div>
+            <div class="row">
+              <div class="value">{{me?.minutesBalance}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="edit-profile-button-wrap" *ngIf="isMy"><a routerLink="/profilesetup">
+            <button class="edit-profile-button"> <i class="kl-edit-profile"> </i><span> Edit Profile</span></button></a></div>
+        <div class="friendship-options-wrap" *ngIf="!isMy &amp;&amp; !!target">
+          <app-friendship-strip [otherId]="target.id"></app-friendship-strip>
+        </div>
+      </div>
+    </div>
+    <div class="aboutMe-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

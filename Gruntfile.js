@@ -23,6 +23,8 @@ module.exports = function(grunt) {
           ext: '.component.html'
         }],
         options: {
+          doctype: 'html',
+          pretty: true,
           plugins: [pug_plugin_ng]
         }
       }

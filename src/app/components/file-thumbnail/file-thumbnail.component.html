@@ -1,1 +1,13 @@
-<div class="file-wrap" *ngIf="file"><div *ngIf="extensionData[file.extension] !== undefined; else showUnknownIcon"><ngl-icon class="preview icon" icon="{{ extensionData[file.extension] }}" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage"/><div class="file-name"><a href="https://teststorage3123.blob.core.windows.net/blobs/{{file.blobId}}">{{file | fileName}}</a></div></div></div><ng-template #showUnknownIcon="#showUnknownIcon"><div class="file-wrap"><ngl-icon class="preview icon" icon="unknown" category="doctype" *ngIf="!isImage"></ngl-icon><div class="file-name">{{file | fileName}}</div></div></ng-template>
+
+<div class="file-wrap" *ngIf="file">
+  <div *ngIf="extensionData[file.extension] !== undefined; else showUnknownIcon">
+    <ngl-icon class="preview icon" icon="{{ extensionData[file.extension] }}" category="doctype" *ngIf="!isImage"></ngl-icon><img class="preview thumbnail" src="{{backgroundUrl}}" *ngIf="isImage">
+    <div class="file-name"><a href="https://teststorage3123.blob.core.windows.net/blobs/{{file.blobId}}">{{file | fileName}}</a></div>
+  </div>
+</div>
+<ng-template #showUnknownIcon>
+  <div class="file-wrap">
+    <ngl-icon class="preview icon" icon="unknown" category="doctype" *ngIf="!isImage"></ngl-icon>
+    <div class="file-name">{{file | fileName}}</div>
+  </div>
+</ng-template>

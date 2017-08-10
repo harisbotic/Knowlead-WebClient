@@ -1,1 +1,26 @@
-<a *ngIf="notification"><div class="row single-notification-container" [class.unread]="!notification?.seenAt"><div class="col-20 posRel profile-image-round-small"><app-profile-picture class="centerV" [user]="notification.fromApplicationUser"></app-profile-picture></div><div class="col-50 posRel"><div class="notification-text-wrap"><div class="row fromWho"><a routerLink="{{notification.fromApplicationUser | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a><div class="notification-text">Sent you a friend request.</div><div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div></div></div></div><div class="col-30"><div class="row"><div class="request-response-wrap"><div class="col-50"><div class="request-response" id="accept"><i class="kl-check" (click)="acceptFriend()"></i></div></div><div class="col-50"><div class="request-response" id="decline"><i class="kl-cross" (click)="declineFriend()"></i></div></div></div></div></div></div></a>
+<a *ngIf="notification">
+  <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
+    <div class="col-20 posRel profile-image-round-small">
+      <app-profile-picture class="centerV" [user]="notification.fromApplicationUser"></app-profile-picture>
+    </div>
+    <div class="col-50 posRel">
+      <div class="notification-text-wrap">
+        <div class="row fromWho"><a routerLink="{{notification.fromApplicationUser | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
+          <div class="notification-text">Sent you a friend request.</div>
+          <div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-30">
+      <div class="row">
+        <div class="request-response-wrap">
+          <div class="col-50">
+            <div class="request-response" id="accept"><i class="kl-check" (click)="acceptFriend()"></i></div>
+          </div>
+          <div class="col-50">
+            <div class="request-response" id="decline"><i class="kl-cross" (click)="declineFriend()"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></a>

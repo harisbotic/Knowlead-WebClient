@@ -1,1 +1,21 @@
-<a *ngIf="notification"><div class="row single-notification-container" [class.unread]="!notification?.seenAt"><div class="col-20 posRel profile-image-round-small"><app-profile-picture class="centerV" [user]="notification.fromApplicationUser"></app-profile-picture></div><div class="col-60 posRel"><div class="notification-text-wrap"><div class="row fromWho"><a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a><div class="last-message-text">{{notification.customText}}</div><div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div></div></div></div><div class="col-20"><div class="row"><div class="col-100 posRel"><div class="notification-icon hardPosRel"><i class="kl-messages centerV"></i></div></div></div></div></div></a>
+<a *ngIf="notification">
+  <div class="row single-notification-container" [class.unread]="!notification?.seenAt">
+    <div class="col-20 posRel profile-image-round-small">
+      <app-profile-picture class="centerV" [user]="notification.fromApplicationUser"></app-profile-picture>
+    </div>
+    <div class="col-60 posRel">
+      <div class="notification-text-wrap">
+        <div class="row fromWho"><a routerLink="{{notification.fromApplicationUserId | userProfileLink}}">{{notification.fromApplicationUser | fullName}}</a>
+          <div class="last-message-text">{{notification.customText}}</div>
+          <div class="timeAgo">{{notification.scheduledAt | amTimeAgo}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-20">
+      <div class="row">
+        <div class="col-100 posRel">
+          <div class="notification-icon hardPosRel"><i class="kl-messages centerV"></i></div>
+        </div>
+      </div>
+    </div>
+  </div></a>
