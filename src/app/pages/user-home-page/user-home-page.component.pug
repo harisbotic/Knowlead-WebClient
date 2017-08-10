@@ -131,56 +131,29 @@ ng-template(#noUpcomingEvents)
                   
     .col-75
       .main-section-wrap
-        .top-elements
-          .col-50
-            //- span#searchTitle Search
-            ng-select(placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch").search-p2p-input
-          .col-20
-            button([disabled]="!!!fosToSearch" (click)="searchByFoses()") Search
-          .col-30
-            .create-request-button-wrap
-              button.create-request-button(
-                (click)="toggleCreateRequest()"
-                [class.create-request-button-opened]="createRequestState === 'open'"
-              ) Create a Request
-        .create-dropdown-wrap([@peerToPeerOptions]="createRequestState")
-          .row
-            .request-section-wrap
-              .section-title Student Section
-          .row.request-type-wrap#last-study-section
-            .col-20
-              .request-type-image-wrap P2P
-                //- img(src="#" alt="p2p-request")              
-            .col-65
-              .row
-                .request-type-title Peer-to-Peer
-              .row
-                .request-type-description.
-                  Engage in direct video communication where you have full interactive experience with your tutor. Create a request with specified details, wait for users to give their offer, and schedule a class with a tutor of your choice.
-            .col-15
-              a.create-p2p-button(routerLink="/p2p") Create
 
-          //- TEACHER SECTION for courses and videos
-          //- .row
-          //-   .request-section-wrap
-          //-     .section-title Teacher Section
-          //- .row.request-type-wrap
-          //-   .col-20
-          //-     .request-type-image-wrap#teachingImg Course
-          //-       //- img(src="#" alt="p2p-request")              
-          //-   .col-65
-          //-     .row
-          //-       .request-type-title Course
-          //-     .row
-          //-       .request-type-description.
-          //-         Lorem ipsum dolor sit amet, consectetur adipisicing
-          //-         elit, sed do eiusmod tempor incididunt ut labore.
-          //-         sed do eiusmod tempor incididunt ut labore.
-          //-         sed do eiusmod tempor incididunt ut labore.
-          //-   .col-15
-          //-     button.create-p2p-button Create
-
-
-
-        .p2p-post-cards
-          router-outlet
+        .my-dashboard-wrap
+          .row.dashboard-header
+            #title
+              | Dashboard
+            .checkbox-wrap
+              label.check-label
+                input(type="checkbox", name="filter-checkbox", checked)
+                span.check-label-text Peer to Peer
+            .checkbox-wrap
+              label.check-label
+                input(type="checkbox", name="filter-checkbox", checked)
+                span.check-label-text Scheduled
+            .checkbox-wrap
+              label.check-label
+                input(type="checkbox", name="filter-checkbox", checked)
+                span.check-label-text Bookmarked
+            .checkbox-wrap
+              label.check-label
+                input(type="checkbox", name="filter-checkbox", checked)
+                span.check-label-text Negotiating
+            //- select.selection-box
+            //-   option Engaded
+            //-   option Recommended
+          .row.dashboard-content
+            router-outlet
