@@ -13,7 +13,6 @@ import { StorageService } from '../../../services/storage.service';
   styleUrls: ['./call-chat.component.scss']
 })
 export class CallChatComponent extends BaseFormComponent<ChatMessageModel> implements OnInit, OnDestroy {
-
   user: ApplicationUserModel;
   messages: ChatMessageModel[] = [];
   callId: Guid;
@@ -68,9 +67,16 @@ export class CallChatComponent extends BaseFormComponent<ChatMessageModel> imple
   }
 
   submit() {
-    this.realtimeService.sendCallMsg(this.getValue());
+    return this.realtimeService.sendCallMsg(this.getValue());
+  }
+
+  onSubmitSuccess(result: any) {
     this.restartForm();
   }
+
+  onSubmitError(err: any) {
+  }
+
 
   ngOnDestroy() {
     super.ngOnDestroy();

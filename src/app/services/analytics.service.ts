@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 
 export type AnalyticsEventType = 'register' | 'login' | 'logout' | 'confirmEmail' | 'p2pCreate' | 'p2pRespond' | 'userPatch'
   | 'p2pRespond' | 'p2pDelete' | 'p2pSchedule' | 'p2pBookmark' | 'changeInfo' | 'searchRequest' | 'changeProfilePicture' | 'changeNotebook'
-  | 'addNotebook' | 'callStop' | 'callStart' | 'callDisconnect' | 'callRespond' | 'callMsg' | 'claimReward' | 'redeemCode';
+  | 'addNotebook' | 'callStop' | 'callStart' | 'callDisconnect' | 'callRespond' | 'callMsg' | 'claimReward' | 'redeemCode' | 'message';
 
 const categories: {[index: string]: string} = {
   'register': 'account',
@@ -32,7 +32,8 @@ const categories: {[index: string]: string} = {
   'callDisconnect': 'call',
   'callRespond': 'call',
   'claimReward': 'store',
-  'redeemCode': 'store'
+  'redeemCode': 'store',
+  'message': 'chat'
 };
 
 @Injectable()

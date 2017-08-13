@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotebookModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { responseToResponseModel } from '../../../utils/converters';
 
 @Component({
   selector: 'app-notebook-edit',
@@ -12,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./notebook-edit.component.scss']
 })
 export class NotebookEditComponent extends BaseFormComponent<NotebookModel> implements OnInit {
-
   form: FormGroup;
   primaryColor: string;
   secondaryColor: string;
@@ -74,11 +74,17 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     const o = (this.getValue().notebookId == null) ?
       this.notebookSerice.addNotebook(this.getValue()) :
       this.notebookSerice.patchNotebook(this.getValue());
-    this.subscriptions.push(o.take(1).subscribe(notebook => {
-      this.setNotebookId(notebook.notebookId.toString());
-      this.doClose();
-    }));
+    return o.take(1);
   }
+
+  onSubmitSuccess(notebook: any) {
+    this.setNotebookId(notebook.notebookId.toString());
+    this.doClose();
+  }
+
+  onSubmitError(err: any) {
+  }
+
 
   reapply() {
     this.form.patchValue({

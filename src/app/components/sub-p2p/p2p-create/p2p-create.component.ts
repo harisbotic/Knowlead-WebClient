@@ -18,7 +18,6 @@ import { cloneDeep } from 'lodash';
   styleUrls: ['./p2p-create.component.scss'],
 })
 export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements OnInit {
-
   form: FormGroup;
   files: FormArray;
   languages: DropdownValueInterface<LanguageModel>[];
@@ -45,7 +44,7 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
       text: new FormControl(null, Validators.required),
       fosId: new FormControl(null, Validators.required),
       blobs: this.files,
-      initialPrice: new FormControl(null, [Validators.required]),
+      initialPrice: new FormControl(null, [Validators.required, Validators.min(10)]),
       deadline: new FormControl(null, dateValidator({minDate: new Date()})),
       languages: new FormControl(null, [Validators.required, ArrayValidator({min: 1})]),
       difficultyLevel: new FormControl(null, null)
@@ -128,14 +127,18 @@ export class P2pCreateComponent extends BaseFormComponent<P2PModel> implements O
   }
 
   submit() {
-    console.log(this.getValue());
-    this.subscriptions.push(this.p2pService.create(this.getValue()).take(1).subscribe(p2p => {
-      this.restartForm();
-      this.router.navigate(['/']);
-    }, (err) => {
-      this.notificationService.error('error creating p2p', err);
-    }));
+    return this.p2pService.create(this.getValue()).take(1);
   }
+
+  onSubmitSuccess(result: any) {
+    this.restartForm();
+    this.router.navigate(['/']);
+  }
+
+  onSubmitError(err: any) {
+    this.notificationService.error('error creating p2p', err);
+  }
+
 
   getValue(): P2PModel {
     // clone value so that we don't mess with original one

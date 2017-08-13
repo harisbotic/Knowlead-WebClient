@@ -4,13 +4,20 @@ import { OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Rx';
 import { ResponseModel } from './models/dto';
+import { responseToResponseModel } from './utils/converters';
+import { FrontendErrorCodes } from './models/frontend.constants';
 export abstract class BaseFormComponent<T> extends BaseComponent implements OnInit {
     form: FormGroup;
     wasSet = false;
+    errorResponse: ResponseModel;
+    busy = false;
+
     protected subscriptions: Subscription[];
     abstract getNewValue(): T | Observable<T>;
     abstract getNewForm(): FormGroup;
-    abstract submit();
+    abstract submit(): Observable<any>;
+    abstract onSubmitSuccess(result: any);
+    abstract onSubmitError(err: any);
 
     getValue(): T {
         if (this.form) {
@@ -79,23 +86,43 @@ export abstract class BaseFormComponent<T> extends BaseComponent implements OnIn
     }
 
     onSubmit() {
+        delete this.errorResponse;
         this.form.markAsDirty();
         for (let control of Object.keys(this.form.controls)) {
             this.form.controls[control].markAsDirty();
         }
         this.applyFullValue(this.getValue());
         if (this.form.valid) {
-            this.submit();
-        }
-    }
-
-    errorHandler = (err: ResponseModel) => {
-        for (let key of Object.keys(err.formErrors)) {
-            if (!this.form.controls[key]) {
-                console.error('Got error from backend for ' + key + ' but form doesnt contain control for that');
-                continue;
+            if (this.busy) {
+                console.warn('Didnt submit because last request didnt finish');
+                return;
             }
-            this.form.controls[key].setErrors({backend: err.formErrors[key][0]});
+            this.busy = true;
+            const observable = this.submit();
+            if (observable) {
+                this.subscriptions.push(observable
+                    .catch(err => {
+                        this.errorResponse = err;
+                        this.busy = false;
+                        if (this.errorResponse.formErrors) {
+                            for (let key in this.errorResponse.formErrors) {
+                                if (this.form.controls[key]) {
+                                    const controlError = {};
+                                    controlError[FrontendErrorCodes.backendError] = this.errorResponse.formErrors[key][0];
+                                    this.form.controls[key].setErrors(controlError);
+                                }
+                            }
+                        }
+                        this.onSubmitError(err);
+                        return Observable.empty();
+                    })
+                    .subscribe((result) => {
+                        this.onSubmitSuccess(result);
+                        this.busy = false;
+                    }));
+            } else {
+                console.warn('Didnt submit form because observable from component was undefined');
+            }
         }
     }
 }

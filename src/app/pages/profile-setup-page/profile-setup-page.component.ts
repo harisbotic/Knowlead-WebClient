@@ -17,7 +17,6 @@ import { cloneDeep } from 'lodash';
   providers: []
 })
 export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUserModel> implements OnInit {
-
   form: FormGroup;
   user: ApplicationUserModel;
   realUser: ApplicationUserModel;
@@ -88,12 +87,14 @@ export class ProfileSetupPageComponent extends BaseFormComponent<ApplicationUser
   }
 
   submit() {
-    this.subscriptions.push(this.accountService
-      .patchUserDetails(this.form.value)
-      .subscribe((user) => {
-        this.router.navigate(['/interestsetup']);
-      }, this.errorHandler
-    ));
+    return this.accountService.patchUserDetails(this.form.value);
+  }
+
+  onSubmitSuccess(result: any) {
+    this.router.navigate(['/interestsetup']);
+  }
+
+  onSubmitError(err: any) {
   }
 
 }

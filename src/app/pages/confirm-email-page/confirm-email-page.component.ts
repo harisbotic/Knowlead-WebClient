@@ -6,6 +6,8 @@ import { SessionService } from '../../services/session.service';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
+import { NotificationService } from '../../services/notifications/notification.service';
+import { joinTranslation } from '../../utils/translate-utils';
 
 @Component({
   selector: 'app-confirm-email-page',
@@ -16,11 +18,11 @@ import { Observable } from 'rxjs/Rx';
 
 })
 export class ConfirmEmailPageComponent extends BaseFormComponent<ConfirmEmailModel> implements OnInit {
-  response: ResponseModel;
   constructor(protected route: ActivatedRoute,
               protected accountService: AccountService,
               protected sessionService: SessionService,
-              protected router: Router) {
+              protected router: Router,
+              protected notificationService: NotificationService) {
     super();
   }
 
@@ -39,14 +41,22 @@ export class ConfirmEmailPageComponent extends BaseFormComponent<ConfirmEmailMod
   }
 
   submit() {
-    this.subscriptions.push(this.accountService.confirmEmail(this.getValue()).subscribe((result) => {
-      this.subscriptions.push(this.sessionService
-        .login({email: this.getValue().email, password: this.getValue().password})
-        .subscribe(() => {
-          this.router.navigate(['/profilesetup']);
-        }
-      ));
-    }, this.errorHandler));
+    return this.accountService.confirmEmail(this.getValue());
   }
 
+  onSubmitSuccess(result: any) {
+    this.subscriptions.push(this.sessionService
+      .login({email: this.getValue().email, password: this.getValue().password})
+      .subscribe(() => {
+        this.router.navigate(['/profilesetup']);
+      }
+    ));
+  }
+
+  onSubmitError(err: any) {
+    this.notificationService.error(
+      joinTranslation('confirm-email-page', 'error-confirming'),
+      joinTranslation('confirm-email-page', 'error-confirming-text')
+    );
+  }
 }

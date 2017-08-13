@@ -15,7 +15,6 @@ import { LoginUserModel } from '../../models/frontend.models';
 })
 export class LoginPageComponent extends BaseFormComponent<LoginUserModel> implements OnInit {
 
-  response: ResponseModel;
   form: FormGroup;
   busy: boolean;
 
@@ -23,16 +22,16 @@ export class LoginPageComponent extends BaseFormComponent<LoginUserModel> implem
     super();
   }
 
+  onSubmitSuccess(result: any) {
+    this.router.navigate(['/home']);
+  }
+
+  onSubmitError(err: any) {
+    // console.warn('Error handler in Login Page was not implemented');
+  }
+
   submit() {
-    this.busy = true;
-    delete this.response;
-    this.subscriptions.push(this.sessionService.login(this.form.value).finally(() => {
-      this.busy = false;
-    }).subscribe(loginResponse => {
-      this.router.navigate(['/home']);
-    }, (errorResponse) => {
-      this.response = errorResponse;
-    }));
+    return this.sessionService.login(this.form.value);
   }
 
   getNewForm() {

@@ -13,7 +13,7 @@ import { FeedbackService } from '../../../services/feedback.service';
 export class NotificationsComponent extends BaseComponent implements OnInit {
 
   notification: PopupNotificationModel;
-  timeout = 5000;
+  timeout = 10000;
   feedbackFormOpened = false;
 
   p2pFeedbackFormOpened = false;

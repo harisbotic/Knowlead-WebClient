@@ -8,3 +8,4 @@ export class FrontendErrorCodes {
 export class SpecialProfilePictures {
     static system = 'system';
 }
+

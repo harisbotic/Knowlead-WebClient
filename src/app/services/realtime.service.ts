@@ -155,17 +155,18 @@ export class RealtimeService {
   }
 
   sendCallMsg(message: ChatMessageModel) {
-    this.invoke(this.callErrorSubject, 'CallMsg', message);
     this.analyticsService.sendEvent('callMsg');
+    return Observable.fromPromise(this.invoke(this.callErrorSubject, 'CallMsg', message));
   }
 
   // CHAT COMMANDS
   sendChatMessage(message: ChatMessageModel) {
-    this.rpcConnection.invoke('msg', message);
+    this.analyticsService.sendEvent('message');
+    return Observable.fromPromise(this.rpcConnection.invoke('msg', message));
   }
 
   private invoke(errorSubject: Subject<any>, nameOfFunction: string, ...params) {
-    this.rpcConnection.invoke(nameOfFunction, ...params).catch(err => errorSubject.next(err));
+    return this.rpcConnection.invoke(nameOfFunction, ...params).catch(err => errorSubject.next(err));
   }
 
   stop() {

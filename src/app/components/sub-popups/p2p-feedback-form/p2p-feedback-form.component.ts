@@ -11,7 +11,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./p2p-feedback-form.component.scss']
 })
 export class P2pFeedbackFormComponent extends BaseFormComponent<P2PFeedbackModel> implements OnInit {
-
   helpfulFeedback: number;
   expertiseFeedback: number;
 
@@ -24,12 +23,16 @@ export class P2pFeedbackFormComponent extends BaseFormComponent<P2PFeedbackModel
               protected notificationService: NotificationService) { super(); }
 
   submit() {
-    this.feedbackService.giveP2pFeedback(this.getValue()).subscribe(() => {
-      this.restartForm();
-      this.closed.emit();
-    }, (err) => {
-      this.notificationService.error('Error giving feedback', err);
-    });
+    return this.feedbackService.giveP2pFeedback(this.getValue());
+  }
+
+  onSubmitSuccess(result: any) {
+    this.restartForm();
+    this.closed.emit();
+  }
+
+  onSubmitError(err: any) {
+    this.notificationService.error('Error giving feedback', err);
   }
 
   getNewValue(): P2PFeedbackModel {

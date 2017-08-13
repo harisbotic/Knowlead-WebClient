@@ -15,11 +15,8 @@ import { Observable } from 'rxjs/Rx';
 })
 export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> implements OnInit, DoCheck {
 
-  busy = false;
-  response: ResponseModel;
   form: FormGroup;
   referral: string;
-  terms: boolean;
 
   constructor(protected accountService: AccountService,
               protected router: Router,
@@ -29,26 +26,17 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
   }
 
   submit() {
-    if (!this.terms) {
-      this.response = {
-        formErrors: undefined,
-        errors: ['Please accept terms and conditions'],
-        object: undefined
-      };
-      return;
+    return this.accountService.register(this.form.value);
+  }
+
+  onSubmitSuccess(result: any) {
+    this.router.navigate(['/registerSuccess']);
+  }
+
+  onSubmitError(errorResponse: any) {
+    if (errorResponse.formErrors && errorResponse.formErrors['email']) {
+      this.errorResponse.errors.push(errorResponse.formErrors['email'][0]);
     }
-    this.busy = true;
-    this.subscriptions.push(this.accountService.register(this.form.value).finally(() => { this.busy = false; })
-      .subscribe((response) => {
-        this.response = response;
-        this.router.navigate(['/registerSuccess']);
-      }, (errorResponse: ResponseModel) => {
-        this.response = errorResponse;
-        if (errorResponse.formErrors && errorResponse.formErrors['email']) {
-          this.response.errors.push(errorResponse.formErrors['email'][0]);
-        }
-      }
-    ));
   }
 
   getNewForm() {
@@ -60,7 +48,8 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
         Validators.pattern(PATTERN_ONE_LOWERCASE)
       ]),
       referralUserId: new FormControl(undefined),
-      confirmpassword: new FormControl('')
+      confirmpassword: new FormControl(''),
+      terms: new FormControl(null, [Validators.requiredTrue])
     });
   }
 
@@ -69,7 +58,9 @@ export class RegisterPageComponent extends BaseFormComponent<RegisterUserModel> 
       return {
         referralUserId: params['ref'],
         email: '',
-        password: ''
+        password: '',
+        terms: false,
+        confirmpassword: ''
       };
     });
   }

@@ -39,8 +39,8 @@
         </div>
     </div>
   </div>
-  <ng-template ngl-modal-footer *ngIf="!noFooter">
+  <template ngl-modal-footer *ngIf="!noFooter">
     <button class="notebookCloseButton" (click)="doClose();">Cancel</button>
     <button class="notebookSaveButton" (click)="onSubmit();" type="button">Save and close</button>
-  </ng-template>
+  </template>
 </ngl-modal>

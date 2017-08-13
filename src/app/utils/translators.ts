@@ -9,7 +9,13 @@ interface MinLengthInterface {
 function translateMinLengthValidator(key: string, value: MinLengthInterface): string {
     return 'PASSWORD_LENGHT_VALIDATION:' + value.requiredLength;
 }
-
+interface MinNumberInterface {
+    actual: number;
+    min: number;
+}
+function minValue(key: string, value: MinNumberInterface) {
+    return 'MIN_NUMBER:' + value.min;
+}
 interface PatternInterface {
     actialValue: string;
     requiredPattern: string;
@@ -54,7 +60,9 @@ let dict: {[index: string]: translatable} = {
     'pattern': translatePatternValidator,
     'passwords_dont_match': translateByKeyValidator,
     'dateInvalid': translateDateValidator,
-    'backend': dontProcess
+    'backend': dontProcess,
+    'min': minValue,
+    'BACKEND_ERROR': dontProcess
 };
 
 export function translateValidations(object: {[key: string]: any}): string[] {

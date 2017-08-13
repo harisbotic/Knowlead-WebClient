@@ -29,6 +29,8 @@
     "translation-test|title": "Test translation on english",
 
     "confirm-email-page|submit": "Submit",
+    "confirm-email-page|error-confirming": "Error confirming your email",
+    "confirm-email-page|error-confirming-text": "If you think you did everything correctly please contact us at info@knowlead.co",
 
     "login-page|submit": "Login",
     "login-page|join": "Join for FREE",
@@ -121,6 +123,7 @@
     "AGE_TOO_YOUNG": "You have to be at least {{param}} years old",
     "AGE_TOO_OLD": "You can't be older then {{param}}",
     "DISCUSSION_CLOSED": "Cannot discuss on this p2p anymore",
+    "MIN_NUMBER": "Minimum value should be: {{param}}",
 
     "CALL_END_REQUESTED": "One of peers requested end of the call",
     "CALL_INACTIVE": "We couldn't reach one of peers",

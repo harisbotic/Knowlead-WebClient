@@ -15,7 +15,6 @@ import { RealtimeService } from '../../../services/realtime.service';
   styleUrls: ['./p2p-thread.component.scss']
 })
 export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> implements OnInit {
-
   @Input() _thread: ThreadModel;
   openCode = 0; // When this code equals to number of messages then new offer form is displayed
   @Input() set thread(value: ThreadModel) {
@@ -103,11 +102,15 @@ export class P2pThreadComponent extends BaseFormComponent<P2PMessageModel> imple
   }
 
   submit() {
-    this.subscriptions.push(this.p2pService.message(this.getValue()).delay(100).subscribe(() => {
-      this.restartForm();
-    }, (err) => {
-      this.notificationService.error('Error posting message', err);
-    }));
+    return this.p2pService.message(this.getValue()).delay(100);
+  }
+
+  onSubmitSuccess(result: any) {
+    this.restartForm();
+  }
+
+  onSubmitError(err: any) {
+    this.notificationService.error('Error posting message', err);
   }
 
   schedule() {

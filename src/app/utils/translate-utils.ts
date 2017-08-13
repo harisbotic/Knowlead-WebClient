@@ -7,5 +7,5 @@ export function extractTranslationName(key: string): string {
 }
 
 export function joinTranslation(page: string, name: string, parameter?: any): string {
-    return page + '|' + name + (parameter) ? ':' + parameter : '';
+    return page + '|' + name + ((parameter) ? ':' + parameter : '');
 }

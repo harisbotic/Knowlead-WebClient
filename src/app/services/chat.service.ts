@@ -65,7 +65,7 @@ export class ChatService {
   }
 
   public sendMessage(message: ChatMessageModel) {
-    this.realtimeService.sendChatMessage(message);
+    return this.realtimeService.sendChatMessage(message);
   }
 
   private messageToConverisationMessage = (message: ChatMessageModel): ConverisationMessageModel => {

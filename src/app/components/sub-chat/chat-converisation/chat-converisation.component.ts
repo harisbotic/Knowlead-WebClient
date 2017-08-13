@@ -93,12 +93,16 @@ export class ChatConverisationComponent extends BaseFormComponent<ChatMessageMod
   getNewForm(): FormGroup {
     return new FormGroup({
       recipientId: new FormControl('', Validators.required),
-      message: new FormControl('', Validators.required)
+      message: new FormControl({validators: Validators.required, disabled: true})
     });
   }
   submit() {
-    this.chatService.sendMessage(this.getValue());
+    return this.chatService.sendMessage(this.getValue());
+  }
+  onSubmitSuccess(result: any) {
     this.restartForm();
+  }
+  onSubmitError(err: any) {
   }
   getConverisation(): Observable<ExtendedConverisationMessage[]> {
     return this.chatService.getConverisation(this.user.id)
