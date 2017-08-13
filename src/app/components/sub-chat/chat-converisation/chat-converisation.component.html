@@ -1,1 +1,24 @@
-<div class="tab-wrap" [class.tabClosed]="!opened"><div class="tab" [class.tabActive]="focused" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a><button type="button" (click)="closed($event)"><i class="kl-close"></i></button></div><div class="converisation" *ngIf="opened" (click)="focus()"><div class="start-friendship-wrap" *ngIf="isEmpty &amp;&amp; friendship"><div class="start-friendship-icon"><i class="kl-peer"></i></div><div class="start-friendship-timestamp">{{friendship.updatedAt | date:'mediumDate'}}</div><div class="start-friendship-text">You are now friends on Knowlead.</div></div><div class="full" *ngFor="let message of getConverisation() | async"><div class="col-17"><span></span></div><div class="col-80 posRel"><a routerLink="{{message.from | userProfileLink}}"><app-profile-picture class="chat-profile-picture" [user]="message.from" size="x-small" [class.pullRight]="message.isMine" [class.pullLeft]="!message.isMine" *ngIf="message.showProfile" [class.displayNone]="message.isMine"></app-profile-picture></a><div class="message" [class.myMessage]="message.isMine">{{message.message}}</div></div><div class="col-3"><span></span></div></div></div><form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="opened"><input type="text" autocomplete="false" formControlName="message" placeholder="Type your message..." (focus)="focused = true" (blur)="focused = false" #chatInput="#chatInput"/></form></div>
+
+<div class="tab-wrap" [class.tabClosed]="!opened">
+  <div class="tab" [class.tabActive]="focused" (click)="toggleOpen()"> <a routerLink="{{user | userProfileLink}}">{{user | fullName}}</a>
+    <button type="button" (click)="closed($event)"><i class="kl-close"></i></button>
+  </div>
+  <div class="converisation" *ngIf="opened" (click)="focus()">
+    <div class="start-friendship-wrap" *ngIf="isEmpty &amp;&amp; friendship">
+      <div class="start-friendship-icon"><i class="kl-peer"></i></div>
+      <div class="start-friendship-timestamp">{{friendship.updatedAt | date:'mediumDate'}}</div>
+      <div class="start-friendship-text">You are now friends on Knowlead.</div>
+    </div>
+    <div class="full" *ngFor="let message of getConverisation() | async">
+      <div class="col-17"><span></span></div>
+      <div class="col-80 posRel"><a routerLink="{{message.from | userProfileLink}}">
+          <app-profile-picture class="chat-profile-picture" [user]="message.from" size="x-small" [class.pullRight]="message.isMine" [class.pullLeft]="!message.isMine" *ngIf="message.showProfile" [class.displayNone]="message.isMine"></app-profile-picture></a>
+        <div class="message" [class.myMessage]="message.isMine">{{message.message}}</div>
+      </div>
+      <div class="col-3"><span></span></div>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="opened">
+    <input type="text" autocomplete="false" formControlName="message" placeholder="Type your message..." (focus)="focused = true" (blur)="focused = false" #chatInput>
+  </form>
+</div>

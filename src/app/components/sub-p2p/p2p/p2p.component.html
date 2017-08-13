@@ -1,1 +1,98 @@
-<div class="view-p2p-wrap" *ngIf="p2p"><div class="row profile-info-wrap"><div class="col-85"><div class="col-10"><div class="profile-picture"><a routerLink="{{p2p.createdBy | userProfileLink}}"><app-profile-picture [user]="p2p.createdBy" [uploadable]="false" size="small"></app-profile-picture></a></div></div><div class="col-90"><div class="profile-name-wrap"><div class="row profile-name"><a routerLink="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div></div></div></div><div class="col-15"><div class="bookmark-wrap"><i class="kl-bookmark2" [class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)"></i><span class="bookmark-counter">{{p2p.bookmarkCount}}</span></div></div></div><div class="row p2p-info-wrap"><div class="row" id="firstRow"><div class="col-50"><div class="p2p-section-wrap"><div class="col-20"><div class="section-icon-wrap" [ngClass]="fosColor"><i class="kl-subject"></i></div></div><div class="col-80 section-text-wrap"><div class="row section-title">SUBJECT</div><div class="row section-item">{{p2p.fos?.name}}</div></div></div></div><div class="col-50"><div class="p2p-section-wrap"><div class="col-20"><div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div></div><div class="col-80 section-text-wrap"><div class="row section-title">REWARD</div><div class="row section-item">{{p2p.actualPrice}}</div></div></div></div></div><div class="row"><div class="col-50"><div class="p2p-section-wrap"><div class="col-20"><div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div></div><div class="col-80 section-text-wrap"><div class="row section-title">LANGUAGES</div><div class="row section-item"><span *ngFor="let language of p2p.languages"><span class="single-language">{{language.code | uppercase}} </span></span></div></div></div></div><div class="col-50"><div class="p2p-section-wrap"><div class="col-20"><div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div></div><div class="col-80 section-text-wrap"><div class="row section-title">DEADLINE</div><div class="row section-item"><span *ngIf="p2p.deadline != null; else noDeadline">{{p2p.deadline | date:'y MMM d, H:m'}} ({{p2p.deadline | amTimeAgo}})</span><template #noDeadline="#noDeadline">No deadline</template></div></div></div></div></div></div><div class="p2p-description-wrap"><div class="row title">Request Description</div><div class="row summary-wrap"><div class="summary">{{p2p.text}}</div></div><div class="row"><div class="col-80"><div class="title">Attachments</div></div><div class="col-20"><div class="download-all-button-wrap"></div></div></div><div class="row attachments-wrap"><app-file-thumbnail class="item" *ngFor="let file of p2p.blobs" [file]="file"></app-file-thumbnail></div></div><div class="offer-button-wrap"><span>Offer count:</span><span class="offer-counter">{{p2p.offerCount}}</span></div><div class="scheduled-wrap" *ngIf="p2p.status === P2PStatus.Scheduled || p2p.status === P2PStatus.Finished"><div>Scheduled with:<a routerLink="{{p2p.scheduledWith | userProfileLink}}">{{p2p.scheduledWith | fullName}}</a></div><div>Schedule time:<span class="scheduled-time">{{p2p.dateTimeAgreed | date}}</span></div><button class="call-button" *ngIf="p2p.canCall" (click)="call()">Call {{p2p.scheduledWith | fullName}}</button><button class="call-button" *ngIf="p2p.canLeaveFeedback" (click)="leaveFeedback()">Leave feedback</button></div><div class="discussion-wrap" *ngIf="p2p.canDiscuss"><app-p2p-discussion [p2p]="p2p"></app-p2p-discussion></div></div>
+
+<div class="view-p2p-wrap" *ngIf="p2p">
+  <div class="row profile-info-wrap">
+    <div class="col-85">
+      <div class="col-10">
+        <div class="profile-picture"><a routerLink="{{p2p.createdBy | userProfileLink}}">
+            <app-profile-picture [user]="p2p.createdBy" [uploadable]="false" size="small"></app-profile-picture></a></div>
+      </div>
+      <div class="col-90">
+        <div class="profile-name-wrap">
+          <div class="row profile-name"><a routerLink="{{p2p.createdBy | userProfileLink}}">{{p2p.createdBy | fullName}}</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-15">
+      <div class="bookmark-wrap"><i class="kl-bookmark2" [class.bookmarked]="p2p.didBookmark" (click)="bookmark($event)"></i><span class="bookmark-counter">{{p2p.bookmarkCount}}</span></div>
+    </div>
+  </div>
+  <div class="row p2p-info-wrap">
+    <div class="row" id="firstRow">
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="fosColor"><i class="kl-subject"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">SUBJECT</div>
+            <div class="row section-item">{{p2p.fos?.name}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="priceColor"><i class="kl-currency"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">REWARD</div>
+            <div class="row section-item">{{p2p.actualPrice}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="languageColor"><i class="kl-globe"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">LANGUAGES</div>
+            <div class="row section-item"><span *ngFor="let language of p2p.languages"><span class="single-language">{{language.code | uppercase}} </span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-50">
+        <div class="p2p-section-wrap">
+          <div class="col-20">
+            <div class="section-icon-wrap" [ngClass]="deadlineColor"><i class="kl-clock"></i></div>
+          </div>
+          <div class="col-80 section-text-wrap">
+            <div class="row section-title">DEADLINE</div>
+            <div class="row section-item"><span *ngIf="p2p.deadline != null; else noDeadline">{{p2p.deadline | date:'y MMM d, H:m'}} ({{p2p.deadline | amTimeAgo}})</span>
+              <template #noDeadline>No deadline</template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p2p-description-wrap">
+    <div class="row title">Request Description</div>
+    <div class="row summary-wrap">
+      <div class="summary">{{p2p.text}}</div>
+    </div>
+    <div class="row">
+      <div class="col-80">
+        <div class="title">Attachments</div>
+      </div>
+      <div class="col-20">
+        <div class="download-all-button-wrap"></div>
+      </div>
+    </div>
+    <div class="row attachments-wrap">
+      <app-file-thumbnail class="item" *ngFor="let file of p2p.blobs" [file]="file"></app-file-thumbnail>
+    </div>
+  </div>
+  <div class="offer-button-wrap"><span>Offer count:</span><span class="offer-counter">{{p2p.offerCount}}</span></div>
+  <div class="scheduled-wrap" *ngIf="p2p.status === P2PStatus.Scheduled || p2p.status === P2PStatus.Finished">
+    <div>Scheduled with:<a routerLink="{{p2p.scheduledWith | userProfileLink}}">{{p2p.scheduledWith | fullName}}</a></div>
+    <div>Schedule time:<span class="scheduled-time">{{p2p.dateTimeAgreed | date}}</span></div>
+    <button class="call-button" *ngIf="p2p.canCall" (click)="call()">Call {{p2p.scheduledWith | fullName}}</button>
+    <button class="call-button" *ngIf="p2p.canLeaveFeedback" (click)="leaveFeedback()">Leave feedback</button>
+  </div>
+  <div class="discussion-wrap" *ngIf="p2p.canDiscuss">
+    <app-p2p-discussion [p2p]="p2p"></app-p2p-discussion>
+  </div>
+</div>
