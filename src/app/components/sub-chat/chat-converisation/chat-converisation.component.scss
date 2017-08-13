@@ -131,3 +131,30 @@
     width: 100%;
     display: inline-block;
 }
+
+
+
+///////////////////////////////////////////////////////////
+// MESSAGE CLASSES ////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+.message {
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 3px 0;
+    width: auto;
+    max-width: 260px;
+    word-wrap: break-word;
+}
+
+.message.myMessage {
+    background-color: $knowlead-primary;
+    color: white;
+    float: right;
+}
+
+.message:not(.myMessage) {
+    background-color: #f9f9f9;
+    color: $font-primary-color;
+    float: left;
+}
