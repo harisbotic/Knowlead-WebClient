@@ -85,31 +85,7 @@ export class UserHomePageComponent extends BaseComponent implements OnInit {
       }));
     }));
     this.subscriptions.push(this.storageService.getFOShierarchy().subscribe(root => {
-      this.foses = [];
-      const getChildren = (fos: FOSModel): FOSModel[] => {
-        let ret = [fos];
-        if (fos.children) {
-          for (let child of fos.children) {
-            ret = ret.concat(getChildren(child));
-          }
-        }
-        return ret;
-      }
-      const s = (fos: FOSModel) => {
-        const children = getChildren(fos).map(f => f.coreLookupId);
-        let name = fos.name;
-        for (let parent = fos.parent; parent && parent.parent; parent = parent.parent) {
-          name = parent.name + ' > ' + name;
-        }
-        this.foses.push({
-          label: name,
-          value: getChildren(fos).map(f => f.coreLookupId)
-        });
-        if (fos.children) {
-          fos.children.forEach(s);
-        }
-      };
-      root.children.forEach(s);
+      this.foses = ModelUtilsService.fosesWithChildren(root);
     }));
   }
 

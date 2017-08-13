@@ -12,12 +12,41 @@ import { FRONTEND } from '../utils/urls';
 import { getGmtDate, parseDateIfNecessary } from '../utils/index';
 import { NotebookService } from './notebook.service';
 import { SpecialProfilePictures } from '../models/frontend.constants';
-import { P2PModelExtended, FileStatus, BlobModelExtended } from '../models/frontend.models';
-import { _BlobModel, P2PStatus } from '../models/dto';
+import { P2PModelExtended, FileStatus, BlobModelExtended, DropdownValueInterface } from '../models/frontend.models';
+import { _BlobModel, P2PStatus, FOSModel } from '../models/dto';
 import { findIndex, isNull } from 'lodash';
 
 @Injectable()
 export class ModelUtilsService {
+
+  public static fosesWithChildren(root: FOSModel): DropdownValueInterface<number[]>[] {
+    let foses = <DropdownValueInterface<number[]>[]>[];
+    const getChildren = (fos: FOSModel): FOSModel[] => {
+      let ret = [fos];
+      if (fos.children) {
+        for (let child of fos.children) {
+          ret = ret.concat(getChildren(child));
+        }
+      }
+      return ret;
+    }
+    const s = (fos: FOSModel) => {
+      const children = getChildren(fos).map(f => f.coreLookupId);
+      let name = fos.name;
+      for (let parent = fos.parent; parent && parent.parent; parent = parent.parent) {
+        name = parent.name + ' > ' + name;
+      }
+      foses.push({
+        label: name,
+        value: getChildren(fos).map(f => f.coreLookupId)
+      });
+      if (fos.children) {
+        fos.children.forEach(s);
+      }
+    };
+    root.children.forEach(s);
+    return foses;
+  }
 
   public static expandP2p(p2p: P2PModel, myId: Guid): P2PModelExtended {
     let ret = <P2PModelExtended>p2p;
