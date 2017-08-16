@@ -9,7 +9,7 @@ import { BaseComponent } from '../../../base.component';
 })
 export class EmptyLookupComponent<T> extends BaseComponent implements OnInit {
 
-  isFocused: boolean = false;
+  isFocused = false;
 
   @Input() placeholder = '';
   @Input() lookup: (query: string) => T[] | Observable<T[]>;

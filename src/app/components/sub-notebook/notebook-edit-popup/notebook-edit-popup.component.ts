@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NotebookEditComponent } from '../notebook-edit/notebook-edit.component';
 import { NotebookService } from '../../../services/notebook.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NotebookEditPopupComponent extends NotebookEditComponent {
 
   opened = true;
+  @Input() noFooter: boolean;
 
   constructor(notebookService: NotebookService, activatedRoute: ActivatedRoute, router: Router) {
     super(notebookService, activatedRoute, router);

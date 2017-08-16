@@ -16,7 +16,7 @@ export class FriendshipPageComponent extends BaseComponent implements OnInit {
   actions = FriendshipDTOActions;
   me: ApplicationUserModel;
 
-  constructor(protected chatService: ChatService, protected accountService: AccountService) { super(); }
+  constructor(public chatService: ChatService, protected accountService: AccountService) { super(); }
 
   ngOnInit() {
     this.subscriptions.push(this.accountService.currentUser().subscribe(user =>

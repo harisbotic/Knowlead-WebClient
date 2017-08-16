@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotebookService } from '../../../services/notebook.service';
-import * as _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotebookModel } from '../../../models/dto';
 import { BaseFormComponent } from '../../../base-form.component';
@@ -21,7 +21,7 @@ export class NotebookEditComponent extends BaseFormComponent<NotebookModel> impl
     if (value != null && value !== 'new') {
       this.subscriptions.push(
         this.notebookSerice.getNotebook(parseInt(value, 10)).take(1).subscribe(notebook =>
-          this.applyFullValue(_.cloneDeep(notebook))
+          this.applyFullValue(cloneDeep(notebook))
         )
       );
     } else {

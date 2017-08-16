@@ -2,7 +2,7 @@
     <div class="row chatSection-wrap">
         <div class="chatSection">
             <div class="row" *ngFor="let message of messages">
-                <div class="message" [class.myMessage]="message.senderId === user?.id">{{message.message}}</div>
+                <div class="call-message" [class.myMessage]="message.senderId === user?.id">{{message.message}}</div>
             </div>
         </div>
     </div>

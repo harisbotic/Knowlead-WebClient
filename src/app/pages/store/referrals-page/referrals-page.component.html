@@ -1,4 +1,21 @@
 <div class="grid-container">
+    <div class="row redeem-wrap">
+        <form>
+            <div class="col-40">
+                <div class="redeem-text">Redeem a code:</div>
+            </div>
+            <div class="col-40">
+                <div class="redeem-input-wrap">
+                    <input type="text" name="redeemCode" [(ngModel)]="redeemCode" placeholder="Type in your code here..." class="redeem-input" />
+                </div>
+            </div>
+            <div class="col-20">
+                <div class="redeem-button-wrap">
+                    <button class="redeem-button" (click)="redeem()">Get Minutes</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="row">
         <div class="header-wrap">
             <div class="row centerV">
@@ -21,38 +38,38 @@
     </div>
 
     <div id="refer">
-      <div class="prizes">
-        <div class="page-content">
-          <p class="callout brandon">Your Progress:</p>
-          <ul class="products clearfix">
-            <li class="first"></li>
-            <li *ngFor="let stop of stops" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
-              <div class="circle" [class.claimed]="stop.claimed" [class.notReached]="!stop.claimed && !stop.canClaim">{{stop.count}}</div>
-              <div class="sep"></div>
-              <p>
-                <span [class.special]="stop.last">
+        <div class="prizes">
+            <div class="page-content">
+                <p class="callout brandon">Your Progress:</p>
+                <ul class="products clearfix">
+                    <li class="first"></li>
+                    <li *ngFor="let stop of stops" [class.last]="stop.last" class="product brandon" (click)="claimReward(stop)">
+                        <div class="circle" [class.claimed]="stop.claimed" [class.notReached]="!stop.claimed && !stop.canClaim">{{stop.count}}</div>
+                        <div class="sep"></div>
+                        <p>
+                            <span [class.special]="stop.last">
                   <div class="refReward">{{stop.upperString}}</div>
                   <div class="refReward">{{stop.lowerString}}</div>
                 </span>
-                <span *ngIf="stop.upperExtraString">
+                            <span *ngIf="stop.upperExtraString">
                   <div>+</div>
                   <div class="extraReward">{{stop.upperExtraString}}</div>
                   <div class="extraReward">{{stop.lowerExtraString}}</div>
                 </span>
-              </p>
+                        </p>
 
-              <div class="tooltip-claimReward" *ngIf="stop.canClaim">
-                Claim your reward!
-              </div>
-            </li>
-          </ul>
-          <div class="progress">
-            <div class="mover">
-              <div class="bar clearfix" [style.width]="currentStop?.width + 'px'"></div>
+                        <div class="tooltip-claimReward" *ngIf="stop.canClaim">
+                            Claim your reward!
+                        </div>
+                    </li>
+                </ul>
+                <div class="progress">
+                    <div class="mover">
+                        <div class="bar clearfix" [style.width]="currentStop?.width + 'px'"></div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
 

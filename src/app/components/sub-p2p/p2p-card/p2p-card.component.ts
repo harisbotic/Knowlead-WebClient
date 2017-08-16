@@ -15,11 +15,11 @@ import { P2PDifficultyLevel } from '../../../models/dto';
   styleUrls: ['./p2p-card.component.scss']
 })
 export class P2pCardComponent extends P2pComponent implements OnInit {
-  @Input() set p2pId(value: number) {
-    super.p2pId = value;
+  @Input() set p2pCardId(value: number) {
+    this.p2pId = value;
   }
-  get p2pId(): number {
-    return super.p2pId;
+  get p2pCardId(): number {
+    return this.p2pId;
   }
 
   static colorLevels = ['low', 'mediocre', 'high'];

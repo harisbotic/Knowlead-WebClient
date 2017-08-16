@@ -12,7 +12,7 @@ import { BaseComponent } from '../../base.component';
 })
 export class GuestHomePageComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  // showRegister = false;
+  videoOpened: boolean;
 
   constructor(
       protected realtimeService: RealtimeService,

@@ -157,10 +157,10 @@
 //p2p-description-wrap
 }
 
-.offer-button-wrap {
+.scheduled-wrap {
   padding: 25px;
 
-  .offer-button {
+  .call-button {
     border: none;
     border-radius: $border-radius;
     background-color: $knowlead-primary;
@@ -168,11 +168,23 @@
     width: 150px;
     height: 35px;
     outline: none;
+    display: block;
+    margin-top: 10px;
 
     &:hover {
       background-color: transparentize($knowlead-primary, 0.1);
     }
   }
+
+  .scheduled-time {
+    color: $knowlead-primary;
+    font-weight: bold;
+  }
+
+}
+
+.offer-button-wrap {
+  padding: 25px;
 
   .offer-counter {
     background-color: $background-color;

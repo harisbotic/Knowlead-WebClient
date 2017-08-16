@@ -4,7 +4,6 @@ import { StorageService } from './storage.service';
 import { RegisterUserModel, ResponseModel, ConfirmEmailModel, InterestModel } from './../models/dto';
 import { responseToResponseModel } from './../utils/converters';
 import { USER_DETAILS, REGISTER, CONFIRMEMAIL } from './../utils/urls';
-import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { fillArray } from './../utils/index';
 import { SessionService, SessionEvent } from './session.service';
@@ -15,6 +14,7 @@ import { AnalyticsService } from './analytics.service';
 import { CHANGE_PROFILE_PICTURE, REMOVE_PROFILE_PICTURE, PROFILE_SEARCH } from '../utils/urls';
 import { getGmtDate, getLocalDate } from '../utils/index';
 import { Observable } from 'rxjs/Rx';
+import { cloneDeep, mapValues, omit } from 'lodash';
 
 @Injectable()
 export class AccountService {
@@ -58,6 +58,10 @@ export class AccountService {
     return this.storageService.getFromStorage<ApplicationUserModel>('otherUser', this.userFiller, {id: id, includeDetails: includeDetails});
   }
 
+  public setUserToStorageWithoutDetails(user: ApplicationUserModel) {
+    this.storageService.setToStorage('otherUser', this.userFiller, {id: user.id, includeDetails: false}, user);
+  }
+
   public register(cridentials: RegisterUserModel): Observable<ResponseModel> {
     return this.http.post(REGISTER, cridentials).map(responseToResponseModel).do(response => {
       this.analyticsService.userRegistration(response.object);
@@ -72,7 +76,7 @@ export class AccountService {
 
   public currentUser(): Observable<ApplicationUserModel> {
     return this.storageService.getFromStorage<ApplicationUserModel>('user', this.userFiller).map(user => {
-      return _.cloneDeep(user);
+      return cloneDeep(user);
     });
   }
 
@@ -142,7 +146,7 @@ export class AccountService {
   }
 
   private prepareForPatch(user: ApplicationUserModel, convertToGmt: boolean): ApplicationUserModel {
-    let cl = _.cloneDeep(user);
+    let cl = cloneDeep(user);
     (<any>cl).birthdate = (cl.birthdate) ? (convertToGmt ? getGmtDate(cl.birthdate) : getLocalDate(cl.birthdate)).toISOString() : undefined;
     const toDelete = ['country', 'state', 'motherTongue', 'status', 'interests', 'timezone', 'email', 'id', 'profilePicture',
       'pointsBalance', 'minutesBalance', 'profilePictureId', 'averageRating'];
@@ -157,7 +161,7 @@ export class AccountService {
     if (cl.languages) {
       cl.languages = fillArray(cl.languages, 'coreLookupId');
     }
-    cl = _.mapValues(cl, (v) => v != null ? v : undefined);
+    cl = mapValues(cl, (v) => v != null ? v : undefined);
     return cl;
   }
 
@@ -179,10 +183,10 @@ export class AccountService {
     return this.currentUser().take(1).flatMap((user) => {
 
       let tmp1 = <ApplicationUserModel>{};
-      tmp1.interests = fillArray(_.cloneDeep(user.interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp1.interests = fillArray(cloneDeep(user.interests).map(i => <InterestModel>omit(i, 'fos')), 'fosId');
 
       let tmp2 = <ApplicationUserModel>{};
-      tmp2.interests = fillArray(_.cloneDeep(interests).map(i => <InterestModel>_.omit(i, 'fos')), 'fosId');
+      tmp2.interests = fillArray(cloneDeep(interests).map(i => <InterestModel>omit(i, 'fos')), 'fosId');
 
       let patch = fastjsonpatch.compare(tmp1, tmp2);
       return this.patchUser(patch);

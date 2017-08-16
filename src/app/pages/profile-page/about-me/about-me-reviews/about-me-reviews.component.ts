@@ -9,5 +9,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./about-me-reviews.component.scss']
 })
 export class AboutMeReviewsComponent extends SubProfileBaseComponent implements OnInit {
-    constructor(accountService: AccountService, activatedRoute: ActivatedRoute) { super(accountService, activatedRoute); }
+  reviews: any[];
+  constructor(accountService: AccountService, activatedRoute: ActivatedRoute) { super(accountService, activatedRoute); }
 }

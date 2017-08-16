@@ -1,12 +1,12 @@
 import { ConnectionClosed } from "./Common"
 import { IConnection } from "./IConnection"
-import { Connection } from "./Connection"
 import { TransportType } from "./Transports"
 import { Subject, Observable } from "./Observable"
-export { Connection } from "./Connection"
 export { TransportType } from "./Transports"
-import { IHubProtocol, MessageType, HubMessage, CompletionMessage, ResultMessage, InvocationMessage } from "./IHubProtocol";
+export { HttpConnection } from "./HttpConnection"
+import { IHubProtocol, MessageType, HubMessage, CompletionMessage, ResultMessage, InvocationMessage, NegotiationMessage } from "./IHubProtocol";
 import { JsonHubProtocol } from "./JsonHubProtocol";
+import { TextMessageFormat } from "./Formatters"
 
 export class HubConnection {
     private connection: IConnection;
@@ -16,14 +16,8 @@ export class HubConnection {
     private connectionClosedCallback: ConnectionClosed;
     private protocol: IHubProtocol;
 
-    static create(url: string, queryString?: string): HubConnection {
-        return new this(new Connection(url, queryString))
-    }
-
-    constructor(connection: IConnection);
-    constructor(url: string, queryString?: string);
-    constructor(connectionOrUrl: IConnection | string, queryString?: string) {
-        this.connection = typeof connectionOrUrl === "string" ? new Connection(connectionOrUrl, queryString) : connectionOrUrl;
+    constructor(connection: IConnection) {
+        this.connection = connection;
         this.connection.onDataReceived = data => {
             this.onDataReceived(data);
         };
@@ -46,7 +40,7 @@ export class HubConnection {
 
             switch (message.type) {
                 case MessageType.Invocation:
-                    this.InvokeClientMethod(<InvocationMessage>message);
+                    this.invokeClientMethod(<InvocationMessage>message);
                     break;
                 case MessageType.Result:
                 case MessageType.Completion:
@@ -66,7 +60,7 @@ export class HubConnection {
         }
     }
 
-    private InvokeClientMethod(invocationMessage: InvocationMessage) {
+    private invokeClientMethod(invocationMessage: InvocationMessage) {
         let method = this.methods.get(invocationMessage.target);
         if (method) {
             method.apply(this, invocationMessage.arguments);
@@ -96,8 +90,11 @@ export class HubConnection {
         }
     }
 
-    start(transportType?: TransportType): Promise<void> {
-        return this.connection.start(transportType);
+    async start(): Promise<void> {
+        await this.connection.start();
+        await this.connection.send(
+            TextMessageFormat.write(
+                JSON.stringify(<NegotiationMessage>{ protocol: this.protocol.name()})));
     }
 
     stop(): void {
@@ -105,7 +102,7 @@ export class HubConnection {
     }
 
     stream<T>(methodName: string, ...args: any[]): Observable<T> {
-        let invocationDescriptor = this.createInvocation(methodName, args);
+        let invocationDescriptor = this.createInvocation(methodName, args, false);
 
         let subject = new Subject<T>();
 
@@ -139,8 +136,16 @@ export class HubConnection {
         return subject;
     }
 
+    send(methodName: string, ...args: any[]): Promise<void> {
+        let invocationDescriptor = this.createInvocation(methodName, args, true);
+
+        let message = this.protocol.writeMessage(invocationDescriptor);
+
+        return this.connection.send(message);
+    }
+
     invoke(methodName: string, ...args: any[]): Promise<any> {
-        let invocationDescriptor = this.createInvocation(methodName, args);
+        let invocationDescriptor = this.createInvocation(methodName, args, false);
 
         let p = new Promise<any>((resolve, reject) => {
             this.callbacks.set(invocationDescriptor.invocationId, (invocationEvent: CompletionMessage | ResultMessage) => {
@@ -178,7 +183,7 @@ export class HubConnection {
         this.connectionClosedCallback = callback;
     }
 
-    private createInvocation(methodName: string, args: any[]): InvocationMessage {
+    private createInvocation(methodName: string, args: any[], nonblocking: boolean): InvocationMessage {
         let id = this.id;
         this.id++;
 
@@ -187,7 +192,7 @@ export class HubConnection {
             invocationId: id.toString(),
             target: methodName,
             arguments: args,
-            nonblocking: false
+            nonblocking: nonblocking
         };
     }
 }

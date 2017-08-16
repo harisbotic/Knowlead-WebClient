@@ -10,11 +10,11 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Observable, BehaviorSubject, Subject } from 'rxjs/Rx';
 import { ApplicationUserModel, FriendshipModel, FriendshipStatus, ChatMessageModel, Guid } from '../models/dto';
 import { AccountService } from './account.service';
-import * as _ from 'lodash';
 import { RealtimeService } from './realtime.service';
 import { GET_CHAT_CONVERISATION, GET_CONVERSATION_HISTORY } from '../utils/urls';
 import { sortByDateFunction } from '../utils/index';
 import { ConversationModel } from '../models/dto';
+import { findIndex, uniqBy } from 'lodash';
 
 export interface ConverisationMessageModel extends ChatMessageModel {
   converisation: Guid;
@@ -122,7 +122,7 @@ export class ChatService {
     this.historySubject.take(1).subscribe(history => {
       history = modificator(history);
       history.sort(sortByDateFunction<ConversationModel>('timestamp'));
-      history = _.uniqBy(history, 'rowKey');
+      history = uniqBy(history, 'rowKey');
       this.historySubject.next(history);
     });
   }
@@ -159,7 +159,7 @@ export class ChatService {
 
   private changeFriendship(otherId: string, friendship: FriendshipModel) {
     this.getFriends().take(1).subscribe(friends => {
-      let idx = _.findIndex(friends, x => x.applicationUserBiggerId === otherId || x.applicationUserSmallerId === otherId);
+      let idx = findIndex(friends, x => x.applicationUserBiggerId === otherId || x.applicationUserSmallerId === otherId);
       if (idx !== -1) {
         if (friendship != null) {
           console.debug('Modifying existing friendship');

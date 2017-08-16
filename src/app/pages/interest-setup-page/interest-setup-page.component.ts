@@ -3,8 +3,8 @@ import { StorageService } from './../../services/storage.service';
 import { AccountService } from '../../services/account.service';
 import { ApplicationUserModel, FOSModel, InterestModel } from '../../models/dto';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
 import { BaseComponent } from '../../base.component';
+import { find, remove } from 'lodash';
 
 @Component({
   selector: 'app-interest-setup-page',
@@ -60,7 +60,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
   }
 
   findInterestByFos(fos: FOSModel): InterestModel {
-    return _.find(this.interests, (interest: InterestModel) => {
+    return find(this.interests, (interest: InterestModel) => {
       return interest.fos.code === fos.code;
     });
   }
@@ -87,7 +87,7 @@ export class InterestSetupPageComponent extends BaseComponent implements OnInit 
       console.error('${fos.name} wasn\'t added, but tried to remove it');
     } else {
       let toDelete = this.findInterestByFos(fos);
-      _.remove(this.interests, (f) => { return toDelete === f; });
+      remove(this.interests, (f) => { return toDelete === f; });
     }
   }
 

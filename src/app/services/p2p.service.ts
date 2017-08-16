@@ -2,19 +2,18 @@ import { Injectable, Injector } from '@angular/core';
 import { Http, RequestOptionsArgs } from '@angular/http';
 import { P2P_NEW } from './../utils/urls';
 import { Observable } from 'rxjs/Rx';
-import * as _ from 'lodash';
 import { P2P_DELETE, P2P_MESSAGE, P2P_SCHEDULE, P2P_ACCEPT_OFFER, P2P_REMOVE_BOOKMARK, P2P_ADD_BOOKMARK,
-    P2P_RECOMMEND } from '../utils/urls';
+    P2P_RECOMMEND, P2P_ALL } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { StorageService } from './storage.service';
 import { P2PMessageModel, P2PModel } from '../models/dto';
 import { ModelUtilsService } from './model-utils.service';
 import { StorageFiller } from './storage.subject';
 import { ListP2PsRequest } from '../models/constants';
-import { P2P_ALL } from '../utils/urls';
 import { AnalyticsService, AnalyticsEventType } from './analytics.service';
 import { RealtimeService } from './realtime.service';
 import { getGmtDate, getLocalDate } from '../utils/index';
+import { isNull, omitBy } from 'lodash';
 
 @Injectable()
 export class P2pService {
@@ -57,7 +56,7 @@ export class P2pService {
   }
 
   create(value: P2PModel): Observable<P2PModel> {
-    let tmp = _(value).omitBy(_.isNull).value();
+    let tmp = omitBy(value, isNull);
     return this.modifyP2p(this.http.post(P2P_NEW, tmp)
         .map(responseToResponseModel)
         .map(o => o.object)
@@ -73,7 +72,7 @@ export class P2pService {
 
     let tmp = getLocalDate(offset ? offset : new Date());
 
-    return this.transformP2ps(this.http.get(P2P_RECOMMEND, {search: query})
+    return this.transformP2ps(this.http.get(P2P_ALL + '/' + ListP2PsRequest.Recommended, {search: query})
       .map(responseToResponseModel)
       .map(v => v.object));
   }
@@ -84,7 +83,12 @@ export class P2pService {
       .map(v => v.object));
   }
 
-  getByFosId(fosId: number) {
+  getByFosIds(fosIds: number[]): Observable<P2PModel[]> {
+    let url = P2P_ALL + '/' + ListP2PsRequest.Recommended + '?' + fosIds.map(v => 'fosIds=' + v).join('&');
+    url += '&offset=1000';
+    return this.transformP2ps(this.http.get(url)
+      .map(responseToResponseModel)
+      .map(v => v.object));
   }
 
   private transformP2ps(all: Observable<P2PModel[]>): Observable<P2PModel[]> {
@@ -98,7 +102,17 @@ export class P2pService {
 
   private modifyP2p(o: Observable<P2PModel>): Observable<P2PModel> {
     return o.flatMap(p2p => this.modelUtilsService.fillP2p(p2p))
-      .do((p2p: P2PModel) => this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p));
+      .do(this.setP2pToStorage.bind(this));
+  }
+
+  public setP2pToStorage(p2p: P2PModel) {
+    this.storageService.setToStorage('p2p', this.p2pFiller, {id: p2p.p2pId}, p2p);
+  }
+
+  public setP2pMessagesToStorage(p2pMessages: P2PMessageModel[]) {
+    if (p2pMessages && p2pMessages.length > 0) {
+      this.storageService.setToStorage('p2pMessages', this.p2pMessagesFiller, {id: p2pMessages[0].p2pId}, p2pMessages);
+    }
   }
 
   private modifyP2pMessage(o: Observable<P2PMessageModel>): Observable<P2PMessageModel> {
@@ -132,7 +146,7 @@ export class P2pService {
     if (typeof(id) === 'number' || typeof(id) === 'string') {
       return this.storageService.getFromStorage<P2PModel>('p2p', this.p2pFiller, {id: id});
     } else {
-      this.storageService.setToStorage<P2PModel>('p2p', this.p2pFiller, {id: id.p2pId}, id);
+      this.setP2pToStorage(id);
       return this.get(id.p2pId);
     }
     // return this.http.get(P2P + "/" + id).map(responseToResponseModel).map(v => v.object);

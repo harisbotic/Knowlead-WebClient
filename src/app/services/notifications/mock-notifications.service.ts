@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseNotificationSource } from './notification.source';
-import * as _ from 'lodash';
+import { times } from 'lodash';
 
 @Injectable()
 export class MockNotificationsService extends BaseNotificationSource {
@@ -10,7 +10,7 @@ export class MockNotificationsService extends BaseNotificationSource {
   constructor() { super(undefined); this.stats.unread = 10; this.refreshStats(); this.loadMore(); }
 
   loadMore() {
-    this.addNotifications(_.times(5, () => {
+    this.addNotifications(times(5, () => {
       return {
         notificationId: '',
         notificationType: 'test',

@@ -2,13 +2,13 @@ import { Injectable, Injector } from '@angular/core';
 import { StorageService } from './storage.service';
 import { NotebookModel } from '../models/dto';
 import { Observable } from 'rxjs/Rx';
-import * as _ from 'lodash';
 import * as fastjsonpatch from 'fast-json-patch';
 import { Http } from '@angular/http';
 import { NOTEBOOK } from '../utils/urls';
 import { responseToResponseModel } from '../utils/converters';
 import { ModelUtilsService } from './model-utils.service';
 import { AnalyticsService } from './analytics.service';
+import { cloneDeep } from 'lodash';
 
 @Injectable()
 export class NotebookService {
@@ -30,7 +30,7 @@ export class NotebookService {
   }
 
   prepareNotebookForPatch(notebook: NotebookModel): NotebookModel {
-    const ret = _.cloneDeep(notebook);
+    const ret = cloneDeep(notebook);
     delete ret.createdAt;
     delete ret.createdById;
     delete ret.createdBy;

@@ -19,10 +19,10 @@
         </div>
         <div class="row">
           <div class="col-50">
-            <div class="profile-minutes">{{user.minutesBalance}} Minutes</div>
+            <div class="profile-minutes tooltip-parent">{{user.minutesBalance}} Minutes<span class="tooltip-minutes tooltip-200">How minutes work: <br><br>Student gives minutes. <br>Teacher gains minutes. <br><br>Go to <a href="/store">Store</a> page for more.</span></div>
           </div>
           <div class="col-50">
-            <div class="profile-score">{{user.pointsBalance}} Score</div>
+            <div class="profile-score tooltip-parent">{{user.pointsBalance}} Score<span class="tooltip-minutes tooltip-175">You gain score both by studying and teaching.</span></div>
           </div>
         </div>
         <div class="row">
@@ -97,12 +97,13 @@
                   <div class="title">Upcoming Events                </div>
                 </div>
                 <div class="col-20">
-                  <div class="info-icon"><i class="kl-info"></i></div>
+                  <div class="info-icon"><i class="kl-info tooltip-parent">
+                      <div class="tooltip-counter tooltip-175"><i class="kl-circle" id="student-circle"></i><span>- You are a Student</span><br><i class="kl-circle" id="teacher-circle"></i><span>- You are a Teacher</span></div></i></div>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="upcoming?.length !== 0; else noUpcomingEvents">
+          <div *ngIf="upcoming &amp;&amp; upcoming.length !== 0; else noUpcomingEvents">
             <div class="upcoming-events-content" *ngFor="let p2p of upcoming; index as i; trackBy: trackByFn">
               <div *ngIf="i === 0;then firstevent else upcomingevents"></div>
               <ng-template #firstevent>
@@ -169,8 +170,13 @@
     <div class="col-75">
       <div class="main-section-wrap">
         <div class="top-elements">
-          <div class="col-50"><span id="searchTitle">All P2P requests are displayed</span></div>
           <div class="col-50">
+            <ng-select class="search-p2p-input" placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch"></ng-select>
+          </div>
+          <div class="col-20">
+            <button [disabled]="!!!fosToSearch" (click)="searchByFoses()">Search</button>
+          </div>
+          <div class="col-30">
             <div class="create-request-button-wrap">
               <button class="create-request-button" (click)="toggleCreateRequest()" [class.create-request-button-opened]="createRequestState === 'open'">Create a Request</button>
             </div>
@@ -191,7 +197,7 @@
                 <div class="request-type-title">Peer-to-Peer</div>
               </div>
               <div class="row">
-                <div class="request-type-description">Engage in direct video communication where you have full interactive experience with your tutor.</div>
+                <div class="request-type-description">Engage in direct video communication where you have full interactive experience with your tutor. Create a request with specified details, wait for users to give their offer, and schedule a class with a tutor of your choice.</div>
               </div>
             </div>
             <div class="col-15"><a class="create-p2p-button" routerLink="/p2p">Create</a></div>

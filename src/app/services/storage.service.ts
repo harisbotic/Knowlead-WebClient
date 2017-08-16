@@ -2,12 +2,12 @@ import { Injectable, Injector } from '@angular/core';
 import { STORE_ACCESS_TOKEN, StorageKey } from './../utils/storage.constants';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Http } from '@angular/http';
-import { parseJwt, iterateObjectAlphabetically, treeify } from './../utils/index';
-import { CountryModel, LanguageModel, StateModel, FOSModel } from './../models/dto';
-import * as _ from 'lodash';
+import { parseJwt, iterateObjectAlphabetically, treeify } from '../utils/index';
+import { CountryModel, LanguageModel, StateModel, FOSModel } from '../models/dto';
 import { SessionService, SessionEvent } from './session.service';
 import { StorageSubject, StorageFiller } from './storage.subject';
 import { STORE_REFRESH_TOKEN } from '../utils/storage.constants';
+import { cloneDeep, sortBy } from 'lodash';
 
 @Injectable()
 export class StorageService {
@@ -137,16 +137,8 @@ export class StorageService {
     return this.getFromStorage<LanguageModel[]>('languages', null);
   }
 
-  public getStates(country: CountryModel): Observable<StateModel[]> {
-    return this.getFromStorage<StateModel[]>('states', null, {countryId: country.geoLookupId});
-  }
-
   public getFOSes(): Observable<FOSModel[]> {
     return this.getFromStorage<FOSModel[]>('FOSes', null);
-  }
-
-  public getFOSvotes(fos: FOSModel): Observable<number> {
-    return this.getFromStorage<number>('FOSvotes', null, {id: fos.coreLookupId});
   }
 
   public getFOShierarchy(): Observable<FOSModel> {
@@ -155,14 +147,14 @@ export class StorageService {
         return this.fosHierarchy;
       }
       console.debug('Creating fos hierarchy');
-      let ret = <FOSModel>{children: treeify(_.cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
+      let ret = <FOSModel>{children: treeify(cloneDeep(foses), 'coreLookupId', 'parentFosId', 'children')};
       this.fosByIds = {};
       let recurse = (model: FOSModel) => {
         if (model.coreLookupId) {
           this.fosByIds[model.coreLookupId] = model;
         }
         if (model.children != null) {
-          model.children = _.sortBy(model.children, 'name');
+          model.children = sortBy(model.children, 'name');
           model.children.forEach(child => child.parent = model);
           model.children.forEach(recurse);
         }
@@ -177,6 +169,10 @@ export class StorageService {
     return this.getFOShierarchy().map(() => {
       return this.fosByIds[id];
     });
+  }
+
+  public setFosToStorage(fos: FOSModel) {
+    // console.warn('Not setting fos value to storage');
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../../services/notifications/notification.service';
-import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
 import { PopupNotificationModel } from '../../../models/frontend.models';
 import { FeedbackService } from '../../../services/feedback.service';

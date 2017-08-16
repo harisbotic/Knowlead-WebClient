@@ -28,6 +28,7 @@ export interface P2PModelExtended extends P2PModel {
     canCall: boolean;
     canDelete: boolean;
     canLeaveFeedback: boolean;
+    canDiscuss: boolean;
     actualPrice: number; // if p2p is scheduled this is price agreed, else it is initial actual
     isMy: boolean;
     otherScheduledUserId: Guid;

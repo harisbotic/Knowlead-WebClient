@@ -2,6 +2,10 @@ ng-template(#editButton)
   button(type="submit") Save
   button((click)="cancelAction()") Cancel
 
+ng-template(#showFemale).
+  Female
+
+
 form((submit)="onSubmit()" [formGroup]="form")
   .row
     .col-100
@@ -45,4 +49,10 @@ form((submit)="onSubmit()" [formGroup]="form")
             .profileInfo-item
               .col-37.itemTopic Email
               .col-63.item.
-                {{ user.email }}  
+                {{ user.email }}
+          .row
+            .profileInfo-item
+              .col-37.itemTopic Gender
+              .col-63.item(*ngIf="user.isMale; else showFemale").
+                Male
+                  

@@ -1,44 +1,108 @@
 @import "../../../../kl-styles/variables.scss";
 
+
+// Redeem Code Section
+
+.redeem-wrap {
+	height: 150px;
+	width: $full-grid-width;
+	background-color: white;
+	border: 5px solid $knowlead-primary;
+	border-top: none;
+}
+
+.redeem-text {
+	font-size: 50px;
+	line-height: 150px;
+	font-weight: bold;
+	text-align: center;
+	margin-left: 45px;
+}
+
+.redeem-input-wrap {
+	display: flex;
+	align-items: center;
+	height: 150px;
+}
+
+input.redeem-input[type=text] {
+	font-size: 30px;
+	font-weight: bold;
+	width: 100%;
+	color: $font-secondary-color;
+	border-radius: $border-radius;
+	border: none;
+	border-bottom: 2px solid $font-primary-color;
+	outline: none;
+	text-align: center;
+
+	&::-webkit-input-placeholder {
+		color: $placeholder-color;
+		font-size: 30px;
+		font-weight: bold;
+	}
+}
+
+.redeem-button-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 150px;
+}
+
+.redeem-button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: $border-radius;
+	background-color: $knowlead-primary;
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
+	outline: none;
+}
+
+
+
+//Referr a Friend Section
 .header-wrap {
-    width: $full-grid-width;
-    height: 300px;
-    background-image: url("/assets/images/referral-cover.jpg");
-    color: white;
-    position: relative;
-    margin-bottom: 30px;
-    background-size: contain;
+	width: $full-grid-width;
+	height: 300px;
+	background-image: url("/assets/images/referral-cover.jpg");
+	color: white;
+	position: relative;
+	margin-bottom: 30px;
+	background-size: contain;
 
-    .headerInfo-wrap {
-        height: 100%;
-        width: 100%;
-        // background-color: blue;
-    }
+	.headerInfo-wrap {
+		height: 100%;
+		width: 100%;
+		// background-color: blue;
+	}
 
-    .headerTitle {
-        font-size: 40px;
-        font-weight: bold;
-        text-transform: uppercase;;
-        text-align: center;
-    }
+	.headerTitle {
+		font-size: 40px;
+		font-weight: bold;
+		text-transform: uppercase;;
+		text-align: center;
+	}
 
-    #titleBelow {
-        margin-top: -20px;
-    }
+	#titleBelow {
+		margin-top: -20px;
+	}
 
-    .headerText {
-        font-size: 18px;
-        text-align: center;
-    }
+	.headerText {
+		font-size: 18px;
+		text-align: center;
+	}
 
-    .referralLink {
-        margin-top: 10px;
-        text-align: center;
-        padding: 5px 15px;
-        background-color: white;
-        border-radius: $border-radius;
-        color: $knowlead-primary;
-    }
+	.referralLink {
+		margin-top: 10px;
+		text-align: center;
+		padding: 5px 15px;
+		background-color: white;
+		border-radius: $border-radius;
+		color: $knowlead-primary;
+	}
 }
 
 
@@ -49,12 +113,12 @@ form{
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+	content: " "; /* 1 */
+	display: table; /* 2 */
 }
 
 .clearfix:after {
-    clear: both;
+	clear: both;
 }
 
 
@@ -62,7 +126,7 @@ form{
 #refer .prizes{
 	width: $full-grid-width;
 	background: #FFF;
-    padding: 30px 45px 100px 45px;
+	padding: 30px 45px 100px 45px;
 }
 
 #refer .prizes .page-content{
@@ -114,7 +178,7 @@ form{
 #refer .prizes .products li.product{
 	height: 100%;
 	color: $font-primary-color;
-    font-weight: bold;
+	font-weight: bold;
 	width: 140px;
 	margin-right: 0px;
 	float: left;
@@ -122,14 +186,14 @@ form{
 }
 
 #refer .prizes .products li.product.last{
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 #refer .prizes .products li.first{
-    width: 10px;
-    float: left;
-    position: relative;
-    height: 100%;
+	width: 10px;
+	float: left;
+	position: relative;
+	height: 100%;
 }
 
 #refer .prizes .products li.product .circle{
@@ -141,46 +205,46 @@ form{
 	overflow: hidden;
 	font-weight: bold;
 	margin: 0 auto;
-    border: 1px solid;
+	border: 1px solid;
 
 	color: white;
 	background: $knowlead-primary;
 	border-color: white;
-    box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
+	box-shadow: 0 0 5px transparentize($font-primary-color, 0.3);
 }
 
 #refer .prizes .products li.product .claimed {
-    color: $disabled-color;
-    background: $post-type-secondary-color;
-    border-color: $disabled-color;
-    box-shadow: none;
+	color: $disabled-color;
+	background: $post-type-secondary-color;
+	border-color: $disabled-color;
+	box-shadow: none;
 
 
-    ~ p {
-        color: $disabled-color;
-    }
+	~ p {
+		color: $disabled-color;
+	}
 }
 
 #refer .prizes .products li.product .notReached {
-    color: $font-primary-color;
-    background: $hover-dark-color;
-    border-color: $disabled-color;
-    box-shadow: none;
+	color: $font-primary-color;
+	background: $hover-dark-color;
+	border-color: $disabled-color;
+	box-shadow: none;
 }
 
 .special {
-    color: $knowlead-primary;
-    font-weight: bold;
-    font-size: 20px;
+	color: $knowlead-primary;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .refReward {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .extraReward {
-    color: $knowlead-primary;
-    font-weight: bold;
+	color: $knowlead-primary;
+	font-weight: bold;
 }
 
 #refer .prizes .products li.product .sep{
@@ -220,27 +284,27 @@ form{
 	width: 100%;
 	border: 1px solid $hover-dark-color;
 	position: absolute;
-    border-radius: $border-radius;
+	border-radius: $border-radius;
 	top: -47px;
 	left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
 	display: none;
 	background-color: $knowlead-secondary;
-    color: white;
-    text-align: center;
-    line-height: 40px;
+	color: white;
+	text-align: center;
+	line-height: 40px;
 
-    &:before {
-        content: "";
-        display: block;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        background-color: $knowlead-secondary;
-        top: 33px;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-    }
+	&:before {
+		content: "";
+		display: block;
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		background-color: $knowlead-secondary;
+		top: 33px;
+		left: 50%;
+		transform: translateX(-50%) rotate(45deg);
+	}
 
 }
 
@@ -295,80 +359,80 @@ form{
 
 
 .referralBottomElements {
-    margin: 30px 0;
-    width: $full-grid-width;
+	margin: 30px 0;
+	width: $full-grid-width;
 
-    .cicrle-wrap {
-        position: relative;
-        height: 300px;
-        width: 100%;
-    }
+	.cicrle-wrap {
+		position: relative;
+		height: 300px;
+		width: 100%;
+	}
 
-    .completedReferrals-wrap {
-        width: 250px;
-        height: 250px;
-        background-color: white;
-        border: 1px solid $hover-dark-color;
-        border-radius: 50%;
-    }
+	.completedReferrals-wrap {
+		width: 250px;
+		height: 250px;
+		background-color: white;
+		border: 1px solid $hover-dark-color;
+		border-radius: 50%;
+	}
 
-    .completedRefferals-number {
-        font-weight: bold;
-        font-size: 100px;
-        margin-top: -17px;
-    }
+	.completedRefferals-number {
+		font-weight: bold;
+		font-size: 100px;
+		margin-top: -17px;
+	}
 
 
-    .completedReferrals-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, 40px);
-        font-size: 16px;
-        font-weight: bold;
-        color: $knowlead-secondary;
-        text-transform: capitalize;
-        width: 250px;
-        text-align: center;
-    }
+	.completedReferrals-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, 40px);
+		font-size: 16px;
+		font-weight: bold;
+		color: $knowlead-secondary;
+		text-transform: capitalize;
+		width: 250px;
+		text-align: center;
+	}
 
-    .pendingReferrals-wrap {
-        width: 100%;
-        height: 300px;
-        background-color: white;
-        border-radius: $border-radius;
-        border: 1px solid $hover-dark-color;
-    }
+	.pendingReferrals-wrap {
+		width: 100%;
+		height: 300px;
+		background-color: white;
+		border-radius: $border-radius;
+		border: 1px solid $hover-dark-color;
+	}
 
-    .pendingReferrals-title {
-        height: 50px;
-        font-weight: bold;
-        font-size: 16px;
-        border-bottom: 2px solid $divider-color;
-        line-height: 50px;
-        padding-left: 20px;
-    }
+	.pendingReferrals-title {
+		height: 50px;
+		font-weight: bold;
+		font-size: 16px;
+		border-bottom: 2px solid $divider-color;
+		line-height: 50px;
+		padding-left: 20px;
+	}
 
-    .pending-wrap {
-        height: 40px;
-        border-bottom: 1px solid $divider-color;
-        line-height: 40px;
-    }
+	.pending-wrap {
+		height: 40px;
+		border-bottom: 1px solid $divider-color;
+		line-height: 40px;
+	}
 
-    .pendingEmail {
-        text-decoration: none;
-        color: $font-primary-color;
-        font-weight: bold;
-        border-right: 1px solid $divider-color;
-        margin-left: 50px;
-    }
+	.pendingEmail {
+		text-decoration: none;
+		color: $font-primary-color;
+		font-weight: bold;
+		border-right: 1px solid $divider-color;
+		margin-left: 50px;
+	}
 
-    .pendingStatus {
-        text-decoration: none;
-        color: $knowlead-primary;
-        font-weight: bold;
-        text-transform: capitalize;
-        margin-left: 50px;
-    }
+	.pendingStatus {
+		text-decoration: none;
+		color: $knowlead-primary;
+		font-weight: bold;
+		text-transform: capitalize;
+		margin-left: 50px;
+	}
 
 }

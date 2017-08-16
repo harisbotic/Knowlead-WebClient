@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FOSModel } from './../../../models/dto';
 import { stringContains } from '../../../utils/index';
-import * as _ from 'lodash';
 import { BaseComponent } from '../../../base.component';
 import { ActivatedRoute } from '@angular/router';
+import { clone } from 'lodash';
 
 @Component({
   selector: 'app-interest-setup-selector',
@@ -55,7 +55,7 @@ export class InterestSetupSelectorComponent extends BaseComponent implements OnI
         this.subcategories.push(fos);
       } else {
         if (!!fos.children) {
-          let tmp = _.clone(fos);
+          let tmp = clone(fos);
           tmp.children = [];
           fos.children.forEach(f => {
             this.searchFos(f, 2, tmp);

@@ -19,11 +19,25 @@ ng-template(#noUpcomingEvents)
                 a(routerLink="{{user | userProfileLink}}") {{user | fullName}}
         .row
           .col-50
-            .profile-minutes.
-              {{user.minutesBalance}} Minutes
+            .profile-minutes.tooltip-parent
+              | {{user.minutesBalance}} Minutes
+              span.tooltip-minutes.tooltip-200
+                | How minutes work: 
+                br
+                br
+                | Student gives minutes. 
+                br
+                | Teacher gains minutes. 
+                br
+                br
+                | Go to 
+                a(href='/store') Store
+                |  page for more.
           .col-50
-            .profile-score.
-              {{user.pointsBalance}} Score
+            .profile-score.tooltip-parent
+              | {{user.pointsBalance}} Score
+              span.tooltip-minutes.tooltip-175
+                | You gain score both by studying and teaching.
         .row
           .sidebar-item-wrap
             a(routerLink="/profilesetup")
@@ -92,8 +106,14 @@ ng-template(#noUpcomingEvents)
                     Upcoming Events                
                 .col-20
                   .info-icon
-                    i.kl-info
-          div(*ngIf="upcoming?.length !== 0; else noUpcomingEvents")
+                    i.kl-info.tooltip-parent
+                      .tooltip-counter.tooltip-175
+                        i.kl-circle#student-circle
+                        span - You are a Student
+                        br
+                        i.kl-circle#teacher-circle
+                        span - You are a Teacher
+          div(*ngIf="upcoming && upcoming.length !== 0; else noUpcomingEvents")
             .upcoming-events-content(*ngFor="let p2p of upcoming; index as i; trackBy: trackByFn")
             
               div(*ngIf="i === 0;then firstevent else upcomingevents")
@@ -113,9 +133,11 @@ ng-template(#noUpcomingEvents)
       .main-section-wrap
         .top-elements
           .col-50
-            span#searchTitle All P2P requests are displayed
-            //- input(type="text", placeholder="interests, bookmarked, math, angular...").search-p2p-input
-          .col-50
+            //- span#searchTitle Search
+            ng-select(placeholder="Field of study" [options]="foses" [(ngModel)]="fosToSearch").search-p2p-input
+          .col-20
+            button([disabled]="!!!fosToSearch" (click)="searchByFoses()") Search
+          .col-30
             .create-request-button-wrap
               button.create-request-button(
                 (click)="toggleCreateRequest()"
@@ -134,7 +156,7 @@ ng-template(#noUpcomingEvents)
                 .request-type-title Peer-to-Peer
               .row
                 .request-type-description.
-                  Engage in direct video communication where you have full interactive experience with your tutor.
+                  Engage in direct video communication where you have full interactive experience with your tutor. Create a request with specified details, wait for users to give their offer, and schedule a class with a tutor of your choice.
             .col-15
               a.create-p2p-button(routerLink="/p2p") Create
 

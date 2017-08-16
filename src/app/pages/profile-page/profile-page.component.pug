@@ -46,7 +46,7 @@
 						button.edit-profile-button 
 							i.kl-edit-profile 
 							span  Edit Profile
-				.friendship-options-wrap(*ngIf="!isMy && target")
+				.friendship-options-wrap(*ngIf="!isMy && !!target")
 					app-friendship-strip([otherId]="target.id")
 		.aboutMe-content
 			router-outlet
