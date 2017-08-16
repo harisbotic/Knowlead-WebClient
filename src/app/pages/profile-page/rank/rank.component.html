@@ -1,0 +1,22 @@
+
+<table>
+  <tr>
+    <th></th>
+    <th>Name </th>
+    <th>Teaching</th>
+    <th>Studying</th>
+    <th>Total Points</th>
+  </tr>
+  <tr *ngFor="let user of users; index as i" [class.user-bolded]="user.isMe">
+    <td>
+      <app-profile-picture [user]="user" size="x-small"></app-profile-picture>
+    </td>
+    <td>{{ user?.name }} {{ user?.surname }}</td>
+    <td>{{ user?.minutesBalance }}</td>
+    <td>{{ user?.pointsBalance }}</td>
+    <td>{{ user?.averageRating }}</td>
+  </tr>
+  <tr *ngIf="shouldShowEmpty()">
+    <th>empty</th>
+  </tr>
+</table>

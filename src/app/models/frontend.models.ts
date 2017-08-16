@@ -49,3 +49,7 @@ export enum FileStatus {
 export interface BlobModelExtended extends _BlobModel {
     status: FileStatus;
 }
+
+export interface ApplicationUserModelExtended extends ApplicationUserModel {
+    isMe: boolean;
+}

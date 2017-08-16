@@ -20,7 +20,8 @@
 				.profilePage-nav-main-section
 					.col-25.profilePage-nav-item
 						a(routerLink=".", routerLinkActive="active-link") About Me
-					.col-25.profilePage-nav-item.disabledLink(*ngIf="isMy") Analytics
+					.col-25.profilePage-nav-item 
+						a(routerLink="rank", routerLinkActive="active-link") Rank
 					.col-25.profilePage-nav-item(*ngIf="isMy")
 						a(routerLink="library", routerLinkActive="active-link") Library
 					.col-25.profilePage-nav-item(*ngIf="isMy")

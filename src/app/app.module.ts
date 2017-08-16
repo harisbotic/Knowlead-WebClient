@@ -114,6 +114,7 @@ import { ProfileInfoComponent } from './pages/profile-page/about-me/profile-info
 import { EditableTextComponent } from './components/sub-form-components/editable-text/editable-text.component';
 import { EditableDropdownComponent } from './components/sub-form-components/editable-dropdown/editable-dropdown.component';
 import { EditableFlatpickrComponent } from './components/sub-form-components/editable-flatpickr/editable-flatpickr.component';
+import { RankComponent } from './pages/profile-page/rank/rank.component';
 
 @NgModule({
   declarations: [
@@ -193,7 +194,8 @@ import { EditableFlatpickrComponent } from './components/sub-form-components/edi
     ProfileInfoComponent,
     EditableTextComponent,
     EditableDropdownComponent,
-    EditableFlatpickrComponent
+    EditableFlatpickrComponent,
+    RankComponent
   ],
   imports: [
     BrowserModule,

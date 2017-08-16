@@ -32,6 +32,7 @@ import { NotebookEditPopupComponent } from './components/sub-notebook/notebook-e
 import { P2pCreateComponent } from './components/sub-p2p/p2p-create/p2p-create.component';
 import { P2pCreatePageComponent } from './pages/p2p-create-page/p2p-create-page.component';
 import { AllMessagesPageComponent } from './pages/user-home-page/all-messages-page/all-messages-page.component';
+import { RankComponent } from './pages/profile-page/rank/rank.component';
 
 const appRoutes: Routes = [
     { path: 'login', redirectTo: '/' },
@@ -72,6 +73,8 @@ const appRoutes: Routes = [
         }]
     }, {
         path: 'friends', component: FriendshipsComponent
+    }, {
+        path: 'rank', component: RankComponent
     }] },
     { path: 'friendships', component: FriendshipPageComponent, canActivate: [AuthGuard, RegisteredGuard] },
     { path: 'mediatest', component: MediatestComponent, canActivate: [AuthGuard, RegisteredGuard] },

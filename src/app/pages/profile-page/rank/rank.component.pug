@@ -1,0 +1,23 @@
+table
+  tr
+    th
+    th Name 
+    th Teaching
+    th Studying
+    th Total Points
+  tr(*ngFor="let user of users; index as i" [class.user-bolded]="user.isMe")
+    td
+      app-profile-picture([user]="user" size="x-small").
+    td.
+      {{ user?.name }} {{ user?.surname }}
+    td.
+      {{ user?.minutesBalance }}
+    td.
+      {{ user?.pointsBalance }}
+    td.
+      {{ user?.averageRating }}
+  tr(*ngIf="shouldShowEmpty()")
+    th empty
+    
+    
+   
